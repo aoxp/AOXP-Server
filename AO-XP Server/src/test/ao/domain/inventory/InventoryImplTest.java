@@ -1,12 +1,11 @@
 package ao.domain.inventory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import ao.domain.worldobject.Item;
 
 public class InventoryImplTest {
 	private InventoryImpl inventory;

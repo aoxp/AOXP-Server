@@ -11,15 +11,16 @@ import ao.domain.worldobject.Item;
  */
 public interface Inventory {
 	/**
-	 * Checks if the inventory has any free slot
-	 * @return True if there is any free slot.
+	 * Checks if the inventory has any free slots.
+	 * @return True if there are any free slots.
 	 */
 	boolean hasFreeSlots();
 	
 	/**
 	 * Adds an Item to the inventory.
 	 * @param item references to the item to add
-	 * @return True if the item was successfully added.
+	 * @return True if the item was successfully added (the full amount).
+	 * 		If not, the amount is altered to match the remaining.
 	 */
 	boolean addItem(Item item);
 	

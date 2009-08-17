@@ -3,7 +3,9 @@ package ao.domain.inventory;
 import ao.domain.worldobject.Item;
 
 public class InventoryImpl implements Inventory {
+	// TODO : Esto está cableado maaaal!!
 	Item[] inventory = new Item[18];
+	
 	@Override
 	public boolean addItem(Item item) {
 		// TODO Auto-generated method stub
@@ -19,9 +21,11 @@ public class InventoryImpl implements Inventory {
 	@Override
 	public boolean hasFreeSlots() {
 		// TODO Auto-generated method stub
-		for (Item item : inventory)
-			if (item == null )
+		for (Item item : inventory) {
+			if (item == null ) {
 				return true;
+			}
+		}
 		
 		return false;
 	}
