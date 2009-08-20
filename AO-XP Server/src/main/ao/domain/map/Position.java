@@ -21,7 +21,7 @@ public class Position {
 	 * Creates a new position with the given data
 	 * @param x	The position in the X axis.
 	 * @param y	The position in the Y axis.
-	 * @param map The map where the position is at.
+	 * @param map The position's map.
 	 */
 	public Position(byte x, byte y, int map) {
 		this.x = x;
