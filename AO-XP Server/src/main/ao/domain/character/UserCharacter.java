@@ -14,10 +14,23 @@ public interface UserCharacter extends Character {
 	int getSkill(Skill skill);
 	
 	/**
+	 * Adds points to the given user's skill. 
+	 * @param skill		The skill to add points.
+	 * @param points	The points to add.
+	 */
+	void addToSkill(Skill skill, byte points);
+	
+	/**
 	 * Checks if the user is a citizen, or not.
 	 * @return True if the user is a citizen, false otherwise.
 	 */
 	boolean isCitizen();
+	
+	/**
+	 * Sets wether the user is a citizen, or not.
+	 * @param status The user's status.
+	 */
+	void setCitizen(boolean status);
 	
 	/**
 	 * Checks if the user is invisible, or not.
@@ -26,10 +39,22 @@ public interface UserCharacter extends Character {
 	boolean isInvisible();
 	
 	/**
+	 * Sets wether the user is invisible, or not.
+	 * @param invisible The user's invisibility status.
+	 */
+	void setInvisible(boolean invisible);
+	
+	/**
 	 * Checks if the user is hidden, or not.
 	 * @return True if the user is hidden, false otherwise.
 	 */
 	boolean isHidden();
+	
+	/**
+	 * Sets wether the user is hidden, or not.
+	 * @param hidden The user's concealment status.
+	 */
+	void setHidden(boolean hidden);
 	
 	/**
 	 * Checks if the user is doing some work.
@@ -38,10 +63,22 @@ public interface UserCharacter extends Character {
 	boolean isWorking();
 	
 	/**
+	 * Sets wether the user is working, or not.
+	 * @param working The user's working status.
+	 */
+	void setWorking(boolean working);
+	
+	/**
 	 * Retrieves the user's guild name.
 	 * @return The user's guild name.
 	 */
 	String getGuildName();
+	
+	/**
+	 * Sets the user's guild name.
+	 * @param name The guild name to be setted.
+	 */
+	void setGuildName(String name);
 	
 	/**
 	 * Retrieves the user's party id.
@@ -54,13 +91,6 @@ public interface UserCharacter extends Character {
 	 * @param id The party id to be setted.
 	 */
 	void setPartyId(int id);
-	
-	
-	/**
-	 * Sets the user's guild name.
-	 * @param name The guild name to be setted.
-	 */
-	void setGuildName(String name);
 	
 	/**
 	 * Retrieves the user's nickname.

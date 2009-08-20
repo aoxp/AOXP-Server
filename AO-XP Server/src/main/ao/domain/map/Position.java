@@ -23,7 +23,7 @@ public class Position {
 	 * @param y	The position in the Y axis.
 	 * @param map The position's map.
 	 */
-	public Position(byte x, byte y, int map) {
+	Position(byte x, byte y, int map) {
 		this.x = x;
 		this.y = y;
 		this.map = map;
@@ -33,7 +33,7 @@ public class Position {
 	 * Retrieves the position in the X axis.
 	 * @return The position in the X axis.
 	 */
-	public byte getX() {
+	byte getX() {
 		return x;
 	}
 	
@@ -41,7 +41,7 @@ public class Position {
 	 * Sets the position in the X axis.
 	 * @param x	The new position in the X axis.
 	 */
-	public void setX(byte x) {
+	void setX(byte x) {
 		this.x = x;
 	}
 	
@@ -49,7 +49,7 @@ public class Position {
 	 * Retrieves the position in the Y axis.
 	 * @return	The position in the Y axis.
 	 */
-	public byte getY() {
+	byte getY() {
 		return y;
 	}
 	
@@ -57,7 +57,7 @@ public class Position {
 	 * Sets the position in the Y axis.
 	 * @param y	The new position in the Y axis.
 	 */
-	public void setY(byte y) {
+	void setY(byte y) {
 		this.y = y;
 	}
 	
@@ -65,7 +65,7 @@ public class Position {
 	 * Retrieves the position's map.
 	 * @return The position's map.
 	 */
-	public int getMap() {
+	int getMap() {
 		return map;
 	}
 	
@@ -73,9 +73,25 @@ public class Position {
 	 * Sets the position's map.
 	 * @param map The new position's map. 
 	 */
-	public void setMap(int map) {
+	void setMap(int map) {
 		this.map = map;
 	}
 	
-	// TODO: Agregar métodos para desplazarse fácilmente sobre ejes X e Y.
+	/**
+	 * Adds (or substract if the given number is negative) positions to the X axis.
+	 * @param positions The positions to add.
+	 */
+	void addToX(int positions) {
+		// TODO: Chequear que el número no se vaya fuera de los rangos?
+		x += positions;
+	}
+	
+	/**
+	 * Adds (or substract if the given number is negative) positions to the Y axis.
+	 * @param positions The positions to add.
+	 */
+	void addToY(int positions) {
+		// TODO: Chequear que el número no se vaya fuera de los rangos?
+		y += positions;
+	}
 }

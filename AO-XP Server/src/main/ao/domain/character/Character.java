@@ -11,10 +11,22 @@ public interface Character {
 	int getHP();
 	
 	/**
+	 * Adds (or substracts if the given number is negative) points to the character's hp.
+	 * @param points	The points to add.
+	 */
+	void addToHP(int points);
+	
+	/**
 	 * Retrieves the maximum character's hp points.
 	 * @return The maximum caracter's hp points.
 	 */
 	int getMaxHP();
+	
+	/**
+	 * Adds (or substracts if the given number is negative) points to character's max hp.
+	 * @param points 	The points to add.
+	 */
+	void addToMaxHP(int points);
 	
 	/**
 	 * Retrieves the character's mana points.
@@ -23,10 +35,22 @@ public interface Character {
 	int getMana();
 	
 	/**
+	 * Adds (or substracts if the given number is negative) points to the character's hp.
+	 * @param points The points to add.
+	 */
+	void addToMana(int points);
+	
+	/**
 	 * Retrieves the maximum character's mana points.
 	 * @return The maximum character's mana points.
 	 */
 	int getMaxMana();
+	
+	/**
+	 * Adds (or substracts if the given number is negative) points to the character's maximum mana points.
+	 * @param points The points to add.
+	 */
+	void addToMaxMana(int points);
 	
 	/**
 	 * Retrieves the character's thirstiness.
@@ -35,10 +59,22 @@ public interface Character {
 	int getThirstiness();
 	
 	/**
+	 * Adds (or substracts if the given number is negative) points to the character's thirstiness.
+	 * @param points The points to add.
+	 */
+	void addToThirstiness(int points);
+	
+	/**
 	 * Retrieves the character's hunger points.
 	 * @return The character's hunger points.
 	 */
 	int getHunger();
+	
+	/**
+	 * Adds (or substracts if the given number is negative) points to the character's hunger.
+	 * @param points
+	 */
+	void addToHunger(int points);
 	
 	/**
 	 * Checks if the character is paralyzed.
@@ -47,10 +83,22 @@ public interface Character {
 	boolean isParalyzed();
 
 	/**
+	 * Sets wether the character is paralyzed, or not.
+	 * @param paralyzed The character's paralysis status.
+	 */
+	void setParalyzed(boolean paralyzed);
+	
+	/**
 	 * Checks if the character is immobilized.
 	 * @return True if the character is paralyzed, false otherwise.
 	 */
 	boolean isImmobilized();
+	
+	/**
+	 * Sets wether the character is immobilized, or not.
+	 * @param immobilized The character's immobilization status.
+	 */
+	void setImmobilized(boolean immobilized);
 	
 	/**
 	 * Retrieves the character's position.
