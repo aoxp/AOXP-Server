@@ -8,53 +8,60 @@ public interface Character {
 	 * Retrieves the character's hp points. 
 	 * @return The character's hp points.
 	 */
-	public int getHP();
+	int getHP();
 	
 	/**
 	 * Retrieves the maximum character's hp points.
 	 * @return The maximum caracter's hp points.
 	 */
-	public int getMaxHP();
+	int getMaxHP();
 	
 	/**
 	 * Retrieves the character's mana points.
 	 * @return The caracter's mana points.
 	 */
-	public int getMana();
+	int getMana();
 	
 	/**
 	 * Retrieves the maximum character's mana points.
 	 * @return The maximum character's mana points.
 	 */
-	public int getMaxMana();
+	int getMaxMana();
 	
 	/**
 	 * Retrieves the character's thirstiness.
 	 * @return The character's thirstiness points.
 	 */
-	public int getThirstiness();
+	int getThirstiness();
 	
 	/**
 	 * Retrieves the character's hunger points.
 	 * @return The character's hunger points.
 	 */
-	public int getHunger();
+	int getHunger();
 	
 	/**
 	 * Checks if the character is paralyzed.
 	 * @return True if the character is paralyzed, false otherwise.
 	 */
-	public boolean isParalyzed();
+	boolean isParalyzed();
+
+	/**
+	 * Checks if the character is immobilized.
+	 * @return True if the character is paralyzed, false otherwise.
+	 */
+	boolean isImmobilized();
 	
 	/**
 	 * Retrieves the character's position.
 	 * @return The character's position.
 	 */
-	public Position getPosition();
+	Position getPosition();
 	
 	/**
 	 * Sets the character's position.
 	 * @param pos The new character's position.
 	 */
-	public void setPosition(Position pos);
+	void setPosition(Position pos);
+	
 }
