@@ -5,25 +5,25 @@ import ao.domain.map.Position;
 public interface Character {
 
 	/**
-	 * Retrieves the character's hp points. 
-	 * @return The character's hp points.
+	 * Retrieves the character's hit points. 
+	 * @return The character's hit points.
 	 */
-	int getHP();
+	int getHitPoints();
 	
 	/**
-	 * Adds (or substracts if the given number is negative) points to the character's hp.
+	 * Adds (or subtracts if the given number is negative) points to the character's hit points.
 	 * @param points	The points to add.
 	 */
-	void addToHP(int points);
+	void addToHitPoints(int points);
 	
 	/**
-	 * Retrieves the maximum character's hp points.
-	 * @return The maximum caracter's hp points.
+	 * Retrieves the maximum character's hit points.
+	 * @return The maximum caracter's hit points.
 	 */
-	int getMaxHP();
+	int getMaxHitPoints();
 	
 	/**
-	 * Adds (or substracts if the given number is negative) points to character's max hp.
+	 * Adds (or subtracts if the given number is negative) points to character's max hit points.
 	 * @param points 	The points to add.
 	 */
 	void addToMaxHP(int points);
@@ -35,7 +35,7 @@ public interface Character {
 	int getMana();
 	
 	/**
-	 * Adds (or substracts if the given number is negative) points to the character's hp.
+	 * Adds (or subtracts if the given number is negative) points to the character's mana points.
 	 * @param points The points to add.
 	 */
 	void addToMana(int points);
@@ -59,7 +59,7 @@ public interface Character {
 	int getThirstiness();
 	
 	/**
-	 * Adds (or substracts if the given number is negative) points to the character's thirstiness.
+	 * Adds (or subtracts if the given number is negative) points to the character's thirstiness.
 	 * @param points The points to add.
 	 */
 	void addToThirstiness(int points);
@@ -71,7 +71,7 @@ public interface Character {
 	int getHunger();
 	
 	/**
-	 * Adds (or substracts if the given number is negative) points to the character's hunger.
+	 * Adds (or subtracts if the given number is negative) points to the character's hunger.
 	 * @param points
 	 */
 	void addToHunger(int points);
@@ -83,7 +83,7 @@ public interface Character {
 	boolean isParalyzed();
 
 	/**
-	 * Sets wether the character is paralyzed, or not.
+	 * Sets whether the character is paralyzed, or not.
 	 * @param paralyzed The character's paralysis status.
 	 */
 	void setParalyzed(boolean paralyzed);
@@ -95,7 +95,7 @@ public interface Character {
 	boolean isImmobilized();
 	
 	/**
-	 * Sets wether the character is immobilized, or not.
+	 * Sets whether the character is immobilized, or not.
 	 * @param immobilized The character's immobilization status.
 	 */
 	void setImmobilized(boolean immobilized);

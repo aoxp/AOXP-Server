@@ -24,7 +24,7 @@ public interface UserCharacter extends Character {
 	boolean isInvisible();
 	
 	/**
-	 * Sets wether the user is invisible, or not.
+	 * Sets whether the user is invisible, or not.
 	 * @param invisible The user's invisibility status.
 	 */
 	void setInvisible(boolean invisible);
@@ -36,7 +36,7 @@ public interface UserCharacter extends Character {
 	boolean isHidden();
 	
 	/**
-	 * Sets wether the user is hidden, or not.
+	 * Sets whether the user is hidden, or not.
 	 * @param hidden The user's concealment status.
 	 */
 	void setHidden(boolean hidden);
