@@ -23,7 +23,7 @@ public class Position {
 	 * @param y	The position in the Y axis.
 	 * @param map The position's map.
 	 */
-	Position(byte x, byte y, int map) {
+	public Position(byte x, byte y, int map) {
 		this.x = x;
 		this.y = y;
 		this.map = map;
@@ -33,7 +33,7 @@ public class Position {
 	 * Retrieves the position in the X axis.
 	 * @return The position in the X axis.
 	 */
-	byte getX() {
+	public byte getX() {
 		return x;
 	}
 	
@@ -41,7 +41,7 @@ public class Position {
 	 * Sets the position in the X axis.
 	 * @param x	The new position in the X axis.
 	 */
-	void setX(byte x) {
+	public void setX(byte x) {
 		this.x = x;
 	}
 	
@@ -49,7 +49,7 @@ public class Position {
 	 * Retrieves the position in the Y axis.
 	 * @return	The position in the Y axis.
 	 */
-	byte getY() {
+	public byte getY() {
 		return y;
 	}
 	
@@ -57,7 +57,7 @@ public class Position {
 	 * Sets the position in the Y axis.
 	 * @param y	The new position in the Y axis.
 	 */
-	void setY(byte y) {
+	public void setY(byte y) {
 		this.y = y;
 	}
 	
@@ -65,7 +65,7 @@ public class Position {
 	 * Retrieves the position's map.
 	 * @return The position's map.
 	 */
-	int getMap() {
+	public int getMap() {
 		return map;
 	}
 	
@@ -73,7 +73,7 @@ public class Position {
 	 * Sets the position's map.
 	 * @param map The new position's map. 
 	 */
-	void setMap(int map) {
+	public void setMap(int map) {
 		this.map = map;
 	}
 	
@@ -81,7 +81,7 @@ public class Position {
 	 * Adds (or substract if the given number is negative) positions to the X axis.
 	 * @param positions The positions to add.
 	 */
-	void addToX(int positions) {
+	public void addToX(int positions) {
 		// TODO: Chequear que el número no se vaya fuera de los rangos?
 		x += positions;
 	}
@@ -90,7 +90,7 @@ public class Position {
 	 * Adds (or substract if the given number is negative) positions to the Y axis.
 	 * @param positions The positions to add.
 	 */
-	void addToY(int positions) {
+	public void addToY(int positions) {
 		// TODO: Chequear que el número no se vaya fuera de los rangos?
 		y += positions;
 	}

@@ -21,18 +21,6 @@ public interface UserCharacter extends Character {
 	void addToSkill(Skill skill, byte points);
 	
 	/**
-	 * Checks if the user is a citizen, or not.
-	 * @return True if the user is a citizen, false otherwise.
-	 */
-	boolean isCitizen();
-	
-	/**
-	 * Sets wether the user is a citizen, or not.
-	 * @param status The user's status.
-	 */
-	void setCitizen(boolean status);
-	
-	/**
 	 * Checks if the user is invisible, or not.
 	 * @return True if the user is invisible, false otherwise.
 	 */
@@ -63,10 +51,9 @@ public interface UserCharacter extends Character {
 	boolean isWorking();
 	
 	/**
-	 * Sets wether the user is working, or not.
-	 * @param working The user's working status.
+	 * Sets the user to work.
 	 */
-	void setWorking(boolean working);
+	void work();
 	
 	/**
 	 * Retrieves the user's guild name.
