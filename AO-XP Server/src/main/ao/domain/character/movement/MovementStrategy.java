@@ -1,5 +1,7 @@
 package ao.domain.character.movement;
 
+import ao.domain.character.Character;
+
 public interface MovementStrategy {
 
 	/**

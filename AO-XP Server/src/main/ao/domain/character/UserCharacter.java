@@ -1,8 +1,5 @@
 package ao.domain.character;
 
-import ao.domain.Gender;
-import ao.domain.Race;
-import ao.domain.Skill;
 
 public interface UserCharacter extends Character {
 
