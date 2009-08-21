@@ -1,6 +1,7 @@
 package ao.domain.character.movement;
 
 import ao.domain.character.Character;
+import ao.domain.map.Position;
 
 public interface MovementStrategy {
 
@@ -14,4 +15,9 @@ public interface MovementStrategy {
 	 * @param target	The character to target
 	 */
 	void setTarget(Character target);
+	
+	/**
+	 * @param pos	The final destination position 
+	 */
+	void setTarget(Position pos);
 }
