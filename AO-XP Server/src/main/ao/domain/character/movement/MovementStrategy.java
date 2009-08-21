@@ -17,6 +17,7 @@ public interface MovementStrategy {
 	void setTarget(Character target);
 	
 	/**
+	 * Targets a position
 	 * @param pos	The final destination position 
 	 */
 	void setTarget(Position pos);
