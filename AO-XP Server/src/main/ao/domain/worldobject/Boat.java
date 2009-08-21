@@ -1,5 +1,8 @@
 package ao.domain.worldobject;
 
+import ao.domain.character.Reputation;
+import ao.domain.character.archetype.UserArchetype;
+
 public class Boat implements Item {
 
 	@Override
@@ -30,6 +33,12 @@ public class Boat implements Item {
 	public int addAmount(int amount) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public boolean canBeUsedBy(UserArchetype archetype, Reputation reputation) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
