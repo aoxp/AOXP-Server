@@ -1,6 +1,9 @@
 package ao.domain.character;
 
+import ao.domain.inventory.Inventory;
 import ao.domain.map.Position;
+import ao.domain.worldobject.EquipableItem;
+import ao.domain.worldobject.Item;
 
 public interface Character {
 
@@ -47,7 +50,7 @@ public interface Character {
 	int getMaxMana();
 	
 	/**
-	 * Adds (or substracts if the given number is negative) points to the character's maximum mana points.
+	 * Adds (or subtracts if the given number is negative) points to the character's maximum mana points.
 	 * @param points The points to add.
 	 */
 	void addToMaxMana(int points);
@@ -112,4 +115,39 @@ public interface Character {
 	 */
 	void setPosition(Position pos);
 	
+	/**
+	 * Uses the given item (must be in the character's inventory).
+	 * @param item The item to use.
+	 */
+	void use(Item item);
+	
+	/**
+	 * Equips the given item (must be in the character's inventory).
+	 * @param item The item to use.
+	 */
+	void equip(EquipableItem item);
+	
+	/**
+	 * Retrieves the character's total attack power (considering items and effects).
+	 * @return The character's total attack power (considering items and effects).
+	 */
+	int getAttackPower();
+	
+	/**
+	 * Retrieves the character's total defense power (considering items and effects).
+	 * @return The character's total defense power (considering items and effects).
+	 */
+	int getDefensePower();
+	
+	/**
+	 * Retrieves a character's inventory.
+	 * @return The character's inventory.
+	 */
+	Inventory getInventory();
+	
+	/**
+	 * Retrieves the character's reputation.
+	 * @return The character's reputation.
+	 */
+	Reputation getReputation();
 }

@@ -1,5 +1,8 @@
 package ao.domain.character;
 
+import ao.domain.worldobject.EquipableItem;
+import ao.domain.worldobject.Item;
+
 
 public interface UserCharacter extends Character {
 
@@ -99,4 +102,5 @@ public interface UserCharacter extends Character {
 	 * @return The user's gender.
 	 */
 	Gender getGender();
+	
 }
