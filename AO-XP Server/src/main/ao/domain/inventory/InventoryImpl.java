@@ -48,4 +48,16 @@ public class InventoryImpl implements Inventory {
 		return null;
 	}
 
+	@Override
+	public Item removeItem(int slot, int amount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item removeItem(Item item, int amount) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
