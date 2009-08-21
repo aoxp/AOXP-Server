@@ -46,13 +46,6 @@ public interface Inventory {
 	 */
 	Item removeItem(Item item);
 	
-	/**
-	 * Removes the item from the inventory
-	 * @param item references to the item to be removed
-	 * @param amount to the amount of the item to be removed
-	 * @return the item removed with the amount removed
-	 */
-	Item removeItem(Item item, int amount);
 	
 	/**
 	 * Gets the item of the desired slot.

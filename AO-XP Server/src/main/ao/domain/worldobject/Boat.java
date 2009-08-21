@@ -26,4 +26,10 @@ public class Boat implements Item {
 		return 0;
 	}
 
+	@Override
+	public int addAmount(int amount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

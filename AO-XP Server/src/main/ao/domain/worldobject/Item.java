@@ -14,6 +14,13 @@ public interface Item extends WorldObject {
 	void use();
 	
 	/**
+	 * Adds (or substracts if the given amount is negative) an amount of the item
+	 * @param amount	references to the amount to be added (negative for substract)
+	 * @return			the new amount of the item.
+	 */
+	int addAmount(int amount);
+	
+	/**
 	 * Retrieves the manufacture difficulty of the item (how hard it's to make).
 	 * @return The manufacture difficulty of the item (how hard it's to make).
 	 */
