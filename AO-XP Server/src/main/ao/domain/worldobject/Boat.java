@@ -1,5 +1,7 @@
 package ao.domain.worldobject;
 
+import ao.domain.character.Gender;
+import ao.domain.character.Race;
 import ao.domain.character.Reputation;
 import ao.domain.character.archetype.UserArchetype;
 
@@ -36,7 +38,7 @@ public class Boat implements Item {
 	}
 
 	@Override
-	public boolean canBeUsedBy(UserArchetype archetype, Reputation reputation) {
+	public boolean canBeUsedBy(Race race, Gender gender, UserArchetype archetype, Reputation reputation) {
 		// TODO Auto-generated method stub
 		return false;
 	}
