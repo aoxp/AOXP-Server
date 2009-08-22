@@ -6,6 +6,12 @@ import ao.domain.character.archetype.UserArchetype;
 public interface Item extends WorldObject {
 
 	/**
+	 * Retrieves the item's unique id.
+	 * @return The item's unique id.
+	 */
+	int getId();
+	
+	/**
 	 * Retrieves the item's amount.
 	 * @return The amount of items put together.
 	 */
