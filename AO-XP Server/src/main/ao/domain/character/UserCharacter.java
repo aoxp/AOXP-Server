@@ -1,9 +1,5 @@
 package ao.domain.character;
 
-import ao.domain.worldobject.EquipableItem;
-import ao.domain.worldobject.Item;
-
-
 public interface UserCharacter extends Character {
 
 	/**
@@ -78,18 +74,6 @@ public interface UserCharacter extends Character {
 	 * @param id The party id to be setted.
 	 */
 	void setPartyId(int id);
-	
-	/**
-	 * Retrieves the user's nickname.
-	 * @return The user's name-
-	 */
-	String getName();
-	
-	/**
-	 * Retrieves the user's display name (includes status, guild, etc).
-	 * @return The user's display name.
-	 */
-	String getDisplayName();
 	
 	/**
 	 * Retrieves the user's race.

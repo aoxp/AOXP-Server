@@ -150,4 +150,28 @@ public interface Character {
 	 * @return The character's reputation.
 	 */
 	Reputation getReputation();
+	
+	/**
+	 * Retrieves the user's nickname.
+	 * @return The user's name-
+	 */
+	String getName();
+	
+	/**
+	 * Retrieves the user's display name (includes status, guild, etc).
+	 * @return The user's display name.
+	 */
+	String getDisplayName();
+	
+	/**
+	 * Retrieves the character's body.
+	 * @return The character's body.
+	 */
+	int getBody();
+	
+	/**
+	 * Retrieves the character's head.
+	 * @return The character's head.
+	 */
+	int getHead();
 }

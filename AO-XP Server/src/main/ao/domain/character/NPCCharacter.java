@@ -1,31 +1,24 @@
 package ao.domain.character;
 
-import ao.domain.character.UserCharacter;
 
-public interface NPCCharacter {
+public interface NPCCharacter extends Character {
 	/**
-	 * Retrieves the NPC's index.
-	 * @return The NPC's index.
+	 * Retrieves the NPC's id.
+	 * @return The NPC's id.
 	 */
-	int getIndex();
-	
-	/**
-	 * Retrieves the NPC's name.
-	 * @return The NPC's index. 
-	 */
-	String getName();
+	int getId();
 	
 	/**
 	 * Retrieves the NPC's experience.
 	 * @return The NPC's experience.
 	 */
-	long getExperience();
+	int getExperience();
 	
 	/**
 	 * Retrieves the NPC's gold.
 	 * @return The NPC's gold.
 	 */
-	long getGold();
+	int getGold();
 	
 	/**
 	 * Retrieves the NPC's description.
@@ -34,28 +27,10 @@ public interface NPCCharacter {
 	String getDescription();
 	
 	/**
-	 * Retrieves the NPC's Attack Power.
-	 * @return The NPC's Attack Power.
+	 * Retrieves the NPC's master if it has one.
+	 * @return The NPC's master if it has one.
 	 */
-	int getAttackPower();
-	
-	/**
-	 * Retrieves the NPC's Evasion Power.
-	 * @return The NPC's Evasion Power.
-	 */
-	int getEvasionPower();
-	
-	/**
-	 * Retrieves the NPC's body.
-	 * @return The NPC's body.
-	 */
-	int getBody();
-	
-	/**
-	 * Retrieves the NPC's master if has one.
-	 * @return The NPC's master if has one.
-	 */
-	UserCharacter getMaster();
+	Character getMaster();
 	
 	/**
 	 * Retrieves the NPC's Type.
@@ -64,16 +39,16 @@ public interface NPCCharacter {
 	NPCType getNPCType();
 	
 	/**
-	 * Checks if the NPC is domable or not.
-	 * @return True if the NPC is domable, false otherwise.
+	 * Checks if the NPC is tameable or not.
+	 * @return True if the NPC is tameable, false otherwise.
 	 */
-	boolean isDomable();
+	boolean isTameable();
 	
 	/**
-	 * Checks if the NPC is commerciable or not.
-	 * @return True if the NPC is comMerciable, false otherwise.
+	 * Checks if the NPC can trade or not.
+	 * @return True if the NPC can trade, false otherwise.
 	 */
-	boolean isCommerciable();
+	boolean canTrade();
 	
 	/**
 	 * Checks if the NPC is hostile or not.
@@ -89,15 +64,7 @@ public interface NPCCharacter {
 	
 	/**
 	 * Checks if the NPC can walk in the water.  
-	 * @return True if the NPC can walk in water or if he is Jesus, false otherwise.
+	 * @return True if the NPC can move in water or if he is Jesus, false otherwise.
 	 */
 	boolean canWalkInWater();
-	
-	/**
-	 * Checks if the NPC has some spell.
-	 * @return True if the NPC has at least one spell.
-	 */
-	boolean hasSpells();
-
-	
 }
