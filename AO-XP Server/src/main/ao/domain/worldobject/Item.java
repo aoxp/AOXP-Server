@@ -52,4 +52,22 @@ public interface Item extends WorldObject {
 	 * @return The usage difficulty of the item.
 	 */
 	int getUsageDifficulty(); // TODO : Nota, esto reemplaza minSkill para navegar, con lo que los separamos.
+	
+	/**
+	 * Check if the item is tradeable
+	 * @return True if the item is tradeable, false otherwise
+	 */
+	boolean isTradeable();
+	
+	/**
+	 * Retrieves the item's sell price
+	 * @return Item sell price
+	 */
+	int getSellPrice();
+	
+	/**
+	 * Retrieves the item's buy price
+	 * @return Item buy price
+	 */
+	int getBuyPrice();
 }
