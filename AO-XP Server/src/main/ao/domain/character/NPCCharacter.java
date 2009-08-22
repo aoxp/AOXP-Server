@@ -57,6 +57,12 @@ public interface NPCCharacter extends Character {
 	boolean isHostile();
 	
 	/**
+	 * Checks if the NPC is a pet.
+	 * @return True if the NPC is a pet, false otherwise.
+	 */
+	boolean isPet();
+	
+	/**
 	 * Checks if the NPC has a master.
 	 * @return True if has a master, false otherwise.
 	 */
@@ -67,4 +73,11 @@ public interface NPCCharacter extends Character {
 	 * @return True if the NPC can move in water or if he is Jesus, false otherwise.
 	 */
 	boolean canWalkInWater();
+	
+	/**
+	 * Checks if the NPC can walk in the earth.
+	 * @return True if the NPC can walk in the earth.
+	 */
+	boolean canWalkInEarth();
+
 }
