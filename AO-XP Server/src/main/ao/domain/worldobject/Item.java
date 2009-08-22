@@ -1,5 +1,7 @@
 package ao.domain.worldobject;
 
+import ao.domain.character.Gender;
+import ao.domain.character.Race;
 import ao.domain.character.Reputation;
 import ao.domain.character.archetype.UserArchetype;
 
@@ -30,12 +32,14 @@ public interface Item extends WorldObject {
 	int addAmount(int amount);
 	
 	/**
-	 * Checks if the item can be used/equipped given an archetype and reputation.
+	 * Checks if the item can be used/equipped given a race, gender, archetype and reputation.
+	 * @param race			The race attempting to use the item.
+	 * @param gender		The gender of the character attempting to use the item.
 	 * @param archetype		The archetype attempting to use the item.
 	 * @param reputation	The reputation of the character attempting to use the item.
 	 * @return True if the item can be used, false otherwise.
 	 */
-	boolean canBeUsedBy(UserArchetype archetype, Reputation reputation);
+	boolean canBeUsedBy(Race race, Gender gender, UserArchetype archetype, Reputation reputation);
 	
 	/**
 	 * Retrieves the manufacture difficulty of the item (how hard it's to make).
