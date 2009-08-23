@@ -48,5 +48,30 @@ public class Boat implements Item {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public Item clone(){
+		// TODO Marco-generated method stub
+		
+		return null;
+	}
+
+	@Override
+	public int getBuyPrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getSellPrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean isTradeable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

@@ -54,6 +54,12 @@ public interface Item extends WorldObject {
 	int getUsageDifficulty(); // TODO : Nota, esto reemplaza minSkill para navegar, con lo que los separamos.
 	
 	/**
+	 * Gets a deep clone of the item
+	 * @return a copy of the item.
+	 */
+	Item clone();
+	
+	/**
 	 * Check if the item is tradeable
 	 * @return True if the item is tradeable, false otherwise
 	 */
