@@ -23,10 +23,11 @@ public class InventoryImpl implements Inventory {
 		if ((i = this.hasItem(item)) != -1) {
 			int amount = item.getAmount();
 			int newAmount, oldAmount;
+			int id = item.getId();
 			
 			// Stack the item to previous slots
 			for (; i < inventory.length; i++) {
-				if (inventory[i].getId() == item.getId()) {
+				if (inventory[i].getId() == id) {
 					oldAmount = inventory[i].getAmount();
 					newAmount = inventory[i].addAmount(amount);
 					amount += oldAmount - newAmount; 
@@ -72,8 +73,10 @@ public class InventoryImpl implements Inventory {
 
 	@Override
 	public int hasItem(Item item) {
+		int id = item.getId();
+		
 		for (int i = 0; i < inventory.length; i++) {
-			if (inventory[i].getId() == item.getId()) {
+			if (inventory[i] != null && inventory[i].getId() == id) {
 				return i;
 			}
 		}
@@ -103,9 +106,10 @@ public class InventoryImpl implements Inventory {
 		Item itemRemoved = item.clone();
 		int remainingAmount = item.getAmount();
 		int left;
+		int id = item.getId();
 		
 		for (; i < inventory.length; i++) {
-			if (inventory[i].getId() == item.getId()) {
+			if (inventory[i].getId() == id) {
 				remainingAmount -= inventory[i].getAmount();
 				left = inventory[i].addAmount( -(inventory[i].getAmount() + remainingAmount));
 				
@@ -153,9 +157,10 @@ public class InventoryImpl implements Inventory {
 	public int getItemAmount(Item item) {
 
 		int amount = 0;
+		int id = item.getId();
 		
 		for (Item i : inventory){
-			if (item.getId() == i.getId()){
+			if (id == i.getId()){
 				amount += i.getAmount();
 			}
 		}
