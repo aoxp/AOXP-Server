@@ -5,6 +5,7 @@ import ao.domain.character.Character;
 
 public interface Behavior {
 
+	// TODO : No estoy 100% seguro de esto... revisar
 	/**
 	 * Follows the NPC's target.
 	 */
@@ -23,19 +24,13 @@ public interface Behavior {
 	Character getTarget();
 	
 	/**
-	 * Checks if the NPC can attack.
-	 * @return True if it can, false otherwise
-	 */
-	boolean canAttack();
-	
-	/**
 	 * Retrieves the NPC's AI type.
 	 * @return The NPC's AI type.
 	 */
 	AIType getAIType();
 	
 	/**
-	 * Sets the NPCto stay quiet
+	 * Sets the NPC to stay quiet
 	 */
 	void stayQuiet(); 
 

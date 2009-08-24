@@ -17,16 +17,16 @@ public interface Reputation {
 	void addToBandit(int points);
 	
 	/**
-	 * Retrieves the assasin points.
-	 * @return The reputation's assasin points.
+	 * Retrieves the assassin points.
+	 * @return The reputation's assassin points.
 	 */
-	int getAssasin();
+	int getAssassin();
 	
 	/**
-	 * Adds the given poitns to the reputation's assasin points.
+	 * Adds the given points to the reputation's assassin points.
 	 * @param points The points to add.
 	 */
-	void addToAssasin(int points);
+	void addToAssassin(int points);
 	
 	/**
 	 * Retrieves the noble points.
@@ -53,14 +53,14 @@ public interface Reputation {
 	void addToBourgeois(int points);
 	
 	/**
-	 * Retrieves the thieff points.
-	 * @return The thieff reputation's points.
+	 * Retrieves the thief points.
+	 * @return The thief reputation's points.
 	 */
-	int getThieff();
+	int getThief();
 	
 	/**
-	 * Adds the given poitns to the reputation's thieff points.
+	 * Adds the given points to the reputation's thief points.
 	 * @param points The points to add.
 	 */
-	void addToThieff(int points);
+	void addToThief(int points);
 }

@@ -2,5 +2,8 @@ package ao.domain.character;
 
 public enum AIType {
 	RANDOM,
-	ASTAR
+	ASTAR,
+	PET,
+	FOLLOW_CHAR,
+	STAY_STILL
 }

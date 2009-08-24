@@ -164,6 +164,12 @@ public interface Character {
 	String getDisplayName();
 	
 	/**
+	 * Retrieves the Character's description.
+	 * @return The Character's description.
+	 */
+	String getDescription();
+	
+	/**
 	 * Retrieves the character's body.
 	 * @return The character's body.
 	 */

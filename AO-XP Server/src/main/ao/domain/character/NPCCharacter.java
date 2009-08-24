@@ -21,12 +21,6 @@ public interface NPCCharacter extends Character {
 	int getGold();
 	
 	/**
-	 * Retrieves the NPC's description.
-	 * @return The NPC's description.
-	 */
-	String getDescription();
-	
-	/**
 	 * Retrieves the NPC's master if it has one.
 	 * @return The NPC's master if it has one.
 	 */
@@ -55,12 +49,6 @@ public interface NPCCharacter extends Character {
 	 * @return True if the NPC is hostile, false otherwise.
 	 */
 	boolean isHostile();
-	
-	/**
-	 * Checks if the NPC is a pet.
-	 * @return True if the NPC is a pet, false otherwise.
-	 */
-	boolean isPet();
 	
 	/**
 	 * Checks if the NPC has a master.

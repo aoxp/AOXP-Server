@@ -4,38 +4,44 @@ import ao.domain.worldobject.Item;
 
 public class InventoryImpl implements Inventory {
 	
+	private static final int DEFAULT_INVENTORY_CAPACITY = 18;
+	
 	Item[] inventory;
 	
-	public InventoryImpl(){
-		this(18);
+	public InventoryImpl() {
+		this(DEFAULT_INVENTORY_CAPACITY);
 	}
 	
-	public InventoryImpl(int slots){
-		if (slots <= 0){
-			return;
-		}
-		
+	public InventoryImpl(int slots) {
 		inventory = new Item[slots];
 	}
 	
 	@Override
 	public int addItem(Item item) {
-		if (this.hasItem(item) != -1){
+		int i;
+		
+		if ((i = this.hasItem(item)) != -1) {
 			int amount = item.getAmount();
+			int newAmount, oldAmount;
 			
-			for (int i = 0; i < inventory.length; i++){
-				if (inventory[i].getId() == item.getId()){
-					amount = inventory[i].addAmount(amount); 
-					if (amount == 0){
+			// Stack the item to previous slots
+			for (; i < inventory.length; i++) {
+				if (inventory[i].getId() == item.getId()) {
+					oldAmount = inventory[i].getAmount();
+					newAmount = inventory[i].addAmount(amount);
+					amount += oldAmount - newAmount; 
+					if (amount == 0) {
 						return 0;
 					}
 				}
 			}
-			item.addAmount(-(item.getAmount() - amount));
+			
+			// Set the item's amount to the remainder
+			item.addAmount(amount - item.getAmount());
 		}
 		
-		for (int i = 0; i < inventory.length; i++){
-			if (inventory[i] == null){
+		for (i = 0; i < inventory.length; i++) {
+			if (inventory[i] == null) {
 				inventory[i] = item;
 				return 0;
 			}
@@ -46,7 +52,7 @@ public class InventoryImpl implements Inventory {
 
 	@Override
 	public Item getItem(int slot) {
-		if (slot < 0 || slot >= inventory.length){
+		if (slot < 0 || slot >= inventory.length) {
 			return null;	
 		}
 		
@@ -55,8 +61,7 @@ public class InventoryImpl implements Inventory {
 
 	@Override
 	public boolean hasFreeSlots() {
-		// TODO Auto-generated method stub
-		for (Item item : inventory){
+		for (Item item : inventory) {
 			if (item == null ){
 				return true;
 			}		
@@ -67,8 +72,8 @@ public class InventoryImpl implements Inventory {
 
 	@Override
 	public int hasItem(Item item) {
-		for (int i = 0; i < inventory.length; i++){
-			if (inventory[i].getId() == item.getId()){
+		for (int i = 0; i < inventory.length; i++) {
+			if (inventory[i].getId() == item.getId()) {
 				return i;
 			}
 		}
@@ -79,39 +84,42 @@ public class InventoryImpl implements Inventory {
 	@Override
 	public Item removeItem(int slot) {
 		Item item = getItem(slot);
-		if (item == null){
-			return null;
+		
+		if (item != null) {
+			inventory[slot] = null;
 		}
-
-		inventory[slot] = null;
+		
 		return item;
 	}
 
 	@Override
 	public Item removeItem(Item item) {
-		//TODO: Empezar a usar la parte lo que devuelve addAmount.
-		if ( this.hasItem(item) == -1 ){
+		int i;
+		
+		if ((i = this.hasItem(item)) == -1) {
 			return null;
 		}
 		
 		Item itemRemoved = item.clone();
 		int remainingAmount = item.getAmount();
+		int left;
 		
-		for (int i = 0; i < inventory.length; i++){
+		for (; i < inventory.length; i++) {
 			if (inventory[i].getId() == item.getId()) {
 				remainingAmount -= inventory[i].getAmount();
-				inventory[i].addAmount( -(inventory[i].getAmount()+remainingAmount));
+				left = inventory[i].addAmount( -(inventory[i].getAmount() + remainingAmount));
 				
-				if (inventory[i].getAmount() <= 0){
+				if (left == 0) {
 					inventory[i] = null;
 				}
 				
-				if (remainingAmount <= 0){
+				if (remainingAmount <= 0) {
 					return itemRemoved;
 				}
 			}
 		}
 		
+		// Couldn't remove the full amount, set the proper amount.
 		itemRemoved.addAmount(-remainingAmount);
 		
 		return itemRemoved;
@@ -120,23 +128,18 @@ public class InventoryImpl implements Inventory {
 	@Override
 	public Item removeItem(int slot, int amount) {
 		Item item = getItem(slot);
-		if (item == null){
+		if (item == null) {
 			return null;
 		}
 
-		Item itemRemoved = item;
+		Item itemRemoved = item.clone();
+		int left = item.addAmount(-amount);
 		
-		item.addAmount(-amount);
-		
-		/**
-		 * Remove the remaining amount from a copy of the item,
-		 * so the copy will end with the amount of removed items
-		 */
-		itemRemoved.addAmount(-item.getAmount());
-		
-		if (item.getAmount() <= 0){
+		if (left == 0){
 			inventory[slot] = null;
 		}
+		
+		itemRemoved.addAmount(-left);
 
 		return itemRemoved;
 	}
