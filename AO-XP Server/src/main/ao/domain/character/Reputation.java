@@ -63,4 +63,28 @@ public interface Reputation {
 	 * @param points The points to add.
 	 */
 	void addToThief(int points);
+	
+	/**
+	 * Checks if the reputation belongs to royal army.
+	 * @return True if the reputation belongs to royal army, false otherwise.
+	 */
+	boolean isRoyalArmy();
+	
+	/**
+	 * Sets whether the reputation belongs to royal army, or not.
+	 * @param belongs Determines if the reputation belongs to royal army.
+	 */
+	void setRoyalArmy(boolean belongs);
+	
+	/**
+	 * Checks if the reputation belongs to royal army.
+	 * @return True if the reputation belongs to royal army, false otherwise.
+	 */
+	boolean isChaosLegion();
+	
+	/**
+	 * Sets whether the reputation belongs to royal army, or not.
+	 * @param belongs Determines if the reputation belongs to royal army.
+	 */
+	void setChaosLegion(boolean belongs);
 }

@@ -180,4 +180,28 @@ public interface Character {
 	 * @return The character's head.
 	 */
 	int getHead();
+
+	/**
+	 * Retrieves the character's poisoning status.
+	 * @return The character's poisoning status.
+	 */
+	boolean isPoisoned();
+	
+	/**
+	 * Sets whether the character is poisoned, or not.
+	 * @param poisoned The new character's poisoning status.
+	 */
+	void setPoisoned(boolean poisoned);
+	
+	/**
+	 * Retrieves the character's level.
+	 * @return The character's level.
+	 */
+	byte getLevel();
+	
+	/**
+	 * Adds the nivel levels to character's level.
+	 * @param level The levels to add.
+	 */
+	void addToLevel(byte level);
 }
