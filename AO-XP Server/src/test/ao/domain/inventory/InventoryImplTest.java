@@ -49,10 +49,22 @@ public class InventoryImplTest {
 
 	@Test
 	public void testHasFreeSlots() {
-		// TODO : Complete mocking once implementation is done
 		Assert.assertTrue(inventory.hasFreeSlots());
 		
-		// TODO : Fill the inventory and then make sure hasFreeSlots() is false 
+		Item[] item = new Item[inventory.getCapacity()];
+
+		for (int i = 0; i< inventory.getCapacity(); i++) {
+			item[i] = EasyMock.createMock(Item.class);
+			EasyMock.expect(item[i].getId()).andReturn(i).anyTimes();
+			EasyMock.replay(item[i]);
+			
+			inventory.addItem(item[i]);
+		} 
+		
+		Assert.assertFalse(inventory.hasFreeSlots());
+		
+		inventory.removeItem(0);
+		Assert.assertTrue(inventory.hasFreeSlots());
 	}
 
 	@Test
