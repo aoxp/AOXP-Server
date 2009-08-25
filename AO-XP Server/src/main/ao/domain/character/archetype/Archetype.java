@@ -192,13 +192,6 @@ public interface Archetype {
 	int getManaIncrement(int intelligence);
 	
 	/**
-	 * Retrieves the chance of succeeding at theft.
-	 * Must be a number between 0 (impossible) and 1 (always)
-	 * @return The chance of succeeding at theft.
-	 */
-	float getThievingChance();
-	
-	/**
 	 * Retrieves the chance of succeeding at stabbing an opponent.
 	 * Must be a number between 0 (impossible) and 1 (always)
 	 * @param stabSkill The user's stab skill.

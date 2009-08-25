@@ -6,9 +6,7 @@ package ao.domain.character.archetype;
  * @author jsotuyod
  */
 public enum UserArchetype {
-	// TODO : Once the archetype classes are implemented, uncomment them, and delete the dummy archetype
-	DUMMY(null);
-//	MAGE(new MageArchetype()),
+	MAGE(new MageArchetype());
 //	CLERIC(new ClericArchetype()),
 //	WARRIOR(new WarriorArchetype()),
 //	ASSASIN(new AssasinArchetype()),
