@@ -6,7 +6,7 @@ package ao.domain.character.archetype;
  * @author jsotuyod
  */
 public enum UserArchetype {
-	MAGE(new MageArchetype());
+	MAGE(new MageArchetype()),
 //	CLERIC(new ClericArchetype()),
 //	WARRIOR(new WarriorArchetype()),
 //	ASSASIN(new AssasinArchetype()),
@@ -16,12 +16,12 @@ public enum UserArchetype {
 //	BANDIT(new BanditArchetype()),
 //	PALADIN(new PaladinArchetype()),
 //	HUNTER(new HunterArchetype()),
-//	FISHER(new FisherArchetype()),
+	FISHER(new FisherArchetype()),
 //	BLACKSMITH(new BlacksmithArchetype()),
 //	LUMBERJACK(new LumberjackArchetype()),
 //	MINER(new MinerArchetype()),
 //	CARPENTER(new CarpenterArchetype()),
-//	PIRAT(new PiratArchetype());
+	PIRAT(new PiratArchetype());
 	
 	private Archetype archetype;
 	
