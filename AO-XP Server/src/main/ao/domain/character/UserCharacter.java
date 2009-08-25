@@ -88,18 +88,6 @@ public interface UserCharacter extends Character {
 	Gender getGender();
 	
 	/**
-	 * Retrieves the user's status.
-	 * @return True if the user is dead, false otherwise. 
-	 */
-	boolean isDead();
-	
-	/**
-	 * Sets whether the user is dead, or not.
-	 * @param dead The user's status.
-	 */
-	void setDead(boolean dead);
-	
-	/**
 	 * Checks if the user is dumb, or not.
 	 * @return True if the user is dumb, false otherwise.
 	 */
@@ -110,4 +98,5 @@ public interface UserCharacter extends Character {
 	 * @param dumb The new user's dumb status.
 	 */
 	void setDumb(boolean dumb);
+	
 }

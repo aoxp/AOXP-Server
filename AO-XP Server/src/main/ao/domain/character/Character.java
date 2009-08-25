@@ -204,4 +204,17 @@ public interface Character {
 	 * @param level The levels to add.
 	 */
 	void addToLevel(byte level);
+	
+	/**
+	 * Retrieves the character's status.
+	 * @return True if the character is dead, false otherwise. 
+	 */
+	boolean isDead();
+	
+	/**
+	 * Sets whether the character is dead, or not.
+	 * @param dead The character's status.
+	 */
+	void setDead(boolean dead);
+	
 }

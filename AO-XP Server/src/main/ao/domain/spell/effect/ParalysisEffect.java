@@ -10,7 +10,6 @@ public class ParalysisEffect implements Effect {
 		target.setParalyzed(true);
 	}
 	
-
 	@Override
 	public boolean appliesTo(Character target) {
 		if (target instanceof UserCharacter && ((UserCharacter) target).isDead()) {

@@ -14,7 +14,7 @@ public class RecoverMobilityEffect implements Effect {
 	@Override
 	public boolean appliesTo(Character target) {
 		// TODO: Considerar casos de remo a npc cuando esté armado el sistema de mascotas.
-		if (!(target.isImmobilized() || target.isParalyzed())) {
+		if (!target.isImmobilized() || !target.isParalyzed()) {
 			return false;
 		}
 		

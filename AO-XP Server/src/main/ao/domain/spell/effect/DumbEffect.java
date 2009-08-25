@@ -7,7 +7,7 @@ public class DumbEffect implements Effect {
 
 	@Override
 	public boolean appliesTo(Character target) {
-		if (!(target instanceof UserCharacter) || ((UserCharacter) target).isDead()) {
+		if (target instanceof UserCharacter && ((UserCharacter) target).isDead()) {
 			return false;
 		}
 		
