@@ -4,7 +4,7 @@ import ao.domain.worldobject.Item;
 
 public class InventoryImpl implements Inventory {
 	
-	private static final int DEFAULT_INVENTORY_CAPACITY = 18;
+	private static final int DEFAULT_INVENTORY_CAPACITY = 20;
 	
 	Item[] inventory;
 	
@@ -27,7 +27,7 @@ public class InventoryImpl implements Inventory {
 			
 			// Stack the item to previous slots
 			for (; i < inventory.length; i++) {
-				if (inventory[i].getId() == id) {
+				if (inventory[i]!= null && inventory[i].getId() == id) {
 					oldAmount = inventory[i].getAmount();
 					newAmount = inventory[i].addAmount(amount);
 					amount += oldAmount - newAmount; 
@@ -36,7 +36,6 @@ public class InventoryImpl implements Inventory {
 					}
 				}
 			}
-			
 			// Set the item's amount to the remainder
 			item.addAmount(amount - item.getAmount());
 		}
@@ -63,7 +62,7 @@ public class InventoryImpl implements Inventory {
 	@Override
 	public boolean hasFreeSlots() {
 		for (Item item : inventory) {
-			if (item == null ){
+			if (item == null) {
 				return true;
 			}		
 		}
@@ -109,7 +108,7 @@ public class InventoryImpl implements Inventory {
 		int id = item.getId();
 		
 		for (; i < inventory.length; i++) {
-			if (inventory[i].getId() == id) {
+			if (inventory[i] != null && inventory[i].getId() == id) {
 				remainingAmount -= inventory[i].getAmount();
 				left = inventory[i].addAmount( -(inventory[i].getAmount() + remainingAmount));
 				
@@ -160,7 +159,7 @@ public class InventoryImpl implements Inventory {
 		int id = item.getId();
 		
 		for (Item i : inventory){
-			if (id == i.getId()){
+			if (i != null && id == i.getId()){
 				amount += i.getAmount();
 			}
 		}

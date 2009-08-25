@@ -24,12 +24,90 @@ public class InventoryImplTest {
 
 	@Test
 	public void testAddItem() {
-		Item item = EasyMock.createMock(Item.class);
+		/* Item item = EasyMock.createMock(Item.class);
 		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
 		EasyMock.replay(item);
 		
 		inventory.addItem(item);
-		Assert.assertTrue(inventory.hasItem(item) != -1);
+		Assert.assertTrue(inventory.hasItem(item) != -1); */
+		
+		//Try to add all the items to the inventory
+		Item[] item = new Item[inventory.getCapacity()];
+		for (int i = 0; i< inventory.getCapacity(); i++) {
+			item[i] = EasyMock.createMock(Item.class);
+			EasyMock.expect(item[i].getId()).andReturn(i).anyTimes();
+			EasyMock.replay(item[i]);
+			
+			Assert.assertEquals(0, inventory.addItem(item[i]));
+		}	
+
+		//Try to add an item when inventory is full and item not repeated.
+		Item newItem = EasyMock.createMock(Item.class);
+		EasyMock.expect(newItem.getId()).andReturn(22);
+		EasyMock.expect(newItem.getAmount()).andReturn(1);
+		EasyMock.replay(newItem);
+		Assert.assertEquals(1, inventory.addItem(newItem));
+		
+		//Try to add an item that is repeated when inv. is full
+		EasyMock.reset(newItem);
+		EasyMock.expect(newItem.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(newItem.getAmount()).andReturn(1);
+		
+		EasyMock.reset(item[1]);
+		EasyMock.expect(item[1].getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item[1].getAmount()).andReturn(1);
+		EasyMock.expect(item[1].addAmount(1)).andReturn(2);
+		EasyMock.expect(item[1].getAmount()).andReturn(2).anyTimes();
+		
+		EasyMock.expect(newItem.addAmount(-1)).andReturn(1);
+		EasyMock.expect(newItem.getAmount()).andReturn(1).anyTimes();
+		
+		EasyMock.replay(newItem, item[1]);
+		Assert.assertEquals(0, inventory.addItem(newItem));
+		Assert.assertEquals(2, inventory.getItemAmount(newItem));
+		
+		//Try to add an item that is repeated when inventory isnt full but item not exceed the limit
+		inventory.removeItem(0);
+		EasyMock.reset(newItem);
+		EasyMock.expect(newItem.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(newItem.getAmount()).andReturn(2);
+		EasyMock.expect(newItem.getAmount()).andReturn(2);
+		
+		EasyMock.reset(item[1]);
+		EasyMock.expect(item[1].getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item[1].getAmount()).andReturn(1);
+		EasyMock.expect(item[1].addAmount(2)).andReturn(2); //Set the max amount to 2
+		EasyMock.expect(item[1].getAmount()).andReturn(2);
+		
+		EasyMock.expect(newItem.addAmount(-1)).andReturn(1);
+		EasyMock.expect(newItem.getAmount()).andReturn(1);
+		
+		EasyMock.replay(newItem, item[1]);
+
+		Assert.assertEquals(0, inventory.addItem(newItem));
+		Assert.assertEquals(3, inventory.getItemAmount(newItem));
+		
+		//Try to add an item that is repeated when inventory isnt full and item amount exceeds the limit.
+		inventory.removeItem(0);
+		inventory.addItem(item[0]);
+		
+		EasyMock.reset(newItem);
+		EasyMock.expect(newItem.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(newItem.getAmount()).andReturn(2);
+		EasyMock.expect(newItem.getAmount()).andReturn(2);
+		
+		EasyMock.reset(item[1]);
+		EasyMock.expect(item[1].getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item[1].getAmount()).andReturn(1);
+		EasyMock.expect(item[1].addAmount(2)).andReturn(2); //Set the max amount to 2
+		EasyMock.expect(item[1].getAmount()).andReturn(2);
+		
+		EasyMock.expect(newItem.addAmount(-1)).andReturn(1);
+		EasyMock.expect(newItem.getAmount()).andReturn(1);
+		
+		EasyMock.replay(newItem, item[1]);
+		
+		Assert.assertEquals(1, inventory.addItem(newItem));
 	}
 
 	@Test
@@ -49,8 +127,6 @@ public class InventoryImplTest {
 
 	@Test
 	public void testHasFreeSlots() {
-		Assert.assertTrue(inventory.hasFreeSlots());
-		
 		Item[] item = new Item[inventory.getCapacity()];
 
 		for (int i = 0; i< inventory.getCapacity(); i++) {
@@ -58,6 +134,7 @@ public class InventoryImplTest {
 			EasyMock.expect(item[i].getId()).andReturn(i).anyTimes();
 			EasyMock.replay(item[i]);
 			
+			Assert.assertTrue(inventory.hasFreeSlots());
 			inventory.addItem(item[i]);
 		} 
 		
@@ -144,6 +221,19 @@ public class InventoryImplTest {
 		// Test bounds
 		Assert.assertNull(inventory.removeItem(-1, 1));
 		Assert.assertNull(inventory.removeItem(inventory.getCapacity(), 1));
+	}
+	
+	@Test
+	public void testGetItemAmount() {
+		Item item = EasyMock.createMock(Item.class);
+		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item.getAmount()).andReturn(1).anyTimes();
+		EasyMock.replay(item);
+		
+		inventory.addItem(item);
+		Assert.assertEquals(1, inventory.getItemAmount(item));
+
+		//TODO: Test getting amounts an item placed in different slots of the inventory.
 	}
 
 }
