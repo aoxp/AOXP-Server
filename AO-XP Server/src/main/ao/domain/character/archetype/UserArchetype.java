@@ -12,7 +12,7 @@ public enum UserArchetype {
 //	ASSASIN(new AssasinArchetype()),
 //	THIEF(new ThiefArchetype()),
 //	BARD(new BardArchetype()),
-//	DRUID(new DruidArchetype()),
+	DRUID(new DruidArchetype()),
 //	BANDIT(new BanditArchetype()),
 //	PALADIN(new PaladinArchetype()),
 //	HUNTER(new HunterArchetype()),

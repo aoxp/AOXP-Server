@@ -15,7 +15,7 @@ public abstract class DefaultArchetype implements Archetype {
 	private static final float DEFAULT_SAILING_MODIFIER = 2.3f;
 	private static final float DEFAULT_STABBING_DAMAGE_MODIFIER = 1.5f;
 	private static final int DEFAULT_STAMINA_INCREMENT = 15;
-	private static final float DEFAULT_TAMING_TRAINING_CHANCE = 1.3f;
+	private static final float DEFAULT_TAMING_TRAINING_CHANCE = 0.3f;
 	private static final int DEFAULT_WOOD_WORK_STAMINA_COST = 6;
 	private static final float DEFAULT_BLACKSMITH_MODIFIER = 4.0f;
 	private static final float DEFAULT_IRON_WORKING_MODIFIER = 3.0f;

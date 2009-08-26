@@ -1,6 +1,7 @@
 package ao.domain.spell.effect;
 
 import ao.domain.character.Character;
+import ao.domain.character.UserCharacter;
 import ao.domain.worldobject.WorldObject;
 
 public class InvisibilityEffect implements Effect {
@@ -13,7 +14,7 @@ public class InvisibilityEffect implements Effect {
 
 	@Override
 	public boolean appliesTo(Character caster, Character target) {
-		if (target.isDead()) {
+		if (!(target instanceof UserCharacter) || target.isDead()) {
 			return false;
 		}
 		
