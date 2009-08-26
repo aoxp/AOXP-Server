@@ -1,5 +1,9 @@
 package ao.domain.character;
 
+/**
+ * Defines available skills.
+ * @author jsotuyod
+ */
 public enum Skill {
 	LUCK,
 	MAGIC,

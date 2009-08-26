@@ -29,7 +29,7 @@ public interface Character {
 	 * Adds (or subtracts if the given number is negative) points to character's max hit points.
 	 * @param points 	The points to add.
 	 */
-	void addToMaxHP(int points);
+	void addToMaxHitPoints(int points);
 	
 	/**
 	 * Retrieves the character's mana points.
@@ -182,16 +182,16 @@ public interface Character {
 	int getHead();
 	
 	/**
-	 * Retrieves the old character's body.
+	 * Retrieves the original character's body.
 	 * @return The character's body.
 	 */
-	int getOldBody();
+	int getOriginalBody();
 	
 	/**
-	 * Retrieves the old character's head.
+	 * Retrieves the original character's head.
 	 * @return The character's head.
 	 */
-	int getOldHead();
+	int getOriginalHead();
 
 	/**
 	 * Sets the character's head
@@ -224,28 +224,22 @@ public interface Character {
 	byte getLevel();
 	
 	/**
-	 * Adds the nivel levels to character's level.
-	 * @param level The levels to add.
+	 * Retrieves the character's experience.
+	 * @return The character's experience.
 	 */
-	void addToLevel(byte level);
+	int getExperience();
 	
 	/**
-	 * Retrieves the character's exp.
-	 * @return The character's exp.
+	 * Retrieves the experience needed to level up
+	 * @return the experience needed to level up.
 	 */
-	int getExp();
+	int getExperienceForLeveUp();
 	
 	/**
-	 * Retrieves the exp needed to level up
-	 * @return the exp needed to level up.
+	 * Adds experience to the character's current experience. Will level up if possible.
+	 * @param exp the experience to add.
 	 */
-	int getExpForLeveUp();
-	
-	/**
-	 * Adds exp to the character's current exp.
-	 * @param exp the exp to add.
-	 */
-	void addToExp(int exp);
+	void addToExperience(int experience);
 	
 	/**
 	 * Retrieves the character's status.
@@ -266,7 +260,7 @@ public interface Character {
 	boolean isMimetized();
 	
 	/**
-	 * Sets wether the character is mimetized, or not.
+	 * Sets whether the character is mimetized, or not.
 	 * @param mimetized The character's mimetized status.
 	 */
 	void setMimetized(boolean mimetized);
@@ -306,4 +300,16 @@ public interface Character {
 	 * @param dumb The new user's dumb status.
 	 */
 	void setDumb(boolean dumb);
+	
+	/**
+	 * Checks if the character can walk in the water.  
+	 * @return True if the character can move in water, false otherwise.
+	 */
+	boolean canWalkInWater();
+	
+	/**
+	 * Checks if the character can walk in the earth.
+	 * @return True if the character can walk in the earth.
+	 */
+	boolean canWalkInEarth();
 }

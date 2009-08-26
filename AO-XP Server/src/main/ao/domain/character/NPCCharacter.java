@@ -56,16 +56,4 @@ public interface NPCCharacter extends Character {
 	 */
 	boolean hasMaster();
 	
-	/**
-	 * Checks if the NPC can walk in the water.  
-	 * @return True if the NPC can move in water or if he is Jesus, false otherwise.
-	 */
-	boolean canWalkInWater();
-	
-	/**
-	 * Checks if the NPC can walk in the earth.
-	 * @return True if the NPC can walk in the earth.
-	 */
-	boolean canWalkInEarth();
-
 }

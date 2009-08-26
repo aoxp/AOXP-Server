@@ -13,4 +13,10 @@ public interface EquipableItem extends Item {
 	 * @param equipped True if the item is equipped, false otherwise.
 	 */
 	void setEquipped(boolean equipped);
+	
+	/**
+	 * Retrieves the object's graphic when equipped (may be a body index, head index, etc. according to the specific item). 
+	 * @return The object's graphic when equipped (may be a body index, head index, etc. according to the specific item).
+	 */
+	int getEquippedGraphic();
 }

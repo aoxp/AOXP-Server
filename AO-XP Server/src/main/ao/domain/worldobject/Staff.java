@@ -98,4 +98,16 @@ public class Staff implements Weapon {
 
 	}
 
+	@Override
+	public int getGraphic() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getEquippedGraphic() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

@@ -74,4 +74,10 @@ public class Boat implements Item {
 		return false;
 	}
 
+	@Override
+	public int getGraphic() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
