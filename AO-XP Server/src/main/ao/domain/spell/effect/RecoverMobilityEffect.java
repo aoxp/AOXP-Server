@@ -2,6 +2,7 @@ package ao.domain.spell.effect;
 
 import ao.domain.character.Character;
 import ao.domain.character.UserCharacter;
+import ao.domain.worldobject.WorldObject;
 
 public class RecoverMobilityEffect implements Effect {
 
@@ -10,19 +11,29 @@ public class RecoverMobilityEffect implements Effect {
 		target.setImmobilized(false);
 		target.setParalyzed(false);
 	}
-
+	
 	@Override
-	public boolean appliesTo(Character target) {
+	public boolean appliesTo(Character caster, Character target) {
 		// TODO: Considerar casos de remo a npc cuando esté armado el sistema de mascotas.
 		if (!target.isImmobilized() || !target.isParalyzed()) {
 			return false;
 		}
 		
-		if (target instanceof UserCharacter && ((UserCharacter) target).isDead()) {
+		if (target instanceof UserCharacter && !target.isDead()) {
 			return false;
 		}
 		
 		return true;
+	}
+
+	@Override
+	public boolean appliesTo(Character caster, WorldObject worldobject) {
+		return false;
+	}
+
+	@Override
+	public void apply(Character caster, WorldObject target) {
+		
 	}
 
 }

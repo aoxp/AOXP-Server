@@ -182,6 +182,18 @@ public interface Character {
 	int getHead();
 
 	/**
+	 * Sets the character's head
+	 * @param head the new head.
+	 */
+	void setHead(int head);
+	
+	/**
+	 * Sets the character's body
+	 * @param body the new body
+	 */
+	void setBody(int body);
+	
+	/**
 	 * Retrieves the character's poisoning status.
 	 * @return The character's poisoning status.
 	 */
@@ -206,6 +218,24 @@ public interface Character {
 	void addToLevel(byte level);
 	
 	/**
+	 * Retrieves the character's exp.
+	 * @return The character's exp.
+	 */
+	int getExp();
+	
+	/**
+	 * Retrieves the exp needed to level up
+	 * @return the exp needed to level up.
+	 */
+	int getExpForLeveUp();
+	
+	/**
+	 * Adds exp to the character's current exp.
+	 * @param exp the exp to add.
+	 */
+	void addToExp(int exp);
+	
+	/**
 	 * Retrieves the character's status.
 	 * @return True if the character is dead, false otherwise. 
 	 */
@@ -217,4 +247,51 @@ public interface Character {
 	 */
 	void setDead(boolean dead);
 	
+	/**
+	 * Checks if the user is mimetized, or not.
+	 * @return True if the user is mimetized, false otherwise.
+	 */
+	boolean isMimetized();
+	
+	/**
+	 * Sets wether the character is mimetized, or not.
+	 * @param mimetized The character's mimetized status.
+	 */
+	void setMimetized(boolean mimetized);
+	
+	/**
+	 * Checks if the user is invisible, or not.
+	 * @return True if the user is invisible, false otherwise.
+	 */
+	boolean isInvisible();
+	
+	/**
+	 * Sets whether the user is invisible, or not.
+	 * @param invisible The user's invisibility status.
+	 */
+	void setInvisible(boolean invisible);
+	
+	/**
+	 * Checks if the user is hidden, or not.
+	 * @return True if the user is hidden, false otherwise.
+	 */
+	boolean isHidden();
+	
+	/**
+	 * Sets whether the user is hidden, or not.
+	 * @param hidden The user's concealment status.
+	 */
+	void setHidden(boolean hidden);
+	
+	/**
+	 * Checks if the user is dumb, or not.
+	 * @return True if the user is dumb, false otherwise.
+	 */
+	boolean isDumb();
+	
+	/**
+	 * Sets whether the user is dumb, or not.
+	 * @param dumb The new user's dumb status.
+	 */
+	void setDumb(boolean dumb);
 }

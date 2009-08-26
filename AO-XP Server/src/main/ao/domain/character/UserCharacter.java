@@ -17,30 +17,6 @@ public interface UserCharacter extends Character {
 	void addToSkill(Skill skill, byte points);
 	
 	/**
-	 * Checks if the user is invisible, or not.
-	 * @return True if the user is invisible, false otherwise.
-	 */
-	boolean isInvisible();
-	
-	/**
-	 * Sets whether the user is invisible, or not.
-	 * @param invisible The user's invisibility status.
-	 */
-	void setInvisible(boolean invisible);
-	
-	/**
-	 * Checks if the user is hidden, or not.
-	 * @return True if the user is hidden, false otherwise.
-	 */
-	boolean isHidden();
-	
-	/**
-	 * Sets whether the user is hidden, or not.
-	 * @param hidden The user's concealment status.
-	 */
-	void setHidden(boolean hidden);
-	
-	/**
 	 * Checks if the user is doing some work.
 	 * @return True if the user is working, false other wise.
 	 */
@@ -85,18 +61,5 @@ public interface UserCharacter extends Character {
 	 * Retrieves the user's gender.
 	 * @return The user's gender.
 	 */
-	Gender getGender();
-	
-	/**
-	 * Checks if the user is dumb, or not.
-	 * @return True if the user is dumb, false otherwise.
-	 */
-	boolean isDumb();
-	
-	/**
-	 * Sets whether the user is dumb, or not.
-	 * @param dumb The new user's dumb status.
-	 */
-	void setDumb(boolean dumb);
-	
+	Gender getGender();	
 }
