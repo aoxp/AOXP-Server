@@ -1,5 +1,7 @@
 package ao.domain.character;
 
+import ao.domain.character.archetype.Archetype;
+
 public interface UserCharacter extends Character {
 
 	/**
@@ -61,5 +63,11 @@ public interface UserCharacter extends Character {
 	 * Retrieves the user's gender.
 	 * @return The user's gender.
 	 */
-	Gender getGender();	
+	Gender getGender();
+	
+	/**
+	 * Retrieves the user's archetype.
+	 * @return The user's archetype.
+	 */
+	Archetype getArchetype();
 }

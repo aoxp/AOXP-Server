@@ -1,7 +1,6 @@
 package ao.domain.spell.effect;
 
 import ao.domain.character.Character;
-import ao.domain.character.UserCharacter;
 import ao.domain.worldobject.WorldObject;
 
 public class RecoverMobilityEffect implements Effect {
@@ -19,7 +18,7 @@ public class RecoverMobilityEffect implements Effect {
 			return false;
 		}
 		
-		if (target instanceof UserCharacter && !target.isDead()) {
+		if (target.isDead()) {
 			return false;
 		}
 		

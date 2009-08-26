@@ -13,9 +13,9 @@ public interface Effect {
 	void apply(Character caster, Character target);
 	
 	/**
-	 * Applis the effect in the given object
+	 * Applies the effect in the given object
 	 * @param caster The character casting the spell with the effect
-	 * @param target The worldobject where to apply the effect.
+	 * @param target The world object on which to apply the effect.
 	 */
 	void apply(Character caster, WorldObject target);
 
@@ -28,7 +28,7 @@ public interface Effect {
 	boolean appliesTo(Character caster, Character target);
 	
 	/**
-	 * Checks whether the effect can be applied to the given worldobject, or not.
+	 * Checks whether the effect can be applied to the given world object, or not.
 	 * @param caster The caster of the spell.
 	 * @param worldobject The target object.
 	 * @return True if the effect can be applied, false otherwise.

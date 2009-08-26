@@ -1,7 +1,6 @@
 package ao.domain.spell.effect;
 
 import ao.domain.character.Character;
-import ao.domain.character.UserCharacter;
 import ao.domain.worldobject.WorldObject;
 
 public class ImmobilizationEffect implements Effect {
@@ -13,7 +12,7 @@ public class ImmobilizationEffect implements Effect {
 	
 	@Override
 	public boolean appliesTo(Character caster, Character target) {
-		if (target instanceof UserCharacter && !target.isDead()) {
+		if (target.isDead()) {
 			return false;
 		}
 		

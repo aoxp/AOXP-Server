@@ -21,7 +21,7 @@ public class MageArchetype extends DefaultArchetype {
 	}
 	
 	@Override
-	public int getStaminaIncrement(int level) {
+	public int getStaminaIncrement() {
 		return STAMINA_INCREMENT;
 	}
 	
@@ -31,7 +31,7 @@ public class MageArchetype extends DefaultArchetype {
 	}
 
 	@Override
-	public int getManaIncrement(int intelligence) {
+	public int getManaIncrement(int intelligence, int mana) {
 		return (int) Math.round(intelligence * MANA_MODIFIER);
 	}
 }

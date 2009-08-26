@@ -25,7 +25,7 @@ public class FisherArchetype extends DefaultArchetype {
 	}
 	
 	@Override
-	public int getStaminaIncrement(int level) {
+	public int getStaminaIncrement() {
 		return STAMINA_INCREMENT;
 	}
 	

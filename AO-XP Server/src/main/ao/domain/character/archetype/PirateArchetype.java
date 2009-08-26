@@ -4,7 +4,7 @@ package ao.domain.character.archetype;
  * A pirate archetype.
  * @author jsotuyod
  */
-public class PiratArchetype extends DefaultArchetype {
+public class PirateArchetype extends DefaultArchetype {
 
 	private static final int HIT_INCREMENT = 3;
 	private static final int SAILING_MIN_LEVEL = 20;

@@ -179,17 +179,17 @@ public interface Archetype {
 	
 	/**
 	 * Retrieve the amount by which to increment the user's stamina each level.
-	 * @param level	The level the user has just reached.
 	 * @return The amount by which to increment the user's stamina.
 	 */
-	int getStaminaIncrement(int level);
+	int getStaminaIncrement();
 	
 	/**
 	 * Retrieve the amount by which to increment the user's mana each level.
 	 * @param intelligence The user's intelligence.
+	 * @param mana The user's current maximum mana.
 	 * @return The amount by which to increment the user's mana.
 	 */
-	int getManaIncrement(int intelligence);
+	int getManaIncrement(int intelligence, int mana);
 	
 	/**
 	 * Retrieves the chance of succeeding at stabbing an opponent.

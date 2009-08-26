@@ -37,7 +37,13 @@ public abstract class DefaultArchetype implements Archetype {
 	private static final float DEFAULT_MIN_STABBING_CHANCE = 0.0439f;
 	private static final float DEFAULT_STABBING_CHANCE_SKILL_MULTIPLIER = 0.000361f;
 	private static final int DEFAULT_MANA_INCREMENT = 0;
+	private static final int DEFAULT_HIT_INCREMENT = 2;
 
+	@Override
+	public int getHitIncrement(int level) {
+		return DEFAULT_HIT_INCREMENT;
+	}
+	
 	@Override
 	public boolean canBlacksmith(int blacksmithSkill, Item item) {
 		return blacksmithSkill / getBlacksmithModifier() >= item.getManufactureDifficulty();
@@ -159,12 +165,12 @@ public abstract class DefaultArchetype implements Archetype {
 	}
 
 	@Override
-	public int getStaminaIncrement(int level) {
+	public int getStaminaIncrement() {
 		return DEFAULT_STAMINA_INCREMENT;
 	}
 	
 	@Override
-	public int getManaIncrement(int intelligence) {
+	public int getManaIncrement(int intelligence, int mana) {
 		return DEFAULT_MANA_INCREMENT;
 	}
 
