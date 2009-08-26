@@ -18,7 +18,7 @@ public enum UserArchetype {
 //	HUNTER(new HunterArchetype()),
 	FISHER(new FisherArchetype()),
 //	BLACKSMITH(new BlacksmithArchetype()),
-//	LUMBERJACK(new LumberjackArchetype()),
+	LUMBERJACK(new LumberjackArchetype()),
 //	MINER(new MinerArchetype()),
 //	CARPENTER(new CarpenterArchetype()),
 	PIRAT(new PiratArchetype());

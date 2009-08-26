@@ -4,7 +4,7 @@ package ao.domain.character.archetype;
  * A lumberjack archetype.
  * @author Zama
  */
-public class LumberjackArchetype {
+public class LumberjackArchetype extends DefaultArchetype {
 
 	private static final int HIT_INCREMENT = 2;
 	private static final int STAMINA_INCREMENT = 35;
