@@ -180,6 +180,18 @@ public interface Character {
 	 * @return The character's head.
 	 */
 	int getHead();
+	
+	/**
+	 * Retrieves the old character's body.
+	 * @return The character's body.
+	 */
+	int getOldBody();
+	
+	/**
+	 * Retrieves the old character's head.
+	 * @return The character's head.
+	 */
+	int getOldHead();
 
 	/**
 	 * Sets the character's head

@@ -9,7 +9,9 @@ public class MimetismEffect implements Effect {
 
 	@Override
 	public boolean appliesTo(Character caster, Character target) {
-		if (((UserCharacter)caster).getArchetype() != UserArchetype.DRUID.getArchetype() && !(target instanceof UserCharacter)) {
+		// Only druids (or maybe npcs, not yet defined) can mimetize themselvs with NPC's
+		if (!(target instanceof UserCharacter) 
+				&& (caster instanceof UserCharacter) && ((UserCharacter)caster).getArchetype() != UserArchetype.DRUID.getArchetype()) {
 			return false;
 		}
 		return true;
@@ -17,7 +19,8 @@ public class MimetismEffect implements Effect {
 
 	@Override
 	public boolean appliesTo(Character caster, WorldObject worldobject) {
-		if (((UserCharacter)caster).getArchetype() != UserArchetype.DRUID.getArchetype()) {
+		// Only druids (or maybe npcs, not yet defined) can mimetize themselves with worldobjects
+		if (caster instanceof UserCharacter && ((UserCharacter)caster).getArchetype() != UserArchetype.DRUID.getArchetype()) {
 			return false;
 		}
 		return true;
