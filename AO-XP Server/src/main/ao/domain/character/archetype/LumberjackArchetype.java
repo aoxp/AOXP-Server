@@ -6,6 +6,16 @@ package ao.domain.character.archetype;
  */
 public class LumberjackArchetype extends DefaultArchetype {
 
+	LumberjackArchetype(float evasionModifier, float meleeAccuracyModifier,
+			float rangedAccuracyModifier, float meleeDamageModifier,
+			float rangedDamageModifier, float wrestlingDamageModifier,
+			float blockPowerModifier) {
+		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
+				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
+				blockPowerModifier);
+		// TODO Auto-generated constructor stub
+	}
+
 	private static final int STAMINA_INCREMENT = 35;
 	private static final int LUMBER_MIN_AMOUNT = 1;
 	private static final int LUMBER_MAX_AMOUNT = 4;

@@ -38,7 +38,37 @@ public abstract class DefaultArchetype implements Archetype {
 	private static final float DEFAULT_STABBING_CHANCE_SKILL_MULTIPLIER = 0.000361f;
 	private static final int DEFAULT_MANA_INCREMENT = 0;
 	private static final int DEFAULT_HIT_INCREMENT = 2;
-
+	
+	protected float evasionModifier;
+	protected float meleeAccuracyModifier;
+	protected float rangedAccuracyModifier;
+	protected float meleeDamageModifier;
+	protected float rangedDamageModifier;
+	protected float wrestlingDamageModifier;
+	protected float blockPowerModifier;
+	
+	/**
+	 * Sets the modifiers for the archetype
+	 * @param evasionModifier
+	 * @param meleeAccuracyModifier
+	 * @param rangedAccuracyModifier
+	 * @param meleeDamageModifier
+	 * @param rangedDamageModifier
+	 * @param wrestlingDamageModifier
+	 * @param blockPowerModifier
+	 */
+	DefaultArchetype(float evasionModifier, float meleeAccuracyModifier, float rangedAccuracyModifier, 
+			float meleeDamageModifier, float rangedDamageModifier, float wrestlingDamageModifier, 
+			float blockPowerModifier){
+		this.evasionModifier = evasionModifier;
+		this.meleeAccuracyModifier = meleeAccuracyModifier;
+		this.rangedAccuracyModifier = rangedAccuracyModifier;
+		this.meleeDamageModifier = meleeDamageModifier;
+		this.rangedDamageModifier = rangedDamageModifier;
+		this.wrestlingDamageModifier = wrestlingDamageModifier;
+		this.blockPowerModifier = blockPowerModifier;
+	}
+	
 	@Override
 	public int getHitIncrement(int level) {
 		return DEFAULT_HIT_INCREMENT;
@@ -192,6 +222,41 @@ public abstract class DefaultArchetype implements Archetype {
 	@Override
 	public int getWoodWorkStaminaCost() {
 		return DEFAULT_WOOD_WORK_STAMINA_COST;
+	}
+	
+	@Override
+	public float getEvasionModifier() {
+		return evasionModifier;
+	}
+
+	@Override
+	public float getMeleeAccuracyModifier() {
+		return meleeAccuracyModifier;
+	}
+
+	@Override
+	public float getRangedAccuracyModifier() {
+		return rangedAccuracyModifier;
+	}
+
+	@Override
+	public float getMeleeDamageModifier() {
+		return meleeDamageModifier;
+	}
+
+	@Override
+	public float getRangedDamageModifier() {
+		return rangedDamageModifier;
+	}
+
+	@Override
+	public float getWrestlingDamageModifier() {
+		return wrestlingDamageModifier;
+	}
+
+	@Override
+	public float getBlockPowerModifier() {
+		return blockPowerModifier;
 	}
 
 	/**

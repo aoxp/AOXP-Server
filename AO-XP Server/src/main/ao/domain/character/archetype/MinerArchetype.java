@@ -6,6 +6,16 @@ package ao.domain.character.archetype;
  */
 public class MinerArchetype extends DefaultArchetype {
 
+	MinerArchetype(float evasionModifier, float meleeAccuracyModifier,
+			float rangedAccuracyModifier, float meleeDamageModifier,
+			float rangedDamageModifier, float wrestlingDamageModifier,
+			float blockPowerModifier) {
+		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
+				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
+				blockPowerModifier);
+		// TODO Auto-generated constructor stub
+	}
+
 	private static final int STAMINA_INCREMENT = 40;
 	private static final int MINED_MAX_AMOUNT = 6;
 	private static final int MINED_MIN_AMOUNT = 1;

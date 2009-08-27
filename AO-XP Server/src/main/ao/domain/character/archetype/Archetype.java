@@ -211,4 +211,46 @@ public interface Archetype {
 	 * @return The chance to train taming.
 	 */
 	float getTamingTrainingChance();
+	
+	/**
+	 * Retrieves the Archetype's evasion modifier.
+	 * @return The Archetype's evasion modifier.
+	 */
+	float getEvasionModifier();
+	
+	/**
+	 * Retrieves the Archetype's melee accuracy modifier.
+	 * @return The Archetype's melee accuracy modifier.
+	 */
+	float getMeleeAccuracyModifier();
+	
+	/**
+	 * Retrieves the Archetype's ranged accuracy modifier.
+	 * @return The Archetype's ranged accuracy modifier.
+	 */
+	float getRangedAccuracyModifier();
+	
+	/**
+	 * Retrieves the Archetype's melee damage modifier.
+	 * @return The Archetype's melee damage modifier.
+	 */
+	float getMeleeDamageModifier();
+	
+	/**
+	 * Retrieves the Archetype's ranged damage modifier.
+	 * @return The Archetype's ranged damage modifier.
+	 */
+	float getRangedDamageModifier();
+	
+	/**
+	 * Retrieves the Archetype's wrestling damage modifier.
+	 * @return The Archetype's wrestling damage modifier.
+	 */
+	float getWrestlingDamageModifier();
+	
+	/**
+	 * Retrieves the Archetype's block power modifier.
+	 * @return The Archetype's block power modifier.
+	 */
+	float getBlockPowerModifier();
 }

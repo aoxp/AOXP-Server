@@ -6,6 +6,16 @@ package ao.domain.character.archetype;
  */
 public class FisherArchetype extends DefaultArchetype {
 
+	FisherArchetype(float evasionModifier, float meleeAccuracyModifier,
+			float rangedAccuracyModifier, float meleeDamageModifier,
+			float rangedDamageModifier, float wrestlingDamageModifier,
+			float blockPowerModifier) {
+		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
+				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
+				blockPowerModifier);
+		// TODO Auto-generated constructor stub
+	}
+
 	private static final int HIT_INCREMENT = 1;
 	private static final int SAILING_MIN_LEVEL = 20;
 	private static final float SAILING_MODIFIER = 1.2f;

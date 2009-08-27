@@ -10,6 +10,16 @@ import ao.domain.worldobject.Weapon;
  * @author jsotuyod
  */
 public class MageArchetype extends DefaultArchetype {
+	
+	MageArchetype(float evasionModifier, float meleeAccuracyModifier,
+			float rangedAccuracyModifier, float meleeDamageModifier,
+			float rangedDamageModifier, float wrestlingDamageModifier,
+			float blockPowerModifier) {
+		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
+				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
+				blockPowerModifier);
+		// TODO Auto-generated constructor stub
+	}
 
 	private static final float MANA_MODIFIER = 2.8f;
 	private static final int HIT_INCREMENT = 1;
