@@ -6,16 +6,6 @@ package ao.domain.character.archetype;
  */
 public class FisherArchetype extends DefaultArchetype {
 
-	FisherArchetype(float evasionModifier, float meleeAccuracyModifier,
-			float rangedAccuracyModifier, float meleeDamageModifier,
-			float rangedDamageModifier, float wrestlingDamageModifier,
-			float blockPowerModifier) {
-		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
-				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
-				blockPowerModifier);
-		// TODO Auto-generated constructor stub
-	}
-
 	private static final int HIT_INCREMENT = 1;
 	private static final int SAILING_MIN_LEVEL = 20;
 	private static final float SAILING_MODIFIER = 1.2f;
@@ -23,6 +13,15 @@ public class FisherArchetype extends DefaultArchetype {
 	private static final int FISHED_MIN_AMOUNT = 1;
 	private static final int FISHED_MAX_AMOUNT = 4;
 	private static final int FISHING_STAMINA_COST = 1;
+	
+	public FisherArchetype(float evasionModifier, float meleeAccuracyModifier,
+			float rangedAccuracyModifier, float meleeDamageModifier,
+			float rangedDamageModifier, float wrestlingDamageModifier,
+			float blockPowerModifier) {
+		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
+				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
+				blockPowerModifier);
+	}
 
 	@Override
 	public int getHitIncrement(int level) {

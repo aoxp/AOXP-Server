@@ -1,28 +1,28 @@
 package ao.domain.character.archetype;
 
+import ao.ioc.ArchetypeLocator;
 
 /**
  * User Archetype enumerator. Wraps archetype classes in an enum.
  * @author jsotuyod
  */
 public enum UserArchetype {
-//	MAGE(new MageArchetype()),
-//	CLERIC(new ClericArchetype()),
+	MAGE(ArchetypeLocator.getArchetype(MageArchetype.class)),
+	CLERIC(ArchetypeLocator.getArchetype(ClericArchetype.class)),
 //	WARRIOR(new WarriorArchetype()),
 //	ASSASIN(new AssasinArchetype()),
 //	THIEF(new ThiefArchetype()),
-//	BARD(new BardArchetype()),
-//	DRUID(new DruidArchetype()),
+	BARD(ArchetypeLocator.getArchetype(BardArchetype.class)),
+	DRUID(ArchetypeLocator.getArchetype(DruidArchetype.class)),
 //	BANDIT(new BanditArchetype()),
 //	PALADIN(new PaladinArchetype()),
 //	HUNTER(new HunterArchetype()),
-//	FISHER(new FisherArchetype()),
+	FISHER(ArchetypeLocator.getArchetype(FisherArchetype.class)),
 //	BLACKSMITH(new BlacksmithArchetype()),
-//	LUMBERJACK(new LumberjackArchetype()),
-//	MINER(new MinerArchetype()),
+	LUMBERJACK(ArchetypeLocator.getArchetype(LumberjackArchetype.class)),
+	MINER(ArchetypeLocator.getArchetype(MinerArchetype.class)),
 //	CARPENTER(new CarpenterArchetype()),
-//	PIRATE(new PirateArchetype());
-	DRUID(null);
+	PIRATE(ArchetypeLocator.getArchetype(PirateArchetype.class));
 	
 	private Archetype archetype;
 	

@@ -48,7 +48,7 @@ public abstract class DefaultArchetype implements Archetype {
 	protected float blockPowerModifier;
 	
 	/**
-	 * Sets the modifiers for the archetype
+	 * Creates a new default archetype.
 	 * @param evasionModifier
 	 * @param meleeAccuracyModifier
 	 * @param rangedAccuracyModifier
@@ -57,7 +57,7 @@ public abstract class DefaultArchetype implements Archetype {
 	 * @param wrestlingDamageModifier
 	 * @param blockPowerModifier
 	 */
-	DefaultArchetype(float evasionModifier, float meleeAccuracyModifier, float rangedAccuracyModifier, 
+	public DefaultArchetype(float evasionModifier, float meleeAccuracyModifier, float rangedAccuracyModifier, 
 			float meleeDamageModifier, float rangedDamageModifier, float wrestlingDamageModifier, 
 			float blockPowerModifier){
 		this.evasionModifier = evasionModifier;
