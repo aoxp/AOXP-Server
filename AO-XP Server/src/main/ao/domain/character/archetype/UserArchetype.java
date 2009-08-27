@@ -7,11 +7,11 @@ package ao.domain.character.archetype;
  */
 public enum UserArchetype {
 	MAGE(new MageArchetype()),
-//	CLERIC(new ClericArchetype()),
+	CLERIC(new ClericArchetype()),
 //	WARRIOR(new WarriorArchetype()),
 //	ASSASIN(new AssasinArchetype()),
 //	THIEF(new ThiefArchetype()),
-//	BARD(new BardArchetype()),
+	BARD(new BardArchetype()),
 	DRUID(new DruidArchetype()),
 //	BANDIT(new BanditArchetype()),
 //	PALADIN(new PaladinArchetype()),
