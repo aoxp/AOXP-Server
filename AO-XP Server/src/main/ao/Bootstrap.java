@@ -1,5 +1,9 @@
 package ao;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.nio.channels.ServerSocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,15 +17,24 @@ public class Bootstrap {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		AOXPServer server = Bootstrap.bootstrap();
+		AOXPServer server = null;
+		
+		try {
+			server = Bootstrap.bootstrap();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		server.run();
 	}
 
 	/**
 	 * Bootstraps the application.
 	 * @return The application.
+	 * @throws IOException 
 	 */
-	private static AOXPServer bootstrap() {
+	private static AOXPServer bootstrap() throws IOException {
 		
 		AOXPServer server = new AOXPServer();
 		
@@ -47,10 +60,20 @@ public class Bootstrap {
 	/**
 	 * Starts networking on the given server.
 	 * @param server The server on which to start networking.
+	 * @throws IOException
 	 */
-	private static void startNetworking(AOXPServer server) {
+	private static void startNetworking(AOXPServer server) throws IOException {
 		// TODO Auto-generated method stub
+		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 		
+		// TODO : Read all these values from configuration values, possibly even inject them...
+		int port = 7666;
+		InetSocketAddress endpoint = new InetSocketAddress(InetAddress.getLocalHost(), port);
+		int backlog = 5;
+		
+		serverSocketChannel.socket().bind(endpoint, backlog);
+		
+		server.setServerSocketChannel(serverSocketChannel);
 	}
 
 	/**

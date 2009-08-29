@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
@@ -23,21 +24,28 @@ public class AOXPServer {
 	 */
 	public void run() {
 		try {
-			// TODO This should really end when the app is somehow interrupted...
+			// TODO This should really end when the application is somehow interrupted...
 			while (true) {
 				// Wait for any activity (either an incoming connection or incoming data on an existing connection)
-				int num = selector.select();
-				
-				if (num == 0) {
+				if (selector.select() == 0) {
 					continue;	// No activity, continue
 				}
 				
 				// Process detected events
-				Set keys = selector.selectedKeys();
-				Iterator it = keys.iterator();
-				while (it.hasNext()) {
-					SelectionKey key = (SelectionKey)it.next();
-					
+				Set<SelectionKey> keys = selector.selectedKeys();
+				for (SelectionKey key : keys) {
+					if ((key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
+						// Accept the incoming connection.
+						SocketChannel sc = ssc.accept();
+						
+						sc.configureBlocking(false);
+						sc.register(selector, SelectionKey.OP_READ);
+					} else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
+						SocketChannel sc = (SocketChannel)key.channel();
+						
+						// TODO : Handle input.... if it's not a closed connection, grab a thread from the thread pool and process data!
+					}
+
 					// TODO : deal with SelectionKey
 				}
 				
