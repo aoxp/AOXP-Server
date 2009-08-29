@@ -19,8 +19,7 @@ public class HitPointsEffect implements Effect {
 	@Override
 	public void apply(Character caster, Character target) {
 		int points = minPoints + randomGenerator.nextInt(deltaPoints);
-		// TODO : Check this is integer division.... is that what we want??
-		points += points / (3 * caster.getLevel()) * 100;
+		points += (int) Math.round(points * 0.03f * caster.getLevel());
 	    
 		target.addToHitPoints(points);
 	}
