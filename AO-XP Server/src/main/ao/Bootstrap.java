@@ -9,7 +9,6 @@ import java.util.concurrent.Executors;
 
 /**
  * Bootstraps the application.
- * @author jsotuyod
  */
 public class Bootstrap {
 
@@ -66,7 +65,7 @@ public class Bootstrap {
 		// TODO Auto-generated method stub
 		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 		
-		// TODO : Read all these values from configuration values, possibly even inject them...
+		// TODO : Read all these values from configuration files, possibly even inject them...
 		int port = 7666;
 		InetSocketAddress endpoint = new InetSocketAddress(InetAddress.getLocalHost(), port);
 		int backlog = 5;

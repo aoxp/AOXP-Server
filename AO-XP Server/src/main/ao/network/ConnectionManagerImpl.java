@@ -1,0 +1,100 @@
+package ao.network;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
+import ao.domain.user.User;
+
+/**
+ * Default connection manager
+ */
+public class ConnectionManagerImpl implements ConnectionManager {
+
+	private static final float DEFAULT_LOAD_FACTOR = 0.75f;
+	
+	private ConcurrentMap<SocketChannel, Connection> scToConnection;
+	private ConcurrentMap<User, Connection> userToConnection;
+
+	/**
+	 * Creates a new ConnectionManagerImpl
+	 * @param maxExpectedUsers The maximum numbers of concurrent users expected in the server.
+	 */
+	public ConnectionManagerImpl(int maxExpectedUsers) {
+		int concurrencyLevel = Runtime.getRuntime().availableProcessors();
+		
+		this.scToConnection = new ConcurrentHashMap<SocketChannel, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
+		this.userToConnection = new ConcurrentHashMap<User, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
+	}
+	
+	@Override
+	public ByteBuffer getInputBuffer(SocketChannel sc) {
+		return this.scToConnection.get(sc).inputBuffer;
+	}
+
+	@Override
+	public void handleIncomingData(SocketChannel sc) {
+
+		Connection connection = this.scToConnection.get(sc);
+		
+		// TODO : Handle incoming data
+	}
+
+	@Override
+	public void registerConnection(SocketChannel sc) {
+		Connection connection = new Connection(sc);
+		
+		this.scToConnection.put(sc, connection);
+		this.userToConnection.put(connection.user, connection);
+	}
+	
+	@Override
+	public void unregisterConnection(SocketChannel sc) {
+		
+		// TODO : Apply any other internal logic before definitely removing the user
+		
+		Connection connection = this.scToConnection.remove(sc);
+		this.userToConnection.remove(connection.user);
+	}
+
+	@Override
+	public void flushOutputBuffer(User user) throws IOException {
+		
+		Connection connection = this.userToConnection.get(user);
+		connection.outputBuffer.flip();
+		connection.socketChannel.write(connection.outputBuffer);
+		connection.outputBuffer.clear();
+	}
+
+	@Override
+	public ByteBuffer getOutputBuffer(User user) {
+		
+		return this.userToConnection.get(user).outputBuffer;
+	}
+
+	/**
+	 * Connection class. Simple DTO for connections.
+	 */
+	private class Connection {
+		
+		private static final int BUFFER_CAPACITY = 8192;
+		
+		protected ByteBuffer inputBuffer;
+		protected ByteBuffer outputBuffer;
+		protected SocketChannel socketChannel;
+		protected User user;
+		
+		public Connection(SocketChannel socketChannel) {
+			this.socketChannel = socketChannel;
+			
+			// TODO : Evaluate the usage of a direct buffer instead.... may have performance impact...
+			this.inputBuffer = ByteBuffer.allocate(BUFFER_CAPACITY);
+			this.outputBuffer = ByteBuffer.allocate(BUFFER_CAPACITY);
+			
+			// TODO : Create user instance? receive it in the constructor?
+		}
+	}
+
+}

@@ -5,19 +5,21 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
+import ao.network.ConnectionManager;
+import ao.network.ConnectionManagerImpl;
+
 /**
  * The server application.
- * @author jsotuyod
  */
 public class AOXPServer {
 
 	private ExecutorService threadPool;
 	private ServerSocketChannel ssc;
 	private Selector selector;
+	private ConnectionManager connectionManager;
 
 	/**
 	 * Starts running the AOXPServer. It MUST be properly initialized beforehand.
@@ -40,13 +42,25 @@ public class AOXPServer {
 						
 						sc.configureBlocking(false);
 						sc.register(selector, SelectionKey.OP_READ);
-					} else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
-						SocketChannel sc = (SocketChannel)key.channel();
 						
-						// TODO : Handle input.... if it's not a closed connection, grab a thread from the thread pool and process data!
+						connectionManager.registerConnection(sc);
+					} else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
+						final SocketChannel sc = (SocketChannel) key.channel();
+						
+						if (sc.read(connectionManager.getInputBuffer(sc)) == -1) {
+							// Connection closed
+							connectionManager.unregisterConnection(sc);
+						} else {
+							// Handle data
+							threadPool.execute(new Runnable() {
+								
+								@Override
+								public void run() {
+									connectionManager.handleIncomingData(sc);
+								}
+							});
+						}
 					}
-
-					// TODO : deal with SelectionKey
 				}
 				
 				keys.clear();
@@ -79,6 +93,10 @@ public class AOXPServer {
 		// Set general configuration
 		this.ssc.configureBlocking(false);
 		this.ssc.register(selector, SelectionKey.OP_ACCEPT);
+		
+		// TODO : This should be injected!
+		// Reset connection manager
+		this.connectionManager = new ConnectionManagerImpl(1000);
 	}
 
 }
