@@ -9,6 +9,8 @@ import java.util.concurrent.ConcurrentMap;
 import ao.config.ServerConfig;
 import ao.domain.user.User;
 
+import com.google.inject.Inject;
+
 /**
  * Default connection manager
  */
@@ -23,6 +25,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	 * Creates a new ConnectionManagerImpl
 	 * @param config The server's configuration.
 	 */
+	@Inject
 	public ConnectionManagerImpl(ServerConfig config) {
 		int concurrencyLevel = Runtime.getRuntime().availableProcessors();
 		int maxExpectedUsers = config.getMaximumConcurrentUsers();

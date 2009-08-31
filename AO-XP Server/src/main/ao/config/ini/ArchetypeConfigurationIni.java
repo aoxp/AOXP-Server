@@ -31,7 +31,7 @@ public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public ArchetypeConfigurationIni() throws Exception {
+	public ArchetypeConfigurationIni() throws IOException {
 		config = new Ini(new FileInputStream(CONFIG_FILE_PATH));
 	}
 	
