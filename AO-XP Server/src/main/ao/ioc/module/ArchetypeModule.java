@@ -1,5 +1,7 @@
 package ao.ioc.module;
 
+import ao.config.ArchetypeConfiguration;
+import ao.domain.character.archetype.Archetype;
 import ao.domain.character.archetype.BardArchetype;
 import ao.domain.character.archetype.ClericArchetype;
 import ao.domain.character.archetype.DruidArchetype;
@@ -14,47 +16,71 @@ import com.google.inject.Provides;
 
 public class ArchetypeModule extends AbstractModule {
 
+	private ArchetypeConfiguration config;
+	
 	@Override
-	protected void configure() {
+ 	protected void configure() {
+	}
+	
+	public ArchetypeModule(ArchetypeConfiguration config) {
+		this.config = config;
+	}
+	
+	/**
+	 * Retrieves a new instance of the given archetype class.
+	 * @param archetype The archetype class.
+	 * @return A new instance of the archetype.
+	 * @throws Exception
+	 */
+	private Archetype getArchetype(Class <?extends Archetype> archetype) throws Exception {
+			return archetype.getConstructor().newInstance(
+					config.getEvasionModifier(archetype),
+					config.getMeleeAccuracyModifier(archetype),
+					config.getRangedAccuracyModifier(archetype),
+					config.getMeleeDamageModifier(archetype),
+					config.getRangedDamageModifier(archetype),
+					config.getWrestlingDamageModifier(archetype),
+					config.getBlockPowerModifier(archetype)
+					);
 	}
 	
 	@Provides
-	MageArchetype provideMageArchetype() {
-		return new MageArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	MageArchetype provideMageArchetype() throws Exception {
+		return (MageArchetype) getArchetype(MageArchetype.class);
 	}
 	
 	@Provides
-	ClericArchetype provideClericArchetype() {
-		return new ClericArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	ClericArchetype provideClericArchetype() throws Exception {
+		return (ClericArchetype) getArchetype(ClericArchetype.class);
 	}
 	
 	@Provides
-	BardArchetype provideBardArchetype() {
-		return new BardArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	BardArchetype provideBardArchetype() throws Exception {
+		return (BardArchetype) getArchetype(BardArchetype.class);
 	}
 	
 	@Provides
-	DruidArchetype provideDruidArchetype() {
-		return new DruidArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	DruidArchetype provideDruidArchetype() throws Exception {
+		return (DruidArchetype) getArchetype(DruidArchetype.class);
 	}
 	
 	@Provides
-	FisherArchetype provideFisherArchetype() {
-		return new FisherArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	FisherArchetype provideFisherArchetype() throws Exception {
+		return (FisherArchetype) getArchetype(FisherArchetype.class);
 	}
 	
 	@Provides
-	LumberjackArchetype provideLumberjackArchetype() {
-		return new LumberjackArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	LumberjackArchetype provideLumberjackArchetype() throws Exception {
+		return (LumberjackArchetype) getArchetype(LumberjackArchetype.class);
 	}
 	
 	@Provides
-	MinerArchetype provideMinerArchetype() {
-		return new MinerArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	MinerArchetype provideMinerArchetype() throws Exception {
+		return (MinerArchetype) getArchetype(MinerArchetype.class);
 	}
 
 	@Provides
-	PirateArchetype providePirateArchetype() {
-		return new PirateArchetype(1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+	PirateArchetype providePirateArchetype() throws Exception {
+		return (PirateArchetype) getArchetype(PirateArchetype.class);
 	}
 }

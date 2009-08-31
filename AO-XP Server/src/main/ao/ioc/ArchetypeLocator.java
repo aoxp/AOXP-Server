@@ -1,5 +1,6 @@
 package ao.ioc;
 
+import ao.config.ArchetypeConfigurationIni;
 import ao.domain.character.archetype.Archetype;
 import ao.ioc.module.ArchetypeModule;
 
@@ -8,7 +9,11 @@ import com.google.inject.Injector;
 
 public class ArchetypeLocator {
 
-	private static Injector injector = Guice.createInjector(new ArchetypeModule());
+	private static Injector injector;
+	
+	public ArchetypeLocator() throws Exception {
+		injector = Guice.createInjector(new ArchetypeModule(new ArchetypeConfigurationIni()));
+	}
 	
 	/**
 	 * Locates archetype instances.
