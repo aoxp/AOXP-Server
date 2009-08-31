@@ -10,10 +10,10 @@ import org.ini4j.InvalidFileFormatException;
 import ao.config.ArchetypeConfiguration;
 import ao.domain.character.archetype.Archetype;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
-	
-	// TODO : Externalize this to a .properties file (with all other paths)
-	private static final String CONFIG_FILE_PATH = "Dat/balance.ini";
 	
 	private static final String BLOCK_POWER_HEADER = "MODESCUDO";
 	private static final String EVASION_HEADER = "MODEVASION";
@@ -31,8 +31,9 @@ public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public ArchetypeConfigurationIni() throws IOException {
-		config = new Ini(new FileInputStream(CONFIG_FILE_PATH));
+	@Inject
+	public ArchetypeConfigurationIni(@Named("ArchetypeConfigIni") String archetypeConfigIni) throws IOException {
+		config = new Ini(new FileInputStream(archetypeConfigIni));
 	}
 	
 	/**

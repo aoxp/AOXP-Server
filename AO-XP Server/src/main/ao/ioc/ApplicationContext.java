@@ -1,5 +1,12 @@
 package ao.ioc;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+
 import ao.ioc.module.BootstrapModule;
 import ao.ioc.module.ConfigurationModule;
 
@@ -11,11 +18,27 @@ import com.google.inject.Injector;
  */
 public class ApplicationContext {
 
+	private static final Logger logger = Logger.getLogger(ApplicationContext.class);
+	
 	/**
 	 * The application's injector. All general use modules should be loaded here.
 	 */
-	private static Injector injector = Guice.createInjector(new ConfigurationModule(),
-										new BootstrapModule());
+	private static Injector injector;
+	
+	
+	static {
+		Properties properties = new Properties();
+		
+		try {
+			properties.load(new FileInputStream("project.properties"));
+		} catch (Exception e) {
+			logger.fatal("Error initializing application context", e);
+			e.printStackTrace();
+		}
+		
+		injector = Guice.createInjector(new BootstrapModule(properties),
+				new ConfigurationModule(properties));
+	}
 	
 	/**
 	 * Retrieves an instance of the requested class.

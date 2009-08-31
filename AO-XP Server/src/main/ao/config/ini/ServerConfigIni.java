@@ -7,13 +7,13 @@ import org.ini4j.Ini;
 
 import ao.config.ServerConfig;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
 /**
  * General server configuration, backed by a INI file.
  */
 public class ServerConfigIni implements ServerConfig {
-
-	// TODO : Externalize this to a .properties file (with all other paths)
-	private static final String CONFIG_FILE_PATH = "Server.ini";
 
 	private static final String INIT_HEADER = "INIT";
 
@@ -27,8 +27,9 @@ public class ServerConfigIni implements ServerConfig {
 	 * Creates a new ServerConfigIni instance.
 	 * @throws IOException
 	 */
-	public ServerConfigIni() throws IOException {
-		config = new Ini(new FileInputStream(CONFIG_FILE_PATH));
+	@Inject
+	public ServerConfigIni(@Named("ServerConfigIni") String serverConfigIni) throws IOException {
+		config = new Ini(new FileInputStream(serverConfigIni));
 	}
 	
 	@Override
