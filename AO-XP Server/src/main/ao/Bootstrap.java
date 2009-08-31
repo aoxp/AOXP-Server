@@ -7,11 +7,19 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.log4j.Logger;
+
+import ao.config.ServerConfig;
+import ao.ioc.ApplicationContext;
+import ao.network.ConnectionManager;
+
 /**
  * Bootstraps the application.
  */
 public class Bootstrap {
 
+	private static final Logger logger = Logger.getLogger(Bootstrap.class);
+	
 	/**
 	 * @param args
 	 */
@@ -21,10 +29,14 @@ public class Bootstrap {
 		try {
 			server = Bootstrap.bootstrap();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.fatal("Server bootstraping failed!", e);
+			
 			e.printStackTrace();
+			
+			System.exit(-1);
 		}
 		
+		logger.info("AOXP Server ready. Enjoy it!");
 		server.run();
 	}
 
@@ -37,10 +49,13 @@ public class Bootstrap {
 		
 		AOXPServer server = new AOXPServer();
 		
+		logger.info("Initializing AOXP Server...");
 		loadApplicationContext(server);
 		startWorkers(server);
 		startTimers(server);
 		startNetworking(server);
+		
+		logger.info("AOXP Server initialized.");
 		
 		return server;
 	}
@@ -50,6 +65,9 @@ public class Bootstrap {
 	 * @param server The server on which to start the workers.
 	 */
 	private static void startWorkers(AOXPServer server) {
+		
+		logger.info("Starting up worker thread pool...");
+		
 		// Create one thread per core.
 		int threadCount = Runtime.getRuntime().availableProcessors();
 		
@@ -62,15 +80,15 @@ public class Bootstrap {
 	 * @throws IOException
 	 */
 	private static void startNetworking(AOXPServer server) throws IOException {
-		// TODO Auto-generated method stub
+		
+		logger.info("Initializing server socket...");
+		
 		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 		
-		// TODO : Read all these values from configuration files, possibly even inject them...
-		int port = 7666;
-		InetSocketAddress endpoint = new InetSocketAddress(InetAddress.getLocalHost(), port);
-		int backlog = 5;
+		ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
+		InetSocketAddress endpoint = new InetSocketAddress(InetAddress.getLocalHost(), config.getServerListeningPort());
 		
-		serverSocketChannel.socket().bind(endpoint, backlog);
+		serverSocketChannel.socket().bind(endpoint, config.getListeningBacklog());
 		
 		server.setServerSocketChannel(serverSocketChannel);
 	}
@@ -80,6 +98,9 @@ public class Bootstrap {
 	 * @param server The server on which to start the timers.
 	 */
 	private static void startTimers(AOXPServer server) {
+		
+		logger.info("Starting up game timers...");
+		
 		// TODO : repeat for each timer
 		ExecutorService timer = Executors.newScheduledThreadPool(1);
 		
@@ -91,7 +112,13 @@ public class Bootstrap {
 	 * @param server The server on which to load the application context.
 	 */
 	private static void loadApplicationContext(AOXPServer server) {
-		// TODO Auto-generated method stub
+		
+		logger.info("Loading application context...");
+		
+		logger.info("Setting up connection manager...");
+		server.setConnectionManager(ApplicationContext.getInstance(ConnectionManager.class));
+		
+		// TODO : Load other services and classes from application context
 	}
 
 }

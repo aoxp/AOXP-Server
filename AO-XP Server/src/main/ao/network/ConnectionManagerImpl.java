@@ -6,6 +6,7 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import ao.config.ServerConfig;
 import ao.domain.user.User;
 
 /**
@@ -20,10 +21,11 @@ public class ConnectionManagerImpl implements ConnectionManager {
 
 	/**
 	 * Creates a new ConnectionManagerImpl
-	 * @param maxExpectedUsers The maximum numbers of concurrent users expected in the server.
+	 * @param config The server's configuration.
 	 */
-	public ConnectionManagerImpl(int maxExpectedUsers) {
+	public ConnectionManagerImpl(ServerConfig config) {
 		int concurrencyLevel = Runtime.getRuntime().availableProcessors();
+		int maxExpectedUsers = config.getMaximumConcurrentUsers();
 		
 		this.scToConnection = new ConcurrentHashMap<SocketChannel, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
 		this.userToConnection = new ConcurrentHashMap<User, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);

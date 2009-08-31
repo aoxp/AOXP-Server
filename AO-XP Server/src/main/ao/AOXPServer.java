@@ -8,14 +8,17 @@ import java.nio.channels.SocketChannel;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
+import org.apache.log4j.Logger;
+
 import ao.network.ConnectionManager;
-import ao.network.ConnectionManagerImpl;
 
 /**
  * The server application.
  */
 public class AOXPServer {
 
+	private static final Logger logger = Logger.getLogger(AOXPServer.class);
+	
 	private ExecutorService threadPool;
 	private ServerSocketChannel ssc;
 	private Selector selector;
@@ -37,6 +40,8 @@ public class AOXPServer {
 				Set<SelectionKey> keys = selector.selectedKeys();
 				for (SelectionKey key : keys) {
 					if ((key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
+						logger.debug("New connection created");
+						
 						// Accept the incoming connection.
 						SocketChannel sc = ssc.accept();
 						
@@ -66,7 +71,8 @@ public class AOXPServer {
 				keys.clear();
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			logger.fatal("Unexpected error in main loop.", e);
+			
 			e.printStackTrace();
 		}
 	}
@@ -93,10 +99,14 @@ public class AOXPServer {
 		// Set general configuration
 		this.ssc.configureBlocking(false);
 		this.ssc.register(selector, SelectionKey.OP_ACCEPT);
-		
-		// TODO : This should be injected!
-		// Reset connection manager
-		this.connectionManager = new ConnectionManagerImpl(1000);
 	}
 
+	/**
+	 * Set's the server's connection manager.
+	 * @param connectionManager The connection manager to be used by the server.
+	 */
+	public void setConnectionManager(ConnectionManager connectionManager) {
+		
+		this.connectionManager = connectionManager;
+	}
 }

@@ -1,4 +1,4 @@
-package ao.config;
+package ao.config.ini;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,11 +7,14 @@ import java.io.IOException;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
+import ao.config.ArchetypeConfiguration;
 import ao.domain.character.archetype.Archetype;
 
 public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 	
+	// TODO : Externalize this to a .properties file (with all other paths)
 	private static final String CONFIG_FILE_PATH = "Dat/balance.ini";
+	
 	private static final String BLOCK_POWER_HEADER = "MODESCUDO";
 	private static final String EVASION_HEADER = "MODEVASION";
 	private static final String MELEE_ACCURACY_HEADER = "MODATAQUEARMAS";
@@ -23,7 +26,7 @@ public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 	private Ini config;
 	
 	/**
-	 * Constructor, loads the config file.
+	 * Constructor, loads the configuration file.
 	 * @throws InvalidFileFormatException
 	 * @throws FileNotFoundException
 	 * @throws IOException
@@ -33,13 +36,13 @@ public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 	}
 	
 	/**
-	 * Retrieves the archetype's name in the config file.
+	 * Retrieves the archetype's name in the configuration file.
 	 * @param archetype The archetype.
 	 * @return The archetype's name.
 	 */
 	private String getArchetypeName(Class<? extends Archetype> archetype) {
 		
-		// Esto está así cableadísimo porque es lo que nos obliga a hacer el ini actual del ao.
+		// Intended to be compatible with current INI files.... not the nicest thing ever...
 		String archetypeName = archetype.getSimpleName().replace( "Archetype", "");
 		
 		if (archetypeName == "Bard") {
@@ -54,6 +57,22 @@ public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 			return "Leñador";
 		} else if (archetypeName == "Mage") {
 			return "Mago";
+		} else if (archetypeName == "Warrior") {
+			return "Guerrero";
+		} else if (archetypeName == "Assasin") {
+			return "Asesino";
+		} else if (archetypeName == "Thief") {
+			return "Ladron";
+		} else if (archetypeName == "Bandit") {
+			return "Bandido";
+		} else if (archetypeName == "Paladin") {
+			return "Paladin";
+		} else if (archetypeName == "Hunter") {
+			return "Cazador";
+		} else if (archetypeName == "Blacksmith") {
+			return "Herrero";
+		} else if (archetypeName == "Carpenter") {
+			return "Carpintero";
 		} else if (archetypeName == "Miner") {
 			return "Minero";
 		} else if (archetypeName == "Pirate") {
