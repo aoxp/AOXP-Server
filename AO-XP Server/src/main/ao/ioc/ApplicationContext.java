@@ -1,8 +1,6 @@
 package ao.ioc;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
