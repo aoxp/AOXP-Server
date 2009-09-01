@@ -1,7 +1,5 @@
 package ao.domain.spell.effect;
 
-import static org.junit.Assert.*;
-
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Assert;
