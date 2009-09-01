@@ -79,10 +79,6 @@ public class Spell {
 	 * @return True if the spell applies to the target and caster, false otherwise.
 	 */
 	public boolean appliesTo(Character caster, Character target) {
-		if (caster.getMana() < requiredMana) {
-			return false;
-		}
-		
 		for (Effect effect : effects) {
 			if (!effect.appliesTo(caster, target)) {
 				return false;
@@ -99,10 +95,6 @@ public class Spell {
 	 * @return True if the spell applies to the target and caster, false otherwise.
 	 */
 	public boolean appliesTo(Character caster, WorldObject target) {
-		if (caster.getMana() < requiredMana) {
-			return false;
-		}
-		
 		for (int i = 0; i < effects.length; i++) {
 			if (!effects[i].appliesTo(caster, target)) {
 				return false;
