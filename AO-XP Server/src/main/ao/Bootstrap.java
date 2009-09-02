@@ -102,7 +102,7 @@ public class Bootstrap {
 		logger.info("Starting up game timers...");
 		
 		// TODO : repeat for each timer
-		ExecutorService timer = Executors.newScheduledThreadPool(1);
+		ExecutorService timer = Executors.newSingleThreadScheduledExecutor();
 		
 		// TODO : get runnable for each timer class (use the app context) and the interval for execution
 	}

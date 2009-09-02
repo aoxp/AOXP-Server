@@ -6,6 +6,9 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.apache.log4j.Logger;
+
+import ao.AOXPServer;
 import ao.config.ServerConfig;
 import ao.domain.user.User;
 
@@ -16,6 +19,8 @@ import com.google.inject.Inject;
  */
 public class ConnectionManagerImpl implements ConnectionManager {
 
+	private static final Logger logger = Logger.getLogger(AOXPServer.class);
+	
 	private static final float DEFAULT_LOAD_FACTOR = 0.75f;
 	
 	private ConcurrentMap<SocketChannel, Connection> scToConnection;
@@ -42,9 +47,25 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	@Override
 	public void handleIncomingData(SocketChannel sc) {
 
-		Connection connection = this.scToConnection.get(sc);
-		
-		// TODO : Handle incoming data
+		// Everything is synchronized over the socket. This allows to keep only one running thread per client at a time.
+		synchronized (sc) {
+			Connection connection = this.scToConnection.get(sc);
+			
+			try {
+				if (sc.read(connection.inputBuffer) == -1) {
+					// Connection closed
+					unregisterConnection(sc);
+				} else {
+					
+					// TODO : Handle incoming data
+				}
+			} catch (IOException e) {
+				logger.error("Unexpected error reading data from socket.", e);
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override

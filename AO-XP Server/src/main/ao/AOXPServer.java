@@ -39,7 +39,7 @@ public class AOXPServer {
 				// Process detected events
 				Set<SelectionKey> keys = selector.selectedKeys();
 				for (SelectionKey key : keys) {
-					if ((key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
+					if ((key.readyOps() & SelectionKey.OP_ACCEPT) != 0) {
 						logger.debug("New connection created");
 						
 						// Accept the incoming connection.
@@ -49,22 +49,17 @@ public class AOXPServer {
 						sc.register(selector, SelectionKey.OP_READ);
 						
 						connectionManager.registerConnection(sc);
-					} else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
+					} else if ((key.readyOps() & SelectionKey.OP_READ) != 0) {
 						final SocketChannel sc = (SocketChannel) key.channel();
 						
-						if (sc.read(connectionManager.getInputBuffer(sc)) == -1) {
-							// Connection closed
-							connectionManager.unregisterConnection(sc);
-						} else {
-							// Handle data
-							threadPool.execute(new Runnable() {
-								
-								@Override
-								public void run() {
-									connectionManager.handleIncomingData(sc);
-								}
-							});
-						}
+						// Handle data
+						threadPool.execute(new Runnable() {
+							
+							@Override
+							public void run() {
+								connectionManager.handleIncomingData(sc);
+							}
+						});
 					}
 				}
 				
