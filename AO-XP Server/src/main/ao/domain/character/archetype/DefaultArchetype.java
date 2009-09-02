@@ -206,12 +206,12 @@ public abstract class DefaultArchetype implements Archetype {
 	}
 
 	@Override
-	public int getStolenMaxAmount(EquipableItem gloves) {
+	public int getStolenMaxAmount() {
 		return DEFAULT_STOLEN_MAX_AMOUNT;
 	}
 
 	@Override
-	public int getStolenMinAmount(EquipableItem gloves) {
+	public int getStolenMinAmount() {
 		return DEFAULT_STOLEN_MIN_AMOUNT;
 	}
 

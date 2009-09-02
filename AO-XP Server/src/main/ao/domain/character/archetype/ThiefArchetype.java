@@ -1,13 +1,9 @@
 package ao.domain.character.archetype;
 
-import ao.domain.worldobject.EquipableItem;
-
 public class ThiefArchetype extends DefaultArchetype {
 
 	private static final int THIEF_HIT_INCREMENT = 1;
 	private static final int THIEF_STAMINA_INCREMENT = 18;
-	private static final int THIEF_STOLEN_MAX_AMOUNT_WITH_GLOVES = 1000;
-	private static final int THIEF_STOLEN_MIN_AMOUNT_WITH_GLOVES = 100;
 	private static final int THIEF_STOLEN_MAX_AMOUNT = 800;
 	private static final int THIEF_STOLEN_MIN_AMOUNT = 80;
 	
@@ -47,18 +43,12 @@ public class ThiefArchetype extends DefaultArchetype {
 	}
 
 	@Override
-	public int getStolenMaxAmount(EquipableItem gloves) {
-		if (gloves.isEquipped()){
-			return THIEF_STOLEN_MAX_AMOUNT_WITH_GLOVES;
-		}
+	public int getStolenMaxAmount() {
 		return THIEF_STOLEN_MAX_AMOUNT;
 	}
 
 	@Override
-	public int getStolenMinAmount(EquipableItem gloves) {
-		if (gloves.isEquipped()){
-			return THIEF_STOLEN_MIN_AMOUNT_WITH_GLOVES;
-		}
+	public int getStolenMinAmount() {
 		return THIEF_STOLEN_MIN_AMOUNT;
 	}
 
