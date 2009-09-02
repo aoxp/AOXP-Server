@@ -34,6 +34,6 @@ public class DruidArchetype extends DefaultArchetype {
 	}
 	
 	public int getInitialMana(int intelligence){
-		return DRUID_INITIAL_MANA = 50;
+		return DRUID_INITIAL_MANA;
 	}
 }
