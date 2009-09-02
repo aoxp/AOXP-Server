@@ -24,13 +24,6 @@ public class InventoryImplTest {
 
 	@Test
 	public void testAddItem() {
-		/* Item item = EasyMock.createMock(Item.class);
-		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
-		EasyMock.replay(item);
-		
-		inventory.addItem(item);
-		Assert.assertTrue(inventory.hasItem(item) != -1); */
-		
 		//Try to add all the items to the inventory
 		Item[] item = new Item[inventory.getCapacity()];
 		for (int i = 0; i< inventory.getCapacity(); i++) {

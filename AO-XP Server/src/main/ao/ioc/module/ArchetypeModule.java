@@ -32,16 +32,24 @@ public class ArchetypeModule extends AbstractModule {
 	 * @return A new instance of the archetype.
 	 * @throws Exception
 	 */
+	@SuppressWarnings("unchecked")
 	private Archetype getArchetype(Class <?extends Archetype> archetype) throws Exception {
-			return archetype.getConstructor().newInstance(
-					config.getEvasionModifier(archetype),
-					config.getMeleeAccuracyModifier(archetype),
-					config.getRangedAccuracyModifier(archetype),
-					config.getMeleeDamageModifier(archetype),
-					config.getRangedDamageModifier(archetype),
-					config.getWrestlingDamageModifier(archetype),
-					config.getBlockPowerModifier(archetype)
-					);
+		Class[] args = new Class[] {
+				float.class, float.class, float.class,
+				float.class, float.class, float.class,
+				float.class
+			};
+		
+		return archetype.getConstructor(args)
+			.newInstance(
+				config.getEvasionModifier(archetype),
+				config.getMeleeAccuracyModifier(archetype),
+				config.getRangedAccuracyModifier(archetype),
+				config.getMeleeDamageModifier(archetype),
+				config.getRangedDamageModifier(archetype),
+				config.getWrestlingDamageModifier(archetype),
+				config.getBlockPowerModifier(archetype)
+				);
 	}
 	
 	@Provides

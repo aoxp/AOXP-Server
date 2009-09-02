@@ -38,7 +38,7 @@ Bardo=1.075
 Mago=0.4
 Druida=0.75
 Minero=0.8
-Le�ador=0.8
+Leñador=0.8
 Pescador=0.8
 Herrero=0.8
 Carpintero=0.8
@@ -56,7 +56,7 @@ Bardo=0.7
 Mago=0.5
 Druida=0.65
 Minero=0.6
-Le�ador=0.6
+Leñador=0.6
 Pescador=0.6
 Herrero=0.6
 Carpintero=0.6
@@ -74,12 +74,12 @@ Bardo=0.7
 Mago=0.5
 Druida=0.75
 Minero=0.65
-Le�ador=0.7
+Leñador=0.7
 Pescador=0.65
 Herrero=0.65
 Carpintero=0.7
 
-[MODDA�OARMAS]
+[MODDAÑOARMAS]
 Guerrero=1.1
 Cazador=0.9
 Paladin=0.925
@@ -92,12 +92,12 @@ Bardo=0.75
 Mago=0.5
 Druida=0.7
 Minero=0.8
-Le�ador=0.8
+Leñador=0.8
 Pescador=0.8
 Herrero=0.8
 Carpintero=0.8
 
-[MODDA�OPROYECTILES]
+[MODDAÑOPROYECTILES]
 Guerrero=0.9
 Cazador=1.1
 Paladin=0.8
@@ -110,12 +110,12 @@ Bardo=0.7
 Mago=0.5
 Druida=0.75
 Minero=0.7
-Le�ador=0.7
+Leñador=0.7
 Pescador=0.7
 Herrero=0.7
 Carpintero=0.7
 
-[MODDA�OWRESTLING]
+[MODDAÑOWRESTLING]
 Guerrero=0.4
 Cazador=0.4
 Paladin=0.4
@@ -128,7 +128,7 @@ Bardo=0.4
 Mago=0.4
 Druida=0.4
 Minero=0.4
-Le�ador=0.4
+Leñador=0.4
 Pescador=0.4
 Herrero=0.4
 Carpintero=0.4
@@ -146,7 +146,7 @@ Bardo=0.8
 Mago=0.6
 Druida=0.75
 Minero=0.7
-Le�ador=0.7
+Leñador=0.7
 Pescador=0.7
 Herrero=0.7
 Carpintero=0.7
@@ -164,7 +164,7 @@ Bardo=8.5
 Mago=7
 Druida=8.5
 Minero=9.5
-Le�ador=9.5
+Leñador=9.5
 Pescador=9.5
 Herrero=8.5
 Carpintero=8.5

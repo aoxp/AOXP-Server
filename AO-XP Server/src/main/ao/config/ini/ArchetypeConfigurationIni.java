@@ -46,37 +46,37 @@ public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 		// Intended to be compatible with current INI files.... not the nicest thing ever...
 		String archetypeName = archetype.getSimpleName().replace( "Archetype", "");
 		
-		if (archetypeName == "Bard") {
+		if (archetypeName.equals("Bard")) {
 			return "Bardo";
-		} else if (archetypeName == "Cleric") {
+		} else if (archetypeName.equals("Cleric")) {
 			return "Clerigo";
-		} else if (archetypeName == "Druid") {
+		} else if (archetypeName.equals("Druid")) {
 			return "Druida";
-		} else if (archetypeName == "Fisher") {
+		} else if (archetypeName.equals("Fisher")) {
 			return "Pescador";
-		} else if (archetypeName == "Lumberjack") {
+		} else if (archetypeName.equals("Lumberjack")) {
 			return "Leñador";
-		} else if (archetypeName == "Mage") {
+		} else if (archetypeName.equals("Mage")) {
 			return "Mago";
-		} else if (archetypeName == "Warrior") {
+		} else if (archetypeName.equals("Warrior")) {
 			return "Guerrero";
-		} else if (archetypeName == "Assasin") {
+		} else if (archetypeName.equals("Assasin")) {
 			return "Asesino";
-		} else if (archetypeName == "Thief") {
+		} else if (archetypeName.equals("Thief")) {
 			return "Ladron";
-		} else if (archetypeName == "Bandit") {
+		} else if (archetypeName.equals("Bandit")) {
 			return "Bandido";
-		} else if (archetypeName == "Paladin") {
+		} else if (archetypeName.equals("Paladin")) {
 			return "Paladin";
-		} else if (archetypeName == "Hunter") {
+		} else if (archetypeName.equals("Hunter")) {
 			return "Cazador";
-		} else if (archetypeName == "Blacksmith") {
+		} else if (archetypeName.equals("Blacksmith")) {
 			return "Herrero";
-		} else if (archetypeName == "Carpenter") {
+		} else if (archetypeName.equals("Carpenter")) {
 			return "Carpintero";
-		} else if (archetypeName == "Miner") {
+		} else if (archetypeName.equals("Miner")) {
 			return "Minero";
-		} else if (archetypeName == "Pirate") {
+		} else if (archetypeName.equals("Pirate")) {
 			return "Pirata";
 		}
 		
