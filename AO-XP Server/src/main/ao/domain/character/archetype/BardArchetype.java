@@ -2,7 +2,6 @@ package ao.domain.character.archetype;
 
 /**
  * A bard archetype.
- * @author Brian Chaia
  */
 public class BardArchetype extends DefaultArchetype {
 
@@ -23,6 +22,7 @@ public class BardArchetype extends DefaultArchetype {
 		return (int) Math.round(intelligence * MANA_MODIFIER);
 	}
 	
+	@Override
 	public int getInitialMana(int intelligence){
 		return BARD_INITIAL_MANA;
 	}

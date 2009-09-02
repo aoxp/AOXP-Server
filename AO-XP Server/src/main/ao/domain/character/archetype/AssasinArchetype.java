@@ -1,5 +1,8 @@
 package ao.domain.character.archetype;
 
+/**
+ * An assasin archetype.
+ */
 public class AssasinArchetype extends DefaultArchetype {
 	
 	private static final int LEVEL_MAX_HIT_INCREMENT = 35;
@@ -15,7 +18,6 @@ public class AssasinArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -41,6 +43,7 @@ public class AssasinArchetype extends DefaultArchetype {
 		return ASSASIN_STABBING_DAMAGE_MODIFIER;
 	}
 	
+	@Override
 	public int getInitialMana(int intelligence){
 		return ASSASIN_INITIAL_MANA;
 	}

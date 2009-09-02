@@ -8,7 +8,6 @@ import ao.domain.worldobject.Weapon;
 
 /**
  * Implements Archetype setting default values.
- * @author jsotuyod
  */
 public abstract class DefaultArchetype implements Archetype {
 
@@ -260,6 +259,7 @@ public abstract class DefaultArchetype implements Archetype {
 		return blockPowerModifier;
 	}
 
+	@Override
 	public int getInitialMana(int intelligence){
 		return DEFAULT_INITIAL_MANA;
 	}

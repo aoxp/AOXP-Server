@@ -7,7 +7,6 @@ import ao.domain.worldobject.Weapon;
 
 /**
  * A mage archetype.
- * @author jsotuyod
  */
 public class MageArchetype extends DefaultArchetype {
 	
@@ -45,6 +44,7 @@ public class MageArchetype extends DefaultArchetype {
 		return (int) Math.round(intelligence * MANA_MODIFIER);
 	}
 	
+	@Override
 	public int getInitialMana(int intelligence){
 		return intelligence * MAGE_INITIAL_MANA_MODIFIER;
 	}

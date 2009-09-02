@@ -1,5 +1,8 @@
 package ao.domain.character.archetype;
 
+/**
+ * A bandit archetype.
+ */
 public class BanditArchetype extends DefaultArchetype {
 	
 	private static final int LEVEL_MAX_HIT_INCREMENT = 35;
@@ -16,7 +19,6 @@ public class BanditArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -45,6 +47,7 @@ public class BanditArchetype extends DefaultArchetype {
 		return true;
 	}
 	
+	@Override
 	public int getInitialMana(int intelligence){
 		return BANDIT_INITIAL_MANA;
 	}

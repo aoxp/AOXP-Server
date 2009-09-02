@@ -1,5 +1,8 @@
 package ao.domain.character.archetype;
 
+/**
+ * A blacksmith archetype.
+ */
 public class BlacksmithArchetype extends DefaultArchetype {
 	
 	private static final float BLACKSMITH_BLACKSMITH_MODIFIER = 1.0f;
@@ -13,7 +16,6 @@ public class BlacksmithArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -21,18 +23,12 @@ public class BlacksmithArchetype extends DefaultArchetype {
 		return BLACKSMITH_BLACKSMITH_STAMINA_COST;
 	}
 	
-	/**
-	 * Retrieves the iron working modifier for the archetype.
-	 * @return The iron working modifier for the archetype.
-	 */
+	@Override
 	protected float getIronWorkingModifier() {
 		return BLACKSMITH_IRON_WORKING_MODIFIER;
 	}
 	
-	/**
-	 * Retrieves the blacksmith modifier for the archetype.
-	 * @return The blacksmith modifier for the archetype.
-	 */
+	@Override
 	protected float getBlacksmithModifier() {
 		return BLACKSMITH_BLACKSMITH_MODIFIER;
 	}

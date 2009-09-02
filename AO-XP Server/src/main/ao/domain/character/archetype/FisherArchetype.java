@@ -2,7 +2,6 @@ package ao.domain.character.archetype;
 
 /**
  * A fisher archetype.
- * @author jsotuyod
  */
 public class FisherArchetype extends DefaultArchetype {
 
@@ -53,10 +52,7 @@ public class FisherArchetype extends DefaultArchetype {
 		return FISHING_STAMINA_COST;
 	}
 	
-	/**
-	 * Retrieves the sailing modifier for the archetype.
-	 * @return The sailing modifier for the archetype.
-	 */
+	@Override
 	protected float getSailingModifier() {
 		return SAILING_MODIFIER;
 	}

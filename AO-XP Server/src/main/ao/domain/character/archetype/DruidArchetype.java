@@ -3,10 +3,8 @@
  */
 package ao.domain.character.archetype;
 
-
 /**
  * A druid archetype.
- * @author Marco
  */
 public class DruidArchetype extends DefaultArchetype {
 
@@ -33,6 +31,7 @@ public class DruidArchetype extends DefaultArchetype {
 		return TAMING_TRAINING_CHANCE;
 	}
 	
+	@Override
 	public int getInitialMana(int intelligence){
 		return DRUID_INITIAL_MANA;
 	}

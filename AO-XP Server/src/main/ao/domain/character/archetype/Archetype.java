@@ -253,4 +253,11 @@ public interface Archetype {
 	 * @return The Archetype's block power modifier.
 	 */
 	float getBlockPowerModifier();
+
+	/**
+	 * Retrieves the Archetype's initial mana.
+	 * @param intelligence The character's intelligence.
+	 * @return The Archetype's initial mana.
+	 */
+	int getInitialMana(int intelligence);
 }

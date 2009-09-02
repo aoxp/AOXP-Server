@@ -1,5 +1,8 @@
 package ao.domain.character.archetype;
 
+/**
+ * A thief archetype.
+ */
 public class ThiefArchetype extends DefaultArchetype {
 
 	private static final int THIEF_HIT_INCREMENT = 1;
@@ -14,7 +17,6 @@ public class ThiefArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

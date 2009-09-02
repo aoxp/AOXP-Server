@@ -1,5 +1,8 @@
 package ao.domain.character.archetype;
 
+/**
+ * A carpenter archetype.
+ */
 public class CarpenterArchetype extends DefaultArchetype {
 
 	private static final float CARPENTER_WOOD_WORKING_MODIFIER = 1.0f;
@@ -12,7 +15,6 @@ public class CarpenterArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -20,10 +22,7 @@ public class CarpenterArchetype extends DefaultArchetype {
 		return CARPENTER_WOOD_WORK_STAMINA_COST;
 	}
 	
-	/**
-	 * Retrieves the wood working modifier for the archetype.
-	 * @return The wood working modifier for the archetype.
-	 */
+	@Override
 	protected float getWoodWorkingModifier() {
 		return CARPENTER_WOOD_WORKING_MODIFIER;
 	}

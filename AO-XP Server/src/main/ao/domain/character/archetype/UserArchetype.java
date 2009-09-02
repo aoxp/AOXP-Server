@@ -4,7 +4,6 @@ import ao.ioc.ArchetypeLocator;
 
 /**
  * User Archetype enumerator. Wraps archetype classes in an enum.
- * @author jsotuyod
  */
 public enum UserArchetype {
 	MAGE(ArchetypeLocator.getArchetype(MageArchetype.class)),
@@ -18,10 +17,10 @@ public enum UserArchetype {
 	PALADIN(ArchetypeLocator.getArchetype(PaladinArchetype.class)),
 	HUNTER(ArchetypeLocator.getArchetype(HunterArchetype.class)),
 	FISHER(ArchetypeLocator.getArchetype(FisherArchetype.class)),
-//	BLACKSMITH(new BlacksmithArchetype()),
+	BLACKSMITH(ArchetypeLocator.getArchetype(BlacksmithArchetype.class)),
 	LUMBERJACK(ArchetypeLocator.getArchetype(LumberjackArchetype.class)),
 	MINER(ArchetypeLocator.getArchetype(MinerArchetype.class)),
-//	CARPENTER(new CarpenterArchetype()),
+	CARPENTER(ArchetypeLocator.getArchetype(CarpenterArchetype.class)),
 	PIRATE(ArchetypeLocator.getArchetype(PirateArchetype.class));
 	
 	private Archetype archetype;

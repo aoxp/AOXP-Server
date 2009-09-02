@@ -1,5 +1,8 @@
 package ao.domain.character.archetype;
 
+/**
+ * A paladin archetype.
+ */
 public class PaladinArchetype extends DefaultArchetype {
 
 	private static final int LEVEL_MAX_HIT_INCREMENT = 35;
@@ -13,7 +16,6 @@ public class PaladinArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -29,7 +31,8 @@ public class PaladinArchetype extends DefaultArchetype {
 		return MAX_HIT_INCREMENT;
 	}
 	
-	public int getInitialMana(int intelligence){
+	@Override
+	public int getInitialMana(int intelligence) {
 		return intelligence;
 	}
 	

@@ -2,7 +2,6 @@ package ao.domain.character.archetype;
 
 /**
  * A cleric archetype.
- * @author Brian Chaia
  */
 public class ClericArchetype extends DefaultArchetype {
 
@@ -23,6 +22,7 @@ public class ClericArchetype extends DefaultArchetype {
 		return (int) Math.round(intelligence * MANA_MODIFIER);
 	}
 	
+	@Override
 	public int getInitialMana(int intelligence){
 		return CLERIC_INITIAL_MANA;
 	}

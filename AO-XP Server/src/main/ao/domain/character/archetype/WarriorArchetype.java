@@ -1,5 +1,8 @@
 package ao.domain.character.archetype;
 
+/**
+ * A warrior archetype.
+ */
 public class WarriorArchetype extends DefaultArchetype {
 
 	private static final int LEVEL_MAX_HIT_INCREMENT = 35;
@@ -13,7 +16,6 @@ public class WarriorArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

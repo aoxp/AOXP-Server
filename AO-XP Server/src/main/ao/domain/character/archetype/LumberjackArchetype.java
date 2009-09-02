@@ -2,7 +2,6 @@ package ao.domain.character.archetype;
 
 /**
  * A lumberjack archetype.
- * @author Zama
  */
 public class LumberjackArchetype extends DefaultArchetype {
 

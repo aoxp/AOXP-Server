@@ -2,7 +2,6 @@ package ao.domain.character.archetype;
 
 /**
  * A pirate archetype.
- * @author jsotuyod
  */
 public class PirateArchetype extends DefaultArchetype {
 
@@ -17,7 +16,6 @@ public class PirateArchetype extends DefaultArchetype {
 		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
 				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
 				blockPowerModifier);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -30,10 +28,7 @@ public class PirateArchetype extends DefaultArchetype {
 		return SAILING_MIN_LEVEL;
 	}
 	
-	/**
-	 * Retrieves the sailing modifier for the archetype.
-	 * @return The sailing modifier for the archetype.
-	 */
+	@Override
 	protected float getSailingModifier() {
 		return SAILING_MODIFIER;
 	}

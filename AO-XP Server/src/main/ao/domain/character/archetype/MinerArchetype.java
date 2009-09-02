@@ -2,7 +2,6 @@ package ao.domain.character.archetype;
 
 /**
  * A miner archetype.
- * @author Brian Chaia
  */
 public class MinerArchetype extends DefaultArchetype {
 
@@ -42,18 +41,12 @@ public class MinerArchetype extends DefaultArchetype {
 		return MINING_STAMINA_COST;
 	}
 	
-	/**
-	 * Retrieves the iron working modifier for the archetype.
-	 * @return The iron working modifier for the archetype.
-	 */
+	@Override
 	protected float getIronWorkingModifier() {
 		return MINER_IRON_WORKING_MODIFIER;
 	}
 	
-	/**
-	 * Retrieves the blacksmith modifier for the archetype.
-	 * @return The blacksmith modifier for the archetype.
-	 */
+	@Override
 	protected float getBlacksmithModifier() {
 		return MINER_BLACKSMITH_MODIFIER;
 	}
