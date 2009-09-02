@@ -7,6 +7,7 @@ package ao.domain.character.archetype;
 public class ClericArchetype extends DefaultArchetype {
 
 	private static final float MANA_MODIFIER = 2.0f;
+	private static final int CLERIC_INITIAL_MANA = 50;
 	
 	public ClericArchetype(float evasionModifier, float meleeAccuracyModifier,
 			float rangedAccuracyModifier, float meleeDamageModifier,
@@ -21,4 +22,9 @@ public class ClericArchetype extends DefaultArchetype {
 	public int getManaIncrement(int intelligence, int mana) {
 		return (int) Math.round(intelligence * MANA_MODIFIER);
 	}
+	
+	public int getInitialMana(int intelligence){
+		return CLERIC_INITIAL_MANA;
+	}
+	
 }

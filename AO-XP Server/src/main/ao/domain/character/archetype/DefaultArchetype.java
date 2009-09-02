@@ -38,6 +38,7 @@ public abstract class DefaultArchetype implements Archetype {
 	private static final float DEFAULT_STABBING_CHANCE_SKILL_MULTIPLIER = 0.000361f;
 	private static final int DEFAULT_MANA_INCREMENT = 0;
 	private static final int DEFAULT_HIT_INCREMENT = 2;
+	private static final int DEFAULT_INITIAL_MANA = 0;
 	
 	protected float evasionModifier;
 	protected float meleeAccuracyModifier;
@@ -205,12 +206,12 @@ public abstract class DefaultArchetype implements Archetype {
 	}
 
 	@Override
-	public int getStolenMaxAmount() {
+	public int getStolenMaxAmount(EquipableItem gloves) {
 		return DEFAULT_STOLEN_MAX_AMOUNT;
 	}
 
 	@Override
-	public int getStolenMinAmount() {
+	public int getStolenMinAmount(EquipableItem gloves) {
 		return DEFAULT_STOLEN_MIN_AMOUNT;
 	}
 
@@ -259,6 +260,10 @@ public abstract class DefaultArchetype implements Archetype {
 		return blockPowerModifier;
 	}
 
+	public int getInitialMana(int intelligence){
+		return DEFAULT_INITIAL_MANA;
+	}
+	
 	/**
 	 * Retrieves the sailing modifier for the archetype.
 	 * @return The sailing modifier for the archetype.

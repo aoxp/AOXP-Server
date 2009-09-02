@@ -138,13 +138,13 @@ public interface Archetype {
 	 * Retrieves the minimum amount of gold that can be stolen.
 	 * @return The minimum amount of gold that can be stolen.
 	 */
-	int getStolenMinAmount();
+	int getStolenMinAmount(EquipableItem gloves);
 	
 	/**
 	 * Retrieves the maximum amount of gold that can be stolen.
 	 * @return The maximum amount of gold that can be stolen.
 	 */
-	int getStolenMaxAmount();
+	int getStolenMaxAmount(EquipableItem gloves);
 	
 	/**
 	 * Retrieves the minimum amount of wood that can be lumbered.

@@ -1,0 +1,27 @@
+package ao.domain.character.archetype;
+
+public class HunterArchetype extends DefaultArchetype {
+
+	private static final int LEVEL_MAX_HIT_INCREMENT = 35;
+	private static final int MAX_HIT_INCREMENT = 3;
+	private static final int MIN_HIT_INCREMENT = 2;
+	
+	public HunterArchetype(float evasionModifier, float meleeAccuracyModifier,
+			float rangedAccuracyModifier, float meleeDamageModifier,
+			float rangedDamageModifier, float wrestlingDamageModifier,
+			float blockPowerModifier) {
+		super(evasionModifier, meleeAccuracyModifier, rangedAccuracyModifier,
+				meleeDamageModifier, rangedDamageModifier, wrestlingDamageModifier,
+				blockPowerModifier);
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public int getHitIncrement(int level) {
+		if (level > LEVEL_MAX_HIT_INCREMENT){
+			return MIN_HIT_INCREMENT;
+		}
+		return MAX_HIT_INCREMENT;
+	}
+
+}
