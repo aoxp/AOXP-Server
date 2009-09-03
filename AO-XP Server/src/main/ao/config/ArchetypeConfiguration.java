@@ -1,6 +1,6 @@
 package ao.config;
 
-import ao.domain.character.archetype.Archetype;
+import ao.model.character.archetype.Archetype;
 
 public interface ArchetypeConfiguration {
 

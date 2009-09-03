@@ -8,7 +8,7 @@ import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
 import ao.config.ArchetypeConfiguration;
-import ao.domain.character.archetype.Archetype;
+import ao.model.character.archetype.Archetype;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

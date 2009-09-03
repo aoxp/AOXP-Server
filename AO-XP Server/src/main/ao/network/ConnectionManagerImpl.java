@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import ao.AOXPServer;
 import ao.config.ServerConfig;
-import ao.domain.user.User;
+import ao.model.user.User;
 
 import com.google.inject.Inject;
 

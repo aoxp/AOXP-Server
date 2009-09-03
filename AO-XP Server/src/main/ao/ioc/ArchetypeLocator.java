@@ -1,8 +1,8 @@
 package ao.ioc;
 
 import ao.config.ArchetypeConfiguration;
-import ao.domain.character.archetype.Archetype;
 import ao.ioc.module.ArchetypeModule;
+import ao.model.character.archetype.Archetype;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

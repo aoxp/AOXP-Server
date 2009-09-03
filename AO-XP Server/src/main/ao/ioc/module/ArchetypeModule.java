@@ -1,15 +1,15 @@
 package ao.ioc.module;
 
 import ao.config.ArchetypeConfiguration;
-import ao.domain.character.archetype.Archetype;
-import ao.domain.character.archetype.BardArchetype;
-import ao.domain.character.archetype.ClericArchetype;
-import ao.domain.character.archetype.DruidArchetype;
-import ao.domain.character.archetype.FisherArchetype;
-import ao.domain.character.archetype.LumberjackArchetype;
-import ao.domain.character.archetype.MageArchetype;
-import ao.domain.character.archetype.MinerArchetype;
-import ao.domain.character.archetype.PirateArchetype;
+import ao.model.character.archetype.Archetype;
+import ao.model.character.archetype.BardArchetype;
+import ao.model.character.archetype.ClericArchetype;
+import ao.model.character.archetype.DruidArchetype;
+import ao.model.character.archetype.FisherArchetype;
+import ao.model.character.archetype.LumberjackArchetype;
+import ao.model.character.archetype.MageArchetype;
+import ao.model.character.archetype.MinerArchetype;
+import ao.model.character.archetype.PirateArchetype;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
