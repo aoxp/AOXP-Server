@@ -1,8 +1,8 @@
 package ao.model.spell;
 
-import ao.model.character.Character;
 import ao.model.spell.effect.Effect;
 import ao.model.worldobject.WorldObject;
+import ao.model.character.Character;
 
 public class Spell {
 
@@ -25,6 +25,36 @@ public class Spell {
 	 * The required mana to use the spell.
 	 */
 	private int requiredMana;
+	
+	/**
+	 * The spell's name.
+	 */
+	private String name;
+	
+	/**
+	 * The spell's description.
+	 */
+	private String description;
+	
+	/**
+	 * Determines whether the effects applied to target are harmful, or not.
+	 */
+	private boolean negative;
+	
+	/**
+	 * The spell's fx.
+	 */
+	private int fx;
+	
+	/**
+	 * The spell's sound.
+	 */
+	private int sound;
+	
+	/**
+	 * The pronounced words when the spell is thrown.
+	 */
+	private String magicWords;
 	
 	/**
 	 * Instantes the spell.
@@ -128,5 +158,53 @@ public class Spell {
 		}
 		
 		caster.addToMana(-requiredMana);
+	}
+	
+	/**
+	 * Retrieves the spell's name.
+	 * @return Spell's name.
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Retrieves the spell's description.
+	 * @return Spell's description.
+	 */
+	public String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * Checks whether the spell is negative to target, or not.
+	 * @return
+	 */
+	public boolean isNegative() {
+		return negative;
+	}
+	
+	/**
+	 * Retrieves the spell's fx.
+	 * @return Spell's fx.
+	 */
+	public int getFX() {
+		return fx;
+	}
+	
+	/**
+	 * Retrieves the spell's sound.
+	 * @return Spell's sound.
+	 */
+	public int getSound() {
+		return sound;
+	}
+
+	/**
+	 * Retrieves the spell's magic words.
+	 * @return The spell's magic words.
+	 */
+	public String getMagicWords() {
+		return magicWords;
 	}
 }
