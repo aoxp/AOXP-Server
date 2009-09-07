@@ -3,25 +3,16 @@ package ao.model.character.behavior;
 import ao.model.character.AIType;
 import ao.model.character.Character;
 
+/**
+ * Defines a character's behavior (AI)
+ */
 public interface Behavior {
 
-	// TODO : No estoy 100% seguro de esto... revisar
 	/**
-	 * Follows the NPC's target.
+	 * Tells the behavior that the character was attacked by another.
+	 * @param character The character that attacked.
 	 */
-	void followTarget();
-	
-	/**
-	 * Sets the NPC's target.
-	 * @param character		The character to be target.
-	 */
-	void setTarget(Character character);
-	
-	/**
-	 * Retrieves the NPC's target.
-	 * @return	The NPC's target.
-	 */
-	Character getTarget();
+	void attackedBy(Character character);
 	
 	/**
 	 * Retrieves the NPC's AI type.
@@ -30,8 +21,14 @@ public interface Behavior {
 	AIType getAIType();
 	
 	/**
-	 * Sets the NPC to stay quiet
+	 * Performs an action according to the behavior.
 	 */
-	void stayQuiet(); 
-
+	void takeAction();
+	
+	/**
+	 * Sets the listener for behavior actions.
+	 * @param listener The listener of behavior actions
+	 */
+	void setActionListener(BehaviorActionListener listener);
+	
 }

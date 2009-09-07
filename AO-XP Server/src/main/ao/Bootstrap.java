@@ -49,13 +49,15 @@ public class Bootstrap {
 		
 		AOXPServer server = new AOXPServer();
 		
+		long timeMillis = System.currentTimeMillis();
+		
 		logger.info("Initializing AOXP Server...");
 		loadApplicationContext(server);
 		startWorkers(server);
 		startTimers(server);
 		startNetworking(server);
 		
-		logger.info("AOXP Server initialized.");
+		logger.info("AOXP Server initialized. Took " + (System.currentTimeMillis() - timeMillis) + "ms.");
 		
 		return server;
 	}
