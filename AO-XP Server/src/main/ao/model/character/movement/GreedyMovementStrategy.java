@@ -2,8 +2,6 @@ package ao.model.character.movement;
 
 import java.util.Random;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import ao.model.character.Character;
 import ao.model.map.Heading;
 import ao.model.map.Position;
