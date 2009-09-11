@@ -8,10 +8,11 @@ public interface MovementStrategy {
 
 	/**
 	 * Applies the movement strategy
+	 * @param pos The current position.
 	 * 
 	 * @return null if there is no need to move.
 	 */
-	Heading move();
+	Heading move(Position pos);
 	
 	/**
 	 * Targets a new character
@@ -24,10 +25,4 @@ public interface MovementStrategy {
 	 * @param pos	The final destination position 
 	 */
 	void setTarget(Position pos);
-
-	/**
-	 * Sets the current position.
-	 * @param pos The position.
-	 */
-	void setPosition(Position pos);
 }

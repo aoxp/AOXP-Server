@@ -10,18 +10,17 @@ public class GreedyMovementStrategy implements MovementStrategy {
 
 	private Position targetPosition;
 	private Character targetCharacter;
-	private Position position;
 	
 	private Random randomGenerator = new Random();
 	
 	@Override
-	public Heading move() {
+	public Heading move(Position pos) {
 		if (targetCharacter != null) {
 			targetPosition = targetCharacter.getPosition();
 		}
 		
-		int x = (int) position.getX() - targetPosition.getX();
-		int y = (int) position.getY() - targetPosition.getY();
+		int x = (int) pos.getX() - targetPosition.getX();
+		int y = (int) pos.getY() - targetPosition.getY();
 		
 		if (x < 0 && y > 0) { // Northeast
 			return randomGenerator.nextInt(1) == 0 ? Heading.NORTH : Heading.EAST;
@@ -53,11 +52,6 @@ public class GreedyMovementStrategy implements MovementStrategy {
 	@Override
 	public void setTarget(Position pos) {
 		targetPosition = pos;
-	}
-
-	@Override
-	public void setPosition(Position pos) {
-		position = pos;
 	}
 
 }

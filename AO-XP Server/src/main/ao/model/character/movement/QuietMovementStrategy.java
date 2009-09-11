@@ -10,7 +10,7 @@ import ao.model.map.Position;
 public class QuietMovementStrategy implements MovementStrategy {
 
 	@Override
-	public Heading move() {
+	public Heading move(Position pos) {
 		// No, I will not.
 		
 		return null;
@@ -24,11 +24,6 @@ public class QuietMovementStrategy implements MovementStrategy {
 	@Override
 	public void setTarget(Position pos) {
 		// I don't care the target, I will never move!
-	}
-
-	@Override
-	public void setPosition(Position pos) {
-		// I don't care my position, it will never change!
 	}
 
 }
