@@ -24,6 +24,7 @@ public class GreedyMovementStrategy implements MovementStrategy {
 		int y = (int) position.getY() - targetPosition.getY();
 		
 		if (x < 0 && y > 0) { // Northeast
+			return randomGenerator.nextInt(1) == 0 ? Heading.NORTH : Heading.EAST;
 		} else if (x > 0 && y > 0) { // Northwest
 			return randomGenerator.nextInt(1) == 0 ? Heading.NORTH : Heading.WEST;
 		} else if (x > 0 && y < 0) { // Southwest
