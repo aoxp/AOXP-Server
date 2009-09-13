@@ -342,4 +342,9 @@ public interface Character {
 	 */
 	void cast(Spell spell, WorldObject object);
 
+	/**
+	 * Retrieves the character's spell list.
+	 * @return The character's spells.
+	 */
+	Spell[] getSpells();
 }

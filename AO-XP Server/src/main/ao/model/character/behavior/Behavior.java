@@ -26,9 +26,4 @@ public interface Behavior {
 	 */
 	void takeAction();
 	
-	/**
-	 * Sets the available behavior's spells.
-	 * @param spells The spells.
-	 */
-	void setSpells(Spell[] spells);
 }
