@@ -1,9 +1,12 @@
 package ao.model.character;
 
 import ao.model.inventory.Inventory;
+import ao.model.map.Heading;
 import ao.model.map.Position;
+import ao.model.spell.Spell;
 import ao.model.worldobject.EquipableItem;
 import ao.model.worldobject.Item;
+import ao.model.worldobject.WorldObject;
 
 public interface Character {
 
@@ -312,4 +315,31 @@ public interface Character {
 	 * @return True if the character can walk in the earth.
 	 */
 	boolean canWalkInEarth();
+	
+	/**
+	 * Performs an attack on the given character.
+	 * @param character The target to attack.
+	 */
+	void attack(Character character);
+
+	/**
+	 * Moves the character on the given direction.
+	 * @param heading The heading in which to move.
+	 */
+	void moveTo(Heading heading);
+
+	/**
+	 * Casts a spell on the given character.
+	 * @param spell The spell to cast.
+	 * @param target The character on which to cast the spell.
+	 */
+	void cast(Spell spell, Character target);
+	
+	/**
+	 * Casts a spell on the given world object.
+	 * @param spell The spell to cast.
+	 * @param object The object on which to cast the spell.
+	 */
+	void cast(Spell spell, WorldObject object);
+
 }

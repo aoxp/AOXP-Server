@@ -94,4 +94,13 @@ public class Position {
 		// TODO: Chequear que el número no se vaya fuera de los rangos?
 		y += positions;
 	}
+	
+	/**
+	 * Calculates the Manhattan distance to the given Position.
+	 * @param pos The other position to calculate the distance.
+	 * @return The distance to the other position.
+	 */
+	public int getDistance(Position pos) {
+		return Math.abs(x - pos.x) + Math.abs(y - pos.y);
+	}
 }

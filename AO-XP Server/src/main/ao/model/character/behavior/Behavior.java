@@ -2,6 +2,7 @@ package ao.model.character.behavior;
 
 import ao.model.character.AIType;
 import ao.model.character.Character;
+import ao.model.spell.Spell;
 
 /**
  * Defines a character's behavior (AI)
@@ -26,9 +27,8 @@ public interface Behavior {
 	void takeAction();
 	
 	/**
-	 * Sets the listener for behavior actions.
-	 * @param listener The listener of behavior actions
+	 * Sets the available behavior's spells.
+	 * @param spells The spells.
 	 */
-	void setActionListener(BehaviorActionListener listener);
-	
+	void setSpells(Spell[] spells);
 }
