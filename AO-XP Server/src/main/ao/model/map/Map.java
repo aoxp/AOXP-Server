@@ -8,11 +8,13 @@ public class Map {
 
 	public static final int MAP_WIDTH = 100;
 	public static final int MAP_HEIGHT = 100;
+	public static final int VISIBLE_AREA_WIDTH = 9;
+	public static final int VISIBLE_AREA_HEIGHT = 9;
 	
 	protected String name;
 	protected int id;
 	
-	// We don't user jagged arrays, they are inefficient in Java!
+	// We don't use jagged arrays, they are inefficient in Java!
 	protected Tile[] tiles;
 	
 	/**

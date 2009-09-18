@@ -15,7 +15,7 @@ public class Position {
 	/**
 	 * The position's map.
 	 */
-	private int map;
+	private Map map;
 	
 	/**
 	 * Creates a new position with the given data
@@ -23,7 +23,7 @@ public class Position {
 	 * @param y	The position in the Y axis.
 	 * @param map The position's map.
 	 */
-	public Position(byte x, byte y, int map) {
+	public Position(byte x, byte y, Map map) {
 		this.x = x;
 		this.y = y;
 		this.map = map;
@@ -65,7 +65,7 @@ public class Position {
 	 * Retrieves the position's map.
 	 * @return The position's map.
 	 */
-	public int getMap() {
+	public Map getMap() {
 		return map;
 	}
 	
@@ -73,7 +73,7 @@ public class Position {
 	 * Sets the position's map.
 	 * @param map The new position's map. 
 	 */
-	public void setMap(int map) {
+	public void setMap(Map map) {
 		this.map = map;
 	}
 	
@@ -102,5 +102,21 @@ public class Position {
 	 */
 	public int getDistance(Position pos) {
 		return Math.abs(x - pos.x) + Math.abs(y - pos.y);
+	}
+
+	/**
+	 * Checks if the given position is in our vision range.
+	 * @param pos The position to check.
+	 * @return True if the given position is in the vision range, false otherwise.
+	 */
+	public boolean inVisionRange(Position pos) {
+		
+		if (map != pos.map ||
+			Math.abs(x - pos.x) > Map.VISIBLE_AREA_WIDTH ||
+			Math.abs(y - pos.y) > Map.VISIBLE_AREA_HEIGHT) {
+				return false;
+		}
+		
+		return true;
 	}
 }
