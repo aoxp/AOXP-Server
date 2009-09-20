@@ -4,12 +4,12 @@ package ao.model.map;
 /**
  * A game's map.
  */
-public class Map {
+public class WorldMap {
 
 	public static final int MAP_WIDTH = 100;
 	public static final int MAP_HEIGHT = 100;
-	public static final int VISIBLE_AREA_WIDTH = 9;
-	public static final int VISIBLE_AREA_HEIGHT = 9;
+	public static final int VISIBLE_AREA_WIDTH = 8;
+	public static final int VISIBLE_AREA_HEIGHT = 6;
 	
 	protected String name;
 	protected int id;
@@ -23,7 +23,7 @@ public class Map {
 	 * @param id The unique id of the map.
 	 * @param tiles The array of tiles composing the map.
 	 */
-	public Map(String name, int id, Tile[] tiles) {
+	public WorldMap(String name, int id, Tile[] tiles) {
 		super();
 		this.name = name;
 		this.id = id;

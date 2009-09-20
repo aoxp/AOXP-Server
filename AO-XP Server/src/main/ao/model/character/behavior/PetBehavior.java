@@ -3,6 +3,7 @@ package ao.model.character.behavior;
 import ao.model.character.AIType;
 import ao.model.character.Character;
 import ao.model.character.UserCharacter;
+import ao.model.character.attack.AttackStrategy;
 import ao.model.character.movement.MovementStrategy;
 
 public class PetBehavior implements Behavior {
@@ -10,10 +11,12 @@ public class PetBehavior implements Behavior {
 	private MovementStrategy movement;
 	private Character character;
 	private UserCharacter attacker;
+	private AttackStrategy attack;
 	
-	public PetBehavior(Character character, MovementStrategy movement) {
+	public PetBehavior(Character character, MovementStrategy movement, AttackStrategy attack) {
 		this.movement = movement;
 		this.character = character;
+		this.attack = attack;
 	}
 
 	@Override
@@ -31,7 +34,7 @@ public class PetBehavior implements Behavior {
 	public void takeAction() {
 		
 		if (attacker != null && character.getPosition().inVisionRange(attacker.getPosition())) {
-			character.attack(attacker);
+			attack.attack(attacker);
 		} else {
 			// Follow the pet master.
 			movement.setTarget(character);
