@@ -1,5 +1,8 @@
 package ao.model.map;
 
+import java.util.List;
+import ao.model.character.Character;
+
 public class Position {
 
 	/**
@@ -118,5 +121,13 @@ public class Position {
 		}
 		
 		return true;
+	}
+
+	/**
+	 * Looks for characters in the vision range.
+	 * @return A list of the characters found.
+	 */
+	public List<Character> getCharactersNearby() {
+		return map.getCharactersNearby(x, y);
 	}
 }

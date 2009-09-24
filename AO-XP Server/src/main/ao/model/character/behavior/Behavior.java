@@ -2,7 +2,6 @@ package ao.model.character.behavior;
 
 import ao.model.character.AIType;
 import ao.model.character.Character;
-import ao.model.spell.Spell;
 
 /**
  * Defines a character's behavior (AI)
