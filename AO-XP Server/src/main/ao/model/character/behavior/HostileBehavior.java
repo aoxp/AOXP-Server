@@ -7,7 +7,7 @@ import ao.model.character.UserCharacter;
 import ao.model.character.attack.AttackStrategy;
 import ao.model.character.movement.MovementStrategy;
 
-public class HostilBehavior implements Behavior {
+public class HostileBehavior implements Behavior {
 	
 	private MovementStrategy movement;
 	private AttackStrategy attack;
@@ -15,7 +15,7 @@ public class HostilBehavior implements Behavior {
 	private Character character;
 	private Character target;
 	
-	public HostilBehavior(MovementStrategy movement, AttackStrategy attack, Character character) {
+	public HostileBehavior(MovementStrategy movement, AttackStrategy attack, Character character) {
 		this.movement = movement;
 		this.attack = attack;
 		this.character = character;
