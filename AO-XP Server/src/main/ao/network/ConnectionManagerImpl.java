@@ -1,6 +1,7 @@
 package ao.network;
 
 import java.io.IOException;
+import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.ConcurrentHashMap;
@@ -40,7 +41,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	}
 	
 	@Override
-	public ByteBuffer getInputBuffer(SocketChannel sc) {
+	public DataBuffer getInputBuffer(SocketChannel sc) {
 		return this.scToConnection.get(sc).inputBuffer;
 	}
 
@@ -52,12 +53,26 @@ public class ConnectionManagerImpl implements ConnectionManager {
 			Connection connection = this.scToConnection.get(sc);
 			
 			try {
-				if (sc.read(connection.inputBuffer) == -1) {
+				if (sc.read(connection.inputBuffer.buffer) == -1) {
 					// Connection closed
 					unregisterConnection(sc);
 				} else {
+					// Mark the current position to revert it if there is not enough data.
+					connection.inputBuffer.buffer.mark();
 					
-					// TODO : Handle incoming data
+					int	packetHeader = (int) connection.inputBuffer.get();
+					
+					// TODO: Save this array? It will NEVER change.
+					ServerPackets[] packetHandlers = ServerPackets.values();
+					
+					try {
+						// TODO: Check if the packet exists in the array!!
+						packetHandlers[packetHeader].getHandler().handle(connection);
+					} catch (BufferUnderflowException e) {
+						// Not enough data received, restore the buffer.
+						connection.inputBuffer.buffer.reset();
+					}
+					
 				}
 			} catch (IOException e) {
 				logger.error("Unexpected error reading data from socket.", e);
@@ -90,37 +105,14 @@ public class ConnectionManagerImpl implements ConnectionManager {
 		
 		Connection connection = this.userToConnection.get(user);
 		connection.outputBuffer.flip();
-		connection.socketChannel.write(connection.outputBuffer);
+		connection.socketChannel.write(connection.outputBuffer.buffer);
 		connection.outputBuffer.clear();
 	}
 
 	@Override
-	public ByteBuffer getOutputBuffer(User user) {
+	public DataBuffer getOutputBuffer(User user) {
 		
 		return this.userToConnection.get(user).outputBuffer;
-	}
-
-	/**
-	 * Connection class. Simple DTO for connections.
-	 */
-	private class Connection {
-		
-		private static final int BUFFER_CAPACITY = 8192;
-		
-		protected ByteBuffer inputBuffer;
-		protected ByteBuffer outputBuffer;
-		protected SocketChannel socketChannel;
-		protected User user;
-		
-		public Connection(SocketChannel socketChannel) {
-			this.socketChannel = socketChannel;
-			
-			// TODO : Evaluate the usage of a direct buffer instead.... may have performance impact...
-			this.inputBuffer = ByteBuffer.allocate(BUFFER_CAPACITY);
-			this.outputBuffer = ByteBuffer.allocate(BUFFER_CAPACITY);
-			
-			// TODO : Create user instance? receive it in the constructor?
-		}
 	}
 
 }

@@ -34,14 +34,14 @@ public interface ConnectionManager {
 	 * @param sc The socket channel for which the input buffer is requested.
 	 * @return The input buffer for the requested socket channel.
 	 */
-	ByteBuffer getInputBuffer(SocketChannel sc);
+	DataBuffer getInputBuffer(SocketChannel sc);
 	
 	/**
 	 * Retrieves the output buffer associated with the given socket channel.
 	 * @param user The user whose output buffer is requested.
 	 * @return The output buffer for which the requested user.
 	 */
-	ByteBuffer getOutputBuffer(User user);
+	DataBuffer getOutputBuffer(User user);
 
 	/**
 	 * 
