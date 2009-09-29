@@ -1,11 +1,12 @@
 package ao.network;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 public class DataBuffer {
 
+	private static final String ASCII_FORMAT = "ASCII";
+	private static final String UNICODE_FORMAT = "UTF8";
 	protected ByteBuffer buffer;
 
 	public DataBuffer(int capacity) {
@@ -17,13 +18,6 @@ public class DataBuffer {
 	 */
 	public byte get() {
 		return buffer.get();
-	}
-
-	/**
-	 * @see java.nio.ByteBuffer#get(int)
-	 */
-	public byte get(int index) {
-		return buffer.get(index);
 	}
 
 	/**
@@ -71,57 +65,65 @@ public class DataBuffer {
 	/**
 	 * @see java.nio.ByteBuffer#put(byte)
 	 */
-	public ByteBuffer put(byte b) {
-		return buffer.put(b);
+	public DataBuffer put(byte b) {
+		buffer.put(b);
+		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#put(byte[])
 	 */
-	public final ByteBuffer put(byte[] src) {
-		return buffer.put(src);
+	public final DataBuffer put(byte[] src) {
+		buffer.put(src);
+		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#putChar(char)
 	 */
-	public ByteBuffer putChar(char value) {
-		return buffer.putChar(value);
+	public DataBuffer putChar(char value) {
+		buffer.putChar(value);
+		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#putDouble(double)
 	 */
-	public ByteBuffer putDouble(double value) {
-		return buffer.putDouble(value);
+	public DataBuffer putDouble(double value) {
+		buffer.putDouble(value);
+		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#putFloat(float)
 	 */
-	public ByteBuffer putFloat(float value) {
-		return buffer.putFloat(value);
+	public DataBuffer putFloat(float value) {
+		buffer.putFloat(value);
+		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#putInt(int)
 	 */
-	public ByteBuffer putInt(int value) {
-		return buffer.putInt(value);
+	public DataBuffer putInt(int value) {
+		buffer.putInt(value);
+		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#putLong(long)
 	 */
-	public ByteBuffer putLong(long value) {
-		return buffer.putLong(value);
+	public DataBuffer putLong(long value) {
+		buffer.putLong(value);
+		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#putShort(short)
 	 */
-	public ByteBuffer putShort(short value) {
-		return buffer.putShort(value);
+	public DataBuffer putShort(short value) {
+		buffer.putShort(value);
+		return this;
 	}
 
 	/**
@@ -132,57 +134,112 @@ public class DataBuffer {
 	}
 	
 	/**
-	 * @see java.nio.Buffer#clear()
+	 * Reads an ASCII string from the buffer.
+	 * @return The String at the buffer's current position.
+	 * @throws UnsupportedEncodingException
 	 */
-	public final Buffer clear() {
-		return buffer.clear();
-	}
-	
-	/**
-	 * @see java.nio.Buffer#flip()
-	 */
-	public final Buffer flip() {
-		return buffer.flip();
-	}
-	
-	/**
-	 *  Reads the first int at the buffer's current position and then
-	 *  substracts that amount of bytes to compose them into a string.
-	 * @return The String value at the buffer's current position.
-	 */
-	public String getASCIIString() {
+	public String getASCIIString() throws UnsupportedEncodingException {
 		
-		// The string length is stored as int just before the string itself.
-		byte[] str = new byte[buffer.getInt()];
+		// The string length is stored as a short just before the string itself.
+		byte[] str = new byte[buffer.getShort()];
 		
 		buffer.get(str);
 		
-		return new String(str);
+		return new String(str, ASCII_FORMAT);
 	}
 	
 	/**
-	 *  Reads the first int at the buffer's current position and then
-	 *  substracts that amount of bytes by two to compose them into an unicode string.
-	 * @return The String value at the buffer's current position.
+	 * Reads an ASCII string with fixed length from the buffer.
+	 * @param length The length of the string to be read.
+	 * @return The String at the buffer's current position.
+	 * @throws UnsupportedEncodingException
+	 */
+	public String getASCIIStringFixed(int length) throws UnsupportedEncodingException {
+		
+		byte[] str = new byte[length];
+		
+		buffer.get(str);
+		
+		return new String(str, ASCII_FORMAT);
+	}
+	
+	/**
+	 * Reads a Unicode string from the buffer.
+	 * @return The String at the buffer's current position.
+	 * @throws UnsupportedEncodingException
 	 */
 	public String getUnicodeString() throws UnsupportedEncodingException {
 		
-		// The string length is stored as int just before the string itself.
-		byte[] str = new byte[buffer.getInt() * 2];
+		// The string length is stored as a short just before the string itself.
+		byte[] str = new byte[buffer.getShort() * 2];
 		
 		buffer.get(str);
 		
-		return new String(str, "UTF8");
-		
+		return new String(str, UNICODE_FORMAT);
 	}
 	
 	/**
-	 * Writes the given string as a byte array in the buffer's current position. 
-	 * @param value The string to write.
-	 * @return This buffer.
+	 * Reads a Unicode string with a fixed length from the buffer.
+	 * @param length The length of the string to be read,
+	 * @return The String at the buffer's current position.
+	 * @throws UnsupportedEncodingException
 	 */
-	public ByteBuffer putString(String value) {
-		return buffer.put(value.getBytes());
+	public String getUnicodeString(int length) throws UnsupportedEncodingException {
+		
+		byte[] str = new byte[length];
+		
+		buffer.get(str);
+		
+		return new String(str, UNICODE_FORMAT);
 	}
 	
+	/**
+	 * Writes the given ASCII string in the buffer's current position. 
+	 * @param value The string to be written.
+	 * @return This buffer.
+	 * @throws UnsupportedEncodingException 
+	 */
+	public DataBuffer putASCIIString(String value) throws UnsupportedEncodingException {
+		buffer.putShort((short) value.length());
+		buffer.put(value.getBytes(ASCII_FORMAT));
+		
+		return this;
+	}
+	
+	/**
+	 * Writes the given ASCII string with fixed length in the buffer's current position. 
+	 * @param value The string to be written.
+	 * @return This buffer.
+	 * @throws UnsupportedEncodingException 
+	 */
+	public DataBuffer putASCIIStringFixed(String value) throws UnsupportedEncodingException {
+		buffer.put(value.getBytes(ASCII_FORMAT));
+		
+		return this;
+	}
+	
+	/**
+	 * Writes the given Unicode string in the buffer's current position. 
+	 * @param value The string to be written.
+	 * @return This buffer.
+	 * @throws UnsupportedEncodingException 
+	 */
+	public DataBuffer putUnicodeString(String value) throws UnsupportedEncodingException {
+		buffer.putShort((short) value.length());
+		buffer.put(value.getBytes(UNICODE_FORMAT));
+		
+		return this;
+	}
+	
+	/**
+	 * Writes the given Unicode string with fixed length in the buffer's current position. 
+	 * @param value The string to be written.
+	 * @return This buffer.
+	 * @throws UnsupportedEncodingException 
+	 */
+	public DataBuffer putUnicodeStringFixed(String value) throws UnsupportedEncodingException {
+		buffer.put(value.getBytes(UNICODE_FORMAT));
+		
+		return this;
+	}
 }

@@ -16,22 +16,10 @@ public class Connection {
 	protected SocketChannel socketChannel;
 	protected User user;
 	
-	public DataBuffer getInputBuffer() {
-		return inputBuffer;
-	}
-
-	public DataBuffer getOutputBuffer() {
-		return outputBuffer;
-	}
-
-	public SocketChannel getSocketChannel() {
-		return socketChannel;
-	}
-
-	public User getUser() {
-		return user;
-	}
-	
+	/**
+	 * Creates a new Connection.
+	 * @param socketChannel The channel over which to communicate with the client.
+	 */
 	public Connection(SocketChannel socketChannel) {
 		this.socketChannel = socketChannel;
 		
@@ -40,5 +28,37 @@ public class Connection {
 		this.outputBuffer = new DataBuffer(BUFFER_CAPACITY);
 		
 		// TODO : Create user instance? receive it in the constructor?
+	}
+	
+	/**
+	 * Retrieves the input buffer.
+	 * @return The input buffer.
+	 */
+	public DataBuffer getInputBuffer() {
+		return inputBuffer;
+	}
+	
+	/**
+	 * Retrieves the output buffer.
+	 * @return The output buffer.
+	 */
+	public DataBuffer getOutputBuffer() {
+		return outputBuffer;
+	}
+	
+	/**
+	 * Retrieves the socket channel.
+	 * @return The socket channel.
+	 */
+	public SocketChannel getSocketChannel() {
+		return socketChannel;
+	}
+	
+	/**
+	 * Retrieves the user.
+	 * @return The user.
+	 */
+	public User getUser() {
+		return user;
 	}
 }

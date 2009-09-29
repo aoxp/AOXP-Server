@@ -1,7 +1,6 @@
 package ao.network;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
 import ao.model.user.User;
