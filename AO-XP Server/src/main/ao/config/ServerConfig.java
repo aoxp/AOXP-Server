@@ -25,4 +25,16 @@ public interface ServerConfig {
 	 * @return The backlog for the listening socket.
 	 */
 	int getListeningBacklog();
+	
+	/**
+	 * Retrieves the valid client version.
+	 * @return The version.
+	 */
+	String getVersion();
+	
+	/**
+	 * Retrieves all the valid client hashes.
+	 * @return The hashes.
+	 */
+	String[] getValidClientHashes();
 }

@@ -4,5 +4,5 @@ import ao.model.user.Account;
 
 public interface AccountDAO {
 
-	Account read(String username);
+	Account retrieve(String username);
 }

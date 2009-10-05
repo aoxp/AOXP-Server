@@ -14,7 +14,7 @@ import com.google.inject.Injector;
  */
 public class ApplicationContext {
 
-	public static final boolean SECURTY_ENABLED = false;
+	public static final boolean SECURITY_ENABLED = false;
 	
 	private static final Logger logger = Logger.getLogger(ApplicationContext.class);
 	private static Properties properties;

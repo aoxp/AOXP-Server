@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import org.ini4j.Ini;
+import org.ini4j.Profile.Section;
 
 import ao.config.ServerConfig;
 
@@ -20,6 +21,12 @@ public class ServerConfigIni implements ServerConfig {
 	private static final String BACKLOG_KEY = "Backlog";
 	private static final String MAXUSERS_KEY = "MaxUsers";
 	private static final String LISTENING_PORT_KEY = "StartPort";
+	private static final String VERSION_KEY = "Version";
+	
+	private static final String HASHES_HEADER = "MD5Hush";
+	private static final String HASHES_ACTIVATED_KEY = "Activado";
+	private static final String HASHES_AMOUNT_KEY = "MD5Aceptados";
+	private static final String HASHES_ACCEPTED_KEY_FORMAT = "Md5Aceptado%d";
 	
 	private Ini config;
 	
@@ -49,4 +56,25 @@ public class ServerConfigIni implements ServerConfig {
 		return listeningPort == null ? DEFAULT_LISTENING_PORT : Integer.valueOf(listeningPort);
 	}
 
+	@Override
+	public String getVersion() {
+		return config.get(INIT_HEADER, VERSION_KEY);
+	}
+	
+	@Override
+	public String[] getValidClientHashes() {
+		
+		Section hashesConfig = config.get(HASHES_HEADER);
+		if (Integer.valueOf(hashesConfig.get(HASHES_ACTIVATED_KEY)) == 0) {
+			return null;
+		}
+		
+		String[] clientHashes = new String[Integer.valueOf(hashesConfig.get(HASHES_AMOUNT_KEY))];
+		
+		for (int i = 0; i < clientHashes.length; i++) {
+			clientHashes[i] = hashesConfig.get(String.format(HASHES_ACCEPTED_KEY_FORMAT, i));
+		}
+		
+		return clientHashes;
+	}
 }
