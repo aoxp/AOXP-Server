@@ -5,7 +5,7 @@ import java.nio.BufferUnderflowException;
 
 import ao.network.Connection;
 
-public interface Packet {
+public interface IncomingPacket {
 
 	/**
 	 * Handles the received packet.

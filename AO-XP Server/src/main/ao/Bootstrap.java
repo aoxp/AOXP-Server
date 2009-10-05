@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
 
 import ao.config.ServerConfig;
-import ao.ioc.ApplicationContext;
+import ao.context.ApplicationContext;
 import ao.network.ConnectionManager;
 
 /**

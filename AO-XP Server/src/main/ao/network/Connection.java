@@ -1,7 +1,9 @@
 package ao.network;
 
+import java.io.IOException;
 import java.nio.channels.SocketChannel;
 
+import ao.context.ApplicationContext;
 import ao.model.user.User;
 
 /**
@@ -60,5 +62,20 @@ public class Connection {
 	 */
 	public User getUser() {
 		return user;
+	}
+
+	/**
+	 * Closes the connection.
+	 */
+	public void disconnect() {
+		ConnectionManager manager = ApplicationContext.getInstance(ConnectionManager.class);
+		
+		try {
+			manager.flushOutputBuffer(user);
+		} catch (IOException e) {
+			// I don't care, I'm closing the connection..
+		}
+		
+		manager.unregisterConnection(socketChannel);
 	}
 }

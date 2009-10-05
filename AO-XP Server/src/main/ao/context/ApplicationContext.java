@@ -1,14 +1,12 @@
-package ao.ioc;
+package ao.context;
 
 import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-import ao.ioc.module.BootstrapModule;
-import ao.ioc.module.ConfigurationModule;
+import ao.ioc.InjectorFactory;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -16,17 +14,13 @@ import com.google.inject.Injector;
  */
 public class ApplicationContext {
 
-	private static final Logger logger = Logger.getLogger(ApplicationContext.class);
+	public static final boolean SECURTY_ENABLED = false;
 	
-	/**
-	 * The application's injector. All general use modules should be loaded here.
-	 */
+	private static final Logger logger = Logger.getLogger(ApplicationContext.class);
+	private static Properties properties;
 	private static Injector injector;
 	
-	
 	static {
-		Properties properties = new Properties();
-		
 		try {
 			properties.load(new FileInputStream("project.properties"));
 		} catch (Exception e) {
@@ -34,8 +28,14 @@ public class ApplicationContext {
 			e.printStackTrace();
 		}
 		
-		injector = Guice.createInjector(new BootstrapModule(properties),
-				new ConfigurationModule(properties));
+		injector = InjectorFactory.get(properties);
+	}
+
+	/**
+	 * @return the properties
+	 */
+	public static Properties getProperties() {
+		return properties;
 	}
 	
 	/**

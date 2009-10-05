@@ -1,6 +1,7 @@
 package ao.ioc;
 
 import ao.config.ArchetypeConfiguration;
+import ao.context.ApplicationContext;
 import ao.ioc.module.ArchetypeModule;
 import ao.model.character.archetype.Archetype;
 
