@@ -35,13 +35,6 @@ public class Account {
 	}
 	
 	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-	
-	/**
 	 * @return the mail
 	 */
 	public String getMail() {
@@ -65,5 +58,14 @@ public class Account {
 	
 	public UserCharacter getCharacter(String name) {
 		return null;
+	}
+	
+	/**
+	 * Try to authenticate the account with the given password.
+	 * @param password The password used to authenticate.
+	 * @return True if the password matchs the account password, false otherwise.
+	 */
+	public boolean authenticate(String password) {
+		return this.password.equals(password);
 	}
 }

@@ -17,7 +17,7 @@ public class ApplicationContext {
 	public static final boolean SECURITY_ENABLED = false;
 	
 	private static final Logger logger = Logger.getLogger(ApplicationContext.class);
-	private static Properties properties;
+	private static Properties properties = new Properties();
 	private static Injector injector;
 	
 	static {

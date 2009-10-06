@@ -63,7 +63,7 @@ public class LoginPacket implements IncomingPacket {
 			return;
 		}
 		
-		if (!acc.getPassword().toLowerCase().equals(password.toLowerCase())) {
+		if (!acc.authenticate(password.toLowerCase())) {
 			loginError(connection, "Contraseña incorrecta.");
 			return;
 		}
