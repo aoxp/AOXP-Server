@@ -22,17 +22,17 @@ public class GreedyMovementStrategy implements MovementStrategy {
 		int x = (int) pos.getX() - targetPosition.getX();
 		int y = (int) pos.getY() - targetPosition.getY();
 		
-		if (x < 0 && y > 0) { // Northeast
-			return randomGenerator.nextInt(1) == 0 ? Heading.NORTH : Heading.EAST;
-		} else if (x > 0 && y > 0) { // Northwest
-			return randomGenerator.nextInt(1) == 0 ? Heading.NORTH : Heading.WEST;
-		} else if (x > 0 && y < 0) { // Southwest
-			return randomGenerator.nextInt(1) == 0 ? Heading.SOUTH : Heading.WEST;
-		} else if (x < 0 && y < 0) { // Southeast
-			return randomGenerator.nextInt(1) == 0 ? Heading.SOUTH : Heading.EAST;
-		} else if (x == 0 && y > 0) { // North
+		if (x < 0 && y < 0) { // Northeast
+			return randomGenerator.nextInt(2) == 0 ? Heading.NORTH : Heading.EAST;
+		} else if (x > 0 && y < 0) { // Northwest
+			return randomGenerator.nextInt(2) == 0 ? Heading.NORTH : Heading.WEST;
+		} else if (x > 0 && y > 0) { // Southwest
+			return randomGenerator.nextInt(2) == 0 ? Heading.SOUTH : Heading.WEST;
+		} else if (x < 0 && y > 0) { // Southeast
+			return randomGenerator.nextInt(2) == 0 ? Heading.SOUTH : Heading.EAST;
+		} else if (x == 0 && y < 0) { // North
 			return Heading.NORTH;
-		} else if (x == 0 && y < 0) { // South
+		} else if (x == 0 && y > 0) { // South
 			return Heading.SOUTH;
 		} else if (x > 0 && y == 0) { // West
 			return Heading.WEST;

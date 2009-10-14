@@ -5,7 +5,7 @@ import ao.model.character.Race;
 import ao.model.character.Reputation;
 import ao.model.character.archetype.UserArchetype;
 
-public interface Item extends WorldObject {
+public interface Item extends WorldObject, Cloneable {
 
 	/**
 	 * Retrieves the item's unique id.
@@ -45,13 +45,13 @@ public interface Item extends WorldObject {
 	 * Retrieves the manufacture difficulty of the item (how hard it's to make).
 	 * @return The manufacture difficulty of the item (how hard it's to make).
 	 */
-	int getManufactureDifficulty(); // TODO : Nota, esto reemplaza a minSkill para carpinteria, fundicion y herreria
+	int getManufactureDifficulty(); // Nota, esto reemplaza a minSkill para carpinteria, fundicion y herreria
 	
 	/**
 	 * Retrieves the usage difficulty of the item.
 	 * @return The usage difficulty of the item.
 	 */
-	int getUsageDifficulty(); // TODO : Nota, esto reemplaza minSkill para navegar, con lo que los separamos.
+	int getUsageDifficulty(); // Nota, esto reemplaza minSkill para navegar, con lo que los separamos.
 	
 	/**
 	 * Gets a deep clone of the item

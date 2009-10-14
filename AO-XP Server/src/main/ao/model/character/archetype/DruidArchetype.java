@@ -10,7 +10,7 @@ public class DruidArchetype extends DefaultArchetype {
 
 	private static final float MANA_MODIFIER = 2.0f;
 	private static final float TAMING_TRAINING_CHANCE = 1.0f;
-	private static final int DRUID_INITIAL_MANA = 50;
+	private static final int INITIAL_MANA = 50;
 	
 	public DruidArchetype(float evasionModifier, float meleeAccuracyModifier,
 			float rangedAccuracyModifier, float meleeDamageModifier,
@@ -23,7 +23,7 @@ public class DruidArchetype extends DefaultArchetype {
 	
 	@Override
 	public int getManaIncrement(int intelligence, int mana) {
-		return (int) Math.round(intelligence * MANA_MODIFIER);
+		return Math.round(intelligence * MANA_MODIFIER);
 	}
 	
 	@Override
@@ -33,6 +33,7 @@ public class DruidArchetype extends DefaultArchetype {
 	
 	@Override
 	public int getInitialMana(int intelligence){
-		return DRUID_INITIAL_MANA;
+		return INITIAL_MANA;
 	}
+	
 }

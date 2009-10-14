@@ -5,8 +5,8 @@ package ao.model.character.archetype;
  */
 public class CarpenterArchetype extends DefaultArchetype {
 
-	private static final float CARPENTER_WOOD_WORKING_MODIFIER = 1.0f;
-	private static final int CARPENTER_WOOD_WORK_STAMINA_COST = 2;
+	private static final float WOOD_WORKING_MODIFIER = 1.0f;
+	private static final int WOOD_WORK_STAMINA_COST = 2;
 	
 	public CarpenterArchetype(float evasionModifier,
 			float meleeAccuracyModifier, float rangedAccuracyModifier,
@@ -19,12 +19,12 @@ public class CarpenterArchetype extends DefaultArchetype {
 	
 	@Override
 	public int getWoodWorkStaminaCost() {
-		return CARPENTER_WOOD_WORK_STAMINA_COST;
+		return WOOD_WORK_STAMINA_COST;
 	}
 	
 	@Override
 	protected float getWoodWorkingModifier() {
-		return CARPENTER_WOOD_WORKING_MODIFIER;
+		return WOOD_WORKING_MODIFIER;
 	}
 
 }

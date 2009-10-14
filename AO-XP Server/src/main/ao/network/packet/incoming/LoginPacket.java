@@ -6,6 +6,7 @@ import java.nio.BufferUnderflowException;
 import ao.config.ServerConfig;
 import ao.context.ApplicationContext;
 import ao.data.dao.AccountDAO;
+import ao.data.dao.DAOException;
 import ao.model.user.Account;
 import ao.network.Connection;
 import ao.network.DataBuffer;
@@ -24,7 +25,14 @@ public class LoginPacket implements IncomingPacket {
 		DataBuffer buffer = connection.getInputBuffer();
 		
 		String username = buffer.getASCIIString();
-		Account acc = ApplicationContext.getInstance(AccountDAO.class).retrieve(username);
+		Account acc;
+		
+		try {
+			acc = ApplicationContext.getInstance(AccountDAO.class).retrieve(username);
+		} catch (DAOException e) {
+			loginError(connection, "Ocurrió un error, intentá de nuevo.");
+			return;
+		}
 		
 		if (acc == null) {
 			loginError(connection, "El personaje no existe.");

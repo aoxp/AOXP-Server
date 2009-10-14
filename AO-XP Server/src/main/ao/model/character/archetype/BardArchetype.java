@@ -6,7 +6,7 @@ package ao.model.character.archetype;
 public class BardArchetype extends DefaultArchetype {
 
 	private static final float MANA_MODIFIER = 2.0f;
-	private static final int BARD_INITIAL_MANA = 50;
+	private static final int INITIAL_MANA = 50;
 	
 	public BardArchetype(float evasionModifier, float meleeAccuracyModifier,
 			float rangedAccuracyModifier, float meleeDamageModifier,
@@ -19,11 +19,12 @@ public class BardArchetype extends DefaultArchetype {
 	
 	@Override
 	public int getManaIncrement(int intelligence, int mana) {
-		return (int) Math.round(intelligence * MANA_MODIFIER);
+		return Math.round(intelligence * MANA_MODIFIER);
 	}
 	
 	@Override
 	public int getInitialMana(int intelligence){
-		return BARD_INITIAL_MANA;
+		return INITIAL_MANA;
 	}
+	
 }

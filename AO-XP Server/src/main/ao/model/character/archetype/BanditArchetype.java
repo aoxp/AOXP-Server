@@ -9,8 +9,9 @@ public class BanditArchetype extends DefaultArchetype {
 	private static final int MAX_HIT_INCREMENT = 3;
 	private static final int MIN_HIT_INCREMENT = 1;
 	private static final int STAMINA_INCREMENT = 35;
-	private static final int BANDIT_INITIAL_MANA = 150;
-	private static final int BANDIT_MAN_INCREMENT_MODIFIER = 10;
+	private static final int INITIAL_MANA = 150;
+	private static final int MAN_INCREMENT_MODIFIER = 10;
+	private static final int MIN_MANA_INCREMENT = 4;
 	
 	public BanditArchetype(float evasionModifier, float meleeAccuracyModifier,
 			float rangedAccuracyModifier, float meleeDamageModifier,
@@ -26,7 +27,10 @@ public class BanditArchetype extends DefaultArchetype {
 		if (mana >= 300){
 			return 0; 
 		}
-		return intelligence - BANDIT_MAN_INCREMENT_MODIFIER < 4 ? 4 : intelligence - BANDIT_MAN_INCREMENT_MODIFIER;
+		
+		int rest = intelligence - MAN_INCREMENT_MODIFIER;
+		
+		return rest < MIN_MANA_INCREMENT ? MIN_MANA_INCREMENT : rest;
 	}
 
 	@Override
@@ -34,6 +38,7 @@ public class BanditArchetype extends DefaultArchetype {
 		if (level > LEVEL_MAX_HIT_INCREMENT){
 			return MIN_HIT_INCREMENT;
 		}
+		
 		return MAX_HIT_INCREMENT;
 	}
 
@@ -49,7 +54,7 @@ public class BanditArchetype extends DefaultArchetype {
 	
 	@Override
 	public int getInitialMana(int intelligence){
-		return BANDIT_INITIAL_MANA;
+		return INITIAL_MANA;
 	}
 	
 }

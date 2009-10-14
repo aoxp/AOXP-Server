@@ -23,6 +23,7 @@ public class HunterArchetype extends DefaultArchetype {
 		if (level > LEVEL_MAX_HIT_INCREMENT){
 			return MIN_HIT_INCREMENT;
 		}
+		
 		return MAX_HIT_INCREMENT;
 	}
 

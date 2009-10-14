@@ -5,10 +5,10 @@ package ao.model.character.archetype;
  */
 public class ThiefArchetype extends DefaultArchetype {
 
-	private static final int THIEF_HIT_INCREMENT = 1;
-	private static final int THIEF_STAMINA_INCREMENT = 18;
-	private static final int THIEF_STOLEN_MAX_AMOUNT = 800;
-	private static final int THIEF_STOLEN_MIN_AMOUNT = 80;
+	private static final int HIT_INCREMENT = 1;
+	private static final int STAMINA_INCREMENT = 18;
+	private static final int STOLEN_MAX_AMOUNT = 800;
+	private static final int STOLEN_MIN_AMOUNT = 80;
 	
 	public ThiefArchetype(float evasionModifier, float meleeAccuracyModifier,
 			float rangedAccuracyModifier, float meleeDamageModifier,
@@ -36,22 +36,22 @@ public class ThiefArchetype extends DefaultArchetype {
 	
 	@Override
 	public int getStaminaIncrement() {
-		return THIEF_STAMINA_INCREMENT;
+		return STAMINA_INCREMENT;
 	}
 	
 	@Override
 	public int getHitIncrement(int level) {
-		return THIEF_HIT_INCREMENT;
+		return HIT_INCREMENT;
 	}
 
 	@Override
 	public int getStolenMaxAmount() {
-		return THIEF_STOLEN_MAX_AMOUNT;
+		return STOLEN_MAX_AMOUNT;
 	}
 
 	@Override
 	public int getStolenMinAmount() {
-		return THIEF_STOLEN_MIN_AMOUNT;
+		return STOLEN_MIN_AMOUNT;
 	}
 
 }

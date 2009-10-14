@@ -11,33 +11,33 @@ import ao.model.worldobject.Weapon;
  */
 public abstract class DefaultArchetype implements Archetype {
 
-	private static final float DEFAULT_SAILING_MODIFIER = 2.3f;
-	private static final float DEFAULT_STABBING_DAMAGE_MODIFIER = 1.5f;
-	private static final int DEFAULT_STAMINA_INCREMENT = 15;
-	private static final float DEFAULT_TAMING_TRAINING_CHANCE = 0.3f;
-	private static final int DEFAULT_WOOD_WORK_STAMINA_COST = 6;
-	private static final float DEFAULT_BLACKSMITH_MODIFIER = 4.0f;
-	private static final float DEFAULT_IRON_WORKING_MODIFIER = 3.0f;
-	private static final int DEFAULT_MIN_STABBING_SKILL = 10;
-	private static final float DEFAULT_WOOD_WORKING_MODIFIER = 3.0f;
-	private static final int DEFAULT_BLACKSMITH_STAMINA_COST = 6;
-	private static final int DEFAULT_FISHING_STAMINA_COST = 3;
-	private static final int DEFAULT_FISHED_MAX_AMOUNT = 1;
-	private static final int DEFAULT_FISHED_MIN_AMOUNT = 1;
-	private static final int DEFAULT_LUMBERED_MAX_AMOUNT = 1;
-	private static final int DEFAULT_LUMBERED_MIN_AMOUNT = 1;
-	private static final int DEFAULT_LUMBERJACKING_STAMINA_COST = 4;
-	private static final int DEFAULT_MINED_MAX_AMOUNT = 1;
-	private static final int DEFAULT_MINED_MIN_AMOUNT = 1;
-	private static final int DEFAULT_MINING_STAMINA_COST = 5;
-	private static final int DEFAULT_STOLEN_MAX_AMOUNT = 100;
-	private static final int DEFAULT_STOLEN_MIN_AMOUNT = 1;
-	private static final int DEFAULT_SAILING_MIN_LEVEL = 25;
-	private static final float DEFAULT_MIN_STABBING_CHANCE = 0.0439f;
-	private static final float DEFAULT_STABBING_CHANCE_SKILL_MULTIPLIER = 0.000361f;
-	private static final int DEFAULT_MANA_INCREMENT = 0;
-	private static final int DEFAULT_HIT_INCREMENT = 2;
-	private static final int DEFAULT_INITIAL_MANA = 0;
+	private static final float SAILING_MODIFIER = 2.3f;
+	private static final float STABBING_DAMAGE_MODIFIER = 1.5f;
+	private static final int STAMINA_INCREMENT = 15;
+	private static final float TAMING_TRAINING_CHANCE = 0.3f;
+	private static final int WOOD_WORK_STAMINA_COST = 6;
+	private static final float BLACKSMITH_MODIFIER = 4.0f;
+	private static final float IRON_WORKING_MODIFIER = 3.0f;
+	private static final int MIN_STABBING_SKILL = 10;
+	private static final float WOOD_WORKING_MODIFIER = 3.0f;
+	private static final int BLACKSMITH_STAMINA_COST = 6;
+	private static final int FISHING_STAMINA_COST = 3;
+	private static final int FISHED_MAX_AMOUNT = 1;
+	private static final int FISHED_MIN_AMOUNT = 1;
+	private static final int LUMBERED_MAX_AMOUNT = 1;
+	private static final int LUMBERED_MIN_AMOUNT = 1;
+	private static final int LUMBERJACKING_STAMINA_COST = 4;
+	private static final int MINED_MAX_AMOUNT = 1;
+	private static final int MINED_MIN_AMOUNT = 1;
+	private static final int MINING_STAMINA_COST = 5;
+	private static final int STOLEN_MAX_AMOUNT = 100;
+	private static final int STOLEN_MIN_AMOUNT = 1;
+	private static final int SAILING_MIN_LEVEL = 25;
+	private static final float MIN_STABBING_CHANCE = 0.0439f;
+	private static final float STABBING_CHANCE_SKILL_MULTIPLIER = 0.000361f;
+	private static final int MANA_INCREMENT = 0;
+	private static final int HIT_INCREMENT = 2;
+	private static final int INITIAL_MANA = 0;
 	
 	protected float evasionModifier;
 	protected float meleeAccuracyModifier;
@@ -71,7 +71,7 @@ public abstract class DefaultArchetype implements Archetype {
 	
 	@Override
 	public int getHitIncrement(int level) {
-		return DEFAULT_HIT_INCREMENT;
+		return HIT_INCREMENT;
 	}
 	
 	@Override
@@ -116,7 +116,7 @@ public abstract class DefaultArchetype implements Archetype {
 
 	@Override
 	public boolean canStab(int stabbingSkill) {
-		return stabbingSkill >= DEFAULT_MIN_STABBING_SKILL;
+		return stabbingSkill >= MIN_STABBING_SKILL;
 	}
 
 	@Override
@@ -131,97 +131,97 @@ public abstract class DefaultArchetype implements Archetype {
 
 	@Override
 	public int getBlacksmithingStaminaCost() {
-		return DEFAULT_BLACKSMITH_STAMINA_COST;
+		return BLACKSMITH_STAMINA_COST;
 	}
 
 	@Override
 	public int getFishedMaxAmount() {
-		return DEFAULT_FISHED_MAX_AMOUNT;
+		return FISHED_MAX_AMOUNT;
 	}
 
 	@Override
 	public int getFishedMinAmount() {
-		return DEFAULT_FISHED_MIN_AMOUNT;
+		return FISHED_MIN_AMOUNT;
 	}
 
 	@Override
 	public int getFishingStaminaCost() {
-		return DEFAULT_FISHING_STAMINA_COST;
+		return FISHING_STAMINA_COST;
 	}
 
 	@Override
 	public int getLumberedMaxAmount() {
-		return DEFAULT_LUMBERED_MAX_AMOUNT;
+		return LUMBERED_MAX_AMOUNT;
 	}
 
 	@Override
 	public int getLumberedMinAmount() {
-		return DEFAULT_LUMBERED_MIN_AMOUNT;
+		return LUMBERED_MIN_AMOUNT;
 	}
 
 	@Override
 	public int getLumberjackingStaminaCost() {
-		return DEFAULT_LUMBERJACKING_STAMINA_COST;
+		return LUMBERJACKING_STAMINA_COST;
 	}
 
 	@Override
 	public int getMiningMaxAmount() {
-		return DEFAULT_MINED_MAX_AMOUNT;
+		return MINED_MAX_AMOUNT;
 	}
 
 	@Override
 	public int getMiningMinAmount() {
-		return DEFAULT_MINED_MIN_AMOUNT;
+		return MINED_MIN_AMOUNT;
 	}
 
 	@Override
 	public int getMiningStaminaCost() {
-		return DEFAULT_MINING_STAMINA_COST;
+		return MINING_STAMINA_COST;
 	}
 
 	@Override
 	public int getSailingMinLevel() {
-		return DEFAULT_SAILING_MIN_LEVEL;
+		return SAILING_MIN_LEVEL;
 	}
 
 	@Override
 	public float getStabbingChance(int stabSkill) {
-		return DEFAULT_STABBING_CHANCE_SKILL_MULTIPLIER * stabSkill + DEFAULT_MIN_STABBING_CHANCE;
+		return STABBING_CHANCE_SKILL_MULTIPLIER * stabSkill + MIN_STABBING_CHANCE;
 	}
 
 	@Override
 	public float getStabbingDamageModifier() {
-		return DEFAULT_STABBING_DAMAGE_MODIFIER;
+		return STABBING_DAMAGE_MODIFIER;
 	}
 
 	@Override
 	public int getStaminaIncrement() {
-		return DEFAULT_STAMINA_INCREMENT;
+		return STAMINA_INCREMENT;
 	}
 	
 	@Override
 	public int getManaIncrement(int intelligence, int mana) {
-		return DEFAULT_MANA_INCREMENT;
+		return MANA_INCREMENT;
 	}
 
 	@Override
 	public int getStolenMaxAmount() {
-		return DEFAULT_STOLEN_MAX_AMOUNT;
+		return STOLEN_MAX_AMOUNT;
 	}
 
 	@Override
 	public int getStolenMinAmount() {
-		return DEFAULT_STOLEN_MIN_AMOUNT;
+		return STOLEN_MIN_AMOUNT;
 	}
 
 	@Override
 	public float getTamingTrainingChance() {
-		return DEFAULT_TAMING_TRAINING_CHANCE;
+		return TAMING_TRAINING_CHANCE;
 	}
 
 	@Override
 	public int getWoodWorkStaminaCost() {
-		return DEFAULT_WOOD_WORK_STAMINA_COST;
+		return WOOD_WORK_STAMINA_COST;
 	}
 	
 	@Override
@@ -261,7 +261,7 @@ public abstract class DefaultArchetype implements Archetype {
 
 	@Override
 	public int getInitialMana(int intelligence){
-		return DEFAULT_INITIAL_MANA;
+		return INITIAL_MANA;
 	}
 	
 	/**
@@ -269,7 +269,7 @@ public abstract class DefaultArchetype implements Archetype {
 	 * @return The sailing modifier for the archetype.
 	 */
 	protected float getSailingModifier() {
-		return DEFAULT_SAILING_MODIFIER;
+		return SAILING_MODIFIER;
 	}
 	
 	/**
@@ -277,7 +277,7 @@ public abstract class DefaultArchetype implements Archetype {
 	 * @return The blacksmith modifier for the archetype.
 	 */
 	protected float getBlacksmithModifier() {
-		return DEFAULT_BLACKSMITH_MODIFIER;
+		return BLACKSMITH_MODIFIER;
 	}
 	
 	/**
@@ -285,7 +285,7 @@ public abstract class DefaultArchetype implements Archetype {
 	 * @return The iron working modifier for the archetype.
 	 */
 	protected float getIronWorkingModifier() {
-		return DEFAULT_IRON_WORKING_MODIFIER;
+		return IRON_WORKING_MODIFIER;
 	}
 	
 	/**
@@ -293,6 +293,7 @@ public abstract class DefaultArchetype implements Archetype {
 	 * @return The wood working modifier for the archetype.
 	 */
 	protected float getWoodWorkingModifier() {
-		return DEFAULT_WOOD_WORKING_MODIFIER;
+		return WOOD_WORKING_MODIFIER;
 	}
+	
 }

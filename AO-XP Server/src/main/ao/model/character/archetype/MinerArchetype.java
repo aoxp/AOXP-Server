@@ -9,8 +9,8 @@ public class MinerArchetype extends DefaultArchetype {
 	private static final int MINED_MAX_AMOUNT = 6;
 	private static final int MINED_MIN_AMOUNT = 1;
 	private static final int MINING_STAMINA_COST = 2;
-	private static final float MINER_BLACKSMITH_MODIFIER = 1.2f;
-	private static final float MINER_IRON_WORKING_MODIFIER = 1.0f;
+	private static final float BLACKSMITH_MODIFIER = 1.2f;
+	private static final float IRON_WORKING_MODIFIER = 1.0f;
 	
 	public MinerArchetype(float evasionModifier, float meleeAccuracyModifier,
 			float rangedAccuracyModifier, float meleeDamageModifier,
@@ -43,12 +43,12 @@ public class MinerArchetype extends DefaultArchetype {
 	
 	@Override
 	protected float getIronWorkingModifier() {
-		return MINER_IRON_WORKING_MODIFIER;
+		return IRON_WORKING_MODIFIER;
 	}
 	
 	@Override
 	protected float getBlacksmithModifier() {
-		return MINER_BLACKSMITH_MODIFIER;
+		return BLACKSMITH_MODIFIER;
 	}
 	
 }

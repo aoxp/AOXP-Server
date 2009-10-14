@@ -32,4 +32,5 @@ public class PirateArchetype extends DefaultArchetype {
 	protected float getSailingModifier() {
 		return SAILING_MODIFIER;
 	}
+	
 }
