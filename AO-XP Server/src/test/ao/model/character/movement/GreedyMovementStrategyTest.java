@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import ao.model.map.Heading;
 import ao.model.map.Position;
-import ao.model.map.Tile;
 import ao.model.map.WorldMap;
 
 public class GreedyMovementStrategyTest {
@@ -15,7 +14,7 @@ public class GreedyMovementStrategyTest {
 
 	@Test
 	public void testMove() {
-		WorldMap map = new WorldMap("foo", 0, new Tile[0]);
+		WorldMap map = new WorldMap("foo", 0, null);
 		
 		Position pos = new Position((byte) 50, (byte) 50, map);
 		Position target = new Position((byte) 60, (byte) 60, map);
@@ -48,7 +47,7 @@ public class GreedyMovementStrategyTest {
 		byte x = pos.getX();
 		byte y = pos.getY();
 		
-		int steps = Math.abs(pos.getX() - target.getX()) + Math.abs(pos.getY() - target.getY());
+		int steps = pos.getDistance(target);
 		
 		for (int i = 0; i < steps; i++) {
 			move = movement.move(pos);
@@ -58,7 +57,9 @@ public class GreedyMovementStrategyTest {
 			Assert.assertNotSame(shouldnt2, move);
 		}
 		
-		// Has arrieved to target.
+		// Has arrived to target.
+		Assert.assertEquals(target.getX(), pos.getX());
+		Assert.assertEquals(target.getY(), pos.getY());
 		Assert.assertNull(movement.move(pos));
 		
 		pos.setX(x);

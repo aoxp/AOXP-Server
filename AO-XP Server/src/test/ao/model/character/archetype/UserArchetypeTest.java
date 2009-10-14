@@ -1,9 +1,7 @@
 package ao.model.character.archetype;
 
 import static org.junit.Assert.assertTrue;
-import junit.framework.Assert;
 
-import org.easymock.EasyMock;
 import org.junit.Test;
 
 import ao.ioc.ArchetypeLocator;
