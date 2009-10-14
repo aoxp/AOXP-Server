@@ -50,11 +50,12 @@ public enum UserArchetype {
 		String archetypeClassName = archetype.getClass().getSimpleName();
 		
 		for (UserArchetype arch : UserArchetype.values()) {
-			if (arch.getArchetype().getClass().getSimpleName() == archetypeClassName) {
+			if (arch.getArchetype().getClass().getSimpleName().equals(archetypeClassName)) {
 				return arch;
 			}
 		}
 		
 		return null;
 	}
+	
 }
