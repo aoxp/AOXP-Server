@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.channels.SocketChannel;
 
 import ao.context.ApplicationContext;
+import ao.model.user.LoggedUser;
 import ao.model.user.User;
 
 /**
@@ -29,7 +30,8 @@ public class Connection {
 		this.inputBuffer = new DataBuffer(BUFFER_CAPACITY);
 		this.outputBuffer = new DataBuffer(BUFFER_CAPACITY);
 		
-		// TODO : Create user instance? receive it in the constructor?
+		// TODO : If the differentiation between connected and logged user is to take part, this should be replaced by a connected user
+		this.user = new LoggedUser();
 	}
 	
 	/**
