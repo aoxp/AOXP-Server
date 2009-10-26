@@ -16,9 +16,19 @@ import ao.network.packet.outgoing.ErrorMessagePacket;
 
 public class LoginPacket implements IncomingPacket {
 
-	private static final int HASH_ASCII_LENGTH = 32;
-	private static final int HASH_BINARY_LENGTH = 16;
+	protected static final int HASH_ASCII_LENGTH = 32;
+	protected static final int HASH_BINARY_LENGTH = 16;
+	
+	public static final String DAO_ERROR_MESSAGE = "Ocurrió un error, intentá de nuevo.";
+	public static final String CHARACTER_NOT_FOUND_ERROR_MESSAGE = "El personaje no existe.";
+	public static final String CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT = "Esta versión del juego es obsoleta, la versión correcta es %s. La misma se encuentra disponible en http://www.argentumonline.com.ar/.";
+	public static final String CORRUPTED_CLIENT_ERROR_MESSAGE = "El cliente está dañado, por favor descárguelo nuevamente desde http://www.argentumonline.com.ar/";
+	public static final String BANNED_CHARACTER_ERROR_MESSAGE = "Se te ha prohibido la entrada a Argentum debido a tu mal comportamiento. Puedes consultar el reglamento y el sistema de soporte desde www.argentumonline.com.ar";
+	public static final String INCORRECT_PASSWORD_ERROR_MESSAGE = "Contraseña incorrecta.";
+	
 	private static String[] clientHashes;
+	private static final AccountDAO accDAO = ApplicationContext.getInstance(AccountDAO.class);
+	private static String correctVersion = ApplicationContext.getInstance(ServerConfig.class).getVersion();
 	
 	@Override
 	public void handle(Connection connection) throws BufferUnderflowException, UnsupportedEncodingException {
@@ -28,14 +38,14 @@ public class LoginPacket implements IncomingPacket {
 		Account acc;
 		
 		try {
-			acc = ApplicationContext.getInstance(AccountDAO.class).retrieve(username);
+			acc = accDAO.retrieve(username);
 		} catch (DAOException e) {
-			loginError(connection, "Ocurrió un error, intentá de nuevo.");
+			loginError(connection, DAO_ERROR_MESSAGE);
 			return;
 		}
 		
 		if (acc == null) {
-			loginError(connection, "El personaje no existe.");
+			loginError(connection, CHARACTER_NOT_FOUND_ERROR_MESSAGE);
 			return;
 		}
 		
@@ -47,10 +57,9 @@ public class LoginPacket implements IncomingPacket {
 		}
 		
 		String version = buffer.getShort() + "." + buffer.getShort() + "." + buffer.getShort();
-		String correctVersion = ApplicationContext.getInstance(ServerConfig.class).getVersion();
 		
-		if (correctVersion != version) {
-			loginError(connection, "Esta versión del juego es obsoleta, la versión correcta es " + correctVersion + ". La misma se encuentra disponible en http://www.argentumonline.com.ar/.");
+		if (!correctVersion.equals(version)) {
+			loginError(connection, String.format(CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT, correctVersion));
 			return;
 		}
 		
@@ -61,18 +70,18 @@ public class LoginPacket implements IncomingPacket {
 		
 		if (ApplicationContext.SECURITY_ENABLED) {
 			if (!checkClientHash(buffer.getASCIIStringFixed(HASH_BINARY_LENGTH))) {
-				loginError(connection, "El cliente está dañado, por favor descárguelo nuevamente desde http://www.argentumonline.com.ar/");
+				loginError(connection, CORRUPTED_CLIENT_ERROR_MESSAGE);
 				return;
 			}
 		}
 		
 		if (acc.isBanned(username)) {
-			loginError(connection, "Se te ha prohibido la entrada a Argentum debido a tu mal comportamiento. Puedes consultar el reglamento y el sistema de soporte desde www.argentumonline.com.ar");
+			loginError(connection, BANNED_CHARACTER_ERROR_MESSAGE);
 			return;
 		}
 		
-		if (!acc.authenticate(password.toLowerCase())) {
-			loginError(connection, "Contraseña incorrecta.");
+		if (!acc.authenticate(password)) {
+			loginError(connection, INCORRECT_PASSWORD_ERROR_MESSAGE);
 			return;
 		}
 		

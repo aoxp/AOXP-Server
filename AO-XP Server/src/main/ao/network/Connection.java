@@ -18,6 +18,7 @@ public class Connection {
 	protected DataBuffer outputBuffer;
 	protected SocketChannel socketChannel;
 	protected User user;
+	private static final ConnectionManager manager = ApplicationContext.getInstance(ConnectionManager.class);
 	
 	/**
 	 * Creates a new Connection.
@@ -70,7 +71,6 @@ public class Connection {
 	 * Closes the connection.
 	 */
 	public void disconnect() {
-		ConnectionManager manager = ApplicationContext.getInstance(ConnectionManager.class);
 		
 		try {
 			manager.flushOutputBuffer(user);
