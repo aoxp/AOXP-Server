@@ -1,5 +1,8 @@
 package ao.model.character;
 
+/**
+ * List of available NPC Types.
+ */
 public enum NPCType {	
 	COMMON,
 	RESUCITATOR,

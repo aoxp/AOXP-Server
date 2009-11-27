@@ -7,6 +7,9 @@ import java.util.Map;
 import ao.network.packet.OutgoingPacket;
 import ao.network.packet.outgoing.ErrorMessagePacket;
 
+/**
+ * Manager for server-side packets.
+ */
 public class ServerPacketsManager {
 	
 	/**

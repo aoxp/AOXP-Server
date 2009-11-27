@@ -6,6 +6,9 @@ import java.nio.BufferUnderflowException;
 import ao.network.packet.IncomingPacket;
 import ao.network.packet.incoming.LoginPacket;
 
+/**
+ * Manager for client-side packets.
+ */
 public class ClientPacketsManager {
 
 	/**

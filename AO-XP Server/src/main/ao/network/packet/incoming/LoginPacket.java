@@ -75,7 +75,7 @@ public class LoginPacket implements IncomingPacket {
 			}
 		}
 		
-		if (acc.isBanned(username)) {
+		if (acc.isBanned()) {
 			loginError(connection, BANNED_CHARACTER_ERROR_MESSAGE);
 			return;
 		}

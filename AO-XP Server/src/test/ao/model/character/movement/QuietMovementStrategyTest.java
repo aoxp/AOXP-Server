@@ -2,8 +2,10 @@ package ao.model.character.movement;
 
 import junit.framework.Assert;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
+import ao.model.character.Character;
 import ao.model.map.Position;
 import ao.model.map.Tile;
 import ao.model.map.WorldMap;
@@ -20,6 +22,12 @@ public class QuietMovementStrategyTest {
 		Position target = new Position((byte) 60, (byte) 60, map);
 		
 		movement.setTarget(target);
+		
+		Assert.assertNull(movement.move(pos));
+		
+		Character character = EasyMock.createMock(Character.class);
+		
+		movement.setTarget(character);
 		
 		Assert.assertNull(movement.move(pos));
 	}

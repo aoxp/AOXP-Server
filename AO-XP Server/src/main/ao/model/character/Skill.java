@@ -2,7 +2,6 @@ package ao.model.character;
 
 /**
  * Defines available skills.
- * @author jsotuyod
  */
 public enum Skill {
 	LUCK,

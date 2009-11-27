@@ -2,8 +2,10 @@ package ao.model.character.movement;
 
 import junit.framework.Assert;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
+import ao.model.character.Character;
 import ao.model.map.Heading;
 import ao.model.map.Position;
 import ao.model.map.WorldMap;
@@ -21,27 +23,46 @@ public class GreedyMovementStrategyTest {
 		
 		// Should go to northeast
 		moveTest(pos, target, Heading.WEST, Heading.SOUTH);
+		moveTestCharacter(pos, target, Heading.WEST, Heading.SOUTH);
 		
 		target.setY((byte) 20);
 		
 		// Should go to southeast
 		moveTest(pos, target, Heading.WEST, Heading.NORTH);
+		moveTestCharacter(pos, target, Heading.WEST, Heading.NORTH);
 		
 		target.setX((byte) 20);
 		
 		// Should go to southwest
 		moveTest(pos, target, Heading.EAST, Heading.NORTH);
+		moveTestCharacter(pos, target, Heading.EAST, Heading.NORTH);
 		
 		target.setY((byte) 60);
 		
 		// Should go to northwest
 		moveTest(pos, target, Heading.EAST, Heading.SOUTH);
-		
+		moveTestCharacter(pos, target, Heading.EAST, Heading.SOUTH);
 	}
 
 	private void moveTest(Position pos, Position target, Heading shouldnt1, Heading shouldnt2) {
-		Heading move = null;
 		movement.setTarget(target);
+		
+		_moveTest(pos, target, shouldnt1, shouldnt2);
+	}
+	
+	private void moveTestCharacter(Position pos, Position target, Heading shouldnt1, Heading shouldnt2) {
+		
+		Character character = EasyMock.createMock(Character.class);
+		EasyMock.expect(character.getPosition()).andReturn(target).anyTimes();
+		EasyMock.replay(character);
+		
+		movement.setTarget(character);
+		
+		_moveTest(pos, target, shouldnt1, shouldnt2);
+	}
+	
+	private void _moveTest(Position pos, Position target, Heading shouldnt1, Heading shouldnt2) {
+		Heading move = null;
 		
 		// Save this values because they will change and we don't want to modify the original object.
 		byte x = pos.getX();
@@ -53,6 +74,7 @@ public class GreedyMovementStrategyTest {
 			move = movement.move(pos);
 			movePosition(pos, move);
 			
+			Assert.assertNotNull(move);
 			Assert.assertNotSame(shouldnt1, move);
 			Assert.assertNotSame(shouldnt2, move);
 		}
@@ -82,6 +104,7 @@ public class GreedyMovementStrategyTest {
 			
 		case WEST:
 			pos.setX((byte) (pos.getX() - 1));
+			break;
 		}
 	}
 	
