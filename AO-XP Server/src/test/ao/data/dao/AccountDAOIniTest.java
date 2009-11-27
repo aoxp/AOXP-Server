@@ -11,7 +11,7 @@ public class AccountDAOIniTest {
 
 	private AccountDAOIni dao;
 	private static final String CHARACTER_NICK = "test";
-	private static final String CHARFILES_PATH = "src/test/resources/";
+	private static final String CHARFILES_PATH = "src/test/resources/charfiles/";
 	
 	@Before
 	public void setUp() throws Exception {
