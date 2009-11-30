@@ -16,6 +16,18 @@ public class InventoryImpl implements Inventory {
 		inventory = new Item[slots];
 	}
 	
+	public InventoryImpl(Item[] inventory, int slots) {
+		this(Math.max(inventory.length, slots)); 
+		
+		for (Item item: inventory) {
+			this.addItem(item.clone());
+		}
+	}
+	
+	public InventoryImpl(Item[] inventory) {
+		this(inventory,	DEFAULT_INVENTORY_CAPACITY);
+	}
+	
 	@Override
 	public int addItem(Item item) {
 		int i;
