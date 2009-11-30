@@ -16,23 +16,15 @@ public class InventoryImpl implements Inventory {
 		inventory = new Item[slots];
 	}
 	
-	public InventoryImpl(Item[] inventory, int slots) {
-		this(Math.max(inventory.length, slots)); 
-		
-		for (Item item: inventory) {
-			this.addItem(item.clone());
-		}
-	}
-	
 	public InventoryImpl(Item[] inventory) {
-		this(inventory,	DEFAULT_INVENTORY_CAPACITY);
+		this.inventory = inventory;
 	}
 	
 	@Override
 	public int addItem(Item item) {
 		int i;
 		
-		if ((i = this.hasItem(item)) != -1) {
+		if ((i = hasItem(item)) != -1) {
 			int amount = item.getAmount();
 			int newAmount, oldAmount;
 			int id = item.getId();
@@ -110,7 +102,7 @@ public class InventoryImpl implements Inventory {
 	public Item removeItem(Item item) {
 		int i;
 		
-		if ((i = this.hasItem(item)) == -1) {
+		if ((i = hasItem(item)) == -1) {
 			return null;
 		}
 		
