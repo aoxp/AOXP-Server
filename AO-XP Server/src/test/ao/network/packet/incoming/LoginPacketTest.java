@@ -18,9 +18,6 @@
 
 package ao.network.packet.incoming;
 
-import java.nio.channels.SocketChannel;
-import junit.framework.Assert;
-
 import org.easymock.classextension.EasyMock;
 import org.junit.Before;
 import org.junit.Test;

@@ -76,7 +76,7 @@ public class WorldMapTest {
 		map.getTile(5, 5).setCharacter(EasyMock.createMock(Character.class));
 		map.getTile(25, 5).setCharacter(EasyMock.createMock(Character.class)); // This one shouldn't be in the return.
 		
-		List chars = map.getCharactersNearby(7, 7);
+		List<Character> chars = map.getCharactersNearby(7, 7);
 		
 		assertEquals(chars.size(), 5);
 		assertTrue(chars.contains(map.getTile(8, 8).getCharacter()));

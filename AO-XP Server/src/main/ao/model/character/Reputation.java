@@ -56,7 +56,7 @@ public interface Reputation {
 	 * Adds the given points to the reputation's noble points.
 	 * @param points The points to add.
 	 */
-	void addToNoblePoints(int points);
+	void addToNoble(int points);
 	
 	/**
 	 * Retrieves the bourgeois points.
@@ -94,4 +94,5 @@ public interface Reputation {
 	 * @param belongs Determines if the reputation belongs to a faction.
 	 */
 	void setBelongsToFaction(boolean belongs);
+
 }

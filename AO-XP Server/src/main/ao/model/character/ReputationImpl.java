@@ -78,10 +78,10 @@ public class ReputationImpl implements Reputation {
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.character.Reputation#addToNoblePoints(int)
+	 * @see ao.model.character.Reputation#addToNoble(int)
 	 */
 	@Override
-	public void addToNoblePoints(int points) {
+	public void addToNoble(int points) {
 		noblePoints += points;
 	}
 
@@ -167,5 +167,5 @@ public class ReputationImpl implements Reputation {
 	public void setBelongsToFaction(boolean belongs) {
 		belongsToFaction = belongs;
 	}
-	
+
 }
