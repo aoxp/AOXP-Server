@@ -16,15 +16,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.model.character;
+package ao.security;
 
-/**
- * List of character attributes.
- */
-public enum Atributes {
-	STRENGTH,
-    AGILITY,
-    INTELLIGENCE,
-    CHARISMA,
-    CONSTITUTION
+public class Hashing {
+	public static final int MD5_ASCII_LENGTH = 32;
+	public static final int MD5_BINARY_LENGTH = 16;
 }

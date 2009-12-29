@@ -55,4 +55,28 @@ public interface ServerConfig {
 	 * @return The hashes.
 	 */
 	String[] getValidClientHashes();
+	
+	/**
+	 * Checks if the character creation is enabled.
+	 * @return True if the character creation is enabled, false otherwise.
+	 */
+	boolean isCharacterCreationEnabled();
+	
+	/**
+	 * Sets whether the character creation is enabled or not.
+	 * @param enabled The character creation status.
+	 */
+	void setCharacterCreationEnabled(boolean enabled);
+	
+	/**
+	 * Checks if the server is restricted only to administrators.
+	 * @return True if the server is restricted, false otherwise.
+	 */
+	boolean isRestrictedToAdmins();
+	
+	/**
+	 * Sets whether the server is restricted to administrators or not.
+	 * @param restricted The restriction status.
+	 */
+	void setRestrictedToAdmins(boolean restricted);
 }

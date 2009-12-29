@@ -40,6 +40,8 @@ public class ServerConfigIni implements ServerConfig {
 	private static final String MAXUSERS_KEY = "MaxUsers";
 	private static final String LISTENING_PORT_KEY = "StartPort";
 	private static final String VERSION_KEY = "Version";
+	private static final String CHARACTER_CREATION_KEY = "PuedeCrearPersonajes";
+	private static final String RESTRICTED_TO_ADMINS_KEY = "ServerSoloGMs";
 	
 	private static final String HASHES_HEADER = "MD5Hush";
 	private static final String HASHES_ACTIVATED_KEY = "Activado";
@@ -95,4 +97,27 @@ public class ServerConfigIni implements ServerConfig {
 		
 		return clientHashes;
 	}
+
+	@Override
+	public boolean isCharacterCreationEnabled() {
+		return config.get(INIT_HEADER, CHARACTER_CREATION_KEY).equals("1");
+	}
+
+	@Override
+	public void setCharacterCreationEnabled(boolean enabled) {
+		config.put(INIT_HEADER, CHARACTER_CREATION_KEY, enabled ? "1" : "0");
+		
+	}
+
+	
+	@Override
+	public boolean isRestrictedToAdmins() {
+		return config.get(INIT_HEADER, RESTRICTED_TO_ADMINS_KEY).equals("1");
+	}
+
+	@Override
+	public void setRestrictedToAdmins(boolean restricted) {
+		config.put(INIT_HEADER, CHARACTER_CREATION_KEY, restricted ? "1" : "0");
+	}
+	
 }

@@ -1,21 +1,3 @@
-/*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
-    Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 package ao.network.packet.incoming;
 
 import java.io.UnsupportedEncodingException;
@@ -31,11 +13,10 @@ import ao.network.DataBuffer;
 import ao.network.ServerPacketsManager;
 import ao.network.packet.IncomingPacket;
 import ao.network.packet.outgoing.ErrorMessagePacket;
+import ao.security.Hashing;
 
-public class LoginPacket implements IncomingPacket {
+public class LoginExistingCharacterPacket implements IncomingPacket {
 
-	protected static final int HASH_ASCII_LENGTH = 32;
-	protected static final int HASH_BINARY_LENGTH = 16;
 	
 	public static final String DAO_ERROR_MESSAGE = "Ocurrió un error, intentá de nuevo.";
 	public static final String CHARACTER_NOT_FOUND_ERROR_MESSAGE = "El personaje no existe.";
@@ -46,7 +27,8 @@ public class LoginPacket implements IncomingPacket {
 	
 	private static String[] clientHashes;
 	private static final AccountDAO accDAO = ApplicationContext.getInstance(AccountDAO.class);
-	private static String correctVersion = ApplicationContext.getInstance(ServerConfig.class).getVersion();
+	private static final ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
+	private static String correctVersion = config.getVersion();
 	
 	@Override
 	public void handle(Connection connection) throws BufferUnderflowException, UnsupportedEncodingException {
@@ -69,7 +51,7 @@ public class LoginPacket implements IncomingPacket {
 		
 		String password;
 		if (ApplicationContext.SECURITY_ENABLED) {
-			password = buffer.getASCIIStringFixed(HASH_ASCII_LENGTH);
+			password = buffer.getASCIIStringFixed(Hashing.MD5_ASCII_LENGTH);
 		} else {
 			password = buffer.getASCIIString();
 		}
@@ -87,7 +69,7 @@ public class LoginPacket implements IncomingPacket {
 		}
 		
 		if (ApplicationContext.SECURITY_ENABLED) {
-			if (!checkClientHash(buffer.getASCIIStringFixed(HASH_BINARY_LENGTH))) {
+			if (!checkClientHash(buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH))) {
 				loginError(connection, CORRUPTED_CLIENT_ERROR_MESSAGE);
 				return;
 			}
@@ -122,9 +104,9 @@ public class LoginPacket implements IncomingPacket {
 	 * @param hash The hash to check.
 	 * @return True if the hash match, false otherwise.
 	 */
-	private boolean checkClientHash(String hash) {
+	public static boolean checkClientHash(String hash) {
 		if (clientHashes == null) {
-			clientHashes = ApplicationContext.getInstance(ServerConfig.class).getValidClientHashes();
+			clientHashes = config.getValidClientHashes();
 		}
 		
 		for (String validHash : clientHashes) {

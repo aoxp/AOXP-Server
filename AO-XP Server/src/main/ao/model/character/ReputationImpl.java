@@ -158,7 +158,6 @@ public class ReputationImpl implements Reputation {
 	public boolean belongsToFaction() {
 		return belongsToFaction;
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see ao.model.character.Reputation#setBelongsToFaction(boolean)

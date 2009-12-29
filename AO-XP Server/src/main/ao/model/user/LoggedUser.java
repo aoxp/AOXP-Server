@@ -36,7 +36,7 @@ import ao.model.worldobject.WorldObject;
 /**
  * Defines a logged user.
  */
-public class LoggedUser implements User, UserCharacter {
+public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	
 	
 	private static final int MAX_THIRSTINESS = 100;
@@ -51,13 +51,13 @@ public class LoggedUser implements User, UserCharacter {
 	/*
 	 * UserFlags
 	 */
-	private Boolean poisoned = false;
-	private Boolean paralyzed = false;
-	private Boolean immobilized = false;
-	private Boolean invisible = false;
-	private Boolean mimetized = false;
-	private Boolean dumbed = false;
-	private Boolean hidden = false;
+	private boolean poisoned = false;
+	private boolean paralyzed = false;
+	private boolean immobilized = false;
+	private boolean invisible = false;
+	private boolean mimetized = false;
+	private boolean dumbed = false;
+	private boolean hidden = false;
 	
 	/*
 	 * UserStats
@@ -68,7 +68,7 @@ public class LoggedUser implements User, UserCharacter {
 	private int hitpoints; 
 	private int thirstiness;
 	private int hunger;
-	private Byte lvl;
+	private byte lvl;
 	private String name;
 	private String description;
 	
