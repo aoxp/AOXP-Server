@@ -6,7 +6,6 @@ import java.util.Random;
 
 import ao.model.character.Attribute;
 import ao.model.user.LoggedUser;
-import ao.model.user.User;
 import ao.network.Connection;
 import ao.network.ServerPacketsManager;
 import ao.network.packet.IncomingPacket;
@@ -28,7 +27,7 @@ public class ThrowDicesPacket implements IncomingPacket {
 	@Override
 	public void handle(Connection connection) throws BufferUnderflowException,
 			UnsupportedEncodingException {
-		// TODO Auto-generated method stub
+		
 		LoggedUser user = (LoggedUser) connection.getUser();
 		
 		byte strength = (byte) Math.max(MIN_STRENGTH, 13 + rnd.nextInt(4) + rnd.nextInt(3));

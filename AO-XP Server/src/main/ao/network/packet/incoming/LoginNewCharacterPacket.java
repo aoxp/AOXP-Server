@@ -69,11 +69,6 @@ public class LoginNewCharacterPacket implements IncomingPacket {
 		
 		String version = buffer.get() + "." + buffer.get() + "." + buffer.get();
 
-		// TODO: This versions are deprecated, delete this when the client don't send them anymore.
-		for (int i = 0; i < 7; i++) {
-			buffer.getShort();
-		}
-		
 		if (ApplicationContext.SECURITY_ENABLED) {
 			if (!LoginExistingCharacterPacket.checkClientHash(buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH))) {
 				loginError(connection, CORRUPTED_CLIENT_ERROR_MESSAGE);

@@ -63,9 +63,6 @@ public class LoginExistingCharacterPacketTest {
 		EasyMock.expect(buffer.getShort()).andReturn((short) minor).once();
 		EasyMock.expect(buffer.getShort()).andReturn((short) version).once();
 		
-		// Deprecated versions.
-		EasyMock.expect(buffer.getShort()).andReturn((short) 1).times(7);
-		
 		if (ApplicationContext.SECURITY_ENABLED) {
 			EasyMock.expect(buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH)).andReturn(hash).once();
 		}
