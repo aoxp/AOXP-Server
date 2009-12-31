@@ -18,12 +18,20 @@
 
 package ao.model.worldobject;
 
-import ao.model.character.Gender;
-import ao.model.character.Race;
-import ao.model.character.Reputation;
+import java.util.List;
+
 import ao.model.character.archetype.UserArchetype;
 
-public class Staff implements Weapon {
+public class Staff extends AbstractItem implements Weapon {
+
+	public Staff(int id, String name, int amount, boolean tradeable,
+			int graphic, int value, int usageDifficulty,
+			int manufactureDifficulty, boolean smallRace,
+			List<UserArchetype> forbiddenArchetypes) {
+		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
+				manufactureDifficulty, smallRace, forbiddenArchetypes);
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getMagicPower() {
 		// TODO : Complete this based on staff
@@ -49,77 +57,9 @@ public class Staff implements Weapon {
 	}
 
 	@Override
-	public int addAmount(int amount) {
+	public Item clone() {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean canBeUsedBy(Race race, Gender gender,
-			UserArchetype archetype, Reputation reputation) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public int getAmount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getBuyPrice() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getId() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Override
-	public Item clone(){
-		// TODO Marco-generated method stub
-		
 		return null;
-	}
-
-	@Override
-	public int getManufactureDifficulty() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getSellPrice() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getUsageDifficulty() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isTradeable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void use() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int getGraphic() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -128,4 +68,9 @@ public class Staff implements Weapon {
 		return 0;
 	}
 
+	@Override
+	public void use() {
+		// TODO Auto-generated method stub
+		
+	}
 }

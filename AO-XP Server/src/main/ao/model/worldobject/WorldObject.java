@@ -25,4 +25,10 @@ public interface WorldObject {
 	 * @return The object's graphic index.
 	 */
 	int getGraphic();
+	
+	/**
+	 * Retrieves the object's name.
+	 * @return The object's name.
+	 */
+	String getName();
 }

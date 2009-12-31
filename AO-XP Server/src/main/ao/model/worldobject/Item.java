@@ -84,14 +84,8 @@ public interface Item extends WorldObject, Cloneable {
 	boolean isTradeable();
 	
 	/**
-	 * Retrieves the item's sell price
-	 * @return Item sell price
+	 * Retrieves the item's value
+	 * @return The item's value.
 	 */
-	int getSellPrice();
-	
-	/**
-	 * Retrieves the item's buy price
-	 * @return Item buy price
-	 */
-	int getBuyPrice();
+	int getValue();
 }
