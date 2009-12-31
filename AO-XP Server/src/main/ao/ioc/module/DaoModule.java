@@ -16,25 +16,31 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.ioc;
+package ao.ioc.module;
 
 import java.util.Properties;
 
-import ao.ioc.module.BootstrapModule;
-import ao.ioc.module.ConfigurationModule;
-import ao.ioc.module.DaoModule;
+import ao.data.dao.AccountDAO;
+import ao.data.dao.AccountDAOIni;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.AbstractModule;
+import com.google.inject.name.Names;
 
-public class InjectorFactory {
+public class DaoModule extends AbstractModule {
 
+	protected Properties properties;
+	
 	/**
-	 * Retrieves a new injector with the given properties.
-	 * @param properties The injector properties.
-	 * @return The injector.
+	 * Creates a new DaoModule.
+	 * @param properties The general project properties.
 	 */
-	public static Injector get(Properties properties) {
-		return Guice.createInjector(new BootstrapModule(properties), new ConfigurationModule(properties), new DaoModule(properties));
+	public DaoModule(Properties properties) {
+		this.properties = properties;
+	}
+	
+	@Override
+	protected void configure() {
+		bind(AccountDAO.class).to(AccountDAOIni.class);
+		bind(String.class).annotatedWith(Names.named("CharfilesPath")).toInstance(properties.getProperty("config.path.charfiles"));
 	}
 }

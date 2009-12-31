@@ -22,8 +22,6 @@ import java.util.Properties;
 
 import ao.config.ArchetypeConfiguration;
 import ao.config.ini.ArchetypeConfigurationIni;
-import ao.data.dao.AccountDAO;
-import ao.data.dao.AccountDAOIni;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
@@ -49,9 +47,6 @@ public class ConfigurationModule extends AbstractModule {
 		// Bind game specific configuration
 		bind(ArchetypeConfiguration.class).to(ArchetypeConfigurationIni.class);
 		bind(String.class).annotatedWith(Names.named("ArchetypeConfigIni")).toInstance(properties.getProperty("config.path.archetype"));
-		
-		bind(AccountDAO.class).to(AccountDAOIni.class);
-		bind(String.class).annotatedWith(Names.named("CharfilesPath")).toInstance(properties.getProperty("config.path.charfiles"));
 	}
 
 }
