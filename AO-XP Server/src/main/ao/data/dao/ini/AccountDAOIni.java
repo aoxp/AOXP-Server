@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.data.dao;
+package ao.data.dao.ini;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,6 +28,8 @@ import org.ini4j.Ini;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+import ao.data.dao.AccountDAO;
+import ao.data.dao.DAOException;
 import ao.model.user.Account;
 
 public class AccountDAOIni implements AccountDAO {
