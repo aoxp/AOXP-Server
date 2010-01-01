@@ -21,7 +21,7 @@ package ao.ioc.module;
 import java.util.Properties;
 
 import ao.data.dao.AccountDAO;
-import ao.data.dao.AccountDAOIni;
+import ao.data.dao.ini.AccountDAOIni;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;

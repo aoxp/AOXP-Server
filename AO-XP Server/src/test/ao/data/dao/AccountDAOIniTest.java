@@ -23,6 +23,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ao.data.dao.ini.AccountDAOIni;
 import ao.model.user.Account;
 
 public class AccountDAOIniTest {
