@@ -41,7 +41,18 @@ public enum UserArchetype {
 	CARPENTER(ArchetypeLocator.getArchetype(CarpenterArchetype.class)),
 	PIRATE(ArchetypeLocator.getArchetype(PirateArchetype.class));
 	
+	private static UserArchetype[] values = UserArchetype.values();
+	
 	private Archetype archetype;
+	
+	/**
+	 * Retrieves the UserArchetype for the given index.
+	 * @param index The UserArchetype index.
+	 * @return The UserArchetype.
+	 */
+	public static UserArchetype get(byte index) {
+		return values[index];
+	}
 	
 	/**
 	 * Create a new UserArchetype

@@ -21,40 +21,22 @@ package ao.network.packet.incoming;
 import java.io.UnsupportedEncodingException;
 import java.nio.BufferUnderflowException;
 
-import ao.config.ServerConfig;
 import ao.context.ApplicationContext;
+import ao.model.character.Skill;
 import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.ServerPacketsManager;
 import ao.network.packet.IncomingPacket;
 import ao.network.packet.outgoing.ErrorMessagePacket;
 import ao.security.Hashing;
+import ao.service.LoginService;
+import ao.service.LoginService.LoginErrorException;
 
 public class LoginNewCharacterPacket implements IncomingPacket {
-
-	public static final String CHARACTER_CREATION_DISABLE_ERROR = "La creación de personajes en este servidor se ha deshabilitado.";
-	public static final String ONLY_ADMINS_ERROR = "Servidor restringido a administradores. Consulte la página oficial o el foro oficial para mas información.";
-	public static final String CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT = "Esta versión del juego es obsoleta, la versión correcta es %s. La misma se encuentra disponible en http://www.argentumonline.com.ar/.";
-	public static final String CORRUPTED_CLIENT_ERROR_MESSAGE = "El cliente está dañado, por favor descárguelo nuevamente desde http://www.argentumonline.com.ar/";
-	
-	private static ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
-	private static String correctVersion = config.getVersion();
 	
 	@Override
 	public void handle(Connection connection) throws BufferUnderflowException,
 			UnsupportedEncodingException {
-		
-		if (!config.isCharacterCreationEnabled()) {
-			loginError(connection, CHARACTER_CREATION_DISABLE_ERROR);
-			return;
-		}
-		
-		if (config.isRestrictedToAdmins()) {
-			loginError(connection, ONLY_ADMINS_ERROR);
-			return;
-		}
-		
-		// TODO: Check for too much created characters.
 		
 		DataBuffer buffer = connection.getInputBuffer();
 		
@@ -68,18 +50,25 @@ public class LoginNewCharacterPacket implements IncomingPacket {
 		}
 		
 		String version = buffer.get() + "." + buffer.get() + "." + buffer.get();
-
+		String clientHash = "";
+		
 		if (ApplicationContext.SECURITY_ENABLED) {
-			if (!LoginExistingCharacterPacket.checkClientHash(buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH))) {
-				loginError(connection, CORRUPTED_CLIENT_ERROR_MESSAGE);
-				return;
-			}
+			clientHash = buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH);
 		}
 		
-		if (!correctVersion.equals(version)) {
-			loginError(connection, String.format(CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT, correctVersion));
-			return;
+		byte race = buffer.get();
+		byte gender = buffer.get();
+		byte archetype = buffer.get();
+		byte[] skills = buffer.getBlock(Skill.AMOUNT);
+		String mail = buffer.getASCIIString();
+		byte homeland = buffer.get();
+		
+		try {
+			LoginService.newCharacter(nick, password, race, gender, archetype, skills, mail, homeland, clientHash, version);
+		} catch (LoginErrorException e) {
+			loginError(connection, e.getMessage());
 		}
+
 		
 	}
 

@@ -42,5 +42,12 @@ public enum Skill {
 	TAME,
 	PROJECTILES,
 	WRESTLING,
-	SAILING
+	SAILING;
+	
+	/**
+	 * The amount of existing skills.
+	 * 
+	 * TODO: I don't really like this...any better alternative?
+	 */
+	public static final int AMOUNT = Skill.values().length;
 }

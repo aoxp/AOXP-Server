@@ -32,6 +32,19 @@ public class DataBuffer {
 	}
 
 	/**
+	 * Retrieves a byte array from the buffer and removes it.
+	 * @param length The array length.
+	 * @return The requested byte array.
+	 */
+	public byte[] getBlock(int length) {
+		byte[] ret = new byte[length];
+		
+		buffer.get(ret, buffer.position(), length);
+		
+		return ret;
+	}
+	
+	/**
 	 * @see java.nio.ByteBuffer#get()
 	 */
 	public byte get() {
