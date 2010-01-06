@@ -11,10 +11,12 @@ import ao.network.packet.IncomingPacket;
 import ao.network.packet.outgoing.ErrorMessagePacket;
 import ao.security.Hashing;
 import ao.service.LoginService;
-import ao.service.LoginService.LoginErrorException;
+import ao.service.login.LoginErrorException;
 
 public class LoginExistingCharacterPacket implements IncomingPacket {
 
+	private static LoginService service = ApplicationContext.getInstance(LoginService.class);
+	
 	@Override
 	public void handle(Connection connection) throws BufferUnderflowException, UnsupportedEncodingException {
 		DataBuffer buffer = connection.getInputBuffer();
@@ -37,7 +39,7 @@ public class LoginExistingCharacterPacket implements IncomingPacket {
 		}
 		
 		try {
-			LoginService.existingCharacter(username, password, version, clientHash);
+			service.connectExistingCharacter(username, password, version, clientHash);
 		} catch(LoginErrorException e) {
 			loginError(connection, e.getMessage());
 		}

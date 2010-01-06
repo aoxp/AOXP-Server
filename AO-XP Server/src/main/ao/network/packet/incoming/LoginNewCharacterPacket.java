@@ -30,9 +30,11 @@ import ao.network.packet.IncomingPacket;
 import ao.network.packet.outgoing.ErrorMessagePacket;
 import ao.security.Hashing;
 import ao.service.LoginService;
-import ao.service.LoginService.LoginErrorException;
+import ao.service.login.LoginErrorException;
 
 public class LoginNewCharacterPacket implements IncomingPacket {
+	
+	private static LoginService service = ApplicationContext.getInstance(LoginService.class);
 	
 	@Override
 	public void handle(Connection connection) throws BufferUnderflowException,
@@ -64,7 +66,7 @@ public class LoginNewCharacterPacket implements IncomingPacket {
 		byte homeland = buffer.get();
 		
 		try {
-			LoginService.newCharacter(nick, password, race, gender, archetype, skills, mail, homeland, clientHash, version);
+			service.connectNewCharacter(nick, password, race, gender, archetype, skills, mail, homeland, clientHash, version);
 		} catch (LoginErrorException e) {
 			loginError(connection, e.getMessage());
 		}

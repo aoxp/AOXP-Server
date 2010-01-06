@@ -27,7 +27,7 @@ import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.packet.IncomingPacket;
 import ao.security.Hashing;
-import ao.service.LoginService;
+import ao.service.login.LoginServiceImpl;
 
 public class LoginExistingCharacterPacketTest {
 
@@ -80,7 +80,7 @@ public class LoginExistingCharacterPacketTest {
 	
 	@Test
 	public void testHandleCharacterNotFound() throws Exception {
-		writeLogin("foo", "foo", 0, 0, 0, "", LoginService.CHARACTER_NOT_FOUND_ERROR_MESSAGE);
+		writeLogin("foo", "foo", 0, 0, 0, "", LoginServiceImpl.CHARACTER_NOT_FOUND_ERROR_MESSAGE);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());
@@ -88,7 +88,7 @@ public class LoginExistingCharacterPacketTest {
 	
 	@Test
 	public void testHandleIncorrectPassword() throws Exception {
-		writeLogin(CHARACTER_NAME, "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "", LoginService.INCORRECT_PASSWORD_ERROR_MESSAGE);
+		writeLogin(CHARACTER_NAME, "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "", LoginServiceImpl.INCORRECT_PASSWORD_ERROR_MESSAGE);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());
@@ -96,7 +96,7 @@ public class LoginExistingCharacterPacketTest {
 	
 	@Test
 	public void testHandleOutOfDateClient() throws Exception {
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, 0, 0, 0, "", String.format(LoginService.CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION));
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, 0, 0, 0, "", String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION));
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());
@@ -109,7 +109,7 @@ public class LoginExistingCharacterPacketTest {
 		}
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD,
-				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "foo", LoginService.BANNED_CHARACTER_ERROR_MESSAGE);
+				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "foo", LoginServiceImpl.BANNED_CHARACTER_ERROR_MESSAGE);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());
@@ -118,7 +118,7 @@ public class LoginExistingCharacterPacketTest {
 	@Test
 	public void testHandleBannedCharacter() throws Exception {
 		writeLogin(BANNED_CHARACTER_NAME, BANNED_CHARACTER_PASSWORD,
-						CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "", LoginService.BANNED_CHARACTER_ERROR_MESSAGE);
+						CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "", LoginServiceImpl.BANNED_CHARACTER_ERROR_MESSAGE);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());
