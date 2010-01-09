@@ -56,6 +56,10 @@ public class Food extends ConsumableItem {
 		this.maxHun = maxHun;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.AbstractItem#clone()
+	 */
 	@Override
 	public Item clone() {
 		return new Food(id, name, amount, tradeable, graphic, value,
@@ -63,10 +67,31 @@ public class Food extends ConsumableItem {
 				minHun, maxHun);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.ConsumableItem#use(ao.model.character.Character)
+	 */
 	@Override
 	public void use(Character character) {
 		super.use(character);
-		// TODO Auto-generated method stub
+		
+		character.addToHunger((int) (Math.random() * (maxHun - minHun + 1)) + minHun);
+	}
+
+	/**
+	 * Retrieves the minimum hunger restored by the food.
+	 * @return The minimum hunger restored by the food.
+	 */
+	public int getMinHun() {
+		return minHun;
+	}
+
+	/**
+	 * Retrieves the maximum hunger restored by the food.
+	 * @return The maximum hunger restored by the food.
+	 */
+	public int getMaxHun() {
+		return maxHun;
 	}
 
 }
