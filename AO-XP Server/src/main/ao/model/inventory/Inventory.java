@@ -24,8 +24,7 @@ package ao.model.inventory;
 import ao.model.worldobject.Item;
 
 /**
- * @author Marco
- *
+ * Character inventory.
  */
 public interface Inventory {
 	/**
@@ -92,4 +91,9 @@ public interface Inventory {
 	 * @return The amount of the item.
 	 */
 	int getItemAmount(Item item);
+	
+	/**
+	 * Removes all items with an amount of 0.
+	 */
+	void cleanup();
 }

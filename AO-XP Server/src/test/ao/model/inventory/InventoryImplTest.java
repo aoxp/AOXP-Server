@@ -249,4 +249,25 @@ public class InventoryImplTest {
 		//TODO: Test getting amounts an item placed in different slots of the inventory.
 	}
 
+
+	@Test
+	public void testCleanup() {
+		Item item = EasyMock.createMock(Item.class);
+		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item.getAmount()).andReturn(0).anyTimes();
+		
+		Item item2 = EasyMock.createMock(Item.class);
+		EasyMock.expect(item2.getId()).andReturn(2).anyTimes();
+		EasyMock.expect(item2.getAmount()).andReturn(5).anyTimes();
+		
+		EasyMock.replay(item, item2);
+		
+		inventory.addItem(item);
+		inventory.addItem(item2);
+		
+		inventory.cleanup();
+		
+		Assert.assertTrue(inventory.hasItem(item) == -1);
+		Assert.assertTrue(inventory.hasItem(item2) != -1);
+	}
 }

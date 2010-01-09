@@ -54,7 +54,7 @@ public abstract class AbstractItem implements Item {
 	 * @param value The item's value.
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes
+	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 */
 	public AbstractItem(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
@@ -98,7 +98,7 @@ public abstract class AbstractItem implements Item {
 		
 		// Race is only important for armors and clothes
 		
-		if (forbiddenArchetypes.contains(archetype)) {
+		if (forbiddenArchetypes != null && forbiddenArchetypes.contains(archetype)) {
 			return false;
 		}
 		

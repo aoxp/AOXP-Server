@@ -20,6 +20,9 @@ package ao.model.inventory;
 
 import ao.model.worldobject.Item;
 
+/**
+ * Concrete implementation of the user inventory.
+ */
 public class InventoryImpl implements Inventory {
 	
 	private static final int DEFAULT_INVENTORY_CAPACITY = 20;
@@ -38,6 +41,10 @@ public class InventoryImpl implements Inventory {
 		this.inventory = inventory;
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#addItem(ao.model.worldobject.Item)
+	 */
 	@Override
 	public int addItem(Item item) {
 		int i;
@@ -72,6 +79,10 @@ public class InventoryImpl implements Inventory {
 		return item.getAmount();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#getItem(int)
+	 */
 	@Override
 	public Item getItem(int slot) {
 		if (slot < 0 || slot >= inventory.length) {
@@ -81,6 +92,10 @@ public class InventoryImpl implements Inventory {
 		return inventory[slot];
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#hasFreeSlots()
+	 */
 	@Override
 	public boolean hasFreeSlots() {
 		for (Item item : inventory) {
@@ -92,6 +107,10 @@ public class InventoryImpl implements Inventory {
 		return false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#hasItem(ao.model.worldobject.Item)
+	 */
 	@Override
 	public int hasItem(Item item) {
 		int id = item.getId();
@@ -105,6 +124,10 @@ public class InventoryImpl implements Inventory {
 		return -1;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#removeItem(int)
+	 */
 	@Override
 	public Item removeItem(int slot) {
 		Item item = getItem(slot);
@@ -116,6 +139,10 @@ public class InventoryImpl implements Inventory {
 		return item;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#removeItem(ao.model.worldobject.Item)
+	 */
 	@Override
 	public Item removeItem(Item item) {
 		int i;
@@ -150,6 +177,10 @@ public class InventoryImpl implements Inventory {
 		return itemRemoved;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#removeItem(int, int)
+	 */
 	@Override
 	public Item removeItem(int slot, int amount) {
 		Item item = getItem(slot);
@@ -169,11 +200,19 @@ public class InventoryImpl implements Inventory {
 		return itemRemoved;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#getCapacity()
+	 */
 	@Override
 	public int getCapacity() {
 		return inventory.length;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#getItemAmount(ao.model.worldobject.Item)
+	 */
 	@Override
 	public int getItemAmount(Item item) {
 
@@ -187,6 +226,19 @@ public class InventoryImpl implements Inventory {
 		}
 		
 		return amount;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#cleanup()
+	 */
+	@Override
+	public void cleanup() {
+		for (int i = inventory.length - 1; i >= 0; i--) {
+			if (inventory[i] != null && inventory[i].getAmount() == 0) {
+				inventory[i] = null;
+			}
+		}
 	}
 
 }

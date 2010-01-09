@@ -20,6 +20,7 @@ package ao.model.worldobject;
 
 import java.util.List;
 
+import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 public class Boat extends AbstractItem {
@@ -40,7 +41,7 @@ public class Boat extends AbstractItem {
 	}
 
 	@Override
-	public void use() {
+	public void use(Character character) {
 		// TODO Auto-generated method stub
 		
 	}

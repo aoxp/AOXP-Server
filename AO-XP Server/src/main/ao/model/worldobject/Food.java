@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package ao.model.worldobject;
 
@@ -23,38 +23,37 @@ import java.util.List;
 import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
-public class Staff extends AbstractItem implements Weapon {
+/**
+ * Food to be consumed by characters.
+ */
+public class Food extends ConsumableItem {
 
-	public Staff(int id, String name, int amount, boolean tradeable,
+	protected int minHun;
+	protected int maxHun;
+
+	/**
+	 * Creates a new food instance.
+	 * @param id The id of the item.
+	 * @param name The name of the item.
+	 * @param amount The item's amount.
+	 * @param tradeable True if it's tradeable, false otherwise.
+	 * @param graphic The graphic for the item.
+	 * @param value The item's value.
+	 * @param usageDifficulty The item's usage difficulty.
+	 * @param manufactureDifficulty The item's manufacture difficulty.
+	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param minHun The minimum hunger replenished by the food.
+	 * @param maxHun The maximum hunger replenished by the food.
+	 */
+	public Food(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, boolean smallRace,
-			List<UserArchetype> forbiddenArchetypes) {
+			List<UserArchetype> forbiddenArchetypes, int minHun, int maxHun) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
 				manufactureDifficulty, smallRace, forbiddenArchetypes);
-		// TODO Auto-generated constructor stub
-	}
 
-	public int getMagicPower() {
-		// TODO : Complete this based on staff
-		return 0;
-	}
-	
-	@Override
-	public int getAttackPower() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public boolean isEquipped() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setEquipped(boolean equipped) {
-		// TODO Auto-generated method stub
-
+		this.minHun = minHun;
+		this.maxHun = maxHun;
 	}
 
 	@Override
@@ -64,14 +63,9 @@ public class Staff extends AbstractItem implements Weapon {
 	}
 
 	@Override
-	public int getEquippedGraphic() {
+	public void use(Character character) {
+		super.use(character);
 		// TODO Auto-generated method stub
-		return 0;
 	}
 
-	@Override
-	public void use(Character character) {
-		// TODO Auto-generated method stub
-		
-	}
 }

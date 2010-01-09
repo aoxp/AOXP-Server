@@ -18,6 +18,7 @@
 
 package ao.model.worldobject;
 
+import ao.model.character.Character;
 import ao.model.character.Gender;
 import ao.model.character.Race;
 import ao.model.character.Reputation;
@@ -39,8 +40,9 @@ public interface Item extends WorldObject, Cloneable {
 	
 	/**
 	 * Attempts to use the item.
+	 * @param character The character using this item.
 	 */
-	void use();
+	void use(Character character);
 	
 	/**
 	 * Adds (or subtracts if the given amount is negative) an amount of the item
