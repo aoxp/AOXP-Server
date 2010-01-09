@@ -6,6 +6,7 @@ import ao.service.LoginService;
 import ao.service.login.LoginServiceImpl;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Singleton;
 
 public class ServiceModule extends AbstractModule {
 
@@ -21,7 +22,7 @@ public class ServiceModule extends AbstractModule {
 	
 	@Override
 	protected void configure() {
-		bind(LoginService.class).to(LoginServiceImpl.class);
+		bind(LoginService.class).to(LoginServiceImpl.class).in(Singleton.class);
 	}
 
 }

@@ -24,6 +24,7 @@ import ao.data.dao.AccountDAO;
 import ao.data.dao.ini.AccountDAOIni;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 
 public class DaoModule extends AbstractModule {
@@ -40,7 +41,7 @@ public class DaoModule extends AbstractModule {
 	
 	@Override
 	protected void configure() {
-		bind(AccountDAO.class).to(AccountDAOIni.class);
+		bind(AccountDAO.class).to(AccountDAOIni.class).in(Singleton.class);
 		bind(String.class).annotatedWith(Names.named("CharfilesPath")).toInstance(properties.getProperty("config.path.charfiles"));
 	}
 }
