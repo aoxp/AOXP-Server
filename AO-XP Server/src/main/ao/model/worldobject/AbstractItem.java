@@ -42,7 +42,7 @@ public abstract class AbstractItem implements Item {
 	protected int usageDifficulty;
 	protected int manufactureDifficulty;
 	
-	private List<UserArchetype> forbiddenArchetypes;
+	protected List<UserArchetype> forbiddenArchetypes;
 	
 	/**
 	 * Creates a new AbstractItem instance.
@@ -58,7 +58,7 @@ public abstract class AbstractItem implements Item {
 	 */
 	public AbstractItem(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, boolean smallRace,
+			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes) {
 		super();
 		this.id = id;

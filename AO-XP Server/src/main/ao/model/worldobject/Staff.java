@@ -27,10 +27,10 @@ public class Staff extends AbstractItem implements Weapon {
 
 	public Staff(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, boolean smallRace,
+			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, smallRace, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes);
 		// TODO Auto-generated constructor stub
 	}
 

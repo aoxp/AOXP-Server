@@ -47,10 +47,10 @@ public class Food extends ConsumableItem {
 	 */
 	public Food(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, boolean smallRace,
+			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, int minHun, int maxHun) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, smallRace, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes);
 
 		this.minHun = minHun;
 		this.maxHun = maxHun;
@@ -58,8 +58,9 @@ public class Food extends ConsumableItem {
 
 	@Override
 	public Item clone() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Food(id, name, amount, tradeable, graphic, value,
+				usageDifficulty, manufactureDifficulty, forbiddenArchetypes,
+				minHun, maxHun);
 	}
 
 	@Override
