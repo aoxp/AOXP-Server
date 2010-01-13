@@ -80,7 +80,7 @@ public class LoginExistingCharacterPacketTest {
 	
 	@Test
 	public void testHandleCharacterNotFound() throws Exception {
-		writeLogin("foo", "foo", 0, 0, 0, "", LoginServiceImpl.CHARACTER_NOT_FOUND_ERROR_MESSAGE);
+		writeLogin("foo", "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "", LoginServiceImpl.CHARACTER_NOT_FOUND_ERROR_MESSAGE);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());
