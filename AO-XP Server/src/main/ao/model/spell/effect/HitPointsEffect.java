@@ -28,14 +28,17 @@ import ao.model.worldobject.WorldObject;
  */
 public class HitPointsEffect implements Effect {
 
+	private static final float EFFECT_MULTIPLIER = 0.03f;
+	
+	private static final Random randomGenerator = new Random();
+	
 	private int minPoints;
 	private int deltaPoints;
-	private static final Random randomGenerator = new Random();
 	
 	/**
 	 * Creates a new HitPointsEffect instance.
-	 * @param minPoints The minimum points to be added / substracted (if negative)
-	 * @param maxPoints The maximum points to be added / substracted (if negative)
+	 * @param minPoints The minimum points to be added / subtracted (if negative)
+	 * @param maxPoints The maximum points to be added / subtracted (if negative)
 	 */
  	public HitPointsEffect(int minPoints, int maxPoints) {
 		this.minPoints = minPoints;
@@ -49,7 +52,7 @@ public class HitPointsEffect implements Effect {
 	@Override
 	public void apply(Character caster, Character target) {
 		int points = minPoints + randomGenerator.nextInt(deltaPoints);
-		points += (int) Math.round(points * 0.03f * caster.getLevel());
+		points += (int) Math.round(points * EFFECT_MULTIPLIER * caster.getLevel());
 	    
 		target.addToHitPoints(points);
 	}
