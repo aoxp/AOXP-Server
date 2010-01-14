@@ -104,4 +104,45 @@ public class FoodTest {
 		assertEquals(MAX_HUN, food2.getMaxHun());
 	}
 
+	@Test
+	public void testClone() {
+		
+		Food clone = (Food) food1.clone();
+		
+		// Make sure all fields match
+		assertEquals(food1.amount, clone.amount);
+		assertEquals(food1.forbiddenArchetypes, clone.forbiddenArchetypes);
+		assertEquals(food1.graphic, clone.graphic);
+		assertEquals(food1.id, clone.id);
+		assertEquals(food1.manufactureDifficulty, clone.manufactureDifficulty);
+		assertEquals(food1.maxHun, clone.maxHun);
+		assertEquals(food1.minHun, clone.minHun);
+		assertEquals(food1.name, clone.name);
+		assertEquals(food1.tradeable, clone.tradeable);
+		assertEquals(food1.usageDifficulty, clone.usageDifficulty);
+		assertEquals(food1.value, clone.value);
+		
+		// Make sure the object itself is different
+		assertFalse(food1 == clone);
+		
+		
+		clone = (Food) food2.clone();
+		
+		// Make sure all fields match
+		assertEquals(food2.amount, clone.amount);
+		assertEquals(food2.forbiddenArchetypes, clone.forbiddenArchetypes);
+		assertEquals(food2.graphic, clone.graphic);
+		assertEquals(food2.id, clone.id);
+		assertEquals(food2.manufactureDifficulty, clone.manufactureDifficulty);
+		assertEquals(food2.maxHun, clone.maxHun);
+		assertEquals(food2.minHun, clone.minHun);
+		assertEquals(food2.name, clone.name);
+		assertEquals(food2.tradeable, clone.tradeable);
+		assertEquals(food2.usageDifficulty, clone.usageDifficulty);
+		assertEquals(food2.value, clone.value);
+		
+		// Make sure the object itself is different
+		assertFalse(food2 == clone);
+	}
+	
 }

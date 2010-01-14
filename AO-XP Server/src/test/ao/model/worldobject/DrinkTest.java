@@ -18,7 +18,9 @@
 
 package ao.model.worldobject;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.easymock.Capture;
 import org.easymock.EasyMock;
@@ -102,6 +104,47 @@ public class DrinkTest {
 		
 		assertEquals(MAX_THIRST, drink1.getMaxThirst());
 		assertEquals(MAX_THIRST, drink2.getMaxThirst());
+	}
+	
+	@Test
+	public void testClone() {
+		
+		Drink clone = (Drink) drink1.clone();
+		
+		// Make sure all fields match
+		assertEquals(drink1.amount, clone.amount);
+		assertEquals(drink1.forbiddenArchetypes, clone.forbiddenArchetypes);
+		assertEquals(drink1.graphic, clone.graphic);
+		assertEquals(drink1.id, clone.id);
+		assertEquals(drink1.manufactureDifficulty, clone.manufactureDifficulty);
+		assertEquals(drink1.maxThirst, clone.maxThirst);
+		assertEquals(drink1.minThirst, clone.minThirst);
+		assertEquals(drink1.name, clone.name);
+		assertEquals(drink1.tradeable, clone.tradeable);
+		assertEquals(drink1.usageDifficulty, clone.usageDifficulty);
+		assertEquals(drink1.value, clone.value);
+		
+		// Make sure the object itself is different
+		assertFalse(drink1 == clone);
+		
+		
+		clone = (Drink) drink2.clone();
+		
+		// Make sure all fields match
+		assertEquals(drink2.amount, clone.amount);
+		assertEquals(drink2.forbiddenArchetypes, clone.forbiddenArchetypes);
+		assertEquals(drink2.graphic, clone.graphic);
+		assertEquals(drink2.id, clone.id);
+		assertEquals(drink2.manufactureDifficulty, clone.manufactureDifficulty);
+		assertEquals(drink2.maxThirst, clone.maxThirst);
+		assertEquals(drink2.minThirst, clone.minThirst);
+		assertEquals(drink2.name, clone.name);
+		assertEquals(drink2.tradeable, clone.tradeable);
+		assertEquals(drink2.usageDifficulty, clone.usageDifficulty);
+		assertEquals(drink2.value, clone.value);
+		
+		// Make sure the object itself is different
+		assertFalse(drink2 == clone);
 	}
 
 }
