@@ -18,7 +18,9 @@
 
 package ao.context;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.net.URI;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -37,10 +39,12 @@ public class ApplicationContext {
 	private static final Logger logger = Logger.getLogger(ApplicationContext.class);
 	private static Properties properties = new Properties();
 	private static Injector injector;
-	
+
 	static {
 		try {
-			properties.load(new FileInputStream("project.properties"));
+			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			URI fileUri = loader.getResource("project.properties").toURI();
+			properties.load(new FileInputStream(new File(fileUri)));
 		} catch (Exception e) {
 			logger.fatal("Error initializing application context", e);
 			e.printStackTrace();
