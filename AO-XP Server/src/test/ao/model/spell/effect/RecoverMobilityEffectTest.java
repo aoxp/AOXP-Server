@@ -63,20 +63,36 @@ public class RecoverMobilityEffectTest {
 		Character caster = EasyMock.createMock(Character.class);
 		Character target = EasyMock.createMock(Character.class);
 		
-		// Pretend the target is immobilized first, then just paralyzed, finally none.
+		// Pretend the target is immobilized
 		EasyMock.expect(target.isImmobilized()).andReturn(true).once();
 		EasyMock.expect(target.isDead()).andReturn(false).once();
 		target.setParalyzed(false);
 		target.setImmobilized(false);
 		
+		// Pretend the target is paralyzed
 		EasyMock.expect(target.isImmobilized()).andReturn(false).once();
 		EasyMock.expect(target.isParalyzed()).andReturn(true).once();
 		EasyMock.expect(target.isDead()).andReturn(false).once();
 		target.setParalyzed(false);
 		target.setImmobilized(false);
 		
+		// Pretend the target is just fine
 		EasyMock.expect(target.isImmobilized()).andReturn(false).once();
 		EasyMock.expect(target.isParalyzed()).andReturn(false).once();
+		
+		// Pretend the target is dead and paralyzed
+		EasyMock.expect(target.isImmobilized()).andReturn(false).once();
+		EasyMock.expect(target.isParalyzed()).andReturn(true).once();
+		EasyMock.expect(target.isDead()).andReturn(true).once();
+		target.setParalyzed(false);
+		target.setImmobilized(false);
+		
+		// Pretend the target is dead and immobilized
+		EasyMock.expect(target.isImmobilized()).andReturn(true).once();
+		EasyMock.expect(target.isParalyzed()).andReturn(false).once();
+		EasyMock.expect(target.isDead()).andReturn(true).once();
+		target.setParalyzed(false);
+		target.setImmobilized(false);
 		
 		EasyMock.replay(caster, target);
 		
@@ -87,6 +103,12 @@ public class RecoverMobilityEffectTest {
 		Assert.assertTrue(recoverMobilityEffect.appliesTo(caster, target));
 		
 		// A non-paralyzed, non/immobilized char is invalid.
+		Assert.assertFalse(recoverMobilityEffect.appliesTo(caster, target));
+		
+		// A paralyzed dead char is invalid.
+		Assert.assertFalse(recoverMobilityEffect.appliesTo(caster, target));
+		
+		// A immobilized dead char is invalid.
 		Assert.assertFalse(recoverMobilityEffect.appliesTo(caster, target));
 	}
 
