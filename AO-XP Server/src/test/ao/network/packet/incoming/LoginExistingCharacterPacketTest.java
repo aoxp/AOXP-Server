@@ -23,6 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.context.ApplicationContext;
+import ao.model.user.ConnectedUser;
 import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.packet.IncomingPacket;
@@ -49,6 +50,7 @@ public class LoginExistingCharacterPacketTest {
 		
 		EasyMock.expect(connection.getInputBuffer()).andReturn(EasyMock.createMock(DataBuffer.class)).anyTimes();
 		EasyMock.expect(connection.getOutputBuffer()).andReturn(EasyMock.createMock(DataBuffer.class)).anyTimes();
+		EasyMock.expect(connection.getUser()).andReturn(EasyMock.createMock(ConnectedUser.class)).anyTimes();
 		connection.disconnect();
 		
 		EasyMock.replay(connection);
