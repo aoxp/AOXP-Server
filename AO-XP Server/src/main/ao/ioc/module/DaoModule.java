@@ -21,7 +21,8 @@ package ao.ioc.module;
 import java.util.Properties;
 
 import ao.data.dao.AccountDAO;
-import ao.data.dao.ini.AccountDAOIni;
+import ao.data.dao.UserCharacterDAO;
+import ao.data.dao.ini.UserDAOIni;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
@@ -41,7 +42,9 @@ public class DaoModule extends AbstractModule {
 	
 	@Override
 	protected void configure() {
-		bind(AccountDAO.class).to(AccountDAOIni.class).in(Singleton.class);
+		bind(AccountDAO.class).to(UserDAOIni.class).in(Singleton.class);
+		bind(UserCharacterDAO.class).to(UserDAOIni.class).in(Singleton.class);
+		
 		bind(String.class).annotatedWith(Names.named("CharfilesPath")).toInstance(properties.getProperty("config.path.charfiles"));
 	}
 }

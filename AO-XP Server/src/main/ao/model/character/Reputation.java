@@ -82,7 +82,6 @@ public interface Reputation {
 	 */
 	void addToThief(int points);
 	
-	
 	/**
 	 * Checks if the reputation belongs to any faction.
 	 * @return True if the reputation belongs to a faction, false otherwise.

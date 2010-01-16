@@ -23,6 +23,7 @@ import java.nio.BufferUnderflowException;
 
 import ao.context.ApplicationContext;
 import ao.model.character.Skill;
+import ao.model.user.ConnectedUser;
 import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.ServerPacketsManager;
@@ -66,7 +67,10 @@ public class LoginNewCharacterPacket implements IncomingPacket {
 		byte homeland = buffer.get();
 		
 		try {
-			service.connectNewCharacter(nick, password, race, gender, archetype, skills, mail, homeland, clientHash, version);
+			service.connectNewCharacter((ConnectedUser) connection.getUser(), 
+					nick, password, race, gender, archetype, skills, mail,
+					homeland, clientHash, version);
+			
 		} catch (LoginErrorException e) {
 			loginError(connection, e.getMessage());
 		}

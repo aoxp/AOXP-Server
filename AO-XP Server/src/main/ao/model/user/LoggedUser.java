@@ -42,7 +42,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private static final int MAX_THIRSTINESS = 100;
 	private static final int MAX_HUNGER = 100;
 	
-	private Reputation reputation; //TODO: need to be instanced in the constructor.
+	private Reputation reputation;
 	private Inventory inventory; //TODO: need to be instanced in the constructor.
 	private Race race;
 	private Gender gender;
@@ -51,13 +51,13 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	/*
 	 * UserFlags
 	 */
-	private boolean poisoned = false;
-	private boolean paralyzed = false;
-	private boolean immobilized = false;
-	private boolean invisible = false;
-	private boolean mimetized = false;
-	private boolean dumbed = false;
-	private boolean hidden = false;
+	private boolean poisoned;
+	private boolean paralyzed;
+	private boolean immobilized;
+	private boolean invisible;
+	private boolean mimetized;
+	private boolean dumbed;
+	private boolean hidden;
 	
 	/*
 	 * UserStats
@@ -68,15 +68,42 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private int hitpoints; 
 	private int thirstiness;
 	private int hunger;
-	private byte lvl;
+	private byte level;
 	private String name;
 	private String description;
 	
 
-	public LoggedUser() {
-
-	}
 	
+	public LoggedUser(Reputation reputation, Race race, Gender gender,
+			Archetype archetype, boolean poisoned, boolean paralyzed,
+			boolean immobilized, boolean invisible, boolean mimetized,
+			boolean dumbed, boolean hidden, int maxMana, int maxHitPoints,
+			int mana, int hitpoints, int thirstiness, int hunger, byte lvl,
+			String name, String description) {
+		
+		super();
+		this.reputation = reputation;
+		this.race = race;
+		this.gender = gender;
+		this.archetype = archetype;
+		this.poisoned = poisoned;
+		this.paralyzed = paralyzed;
+		this.immobilized = immobilized;
+		this.invisible = invisible;
+		this.mimetized = mimetized;
+		this.dumbed = dumbed;
+		this.hidden = hidden;
+		this.maxMana = maxMana;
+		this.maxHitPoints = maxHitPoints;
+		this.mana = mana;
+		this.hitpoints = hitpoints;
+		this.thirstiness = thirstiness;
+		this.hunger = hunger;
+		this.level = lvl;
+		this.name = name;
+		this.description = description;
+	}
+
 	@Override
 	public void addToSkill(Skill skill, byte points) {
 		// TODO Auto-generated method stub
@@ -297,7 +324,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public byte getLevel() {
 		// TODO Auto-generated method stub
-		return lvl;
+		return level;
 	}
 
 	@Override
