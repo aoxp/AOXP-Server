@@ -27,7 +27,6 @@ import org.junit.Test;
 
 import ao.data.dao.DAOException;
 import ao.data.dao.ini.UserDAOIni;
-import ao.model.character.Attribute;
 import ao.model.character.Gender;
 import ao.model.character.Race;
 import ao.model.character.Skill;
