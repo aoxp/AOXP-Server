@@ -1,4 +1,5 @@
 /*
+
     AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
@@ -55,6 +56,31 @@ public class WorldMap {
 		this.id = id;
 		this.tiles = tiles;
 	}
+
+	/**
+	 * Creates a new Map.
+	 * @param id The unique id of the map.
+	 */
+	public WorldMap(int id) {
+		super();
+		this.id = id;
+	}
+	
+	/**
+	 * Sets the tiles of the map
+	 * @param tiles The array of tiles composing the map
+	 */
+	public void setTiles(Tile[] tiles) {
+		this.tiles = tiles;
+	}
+	
+	/**
+	 * Sets the name of the map
+	 * @param name The name of the map
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 	/**
 	 * Retrieves the tile at the given coordinates.
@@ -63,9 +89,19 @@ public class WorldMap {
 	 * @return The tile at the given coordinates.
 	 */
 	public Tile getTile(int x, int y) {
-		return tiles[y * MAP_WIDTH + x];
+		return tiles[WorldMap.getTileKey(x, y)];
 	}
 
+	/**
+	 * Retrieves the tile index at the given  coordinates.
+	 * @param x The coordinate along the x vertex (zero is at the left).
+	 * @param y The coordinate along the y vertex (zero is at the top).
+	 * @return The tile index at the given coordinates.
+	 */
+	public static int getTileKey(int x, int y) {
+		return y * MAP_WIDTH + x;
+	}
+	
 	/**
 	 * Retrieves the map's name.
 	 * @return The map's name.

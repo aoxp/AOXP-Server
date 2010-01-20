@@ -16,32 +16,24 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.model.map;
+package ao.service;
 
-/**
- * Triggers for map position events.
- */
-public enum Trigger {
-	NONE,
-    UNDERROOF,
-    trigger_2, //TODO What is this?
-    INVALIDPOSITION,
-    SAFEZONE,
-    ANTIPICKET,
-    FIGHTZONE;
+import ao.model.map.WorldMap;
 
+public interface MapService {
 
 	/**
-	 * Enum values.
+	 * Loads the given map from the map path.
+	 * @param map The number map to be loaded
+	 * @return The WorldMap loaded
 	 */
-	private static Trigger[] values = Trigger.values();
-
+	void loadMaps();
+	
 	/**
-	 * Retrieves the gender with the given index.
-	 * @param index The gender index.
-	 * @return The gender.
+	 * Retrieves the map with the given id.
+	 * @param id The number map to be returned
+	 * @return The WorldMap loaded
 	 */
-	public static Trigger get(short index) {
-		return values[index];
-	}
+	WorldMap getMap(int id);
+
 }

@@ -26,6 +26,7 @@ import org.easymock.classextension.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import ao.model.character.Character;
+import ao.model.worldobject.WorldObject;
 
 public class WorldMapTest {
 
@@ -38,9 +39,10 @@ public class WorldMapTest {
 	
 	@Test
 	public void testGetTile() {
-		Tile t = new Tile();
-		Tile t2 = new Tile();
-		Tile t3 = new Tile();
+		short[] layers = new short[Tile.LAYERS]; 
+		Tile t = new Tile(true, layers, (byte) 0, null, null, null);
+		Tile t2 = new Tile(false, layers, (byte) 0, null, null, null);
+		Tile t3 = new Tile(true, layers, (byte) 0, null, null, null);
 		
 		map = new WorldMap("foo", 1, new Tile[] {t, t2, t3});
 		
@@ -62,9 +64,9 @@ public class WorldMapTest {
 	@Test
 	public void testGetCharactersNearby() {
 		Tile[] tiles = new Tile[2600];
-		
+		short [] layers = new short[Tile.LAYERS - 1];
 		for (int i = 0; i < 2600; i++) {
-			tiles[i] = new Tile();
+			tiles[i] = new Tile(true, layers, (byte) 0, null, null, null);
 		}
 		
 		map = new WorldMap("foo", 1, tiles);
