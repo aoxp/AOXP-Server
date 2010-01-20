@@ -25,6 +25,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 
 import org.apache.log4j.Logger;
 import org.ini4j.Ini;
@@ -197,7 +199,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		Ini chara;
 		
 		try {
-			chara = new Ini(new BufferedReader(new FileReader(getCharFilePath(username))));
+			// Make sure the reader is closed, since Ini4J gives no guarantees.
+			Reader reader = new BufferedReader(new FileReader(getCharFilePath(username)));
+			chara = new Ini(reader);
+			reader.close();
 		} catch (FileNotFoundException e) {
 			// The account doesn't exists.
 			return null;
@@ -228,7 +233,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		acc.put(FLAGS_HEADER, BANNED_KEY, "0");
 		
 		try {
-			acc.store(new BufferedWriter(new FileWriter(getCharFilePath(name))));
+			// Make sure the writer is closed, since Ini4j gives no guarantees.
+			Writer writer = new BufferedWriter(new FileWriter(getCharFilePath(name)));
+			acc.store(writer);
+			writer.close();
 		} catch (IOException e) {
 			logger.error("Charfile (account data) creation failed!", e);
 			throw new DAOException();
@@ -352,7 +360,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		Reputation rep = new ReputationImpl(0, 0, 0, 0, INITIAL_NOBLE_POINTS, false);
 	
 		try {
-			chara.store(new BufferedWriter(new FileWriter(getCharFilePath(name))));
+			// Make sure the stream is closed, since Ini4J gives no guarantees.
+			Writer writer = new BufferedWriter(new FileWriter(getCharFilePath(name)));
+			chara.store(writer);
+			writer.close();
 		} catch (IOException e) {
 			logger.error("Charfile (full charfile) creation failed!", e);
 			throw new DAOException();
@@ -362,7 +373,6 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		return new LoggedUser(rep, race, gender, archetype.getArchetype(),
 				false, false, false, false, false, false, false, 0, 0, 0, 0,
 				100, 100, (byte) 1, name, "");
-		
 	}
 	
 	/**
