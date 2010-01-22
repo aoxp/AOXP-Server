@@ -18,6 +18,8 @@
 
 package ao.model.user;
 
+import java.util.List;
+
 import ao.model.character.UserCharacter;
 
 /**
@@ -29,8 +31,7 @@ public class AccountImpl implements Account {
 	private String password;
 	private String mail;
 	
-	// In this Account implementation only can exist one character per account.
-	private String character;
+	private List<String> characters;
 	private boolean banned;
 	
 	/**
@@ -38,14 +39,14 @@ public class AccountImpl implements Account {
 	 * @param name The name of the account.
 	 * @param password The account's password.
 	 * @param mail The account's email.
-	 * @param character The account's character.
+	 * @param characters The account's characters.
 	 * @param banned Wether the account is banned or not.
 	 */
-	public AccountImpl(String name, String password, String mail, String character, boolean banned) {
+	public AccountImpl(String name, String password, String mail, List<String> characters, boolean banned) {
 		this.name = name;
 		this.password = password;
 		this.mail = mail;
-		this.character = character;
+		this.characters = characters;
 		this.banned = banned;
 	}
 	
@@ -66,15 +67,23 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#getCharacters()
 	 */
-	public String[] getCharacters() {
-		return new String[] {character};
+	public List<String> getCharacters() {
+		return characters;
 	}
 	
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#hasCharacter(java.lang.String)
 	 */
 	public boolean hasCharacter(String name) {
-		return name.toLowerCase().equals(character.toLowerCase());
+		String nameLower = name.toLowerCase();
+		
+		for (String character : characters) {
+			if (nameLower.equals(character.toLowerCase())) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	/* (non-Javadoc)
@@ -103,6 +112,6 @@ public class AccountImpl implements Account {
 	 * @see ao.model.user.Account#addCharacter(java.lang.String)
 	 */
 	public void addCharacter(String name) {
-		character = name;
+		characters.add(name);
 	}
 }

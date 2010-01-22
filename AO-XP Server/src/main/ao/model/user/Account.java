@@ -18,6 +18,8 @@
 
 package ao.model.user;
 
+import java.util.List;
+
 import ao.model.character.UserCharacter;
 
 public interface Account {
@@ -35,10 +37,10 @@ public interface Account {
 	/**
 	 * @return the characters
 	 */
-	String[] getCharacters();
+	List<String> getCharacters();
 
 	/**
-	 * Checks if the a character with the given name exists in this account.
+	 * Checks if the a character with the given name exists in this account. Check is case insensitive.
 	 * @param name The name of the character for which to check.
 	 * @return True if the character exists in the account, false otherwise.
 	 */

@@ -27,6 +27,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.ini4j.Ini;
@@ -212,11 +214,15 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			throw new DAOException();
 		}
 		
+		// Add the single character's name.
+		List<String> characters = new LinkedList<String>();
+		characters.add(username);
+		
 		return new AccountImpl(
 				username,
 				chara.get(INIT_HEADER, PASSWORD_KEY),
 				chara.get(CONTACT_HEADER, MAIL_KEY),
-				username,
+				characters,
 				chara.get(FLAGS_HEADER, BANNED_KEY).equals("1")
 		);
 	}
