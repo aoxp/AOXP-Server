@@ -190,14 +190,33 @@ public class InventoryImplTest {
 		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
 		EasyMock.expect(item.getAmount()).andReturn(10).anyTimes();
 		EasyMock.expect(item.addAmount(-10)).andReturn(0);
+		Item item2 = EasyMock.createMock(Item.class);
+		EasyMock.expect(item2.getId()).andReturn(2).anyTimes();
+		EasyMock.expect(item2.getAmount()).andReturn(5).anyTimes();
+		EasyMock.expect(item2.addAmount(-10)).andReturn(-5);
+		Item itemRemoved = EasyMock.createMock(Item.class);
+		EasyMock.expect(itemRemoved.getId()).andReturn(2).anyTimes();
+		EasyMock.expect(itemRemoved.getAmount()).andReturn(10).anyTimes();
+		Item itemRemovedClone = EasyMock.createMock(Item.class);
+		EasyMock.expect(itemRemovedClone.getId()).andReturn(2).anyTimes();
+		EasyMock.expect(itemRemovedClone.getAmount()).andReturn(10).anyTimes();
+		EasyMock.expect(itemRemovedClone.addAmount(-5)).andReturn(5);
+		EasyMock.expect(itemRemoved.clone()).andReturn(itemRemovedClone);
 		Item newItem = EasyMock.createMock(Item.class);
+		EasyMock.expect(newItem.getId()).andReturn(1).anyTimes();
 		EasyMock.expect(newItem.getAmount()).andReturn(10).anyTimes();
 		EasyMock.expect(item.clone()).andReturn(newItem);
-		EasyMock.replay(item, newItem);
+		EasyMock.replay(item, newItem, item2, itemRemoved, itemRemovedClone);
 		
+		// Completely remove a item from inventory
 		inventory.addItem(item);
 		inventory.removeItem(item);
 		Assert.assertEquals(-1, inventory.hasItem(item));
+		
+		// Remove an item, but leave some left
+		inventory.addItem(item2);
+		inventory.removeItem(itemRemoved);
+		Assert.assertTrue(inventory.hasItem(item2) != -1);
 		
 		// Try to remove a item not in inventory
 		Assert.assertNull(inventory.removeItem(item));
