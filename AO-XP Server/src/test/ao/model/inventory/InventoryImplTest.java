@@ -213,7 +213,7 @@ public class InventoryImplTest {
 		inventory.removeItem(item);
 		Assert.assertEquals(-1, inventory.hasItem(item));
 		
-		// Remove an item, but leave some left
+		// Remove an item, by more than can be removed
 		inventory.addItem(item2);
 		inventory.removeItem(itemRemoved);
 		Assert.assertTrue(inventory.hasItem(item2) != -1);
