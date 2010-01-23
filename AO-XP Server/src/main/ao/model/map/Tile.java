@@ -28,7 +28,7 @@ import ao.model.worldobject.WorldObject;
  */
 public class Tile {
 
-	public static final byte LAYERS = 4; 
+	public static final byte LAYERS_AMOUNT = 4; 
 	public static final byte OBLIGATORY_LAYERS_AMOUNT = 1;
 	
 	protected Character character;

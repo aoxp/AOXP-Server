@@ -74,7 +74,7 @@ public class LoginServiceImpl implements LoginService {
 		// TODO: Check for too much created characters?
 		// TODO: Check for valid homeland, race, archetype, gender, name and mail.
 		
-		// First, we have to create de new account.
+		// First, we have to create the new account.
 		Account acc;
 		
 		try {

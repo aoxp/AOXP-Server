@@ -48,19 +48,19 @@ public class MapServiceImplTest {
 		WorldMap map = EasyMock.createMock(WorldMap.class);
 		service.maps.add(map);
 		//Increase mapAmount because getMap checks the id.
-		service.mapAmount++;
+		service.mapsAmount++;
 		assertEquals(service.getMap(service.maps.lastIndexOf(map) + 1), map);
 	}
 	
 	@Test
 	public void testLoadMaps() {
 		
-		Position tileExit1 = new Position((byte) 1, (byte) 1, service.getMap(1));
-		Position tileExit2 = new Position((byte) 11, (byte) 11, service.getMap(11));
-		Position tileExit3 = null;
-
 		service.loadMaps();
 		WorldMap map = service.getMap(1);
+		
+		Position tileExit1 = new Position((byte) 1, (byte) 1, map);
+		Position tileExit2 = new Position((byte) 11, (byte) 11, service.getMap(11));
+		Position tileExit3 = null;
 
 		assertTrue(map.getTile(0, 0).isBlocked());
 		Assert.assertFalse(map.getTile(1, 0).isBlocked());

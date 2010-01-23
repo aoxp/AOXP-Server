@@ -23,7 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.context.ApplicationContext;
-import ao.model.user.ConnectedUser;
+import ao.mock.MockFactory;
 import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.packet.IncomingPacket;
@@ -46,14 +46,7 @@ public class LoginExistingCharacterPacketTest {
 	@Before
 	public void setUp() throws Exception {
 		packet = new LoginExistingCharacterPacket();
-		connection = EasyMock.createMock(Connection.class);
-		
-		EasyMock.expect(connection.getInputBuffer()).andReturn(EasyMock.createMock(DataBuffer.class)).anyTimes();
-		EasyMock.expect(connection.getOutputBuffer()).andReturn(EasyMock.createMock(DataBuffer.class)).anyTimes();
-		EasyMock.expect(connection.getUser()).andReturn(EasyMock.createMock(ConnectedUser.class)).anyTimes();
-		connection.disconnect();
-		
-		EasyMock.replay(connection);
+		connection = MockFactory.mockConnection();
 	}
 
 	private void writeLogin(String charName, String password, int major, int minor, int version, String hash, String error) throws Exception {
@@ -90,7 +83,7 @@ public class LoginExistingCharacterPacketTest {
 	
 	@Test
 	public void testHandleIncorrectPassword() throws Exception {
-		writeLogin(CHARACTER_NAME, "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "", LoginServiceImpl.INCORRECT_PASSWORD_ERROR_MESSAGE);
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD + "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "", LoginServiceImpl.INCORRECT_PASSWORD_ERROR_MESSAGE);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());
@@ -111,7 +104,7 @@ public class LoginExistingCharacterPacketTest {
 		}
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD,
-				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "foo", LoginServiceImpl.BANNED_CHARACTER_ERROR_MESSAGE);
+				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "foo", LoginServiceImpl.CORRUPTED_CLIENT_ERROR_MESSAGE);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());

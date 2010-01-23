@@ -39,7 +39,7 @@ public class WorldMapTest {
 	
 	@Test
 	public void testGetTile() {
-		short[] layers = new short[Tile.LAYERS]; 
+		short[] layers = new short[Tile.LAYERS_AMOUNT]; 
 		Tile t = new Tile(true, layers, Trigger.NONE, null, null, null);
 		Tile t2 = new Tile(false, layers, Trigger.NONE, null, null, null);
 		Tile t3 = new Tile(true, layers, Trigger.NONE, null, null, null);
@@ -64,7 +64,7 @@ public class WorldMapTest {
 	@Test
 	public void testGetCharactersNearby() {
 		Tile[] tiles = new Tile[2600];
-		short [] layers = new short[Tile.LAYERS - 1];
+		short [] layers = new short[Tile.LAYERS_AMOUNT - 1];
 		for (int i = 0; i < 2600; i++) {
 			tiles[i] = new Tile(true, layers, Trigger.NONE, null, null, null);
 		}

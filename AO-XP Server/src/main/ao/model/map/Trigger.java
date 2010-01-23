@@ -18,17 +18,13 @@
 
 package ao.model.map;
 
-import org.apache.log4j.Logger;
-
-import ao.service.map.MapServiceImpl;
-
 /**
  * Triggers for map position events.
  */
 public enum Trigger {
 	NONE,
     UNDERROOF,
-    trigger_2, //TODO What is this?
+    trigger_2, // TODO: What is this?
     INVALIDPOSITION,
     SAFEZONE,
     ANTIPICKET,
@@ -48,4 +44,5 @@ public enum Trigger {
 	public static Trigger get(short index) {
 		return values[index];
 	}
+	
 }
