@@ -79,17 +79,5 @@ public interface ServerConfig {
 	 * @param restricted The restriction status.
 	 */
 	void setRestrictedToAdmins(boolean restricted);
-	
-	/**
-	 * Retrieves the map's amount. 
-	 * @return The map's amount.
-	 */
-	int getMapAmount();
-	
-	/**
-	 * Retrieves the map path.
-	 * @return The map's path.
-	 */
-	String getMapPath();
-	
+		
 }

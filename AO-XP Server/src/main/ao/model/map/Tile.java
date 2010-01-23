@@ -37,18 +37,16 @@ public class Tile {
 	protected short[] layers; 
 	protected boolean blocked; 
 	protected Position tileExit;
-	protected Character npc; 
 
-	public Tile(boolean blocked, short[] layers, short trigger, Position tileExit, NPCCharacter npc, WorldObject worldObject) {
+	public Tile(boolean blocked, short[] layers, Trigger trigger, Position tileExit, NPCCharacter npc, WorldObject worldObject) {
 		this.blocked = blocked;		
 		this.layers = layers;
-		this.trigger = Trigger.get(trigger);
+		this.trigger = trigger;
 		this.tileExit = tileExit;
 		
 		//TODO Create the Implementations.
 		this.worldObject = worldObject;
-		this.npc = npc;
-
+		this.character = npc;
 	}
 	
 	/**
@@ -63,7 +61,7 @@ public class Tile {
 	/**
 	 * Retrieves the graphic in the given layer. 
 	 * @param layer The layer of the tile.
-	 * @return
+	 * @return The graphic in the given layer.
 	 */
 	public int getLayer(byte layer) {
 		return layers[layer - 1];
@@ -74,7 +72,7 @@ public class Tile {
 	 * @return The tile exit at the tile.
 	 */
 	public Position getTileExit() {
-		return this.tileExit;
+		return tileExit;
 	}
 	
 	/**
@@ -100,23 +98,6 @@ public class Tile {
 	public void setBlocked(boolean block) {	
 		this.blocked = block;
 	}
-	
-
-	/**
-	 * Sets the NPCCharacter at the tile.
-	 * @param npc The NPCCharacter to be set at the tile.
-	 */
-	public void setNPC(Character npc) {
-		this.npc = npc;
-	}
-	
-	/**
-	 * Retrieves the NPCCharacter at the tile.
-	 * @return The NPCCharacter at the tile.
-	 */
-	public Character getNPC() {
-		return npc ;
-	}	
 	
 	/**
 	 * Retrieves the character at the tile.

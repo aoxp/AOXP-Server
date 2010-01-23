@@ -18,6 +18,10 @@
 
 package ao.model.map;
 
+import org.apache.log4j.Logger;
+
+import ao.service.map.MapServiceImpl;
+
 /**
  * Triggers for map position events.
  */
@@ -35,7 +39,7 @@ public enum Trigger {
 	 * Enum values.
 	 */
 	private static Trigger[] values = Trigger.values();
-
+	
 	/**
 	 * Retrieves the gender with the given index.
 	 * @param index The gender index.

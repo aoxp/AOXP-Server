@@ -19,6 +19,7 @@
 
 package ao.model.map;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import ao.model.character.Character;
@@ -148,5 +149,26 @@ public class WorldMap {
 		}
 		
 		return charList;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		WorldMap other = (WorldMap) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (!Arrays.equals(tiles, other.tiles))
+			return false;
+		return true;
 	}
 }

@@ -43,9 +43,6 @@ public class ServerConfigIni implements ServerConfig {
 	private static final String CHARACTER_CREATION_KEY = "PuedeCrearPersonajes";
 	private static final String RESTRICTED_TO_ADMINS_KEY = "ServerSoloGMs";
 	
-	private static final String MAP_DIR_KEY = "DirMap";
-	private static final String MAP_AMOUNT_KEY = "NumMaps"; 
-	
 	private static final String HASHES_HEADER = "MD5Hush";
 	private static final String HASHES_ACTIVATED_KEY = "Activado";
 	private static final String HASHES_AMOUNT_KEY = "MD5Aceptados";
@@ -122,15 +119,5 @@ public class ServerConfigIni implements ServerConfig {
 	public void setRestrictedToAdmins(boolean restricted) {
 		config.put(INIT_HEADER, CHARACTER_CREATION_KEY, restricted ? "1" : "0");
 	}
-	
-	@Override
-	public String getMapPath() {
-		return config.get(INIT_HEADER, MAP_DIR_KEY);
-	}
-	
-	@Override
-	public int getMapAmount() {
-		return Integer.parseInt(config.get(INIT_HEADER, MAP_AMOUNT_KEY));
-	}
-	
+
 }

@@ -18,18 +18,24 @@
 
 package ao;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.URI;
 import java.nio.channels.ServerSocketChannel;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
+import com.google.inject.Injector;
 
 import ao.config.ServerConfig;
 import ao.context.ApplicationContext;
 import ao.network.ConnectionManager;
+import ao.service.MapService;
 
 /**
  * Bootstraps the application.
@@ -139,6 +145,11 @@ public class Bootstrap {
 		server.setConnectionManager(ApplicationContext.getInstance(ConnectionManager.class));
 		
 		// TODO : Load other services and classes from application context
+
+		//Load the maps.
+		MapService service = ApplicationContext.getInstance(MapService.class);
+		service.loadMaps();
+		
 	}
 
 }

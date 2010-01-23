@@ -27,103 +27,57 @@ import org.easymock.classextension.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
-import ao.model.character.Character;
-import ao.model.character.NPCCharacter;
 import ao.model.map.Position;
-import ao.model.map.Tile;
 import ao.model.map.Trigger;
 import ao.model.map.WorldMap;
-import ao.model.worldobject.WorldObject;
-import ao.service.MapService;
 
 public class MapServiceImplTest {
 
-	private WorldMap map;
-	private MapService service;
+	private MapServiceImpl service;
 	private static final String MAPS_PATH = "src/test/resources/maps/";
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 				
 		service = new MapServiceImpl(MAPS_PATH, (int) 1);
-		
-		service.loadMaps();
-		
-		map = service.getMap(1); 
+
+	}
+
+	@Test
+	public void testGetMap() {
+		WorldMap map = EasyMock.createMock(WorldMap.class);
+		service.maps.add(map);
+		//Increase mapAmount because getMap checks the id.
+		service.mapAmount++;
+		assertEquals(service.getMap(service.maps.lastIndexOf(map) + 1), map);
 	}
 	
 	@Test
-	public void testGetMap() {
-		WorldObject worldObject = EasyMock.createMock(WorldObject.class);
-		NPCCharacter npc = EasyMock.createMock(NPCCharacter.class);
-		Position tileExit = new Position((byte) 1, (byte) 1, service.getMap(9));
-		Tile tile = service.getMap(1).getTile(75, 75);
+	public void testLoadMaps() {
 		
-		tile.setBlocked(true);
-		tile.setLayer((short)1111, (byte) 1);
-		tile.setLayer((short)2222, (byte) 2);
-		tile.setLayer((short)3333, (byte) 3);
-		tile.setLayer((short)4444, (byte) 4);
-		tile.setTrigger(Trigger.get((short) 0));
-		tile.setTileExit(tileExit);
-		tile.setWorldObject(worldObject);
-		tile.setNPC(npc);
+		Position tileExit1 = new Position((byte) 1, (byte) 1, service.getMap(1));
+		Position tileExit2 = new Position((byte) 11, (byte) 11, service.getMap(11));
+		Position tileExit3 = null;
 
-		Assert.assertEquals(tile.getLayer((byte) 1), 1111);
-		Assert.assertEquals(tile.getLayer((byte) 2), 2222);
-		Assert.assertEquals(tile.getLayer((byte) 3), 3333);
-		Assert.assertEquals(tile.getLayer((byte) 4), 4444);
-		Assert.assertEquals(tile.getTrigger(),Trigger.get((short) 0)); 
-		Assert.assertEquals(tile.getTileExit(), tileExit);
-		Assert.assertEquals(tile.getWorldObject(), worldObject);
-		Assert.assertEquals(tile.getNPC(), npc);
-	}
+		service.loadMaps();
+		WorldMap map = service.getMap(1);
 
-	@Test
-	public void testBlockedTile() {
 		assertTrue(map.getTile(0, 0).isBlocked());
 		Assert.assertFalse(map.getTile(1, 0).isBlocked());
 		Assert.assertFalse(map.getTile(50, 50).isBlocked());
-	}
 
-	@Test
-	public void testTriggerTile() {
-		assertEquals(map.getTile(0, 0).getTrigger(), Trigger.get((short) 0));
-		assertEquals(map.getTile(1, 0).getTrigger(), Trigger.get((short) 0));
-		assertEquals(map.getTile(49, 49).getTrigger(), Trigger.get((short) 0));
-	}
+		assertEquals(map.getTile(0, 0).getTrigger(), Trigger.NONE);
+		assertEquals(map.getTile(1, 0).getTrigger(), Trigger.NONE);
+		assertEquals(map.getTile(49, 49).getTrigger(), Trigger.NONE);
 
-	@Test
-	public void testLayersTile() {
 		assertEquals(map.getTile(0, 0).getLayer((byte) 1), 6005);	
 		assertEquals(map.getTile(1, 0).getLayer((byte) 3), 9434);
 		assertEquals(map.getTile(49, 49).getLayer((byte) 2), 7331);
 		assertEquals(map.getTile(49, 49).getLayer((byte) 4), 0);
-	}
-
-	@Test
-	public void testNPCTile() {
-		NPCCharacter npc1 = EasyMock.createMock(NPCCharacter.class);
-		NPCCharacter npc2 = EasyMock.createMock(NPCCharacter.class);
-		NPCCharacter npc3 = EasyMock.createMock(NPCCharacter.class);
 		
-		map.getTile(0, 0).setNPC(npc1);
-		map.getTile(1, 1).setNPC(npc2);
-		map.getTile(49, 49).setNPC(npc3);
-		 
-		Assert.assertEquals(map.getTile(0, 0).getNPC(), npc1);
-		Assert.assertEquals(map.getTile(1, 1).getNPC(), npc2);
-		Assert.assertEquals(map.getTile(49 , 49).getNPC(), npc3);
- 	}
-
-	@Test
-	public void testExitTile() {
-		Position tileExit1 = new Position((byte) 1, (byte) 1, service.getMap(1));
-		Position tileExit2 = new Position((byte) 11, (byte) 11, service.getMap(11));
-		Position tileExit3 = null;
-		Assert.assertEquals(map.getTile(0, 0).getTileExit(), tileExit1);
-		Assert.assertEquals(map.getTile(1, 0).getTileExit(), tileExit2);
-		Assert.assertEquals(map.getTile(49, 49).getTileExit(), tileExit3);
+		assertEquals(map.getTile(0, 0).getTileExit(), tileExit1);
+		assertEquals(map.getTile(1, 0).getTileExit(), tileExit2);
+		assertEquals(map.getTile(49, 49).getTileExit(), tileExit3);
 	}
 	
 }

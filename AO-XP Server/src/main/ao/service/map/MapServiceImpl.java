@@ -33,6 +33,7 @@ import com.google.inject.name.Named;
 import ao.model.character.Character;
 import ao.model.map.Tile;
 import ao.model.map.Position;
+import ao.model.map.Trigger;
 import ao.model.map.WorldMap;
 import ao.service.MapService;
 
@@ -43,21 +44,32 @@ public class MapServiceImpl implements MapService {
 	private static final Logger logger = Logger.getLogger(MapServiceImpl.class);
 	private static final String MAP_EXTENSION = ".map";
 	private static final String INF_EXTENSION = ".inf";
+	private static final String MAP_FILE_NAME = "Mapa";
 	
-	private List<WorldMap> mapList = new LinkedList<WorldMap>();
+	private static final byte BITFLAG_BLOCKED = 1;
+	private static final byte BITFLAG_LAYER2 = 2;
+	private static final byte BITFLAG_LAYER3 = 4;
+	private static final byte BITFLAG_LAYER4 = 8;
+	private static final byte BITFLAG_TRIGGER = 16;
+	
+	private static final byte BITFLAG_TILEEXIT = 1;
+	private static final byte BITFLAG_NPC = 2;
+	private static final byte BITFLAG_OBJECT = 4;
+	
+	protected List<WorldMap> maps = new LinkedList<WorldMap>();
 	private String mapPath;
-	private int mapAmount;
+	protected int mapAmount;
 	
 	@Inject
 	public MapServiceImpl(@Named("MapsPath") String mapPath, @Named("MapAmount") int mapAmount) {
-		// TODO Auto-generated constructor stub
- 		this.mapPath = mapPath;
+
+		this.mapPath = mapPath;
 		this.mapAmount = mapAmount;
 
-		int count = 0;
+		int i = 0;
 
-		for (count = 1; count < mapAmount + 1; count++) {
-			mapList.add(new WorldMap(count));
+		for (i = 1; i <= mapAmount; i++) {
+			maps.add(new WorldMap(i));
 		}
 		
 	}
@@ -66,10 +78,10 @@ public class MapServiceImpl implements MapService {
 	 * Loads all maps
 	 */
 	public void loadMaps() {
-		int count = 0;
+		int i = 0;
 		
-		for (count = 1; count < mapAmount + 1; count++) {
-			this.loadMap(count);
+		for (i = 1; i <= mapAmount; i++) {
+			this.loadMap(i);
 		}		
 	}
 	
@@ -79,8 +91,8 @@ public class MapServiceImpl implements MapService {
 	 * @return The WorldMap loaded
 	 */
 	public WorldMap getMap(int id) {
-		if ((id > 0) && (id <= mapAmount)) {
-			return mapList.get(id - 1);
+		if (id > 0 && id <= mapAmount) {
+			return maps.get(id - 1);
 		}
 		return null;
 	}
@@ -91,18 +103,16 @@ public class MapServiceImpl implements MapService {
 	 * @return The WorldMap loaded
 	 */
 	private WorldMap loadMap(int map) {
-		// TODO Auto-generated method stub
-		
+	
 		byte flag;
-		int x, y;
 		RandomAccessFile dataInf = null;
 		RandomAccessFile dataMap = null;
 		byte[] bufInf = null;
 		byte[] bufMap = null;
 				
 		try {
-			dataInf = new RandomAccessFile(mapPath + "mapa" + map + INF_EXTENSION, "r");
-			dataMap = new RandomAccessFile(mapPath + "mapa" + map + MAP_EXTENSION, "r");
+			dataInf = new RandomAccessFile(mapPath + MAP_FILE_NAME + map + INF_EXTENSION, "r");
+			dataMap = new RandomAccessFile(mapPath + MAP_FILE_NAME + map + MAP_EXTENSION, "r");
 			bufInf = new byte[(int) dataInf.length()];
 			bufMap = new byte[(int) dataMap.length()];
 			dataInf.readFully(bufInf);		
@@ -115,12 +125,12 @@ public class MapServiceImpl implements MapService {
 		ByteBuffer bufferInf = ByteBuffer.wrap(bufInf);
 		ByteBuffer bufferMap = ByteBuffer.wrap(bufMap);
 		
-		
+		//VB writes with Little Endian and the default byte order in Java is Big Endian.
 		bufferInf.order(ByteOrder.LITTLE_ENDIAN);
 		bufferMap.order(ByteOrder.LITTLE_ENDIAN);
 
-		
-		// Get the map header
+		//Get the map header
+
 		short mapVersion = bufferMap.getShort(); 
 
 		byte[] description = new byte[255];
@@ -129,58 +139,63 @@ public class MapServiceImpl implements MapService {
 		int CRC = bufferMap.getInt();
 		int magicWord = bufferMap.getInt();	
 		
-		bufferMap.getShort();
-		bufferMap.getShort();
-		bufferMap.getShort();
-		bufferMap.getShort();
-		
-		// .INF Header 
-		bufferInf.getShort();
-		bufferInf.getShort();
-		bufferInf.getShort();
-		bufferInf.getShort();
-		bufferInf.getShort();
+		//The .map header has 8 bytes empty.
+		byte[] emptyHeader = new byte[8];
+		bufferMap.get(emptyHeader);
 
+		//The .inf header has 10 bytes empty.
+		emptyHeader = new byte[10];
+		bufferInf.get(emptyHeader);	
+		
 		Tile[] Tiles = new Tile[WorldMap.MAP_HEIGHT * WorldMap.MAP_WIDTH];
-		
-		for (y = 0; y < WorldMap.MAP_HEIGHT; y++ )  {
-			for (x = 0; x < WorldMap.MAP_HEIGHT; x++) {
 
-				boolean blocked = false;
-				short trigger = 0;
-				Position tileExit = null;
+		boolean blocked;
+		Trigger trigger;
+		Position tileExit;
+		
+		for (int y = 0; y < WorldMap.MAP_HEIGHT; y++ )  {
+			for (int x = 0; x < WorldMap.MAP_HEIGHT; x++) {
+
+				blocked = false;
+				trigger = Trigger.NONE;
+				tileExit = null;
 				
 				flag = bufferMap.get();
 
-				//If the frist bitflag is seted then, the tile is blocked.
-				if ((flag & 1) == 1) {
+				//If the first bitflag is set then, the tile is blocked.
+				if ((flag & BITFLAG_BLOCKED) == BITFLAG_BLOCKED) {
 					blocked = true;
 				}
 				
 				short[] layers = new short[Tile.LAYERS];
 
-				//Every tile must have the frist layer.
+				//Every tile must have the first layer.
 				layers[0] = bufferMap.getShort();
 
-				if ((flag & 2) == 2) {
+				if ((flag & BITFLAG_LAYER2) == BITFLAG_LAYER2) {
 					layers[1] = bufferMap.getShort();
 				}
 				
-				if ((flag & 4) == 4) {
+				if ((flag & BITFLAG_LAYER3) == BITFLAG_LAYER3) {
 					layers[2] = bufferMap.getShort();
 				}
 
-				if ((flag & 8) == 8) {
+				if ((flag & BITFLAG_LAYER4) == BITFLAG_LAYER4) {
 					layers[3] = bufferMap.getShort();
 				}
 
-				if ((flag & 16) == 16) {
-					trigger = bufferMap.getShort();
+				if ((flag & BITFLAG_TRIGGER) == BITFLAG_TRIGGER) {					
+					try {
+						trigger = Trigger.get(bufferMap.getShort());
+					} catch (ArrayIndexOutOfBoundsException e) {
+						logger.info("In (" + map + ", " + x + ", " + y + ") the trigger's value has an error");
+						trigger = Trigger.NONE ;
+					}
 				}
 
 				flag = bufferInf.get();
 
-				if ((flag & 1) == 1) {
+				if ((flag & BITFLAG_TILEEXIT) == BITFLAG_TILEEXIT) {
 					tileExit = new Position(
 											(byte) bufferInf.getShort(), 
 											(byte) bufferInf.getShort(), 
@@ -188,27 +203,32 @@ public class MapServiceImpl implements MapService {
 											);
 				}	
 
-				if ((flag & 2) == 2) {
+				if ((flag & BITFLAG_NPC) == BITFLAG_NPC) {
+					//The NPC number.
 					bufferInf.getShort();					
 					//TODO Create the NPCharacter implementation
 				}
 				
-				if ((flag & 4) == 4) {
+				if ((flag & BITFLAG_OBJECT) == BITFLAG_OBJECT) {
+					//The object index.
 					bufferInf.getShort();
-					bufferInf.getShort();					
+					
+					//The objet's amount.
+					bufferInf.getShort();
+					
 					//TODO Create the WorldObject implementation.				
 				}
 				
 				//TODO Replace the nulls with the NPCCharacter and WorldObject objects.
 				Tiles[WorldMap.getTileKey(x, y)] = new Tile(blocked, layers, trigger, tileExit, null, null);
-
-			}
-			
+		
+				}
+				
 		}
 		
-		this.getMap(map).setTiles(Tiles);
-		
-		return this.getMap(map);
+		WorldMap buffMap = getMap(map);
+		buffMap.setTiles(Tiles);
+		return buffMap;
 	}
 
 }
