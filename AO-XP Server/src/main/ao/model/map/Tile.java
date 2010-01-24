@@ -19,8 +19,6 @@
 package ao.model.map;
 
 import ao.model.character.Character;
-import ao.model.character.NPCCharacter;
-import ao.model.worldobject.Item;
 import ao.model.worldobject.WorldObject;
 
 /**
@@ -38,21 +36,30 @@ public class Tile {
 	protected boolean blocked; 
 	protected Position tileExit;
 
-	public Tile(boolean blocked, short[] layers, Trigger trigger, Position tileExit, NPCCharacter npc, WorldObject worldObject) {
-		this.blocked = blocked;		
+	/**
+	 * Creates a new tile.
+	 * @param blocked Whether the tile is blocked or not.
+	 * @param layers Indices of the graphics in the different layers.
+	 * @param trigger The trigger ruling over this tile.
+	 * @param tileExit Position to which this tile leads, if any.
+	 * @param character The character currently standing on this position, if any.
+	 * @param worldObject The object laying in this position, if any.
+	 */
+	public Tile(boolean blocked, short[] layers, Trigger trigger, Position tileExit, Character character, WorldObject worldObject) {
+		this.blocked = blocked;
 		this.layers = layers;
 		this.trigger = trigger;
 		this.tileExit = tileExit;
 		
 		//TODO Create the Implementations.
 		this.worldObject = worldObject;
-		this.character = npc;
+		this.character = character;
 	}
 	
 	/**
 	 * Sets the given graphic at the given layer.
-	 * @param graphic The graphic to be seted.
-	 * @param layer The layer where the graphic must be seted.
+	 * @param graphic The graphic to be set.
+	 * @param layer The layer where the graphic must be set.
 	 */
 	public void setLayer(short graphic, byte layer) {
 		this.layers[layer - 1] = graphic;

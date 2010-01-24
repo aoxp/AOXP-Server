@@ -18,30 +18,31 @@
 
 package ao.service.map;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-
-import ao.model.character.Character;
-import ao.model.map.Tile;
 import ao.model.map.Position;
+import ao.model.map.Tile;
 import ao.model.map.Trigger;
 import ao.model.map.WorldMap;
 import ao.service.MapService;
 
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
-
+/**
+ * Concrete implementation of MapService.
+ */
 public class MapServiceImpl implements MapService {
 
 	private static final Logger logger = Logger.getLogger(MapServiceImpl.class);
+	
 	private static final String MAP_EXTENSION = ".map";
 	private static final String INF_EXTENSION = ".inf";
 	private static final String MAP_FILE_NAME = "Mapa";
@@ -61,7 +62,7 @@ public class MapServiceImpl implements MapService {
 	protected int mapsAmount;
 	
 	@Inject
-	public MapServiceImpl(@Named("MapsPath") String mapsPath, @Named("MapAmount") int mapsAmount) {
+	public MapServiceImpl(@Named("MapsPath") String mapsPath, @Named("MapsAmount") int mapsAmount) {
 
 		this.mapsPath = mapsPath;
 		this.mapsAmount = mapsAmount;
@@ -109,6 +110,7 @@ public class MapServiceImpl implements MapService {
 		byte[] bufMap = null;
 				
 		try {
+			// Completely read both files
 			dataInf = new RandomAccessFile(mapsPath + MAP_FILE_NAME + map + INF_EXTENSION, "r");
 			dataMap = new RandomAccessFile(mapsPath + MAP_FILE_NAME + map + MAP_EXTENSION, "r");
 			bufInf = new byte[(int) dataInf.length()];
@@ -134,7 +136,7 @@ public class MapServiceImpl implements MapService {
 		byte[] description = new byte[255];
 		mapBuffer.get(description);
 		
-		int CRC = mapBuffer.getInt();
+		int crc = mapBuffer.getInt();
 		int magicWord = mapBuffer.getInt();	
 		
 		// The .map header has 8 empty bytes.
@@ -145,7 +147,7 @@ public class MapServiceImpl implements MapService {
 		emptyHeader = new byte[10];
 		infBuffer.get(emptyHeader);	
 		
-		Tile[] Tiles = new Tile[WorldMap.MAP_HEIGHT * WorldMap.MAP_WIDTH];
+		Tile[] tiles = new Tile[WorldMap.MAP_HEIGHT * WorldMap.MAP_WIDTH];
 
 		boolean blocked;
 		Trigger trigger;
@@ -206,7 +208,7 @@ public class MapServiceImpl implements MapService {
 				if ((flag & BITFLAG_NPC) == BITFLAG_NPC) {
 					// The NPC number.
 					infBuffer.getShort();					
-					// TODO: instanciate the NPCCharacter object.
+					// TODO: instantiate the NPCCharacter object.
 				}
 				
 				if ((flag & BITFLAG_OBJECT) == BITFLAG_OBJECT) {
@@ -216,18 +218,18 @@ public class MapServiceImpl implements MapService {
 					// The object's amount.
 					infBuffer.getShort();
 					
-					// TODO: instanciate the WorldObject object.				
+					// TODO: instantiate the WorldObject object.				
 				}
 				
 				// TODO: Replace the nulls with the NPCCharacter and WorldObject objects.
-				Tiles[WorldMap.getTileKey(x, y)] = new Tile(blocked, layers, trigger, tileExit, null, null);
+				tiles[WorldMap.getTileKey(x, y)] = new Tile(blocked, layers, trigger, tileExit, null, null);
 		
 				}
 				
 		}
 		
 		WorldMap buffMap = getMap(map);
-		buffMap.setTiles(Tiles);
+		buffMap.setTiles(tiles);
 		
 		return buffMap;
 	}
