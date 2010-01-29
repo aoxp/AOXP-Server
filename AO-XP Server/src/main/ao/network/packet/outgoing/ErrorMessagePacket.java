@@ -38,7 +38,7 @@ public class ErrorMessagePacket implements OutgoingPacket {
 	@Override
 	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
 		// TODO: UTF-8?
-		buffer.putASCIIStringFixed(message);
+		buffer.putASCIIString(message);
 	}
 
 }
