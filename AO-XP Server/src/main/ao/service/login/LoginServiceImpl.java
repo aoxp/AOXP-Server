@@ -54,7 +54,7 @@ public class LoginServiceImpl implements LoginService {
 	private String[] clientHashes;
 	private final AccountDAO accDAO = ApplicationContext.getInstance(AccountDAO.class);
 	private final UserCharacterDAO charDAO = ApplicationContext.getInstance(UserCharacterDAO.class);
-	private ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
+	private final ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
 	private String currentClientVersion = config.getVersion();
 	
 	@Override
