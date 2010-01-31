@@ -108,7 +108,6 @@ public class ServerConfigIni implements ServerConfig {
 		config.put(INIT_HEADER, CHARACTER_CREATION_KEY, enabled ? "1" : "0");
 		
 	}
-
 	
 	@Override
 	public boolean isRestrictedToAdmins() {
@@ -117,7 +116,7 @@ public class ServerConfigIni implements ServerConfig {
 
 	@Override
 	public void setRestrictedToAdmins(boolean restricted) {
-		config.put(INIT_HEADER, CHARACTER_CREATION_KEY, restricted ? "1" : "0");
+		config.put(INIT_HEADER, RESTRICTED_TO_ADMINS_KEY, restricted ? "1" : "0");
 	}
 
 }

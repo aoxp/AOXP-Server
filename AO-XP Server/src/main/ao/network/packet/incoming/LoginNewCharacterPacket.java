@@ -74,7 +74,6 @@ public class LoginNewCharacterPacket implements IncomingPacket {
 		} catch (LoginErrorException e) {
 			loginError(connection, e.getMessage());
 		}
-
 		
 	}
 

@@ -42,5 +42,12 @@ public interface UserCharacterDAO {
 	UserCharacter create(String name, Race race, Gender gender,
 			UserArchetype archetype, byte[] skills, byte homeland, byte strength,
 			byte agility, byte intelligence, byte charisma, byte constitution)
-			throws DAOException;
+			throws DAOException, NameAlreadyTakenException;
+
+	/**
+	 * Checks if the character with the given name exists.
+	 * @param name The character name.
+	 * @return True if the character exists, false otherwise.
+	 */
+	boolean exists(String name);
 }

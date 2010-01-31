@@ -98,8 +98,8 @@ public class ConnectionManagerImpl implements ConnectionManager {
 					} catch (BufferUnderflowException e) {
 						// Not enough data received, restore the buffer to the last mark of a completed packet.
 						buffer.reset();
-					} catch( ArrayIndexOutOfBoundsException e) {
-						// Whooa, what are you doing? The packet doesn't exists, close connection!
+					} catch(ArrayIndexOutOfBoundsException e) {
+						// Whooa, what are you doing? The packet doesn't exists, close the connection!
 						connection.disconnect();
 						return;
 					}

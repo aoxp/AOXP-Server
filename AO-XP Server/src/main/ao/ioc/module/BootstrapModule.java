@@ -48,7 +48,7 @@ public class BootstrapModule extends AbstractModule {
 	protected void configure() {
 		
 		// General server configuration
-		bind(ServerConfig.class).to(ServerConfigIni.class);
+		bind(ServerConfig.class).to(ServerConfigIni.class).in(Singleton.class);
 		bind(String.class).annotatedWith(Names.named("ServerConfigIni")).toInstance(properties.getProperty("config.path.server"));
 		
 		// Connection Manager

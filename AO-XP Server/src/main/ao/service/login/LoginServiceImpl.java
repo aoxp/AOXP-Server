@@ -22,6 +22,7 @@ import ao.config.ServerConfig;
 import ao.context.ApplicationContext;
 import ao.data.dao.AccountDAO;
 import ao.data.dao.DAOException;
+import ao.data.dao.NameAlreadyTakenException;
 import ao.data.dao.UserCharacterDAO;
 import ao.model.character.Attribute;
 import ao.model.character.Gender;
@@ -34,31 +35,36 @@ import ao.service.LoginService;
 
 public class LoginServiceImpl implements LoginService {
 	
-	public static final String DAO_ERROR_MESSAGE = "Ocurrió un error, intentá de nuevo.";
-	public static final String CHARACTER_NOT_FOUND_ERROR_MESSAGE = "El personaje no existe.";
-	public static final String CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT = "Esta versión del juego es obsoleta, la versión correcta es %s. La misma se encuentra disponible en http://www.argentumonline.com.ar/.";
-	public static final String CORRUPTED_CLIENT_ERROR_MESSAGE = "El cliente está dañado, por favor descárguelo nuevamente desde http://www.argentumonline.com.ar/";
-	public static final String BANNED_CHARACTER_ERROR_MESSAGE = "Se te ha prohibido la entrada a Argentum debido a tu mal comportamiento. Puedes consultar el reglamento y el sistema de soporte desde www.argentumonline.com.ar";
-	public static final String INCORRECT_PASSWORD_ERROR_MESSAGE = "Contraseña incorrecta.";
+	public static final String DAO_ERROR = "Ocurrió un error, intentá de nuevo.";
+	public static final String CHARACTER_NOT_FOUND_ERROR = "El personaje no existe.";
+	public static final String CLIENT_OUT_OF_DATE_ERROR_FORMAT = "Esta versión del juego es obsoleta, la versión correcta es %s. La misma se encuentra disponible en http://www.argentumonline.com.ar/.";
+	public static final String CORRUPTED_CLIENT_ERROR = "El cliente está dañado, por favor descárguelo nuevamente desde http://www.argentumonline.com.ar/";
+	public static final String BANNED_CHARACTER_ERROR = "Se te ha prohibido la entrada a Argentum debido a tu mal comportamiento. Puedes consultar el reglamento y el sistema de soporte desde www.argentumonline.com.ar";
+	public static final String INCORRECT_PASSWORD_ERROR = "Contraseña incorrecta.";
 	public static final String CHARACTER_CREATION_DISABLED_ERROR = "La creación de personajes en este servidor se ha deshabilitado.";
-	public static final String ONLY_ADMINS_ERROR = "Servidor restringido a administradores. Consulte la página oficial o el foro oficial para mas información.";
-	public static final String MUST_THROW_DICES_BEFORE = "Debe tirar los dados antes de poder crear un personaje.";
+	public static final String ONLY_ADMINS_ERROR = "Servidor restringido a administradores. Consulte la página oficial o el foro oficial para más información.";
+	public static final String MUST_THROW_DICES_BEFORE_ERROR = "Debe tirar los dados antes de poder crear un personaje.";
+	public static final String INVALID_RACE_ERROR = "La raza seleccionada no es válida.";
+	public static final String INVALID_GENDER_ERROR = "El género seleccionado no es válido.";
+	public static final String INVALID_ARCHETYPE_ERROR = "La clase seleccionada no es válida.";
+	public static final String INVALID_SKILLS_POINTS_ERROR = "Los skills asignados no son válidos.";
+	public static final String ACCOUNT_NAME_TAKEN_ERROR = "Ya existe el personaje.";
+	private static final int INITIAL_SKILL_POINTS = 10;
 	
 	private String[] clientHashes;
 	private final AccountDAO accDAO = ApplicationContext.getInstance(AccountDAO.class);
 	private final UserCharacterDAO charDAO = ApplicationContext.getInstance(UserCharacterDAO.class);
-	private final ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
+	private ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
 	private String currentClientVersion = config.getVersion();
 	
 	@Override
-	public void connectNewCharacter(ConnectedUser user, String username, String password, byte race,
-			byte gender, byte archetype, byte[] skills, String mail, 
+	public void connectNewCharacter(ConnectedUser user, String username, String password, byte bRace,
+			byte bGender, byte bArchetype, byte[] skills, String mail, 
 			byte homeland, String clientHash,
 			String version) throws LoginErrorException {
 		
-		// TODO: Maybe this can be done outside the service to avoid the useless buffer read?
 		checkClient(clientHash, version);
-		
+
 		if (!config.isCharacterCreationEnabled()) {
 			throw new LoginErrorException(CHARACTER_CREATION_DISABLED_ERROR);
 		}
@@ -68,33 +74,71 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		if (user.getAttribute(Attribute.AGILITY) == null) {
-			throw new LoginErrorException(MUST_THROW_DICES_BEFORE);
+			throw new LoginErrorException(MUST_THROW_DICES_BEFORE_ERROR);
 		}
 		
-		// TODO: Check for too much created characters?
-		// TODO: Check for valid homeland, race, archetype, gender, name and mail.
+		Race race;
+		
+		try {
+			race = Race.get(bRace);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			throw new LoginErrorException(INVALID_RACE_ERROR);
+		}
+		
+		Gender gender;
+		
+		try {
+			gender = Gender.get(bGender);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			throw new LoginErrorException(INVALID_GENDER_ERROR);
+		}
+		
+		UserArchetype archetype;
+		
+		try {
+			archetype = UserArchetype.get(bArchetype);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			throw new LoginErrorException(INVALID_ARCHETYPE_ERROR);
+		}
+		
+		// Prevent skills hack.
+		int totalSkills = 0;
+		
+		for(int i = 0; i < skills.length; i++) {
+			totalSkills += skills[i];
+		}
+		
+		if (totalSkills > INITIAL_SKILL_POINTS) {
+			throw new LoginErrorException(INVALID_SKILLS_POINTS_ERROR);
+		}
+		
+		// TODO: Check for valid homeland, name and mail.
 		
 		// First, we have to create the new account.
 		Account acc;
 		
 		try {
 			acc = accDAO.create(username, password, mail);
+		} catch(NameAlreadyTakenException e) {
+			throw new LoginErrorException(ACCOUNT_NAME_TAKEN_ERROR);
+			
 		} catch (DAOException e) {
 			accDAO.delete(username);
 			
-			throw new LoginErrorException(DAO_ERROR_MESSAGE);
+			throw new LoginErrorException(DAO_ERROR);
 		}
+			
 		
 		// Once we have the account, lets create the character itself!
 		try {
-			UserCharacter chara = charDAO.create(username, Race.get(race), Gender.get(gender),
-					UserArchetype.get(archetype), skills, homeland, user.getAttribute(Attribute.STRENGTH), 
+			UserCharacter chara = charDAO.create(username, race, gender, archetype,
+					skills, homeland, user.getAttribute(Attribute.STRENGTH), 
 					user.getAttribute(Attribute.AGILITY), user.getAttribute(Attribute.INTELLIGENCE),
 					user.getAttribute(Attribute.CHARISMA), user.getAttribute(Attribute.CONSTITUTION) );
 		} catch (DAOException e) {
 			accDAO.delete(username);
 			
-			throw new LoginErrorException(DAO_ERROR_MESSAGE);
+			throw new LoginErrorException(e.getMessage());
 		}
 		
 		// Everything it's okay, associate the character with the account and the account with the user.
@@ -111,25 +155,38 @@ public class LoginServiceImpl implements LoginService {
 		
 		checkClient(clientHash, version);
 		
+		if (config.isRestrictedToAdmins()) {
+			throw new LoginErrorException(ONLY_ADMINS_ERROR);
+		}
+		
 		Account acc;
 		
 		try {
 			acc = accDAO.retrieve(name);
 		} catch (DAOException e) {
-			throw new LoginErrorException(DAO_ERROR_MESSAGE);
+			throw new LoginErrorException(DAO_ERROR);
 		}
 		
 		if (acc == null) {
-			throw new LoginErrorException(CHARACTER_NOT_FOUND_ERROR_MESSAGE);
+			throw new LoginErrorException(CHARACTER_NOT_FOUND_ERROR);
 		}
 		
 		if (acc.isBanned()) {
-			throw new LoginErrorException(BANNED_CHARACTER_ERROR_MESSAGE);
+			throw new LoginErrorException(BANNED_CHARACTER_ERROR);
 		}
 		
 		if (!acc.authenticate(password)) {
-			throw new LoginErrorException(INCORRECT_PASSWORD_ERROR_MESSAGE);
+			throw new LoginErrorException(INCORRECT_PASSWORD_ERROR);
 		}
+	}
+	
+	/**
+	 * Sets the current client's version.
+	 * @param version The new client version.
+	 */
+	public void setCurrentClientVersion(String version) {
+		// TODO: Update the config!
+		currentClientVersion = version;
 	}
 	
 	/**
@@ -141,7 +198,7 @@ public class LoginServiceImpl implements LoginService {
 	private void checkClient(String hash, String version) throws LoginErrorException {
 		
 		if (!currentClientVersion.equals(version)) {
-			throw new LoginErrorException(String.format(CLIENT_OUT_OF_DATE_ERROR_MESSAGE_FORMAT, currentClientVersion));
+			throw new LoginErrorException(String.format(CLIENT_OUT_OF_DATE_ERROR_FORMAT, currentClientVersion));
 		}
 		
 		if (hash.equals("")) {
@@ -158,7 +215,7 @@ public class LoginServiceImpl implements LoginService {
 			}
 		}
 		
-		throw new LoginErrorException(CORRUPTED_CLIENT_ERROR_MESSAGE);
+		throw new LoginErrorException(CORRUPTED_CLIENT_ERROR);
 	}
 	
 }

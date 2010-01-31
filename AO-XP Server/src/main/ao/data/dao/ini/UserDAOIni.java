@@ -22,11 +22,14 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,6 +41,7 @@ import com.google.inject.name.Named;
 
 import ao.data.dao.AccountDAO;
 import ao.data.dao.DAOException;
+import ao.data.dao.NameAlreadyTakenException;
 import ao.data.dao.UserCharacterDAO;
 import ao.model.character.Attribute;
 import ao.model.character.Gender;
@@ -185,7 +189,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	protected static final byte NO_WEAPON = 2;
 	protected static final byte NO_HELMET = 2;
 	// TODO: This shouldn't be here.
-	protected static final String NO_ENLISTMENT_KEY_MESSAGE = new String("No ingresó a ninguna facción");
+	protected static final String NO_ENLISTMENT_KEY_MESSAGE = "No ingresó a ninguna facción";
 	protected static final int INITIAL_NOBLE_POINTS = 1000;
 	
 	private static final Logger logger = Logger.getLogger(UserDAOIni.class);
@@ -229,7 +233,11 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	
 	@Override
 	public Account create(String name, String password, String mail)
-			throws DAOException {
+			throws DAOException, NameAlreadyTakenException {
+		
+		if (exists(name)) {
+			throw new NameAlreadyTakenException();
+		}
 		
 		Ini acc = new Ini();
 		
@@ -239,16 +247,17 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		acc.put(FLAGS_HEADER, BANNED_KEY, "0");
 		
 		try {
-			// Make sure the writer is closed, since Ini4j gives no guarantees.
-			Writer writer = new BufferedWriter(new FileWriter(getCharFilePath(name)));
+			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(getCharFilePath(name)), "UTF-8");
 			acc.store(writer);
+			
+			// Make sure the writer is closed, since Ini4j gives no guarantees.
 			writer.close();
 		} catch (IOException e) {
 			logger.error("Charfile (account data) creation failed!", e);
 			throw new DAOException();
 		}
 		
-		return new AccountImpl(name, password, mail, null, false);
+		return new AccountImpl(name, password, mail, new ArrayList<String>(), false);
 	}
 
 	@Override
@@ -270,7 +279,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	public UserCharacter create(String name, Race race, Gender gender,
 			UserArchetype archetype, byte[] skills, byte homeland, byte strength,
 			byte agility, byte intelligence, byte charisma, byte constitution)
-			throws DAOException {
+			throws DAOException, NameAlreadyTakenException {
 		Ini chara = new Ini();
 		
 		chara.put(INIT_HEADER, GENDER_KEY, gender.ordinal());
@@ -366,9 +375,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		Reputation rep = new ReputationImpl(0, 0, 0, 0, INITIAL_NOBLE_POINTS, false);
 	
 		try {
-			// Make sure the stream is closed, since Ini4J gives no guarantees.
-			Writer writer = new BufferedWriter(new FileWriter(getCharFilePath(name)));
+			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(getCharFilePath(name)), "UTF-8");
 			chara.store(writer);
+			
+			// Make sure the stream is closed, since Ini4J gives no guarantees.
 			writer.close();
 		} catch (IOException e) {
 			logger.error("Charfile (full charfile) creation failed!", e);
@@ -379,6 +389,11 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		return new LoggedUser(rep, race, gender, archetype.getArchetype(),
 				false, false, false, false, false, false, false, 0, 0, 0, 0,
 				100, 100, (byte) 1, name, "");
+	}
+	
+	@Override
+	public boolean exists(String name) {
+		return (new File(getCharFilePath(name))).exists();
 	}
 	
 	/**

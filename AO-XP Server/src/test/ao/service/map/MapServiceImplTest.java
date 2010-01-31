@@ -38,16 +38,14 @@ public class MapServiceImplTest {
 	
 	@Before
 	public void setUp() {
-				
 		service = new MapServiceImpl(MAPS_PATH, (int) 1);
-
 	}
 
 	@Test
 	public void testGetMap() {
 		WorldMap map = EasyMock.createMock(WorldMap.class);
 		service.maps.add(map);
-		//Increase mapAmount because getMap checks the id.
+		// Increase mapAmount because getMap checks for valid id.
 		service.mapsAmount++;
 		assertEquals(service.getMap(service.maps.lastIndexOf(map) + 1), map);
 	}
