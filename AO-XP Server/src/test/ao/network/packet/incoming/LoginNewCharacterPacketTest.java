@@ -127,8 +127,23 @@ public class LoginNewCharacterPacketTest {
 	@Test
 	public void skillsHackingTest() throws Exception {
 		
-		byte[] skills = CHARACTER_SKILLS;
+		byte[] skills = CHARACTER_SKILLS.clone();
 		skills[1] = 20;
+		
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
+				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
+				skills, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_SKILLS_POINTS_ERROR);
+		
+		packet.handle(connection);
+		EasyMock.verify(connection.getOutputBuffer());
+	}
+	
+	@Test
+	public void skillsHacking2Test() throws Exception {
+		
+		byte[] skills = CHARACTER_SKILLS.clone();
+		skills[1] += 50;
+		skills[2] -= 50;
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
