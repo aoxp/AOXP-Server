@@ -77,7 +77,6 @@ public class LoginNewCharacterPacketTest {
 		
 		config.setRestrictedToAdmins(false);
 		config.setCharacterCreationEnabled(true);
-		ApplicationContext.getInstance(AccountDAO.class).create(CHARACTER_NAME, "ááá", CHARACTER_MAIL);
 	}
 	
 	@After
@@ -114,6 +113,8 @@ public class LoginNewCharacterPacketTest {
 	
 	@Test
 	public void nameTakenTest() throws Exception {
+		ApplicationContext.getInstance(AccountDAO.class).create(CHARACTER_NAME, CHARACTER_PASSWORD, CHARACTER_MAIL);
+		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.ACCOUNT_NAME_TAKEN_ERROR);

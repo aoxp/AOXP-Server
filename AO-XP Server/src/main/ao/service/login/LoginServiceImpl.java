@@ -106,10 +106,11 @@ public class LoginServiceImpl implements LoginService {
 		
 		for(int i = 0; i < skills.length; i++) {
 			totalSkills += skills[i];
-		}
-		
-		if (totalSkills > INITIAL_SKILL_POINTS) {
-			throw new LoginErrorException(INVALID_SKILLS_POINTS_ERROR);
+			
+			if (totalSkills > INITIAL_SKILL_POINTS || skills[i] > INITIAL_SKILL_POINTS || skills[1] < 0) {
+				throw new LoginErrorException(INVALID_SKILLS_POINTS_ERROR);
+			}
+			
 		}
 		
 		// TODO: Check for valid homeland, name and mail.
