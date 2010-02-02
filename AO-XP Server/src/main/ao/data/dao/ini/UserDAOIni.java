@@ -19,14 +19,11 @@
 package ao.data.dao.ini;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -35,9 +32,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.ini4j.Ini;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 import ao.data.dao.AccountDAO;
 import ao.data.dao.DAOException;
@@ -55,6 +49,9 @@ import ao.model.map.Heading;
 import ao.model.user.Account;
 import ao.model.user.AccountImpl;
 import ao.model.user.LoggedUser;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	
@@ -247,7 +244,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		acc.put(FLAGS_HEADER, BANNED_KEY, "0");
 		
 		try {
-			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(getCharFilePath(name)), "UTF-8");
+			Writer writer = new FileWriter(getCharFilePath(name));
 			acc.store(writer);
 			
 			// Make sure the writer is closed, since Ini4j gives no guarantees.
@@ -375,7 +372,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		Reputation rep = new ReputationImpl(0, 0, 0, 0, INITIAL_NOBLE_POINTS, false);
 	
 		try {
-			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(getCharFilePath(name)), "UTF-8");
+			Writer writer = new FileWriter(getCharFilePath(name));
 			chara.store(writer);
 			
 			// Make sure the stream is closed, since Ini4J gives no guarantees.

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URI;
 import java.util.Properties;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
@@ -41,8 +42,28 @@ public class ApplicationContext {
 	private static Injector injector;
 
 	static {
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		
+		// Load global.properties
 		try {
-			ClassLoader loader = Thread.currentThread().getContextClassLoader();
+			URI fileUri = loader.getResource("global.properties").toURI();
+			Properties globalProperties = new Properties();
+			File propFile = new File(fileUri);
+			
+			if (propFile.exists()) {
+				globalProperties.load(new FileInputStream(propFile));
+				
+				for (Entry<Object, Object> property : globalProperties.entrySet()) {
+					 System.setProperty((String) property.getKey(), (String) property.getValue());
+				}
+			}
+		} catch (Exception e) {
+			logger.fatal("Error initializing application context", e);
+			e.printStackTrace();
+		}
+		
+		// Load project.properties
+		try {
 			URI fileUri = loader.getResource("project.properties").toURI();
 			properties.load(new FileInputStream(new File(fileUri)));
 		} catch (Exception e) {

@@ -18,7 +18,10 @@
 
 package ao.data.dao.ini;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
@@ -26,14 +29,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.data.dao.DAOException;
-import ao.data.dao.ini.UserDAOIni;
 import ao.model.character.Gender;
 import ao.model.character.Race;
 import ao.model.character.Skill;
 import ao.model.character.UserCharacter;
 import ao.model.character.archetype.UserArchetype;
 import ao.model.user.Account;
-import ao.model.user.LoggedUser;
 
 public class UserDAOIniTest {
 
@@ -46,6 +47,9 @@ public class UserDAOIniTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		// Disable escaping for Ini4j
+		System.setProperty("org.ini4j.config.escape", "false");
+		
 		dao = new UserDAOIni(CHARFILES_PATH);
 	}
 
