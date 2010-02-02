@@ -18,6 +18,9 @@
 
 package ao.network.packet.incoming;
 
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
 import org.junit.Before;
@@ -27,12 +30,12 @@ import ao.config.ServerConfig;
 import ao.context.ApplicationContext;
 import ao.data.dao.AccountDAO;
 import ao.mock.MockFactory;
-import ao.model.character.Attribute;
 import ao.model.character.Gender;
 import ao.model.character.Race;
 import ao.model.character.Skill;
 import ao.model.character.archetype.UserArchetype;
 import ao.model.user.Account;
+import ao.model.user.User;
 import ao.model.user.ConnectedUser;
 import ao.network.Connection;
 import ao.network.DataBuffer;
@@ -62,18 +65,7 @@ public class LoginNewCharacterPacketTest {
 	@Before
 	public void setUp() throws Exception {
 		packet = new LoginNewCharacterPacket();
-		connection = MockFactory.mockConnection();
-		ConnectedUser user = (ConnectedUser) connection.getUser();
-		
-		EasyMock.expect(user.getAttribute(Attribute.AGILITY)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.CHARISMA)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.CONSTITUTION)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.INTELLIGENCE)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.STRENGTH)).andReturn((byte) 18).anyTimes();
-		
-		user.setAccount((Account) EasyMock.anyObject());
-		
-		EasyMock.replay(user);
+		connection = MockFactory.mockConnection(MockFactory.mockConnectedUser());
 		
 		config.setRestrictedToAdmins(false);
 		config.setCharacterCreationEnabled(true);
@@ -99,6 +91,23 @@ public class LoginNewCharacterPacketTest {
 	}
 	
 	@Test
+	public void successfulCharacterCreation() throws Exception {
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
+				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
+				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND);
+		
+		packet.handle(connection);
+		
+		Account account = ((ConnectedUser) connection.getUser()).getAccount();
+		
+		assertTrue(account.hasCharacter(CHARACTER_NAME));
+		assertEquals(account.getName(), CHARACTER_NAME);
+		assertEquals(account.getMail(), CHARACTER_MAIL);
+		
+		// TODO: Check if the charfiles was created.
+	}
+	
+ 	@Test
 	public void clientOutOfDateTest() throws Exception {
 		LoginServiceImpl service = (LoginServiceImpl) ApplicationContext.getInstance(LoginService.class);
 		service.setCurrentClientVersion(CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION);
