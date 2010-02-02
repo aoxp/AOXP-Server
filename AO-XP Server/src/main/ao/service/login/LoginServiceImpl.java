@@ -32,6 +32,7 @@ import ao.model.character.archetype.UserArchetype;
 import ao.model.user.Account;
 import ao.model.user.ConnectedUser;
 import ao.service.LoginService;
+import ao.service.ValidatorService;
 
 public class LoginServiceImpl implements LoginService {
 	
@@ -49,6 +50,9 @@ public class LoginServiceImpl implements LoginService {
 	public static final String INVALID_ARCHETYPE_ERROR = "La clase seleccionada no es válida.";
 	public static final String INVALID_SKILLS_POINTS_ERROR = "Los skills asignados no son válidos.";
 	public static final String ACCOUNT_NAME_TAKEN_ERROR = "Ya existe el personaje.";
+	public static final String INVALID_NAME_ERROR = "El nombre ingresado no es válido.";
+	public static final String INVALID_EMAIL_ERROR = "La dirección de e-mail ingresada no es válida.";
+	
 	private static final int INITIAL_SKILL_POINTS = 10;
 	
 	private String[] clientHashes;
@@ -77,6 +81,14 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(MUST_THROW_DICES_BEFORE_ERROR);
 		}
 		
+		if (!ValidatorService.validCharacterName(username)) {
+			throw new LoginErrorException(INVALID_NAME_ERROR);
+		}
+		
+		if (!ValidatorService.validEmail(mail)) {
+			throw new LoginErrorException(INVALID_EMAIL_ERROR);
+		}
+		
 		Race race;
 		
 		try {
@@ -101,6 +113,8 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(INVALID_ARCHETYPE_ERROR);
 		}
 		
+		// TODO: Check for valid homeland.
+		
 		// Prevent skills hack.
 		int totalSkills = 0;
 		
@@ -112,8 +126,6 @@ public class LoginServiceImpl implements LoginService {
 			}
 			
 		}
-		
-		// TODO: Check for valid homeland, name and mail.
 		
 		// First, we have to create the new account.
 		Account acc;

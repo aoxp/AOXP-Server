@@ -19,7 +19,6 @@
 package ao.network.packet.incoming;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
@@ -35,7 +34,6 @@ import ao.model.character.Race;
 import ao.model.character.Skill;
 import ao.model.character.archetype.UserArchetype;
 import ao.model.user.Account;
-import ao.model.user.User;
 import ao.model.user.ConnectedUser;
 import ao.network.Connection;
 import ao.network.DataBuffer;
@@ -77,6 +75,27 @@ public class LoginNewCharacterPacketTest {
 	}
 	
 	@Test
+	public void invalidEmailTest() throws Exception {
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
+				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
+				CHARACTER_SKILLS, "foo", CHARACTER_HOMELAND, LoginServiceImpl.INVALID_EMAIL_ERROR);
+		
+		packet.handle(connection);
+		EasyMock.verify(connection.getOutputBuffer());
+	}
+	
+	@Test
+	public void invalidNameTest() throws Exception {
+		
+		writeLogin("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
+				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
+				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_NAME_ERROR);
+		
+		packet.handle(connection);
+		EasyMock.verify(connection.getOutputBuffer());
+	}
+	
+	@Test
 	public void corruptedClientTest() throws Exception {
 		if (!ApplicationContext.SECURITY_ENABLED) {
 			return;
@@ -104,7 +123,7 @@ public class LoginNewCharacterPacketTest {
 		assertEquals(account.getName(), CHARACTER_NAME);
 		assertEquals(account.getMail(), CHARACTER_MAIL);
 		
-		// TODO: Check if the charfiles was created.
+		// TODO: Check if the charfile was created.
 	}
 	
  	@Test
