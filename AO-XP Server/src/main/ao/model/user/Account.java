@@ -51,6 +51,12 @@ public interface Account {
 	 * @return True if the account is banned, false otherwise.
 	 */
 	boolean isBanned();
+	
+	/**
+	 * Sets the account's ban status.
+	 * @param banned Whether the account is banned, or not.
+	 */
+	void setBanned(boolean banned);
 
 	/**
 	 * Retrieves the character with the given name.

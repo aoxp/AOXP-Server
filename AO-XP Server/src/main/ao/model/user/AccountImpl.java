@@ -31,7 +31,7 @@ public class AccountImpl implements Account {
 	private String password;
 	private String mail;
 	
-	private List<String> characters;
+	protected List<String> characters;
 	private boolean banned;
 	
 	/**
@@ -53,6 +53,7 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#getName()
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -60,6 +61,7 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#getMail()
 	 */
+	@Override
 	public String getMail() {
 		return mail;
 	}
@@ -67,6 +69,7 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#getCharacters()
 	 */
+	@Override
 	public List<String> getCharacters() {
 		return characters;
 	}
@@ -74,6 +77,7 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#hasCharacter(java.lang.String)
 	 */
+	@Override
 	public boolean hasCharacter(String name) {
 		String nameLower = name.toLowerCase();
 		
@@ -89,6 +93,7 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#isBanned()
 	 */
+	@Override
 	public boolean isBanned() {
 		return banned;
 	}
@@ -96,6 +101,7 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#getCharacter(java.lang.String)
 	 */
+	@Override
 	public UserCharacter getCharacter(String name) {
 		// TODO : Fill this in!
 		return null;
@@ -104,6 +110,7 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#authenticate(java.lang.String)
 	 */
+	@Override
 	public boolean authenticate(String password) {
 		return this.password.toLowerCase().equals(password.toLowerCase());
 	}
@@ -111,7 +118,17 @@ public class AccountImpl implements Account {
 	/* (non-Javadoc)
 	 * @see ao.model.user.Account#addCharacter(java.lang.String)
 	 */
+	@Override
 	public void addCharacter(String name) {
 		characters.add(name);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.user.Account#setBanned(boolean)
+	 */
+	@Override
+	public void setBanned(boolean banned) {
+		this.banned = banned;
 	}
 }
