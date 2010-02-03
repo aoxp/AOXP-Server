@@ -18,15 +18,17 @@
 
 package ao.model.map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.easymock.classextension.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+
 import ao.model.character.Character;
-import ao.model.worldobject.WorldObject;
 
 public class WorldMapTest {
 
@@ -46,18 +48,54 @@ public class WorldMapTest {
 		
 		map = new WorldMap("foo", 1, new Tile[] {t, t2, t3});
 		
-		assertTrue(map.getTile(0, 0) == t);
-		assertTrue(map.getTile(1, 0) == t2);
-		assertTrue(map.getTile(2, 0) == t3);
+		assertEquals(map.getTile(0, 0), t);
+		assertEquals(map.getTile(1, 0), t2);
+		assertEquals(map.getTile(2, 0), t3);
 	}
 
 	@Test
+	public void testSetTiles() {
+		short[] layers = new short[Tile.LAYERS_AMOUNT]; 
+		Tile t = new Tile(true, layers, Trigger.NONE, null, null, null);
+		
+		map.setTiles(new Tile[] {t});
+		
+		assertEquals(map.getTile(0, 0), t);
+	}
+	
+	@Test
+	public void testEquals() {
+		WorldMap map2 = new WorldMap("foo", 1, new Tile[] {});
+		WorldMap map3 = new WorldMap("foo", 2, new Tile[] {});
+		WorldMap map4 = new WorldMap("asd", 1, new Tile[] {});
+		WorldMap map5 = new WorldMap("asd", 3, new Tile[] {null});
+		WorldMap map6 = new WorldMap(null, 4, new Tile[] {});
+		
+		assertTrue(map.equals(map));
+		assertTrue(map.equals(map2));
+		assertFalse(map.equals(map3));
+		assertFalse(map.equals(map4));
+		assertFalse(map.equals(map5));
+		assertFalse(map6.equals(map));
+		assertFalse(map.equals(null));
+		assertFalse(map.equals(new String()));
+	}
+	
+	@Test
 	public void testGetName() {
 		assertEquals("foo", map.getName());
+		
+		map.setName("asd");
+		
+		assertEquals("asd", map.getName());
 	}
 
 	@Test
 	public void testGetId() {
+		assertEquals(map.getId(), 1);
+		
+		map = new WorldMap(1);
+		
 		assertEquals(map.getId(), 1);
 	}
 	

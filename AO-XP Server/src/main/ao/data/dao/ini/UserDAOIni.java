@@ -26,9 +26,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.ini4j.Ini;
@@ -216,7 +215,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		}
 		
 		// Add the single character's name.
-		List<String> characters = new LinkedList<String>();
+		Set<String> characters = new LinkedHashSet<String>();
 		characters.add(username);
 		
 		return new AccountImpl(
@@ -254,7 +253,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			throw new DAOException();
 		}
 		
-		return new AccountImpl(name, password, mail, new ArrayList<String>(), false);
+		return new AccountImpl(name, password, mail, new LinkedHashSet<String>(), false);
 	}
 
 	@Override

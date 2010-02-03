@@ -18,7 +18,7 @@
 
 package ao.model.user;
 
-import java.util.List;
+import java.util.Set;
 
 import ao.model.character.UserCharacter;
 
@@ -37,7 +37,7 @@ public interface Account {
 	/**
 	 * @return the characters
 	 */
-	List<String> getCharacters();
+	Set<String> getCharacters();
 
 	/**
 	 * Checks if the a character with the given name exists in this account. Check is case insensitive.

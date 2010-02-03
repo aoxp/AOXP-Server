@@ -51,7 +51,6 @@ public class Tile {
 		this.trigger = trigger;
 		this.tileExit = tileExit;
 		
-		//TODO Create the Implementations.
 		this.worldObject = worldObject;
 		this.character = character;
 	}

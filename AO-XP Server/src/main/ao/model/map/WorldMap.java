@@ -94,7 +94,7 @@ public class WorldMap {
 	}
 
 	/**
-	 * Retrieves the tile index at the given  coordinates.
+	 * Retrieves the tile index at the given coordinates.
 	 * @param x The coordinate along the x vertex (zero is at the left).
 	 * @param y The coordinate along the y vertex (zero is at the top).
 	 * @return The tile index at the given coordinates.

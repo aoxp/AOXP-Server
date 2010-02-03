@@ -18,7 +18,7 @@
 
 package ao.model.user;
 
-import java.util.List;
+import java.util.Set;
 
 import ao.model.character.UserCharacter;
 
@@ -31,7 +31,7 @@ public class AccountImpl implements Account {
 	private String password;
 	private String mail;
 	
-	protected List<String> characters;
+	protected Set<String> characters;
 	private boolean banned;
 	
 	/**
@@ -42,7 +42,7 @@ public class AccountImpl implements Account {
 	 * @param characters The account's characters.
 	 * @param banned Wether the account is banned or not.
 	 */
-	public AccountImpl(String name, String password, String mail, List<String> characters, boolean banned) {
+	public AccountImpl(String name, String password, String mail, Set<String> characters, boolean banned) {
 		this.name = name;
 		this.password = password;
 		this.mail = mail;
@@ -70,7 +70,7 @@ public class AccountImpl implements Account {
 	 * @see ao.model.user.Account#getCharacters()
 	 */
 	@Override
-	public List<String> getCharacters() {
+	public Set<String> getCharacters() {
 		return characters;
 	}
 	

@@ -1,3 +1,21 @@
+/*
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package ao.model.user;
 
 import static org.junit.Assert.assertEquals;
@@ -5,8 +23,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedHashSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +34,7 @@ public class AccountImplTest {
 	private static final String ACCOUNT_PASSWORD = "a password";
 	private static final String ACCOUNT_EMAIL = "anemail@address.com";
 	private static final boolean ACCOUNT_BANNED = false;
-	private static final List ACCOUNT_CHARACTERS = new LinkedList<String>();
+	private static final LinkedHashSet ACCOUNT_CHARACTERS = new LinkedHashSet<String>();
 	private static final String TEST_CHARACTER_NAME = "a character";
 	
 	AccountImpl account;
