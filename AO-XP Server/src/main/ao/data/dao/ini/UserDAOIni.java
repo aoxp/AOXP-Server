@@ -19,6 +19,7 @@
 package ao.data.dao.ini;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -243,7 +244,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		acc.put(FLAGS_HEADER, BANNED_KEY, "0");
 		
 		try {
-			Writer writer = new FileWriter(getCharFilePath(name));
+			Writer writer = new BufferedWriter(new FileWriter(getCharFilePath(name)));
 			acc.store(writer);
 			
 			// Make sure the writer is closed, since Ini4j gives no guarantees.
@@ -371,7 +372,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		Reputation rep = new ReputationImpl(0, 0, 0, 0, INITIAL_NOBLE_POINTS, false);
 	
 		try {
-			Writer writer = new FileWriter(getCharFilePath(name));
+			Writer writer = new BufferedWriter(new FileWriter(getCharFilePath(name)));
 			chara.store(writer);
 			
 			// Make sure the stream is closed, since Ini4J gives no guarantees.
