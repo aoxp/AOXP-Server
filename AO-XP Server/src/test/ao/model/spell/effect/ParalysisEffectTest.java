@@ -25,6 +25,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ao.exception.InvalidTargetException;
 import ao.model.character.Character;
 import ao.model.spell.effect.Effect;
 import ao.model.spell.effect.ParalysisEffect;
@@ -94,7 +95,12 @@ public class ParalysisEffectTest {
 		EasyMock.replay(obj, caster);
 		
 		// Should do nothing....
-		paralysisEffect.apply(caster, obj);
+		try {
+			paralysisEffect.apply(caster, obj);
+			Assert.fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (InvalidTargetException e) {
+			// this is ok
+		}
 		
 		EasyMock.verify(caster, obj);
 	}

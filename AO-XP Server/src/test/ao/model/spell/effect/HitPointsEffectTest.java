@@ -22,9 +22,11 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 import org.easymock.EasyMock;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ao.exception.InvalidTargetException;
 import ao.model.character.Character;
 import ao.model.worldobject.WorldObject;
 
@@ -68,4 +70,22 @@ public class HitPointsEffectTest {
 		assertFalse(hpEffect2.appliesTo(caster, target));
 	}
 
+	@Test
+	public void testApplyCharacterWorldObject() {
+		WorldObject obj = EasyMock.createMock(WorldObject.class);
+		Character caster = EasyMock.createMock(Character.class);
+		
+		EasyMock.replay(obj, caster);
+		
+		// Should do nothing....
+		try {
+			hpEffect1.apply(caster, obj);
+			Assert.fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (InvalidTargetException e) {
+			// this is ok
+		}
+		
+		EasyMock.verify(caster, obj);
+	}
+	
 }

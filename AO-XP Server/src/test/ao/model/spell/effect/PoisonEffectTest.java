@@ -25,6 +25,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ao.exception.InvalidTargetException;
 import ao.model.character.Character;
 import ao.model.spell.effect.Effect;
 import ao.model.spell.effect.PoisonEffect;
@@ -32,11 +33,11 @@ import ao.model.worldobject.WorldObject;
 
 public class PoisonEffectTest {
 
-	private Effect poisinEffect;
+	private Effect poisonEffect;
 	
 	@Before
 	public void setUp() throws Exception {
-		this.poisinEffect = new PoisonEffect();
+		this.poisonEffect = new PoisonEffect();
 	}
 
 	@After
@@ -52,7 +53,7 @@ public class PoisonEffectTest {
 		
 		EasyMock.replay(caster, target);
 		
-		poisinEffect.apply(caster, target);
+		poisonEffect.apply(caster, target);
 		
 		EasyMock.verify(caster, target);
 	}
@@ -69,10 +70,10 @@ public class PoisonEffectTest {
 		EasyMock.replay(caster, target);
 		
 		// Paralyzing a dead char is invalid.
-		Assert.assertFalse(poisinEffect.appliesTo(caster, target));
+		Assert.assertFalse(poisonEffect.appliesTo(caster, target));
 		
 		/// Paralyzing an alive char is valid.
-		Assert.assertTrue(poisinEffect.appliesTo(caster, target));
+		Assert.assertTrue(poisonEffect.appliesTo(caster, target));
 	}
 
 	@Test
@@ -83,7 +84,7 @@ public class PoisonEffectTest {
 		EasyMock.replay(obj, caster);
 		
 		// Should always false, no matter what
-		Assert.assertFalse(poisinEffect.appliesTo(caster, obj));
+		Assert.assertFalse(poisonEffect.appliesTo(caster, obj));
 	}
 
 	@Test
@@ -94,7 +95,12 @@ public class PoisonEffectTest {
 		EasyMock.replay(obj, caster);
 		
 		// Should do nothing....
-		poisinEffect.apply(caster, obj);
+		try {
+			poisonEffect.apply(caster, obj);
+			Assert.fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (InvalidTargetException e) {
+			// this is ok
+		}
 		
 		EasyMock.verify(caster, obj);
 	}

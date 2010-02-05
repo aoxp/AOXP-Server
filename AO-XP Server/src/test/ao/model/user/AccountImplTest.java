@@ -24,6 +24,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,7 @@ public class AccountImplTest {
 	private static final String ACCOUNT_PASSWORD = "a password";
 	private static final String ACCOUNT_EMAIL = "anemail@address.com";
 	private static final boolean ACCOUNT_BANNED = false;
-	private static final LinkedHashSet ACCOUNT_CHARACTERS = new LinkedHashSet<String>();
+	private static final Set<String> ACCOUNT_CHARACTERS = new LinkedHashSet<String>();
 	private static final String TEST_CHARACTER_NAME = "a character";
 	
 	AccountImpl account;

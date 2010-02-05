@@ -24,11 +24,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ao.exception.InvalidTargetException;
 import ao.model.character.Character;
 import ao.model.character.NPCCharacter;
 import ao.model.character.UserCharacter;
-import ao.model.spell.effect.Effect;
-import ao.model.spell.effect.InvisibilityEffect;
 import ao.model.worldobject.WorldObject;
 
 public class InvisibilityEffectTest {
@@ -96,8 +95,13 @@ public class InvisibilityEffectTest {
 		
 		EasyMock.replay(obj, caster);
 		
-		// This should do nothing
-		invisibilityEffect.apply(caster, obj);
+		// This should do fail
+		try {
+			invisibilityEffect.apply(caster, obj);
+			Assert.fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (InvalidTargetException e) {
+			// this is ok
+		}
 		
 		EasyMock.verify(caster, obj);
 	}

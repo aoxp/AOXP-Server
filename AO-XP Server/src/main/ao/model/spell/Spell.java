@@ -27,7 +27,7 @@ public class Spell {
 	/**
 	 * The effects stack.
 	 */
-	private Effect[] effects;
+	protected Effect[] effects;
 	
 	/**
 	 * The required staff power to use the spell.
@@ -48,7 +48,7 @@ public class Spell {
 	 * The spell's name.
 	 */
 	private String name;
-	
+
 	/**
 	 * The spell's description.
 	 */
@@ -80,12 +80,26 @@ public class Spell {
 	 * @param requiredStaffPower	The spell's required staff power.
 	 * @param requiredSkill			The spell's required skill.
 	 * @param requiredMana			The spell's required mana.
+	 * @param name					The spell's name.
+	 * @param description			The spell's description.
+	 * @param negative				Whether the spell is negative or not for the target.
+	 * @param fx					The fx to use when displaying the spell.
+	 * @param sound					The sound to play when casting the spell.
+	 * @param magicWords			The magic words to be said by the caster when casting the spell.
 	 */
-	public Spell(Effect[] effects, int requiredStaffPower, int requiredSkill, int requiredMana) {
+	public Spell(Effect[] effects, int requiredStaffPower, int requiredSkill,
+			int requiredMana, String name, String description, boolean negative,
+			int fx, int sound, String magicWords) {
 		this.effects = effects;
 		this.requiredStaffPower = requiredStaffPower;
 		this.requiredSkill = requiredSkill;
 		this.requiredMana = requiredMana;
+		this.name = name;
+		this.description = description;
+		this.negative = negative;
+		this.fx = fx;
+		this.sound = sound;
+		this.magicWords = magicWords;
 	}
 
 	/**

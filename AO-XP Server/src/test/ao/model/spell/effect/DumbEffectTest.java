@@ -24,6 +24,7 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
+import ao.exception.InvalidTargetException;
 import ao.model.character.Character;
 import ao.model.character.UserCharacter;
 import ao.model.spell.effect.DumbEffect;
@@ -77,6 +78,24 @@ public class DumbEffectTest {
 		EasyMock.replay(caster, target);
 		
 		Assert.assertFalse(dumbEffect.appliesTo(caster, target));
+	}
+
+	@Test
+	public void testApplyCharacterWorldObject() {
+		WorldObject obj = EasyMock.createMock(WorldObject.class);
+		Character caster = EasyMock.createMock(Character.class);
+		
+		EasyMock.replay(obj, caster);
+		
+		// Should do nothing....
+		try {
+			dumbEffect.apply(caster, obj);
+			Assert.fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (InvalidTargetException e) {
+			// this is ok
+		}
+		
+		EasyMock.verify(caster, obj);
 	}
 
 }

@@ -18,6 +18,7 @@
 
 package ao.model.spell.effect;
 
+import ao.exception.InvalidTargetException;
 import ao.model.character.Character;
 import ao.model.character.UserCharacter;
 import ao.model.worldobject.WorldObject;
@@ -64,7 +65,7 @@ public class InvisibilityEffect implements Effect {
 	 */
 	@Override
 	public void apply(Character caster, WorldObject target) {
-		
+		throw new InvalidTargetException();
 	}
 	
 }

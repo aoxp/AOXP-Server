@@ -22,10 +22,14 @@ import org.easymock.Capture;
 import org.easymock.IAnswer;
 import org.easymock.classextension.EasyMock;
 
+import ao.exception.InvalidTargetException;
+import ao.model.character.Character;
 import ao.model.character.Attribute;
+import ao.model.spell.effect.Effect;
 import ao.model.user.Account;
 import ao.model.user.ConnectedUser;
 import ao.model.user.User;
+import ao.model.worldobject.WorldObject;
 import ao.network.Connection;
 import ao.network.DataBuffer;
 
@@ -98,4 +102,57 @@ public class MockFactory {
 		return user;
 	}
 	
+	/**
+	 * Creates a new effect mock.
+	 * @param appliesToChar Whether the effect to be mocked should apply to characters.
+	 * @param appliesToWorldObject Whether the effect to be mocked should apply to world objects.
+	 * @return The created mock.
+	 */
+	public static Effect mockEffect(boolean appliesToChar, boolean appliesToWorldObject) {
+		Effect effect = EasyMock.createMock(Effect.class);
+		EasyMock.expect(effect.appliesTo((Character) EasyMock.anyObject(), (Character) EasyMock.anyObject())).andReturn(appliesToChar).anyTimes();
+		EasyMock.expect(effect.appliesTo((Character) EasyMock.anyObject(), (WorldObject) EasyMock.anyObject())).andReturn(appliesToWorldObject).anyTimes();
+		
+		effect.apply((Character) EasyMock.anyObject(), (Character) EasyMock.anyObject());
+		if (!appliesToChar) {
+			EasyMock.expectLastCall().andThrow(new InvalidTargetException()).anyTimes();
+		}
+		
+		effect.apply((Character) EasyMock.anyObject(), (WorldObject) EasyMock.anyObject());
+		if (!appliesToWorldObject) {
+			EasyMock.expectLastCall().andThrow(new InvalidTargetException()).anyTimes();
+		}
+		
+		EasyMock.replay(effect);
+		
+		return effect;
+	}
+	
+	/**
+	 * Creates a new character mock.
+	 * @return The created mock.
+	 */
+	public static Character mockCharacter() {
+		Character character = EasyMock.createMock(Character.class);
+		
+		// TODO : Fill this in as needed
+		
+		EasyMock.replay(character);
+		
+		return character;
+	}
+
+	/**
+	 * Creates a new world object mock.
+	 * @return The created mock.
+	 */
+	public static WorldObject mockWorldObject() {
+		WorldObject worldObject = EasyMock.createMock(WorldObject.class);
+		
+		// TODO : Fill this in as needed
+		
+		EasyMock.replay(worldObject);
+		
+		return worldObject;
+	}
 }
