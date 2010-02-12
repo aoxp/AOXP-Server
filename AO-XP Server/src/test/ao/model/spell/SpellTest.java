@@ -45,6 +45,7 @@ public class SpellTest {
 	
 	private Spell spellNoStaff;
 	private Spell spellWithStaff;
+	private Spell spellNoStaffObject;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -61,6 +62,13 @@ public class SpellTest {
 		effects2[1] = MockFactory.mockEffect(true, false);
 		
 		spellWithStaff = new Spell(effects2, REQUIRED_STAFF_POWER, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
+		
+		Effect[] effects3 = new Effect[2];
+		
+		effects3[0] = MockFactory.mockEffect(false, true);
+		effects3[1] = MockFactory.mockEffect(false, true);
+		
+		spellNoStaffObject = new Spell(effects3, 0, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
 	}
 
 	@After
@@ -71,24 +79,28 @@ public class SpellTest {
 	public void testRequiresStaff() {
 		assertFalse(spellNoStaff.requiresStaff());
 		assertTrue(spellWithStaff.requiresStaff());
+		assertFalse(spellNoStaffObject.requiresStaff());
 	}
 
 	@Test
 	public void testGetRequiredStaffPower() {
 		assertEquals(0, spellNoStaff.getRequiredStaffPower());
 		assertEquals(REQUIRED_STAFF_POWER, spellWithStaff.getRequiredStaffPower());
+		assertEquals(0, spellNoStaffObject.getRequiredStaffPower());
 	}
 
 	@Test
 	public void testGetRequiredMana() {
 		assertEquals(REQUIRED_MANA, spellNoStaff.getRequiredMana());
 		assertEquals(REQUIRED_MANA, spellWithStaff.getRequiredMana());
+		assertEquals(REQUIRED_MANA, spellNoStaffObject.getRequiredMana());
 	}
 
 	@Test
 	public void testGetRequiredSkill() {
 		assertEquals(REQUIRED_SKILL, spellNoStaff.getRequiredSkill());
 		assertEquals(REQUIRED_SKILL, spellWithStaff.getRequiredSkill());
+		assertEquals(REQUIRED_SKILL, spellNoStaffObject.getRequiredSkill());
 	}
 
 	@Test
@@ -98,6 +110,7 @@ public class SpellTest {
 		
 		assertTrue(spellNoStaff.appliesTo(caster, target));
 		assertTrue(spellWithStaff.appliesTo(caster, target));
+		assertFalse(spellNoStaffObject.appliesTo(caster, target));
 	}
 
 	@Test
@@ -107,6 +120,7 @@ public class SpellTest {
 		
 		assertFalse(spellNoStaff.appliesTo(caster, target));
 		assertFalse(spellWithStaff.appliesTo(caster, target));
+		assertTrue(spellNoStaffObject.appliesTo(caster, target));
 	}
 
 	@Test
@@ -122,6 +136,13 @@ public class SpellTest {
 		
 		spellNoStaff.apply(caster, target);
 		spellWithStaff.apply(caster, target);
+		
+		try {
+			spellNoStaffObject.apply(caster, target);
+			fail("Effect not targeting character was applied succesfully to one.");
+		} catch (InvalidTargetException e) {
+			// This is ok
+		}
 		
 		EasyMock.verify(caster, target);
 		EasyMock.verify(spellNoStaff.effects[0], spellNoStaff.effects[1]);
@@ -149,42 +170,59 @@ public class SpellTest {
 		
 		// Nothing else should happen to caster nor target
 		EasyMock.verify(caster, target);
+		
+		// Mock the mana loss
+		EasyMock.reset(caster);
+		caster.addToMana(-REQUIRED_MANA);
+		EasyMock.replay(caster);
+		
+		spellNoStaffObject.apply(caster, target);
+		
+		// Nothing else should happen to caster nor target
+		EasyMock.verify(caster, target);
+		EasyMock.verify(spellNoStaffObject.effects[0], spellNoStaffObject.effects[1]);
 	}
 
 	@Test
 	public void testGetName() {
 		assertEquals(SPELL_NAME, spellNoStaff.getName());
 		assertEquals(SPELL_NAME, spellWithStaff.getName());
+		assertEquals(SPELL_NAME, spellNoStaffObject.getName());
 	}
 
 	@Test
 	public void testGetDescription() {
 		assertEquals(SPELL_DESCRIPTION, spellNoStaff.getDescription());
 		assertEquals(SPELL_DESCRIPTION, spellWithStaff.getDescription());
+		assertEquals(SPELL_DESCRIPTION, spellNoStaffObject.getDescription());
 	}
 
 	@Test
 	public void testIsNegative() {
 		assertEquals(IS_NEGATIVE, spellNoStaff.isNegative());
 		assertEquals(IS_NEGATIVE, spellWithStaff.isNegative());
+		assertEquals(IS_NEGATIVE, spellNoStaffObject.isNegative());
 	}
 
 	@Test
 	public void testGetFX() {
 		assertEquals(SPELL_FX, spellNoStaff.getFX());
 		assertEquals(SPELL_FX, spellWithStaff.getFX());
+		assertEquals(SPELL_FX, spellNoStaffObject.getFX());
 	}
 
 	@Test
 	public void testGetSound() {
 		assertEquals(SPELL_SOUND, spellNoStaff.getSound());
 		assertEquals(SPELL_SOUND, spellWithStaff.getSound());
+		assertEquals(SPELL_SOUND, spellNoStaffObject.getSound());
 	}
 
 	@Test
 	public void testGetMagicWords() {
 		assertEquals(SPELL_MAGIC_WORDS, spellNoStaff.getMagicWords());
 		assertEquals(SPELL_MAGIC_WORDS, spellWithStaff.getMagicWords());
+		assertEquals(SPELL_MAGIC_WORDS, spellNoStaffObject.getMagicWords());
 	}
 
 }
