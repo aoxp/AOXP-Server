@@ -29,7 +29,7 @@ import org.junit.Test;
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
 
-public class DeathPotionTest {
+public class DeathPotionTest extends AbstractItemTest {
 
 	private static final Integer USER_HP = 30;
 	
@@ -40,6 +40,15 @@ public class DeathPotionTest {
 	public void setUp() throws Exception {
 		potion1 = new DeathPotion(1, "Black Potion", 5, true, 1, 1, 0, 0, null);
 		potion2 = new DeathPotion(1, "Black Potion", 1, true, 1, 1, 0, 0, null);
+		
+		item = potion2;
+		itemGraphic = 1;
+		itemId = 1;
+		itemIsTradeable = true;
+		itemManufactureDifficulty = 0;
+		itemUsageDifficulty = 0;
+		itemName = "Black Potion";
+		itemValue = 1;
 	}
 
 	@After

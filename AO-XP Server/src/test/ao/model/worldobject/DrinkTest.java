@@ -31,7 +31,7 @@ import org.junit.Test;
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
 
-public class DrinkTest {
+public class DrinkTest extends AbstractItemTest {
 
 	private static final int MIN_THIRST = 1;
 	private static final int MAX_THIRST = 5;
@@ -43,6 +43,15 @@ public class DrinkTest {
 	public void setUp() throws Exception {
 		drink1 = new Drink(1, "Apple Juice", 5, true, 1, 1, 0, 0, null, MIN_THIRST, MAX_THIRST);
 		drink2 = new Drink(1, "Green Apple Juice", 1, true, 1, 1, 0, 0, null, MAX_THIRST, MAX_THIRST);
+		
+		item = drink2;
+		itemGraphic = 1;
+		itemId = 1;
+		itemIsTradeable = true;
+		itemManufactureDifficulty = 0;
+		itemUsageDifficulty = 0;
+		itemName = "Green Apple Juice";
+		itemValue = 1;
 	}
 
 	@After

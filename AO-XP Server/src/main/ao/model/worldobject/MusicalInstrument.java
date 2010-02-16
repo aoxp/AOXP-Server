@@ -24,15 +24,14 @@ import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * A boat to navigate accross the sea.
+ * A musical instrument.
  */
-public class Boat extends AbstractEquipableItem {
+public class MusicalInstrument extends AbstractItem {
 
-	protected int minHit;
-	protected int maxHit;
+	protected List<Integer> sounds;
 	
 	/**
-	 * Creates a new Boat instance.
+	 * Creates a new MusicalInstrument instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -42,28 +41,25 @@ public class Boat extends AbstractEquipableItem {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param equippedGraphic The index of the graphic when equipped.
-	 * @param minHit The minimum hit granted by this boat.
-	 * @param maxHit The maximum hit granted by this boat.
+	 * @param sounds The sounds that can be played by the instrument.
 	 */
-	public Boat(int id, String name, int amount, boolean tradeable,
+	public MusicalInstrument(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, int equippedGraphic, int minHit, int maxHit) {
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
+			List<Integer> sounds) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, equippedGraphic);
+				manufactureDifficulty, forbiddenArchetypes);
 		
-		this.minHit = minHit;
-		this.maxHit = maxHit;
+		this.sounds = sounds;
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see ao.model.worldobject.AbstractItem#clone()
 	 */
 	@Override
 	public Item clone() {
-		return new Boat(maxHit, name, maxHit, tradeable, maxHit, maxHit, maxHit, maxHit, forbiddenArchetypes, maxHit, minHit, maxHit);
+		return new MusicalInstrument(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, sounds);
 	}
 
 	/*
@@ -73,22 +69,6 @@ public class Boat extends AbstractEquipableItem {
 	@Override
 	public void use(Character character) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	/**
-	 * Retrieves the minimum hit granted.
-	 * @return The minimum hit granted.
-	 */
-	public int getMinHit() {
-		return minHit;
-	}
-
-	/**
-	 * Retrieves the maximum hit granted.
-	 * @return The maximum hit granted.
-	 */
-	public int getMaxHit() {
-		return maxHit;
 	}
 }

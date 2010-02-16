@@ -29,7 +29,7 @@ import org.junit.Test;
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
 
-public class FoodTest {
+public class FoodTest extends AbstractItemTest {
 
 	private static final int MIN_HUN = 1;
 	private static final int MAX_HUN = 5;
@@ -41,6 +41,15 @@ public class FoodTest {
 	public void setUp() throws Exception {
 		food1 = new Food(1, "Apple", 5, true, 1, 1, 0, 0, null, MIN_HUN, MAX_HUN);
 		food2 = new Food(1, "Green Apple", 1, true, 1, 1, 0, 0, null, MAX_HUN, MAX_HUN);
+		
+		item = food2;
+		itemGraphic = 1;
+		itemId = 1;
+		itemIsTradeable = true;
+		itemManufactureDifficulty = 0;
+		itemUsageDifficulty = 0;
+		itemName = "Green Apple";
+		itemValue = 1;
 	}
 
 	@After

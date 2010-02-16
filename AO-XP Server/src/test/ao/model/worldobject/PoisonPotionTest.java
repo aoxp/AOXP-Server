@@ -29,7 +29,7 @@ import org.junit.Test;
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
 
-public class PoisonPotionTest {
+public class PoisonPotionTest extends AbstractItemTest {
 
 	private PoisonPotion potion1;
 	private PoisonPotion potion2;
@@ -38,6 +38,15 @@ public class PoisonPotionTest {
 	public void setUp() throws Exception {
 		potion1 = new PoisonPotion(1, "Violet Potion", 5, true, 1, 1, 0, 0, null);
 		potion2 = new PoisonPotion(1, "Violet Potion", 1, true, 1, 1, 0, 0, null);
+		
+		item = potion2;
+		itemGraphic = 1;
+		itemId = 1;
+		itemIsTradeable = true;
+		itemManufactureDifficulty = 0;
+		itemUsageDifficulty = 0;
+		itemName = "Violet Potion";
+		itemValue = 1;
 	}
 
 	@After

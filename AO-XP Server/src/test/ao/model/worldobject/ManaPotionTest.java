@@ -29,7 +29,7 @@ import org.junit.Test;
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
 
-public class ManaPotionTest {
+public class ManaPotionTest extends AbstractItemTest {
 
 	private static final int MIN_MANA = 1;
 	private static final int MAX_MANA = 5;
@@ -41,6 +41,15 @@ public class ManaPotionTest {
 	public void setUp() throws Exception {
 		potion1 = new ManaPotion(1, "Blue Potion", 5, true, 1, 1, 0, 0, null, MIN_MANA, MAX_MANA);
 		potion2 = new ManaPotion(1, "Big Blue Potion", 1, true, 1, 1, 0, 0, null, MAX_MANA, MAX_MANA);
+		
+		item = potion2;
+		itemGraphic = 1;
+		itemId = 1;
+		itemIsTradeable = true;
+		itemManufactureDifficulty = 0;
+		itemUsageDifficulty = 0;
+		itemName = "Big Blue Potion";
+		itemValue = 1;
 	}
 
 	@After
