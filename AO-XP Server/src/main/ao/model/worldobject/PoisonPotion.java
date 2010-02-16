@@ -6,12 +6,12 @@ import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * A potion to kill self.
+ * A potion to heal from poison.
  */
-public class DeathPotion extends ConsumableItem {
+public class PoisonPotion extends ConsumableItem {
 
 	/**
-	 * Creates a new DeathPotion instance.
+	 * Creates a new PoisonPotion instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -22,7 +22,7 @@ public class DeathPotion extends ConsumableItem {
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 */
-	public DeathPotion(int id, String name, int amount, boolean tradeable,
+	public PoisonPotion(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
@@ -35,7 +35,7 @@ public class DeathPotion extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new DeathPotion(id, name, amount, tradeable, graphic, value,
+		return new PoisonPotion(id, name, amount, tradeable, graphic, value,
 				usageDifficulty, manufactureDifficulty, forbiddenArchetypes);
 	}
 
@@ -47,7 +47,7 @@ public class DeathPotion extends ConsumableItem {
 	public void use(Character character) {
 		super.use(character);
 		
-		// Remove all his HP points!
-		character.addToHitPoints(-character.getHitPoints());
+		// Heal poison!
+		character.setPoisoned(false);
 	}
 }
