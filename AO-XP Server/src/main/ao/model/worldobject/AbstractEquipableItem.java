@@ -20,19 +20,19 @@ package ao.model.worldobject;
 
 import java.util.List;
 
-import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * A magic staff.
+ * Base class for equipable items.
  */
-public class Staff extends AbstractEquipableItem implements Weapon {
-
-	protected int magicPower;
-	protected int attackPower;
+public abstract class AbstractEquipableItem extends AbstractItem implements
+		EquipableItem {
+	
+	protected boolean equipped;
+	protected int equippedGraphic;
 	
 	/**
-	 * Creates a new Staff instance.
+	 * Creates a new AbstractItem instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -43,54 +43,42 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param equippedGraphic The index of the graphic when equipped.
-	 * @param attackPower The attack power of the item.
-	 * @param magicPower The magic power of the staff.
 	 */
-	public Staff(int id, String name, int amount, boolean tradeable,
+	public AbstractEquipableItem(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, int equippedGraphic,
-			int attackPower, int magicPower) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, equippedGraphic);
+			List<UserArchetype> forbiddenArchetypes, int equippedGraphic) {
+		super(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty,forbiddenArchetypes);
 		
-		this.attackPower = attackPower;
-		this.magicPower = magicPower;
-	}
-
-	/**
-	 * Retrieves the staff's magic power.
-	 * @return The staff's magic power.
-	 */
-	public int getMagicPower() {
-		return magicPower;
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Weapon#getAttackPower()
-	 */
-	@Override
-	public int getAttackPower() {
-		return attackPower;
+		this.equipped = false;
+		this.equippedGraphic = equippedGraphic;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.AbstractItem#clone()
+	 * @see ao.model.worldobject.EquipableItem#getEquippedGraphic()
 	 */
 	@Override
-	public Item clone() {
-		return new Staff(magicPower, name, magicPower, tradeable, magicPower, magicPower, magicPower, magicPower, forbiddenArchetypes, magicPower, attackPower, magicPower);
+	public int getEquippedGraphic() {
+		return equippedGraphic;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Item#use(ao.model.character.Character)
+	 * @see ao.model.worldobject.EquipableItem#isEquipped()
 	 */
 	@Override
-	public void use(Character character) {
-		// TODO Auto-generated method stub
-		
+	public boolean isEquipped() {
+		return equipped;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.EquipableItem#setEquipped(boolean)
+	 */
+	@Override
+	public void setEquipped(boolean equipped) {
+		this.equipped = equipped;
+	}
+
 }

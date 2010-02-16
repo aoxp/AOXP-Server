@@ -23,23 +23,47 @@ import java.util.List;
 import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
-public class Boat extends AbstractItem {
+/**
+ * A boat to navigate accross the sea.
+ */
+public class Boat extends AbstractEquipableItem {
 
+	/**
+	 * Creates a new Boat instance.
+	 * @param id The id of the item.
+	 * @param name The name of the item.
+	 * @param amount The item's amount.
+	 * @param tradeable True if it's tradeable, false otherwise.
+	 * @param graphic The graphic for the item.
+	 * @param value The item's value.
+	 * @param usageDifficulty The item's usage difficulty.
+	 * @param manufactureDifficulty The item's manufacture difficulty.
+	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param equippedGraphic The index of the graphic when equipped.
+	 */
 	public Boat(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes) {
+			List<UserArchetype> forbiddenArchetypes, int equippedGraphic) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes, equippedGraphic);
 		// TODO Auto-generated constructor stub
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.AbstractItem#clone()
+	 */
 	@Override
 	public Item clone() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.Item#use(ao.model.character.Character)
+	 */
 	@Override
 	public void use(Character character) {
 		// TODO Auto-generated method stub
