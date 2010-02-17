@@ -49,7 +49,7 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		itemIsTradeable = true;
 		itemManufactureDifficulty = 0;
 		itemUsageDifficulty = 0;
-		itemName = "Turtle Shield";
+		itemName = "Small Boat";
 		itemValue = 1;
 		itemNewbie = false;
 		itemEquipped = false;
