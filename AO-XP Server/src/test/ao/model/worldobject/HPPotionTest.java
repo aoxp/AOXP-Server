@@ -39,8 +39,8 @@ public class HPPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		potion1 = new HPPotion(1, "Red Potion", 5, true, 1, 1, 0, 0, null, MIN_HP, MAX_HP);
-		potion2 = new HPPotion(1, "Big Red Potion", 1, true, 1, 1, 0, 0, null, MAX_HP, MAX_HP);
+		potion1 = new HPPotion(1, "Red Potion", 5, true, 1, 1, 0, 0, null, false, MIN_HP, MAX_HP);
+		potion2 = new HPPotion(1, "Big Red Potion", 1, true, 1, 1, 0, 0, null, false, MAX_HP, MAX_HP);
 		
 		item = potion2;
 		itemGraphic = 1;
@@ -50,6 +50,7 @@ public class HPPotionTest extends AbstractItemTest {
 		itemUsageDifficulty = 0;
 		itemName = "Big Red Potion";
 		itemValue = 1;
+		itemNewbie = false;
 	}
 
 	@After

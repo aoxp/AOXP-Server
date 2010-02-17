@@ -42,13 +42,14 @@ public abstract class AbstractEquipableItem extends AbstractItem implements
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 * @param equippedGraphic The index of the graphic when equipped.
 	 */
 	public AbstractEquipableItem(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, int equippedGraphic) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty,forbiddenArchetypes);
+			List<UserArchetype> forbiddenArchetypes, boolean newbie, int equippedGraphic) {
+		super(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie);
 		
 		this.equipped = false;
 		this.equippedGraphic = equippedGraphic;

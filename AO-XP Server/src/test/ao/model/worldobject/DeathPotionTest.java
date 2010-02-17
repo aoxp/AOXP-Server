@@ -38,8 +38,8 @@ public class DeathPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		potion1 = new DeathPotion(1, "Black Potion", 5, true, 1, 1, 0, 0, null);
-		potion2 = new DeathPotion(1, "Black Potion", 1, true, 1, 1, 0, 0, null);
+		potion1 = new DeathPotion(1, "Black Potion", 5, true, 1, 1, 0, 0, null, false);
+		potion2 = new DeathPotion(1, "Black Potion", 1, true, 1, 1, 0, 0, null, false);
 		
 		item = potion2;
 		itemGraphic = 1;
@@ -49,6 +49,7 @@ public class DeathPotionTest extends AbstractItemTest {
 		itemUsageDifficulty = 0;
 		itemName = "Black Potion";
 		itemValue = 1;
+		itemNewbie = false;
 	}
 
 	@After

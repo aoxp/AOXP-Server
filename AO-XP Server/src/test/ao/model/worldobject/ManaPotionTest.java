@@ -39,8 +39,8 @@ public class ManaPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		potion1 = new ManaPotion(1, "Blue Potion", 5, true, 1, 1, 0, 0, null, MIN_MANA, MAX_MANA);
-		potion2 = new ManaPotion(1, "Big Blue Potion", 1, true, 1, 1, 0, 0, null, MAX_MANA, MAX_MANA);
+		potion1 = new ManaPotion(1, "Blue Potion", 5, true, 1, 1, 0, 0, null, false, MIN_MANA, MAX_MANA);
+		potion2 = new ManaPotion(1, "Big Blue Potion", 1, true, 1, 1, 0, 0, null, false, MAX_MANA, MAX_MANA);
 		
 		item = potion2;
 		itemGraphic = 1;
@@ -50,6 +50,7 @@ public class ManaPotionTest extends AbstractItemTest {
 		itemUsageDifficulty = 0;
 		itemName = "Big Blue Potion";
 		itemValue = 1;
+		itemNewbie = false;
 	}
 
 	@After

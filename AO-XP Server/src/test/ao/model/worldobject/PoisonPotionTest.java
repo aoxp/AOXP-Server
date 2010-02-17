@@ -36,8 +36,8 @@ public class PoisonPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		potion1 = new PoisonPotion(1, "Violet Potion", 5, true, 1, 1, 0, 0, null);
-		potion2 = new PoisonPotion(1, "Violet Potion", 1, true, 1, 1, 0, 0, null);
+		potion1 = new PoisonPotion(1, "Violet Potion", 5, true, 1, 1, 0, 0, null, false);
+		potion2 = new PoisonPotion(1, "Violet Potion", 1, true, 1, 1, 0, 0, null, false);
 		
 		item = potion2;
 		itemGraphic = 1;
@@ -47,6 +47,7 @@ public class PoisonPotionTest extends AbstractItemTest {
 		itemUsageDifficulty = 0;
 		itemName = "Violet Potion";
 		itemValue = 1;
+		itemNewbie = false;
 	}
 
 	@After

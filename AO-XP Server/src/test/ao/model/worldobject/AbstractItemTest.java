@@ -32,6 +32,7 @@ public abstract class AbstractItemTest {
 	protected boolean itemIsTradeable;
 	protected int itemGraphic;
 	protected String itemName;
+	protected boolean itemNewbie;
 	
 	@Test
 	public void testAddAmount() {
@@ -92,4 +93,8 @@ public abstract class AbstractItemTest {
 		assertEquals(itemName, item.getName());
 	}
 
+	@Test
+	public void testIsNewbie() {
+		assertEquals(itemNewbie, item.isNewbie());
+	}
 }

@@ -21,12 +21,13 @@ public class PoisonPotion extends ConsumableItem {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 */
 	public PoisonPotion(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes) {
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, boolean newbie) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes, newbie);
 	}
 
 	/*
@@ -36,7 +37,7 @@ public class PoisonPotion extends ConsumableItem {
 	@Override
 	public Item clone() {
 		return new PoisonPotion(id, name, amount, tradeable, graphic, value,
-				usageDifficulty, manufactureDifficulty, forbiddenArchetypes);
+				usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie);
 	}
 
 	/*

@@ -42,15 +42,16 @@ public class Drink extends ConsumableItem {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 * @param minThirst The minimum thirst replenished by the food.
 	 * @param maxThirst The maximum thirst replenished by the food.
 	 */
 	public Drink(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, int minThirst, int maxThirst) {
+			List<UserArchetype> forbiddenArchetypes, boolean newbie, int minThirst, int maxThirst) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes, newbie);
 
 		this.minThirst = minThirst;
 		this.maxThirst = maxThirst;
@@ -63,7 +64,7 @@ public class Drink extends ConsumableItem {
 	@Override
 	public Item clone() {
 		return new Drink(id, name, amount, tradeable, graphic, value,
-				usageDifficulty, manufactureDifficulty, forbiddenArchetypes,
+				usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie,
 				minThirst, maxThirst);
 	}
 

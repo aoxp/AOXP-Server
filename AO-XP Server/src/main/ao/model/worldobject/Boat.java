@@ -42,6 +42,7 @@ public class Boat extends AbstractEquipableItem {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 * @param equippedGraphic The index of the graphic when equipped.
 	 * @param minHit The minimum hit granted by this boat.
 	 * @param maxHit The maximum hit granted by this boat.
@@ -49,9 +50,9 @@ public class Boat extends AbstractEquipableItem {
 	public Boat(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, int equippedGraphic, int minHit, int maxHit) {
+			List<UserArchetype> forbiddenArchetypes, boolean newbie, int equippedGraphic, int minHit, int maxHit) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, equippedGraphic);
+				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
 		
 		this.minHit = minHit;
 		this.maxHit = maxHit;
@@ -63,7 +64,7 @@ public class Boat extends AbstractEquipableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Boat(maxHit, name, maxHit, tradeable, maxHit, maxHit, maxHit, maxHit, forbiddenArchetypes, maxHit, minHit, maxHit);
+		return new Boat(maxHit, name, maxHit, tradeable, maxHit, maxHit, maxHit, maxHit, forbiddenArchetypes, newbie, maxHit, minHit, maxHit);
 	}
 
 	/*

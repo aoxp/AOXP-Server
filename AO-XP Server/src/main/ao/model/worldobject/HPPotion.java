@@ -24,15 +24,16 @@ public class HPPotion extends ConsumableItem {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 * @param minHP The minimum hit points replenished by the potion.
 	 * @param maxHP The maximum hit points replenished by the potion.
 	 */
 	public HPPotion(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			int minHP, int maxHP) {
+			boolean newbie, int minHP, int maxHP) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes, newbie);
 		
 		this.minHP = minHP;
 		this.maxHP = maxHP;
@@ -46,7 +47,7 @@ public class HPPotion extends ConsumableItem {
 	public Item clone() {
 		return new HPPotion(id, name, amount, tradeable, graphic, value,
 				usageDifficulty, manufactureDifficulty, forbiddenArchetypes,
-				minHP, maxHP);
+				newbie, minHP, maxHP);
 	}
 
 	/*

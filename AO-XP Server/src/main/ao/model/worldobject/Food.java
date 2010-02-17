@@ -48,9 +48,9 @@ public class Food extends ConsumableItem {
 	public Food(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, int minHun, int maxHun) {
+			List<UserArchetype> forbiddenArchetypes, boolean newbie, int minHun, int maxHun) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes, newbie);
 
 		this.minHun = minHun;
 		this.maxHun = maxHun;
@@ -64,7 +64,7 @@ public class Food extends ConsumableItem {
 	public Item clone() {
 		return new Food(id, name, amount, tradeable, graphic, value,
 				usageDifficulty, manufactureDifficulty, forbiddenArchetypes,
-				minHun, maxHun);
+				newbie, minHun, maxHun);
 	}
 
 	/*

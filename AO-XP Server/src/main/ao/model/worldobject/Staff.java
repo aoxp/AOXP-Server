@@ -42,6 +42,7 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 * @param equippedGraphic The index of the graphic when equipped.
 	 * @param attackPower The attack power of the item.
 	 * @param magicPower The magic power of the staff.
@@ -49,10 +50,10 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	public Staff(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, int equippedGraphic,
+			List<UserArchetype> forbiddenArchetypes, boolean newbie, int equippedGraphic,
 			int attackPower, int magicPower) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, equippedGraphic);
+				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
 		
 		this.attackPower = attackPower;
 		this.magicPower = magicPower;
@@ -81,7 +82,7 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 */
 	@Override
 	public Item clone() {
-		return new Staff(magicPower, name, magicPower, tradeable, magicPower, magicPower, magicPower, magicPower, forbiddenArchetypes, magicPower, attackPower, magicPower);
+		return new Staff(magicPower, name, magicPower, tradeable, magicPower, magicPower, magicPower, magicPower, forbiddenArchetypes, newbie, magicPower, attackPower, magicPower);
 	}
 
 	/*

@@ -41,6 +41,7 @@ public abstract class AbstractItem implements Item {
 	protected int value;
 	protected int usageDifficulty;
 	protected int manufactureDifficulty;
+	protected boolean newbie;
 	
 	protected List<UserArchetype> forbiddenArchetypes;
 	
@@ -55,11 +56,12 @@ public abstract class AbstractItem implements Item {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 */
 	public AbstractItem(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes) {
+			List<UserArchetype> forbiddenArchetypes, boolean newbie) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -70,6 +72,7 @@ public abstract class AbstractItem implements Item {
 		this.usageDifficulty = usageDifficulty;
 		this.manufactureDifficulty = manufactureDifficulty;
 		this.forbiddenArchetypes = forbiddenArchetypes;
+		this.newbie = newbie;
 	}
 
 	/*
@@ -177,6 +180,15 @@ public abstract class AbstractItem implements Item {
 	@Override
 	public String getName() {
 		return name;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.Item#isNewbie()
+	 */
+	@Override
+	public boolean isNewbie() {
+		return newbie;
 	}
 
 	/*

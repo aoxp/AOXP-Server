@@ -41,14 +41,15 @@ public class MusicalInstrument extends AbstractItem {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param newbie Whether the item is newbie or nor.
 	 * @param sounds The sounds that can be played by the instrument.
 	 */
 	public MusicalInstrument(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			List<Integer> sounds) {
+			boolean newbie, List<Integer> sounds) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes);
+				manufactureDifficulty, forbiddenArchetypes, newbie);
 		
 		this.sounds = sounds;
 	}
@@ -59,7 +60,7 @@ public class MusicalInstrument extends AbstractItem {
 	 */
 	@Override
 	public Item clone() {
-		return new MusicalInstrument(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, sounds);
+		return new MusicalInstrument(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, sounds);
 	}
 
 	/*

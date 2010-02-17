@@ -41,8 +41,8 @@ public class DrinkTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		drink1 = new Drink(1, "Apple Juice", 5, true, 1, 1, 0, 0, null, MIN_THIRST, MAX_THIRST);
-		drink2 = new Drink(1, "Green Apple Juice", 1, true, 1, 1, 0, 0, null, MAX_THIRST, MAX_THIRST);
+		drink1 = new Drink(1, "Apple Juice", 5, true, 1, 1, 0, 0, null, false, MIN_THIRST, MAX_THIRST);
+		drink2 = new Drink(1, "Green Apple Juice", 1, true, 1, 1, 0, 0, null, false, MAX_THIRST, MAX_THIRST);
 		
 		item = drink2;
 		itemGraphic = 1;
@@ -52,6 +52,7 @@ public class DrinkTest extends AbstractItemTest {
 		itemUsageDifficulty = 0;
 		itemName = "Green Apple Juice";
 		itemValue = 1;
+		itemNewbie = false;
 	}
 
 	@After

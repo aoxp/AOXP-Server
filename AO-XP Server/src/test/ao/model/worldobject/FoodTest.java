@@ -39,8 +39,8 @@ public class FoodTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		food1 = new Food(1, "Apple", 5, true, 1, 1, 0, 0, null, MIN_HUN, MAX_HUN);
-		food2 = new Food(1, "Green Apple", 1, true, 1, 1, 0, 0, null, MAX_HUN, MAX_HUN);
+		food1 = new Food(1, "Apple", 5, true, 1, 1, 0, 0, null, false, MIN_HUN, MAX_HUN);
+		food2 = new Food(1, "Green Apple", 1, true, 1, 1, 0, 0, null, false, MAX_HUN, MAX_HUN);
 		
 		item = food2;
 		itemGraphic = 1;
@@ -50,6 +50,7 @@ public class FoodTest extends AbstractItemTest {
 		itemUsageDifficulty = 0;
 		itemName = "Green Apple";
 		itemValue = 1;
+		itemNewbie = false;
 	}
 
 	@After
