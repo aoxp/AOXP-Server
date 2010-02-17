@@ -15,10 +15,13 @@
   0. You just DO WHAT THE FUCK YOU WANT TO.
 */
 
-package ao.security;
+package ao.security.impl;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+
+import ao.security.SecurityManager;
+import ao.security.Hashing;
 
 /**
  * Default SecurityManager implementation, not so secure.
