@@ -34,13 +34,6 @@ public interface SecurityManager {
 	int getPasswordHashLength();
 	
 	/**
-	 * Retrieves the hashed password.
-	 * @param password The password to hash.
-	 * @return The hashed password.
-	 */
-	String hashPassword(String password);
-	
-	/**
 	 * Retrieves the client's hash's length.
 	 * @return The hash's length.
 	 */

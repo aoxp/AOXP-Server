@@ -43,11 +43,6 @@ public class DefaultSecurityManager implements SecurityManager {
 	}
 
 	@Override
-	public String hashPassword(String password) {
-		return password;
-	}
-
-	@Override
 	public void decrypt(ByteBuffer buffer, SocketChannel sc) {
 		// Do nothing, no encryption for default.
 	}
