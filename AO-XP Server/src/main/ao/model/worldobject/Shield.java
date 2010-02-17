@@ -24,12 +24,12 @@ import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * A helmet.
+ * A shield.
  */
-public class Helmet extends AbstractDefensiveItem {
+public class Shield extends AbstractDefensiveItem {
 
 	/**
-	 * Creates a new Helmet instance.
+	 * Creates a new Shield instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -44,7 +44,7 @@ public class Helmet extends AbstractDefensiveItem {
 	 * @param minDef The minimum defense granted by this boat.
 	 * @param maxDef The maximum defense granted by this boat.
 	 */
-	public Helmet(int id, String name, int amount, boolean tradeable,
+	public Shield(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
 			boolean newbie, int equippedGraphic, int minDef, int maxDef) {
@@ -59,7 +59,7 @@ public class Helmet extends AbstractDefensiveItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Helmet(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef);
+		return new Shield(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef);
 	}
 
 	/*
@@ -68,7 +68,7 @@ public class Helmet extends AbstractDefensiveItem {
 	 */
 	@Override
 	public void use(Character character) {
-		// Helmets can't be used, just equipped
+		// Shields can't be used, just equipped
 	}
 
 }
