@@ -24,12 +24,12 @@ import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * A potion to kill self.
+ * A helmet.
  */
-public class DeathPotion extends ConsumableItem {
+public class Helmet extends AbstractDefensiveItem {
 
 	/**
-	 * Creates a new DeathPotion instance.
+	 * Creates a new AbstractDefensiveitem instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -40,12 +40,17 @@ public class DeathPotion extends ConsumableItem {
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or nor.
+	 * @param equippedGraphic The index of the graphic when equipped.
+	 * @param minDef The minimum defense granted by this boat.
+	 * @param maxDef The maximum defense granted by this boat.
 	 */
-	public DeathPotion(int id, String name, int amount, boolean tradeable,
+	public Helmet(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, boolean newbie) {
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
+			boolean newbie, int equippedGraphic, int minDef, int maxDef) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
+				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic,
+				minDef, maxDef);
 	}
 
 	/*
@@ -54,19 +59,16 @@ public class DeathPotion extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new DeathPotion(id, name, amount, tradeable, graphic, value,
-				usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie);
+		return new Helmet(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.ConsumableItem#use(ao.model.character.Character)
+	 * @see ao.model.worldobject.Item#use(ao.model.character.Character)
 	 */
 	@Override
 	public void use(Character character) {
-		super.use(character);
-		
-		// Remove all his HP points!
-		character.addToHitPoints(-character.getHitPoints());
+		// Helmets can't be used, just equipped
 	}
+
 }

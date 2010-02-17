@@ -82,7 +82,7 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 */
 	@Override
 	public Item clone() {
-		return new Staff(magicPower, name, magicPower, tradeable, magicPower, magicPower, magicPower, magicPower, forbiddenArchetypes, newbie, magicPower, attackPower, magicPower);
+		return new Staff(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, attackPower, magicPower);
 	}
 
 	/*

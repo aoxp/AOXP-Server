@@ -26,7 +26,7 @@ import ao.model.character.archetype.UserArchetype;
 /**
  * A boat to navigate accross the sea.
  */
-public class Boat extends AbstractEquipableItem {
+public class Boat extends AbstractDefensiveItem {
 
 	protected int minHit;
 	protected int maxHit;
@@ -44,15 +44,17 @@ public class Boat extends AbstractEquipableItem {
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or nor.
 	 * @param equippedGraphic The index of the graphic when equipped.
+	 * @param minDef The minimum defense granted by this boat.
+	 * @param maxDef The maximum defense granted by this boat.
 	 * @param minHit The minimum hit granted by this boat.
 	 * @param maxHit The maximum hit granted by this boat.
 	 */
 	public Boat(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie, int equippedGraphic, int minHit, int maxHit) {
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
+			boolean newbie, int equippedGraphic, int minDef, int maxDef, int minHit, int maxHit) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
+				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef);
 		
 		this.minHit = minHit;
 		this.maxHit = maxHit;
@@ -64,7 +66,7 @@ public class Boat extends AbstractEquipableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Boat(maxHit, name, maxHit, tradeable, maxHit, maxHit, maxHit, maxHit, forbiddenArchetypes, newbie, maxHit, minHit, maxHit);
+		return new Boat(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef, minHit, maxHit);
 	}
 
 	/*
@@ -76,7 +78,7 @@ public class Boat extends AbstractEquipableItem {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	/**
 	 * Retrieves the minimum hit granted.
 	 * @return The minimum hit granted.
@@ -84,7 +86,7 @@ public class Boat extends AbstractEquipableItem {
 	public int getMinHit() {
 		return minHit;
 	}
-
+	
 	/**
 	 * Retrieves the maximum hit granted.
 	 * @return The maximum hit granted.
