@@ -190,6 +190,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	protected static final int INITIAL_NOBLE_POINTS = 1000;
 	
 	private static final Logger logger = Logger.getLogger(UserDAOIni.class);
+	
 	private String charfilesPath;
 	
 	@Inject
@@ -238,7 +239,6 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		
 		Ini acc = new Ini();
 		
-		// TODO: If security is enabled hash the password!
 		acc.put(INIT_HEADER, PASSWORD_KEY, password);
 		acc.put(CONTACT_HEADER, MAIL_KEY, mail);
 		acc.put(FLAGS_HEADER, BANNED_KEY, "0");

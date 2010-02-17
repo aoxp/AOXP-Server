@@ -29,6 +29,7 @@ import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.packet.IncomingPacket;
 import ao.security.Hashing;
+import ao.security.SecurityManager;
 import ao.service.LoginService;
 import ao.service.login.LoginServiceImpl;
 
@@ -45,6 +46,7 @@ public class LoginExistingCharacterPacketTest {
 	Connection connection;
 	IncomingPacket packet;
 	ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
+	SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
 	
 	@Before
 	public void setUp() throws Exception {
@@ -59,14 +61,11 @@ public class LoginExistingCharacterPacketTest {
 		DataBuffer outBuffer = connection.getOutputBuffer();
 
 		EasyMock.expect(buffer.getASCIIString()).andReturn(charName).once();
-		EasyMock.expect(buffer.getASCIIString()).andReturn(password).once();
+		EasyMock.expect(buffer.getASCIIStringFixed(security.getPasswordHashLength())).andReturn(password).once();
 		EasyMock.expect(buffer.getShort()).andReturn(major).once();
 		EasyMock.expect(buffer.getShort()).andReturn(minor).once();
 		EasyMock.expect(buffer.getShort()).andReturn(version).once();
-		
-		if (ApplicationContext.SECURITY_ENABLED) {
-			EasyMock.expect(buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH)).andReturn(hash).once();
-		}
+		EasyMock.expect(buffer.getASCIIStringFixed(security.getClientHashLength())).andReturn(hash).once();
 		
 		EasyMock.replay(buffer);
 		
@@ -111,19 +110,6 @@ public class LoginExistingCharacterPacketTest {
 		service.setCurrentClientVersion(CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION);
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, (short) 0, (short) 0,(short) 0, "", String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION));
-		packet.handle(connection);
-		
-		EasyMock.verify(connection.getOutputBuffer());
-	}
-	
-	@Test
-	public void testHandleCorruptedClient() throws Exception {
-		if (!ApplicationContext.SECURITY_ENABLED) {
-			return;
-		}
-		
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD,
-				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "foo", LoginServiceImpl.CORRUPTED_CLIENT_ERROR);
 		packet.handle(connection);
 		
 		EasyMock.verify(connection.getOutputBuffer());

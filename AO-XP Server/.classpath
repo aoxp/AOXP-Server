@@ -11,7 +11,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="lib/ini4j-0.5.1.jar"/>
-    <classpathentry kind="lib" path="lib/jakarta-oro-2.0.8.jar"/>
-    <classpathentry kind="lib" path="lib/commons-validator-1.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/jakarta-oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="lib/commons-validator-1.3.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AO-XP Server Security"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

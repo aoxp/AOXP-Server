@@ -82,23 +82,6 @@ public class ServerConfigIni implements ServerConfig {
 	}
 	
 	@Override
-	public String[] getValidClientHashes() {
-		
-		Section hashesConfig = config.get(HASHES_HEADER);
-		if (Integer.valueOf(hashesConfig.get(HASHES_ACTIVATED_KEY)) == 0) {
-			return null;
-		}
-		
-		String[] clientHashes = new String[Integer.valueOf(hashesConfig.get(HASHES_AMOUNT_KEY))];
-		
-		for (int i = 0; i < clientHashes.length; i++) {
-			clientHashes[i] = hashesConfig.get(String.format(HASHES_ACCEPTED_KEY_FORMAT, i));
-		}
-		
-		return clientHashes;
-	}
-
-	@Override
 	public boolean isCharacterCreationEnabled() {
 		return config.get(INIT_HEADER, CHARACTER_CREATION_KEY).equals("1");
 	}
@@ -106,7 +89,6 @@ public class ServerConfigIni implements ServerConfig {
 	@Override
 	public void setCharacterCreationEnabled(boolean enabled) {
 		config.put(INIT_HEADER, CHARACTER_CREATION_KEY, enabled ? "1" : "0");
-		
 	}
 	
 	@Override

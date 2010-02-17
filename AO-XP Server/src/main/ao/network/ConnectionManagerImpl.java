@@ -29,7 +29,9 @@ import org.apache.log4j.Logger;
 
 import ao.AOXPServer;
 import ao.config.ServerConfig;
+import ao.context.ApplicationContext;
 import ao.model.user.User;
+import ao.security.SecurityManager;
 
 import com.google.inject.Inject;
 
@@ -44,7 +46,8 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	
 	private ConcurrentMap<SocketChannel, Connection> scToConnection;
 	private ConcurrentMap<User, Connection> userToConnection;
-
+	private SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
+	
 	/**
 	 * Creates a new ConnectionManagerImpl
 	 * @param config The server's configuration.
@@ -54,8 +57,8 @@ public class ConnectionManagerImpl implements ConnectionManager {
 		int concurrencyLevel = Runtime.getRuntime().availableProcessors();
 		int maxExpectedUsers = config.getMaximumConcurrentUsers();
 		
-		this.scToConnection = new ConcurrentHashMap<SocketChannel, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
-		this.userToConnection = new ConcurrentHashMap<User, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
+		scToConnection = new ConcurrentHashMap<SocketChannel, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
+		userToConnection = new ConcurrentHashMap<User, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
 	}
 	
 	/*
@@ -64,7 +67,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	 */
 	@Override
 	public DataBuffer getInputBuffer(SocketChannel sc) {
-		return this.scToConnection.get(sc).inputBuffer;
+		return scToConnection.get(sc).inputBuffer;
 	}
 
 	/*
@@ -76,7 +79,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 
 		// Everything is synchronized over the socket. This allows to keep only one running thread per client at a time.
 		synchronized (sc) {
-			Connection connection = this.scToConnection.get(sc);
+			Connection connection = scToConnection.get(sc);
 			ByteBuffer buffer = connection.inputBuffer.buffer;
 			
 			try {
@@ -86,6 +89,9 @@ public class ConnectionManagerImpl implements ConnectionManager {
 				} else {
 					// Limit the buffer to what we currently have, and move pointer to the beginning
 					buffer.flip();
+					
+					// Decrypt the data before trying to handle the packet.
+					security.decrypt(buffer, sc);
 					
 					try {
 						// Handle every packet we may
@@ -123,8 +129,8 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	public void registerConnection(SocketChannel sc) {
 		Connection connection = new Connection(sc);
 		
-		this.scToConnection.put(sc, connection);
-		this.userToConnection.put(connection.user, connection);
+		scToConnection.put(sc, connection);
+		userToConnection.put(connection.user, connection);
 	}
 	
 	/*
@@ -136,8 +142,8 @@ public class ConnectionManagerImpl implements ConnectionManager {
 		
 		// TODO : Apply any other internal logic before definitely removing the user
 		
-		Connection connection = this.scToConnection.remove(sc);
-		this.userToConnection.remove(connection.user);
+		Connection connection = scToConnection.remove(sc);
+		userToConnection.remove(connection.user);
 	}
 
 	/*
@@ -147,8 +153,12 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	@Override
 	public void flushOutputBuffer(User user) throws IOException {
 		
-		Connection connection = this.userToConnection.get(user);
+		Connection connection = userToConnection.get(user);
 		connection.outputBuffer.buffer.flip();
+		
+		// Encrypt the data before sending it.
+		security.encrypt(connection.outputBuffer.buffer, connection.socketChannel);
+		
 		connection.socketChannel.write(connection.outputBuffer.buffer);
 		connection.outputBuffer.buffer.clear();
 	}
@@ -160,7 +170,7 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	@Override
 	public DataBuffer getOutputBuffer(User user) {
 		
-		return this.userToConnection.get(user).outputBuffer;
+		return userToConnection.get(user).outputBuffer;
 	}
 
 }

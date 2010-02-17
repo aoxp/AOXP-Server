@@ -31,6 +31,7 @@ import ao.model.character.UserCharacter;
 import ao.model.character.archetype.UserArchetype;
 import ao.model.user.Account;
 import ao.model.user.ConnectedUser;
+import ao.security.SecurityManager;
 import ao.service.LoginService;
 import ao.service.ValidatorService;
 
@@ -214,12 +215,12 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(String.format(CLIENT_OUT_OF_DATE_ERROR_FORMAT, currentClientVersion));
 		}
 		
-		if (hash.equals("")) {
-			return;
+		if (clientHashes == null) {
+			clientHashes = ApplicationContext.getInstance(SecurityManager.class).getValidClientHashes();
 		}
 		
-		if (clientHashes == null) {
-			clientHashes = config.getValidClientHashes();
+		if (clientHashes.length < 1) {
+			return;
 		}
 		
 		for (String validHash : clientHashes) {

@@ -38,7 +38,8 @@ import ao.model.user.ConnectedUser;
 import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.packet.IncomingPacket;
-import ao.security.Hashing;
+import ao.security.SecurityManager;
+import ao.security.SecurityManager;
 import ao.service.LoginService;
 import ao.service.login.LoginServiceImpl;
 
@@ -59,6 +60,7 @@ public class LoginNewCharacterPacketTest {
 	Connection connection;
 	IncomingPacket packet;
 	ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
+	SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
 	
 	@Before
 	public void setUp() throws Exception {
@@ -90,20 +92,6 @@ public class LoginNewCharacterPacketTest {
 		writeLogin("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_NAME_ERROR);
-		
-		packet.handle(connection);
-		EasyMock.verify(connection.getOutputBuffer());
-	}
-	
-	@Test
-	public void corruptedClientTest() throws Exception {
-		if (!ApplicationContext.SECURITY_ENABLED) {
-			return;
-		}
-		
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
-				CLIENT_VERSION, "foo", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.CORRUPTED_CLIENT_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -267,20 +255,12 @@ public class LoginNewCharacterPacketTest {
 
 		EasyMock.expect(buffer.getASCIIString()).andReturn(charName).once();
 		
-		if (ApplicationContext.SECURITY_ENABLED) {
-			EasyMock.expect(buffer.getASCIIStringFixed(Hashing.MD5_ASCII_LENGTH)).andReturn(password).once();
-		} else {
-			EasyMock.expect(buffer.getASCIIString()).andReturn(password).once();
-		}
+		EasyMock.expect(buffer.getASCIIStringFixed(security.getPasswordHashLength())).andReturn(password).once();
 		
 		EasyMock.expect(buffer.get()).andReturn(major).once();
 		EasyMock.expect(buffer.get()).andReturn(minor).once();
 		EasyMock.expect(buffer.get()).andReturn(version).once();
-		
-		if (ApplicationContext.SECURITY_ENABLED) {
-			EasyMock.expect(buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH)).andReturn(hash).once();
-		}
-		
+		EasyMock.expect(buffer.getASCIIStringFixed(security.getClientHashLength())).andReturn(hash).once();
 		EasyMock.expect(buffer.get()).andReturn(race).once();
 		EasyMock.expect(buffer.get()).andReturn(gender).once();
 		EasyMock.expect(buffer.get()).andReturn(archetype).once();

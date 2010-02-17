@@ -51,12 +51,6 @@ public interface ServerConfig {
 	String getVersion();
 	
 	/**
-	 * Retrieves all the valid client hashes.
-	 * @return The hashes.
-	 */
-	String[] getValidClientHashes();
-	
-	/**
 	 * Checks if the character creation is enabled.
 	 * @return True if the character creation is enabled, false otherwise.
 	 */

@@ -28,34 +28,24 @@ import ao.network.DataBuffer;
 import ao.network.ServerPacketsManager;
 import ao.network.packet.IncomingPacket;
 import ao.network.packet.outgoing.ErrorMessagePacket;
-import ao.security.Hashing;
+import ao.security.SecurityManager;
 import ao.service.LoginService;
 import ao.service.login.LoginErrorException;
 
 public class LoginExistingCharacterPacket implements IncomingPacket {
 
 	private static LoginService service = ApplicationContext.getInstance(LoginService.class);
+	private static SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
 	
 	@Override
 	public void handle(Connection connection) throws BufferUnderflowException, UnsupportedEncodingException {
 		DataBuffer buffer = connection.getInputBuffer();
 		
 		String username = buffer.getASCIIString();
-		
-		String password;
-		
-		if (ApplicationContext.SECURITY_ENABLED) {
-			password = buffer.getASCIIStringFixed(Hashing.MD5_ASCII_LENGTH);
-		} else {
-			password = buffer.getASCIIString();
-		}
+		String password = buffer.getASCIIStringFixed(security.getPasswordHashLength());
 		
 		String version = buffer.getShort() + "." + buffer.getShort() + "." + buffer.getShort();
-		String clientHash = "";
-		
-		if (ApplicationContext.SECURITY_ENABLED) {
-			clientHash = buffer.getASCIIStringFixed(Hashing.MD5_BINARY_LENGTH);
-		}
+		String clientHash = buffer.getASCIIStringFixed(security.getClientHashLength());
 		
 		try {
 			service.connectExistingCharacter((ConnectedUser) connection.getUser(), username, password, version, clientHash);

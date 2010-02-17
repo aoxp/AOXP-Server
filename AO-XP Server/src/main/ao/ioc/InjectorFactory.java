@@ -23,6 +23,7 @@ import java.util.Properties;
 import ao.ioc.module.BootstrapModule;
 import ao.ioc.module.ConfigurationModule;
 import ao.ioc.module.DaoModule;
+import ao.ioc.module.SecurityModule;
 import ao.ioc.module.ServiceModule;
 
 import com.google.inject.Guice;
@@ -40,7 +41,8 @@ public class InjectorFactory {
 				new BootstrapModule(properties),
 				new ConfigurationModule(properties),
 				new DaoModule(properties),
-				new ServiceModule(properties)
+				new ServiceModule(properties),
+				new SecurityModule(properties)
 				);
 	}
 }
