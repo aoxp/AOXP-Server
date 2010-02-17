@@ -75,8 +75,7 @@ public class Boat extends AbstractDefensiveItem {
 	 */
 	@Override
 	public void use(Character character) {
-		// TODO Auto-generated method stub
-		
+		// We do nothing to the character
 	}
 	
 	/**

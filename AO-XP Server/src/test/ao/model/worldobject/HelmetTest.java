@@ -104,7 +104,7 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 		Character character = EasyMock.createMock(Character.class);
 		EasyMock.replay(character);
 		
-		// nothign should happen
+		// nothing should happen
 		helmet1.use(character);
 		helmet2.use(character);
 		
