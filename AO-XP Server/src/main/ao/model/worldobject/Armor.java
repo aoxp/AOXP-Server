@@ -41,8 +41,8 @@ public class Armor extends AbstractDefensiveItem {
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or nor.
 	 * @param equippedGraphic The index of the graphic when equipped.
-	 * @param minDef The minimum defense granted by this boat.
-	 * @param maxDef The maximum defense granted by this boat.
+	 * @param minDef The minimum defense granted by this armor.
+	 * @param maxDef The maximum defense granted by this armor.
 	 */
 	public Armor(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
