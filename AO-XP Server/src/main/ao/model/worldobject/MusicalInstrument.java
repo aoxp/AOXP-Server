@@ -69,7 +69,14 @@ public class MusicalInstrument extends AbstractItem {
 	 */
 	@Override
 	public void use(Character character) {
-		// TODO Auto-generated method stub
+		// Instruments do nothing to the character when used.
+	}
 
+	/**
+	 * Retrieves a random sound to be played.
+	 * @return A random sound to play.
+	 */
+	public int getSoundToPlay() {
+		return sounds.get((int) Math.floor(Math.random() * sounds.size()));
 	}
 }
