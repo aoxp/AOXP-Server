@@ -18,13 +18,7 @@
 
 package ao.context;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.URI;
 import java.util.Properties;
-import java.util.Map.Entry;
-
-import org.apache.log4j.Logger;
 
 import ao.ioc.InjectorFactory;
 
@@ -35,48 +29,10 @@ import com.google.inject.Injector;
  */
 public class ApplicationContext {
 
-	private static final Logger logger = Logger.getLogger(ApplicationContext.class);
-	private static Properties properties = new Properties();
 	private static Injector injector;
 
 	static {
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		
-		// Load global.properties
-		try {
-			URI fileUri = loader.getResource("global.properties").toURI();
-			Properties globalProperties = new Properties();
-			File propFile = new File(fileUri);
-			
-			if (propFile.exists()) {
-				globalProperties.load(new FileInputStream(propFile));
-				
-				for (Entry<Object, Object> property : globalProperties.entrySet()) {
-					 System.setProperty((String) property.getKey(), (String) property.getValue());
-				}
-			}
-		} catch (Exception e) {
-			logger.fatal("Error initializing application context", e);
-			e.printStackTrace();
-		}
-		
-		// Load project.properties
-		try {
-			URI fileUri = loader.getResource("project.properties").toURI();
-			properties.load(new FileInputStream(new File(fileUri)));
-		} catch (Exception e) {
-			logger.fatal("Error initializing application context", e);
-			e.printStackTrace();
-		}
-		
-		injector = InjectorFactory.get(properties);
-	}
-
-	/**
-	 * @return the properties
-	 */
-	public static Properties getProperties() {
-		return properties;
+		reload();
 	}
 	
 	/**
@@ -87,5 +43,15 @@ public class ApplicationContext {
 	 */
 	public static <T> T getInstance(Class<T> clazz) {
 		return injector.getInstance(clazz);
+	}
+
+	/**
+	 * Reloads all modules and associations.
+	 * BEWARE, all previously created objects are not longer attached!
+	 */
+	public static void reload() {
+		Properties properties = ApplicationProperties.getProperties();
+		
+		injector = InjectorFactory.get(properties);
 	}
 }

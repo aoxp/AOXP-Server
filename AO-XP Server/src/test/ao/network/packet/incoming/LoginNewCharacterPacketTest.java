@@ -18,7 +18,8 @@
 
 package ao.network.packet.incoming;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
@@ -27,6 +28,7 @@ import org.junit.Test;
 
 import ao.config.ServerConfig;
 import ao.context.ApplicationContext;
+import ao.context.ApplicationProperties;
 import ao.data.dao.AccountDAO;
 import ao.mock.MockFactory;
 import ao.model.character.Gender;
@@ -38,7 +40,6 @@ import ao.model.user.ConnectedUser;
 import ao.network.Connection;
 import ao.network.DataBuffer;
 import ao.network.packet.IncomingPacket;
-import ao.security.SecurityManager;
 import ao.security.SecurityManager;
 import ao.service.LoginService;
 import ao.service.login.LoginServiceImpl;
@@ -59,13 +60,21 @@ public class LoginNewCharacterPacketTest {
 	
 	Connection connection;
 	IncomingPacket packet;
-	ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
-	SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
+	ServerConfig config;
+	SecurityManager security;
+	
+	static {
+		ApplicationProperties.loadProperties("test.properties");
+		ApplicationContext.reload();
+	}
 	
 	@Before
 	public void setUp() throws Exception {
 		packet = new LoginNewCharacterPacket();
 		connection = MockFactory.mockConnection(MockFactory.mockConnectedUser());
+		
+		config = ApplicationContext.getInstance(ServerConfig.class);
+		security = ApplicationContext.getInstance(SecurityManager.class);
 		
 		config.setRestrictedToAdmins(false);
 		config.setCharacterCreationEnabled(true);
