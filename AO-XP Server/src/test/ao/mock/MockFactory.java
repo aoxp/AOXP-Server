@@ -23,8 +23,8 @@ import org.easymock.IAnswer;
 import org.easymock.classextension.EasyMock;
 
 import ao.exception.InvalidTargetException;
-import ao.model.character.Character;
 import ao.model.character.Attribute;
+import ao.model.character.Character;
 import ao.model.spell.effect.Effect;
 import ao.model.user.Account;
 import ao.model.user.ConnectedUser;
@@ -32,6 +32,7 @@ import ao.model.user.User;
 import ao.model.worldobject.WorldObject;
 import ao.network.Connection;
 import ao.network.DataBuffer;
+import ao.service.timedevents.TimedEvent;
 
 /**
  * Centralizes the common mocks creation.
@@ -154,5 +155,34 @@ public class MockFactory {
 		EasyMock.replay(worldObject);
 		
 		return worldObject;
+	}
+	
+	/**
+	 * Creates a new TimedEvent mock.
+	 * @param executions The amount of the executions the event would have.
+	 * @param chara The event's Character.
+	 * @return The created mock.
+	 */
+	public static TimedEvent mockTimedEvent(int executions, Character chara) {
+		TimedEvent event = EasyMock.createMock(TimedEvent.class);
+		
+		EasyMock.expect(event.getCharacter()).andReturn(chara).anyTimes();
+		
+		for(int i = 0; i < executions; i++) {
+			event.execute();
+		}
+		
+		EasyMock.replay(event);
+		
+		return event;
+	}
+	
+	/**
+	 * Creates a new TimedEvent mock with a default mocked Characted.
+	 * @param executions The amount of the executions the event would have.
+	 * @return The created mock.
+	 */
+	public static TimedEvent mockTimedEvent(int executions) {
+		return mockTimedEvent(executions, mockCharacter());
 	}
 }
