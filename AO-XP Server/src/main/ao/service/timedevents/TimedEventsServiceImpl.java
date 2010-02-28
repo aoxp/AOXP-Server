@@ -30,7 +30,7 @@ import ao.service.TimedEventsService;
 public class TimedEventsServiceImpl implements TimedEventsService {
 
 	protected Map<Character, Map<TimedEvent, TimerTaskAdapter>> events = new ConcurrentHashMap<Character, Map<TimedEvent, TimerTaskAdapter>>();
-	protected Timer timer = new Timer();
+	protected Timer timer = new Timer(true);
 	
 	/**
 	 * Adapts TimedEvent as TimerTask to be used by Timer.
