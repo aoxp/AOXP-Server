@@ -26,7 +26,7 @@ import ao.service.TimedEventsService;
 
 public abstract class AbstractTimedEventTest {
 
-	TimedEvent event;
+	protected TimedEvent event;
 	
 	@Test
 	public void testRegisterLong() {
@@ -35,7 +35,7 @@ public abstract class AbstractTimedEventTest {
 		
 		EasyMock.replay(service);
 		
-		event.service = service;
+		TimedEvent.service = service;
 		event.register(1L);
 		
 		EasyMock.verify(service);
@@ -48,7 +48,7 @@ public abstract class AbstractTimedEventTest {
 		
 		EasyMock.replay(service);
 		
-		event.service = service;
+		TimedEvent.service = service;
 		event.register(1L, 1L, 1L);
 		
 		EasyMock.verify(service);

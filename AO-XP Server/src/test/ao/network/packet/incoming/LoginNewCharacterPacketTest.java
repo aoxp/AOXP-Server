@@ -166,8 +166,8 @@ public class LoginNewCharacterPacketTest {
 	public void skillsHacking2Test() throws Exception {
 		
 		byte[] skills = CHARACTER_SKILLS.clone();
-		skills[1] += 50;
-		skills[2] -= 50;
+		skills[2] += 50;
+		skills[3] -= 50;
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,

@@ -34,7 +34,7 @@ import ao.service.login.LoginErrorException;
 
 public class LoginExistingCharacterPacket implements IncomingPacket {
 
-	private static LoginService service = ApplicationContext.getInstance(LoginService.class);
+	private static LoginService loginService = ApplicationContext.getInstance(LoginService.class);
 	private static SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
 	
 	@Override
@@ -48,7 +48,7 @@ public class LoginExistingCharacterPacket implements IncomingPacket {
 		String clientHash = buffer.getASCIIStringFixed(security.getClientHashLength());
 		
 		try {
-			service.connectExistingCharacter((ConnectedUser) connection.getUser(), username, password, version, clientHash);
+			loginService.connectExistingCharacter((ConnectedUser) connection.getUser(), username, password, version, clientHash);
 		} catch(LoginErrorException e) {
 			loginError(connection, e.getMessage());
 		}

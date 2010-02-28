@@ -18,7 +18,6 @@
 
 package ao.service.timedevents;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
@@ -46,15 +45,19 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		 * 
 		 * @param event The event to adapt.
 		 * @param interval Delay in milliseconds to wait before event's execution.
-		 * @param repeatFor
+		 * @param repeatFor How long the event repetition will last, in milliseconds.
 		 */
 		public TimerTaskAdapter(TimedEvent event, long interval, long repeatFor) {
 			this.event = event;
 			
 			// How many times the event should be executed?
-			executionTimes = repeatFor != -1 ? (int) (repeatFor / interval) : 1;
+			executionTimes = (int) (repeatFor / interval);
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * @see java.util.TimerTask#run()
+		 */
 		@Override
 		public void run() {
 			event.execute();
@@ -65,19 +68,39 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 			}
 		}
 
+		/**
+		 * Retrieves the outer type of this inner class.
+		 * @return The outer type of this inner class.
+		 */
 		private TimedEventsServiceImpl getOuterType() {
 			return TimedEventsServiceImpl.this;
 		}
+
+		/**
+		 * Retrieves the number of executions the task has to perform before completing.
+		 * @return The number of executions the task has to perform before completing.
+		 */
+		public int getExecutionTimes() {
+			return executionTimes;
+		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.service.TimedEventsService#addEvent(ao.model.character.Character, ao.service.timedevents.TimedEvent, long, long, long)
+	 */
 	@Override
 	public void addEvent(Character chara, TimedEvent event, long delay, long interval, long repeatFor) {
 		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(chara);
 		
-		// If the character had no previous events, create his events container.
+		// If the character had no previous events, create his events container (this needs some synchronization).
 		if (characterEvents == null) {
-			characterEvents = new HashMap<TimedEvent, TimerTaskAdapter>();
-			events.put(chara, characterEvents);
+			synchronized (events) {
+				if (events.get(chara) == null) {
+					characterEvents = new ConcurrentHashMap<TimedEvent, TimerTaskAdapter>();
+					events.put(chara, characterEvents);
+				}
+			}
 		}
 		
 		TimerTaskAdapter adaptedEvent = new TimerTaskAdapter(event, interval, repeatFor);
@@ -90,35 +113,54 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		}
 		
 		// Single execution or repeated?
-		if (repeatFor == -1) {
+		if (adaptedEvent.getExecutionTimes() == 1) {
 			timer.schedule(adaptedEvent, delay);
 		} else {
 			timer.scheduleAtFixedRate(adaptedEvent, delay, interval);
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.service.TimedEventsService#addEvent(ao.model.character.Character, ao.service.timedevents.TimedEvent, long)
+	 */
 	@Override
 	public void addEvent(Character chara, TimedEvent event, long delay) {
-		addEvent(chara, event, delay, -1, -1);
+		addEvent(chara, event, delay, delay, delay);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see ao.service.TimedEventsService#removeCharacterEvents(ao.model.character.Character)
+	 */
 	@Override
 	public void removeCharacterEvents(Character chara) {
 		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(chara);
-		Iterator<TimedEvent> it = characterEvents.keySet().iterator();
 		
-		// Remove them all!
-		while(it.hasNext()) {
-			characterEvents.get(it.next()).cancel();
-			it.remove();
+		synchronized (characterEvents) {
+			Iterator<TimedEvent> it = characterEvents.keySet().iterator();
+			
+			// Remove them all!
+			while(it.hasNext()) {
+				characterEvents.get(it.next()).cancel();
+				it.remove();
+			}
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see ao.service.TimedEventsService#removeEvent(ao.service.timedevents.TimedEvent)
+	 */
 	@Override
 	public void removeEvent(TimedEvent event) {
 		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(event.getCharacter());
 		
-		characterEvents.remove(event).cancel();
+		TimerTaskAdapter task = characterEvents.remove(event);
+		
+		if (task != null) {
+			task.cancel();
+		}
 	}
 
 }
