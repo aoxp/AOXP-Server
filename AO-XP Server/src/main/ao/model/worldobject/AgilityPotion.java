@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package ao.model.worldobject;
 
@@ -24,12 +24,15 @@ import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * Raw Mineral's.
+ * A potion to increase agility.
  */
-public class Mineral extends AbstractItem {
+public class AgilityPotion extends ConsumableItem {
 
+	protected int minModifier;
+	protected int maxModifier;
+	
 	/**
-	 * Creates a new Mineral instance.
+	 * Creates a new AgilityPotion instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -40,13 +43,18 @@ public class Mineral extends AbstractItem {
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or nor.
+	 * @param minModifier The minimum modifier of this potion.
+	 * @param maxModifier The maximum modifier of this potion.
 	 */
-	public Mineral(int id, String name, int amount, boolean tradeable,
+	public AgilityPotion(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie) {
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
+			boolean newbie, int minModifier, int maxModifier) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
 				manufactureDifficulty, forbiddenArchetypes, newbie);
+		
+		this.minModifier = minModifier;
+		this.maxModifier = maxModifier;
 	}
 
 	/*
@@ -55,16 +63,34 @@ public class Mineral extends AbstractItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Mineral(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
+		return new AgilityPotion(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, minModifier, maxModifier);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Item#use(ao.model.character.Character)
+	 * @see ao.model.worldobject.ConsumableItem#use(ao.model.character.Character)
 	 */
 	@Override
 	public void use(Character character) {
-		// Can't be used by itself, needs a foundry
+		super.use(character);
+		
+		// increase agility!
+		character.addToAgility((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier);
+	}
+
+	/**
+	 * Retrieves the minimum modifier for this potion.
+	 * @return The minimum modifier for this potion.
+	 */
+	public int getMinModifier() {
+		return minModifier;
+	}
+
+	/**
+	 * Retrieves the maximim modifier for this potion.
+	 * @return The maximim modifier for this potion.
+	 */
+	public int getMaxModifier() {
+		return maxModifier;
 	}
 }

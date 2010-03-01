@@ -365,4 +365,16 @@ public interface Character {
 	 * @return The character's spells.
 	 */
 	Spell[] getSpells();
+	
+	/**
+	 * Adds (or subtracts if the given number is negative) points to the character's agility.
+	 * @param points	The points to add.
+	 */
+	void addToAgility(int points);
+
+	/**
+	 * Adds (or subtracts if the given number is negative) points to the character's strength.
+	 * @param points	The points to add.
+	 */
+	void addToStrength(int points);
 }
