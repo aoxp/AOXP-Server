@@ -18,6 +18,7 @@
 
 package ao.service.timedevents;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Timer;
@@ -95,10 +96,10 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		
 		// If the character had no previous events, create his events container (this needs some synchronization).
 		if (characterEvents == null) {
-			synchronized (chara) {
+			synchronized (events) {
 				characterEvents = events.get(chara);
 				if (characterEvents == null) {
-					characterEvents = new ConcurrentHashMap<TimedEvent, TimerTaskAdapter>();
+					characterEvents = new HashMap<TimedEvent, TimerTaskAdapter>();
 					events.put(chara, characterEvents);
 				}
 			}
@@ -108,7 +109,7 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		
 		synchronized (characterEvents) {
 			if (events.get(chara) != characterEvents) {
-				return;	// This means a concurrent call to removeCharacterEvents has occured. "Remove" this one too.
+				return;	// This means a concurrent call to removeCharacterEvents has occurred. "Remove" this one too.
 			}
 			
 			// Single execution or repeated?
@@ -118,7 +119,6 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 				timer.scheduleAtFixedRate(adaptedEvent, delay, interval);
 			}
 			
-			// Add it AFTER being scheduled. Therefore, removeEvent doesn't need to be synchronized and will work smoothly
 			TimerTaskAdapter previous = characterEvents.put(event, adaptedEvent);
 			
 			// The same event was already filed for the character, renew the execution delay. 
@@ -170,10 +170,12 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(event.getCharacter());
 		
 		if (characterEvents != null) {
-			TimerTaskAdapter task = characterEvents.remove(event);
-			
-			if (task != null) {
-				task.cancel();
+			synchronized (characterEvents) {
+				TimerTaskAdapter task = characterEvents.remove(event);
+				
+				if (task != null) {
+					task.cancel();
+				}
 			}
 		}
 	}
