@@ -95,7 +95,7 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		
 		// If the character had no previous events, create his events container (this needs some synchronization).
 		if (characterEvents == null) {
-			synchronized (events) {
+			synchronized (chara) {
 				characterEvents = events.get(chara);
 				if (characterEvents == null) {
 					characterEvents = new ConcurrentHashMap<TimedEvent, TimerTaskAdapter>();
@@ -105,19 +105,27 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		}
 		
 		TimerTaskAdapter adaptedEvent = new TimerTaskAdapter(event, interval, repeatFor);
-		TimerTaskAdapter previous = characterEvents.put(event, adaptedEvent);
 		
-		// The same event was already filed for the character, renew the execution delay. 
-		if (previous != null) {
-			previous.cancel();
-			timer.purge();
-		}
-		
-		// Single execution or repeated?
-		if (adaptedEvent.getExecutionTimes() == 1) {
-			timer.schedule(adaptedEvent, delay);
-		} else {
-			timer.scheduleAtFixedRate(adaptedEvent, delay, interval);
+		synchronized (characterEvents) {
+			if (events.get(chara) != characterEvents) {
+				return;	// This means a concurrent call to removeCharacterEvents has occured. "Remove" this one too.
+			}
+			
+			// Single execution or repeated?
+			if (adaptedEvent.getExecutionTimes() == 1) {
+				timer.schedule(adaptedEvent, delay);
+			} else {
+				timer.scheduleAtFixedRate(adaptedEvent, delay, interval);
+			}
+			
+			// Add it AFTER being scheduled. Therefore, removeEvent doesn't need to be synchronized and will work smoothly
+			TimerTaskAdapter previous = characterEvents.put(event, adaptedEvent);
+			
+			// The same event was already filed for the character, renew the execution delay. 
+			if (previous != null) {
+				previous.cancel();
+				timer.purge();
+			}
 		}
 	}
 
@@ -136,13 +144,17 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 	 */
 	@Override
 	public void removeCharacterEvents(Character chara) {
-		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(chara);
+		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.remove(chara);
+		
+		if (characterEvents == null) {
+			return;
+		}
 		
 		synchronized (characterEvents) {
 			Iterator<TimedEvent> it = characterEvents.keySet().iterator();
 			
 			// Remove them all!
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				characterEvents.get(it.next()).cancel();
 				it.remove();
 			}
@@ -157,10 +169,12 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 	public void removeEvent(TimedEvent event) {
 		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(event.getCharacter());
 		
-		TimerTaskAdapter task = characterEvents.remove(event);
-		
-		if (task != null) {
-			task.cancel();
+		if (characterEvents != null) {
+			TimerTaskAdapter task = characterEvents.remove(event);
+			
+			if (task != null) {
+				task.cancel();
+			}
 		}
 	}
 
