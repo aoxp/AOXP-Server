@@ -29,23 +29,25 @@ import org.junit.Test;
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
 
-public class MineralTest extends AbstractItemTest {
+public class TeleportTest extends AbstractItemTest {
 
-	private Mineral mineral1;
-	private Mineral mineral2;
+	private static final int RADIUS = 4;
+	
+	private Teleport teleport1;
+	private Teleport teleport2;
 	
 	@Before
 	public void setUp() throws Exception {
-		mineral1 = new Mineral(1, "Gold", 5, true, 1, 1, 0, 0, null, false);
-		mineral2 = new Mineral(1, "Cooper", 1, true, 1, 1, 0, 0, null, false);
+		teleport1 = new Teleport(1, "Teleport", 5, true, 1, 1, 0, 0, null, false, RADIUS);
+		teleport2 = new Teleport(1, "Teleport", 1, true, 1, 1, 0, 0, null, false, RADIUS);
 		
-		item = mineral2;
+		item = teleport2;
 		itemGraphic = 1;
 		itemId = 1;
 		itemIsTradeable = true;
 		itemManufactureDifficulty = 0;
 		itemUsageDifficulty = 0;
-		itemName = "Cooper";
+		itemName = "Teleport";
 		itemValue = 1;
 		itemNewbie = false;
 	}
@@ -65,8 +67,8 @@ public class MineralTest extends AbstractItemTest {
 		// Usage of minerals do nothing.
 		EasyMock.replay(inventory, character);
 		
-		mineral1.use(character);
-		mineral2.use(character);
+		teleport1.use(character);
+		teleport2.use(character);
 		
 		EasyMock.verify(inventory, character);
 	}
@@ -74,38 +76,40 @@ public class MineralTest extends AbstractItemTest {
 	@Test
 	public void testClone() {
 		
-		Mineral clone = (Mineral) mineral1.clone();
+		Teleport clone = (Teleport) teleport1.clone();
 		
 		// Make sure all fields match
-		assertEquals(mineral1.amount, clone.amount);
-		assertEquals(mineral1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(mineral1.graphic, clone.graphic);
-		assertEquals(mineral1.id, clone.id);
-		assertEquals(mineral1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(mineral1.name, clone.name);
-		assertEquals(mineral1.tradeable, clone.tradeable);
-		assertEquals(mineral1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(mineral1.value, clone.value);
+		assertEquals(teleport1.amount, clone.amount);
+		assertEquals(teleport1.forbiddenArchetypes, clone.forbiddenArchetypes);
+		assertEquals(teleport1.graphic, clone.graphic);
+		assertEquals(teleport1.id, clone.id);
+		assertEquals(teleport1.manufactureDifficulty, clone.manufactureDifficulty);
+		assertEquals(teleport1.name, clone.name);
+		assertEquals(teleport1.tradeable, clone.tradeable);
+		assertEquals(teleport1.usageDifficulty, clone.usageDifficulty);
+		assertEquals(teleport1.value, clone.value);
+		assertEquals(teleport1.radius, clone.radius);
 		
 		// Make sure the object itself is different
-		assertFalse(mineral1 == clone);
+		assertFalse(teleport1 == clone);
 		
 		
-		clone = (Mineral) mineral2.clone();
+		clone = (Teleport) teleport2.clone();
 		
 		// Make sure all fields match
-		assertEquals(mineral2.amount, clone.amount);
-		assertEquals(mineral2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(mineral2.graphic, clone.graphic);
-		assertEquals(mineral2.id, clone.id);
-		assertEquals(mineral2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(mineral2.name, clone.name);
-		assertEquals(mineral2.tradeable, clone.tradeable);
-		assertEquals(mineral2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(mineral2.value, clone.value);
+		assertEquals(teleport2.amount, clone.amount);
+		assertEquals(teleport2.forbiddenArchetypes, clone.forbiddenArchetypes);
+		assertEquals(teleport2.graphic, clone.graphic);
+		assertEquals(teleport2.id, clone.id);
+		assertEquals(teleport2.manufactureDifficulty, clone.manufactureDifficulty);
+		assertEquals(teleport2.name, clone.name);
+		assertEquals(teleport2.tradeable, clone.tradeable);
+		assertEquals(teleport2.usageDifficulty, clone.usageDifficulty);
+		assertEquals(teleport2.value, clone.value);
+		assertEquals(teleport2.radius, clone.radius);
 		
 		// Make sure the object itself is different
-		assertFalse(mineral2 == clone);
+		assertFalse(teleport2 == clone);
 	}
 
 }

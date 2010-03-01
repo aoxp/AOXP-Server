@@ -20,16 +20,18 @@ package ao.model.worldobject;
 
 import java.util.List;
 
+import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
-public abstract class AbstractDefensiveItem extends AbstractEquipableItem implements
-		DefensiveItem {
+/**
+ * A teleport object.
+ */
+public class Teleport extends AbstractItem {
 
-	protected int minDef;
-	protected int maxDef;
+	protected int radius;
 	
 	/**
-	 * Creates a new AbstractDefensiveitem instance.
+	 * Creates a new Teleport instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -40,36 +42,41 @@ public abstract class AbstractDefensiveItem extends AbstractEquipableItem implem
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or nor.
-	 * @param equippedGraphic The index of the graphic when equipped.
-	 * @param minDef The minimum defense granted by this item.
-	 * @param maxDef The maximum defense granted by this item.
+	 * @param radius The radius of the teleporter's target area.
 	 */
-	public AbstractDefensiveItem(int id, String name, int amount,
-			boolean tradeable, int graphic, int value, int usageDifficulty,
+	public Teleport(int id, String name, int amount, boolean tradeable,
+			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			boolean newbie, int equippedGraphic, int minDef, int maxDef) {
+			boolean newbie, int radius) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
+				manufactureDifficulty, forbiddenArchetypes, newbie);
 		
-		this.minDef = minDef;
-		this.maxDef = maxDef;
+		this.radius = radius;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.DefensiveItem#getMaxDef()
+	 * @see ao.model.worldobject.AbstractItem#clone()
 	 */
 	@Override
-	public int getMaxDef() {
-		return maxDef;
+	public Item clone() {
+		return new Teleport(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, radius);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.DefensiveItem#getMinDef()
+	 * @see ao.model.worldobject.Item#use(ao.model.character.Character)
 	 */
 	@Override
-	public int getMinDef() {
-		return minDef;
+	public void use(Character character) {
+		// This item can't be used.
+	}
+
+	/**
+	 * Retrieves the teleport's radius.
+	 * @return The teleport's radius.
+	 */
+	public int getRadius() {
+		return radius;
 	}
 }
