@@ -23,18 +23,31 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public abstract class AbstractDefensiveItemTest extends AbstractEquipableItemTest {
-
+	
 	protected int itemMinDef;
 	protected int itemMaxDef;
+
+	protected int itemMinMagicDef;
+	protected int itemMaxMagicDef;
 	
 	@Test
 	public void testGetMaxDef() {
 		assertEquals(itemMaxDef, ((AbstractDefensiveItem) item).getMaxDef());
 	}
-
+	
 	@Test
 	public void testGetMinDef() {
 		assertEquals(itemMinDef, ((AbstractDefensiveItem) item).getMinDef());
+	}
+	
+	@Test
+	public void testGetMaxMagicDef() {
+		assertEquals(itemMaxMagicDef, ((AbstractDefensiveItem) item).getMaxMagicDef());
+	}
+
+	@Test
+	public void testGetMinMagicDef() {
+		assertEquals(itemMinMagicDef, ((AbstractDefensiveItem) item).getMinMagicDef());
 	}
 
 }

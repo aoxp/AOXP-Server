@@ -46,15 +46,17 @@ public class Boat extends AbstractDefensiveItem {
 	 * @param equippedGraphic The index of the graphic when equipped.
 	 * @param minDef The minimum defense granted by this boat.
 	 * @param maxDef The maximum defense granted by this boat.
+	 * @param minMagicDef The minimum magic defense granted by this item.
+	 * @param maxMagicDef The maximum magic defense granted by this item.
 	 * @param minHit The minimum hit granted by this boat.
 	 * @param maxHit The maximum hit granted by this boat.
 	 */
 	public Boat(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			boolean newbie, int equippedGraphic, int minDef, int maxDef, int minHit, int maxHit) {
+			boolean newbie, int equippedGraphic, int minDef, int maxDef, int minMagicDef, int maxMagicDef, int minHit, int maxHit) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef);
+				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef);
 		
 		this.minHit = minHit;
 		this.maxHit = maxHit;
@@ -66,7 +68,7 @@ public class Boat extends AbstractDefensiveItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Boat(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef, minHit, maxHit);
+		return new Boat(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef, minHit, maxHit);
 	}
 
 	/*

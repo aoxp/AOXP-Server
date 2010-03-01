@@ -32,13 +32,16 @@ public class ArmorTest extends AbstractDefensiveItemTest {
 	private static final int MIN_DEF = 1;
 	private static final int MAX_DEF = 5;
 	
+	private static final int MIN_MAGIC_DEF = 10;
+	private static final int MAX_MAGIC_DEF = 50;
+	
 	private Armor armor1;
 	private Armor armor2;
 	
 	@Before
 	public void setUp() throws Exception {
-		armor1 = new Armor(1, "Leather Armor", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF);
-		armor2 = new Armor(1, "Leather Armor", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF);
+		armor1 = new Armor(1, "Leather Armor", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		armor2 = new Armor(1, "Leather Armor", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
 		
 		item = armor1;
 		itemGraphic = 1;
@@ -53,6 +56,8 @@ public class ArmorTest extends AbstractDefensiveItemTest {
 		itemEquippedGraphic = 1;
 		itemMinDef = MIN_DEF;
 		itemMaxDef = MAX_DEF;
+		itemMinMagicDef = MIN_MAGIC_DEF;
+		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -71,6 +76,8 @@ public class ArmorTest extends AbstractDefensiveItemTest {
 		assertEquals(armor1.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(armor1.maxDef, clone.maxDef);
 		assertEquals(armor1.minDef, clone.minDef);
+		assertEquals(armor1.maxMagicDef, clone.maxMagicDef);
+		assertEquals(armor1.minMagicDef, clone.minMagicDef);
 		assertEquals(armor1.name, clone.name);
 		assertEquals(armor1.tradeable, clone.tradeable);
 		assertEquals(armor1.usageDifficulty, clone.usageDifficulty);
@@ -90,6 +97,8 @@ public class ArmorTest extends AbstractDefensiveItemTest {
 		assertEquals(armor2.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(armor2.maxDef, clone.maxDef);
 		assertEquals(armor2.minDef, clone.minDef);
+		assertEquals(armor2.maxMagicDef, clone.maxMagicDef);
+		assertEquals(armor2.minMagicDef, clone.minMagicDef);
 		assertEquals(armor2.name, clone.name);
 		assertEquals(armor2.tradeable, clone.tradeable);
 		assertEquals(armor2.usageDifficulty, clone.usageDifficulty);

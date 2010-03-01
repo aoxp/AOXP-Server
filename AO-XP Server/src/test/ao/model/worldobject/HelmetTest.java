@@ -31,14 +31,17 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 
 	private static final int MIN_DEF = 1;
 	private static final int MAX_DEF = 5;
+
+	private static final int MIN_MAGIC_DEF = 10;
+	private static final int MAX_MAGIC_DEF = 50;
 	
 	private Helmet helmet1;
 	private Helmet helmet2;
 	
 	@Before
 	public void setUp() throws Exception {
-		helmet1 = new Helmet(1, "Viking Helmet", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF);
-		helmet2 = new Helmet(1, "Viking Helmet", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF);
+		helmet1 = new Helmet(1, "Viking Helmet", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		helmet2 = new Helmet(1, "Viking Helmet", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
 		
 		item = helmet1;
 		itemGraphic = 1;
@@ -53,6 +56,8 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 		itemEquippedGraphic = 1;
 		itemMinDef = MIN_DEF;
 		itemMaxDef = MAX_DEF;
+		itemMinMagicDef = MIN_MAGIC_DEF;
+		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -71,6 +76,8 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 		assertEquals(helmet1.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(helmet1.maxDef, clone.maxDef);
 		assertEquals(helmet1.minDef, clone.minDef);
+		assertEquals(helmet1.maxMagicDef, clone.maxMagicDef);
+		assertEquals(helmet1.minMagicDef, clone.minMagicDef);
 		assertEquals(helmet1.name, clone.name);
 		assertEquals(helmet1.tradeable, clone.tradeable);
 		assertEquals(helmet1.usageDifficulty, clone.usageDifficulty);
@@ -90,6 +97,8 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 		assertEquals(helmet2.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(helmet2.maxDef, clone.maxDef);
 		assertEquals(helmet2.minDef, clone.minDef);
+		assertEquals(helmet2.maxMagicDef, clone.maxMagicDef);
+		assertEquals(helmet2.minMagicDef, clone.minMagicDef);
 		assertEquals(helmet2.name, clone.name);
 		assertEquals(helmet2.tradeable, clone.tradeable);
 		assertEquals(helmet2.usageDifficulty, clone.usageDifficulty);

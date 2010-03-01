@@ -34,4 +34,16 @@ public interface DefensiveItem extends EquipableItem {
 	 * @return The maximum defense granted.
 	 */
 	int getMaxDef();
+	
+	/**
+	 * Retrieves the minimum magic defense granted.
+	 * @return The minimum magic defense granted.
+	 */
+	int getMinMagicDef();
+
+	/**
+	 * Retrieves the maximum magic defense granted.
+	 * @return The maximum magic defense granted.
+	 */
+	int getMaxMagicDef();
 }

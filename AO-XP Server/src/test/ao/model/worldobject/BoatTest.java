@@ -34,14 +34,17 @@ public class BoatTest extends AbstractDefensiveItemTest {
 
 	private static final int MIN_HIT = 1;
 	private static final int MAX_HIT = 5;
+
+	private static final int MIN_MAGIC_DEF = 10;
+	private static final int MAX_MAGIC_DEF = 50;
 	
 	private Boat boat1;
 	private Boat boat2;
 	
 	@Before
 	public void setUp() throws Exception {
-		boat1 = new Boat(1, "Small Boat", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_HIT, MAX_HIT);
-		boat2 = new Boat(1, "Small Boat", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_HIT, MAX_HIT);
+		boat1 = new Boat(1, "Small Boat", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
+		boat2 = new Boat(1, "Small Boat", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
 		
 		item = boat1;
 		itemGraphic = 1;
@@ -56,6 +59,8 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		itemEquippedGraphic = 1;
 		itemMinDef = MIN_DEF;
 		itemMaxDef = MAX_DEF;
+		itemMinMagicDef = MIN_MAGIC_DEF;
+		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -74,6 +79,8 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		assertEquals(boat1.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(boat1.maxDef, clone.maxDef);
 		assertEquals(boat1.minDef, clone.minDef);
+		assertEquals(boat1.maxMagicDef, clone.maxMagicDef);
+		assertEquals(boat1.minMagicDef, clone.minMagicDef);
 		assertEquals(boat1.maxHit, clone.maxHit);
 		assertEquals(boat1.minHit, clone.minHit);
 		assertEquals(boat1.name, clone.name);
@@ -95,6 +102,8 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		assertEquals(boat2.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(boat2.maxDef, clone.maxDef);
 		assertEquals(boat2.minDef, clone.minDef);
+		assertEquals(boat2.maxMagicDef, clone.maxMagicDef);
+		assertEquals(boat2.minMagicDef, clone.minMagicDef);
 		assertEquals(boat2.maxHit, clone.maxHit);
 		assertEquals(boat2.minHit, clone.minHit);
 		assertEquals(boat2.name, clone.name);

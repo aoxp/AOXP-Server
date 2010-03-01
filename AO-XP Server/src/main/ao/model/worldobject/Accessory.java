@@ -1,21 +1,3 @@
-/*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
-    Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 package ao.model.worldobject;
 
 import java.util.List;
@@ -24,12 +6,12 @@ import ao.model.character.Character;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * A helmet.
+ * Accessory items such as rings.
  */
-public class Helmet extends AbstractDefensiveItem {
+public class Accessory extends AbstractDefensiveItem {
 
 	/**
-	 * Creates a new Helmet instance.
+	 * Creates a new Accessory instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param amount The item's amount.
@@ -41,12 +23,12 @@ public class Helmet extends AbstractDefensiveItem {
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or nor.
 	 * @param equippedGraphic The index of the graphic when equipped.
-	 * @param minDef The minimum defense granted by this helmet.
-	 * @param maxDef The maximum defense granted by this helmet.
+	 * @param minDef The minimum defense granted by this item.
+	 * @param maxDef The maximum defense granted by this item.
 	 * @param minMagicDef The minimum magic defense granted by this item.
 	 * @param maxMagicDef The maximum magic defense granted by this item.
 	 */
-	public Helmet(int id, String name, int amount, boolean tradeable,
+	public Accessory(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
 			boolean newbie, int equippedGraphic, int minDef, int maxDef,
@@ -62,7 +44,7 @@ public class Helmet extends AbstractDefensiveItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Helmet(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef);
+		return new Accessory(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef);
 	}
 
 	/*
@@ -71,7 +53,7 @@ public class Helmet extends AbstractDefensiveItem {
 	 */
 	@Override
 	public void use(Character character) {
-		// Helmets can't be used, just equipped
+		// Accessories are not used, just equipped
 	}
 
 }

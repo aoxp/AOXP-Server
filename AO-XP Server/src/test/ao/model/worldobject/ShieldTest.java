@@ -31,14 +31,17 @@ public class ShieldTest extends AbstractDefensiveItemTest {
 
 	private static final int MIN_DEF = 1;
 	private static final int MAX_DEF = 5;
+
+	private static final int MIN_MAGIC_DEF = 10;
+	private static final int MAX_MAGIC_DEF = 50;
 	
 	private Shield shield1;
 	private Shield shield2;
 	
 	@Before
 	public void setUp() throws Exception {
-		shield1 = new Shield(1, "Turtle Shield", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF);
-		shield2 = new Shield(1, "Turtle Shield", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF);
+		shield1 = new Shield(1, "Turtle Shield", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		shield2 = new Shield(1, "Turtle Shield", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
 		
 		item = shield1;
 		itemGraphic = 1;
@@ -53,6 +56,8 @@ public class ShieldTest extends AbstractDefensiveItemTest {
 		itemEquippedGraphic = 1;
 		itemMinDef = MIN_DEF;
 		itemMaxDef = MAX_DEF;
+		itemMinMagicDef = MIN_MAGIC_DEF;
+		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -71,6 +76,8 @@ public class ShieldTest extends AbstractDefensiveItemTest {
 		assertEquals(shield1.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(shield1.maxDef, clone.maxDef);
 		assertEquals(shield1.minDef, clone.minDef);
+		assertEquals(shield1.maxMagicDef, clone.maxMagicDef);
+		assertEquals(shield1.minMagicDef, clone.minMagicDef);
 		assertEquals(shield1.name, clone.name);
 		assertEquals(shield1.tradeable, clone.tradeable);
 		assertEquals(shield1.usageDifficulty, clone.usageDifficulty);
@@ -90,6 +97,8 @@ public class ShieldTest extends AbstractDefensiveItemTest {
 		assertEquals(shield2.manufactureDifficulty, clone.manufactureDifficulty);
 		assertEquals(shield2.maxDef, clone.maxDef);
 		assertEquals(shield2.minDef, clone.minDef);
+		assertEquals(shield2.maxMagicDef, clone.maxMagicDef);
+		assertEquals(shield2.minMagicDef, clone.minMagicDef);
 		assertEquals(shield2.name, clone.name);
 		assertEquals(shield2.tradeable, clone.tradeable);
 		assertEquals(shield2.usageDifficulty, clone.usageDifficulty);

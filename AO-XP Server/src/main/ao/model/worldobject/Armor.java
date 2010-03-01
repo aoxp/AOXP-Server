@@ -43,14 +43,16 @@ public class Armor extends AbstractDefensiveItem {
 	 * @param equippedGraphic The index of the graphic when equipped.
 	 * @param minDef The minimum defense granted by this armor.
 	 * @param maxDef The maximum defense granted by this armor.
+	 * @param minMagicDef The minimum magic defense granted by this item.
+	 * @param maxMagicDef The maximum magic defense granted by this item.
 	 */
 	public Armor(int id, String name, int amount, boolean tradeable,
 			int graphic, int value, int usageDifficulty,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			boolean newbie, int equippedGraphic, int minDef, int maxDef) {
+			boolean newbie, int equippedGraphic, int minDef, int maxDef, int minMagicDef, int maxMagicDef) {
 		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
 				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic,
-				minDef, maxDef);
+				minDef, maxDef, minMagicDef, maxMagicDef);
 	}
 
 	/*
@@ -59,7 +61,7 @@ public class Armor extends AbstractDefensiveItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Armor(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef);
+		return new Armor(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef);
 	}
 
 	/*
