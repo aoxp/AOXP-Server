@@ -22,32 +22,28 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public abstract class AbstractDefensiveItemTest extends AbstractEquipableItemTest {
-	
-	protected int itemMinDef;
-	protected int itemMaxDef;
+import ao.model.worldobject.properties.DefensiveItemProperties;
 
-	protected int itemMinMagicDef;
-	protected int itemMaxMagicDef;
+public abstract class AbstractDefensiveItemTest extends AbstractEquipableItemTest {
 	
 	@Test
 	public void testGetMaxDef() {
-		assertEquals(itemMaxDef, ((AbstractDefensiveItem) item).getMaxDef());
+		assertEquals(((DefensiveItemProperties) objectProps).getMaxDef(), ((AbstractDefensiveItem) object).getMaxDef());
 	}
 	
 	@Test
 	public void testGetMinDef() {
-		assertEquals(itemMinDef, ((AbstractDefensiveItem) item).getMinDef());
+		assertEquals(((DefensiveItemProperties) objectProps).getMinDef(), ((AbstractDefensiveItem) object).getMinDef());
 	}
 	
 	@Test
 	public void testGetMaxMagicDef() {
-		assertEquals(itemMaxMagicDef, ((AbstractDefensiveItem) item).getMaxMagicDef());
+		assertEquals(((DefensiveItemProperties) objectProps).getMaxMagicDef(), ((AbstractDefensiveItem) object).getMaxMagicDef());
 	}
 
 	@Test
 	public void testGetMinMagicDef() {
-		assertEquals(itemMinMagicDef, ((AbstractDefensiveItem) item).getMinMagicDef());
+		assertEquals(((DefensiveItemProperties) objectProps).getMinMagicDef(), ((AbstractDefensiveItem) object).getMinMagicDef());
 	}
 
 }

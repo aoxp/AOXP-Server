@@ -18,42 +18,21 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
-
 import ao.model.character.Character;
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.StatModifyingItemProperties;
 
 /**
  * Food to be consumed by characters.
  */
 public class Food extends ConsumableItem {
 
-	protected int minHun;
-	protected int maxHun;
-
 	/**
 	 * Creates a new food instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param minHun The minimum hunger replenished by the food.
-	 * @param maxHun The maximum hunger replenished by the food.
 	 */
-	public Food(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie, int minHun, int maxHun) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
-
-		this.minHun = minHun;
-		this.maxHun = maxHun;
+	public Food(StatModifyingItemProperties properties, int amount) {
+		super(properties, amount);
 	}
 
 	/*
@@ -62,9 +41,7 @@ public class Food extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Food(id, name, amount, tradeable, graphic, value,
-				usageDifficulty, manufactureDifficulty, forbiddenArchetypes,
-				newbie, minHun, maxHun);
+		return new Food((StatModifyingItemProperties) properties, amount);
 	}
 
 	/*
@@ -75,7 +52,10 @@ public class Food extends ConsumableItem {
 	public void use(Character character) {
 		super.use(character);
 		
-		character.addToHunger((int) (Math.random() * (maxHun - minHun + 1)) + minHun);
+		int minModifier = ((StatModifyingItemProperties) properties).getMinModifier();
+		int maxModifier = ((StatModifyingItemProperties) properties).getMaxModifier();
+		
+		character.addToHunger((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier);
 	}
 
 	/**
@@ -83,7 +63,7 @@ public class Food extends ConsumableItem {
 	 * @return The minimum hunger restored by the food.
 	 */
 	public int getMinHun() {
-		return minHun;
+		return ((StatModifyingItemProperties) properties).getMinModifier();
 	}
 
 	/**
@@ -91,7 +71,7 @@ public class Food extends ConsumableItem {
 	 * @return The maximum hunger restored by the food.
 	 */
 	public int getMaxHun() {
-		return maxHun;
+		return ((StatModifyingItemProperties) properties).getMaxModifier();
 	}
 
 }

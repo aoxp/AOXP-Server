@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.model.character.Character;
+import ao.model.worldobject.properties.DefensiveItemProperties;
 
 public class AccessoryTest extends AbstractDefensiveItemTest {
 
@@ -40,24 +41,16 @@ public class AccessoryTest extends AbstractDefensiveItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		accessory1 = new Accessory(1, "Gold Ring", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
-		accessory2 = new Accessory(1, "Diamond Ring", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		DefensiveItemProperties props1 = new DefensiveItemProperties(1, "Gold Ring", 1, true, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		accessory1 = new Accessory(props1, 5);
 		
-		item = accessory1;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Gold Ring";
-		itemValue = 1;
-		itemNewbie = false;
+		DefensiveItemProperties props2 = new DefensiveItemProperties(1, "Diamond Ring", 1, true, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		accessory2 = new Accessory(props2, 1);
+		
+		object = accessory1;
+		objectProps = props1;
+		ammount = 5;
 		itemEquipped = false;
-		itemEquippedGraphic = 1;
-		itemMinDef = MIN_DEF;
-		itemMaxDef = MAX_DEF;
-		itemMinMagicDef = MIN_MAGIC_DEF;
-		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -70,18 +63,7 @@ public class AccessoryTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(accessory1.amount, clone.amount);
-		assertEquals(accessory1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(accessory1.graphic, clone.graphic);
-		assertEquals(accessory1.id, clone.id);
-		assertEquals(accessory1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(accessory1.maxDef, clone.maxDef);
-		assertEquals(accessory1.minDef, clone.minDef);
-		assertEquals(accessory1.maxMagicDef, clone.maxMagicDef);
-		assertEquals(accessory1.minMagicDef, clone.minMagicDef);
-		assertEquals(accessory1.name, clone.name);
-		assertEquals(accessory1.tradeable, clone.tradeable);
-		assertEquals(accessory1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(accessory1.value, clone.value);
+		assertEquals(accessory1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(accessory1 == clone);
@@ -91,18 +73,7 @@ public class AccessoryTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(accessory2.amount, clone.amount);
-		assertEquals(accessory2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(accessory2.graphic, clone.graphic);
-		assertEquals(accessory2.id, clone.id);
-		assertEquals(accessory2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(accessory2.maxDef, clone.maxDef);
-		assertEquals(accessory2.minDef, clone.minDef);
-		assertEquals(accessory2.maxMagicDef, clone.maxMagicDef);
-		assertEquals(accessory2.minMagicDef, clone.minMagicDef);
-		assertEquals(accessory2.name, clone.name);
-		assertEquals(accessory2.tradeable, clone.tradeable);
-		assertEquals(accessory2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(accessory2.value, clone.value);
+		assertEquals(accessory2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(accessory2 == clone);

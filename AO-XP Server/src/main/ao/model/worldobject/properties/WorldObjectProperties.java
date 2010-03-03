@@ -16,28 +16,47 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.model.worldobject;
+package ao.model.worldobject.properties;
 
 /**
- * An object within the world.
+ * Defines a WorldObject's properties. Allows a lightweight pattern implementation.
  */
-public interface WorldObject {
+public class WorldObjectProperties {
+
+	protected int id;
+	protected String name;
+	protected int graphic;
+	
+	/**
+	 * Creates a new WorldObjectProperties instance.
+	 * @param id The id of the item.
+	 * @param name The name of the item.
+	 * @param graphic The graphic for the item.
+	 */
+	public WorldObjectProperties(int id, String name, int graphic) {
+		this.id = id;
+		this.name = name;
+		this.graphic = graphic;
+	}
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
 
 	/**
-	 * Retrieves the item's unique id.
-	 * @return The item's unique id.
+	 * @return the name
 	 */
-	int getId();
-	
+	public String getName() {
+		return name;
+	}
+
 	/**
-	 * Retrieves the object's graphic index.
-	 * @return The object's graphic index.
+	 * @return the graphic
 	 */
-	int getGraphic();
-	
-	/**
-	 * Retrieves the object's name.
-	 * @return The object's name.
-	 */
-	String getName();
+	public int getGraphic() {
+		return graphic;
+	}
 }

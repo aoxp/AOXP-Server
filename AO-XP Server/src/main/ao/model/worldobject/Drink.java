@@ -18,43 +18,21 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
-
 import ao.model.character.Character;
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.StatModifyingItemProperties;
 
 /**
- * Food to be consumed by characters.
+ * Drink to be consumed by characters.
  */
 public class Drink extends ConsumableItem {
 
-	protected int minThirst;
-	protected int maxThirst;
-
 	/**
 	 * Creates a new drink instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
-	 * @param minThirst The minimum thirst replenished by the food.
-	 * @param maxThirst The maximum thirst replenished by the food.
 	 */
-	public Drink(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie, int minThirst, int maxThirst) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
-
-		this.minThirst = minThirst;
-		this.maxThirst = maxThirst;
+	public Drink(StatModifyingItemProperties properties, int amount) {
+		super(properties, amount);
 	}
 
 	/*
@@ -63,9 +41,7 @@ public class Drink extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Drink(id, name, amount, tradeable, graphic, value,
-				usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie,
-				minThirst, maxThirst);
+		return new Drink((StatModifyingItemProperties) properties, amount);
 	}
 
 	/*
@@ -75,8 +51,11 @@ public class Drink extends ConsumableItem {
 	@Override
 	public void use(Character character) {
 		super.use(character);
+
+		int minModifier = ((StatModifyingItemProperties) properties).getMinModifier();
+		int maxModifier = ((StatModifyingItemProperties) properties).getMaxModifier();
 		
-		character.addToThirstiness((int) (Math.random() * (maxThirst - minThirst + 1)) + minThirst);
+		character.addToThirstiness((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier);
 	}
 
 	/**
@@ -84,7 +63,7 @@ public class Drink extends ConsumableItem {
 	 * @return The minimum thirst restored by the drink.
 	 */
 	public int getMinThirst() {
-		return minThirst;
+		return ((StatModifyingItemProperties) properties).getMinModifier();
 	}
 
 	/**
@@ -92,7 +71,7 @@ public class Drink extends ConsumableItem {
 	 * @return The maximum thirst restored by the drink.
 	 */
 	public int getMaxThirst() {
-		return maxThirst;
+		return ((StatModifyingItemProperties) properties).getMaxModifier();
 	}
 
 }

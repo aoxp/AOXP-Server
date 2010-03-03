@@ -19,37 +19,26 @@
 package ao.model.worldobject;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
-import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ao.model.character.Character;
-import ao.model.inventory.Inventory;
+import ao.model.worldobject.properties.TeleportProperties;
 
-public class TeleportTest extends AbstractItemTest {
+public class TeleportTest extends AbstractWorldObjectTest {
 
 	private static final int RADIUS = 4;
 	
 	private Teleport teleport1;
-	private Teleport teleport2;
 	
 	@Before
 	public void setUp() throws Exception {
-		teleport1 = new Teleport(1, "Teleport", 5, true, 1, 1, 0, 0, null, false, RADIUS);
-		teleport2 = new Teleport(1, "Teleport", 1, true, 1, 1, 0, 0, null, false, RADIUS);
+		TeleportProperties props1 = new TeleportProperties(1, "Teleport", 1, RADIUS);
+		teleport1 = new Teleport(props1);
 		
-		item = teleport2;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Teleport";
-		itemValue = 1;
-		itemNewbie = false;
+		object = teleport1;
+		objectProps = props1;
 	}
 
 	@After
@@ -57,59 +46,7 @@ public class TeleportTest extends AbstractItemTest {
 	}
 
 	@Test
-	public void testUse() {
-		
-		Inventory inventory = EasyMock.createMock(Inventory.class);
-		
-		Character character = EasyMock.createMock(Character.class);
-		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-		
-		// Usage of minerals do nothing.
-		EasyMock.replay(inventory, character);
-		
-		teleport1.use(character);
-		teleport2.use(character);
-		
-		EasyMock.verify(inventory, character);
+	public void testGetRadius() {
+		assertEquals(RADIUS, teleport1.getRadius());
 	}
-	
-	@Test
-	public void testClone() {
-		
-		Teleport clone = (Teleport) teleport1.clone();
-		
-		// Make sure all fields match
-		assertEquals(teleport1.amount, clone.amount);
-		assertEquals(teleport1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(teleport1.graphic, clone.graphic);
-		assertEquals(teleport1.id, clone.id);
-		assertEquals(teleport1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(teleport1.name, clone.name);
-		assertEquals(teleport1.tradeable, clone.tradeable);
-		assertEquals(teleport1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(teleport1.value, clone.value);
-		assertEquals(teleport1.radius, clone.radius);
-		
-		// Make sure the object itself is different
-		assertFalse(teleport1 == clone);
-		
-		
-		clone = (Teleport) teleport2.clone();
-		
-		// Make sure all fields match
-		assertEquals(teleport2.amount, clone.amount);
-		assertEquals(teleport2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(teleport2.graphic, clone.graphic);
-		assertEquals(teleport2.id, clone.id);
-		assertEquals(teleport2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(teleport2.name, clone.name);
-		assertEquals(teleport2.tradeable, clone.tradeable);
-		assertEquals(teleport2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(teleport2.value, clone.value);
-		assertEquals(teleport2.radius, clone.radius);
-		
-		// Make sure the object itself is different
-		assertFalse(teleport2 == clone);
-	}
-
 }

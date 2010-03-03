@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
+import ao.model.worldobject.properties.StatModifyingItemProperties;
 
 public class DrinkTest extends AbstractItemTest {
 
@@ -41,18 +42,15 @@ public class DrinkTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		drink1 = new Drink(1, "Apple Juice", 5, true, 1, 1, 0, 0, null, false, MIN_THIRST, MAX_THIRST);
-		drink2 = new Drink(1, "Green Apple Juice", 1, true, 1, 1, 0, 0, null, false, MAX_THIRST, MAX_THIRST);
+		StatModifyingItemProperties props1 = new StatModifyingItemProperties(1, "Apple Juice", 1, true, 1, 0, 0, null, false, MIN_THIRST, MAX_THIRST);
+		drink1 = new Drink(props1, 5);
 		
-		item = drink2;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Green Apple Juice";
-		itemValue = 1;
-		itemNewbie = false;
+		StatModifyingItemProperties props2 = new StatModifyingItemProperties(1, "Green Apple Juice", 1, true, 1, 0, 0, null, false, MAX_THIRST, MAX_THIRST);
+		drink2 = new Drink(props2, 1);
+		
+		object = drink2;
+		ammount = 1;
+		objectProps = props2;
 	}
 
 	@After
@@ -123,16 +121,7 @@ public class DrinkTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(drink1.amount, clone.amount);
-		assertEquals(drink1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(drink1.graphic, clone.graphic);
-		assertEquals(drink1.id, clone.id);
-		assertEquals(drink1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(drink1.maxThirst, clone.maxThirst);
-		assertEquals(drink1.minThirst, clone.minThirst);
-		assertEquals(drink1.name, clone.name);
-		assertEquals(drink1.tradeable, clone.tradeable);
-		assertEquals(drink1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(drink1.value, clone.value);
+		assertEquals(drink1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(drink1 == clone);
@@ -142,16 +131,7 @@ public class DrinkTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(drink2.amount, clone.amount);
-		assertEquals(drink2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(drink2.graphic, clone.graphic);
-		assertEquals(drink2.id, clone.id);
-		assertEquals(drink2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(drink2.maxThirst, clone.maxThirst);
-		assertEquals(drink2.minThirst, clone.minThirst);
-		assertEquals(drink2.name, clone.name);
-		assertEquals(drink2.tradeable, clone.tradeable);
-		assertEquals(drink2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(drink2.value, clone.value);
+		assertEquals(drink2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(drink2 == clone);

@@ -18,45 +18,21 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
-
 import ao.model.character.Character;
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.StaffProperties;
 
 /**
  * A magic staff.
  */
 public class Staff extends AbstractEquipableItem implements Weapon {
 
-	protected int magicPower;
-	protected int attackPower;
-	
 	/**
 	 * Creates a new Staff instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
-	 * @param equippedGraphic The index of the graphic when equipped.
-	 * @param attackPower The attack power of the item.
-	 * @param magicPower The magic power of the staff.
 	 */
-	public Staff(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie, int equippedGraphic,
-			int attackPower, int magicPower) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
-		
-		this.attackPower = attackPower;
-		this.magicPower = magicPower;
+	public Staff(StaffProperties properties, int amount) {
+		super(properties, amount);
 	}
 
 	/**
@@ -64,7 +40,7 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 * @return The staff's magic power.
 	 */
 	public int getMagicPower() {
-		return magicPower;
+		return ((StaffProperties) properties).getMagicPower();
 	}
 	
 	/*
@@ -73,7 +49,7 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 */
 	@Override
 	public int getAttackPower() {
-		return attackPower;
+		return ((StaffProperties) properties).getAttackPower();
 	}
 
 	/*
@@ -82,7 +58,7 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 */
 	@Override
 	public Item clone() {
-		return new Staff(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic, attackPower, magicPower);
+		return new Staff((StaffProperties) properties, amount);
 	}
 
 	/*

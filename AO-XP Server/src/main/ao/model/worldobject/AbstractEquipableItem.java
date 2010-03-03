@@ -18,9 +18,7 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
-
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.EquippableItemProperties;
 
 /**
  * Base class for equipable items.
@@ -29,30 +27,16 @@ public abstract class AbstractEquipableItem extends AbstractItem implements
 		EquipableItem {
 	
 	protected boolean equipped;
-	protected int equippedGraphic;
 	
 	/**
-	 * Creates a new AbstractItem instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * Creates a new AbstractEquipableItem instance.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
-	 * @param equippedGraphic The index of the graphic when equipped.
 	 */
-	public AbstractEquipableItem(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie, int equippedGraphic) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie);
+	public AbstractEquipableItem(EquippableItemProperties properties, int amount) {
+		super(properties, amount);
 		
 		this.equipped = false;
-		this.equippedGraphic = equippedGraphic;
 	}
 
 	/*
@@ -61,7 +45,7 @@ public abstract class AbstractEquipableItem extends AbstractItem implements
 	 */
 	@Override
 	public int getEquippedGraphic() {
-		return equippedGraphic;
+		return ((EquippableItemProperties) properties).getEquippedGraphic();
 	}
 
 	/*
@@ -81,5 +65,4 @@ public abstract class AbstractEquipableItem extends AbstractItem implements
 	public void setEquipped(boolean equipped) {
 		this.equipped = equipped;
 	}
-
 }

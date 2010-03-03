@@ -22,24 +22,25 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import ao.model.worldobject.properties.EquippableItemProperties;
+
 public abstract class AbstractEquipableItemTest extends AbstractItemTest {
 
 	protected boolean itemEquipped;
-	protected int itemEquippedGraphic;
 	
 	@Test
 	public void testGetEquippedGraphic() {
-		assertEquals(itemEquippedGraphic, ((AbstractEquipableItem) item).getEquippedGraphic());
+		assertEquals(((EquippableItemProperties) objectProps).getEquippedGraphic(), ((AbstractEquipableItem) object).getEquippedGraphic());
 	}
 
 	@Test
 	public void testIsEquipped() {
-		assertEquals(itemEquipped, ((AbstractEquipableItem) item).isEquipped());
+		assertEquals(itemEquipped, ((AbstractEquipableItem) object).isEquipped());
 	}
 
 	@Test
 	public void testSetEquipped() {
-		AbstractEquipableItem it = (AbstractEquipableItem) item;
+		AbstractEquipableItem it = (AbstractEquipableItem) object;
 		
 		it.setEquipped(false);
 		assertEquals(false, it.isEquipped());

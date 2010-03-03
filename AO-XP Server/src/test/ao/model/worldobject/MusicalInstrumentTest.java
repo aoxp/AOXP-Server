@@ -18,7 +18,9 @@
 
 package ao.model.worldobject;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -29,6 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.model.character.Character;
+import ao.model.worldobject.properties.MusicalInstrumentProperties;
 
 public class MusicalInstrumentTest extends AbstractItemTest {
 	
@@ -50,18 +53,14 @@ public class MusicalInstrumentTest extends AbstractItemTest {
 		sounds2 = new LinkedList<Integer>();
 		sounds2.add(2);
 		
-		instrument1 = new MusicalInstrument(1, "Horn", 5, true, 1, 1, 0, 0, null, false, sounds1);
-		instrument2 = new MusicalInstrument(1, "Drum", 1, true, 1, 1, 0, 0, null, false, sounds2);
+		MusicalInstrumentProperties props1 = new MusicalInstrumentProperties(1, "Horn", 1, true, 1, 0, 0, null, false, 1, sounds1);
+		instrument1 = new MusicalInstrument(props1, 5);
 		
-		item = instrument1;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Horn";
-		itemValue = 1;
-		itemNewbie = false;
+		MusicalInstrumentProperties props2 = new MusicalInstrumentProperties(1, "Drum", 1, true, 1, 0, 0, null, false, 1, sounds2);
+		instrument2 = new MusicalInstrument(props2, 1);
+		
+		object = instrument1;
+		objectProps = props1;
 	}
 
 	@After
@@ -74,15 +73,7 @@ public class MusicalInstrumentTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(instrument1.amount, clone.amount);
-		assertEquals(instrument1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(instrument1.graphic, clone.graphic);
-		assertEquals(instrument1.id, clone.id);
-		assertEquals(instrument1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(instrument1.sounds, clone.sounds);
-		assertEquals(instrument1.name, clone.name);
-		assertEquals(instrument1.tradeable, clone.tradeable);
-		assertEquals(instrument1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(instrument1.value, clone.value);
+		assertEquals(instrument1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(instrument1 == clone);
@@ -92,15 +83,7 @@ public class MusicalInstrumentTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(instrument2.amount, clone.amount);
-		assertEquals(instrument2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(instrument2.graphic, clone.graphic);
-		assertEquals(instrument2.id, clone.id);
-		assertEquals(instrument2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(instrument2.sounds, clone.sounds);
-		assertEquals(instrument2.name, clone.name);
-		assertEquals(instrument2.tradeable, clone.tradeable);
-		assertEquals(instrument2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(instrument2.value, clone.value);
+		assertEquals(instrument2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(instrument2 == clone);

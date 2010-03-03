@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.model.character.Character;
+import ao.model.worldobject.properties.BoatProperties;
 
 public class BoatTest extends AbstractDefensiveItemTest {
 	
@@ -43,24 +44,16 @@ public class BoatTest extends AbstractDefensiveItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		boat1 = new Boat(1, "Small Boat", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
-		boat2 = new Boat(1, "Small Boat", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
+		BoatProperties props1 = new BoatProperties(1, "Small Boat", 1, true, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
+		boat1 = new Boat(props1, 5);
 		
-		item = boat1;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Small Boat";
-		itemValue = 1;
-		itemNewbie = false;
+		BoatProperties props2 = new BoatProperties(1, "Small Boat", 1, true, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
+		boat2 = new Boat(props2, 1);
+		
+		object = boat1;
+		objectProps = props1;
+		ammount = 5;
 		itemEquipped = false;
-		itemEquippedGraphic = 1;
-		itemMinDef = MIN_DEF;
-		itemMaxDef = MAX_DEF;
-		itemMinMagicDef = MIN_MAGIC_DEF;
-		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -73,20 +66,7 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(boat1.amount, clone.amount);
-		assertEquals(boat1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(boat1.graphic, clone.graphic);
-		assertEquals(boat1.id, clone.id);
-		assertEquals(boat1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(boat1.maxDef, clone.maxDef);
-		assertEquals(boat1.minDef, clone.minDef);
-		assertEquals(boat1.maxMagicDef, clone.maxMagicDef);
-		assertEquals(boat1.minMagicDef, clone.minMagicDef);
-		assertEquals(boat1.maxHit, clone.maxHit);
-		assertEquals(boat1.minHit, clone.minHit);
-		assertEquals(boat1.name, clone.name);
-		assertEquals(boat1.tradeable, clone.tradeable);
-		assertEquals(boat1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(boat1.value, clone.value);
+		assertEquals(boat1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(boat1 == clone);
@@ -96,20 +76,7 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(boat2.amount, clone.amount);
-		assertEquals(boat2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(boat2.graphic, clone.graphic);
-		assertEquals(boat2.id, clone.id);
-		assertEquals(boat2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(boat2.maxDef, clone.maxDef);
-		assertEquals(boat2.minDef, clone.minDef);
-		assertEquals(boat2.maxMagicDef, clone.maxMagicDef);
-		assertEquals(boat2.minMagicDef, clone.minMagicDef);
-		assertEquals(boat2.maxHit, clone.maxHit);
-		assertEquals(boat2.minHit, clone.minHit);
-		assertEquals(boat2.name, clone.name);
-		assertEquals(boat2.tradeable, clone.tradeable);
-		assertEquals(boat2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(boat2.value, clone.value);
+		assertEquals(boat2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(boat2 == clone);

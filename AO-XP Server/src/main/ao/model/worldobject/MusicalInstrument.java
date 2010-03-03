@@ -21,37 +21,20 @@ package ao.model.worldobject;
 import java.util.List;
 
 import ao.model.character.Character;
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.MusicalInstrumentProperties;
 
 /**
  * A musical instrument.
  */
 public class MusicalInstrument extends AbstractItem {
 
-	protected List<Integer> sounds;
-	
 	/**
 	 * Creates a new MusicalInstrument instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
-	 * @param sounds The sounds that can be played by the instrument.
 	 */
-	public MusicalInstrument(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			boolean newbie, List<Integer> sounds) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
-		
-		this.sounds = sounds;
+	public MusicalInstrument(MusicalInstrumentProperties properties, int amount) {
+		super(properties, amount);
 	}
 	
 	/*
@@ -60,7 +43,7 @@ public class MusicalInstrument extends AbstractItem {
 	 */
 	@Override
 	public Item clone() {
-		return new MusicalInstrument(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, sounds);
+		return new MusicalInstrument((MusicalInstrumentProperties) properties, amount);
 	}
 
 	/*
@@ -77,6 +60,7 @@ public class MusicalInstrument extends AbstractItem {
 	 * @return A random sound to play.
 	 */
 	public int getSoundToPlay() {
+		List<Integer> sounds = ((MusicalInstrumentProperties) properties).getSounds();
 		return sounds.get((int) Math.floor(Math.random() * sounds.size()));
 	}
 }

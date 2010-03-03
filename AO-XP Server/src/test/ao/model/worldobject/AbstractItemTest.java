@@ -22,20 +22,15 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public abstract class AbstractItemTest {
+import ao.model.worldobject.properties.ItemProperties;
 
-	protected AbstractItem item;
-	protected int itemValue;
-	protected int itemId;
-	protected int itemManufactureDifficulty;
-	protected int itemUsageDifficulty;
-	protected boolean itemIsTradeable;
-	protected int itemGraphic;
-	protected String itemName;
-	protected boolean itemNewbie;
+public abstract class AbstractItemTest extends AbstractWorldObjectTest {
+
+	protected int ammount;
 	
 	@Test
 	public void testAddAmount() {
+		AbstractItem item = (AbstractItem) object;
 		int ammount = item.getAmount();
 		
 		// Check adding and removing
@@ -60,41 +55,36 @@ public abstract class AbstractItemTest {
 
 	@Test
 	public void testGetValue() {
-		assertEquals(itemValue, item.getValue());
-	}
-
-	@Test
-	public void testGetId() {
-		assertEquals(itemId, item.getId());
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.getValue(), item.getValue());
 	}
 
 	@Test
 	public void testGetManufactureDifficulty() {
-		assertEquals(itemManufactureDifficulty, item.getManufactureDifficulty());
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.getManufactureDifficulty(), item.getManufactureDifficulty());
 	}
 
 	@Test
 	public void testGetUsageDifficulty() {
-		assertEquals(itemUsageDifficulty, item.getUsageDifficulty());
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.getUsageDifficulty(), item.getUsageDifficulty());
 	}
 
 	@Test
 	public void testIsTradeable() {
-		assertEquals(itemIsTradeable, item.isTradeable());
-	}
-
-	@Test
-	public void testGetGraphic() {
-		assertEquals(itemGraphic, item.getGraphic());
-	}
-
-	@Test
-	public void testGetName() {
-		assertEquals(itemName, item.getName());
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.isTradeable(), item.isTradeable());
 	}
 
 	@Test
 	public void testIsNewbie() {
-		assertEquals(itemNewbie, item.isNewbie());
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.isNewbie(), item.isNewbie());
 	}
 }

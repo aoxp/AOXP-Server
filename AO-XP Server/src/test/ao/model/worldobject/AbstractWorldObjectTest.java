@@ -18,26 +18,29 @@
 
 package ao.model.worldobject;
 
-/**
- * An object within the world.
- */
-public interface WorldObject {
+import static org.junit.Assert.assertEquals;
 
-	/**
-	 * Retrieves the item's unique id.
-	 * @return The item's unique id.
-	 */
-	int getId();
+import org.junit.Test;
+
+import ao.model.worldobject.properties.WorldObjectProperties;
+
+public abstract class AbstractWorldObjectTest {
+
+	protected AbstractWorldObject object;
+	protected WorldObjectProperties objectProps;
 	
-	/**
-	 * Retrieves the object's graphic index.
-	 * @return The object's graphic index.
-	 */
-	int getGraphic();
-	
-	/**
-	 * Retrieves the object's name.
-	 * @return The object's name.
-	 */
-	String getName();
+	@Test
+	public void testGetId() {
+		assertEquals(objectProps.getId(), object.getId());
+	}
+
+	@Test
+	public void testGetGraphic() {
+		assertEquals(objectProps.getGraphic(), object.getGraphic());
+	}
+
+	@Test
+	public void testGetName() {
+		assertEquals(objectProps.getName(), object.getName());
+	}
 }

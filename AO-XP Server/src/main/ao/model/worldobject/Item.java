@@ -25,12 +25,6 @@ import ao.model.character.Reputation;
 import ao.model.character.archetype.UserArchetype;
 
 public interface Item extends WorldObject, Cloneable {
-
-	/**
-	 * Retrieves the item's unique id.
-	 * @return The item's unique id.
-	 */
-	int getId();
 	
 	/**
 	 * Retrieves the item's amount.

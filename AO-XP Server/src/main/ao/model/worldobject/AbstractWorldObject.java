@@ -18,26 +18,48 @@
 
 package ao.model.worldobject;
 
-/**
- * An object within the world.
- */
-public interface WorldObject {
+import ao.model.worldobject.properties.WorldObjectProperties;
 
-	/**
-	 * Retrieves the item's unique id.
-	 * @return The item's unique id.
-	 */
-	int getId();
+/**
+ * Abstract implementation of world object, provides most functionality.
+ */
+public abstract class AbstractWorldObject implements WorldObject {
+
+	protected WorldObjectProperties properties;
 	
 	/**
-	 * Retrieves the object's graphic index.
-	 * @return The object's graphic index.
+	 * Creates a new AbstractWorldObject instance.
+	 * @param properties The object's properties.
 	 */
-	int getGraphic();
+	public AbstractWorldObject(WorldObjectProperties properties) {
+		this.properties = properties;
+	}
 	
-	/**
-	 * Retrieves the object's name.
-	 * @return The object's name.
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.WorldObject#getGraphic()
 	 */
-	String getName();
+	@Override
+	public int getGraphic() {
+		return properties.getGraphic();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.WorldObject#getId()
+	 */
+	@Override
+	public int getId() {
+		return properties.getId();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.WorldObject#getName()
+	 */
+	@Override
+	public String getName() {
+		return properties.getName();
+	}
+
 }

@@ -16,28 +16,32 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.model.worldobject;
+package ao.model.worldobject.properties;
 
 /**
- * An object within the world.
+ * Defines a Teleport's properties. Allows a lightweight pattern implementation.
  */
-public interface WorldObject {
+public class TeleportProperties extends WorldObjectProperties {
+
+	protected int radius;
+	
+	/**
+	 * Creates a new TeleportProperties instance.
+	 * @param id The id of the item.
+	 * @param name The name of the item.
+	 * @param graphic The graphic for the item.
+	 * @param radius The radius of the teleport.
+	 */
+	public TeleportProperties(int id, String name, int graphic, int radius) {
+		super(id, name, graphic);
+		
+		this.radius = radius;
+	}
 
 	/**
-	 * Retrieves the item's unique id.
-	 * @return The item's unique id.
+	 * @return the radius
 	 */
-	int getId();
-	
-	/**
-	 * Retrieves the object's graphic index.
-	 * @return The object's graphic index.
-	 */
-	int getGraphic();
-	
-	/**
-	 * Retrieves the object's name.
-	 * @return The object's name.
-	 */
-	String getName();
+	public int getRadius() {
+		return radius;
+	}
 }

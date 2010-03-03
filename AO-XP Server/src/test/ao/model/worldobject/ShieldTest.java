@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.model.character.Character;
+import ao.model.worldobject.properties.DefensiveItemProperties;
 
 public class ShieldTest extends AbstractDefensiveItemTest {
 
@@ -40,24 +41,16 @@ public class ShieldTest extends AbstractDefensiveItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		shield1 = new Shield(1, "Turtle Shield", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
-		shield2 = new Shield(1, "Turtle Shield", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		DefensiveItemProperties props1 = new DefensiveItemProperties(1, "Turtle Shield", 1, true, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		shield1 = new Shield(props1, 5);
 		
-		item = shield1;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Turtle Shield";
-		itemValue = 1;
-		itemNewbie = false;
+		DefensiveItemProperties props2 = new DefensiveItemProperties(1, "Turtle Shield", 1, true, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		shield2 = new Shield(props2, 1);
+		
+		object = shield1;
+		objectProps = props1;
+		ammount = 5;
 		itemEquipped = false;
-		itemEquippedGraphic = 1;
-		itemMinDef = MIN_DEF;
-		itemMaxDef = MAX_DEF;
-		itemMinMagicDef = MIN_MAGIC_DEF;
-		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -70,18 +63,7 @@ public class ShieldTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(shield1.amount, clone.amount);
-		assertEquals(shield1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(shield1.graphic, clone.graphic);
-		assertEquals(shield1.id, clone.id);
-		assertEquals(shield1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(shield1.maxDef, clone.maxDef);
-		assertEquals(shield1.minDef, clone.minDef);
-		assertEquals(shield1.maxMagicDef, clone.maxMagicDef);
-		assertEquals(shield1.minMagicDef, clone.minMagicDef);
-		assertEquals(shield1.name, clone.name);
-		assertEquals(shield1.tradeable, clone.tradeable);
-		assertEquals(shield1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(shield1.value, clone.value);
+		assertEquals(shield1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(shield1 == clone);
@@ -91,18 +73,7 @@ public class ShieldTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(shield2.amount, clone.amount);
-		assertEquals(shield2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(shield2.graphic, clone.graphic);
-		assertEquals(shield2.id, clone.id);
-		assertEquals(shield2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(shield2.maxDef, clone.maxDef);
-		assertEquals(shield2.minDef, clone.minDef);
-		assertEquals(shield2.maxMagicDef, clone.maxMagicDef);
-		assertEquals(shield2.minMagicDef, clone.minMagicDef);
-		assertEquals(shield2.name, clone.name);
-		assertEquals(shield2.tradeable, clone.tradeable);
-		assertEquals(shield2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(shield2.value, clone.value);
+		assertEquals(shield2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(shield2 == clone);

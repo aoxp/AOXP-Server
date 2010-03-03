@@ -18,49 +18,21 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
+import ao.model.worldobject.properties.DefensiveItemProperties;
 
-import ao.model.character.archetype.UserArchetype;
-
+/**
+ * Base class for defensive items.
+ */
 public abstract class AbstractDefensiveItem extends AbstractEquipableItem implements
 		DefensiveItem {
 	
-	protected int minDef;
-	protected int maxDef;
-
-	protected int minMagicDef;
-	protected int maxMagicDef;
-	
 	/**
-	 * Creates a new AbstractDefensiveitem instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * Creates a new AbstractDefensiveItem instance.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
-	 * @param equippedGraphic The index of the graphic when equipped.
-	 * @param minDef The minimum defense granted by this item.
-	 * @param maxDef The maximum defense granted by this item.
-	 * @param minMagicDef The minimum magic defense granted by this item.
-	 * @param maxMagicDef The maximum magic defense granted by this item.
 	 */
-	public AbstractDefensiveItem(int id, String name, int amount,
-			boolean tradeable, int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			boolean newbie, int equippedGraphic, int minDef, int maxDef, int minMagicDef, int maxMagicDef) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
-		
-		this.minDef = minDef;
-		this.maxDef = maxDef;
-		
-		this.minMagicDef = minMagicDef;
-		this.maxMagicDef = maxMagicDef;
+	public AbstractDefensiveItem(DefensiveItemProperties properties, int amount) {
+		super(properties, amount);
 	}
 
 	/*
@@ -69,7 +41,7 @@ public abstract class AbstractDefensiveItem extends AbstractEquipableItem implem
 	 */
 	@Override
 	public int getMaxDef() {
-		return maxDef;
+		return ((DefensiveItemProperties) properties).getMaxDef();
 	}
 
 	/*
@@ -78,7 +50,7 @@ public abstract class AbstractDefensiveItem extends AbstractEquipableItem implem
 	 */
 	@Override
 	public int getMinDef() {
-		return minDef;
+		return ((DefensiveItemProperties) properties).getMinDef();
 	}
 	
 	/*
@@ -87,7 +59,7 @@ public abstract class AbstractDefensiveItem extends AbstractEquipableItem implem
 	 */
 	@Override
 	public int getMinMagicDef() {
-		return minMagicDef;
+		return ((DefensiveItemProperties) properties).getMinMagicDef();
 	}
 
 	/*
@@ -96,6 +68,6 @@ public abstract class AbstractDefensiveItem extends AbstractEquipableItem implem
 	 */
 	@Override
 	public int getMaxMagicDef() {
-		return maxMagicDef;
+		return ((DefensiveItemProperties) properties).getMaxMagicDef();
 	}
 }

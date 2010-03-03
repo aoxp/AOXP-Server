@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
+import ao.model.worldobject.properties.StatModifyingItemProperties;
 
 public class HPPotionTest extends AbstractItemTest {
 
@@ -39,18 +40,16 @@ public class HPPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		potion1 = new HPPotion(1, "Red Potion", 5, true, 1, 1, 0, 0, null, false, MIN_HP, MAX_HP);
-		potion2 = new HPPotion(1, "Big Red Potion", 1, true, 1, 1, 0, 0, null, false, MAX_HP, MAX_HP);
 		
-		item = potion2;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Big Red Potion";
-		itemValue = 1;
-		itemNewbie = false;
+		StatModifyingItemProperties props1 = new StatModifyingItemProperties(1, "Red Potion", 1, true, 1, 0, 0, null, false, MIN_HP, MAX_HP);
+		potion1 = new HPPotion(props1, 5);
+		
+		StatModifyingItemProperties props2 = new StatModifyingItemProperties(1, "Big Red Potion", 1, true, 1, 0, 0, null, false, MAX_HP, MAX_HP);
+		potion2 = new HPPotion(props2, 1);
+		
+		object = potion2;
+		objectProps = props2;
+		ammount = 1;
 	}
 
 	@After
@@ -121,16 +120,7 @@ public class HPPotionTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(potion1.amount, clone.amount);
-		assertEquals(potion1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(potion1.graphic, clone.graphic);
-		assertEquals(potion1.id, clone.id);
-		assertEquals(potion1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(potion1.maxHP, clone.maxHP);
-		assertEquals(potion1.minHP, clone.minHP);
-		assertEquals(potion1.name, clone.name);
-		assertEquals(potion1.tradeable, clone.tradeable);
-		assertEquals(potion1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(potion1.value, clone.value);
+		assertEquals(potion1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(potion1 == clone);
@@ -140,16 +130,7 @@ public class HPPotionTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(potion2.amount, clone.amount);
-		assertEquals(potion2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(potion2.graphic, clone.graphic);
-		assertEquals(potion2.id, clone.id);
-		assertEquals(potion2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(potion2.maxHP, clone.maxHP);
-		assertEquals(potion2.minHP, clone.minHP);
-		assertEquals(potion2.name, clone.name);
-		assertEquals(potion2.tradeable, clone.tradeable);
-		assertEquals(potion2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(potion2.value, clone.value);
+		assertEquals(potion2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(potion2 == clone);

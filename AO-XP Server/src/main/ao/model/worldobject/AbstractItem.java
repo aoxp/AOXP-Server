@@ -24,55 +24,32 @@ import ao.model.character.Gender;
 import ao.model.character.Race;
 import ao.model.character.Reputation;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.ItemProperties;
 
 /**
  * Abstract implementation of item, provides most functionality.
  */
-public abstract class AbstractItem implements Item {
+public abstract class AbstractItem extends AbstractWorldObject implements Item {
 
 	protected static final int MAX_STACKED_ITEMS = 10000;
 	
-	
-	protected int id;
-	protected String name;
 	protected int amount;
-	protected boolean tradeable;
-	protected int graphic;
-	protected int value;
-	protected int usageDifficulty;
-	protected int manufactureDifficulty;
-	protected boolean newbie;
-	
-	protected List<UserArchetype> forbiddenArchetypes;
 	
 	/**
 	 * Creates a new AbstractItem instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
 	 */
-	public AbstractItem(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie) {
-		super();
-		this.id = id;
-		this.name = name;
+	public AbstractItem(ItemProperties properties, int amount) {
+		super(properties);
+		
 		this.amount = amount;
-		this.tradeable = tradeable;
-		this.graphic = graphic;
-		this.value = value;
-		this.usageDifficulty = usageDifficulty;
-		this.manufactureDifficulty = manufactureDifficulty;
-		this.forbiddenArchetypes = forbiddenArchetypes;
-		this.newbie = newbie;
+		
+		if (this.amount > MAX_STACKED_ITEMS) {
+			this.amount = MAX_STACKED_ITEMS;
+		} else if (this.amount < 0) {
+			this.amount = 0;
+		}
 	}
 
 	/*
@@ -100,6 +77,7 @@ public abstract class AbstractItem implements Item {
 			UserArchetype archetype, Reputation reputation) {
 		
 		// Race is only important for armors and clothes
+		List<UserArchetype> forbiddenArchetypes = ((ItemProperties) properties).getForbiddenArchetypes();
 		
 		if (forbiddenArchetypes != null && forbiddenArchetypes.contains(archetype)) {
 			return false;
@@ -125,16 +103,7 @@ public abstract class AbstractItem implements Item {
 	 */
 	@Override
 	public int getValue() {
-		return value;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Item#getId()
-	 */
-	@Override
-	public int getId() {
-		return id;
+		return ((ItemProperties) properties).getValue();
 	}
 
 	/*
@@ -143,7 +112,7 @@ public abstract class AbstractItem implements Item {
 	 */
 	@Override
 	public int getManufactureDifficulty() {
-		return manufactureDifficulty;
+		return ((ItemProperties) properties).getManufactureDifficulty();
 	}
 
 	/*
@@ -152,7 +121,7 @@ public abstract class AbstractItem implements Item {
 	 */
 	@Override
 	public int getUsageDifficulty() {
-		return usageDifficulty;
+		return ((ItemProperties) properties).getUsageDifficulty();
 	}
 
 	/*
@@ -161,25 +130,7 @@ public abstract class AbstractItem implements Item {
 	 */
 	@Override
 	public boolean isTradeable() {
-		return tradeable;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see ao.model.worldobject.WorldObject#getGraphic()
-	 */
-	@Override
-	public int getGraphic() {
-		return graphic;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see ao.model.worldobject.WorldObject#getName()
-	 */
-	@Override
-	public String getName() {
-		return name;
+		return ((ItemProperties) properties).isTradeable();
 	}
 	
 	/*
@@ -188,7 +139,7 @@ public abstract class AbstractItem implements Item {
 	 */
 	@Override
 	public boolean isNewbie() {
-		return newbie;
+		return ((ItemProperties) properties).isNewbie();
 	}
 
 	/*

@@ -18,7 +18,8 @@
 
 package ao.model.worldobject;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -26,6 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.model.character.Character;
+import ao.model.worldobject.properties.DefensiveItemProperties;
 
 public class ArmorTest extends AbstractDefensiveItemTest {
 
@@ -40,24 +42,16 @@ public class ArmorTest extends AbstractDefensiveItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		armor1 = new Armor(1, "Leather Armor", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
-		armor2 = new Armor(1, "Leather Armor", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		DefensiveItemProperties props1 = new DefensiveItemProperties(1, "Leather Armor", 1, true, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		armor1 = new Armor(props1, 5);
 		
-		item = armor1;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Leather Armor";
-		itemValue = 1;
-		itemNewbie = false;
+		DefensiveItemProperties props2 = new DefensiveItemProperties(1, "Leather Armor", 1, true, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		armor2 = new Armor(props2, 1);
+		
+		object = armor1;
+		objectProps = props1;
+		ammount = 5;
 		itemEquipped = false;
-		itemEquippedGraphic = 1;
-		itemMinDef = MIN_DEF;
-		itemMaxDef = MAX_DEF;
-		itemMinMagicDef = MIN_MAGIC_DEF;
-		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -70,18 +64,7 @@ public class ArmorTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(armor1.amount, clone.amount);
-		assertEquals(armor1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(armor1.graphic, clone.graphic);
-		assertEquals(armor1.id, clone.id);
-		assertEquals(armor1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(armor1.maxDef, clone.maxDef);
-		assertEquals(armor1.minDef, clone.minDef);
-		assertEquals(armor1.maxMagicDef, clone.maxMagicDef);
-		assertEquals(armor1.minMagicDef, clone.minMagicDef);
-		assertEquals(armor1.name, clone.name);
-		assertEquals(armor1.tradeable, clone.tradeable);
-		assertEquals(armor1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(armor1.value, clone.value);
+		assertEquals(armor1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(armor1 == clone);
@@ -91,18 +74,7 @@ public class ArmorTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(armor2.amount, clone.amount);
-		assertEquals(armor2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(armor2.graphic, clone.graphic);
-		assertEquals(armor2.id, clone.id);
-		assertEquals(armor2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(armor2.maxDef, clone.maxDef);
-		assertEquals(armor2.minDef, clone.minDef);
-		assertEquals(armor2.maxMagicDef, clone.maxMagicDef);
-		assertEquals(armor2.minMagicDef, clone.minMagicDef);
-		assertEquals(armor2.name, clone.name);
-		assertEquals(armor2.tradeable, clone.tradeable);
-		assertEquals(armor2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(armor2.value, clone.value);
+		assertEquals(armor2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(armor2 == clone);

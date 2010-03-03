@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.model.character.Character;
+import ao.model.worldobject.properties.DefensiveItemProperties;
 
 public class HelmetTest extends AbstractDefensiveItemTest {
 
@@ -40,24 +41,16 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		helmet1 = new Helmet(1, "Viking Helmet", 5, true, 1, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
-		helmet2 = new Helmet(1, "Viking Helmet", 1, true, 1, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		DefensiveItemProperties props1 = new DefensiveItemProperties(1, "Viking Helmet", 1, true, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		helmet1 = new Helmet(props1, 5);
 		
-		item = helmet1;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Viking Helmet";
-		itemValue = 1;
-		itemNewbie = false;
+		DefensiveItemProperties props2 = new DefensiveItemProperties(1, "Viking Helmet", 1, true, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		helmet2 = new Helmet(props2, 1);
+		
+		object = helmet1;
+		ammount = 5;
+		objectProps = props1;
 		itemEquipped = false;
-		itemEquippedGraphic = 1;
-		itemMinDef = MIN_DEF;
-		itemMaxDef = MAX_DEF;
-		itemMinMagicDef = MIN_MAGIC_DEF;
-		itemMaxMagicDef = MAX_MAGIC_DEF;
 	}
 
 	@After
@@ -70,18 +63,7 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(helmet1.amount, clone.amount);
-		assertEquals(helmet1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(helmet1.graphic, clone.graphic);
-		assertEquals(helmet1.id, clone.id);
-		assertEquals(helmet1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(helmet1.maxDef, clone.maxDef);
-		assertEquals(helmet1.minDef, clone.minDef);
-		assertEquals(helmet1.maxMagicDef, clone.maxMagicDef);
-		assertEquals(helmet1.minMagicDef, clone.minMagicDef);
-		assertEquals(helmet1.name, clone.name);
-		assertEquals(helmet1.tradeable, clone.tradeable);
-		assertEquals(helmet1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(helmet1.value, clone.value);
+		assertEquals(helmet1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(helmet1 == clone);
@@ -91,18 +73,7 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 		
 		// Make sure all fields match
 		assertEquals(helmet2.amount, clone.amount);
-		assertEquals(helmet2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(helmet2.graphic, clone.graphic);
-		assertEquals(helmet2.id, clone.id);
-		assertEquals(helmet2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(helmet2.maxDef, clone.maxDef);
-		assertEquals(helmet2.minDef, clone.minDef);
-		assertEquals(helmet2.maxMagicDef, clone.maxMagicDef);
-		assertEquals(helmet2.minMagicDef, clone.minMagicDef);
-		assertEquals(helmet2.name, clone.name);
-		assertEquals(helmet2.tradeable, clone.tradeable);
-		assertEquals(helmet2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(helmet2.value, clone.value);
+		assertEquals(helmet2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(helmet2 == clone);

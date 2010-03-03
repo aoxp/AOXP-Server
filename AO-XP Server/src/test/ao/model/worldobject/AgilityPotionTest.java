@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
+import ao.model.worldobject.properties.StatModifyingItemProperties;
 
 public class AgilityPotionTest extends AbstractItemTest {
 
@@ -39,18 +40,15 @@ public class AgilityPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		potion1 = new AgilityPotion(1, "Yellow Potion", 5, true, 1, 1, 0, 0, null, false, MIN_AGI, MAX_AGI);
-		potion2 = new AgilityPotion(1, "Big Yellow Potion", 1, true, 1, 1, 0, 0, null, false, MAX_AGI, MAX_AGI);
+		StatModifyingItemProperties props1 = new StatModifyingItemProperties(1, "Yellow Potion", 1, true,  1, 0, 0, null, false, MIN_AGI, MAX_AGI);
+		potion1 = new AgilityPotion(props1, 5);
 		
-		item = potion2;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Big Yellow Potion";
-		itemValue = 1;
-		itemNewbie = false;
+		StatModifyingItemProperties props2 = new StatModifyingItemProperties(1, "Big Yellow Potion", 1, true, 1, 0, 0, null, false, MAX_AGI, MAX_AGI);
+		potion2 = new AgilityPotion(props2, 1);
+		
+		object = potion2;
+		ammount = 1;
+		objectProps = props2;
 	}
 
 	@After
@@ -121,16 +119,7 @@ public class AgilityPotionTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(potion1.amount, clone.amount);
-		assertEquals(potion1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(potion1.graphic, clone.graphic);
-		assertEquals(potion1.id, clone.id);
-		assertEquals(potion1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(potion1.maxModifier, clone.maxModifier);
-		assertEquals(potion1.minModifier, clone.minModifier);
-		assertEquals(potion1.name, clone.name);
-		assertEquals(potion1.tradeable, clone.tradeable);
-		assertEquals(potion1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(potion1.value, clone.value);
+		assertEquals(potion1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(potion1 == clone);
@@ -140,16 +129,7 @@ public class AgilityPotionTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(potion2.amount, clone.amount);
-		assertEquals(potion2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(potion2.graphic, clone.graphic);
-		assertEquals(potion2.id, clone.id);
-		assertEquals(potion2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(potion2.maxModifier, clone.maxModifier);
-		assertEquals(potion2.minModifier, clone.minModifier);
-		assertEquals(potion2.name, clone.name);
-		assertEquals(potion2.tradeable, clone.tradeable);
-		assertEquals(potion2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(potion2.value, clone.value);
+		assertEquals(potion2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(potion2 == clone);

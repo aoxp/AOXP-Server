@@ -18,10 +18,8 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
-
 import ao.model.character.Character;
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.ItemProperties;
 
 /**
  * Raw Mineral's.
@@ -30,23 +28,11 @@ public class Mineral extends AbstractItem {
 
 	/**
 	 * Creates a new Mineral instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
 	 */
-	public Mineral(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
+	public Mineral(ItemProperties properties, int amount) {
+		super(properties, amount);
 	}
 
 	/*
@@ -55,8 +41,7 @@ public class Mineral extends AbstractItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Mineral(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
+		return new Mineral((ItemProperties) properties, amount);
 	}
 
 	/*

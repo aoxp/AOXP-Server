@@ -18,40 +18,19 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
-
-import ao.model.character.Character;
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.TeleportProperties;
 
 /**
  * A teleport object.
  */
-public class Teleport extends AbstractItem {
+public class Teleport extends AbstractWorldObject {
 
-	protected int radius;
-	
 	/**
 	 * Creates a new Teleport instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
-	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
-	 * @param radius The radius of the teleporter's target area.
+	 * @param properties The object's properties.
 	 */
-	public Teleport(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			boolean newbie, int radius) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
-		
-		this.radius = radius;
+	public Teleport(TeleportProperties properties) {
+		super(properties);
 	}
 
 	/*
@@ -60,16 +39,7 @@ public class Teleport extends AbstractItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Teleport(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, radius);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Item#use(ao.model.character.Character)
-	 */
-	@Override
-	public void use(Character character) {
-		// This item can't be used.
+		return (Item) new Teleport((TeleportProperties) properties);
 	}
 
 	/**
@@ -77,6 +47,6 @@ public class Teleport extends AbstractItem {
 	 * @return The teleport's radius.
 	 */
 	public int getRadius() {
-		return radius;
+		return ((TeleportProperties) properties).getRadius();
 	}
 }

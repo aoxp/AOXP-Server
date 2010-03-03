@@ -18,43 +18,21 @@
 
 package ao.model.worldobject;
 
-import java.util.List;
-
 import ao.model.character.Character;
-import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.properties.StatModifyingItemProperties;
 
 /**
  * A potion to increase agility.
  */
 public class AgilityPotion extends ConsumableItem {
-
-	protected int minModifier;
-	protected int maxModifier;
 	
 	/**
 	 * Creates a new AgilityPotion instance.
-	 * @param id The id of the item.
-	 * @param name The name of the item.
+	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param tradeable True if it's tradeable, false otherwise.
-	 * @param graphic The graphic for the item.
-	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
-	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
-	 * @param newbie Whether the item is newbie or nor.
-	 * @param minModifier The minimum modifier of this potion.
-	 * @param maxModifier The maximum modifier of this potion.
 	 */
-	public AgilityPotion(int id, String name, int amount, boolean tradeable,
-			int graphic, int value, int usageDifficulty,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			boolean newbie, int minModifier, int maxModifier) {
-		super(id, name, amount, tradeable, graphic, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie);
-		
-		this.minModifier = minModifier;
-		this.maxModifier = maxModifier;
+	public AgilityPotion(StatModifyingItemProperties properties, int amount) {
+		super(properties, amount);
 	}
 
 	/*
@@ -63,7 +41,7 @@ public class AgilityPotion extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new AgilityPotion(id, name, amount, tradeable, graphic, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, minModifier, maxModifier);
+		return new AgilityPotion((StatModifyingItemProperties) properties, amount);
 	}
 
 	/*
@@ -74,6 +52,9 @@ public class AgilityPotion extends ConsumableItem {
 	public void use(Character character) {
 		super.use(character);
 		
+		int minModifier = ((StatModifyingItemProperties) properties).getMinModifier();
+		int maxModifier = ((StatModifyingItemProperties) properties).getMaxModifier();
+		
 		// increase agility!
 		character.addToAgility((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier);
 	}
@@ -83,7 +64,7 @@ public class AgilityPotion extends ConsumableItem {
 	 * @return The minimum modifier for this potion.
 	 */
 	public int getMinModifier() {
-		return minModifier;
+		return ((StatModifyingItemProperties) properties).getMinModifier();
 	}
 
 	/**
@@ -91,6 +72,6 @@ public class AgilityPotion extends ConsumableItem {
 	 * @return The maximim modifier for this potion.
 	 */
 	public int getMaxModifier() {
-		return maxModifier;
+		return ((StatModifyingItemProperties) properties).getMaxModifier();
 	}
 }

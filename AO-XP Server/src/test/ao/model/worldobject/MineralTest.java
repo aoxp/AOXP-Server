@@ -28,6 +28,7 @@ import org.junit.Test;
 
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
+import ao.model.worldobject.properties.ItemProperties;
 
 public class MineralTest extends AbstractItemTest {
 
@@ -36,18 +37,15 @@ public class MineralTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		mineral1 = new Mineral(1, "Gold", 5, true, 1, 1, 0, 0, null, false);
-		mineral2 = new Mineral(1, "Cooper", 1, true, 1, 1, 0, 0, null, false);
+		ItemProperties props1 = new ItemProperties(1, "Gold", 1, true, 1, 0, 0, null, false);
+		mineral1 = new Mineral(props1, 1);
 		
-		item = mineral2;
-		itemGraphic = 1;
-		itemId = 1;
-		itemIsTradeable = true;
-		itemManufactureDifficulty = 0;
-		itemUsageDifficulty = 0;
-		itemName = "Cooper";
-		itemValue = 1;
-		itemNewbie = false;
+		ItemProperties props2 = new ItemProperties(1, "Cooper", 1, true, 1, 0, 0, null, false);
+		mineral2 = new Mineral(props2, 1);
+		
+		object = mineral2;
+		ammount = 1;
+		objectProps = props2;
 	}
 
 	@After
@@ -78,14 +76,7 @@ public class MineralTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(mineral1.amount, clone.amount);
-		assertEquals(mineral1.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(mineral1.graphic, clone.graphic);
-		assertEquals(mineral1.id, clone.id);
-		assertEquals(mineral1.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(mineral1.name, clone.name);
-		assertEquals(mineral1.tradeable, clone.tradeable);
-		assertEquals(mineral1.usageDifficulty, clone.usageDifficulty);
-		assertEquals(mineral1.value, clone.value);
+		assertEquals(mineral1.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(mineral1 == clone);
@@ -95,14 +86,7 @@ public class MineralTest extends AbstractItemTest {
 		
 		// Make sure all fields match
 		assertEquals(mineral2.amount, clone.amount);
-		assertEquals(mineral2.forbiddenArchetypes, clone.forbiddenArchetypes);
-		assertEquals(mineral2.graphic, clone.graphic);
-		assertEquals(mineral2.id, clone.id);
-		assertEquals(mineral2.manufactureDifficulty, clone.manufactureDifficulty);
-		assertEquals(mineral2.name, clone.name);
-		assertEquals(mineral2.tradeable, clone.tradeable);
-		assertEquals(mineral2.usageDifficulty, clone.usageDifficulty);
-		assertEquals(mineral2.value, clone.value);
+		assertEquals(mineral2.properties, clone.properties);
 		
 		// Make sure the object itself is different
 		assertFalse(mineral2 == clone);
