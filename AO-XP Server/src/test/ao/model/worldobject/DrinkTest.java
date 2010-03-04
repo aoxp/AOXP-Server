@@ -86,7 +86,7 @@ public class DrinkTest extends AbstractItemTest {
 		
 		Capture<Integer> capture = new Capture<Integer>();
 		
-		// Consumption of drink1 requires just a call to addToHunger.
+		// Consumption of drink1 requires just a call to addToThirstiness.
 		character.addToThirstiness(EasyMock.capture(capture));
 		
 		EasyMock.replay(inventory, character);
@@ -101,14 +101,14 @@ public class DrinkTest extends AbstractItemTest {
 	}
 
 	@Test
-	public void testGetMinHun() {
+	public void testGetMinThirst() {
 		
 		assertEquals(MIN_THIRST, drink1.getMinThirst());
 		assertEquals(MAX_THIRST, drink2.getMinThirst());
 	}
 
 	@Test
-	public void testGetMaxHun() {
+	public void testGetMaxThirst() {
 		
 		assertEquals(MAX_THIRST, drink1.getMaxThirst());
 		assertEquals(MAX_THIRST, drink2.getMaxThirst());
