@@ -86,6 +86,12 @@ public interface Inventory {
 	int getCapacity();
 	
 	/**
+	 * Sets the capacity of the inventory
+	 * @param capacity The number of slots for the inventory
+	 */
+	void setCapacity(int capacity);
+	
+	/**
 	 * Gets the amount of an item  in the inventory
 	 * @param item to look for its amount
 	 * @return The amount of the item.

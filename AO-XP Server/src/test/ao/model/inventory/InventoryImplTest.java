@@ -25,8 +25,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ao.model.inventory.Inventory;
-import ao.model.inventory.InventoryImpl;
 import ao.model.worldobject.Item;
 
 public class InventoryImplTest {
@@ -260,14 +258,40 @@ public class InventoryImplTest {
 		Item item = EasyMock.createMock(Item.class);
 		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
 		EasyMock.expect(item.getAmount()).andReturn(1).anyTimes();
-		EasyMock.replay(item);
+		
+		Item item2 = EasyMock.createMock(Item.class);
+		EasyMock.expect(item2.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item2.getAmount()).andReturn(1000).anyTimes();
+		
+		// This is needed to add the second item
+		EasyMock.expect(item.addAmount(1000)).andReturn(1000).once();
+		EasyMock.expect(item2.addAmount(-999)).andReturn(1).once();
+		
+		EasyMock.replay(item, item2);
 		
 		inventory.addItem(item);
 		Assert.assertEquals(1, inventory.getItemAmount(item));
-
-		//TODO: Test getting amounts an item placed in different slots of the inventory.
+		
+		// When adding the second item, amount should stack up
+		inventory.addItem(item2);
+		Assert.assertEquals(1001, inventory.getItemAmount(item));
 	}
 
+	@Test
+	public void testSetCapacity() {
+		Item item = EasyMock.createMock(Item.class);
+		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item.getAmount()).andReturn(1).anyTimes();
+		EasyMock.replay(item);
+		
+		inventory.addItem(item);
+		inventory.setCapacity(1);
+		
+		Assert.assertEquals(1, inventory.getCapacity());
+		Assert.assertEquals(item, inventory.getItem(0));
+		
+		// TODO : Test when capacity is trimmed and items are droped
+	}
 
 	@Test
 	public void testCleanup() {

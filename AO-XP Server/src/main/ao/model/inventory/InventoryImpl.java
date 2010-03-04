@@ -27,7 +27,7 @@ public class InventoryImpl implements Inventory {
 	
 	private static final int DEFAULT_INVENTORY_CAPACITY = 20;
 	
-	Item[] inventory;
+	protected Item[] inventory;
 	
 	public InventoryImpl() {
 		this(DEFAULT_INVENTORY_CAPACITY);
@@ -49,6 +49,7 @@ public class InventoryImpl implements Inventory {
 	public int addItem(Item item) {
 		int i;
 		
+		// FIXME : This doesn't prevent non-falling items to be placed in the slots belonging to backpacks
 		if ((i = hasItem(item)) != -1) {
 			int amount = item.getAmount();
 			int newAmount, oldAmount;
@@ -239,6 +240,23 @@ public class InventoryImpl implements Inventory {
 				inventory[i] = null;
 			}
 		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.inventory.Inventory#setCapacity(int)
+	 */
+	@Override
+	public void setCapacity(int capacity) {
+		Item[] tmpInventory = new Item[capacity];
+		
+		for (int i = 0; i < capacity; i++) {
+			tmpInventory[i] = inventory[i];
+		}
+		
+		// TODO : Throw all other items
+		
+		inventory = tmpInventory;
 	}
 
 }
