@@ -23,15 +23,18 @@ import java.util.List;
 import ao.model.character.archetype.UserArchetype;
 
 /**
- * Defines an Staff's properties. Allows a lightweight pattern implementation.
+ * Defines a Weapon's properties. Allows a lightweight pattern implementation.
  */
-public class StaffProperties extends WeaponProperties {
+public class WeaponProperties extends EquippableItemProperties {
 
-	protected int magicPower;
-	protected int damageBonus;
+	protected boolean stabs;
+	protected int piercingDamage;	// This replaces the old "Refuerzo"
+
+	protected int minHit;
+	protected int maxHit;
 	
 	/**
-	 * Creates a new StaffProperties instance.
+	 * Creates a new WeaponProperties instance.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
@@ -45,33 +48,46 @@ public class StaffProperties extends WeaponProperties {
 	 * @param piercingDamage The pircing damage (not reduced by any kind of armor or defense) done by this item.
 	 * @param minHit The minimum hit done by this item.
 	 * @param maxHit The maximum hit done by this item.
-	 * @param magicPower The magic power of the staff.
-	 * @param damageBonus The attack bonus of the item.
 	 */
-	public StaffProperties(int id, String name, int graphic, boolean tradeable,
-			int value, int usageDifficulty, int manufactureDifficulty,
+	public WeaponProperties(int id, String name, int graphic,
+			boolean tradeable, int value, int usageDifficulty,
+			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, boolean newbie,
-			int equippedGraphic, boolean stabs, int piercingDamage,
-			int minHit, int maxHit, int magicPower, int damageBonus) {
-		super(id, name, graphic, tradeable, value, usageDifficulty,
-				manufactureDifficulty, forbiddenArchetypes, newbie,
-				equippedGraphic, stabs, piercingDamage, minHit, maxHit);
+			int equippedGraphic, boolean stabs, int piercingDamage, int minHit, int maxHit) {
+		super(id, name, graphic, tradeable, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
+
+		this.stabs = stabs;
+		this.piercingDamage = piercingDamage;
 		
-		this.damageBonus = damageBonus;
-		this.magicPower = magicPower;
+		this.minHit = minHit;
+		this.maxHit = maxHit;
 	}
 
 	/**
-	 * @return the magicPower
+	 * @return the true if this item stabs, false otherwise
 	 */
-	public int getMagicPower() {
-		return magicPower;
+	public boolean getStabs() {
+		return stabs;
 	}
 
 	/**
-	 * @return the damageBonus
+	 * @return the piercingDamage
 	 */
-	public int getDamageBonus() {
-		return damageBonus;
+	public int getPiercingDamage() {
+		return piercingDamage;
+	}
+
+	/**
+	 * @return the minHit
+	 */
+	public int getMinHit() {
+		return minHit;
+	}
+
+	/**
+	 * @return the maxHit
+	 */
+	public int getMaxHit() {
+		return maxHit;
 	}
 }

@@ -18,9 +18,7 @@
 
 package ao.model.worldobject;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -28,33 +26,28 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ao.model.character.Character;
-import ao.model.worldobject.properties.BoatProperties;
+import ao.model.worldobject.properties.WeaponProperties;
 
-public class BoatTest extends AbstractDefensiveItemTest {
-	
-	private static final int MIN_DEF = 1;
-	private static final int MAX_DEF = 5;
+public class WeaponTest extends AbstractEquipableItemTest {
 
-	private static final int MIN_HIT = 1;
-	private static final int MAX_HIT = 5;
+	protected static final int MIN_HIT = 1;
+	protected static final int MAX_HIT = 5;
+	protected static final int PIERCING_DAMAGE = 4;
 
-	private static final int MIN_MAGIC_DEF = 10;
-	private static final int MAX_MAGIC_DEF = 50;
-	
-	private Boat boat1;
-	private Boat boat2;
+	protected Weapon weapon1;
+	protected Weapon weapon2;
 	
 	@Before
 	public void setUp() throws Exception {
-		BoatProperties props1 = new BoatProperties(1, "Small Boat", 1, true, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
-		boat1 = new Boat(props1, 5);
+		WeaponProperties props1 = new WeaponProperties(1, "Bastard Sword", 1, true, 1, 0, 0, null, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT);
+		weapon1 = new Weapon(props1, 5);
 		
-		BoatProperties props2 = new BoatProperties(1, "Small Boat", 1, true, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
-		boat2 = new Boat(props2, 1);
+		WeaponProperties props2 = new WeaponProperties(1, "Halberd", 1, true, 1, 0, 0, null, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT);
+		weapon2 = new Weapon(props2, 1);
 		
-		object = boat1;
-		objectProps = props1;
+		object = weapon1;
 		ammount = 5;
+		objectProps = props1;
 		itemEquipped = false;
 	}
 
@@ -64,24 +57,24 @@ public class BoatTest extends AbstractDefensiveItemTest {
 	
 	@Test
 	public void testClone() {
-		Boat clone = (Boat) boat1.clone();
+		Weapon clone = (Weapon) weapon1.clone();
 		
 		// Make sure all fields match
-		assertEquals(boat1.amount, clone.amount);
-		assertEquals(boat1.properties, clone.properties);
+		assertEquals(weapon1.amount, clone.amount);
+		assertEquals(weapon1.properties, clone.properties);
 		
 		// Make sure the object itself is different
-		assertFalse(boat1 == clone);
+		assertFalse(weapon1 == clone);
 		
 		
-		clone = (Boat) boat2.clone();
+		clone = (Weapon) weapon2.clone();
 		
 		// Make sure all fields match
-		assertEquals(boat2.amount, clone.amount);
-		assertEquals(boat2.properties, clone.properties);
+		assertEquals(weapon2.amount, clone.amount);
+		assertEquals(weapon2.properties, clone.properties);
 		
 		// Make sure the object itself is different
-		assertFalse(boat2 == clone);
+		assertFalse(weapon2 == clone);
 	}
 
 	@Test
@@ -90,30 +83,42 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		EasyMock.replay(character);
 		
 		// nothing should happen
-		boat1.use(character);
-		boat2.use(character);
+		weapon1.use(character);
+		weapon2.use(character);
 		
 		EasyMock.verify(character);
 	}
 	
 	@Test
 	public void testGetMinHit() {
-		assertEquals(MIN_HIT, boat1.getMinHit());
-		assertEquals(MAX_HIT, boat2.getMinHit());
-	}
-
-	@Test
-	public void testGetMaxHit() {
-		assertEquals(MAX_HIT, boat1.getMaxHit());
-		assertEquals(MAX_HIT, boat2.getMaxHit());
+		assertEquals(MIN_HIT, weapon1.getMinHit());
+		assertEquals(MAX_HIT, weapon2.getMinHit());
 	}
 	
 	@Test
-	public void testGetDamageBonus() {
-		int damage = boat1.getDamageBonus();
+	public void testGetMaxHit() {
+		assertEquals(MAX_HIT, weapon1.getMaxHit());
+		assertEquals(MAX_HIT, weapon2.getMaxHit());
+	}
+	
+	@Test
+	public void testGetPiercingDamage() {
+		assertEquals(PIERCING_DAMAGE, weapon1.getPiercingDamage());
+		assertEquals(PIERCING_DAMAGE, weapon2.getPiercingDamage());
+	}
+	
+	@Test
+	public void testGetStabs() {
+		assertTrue(weapon1.getStabs());
+		assertFalse(weapon2.getStabs());
+	}
+	
+	@Test
+	public void testGetDamage() {
+		int damage = weapon1.getDamage();
 		
 		assertTrue(damage >= MIN_HIT);
 		assertTrue(damage <= MAX_HIT);
-		assertEquals(MAX_HIT, boat2.getDamageBonus());
+		assertEquals(MAX_HIT, weapon2.getDamage());
 	}
 }

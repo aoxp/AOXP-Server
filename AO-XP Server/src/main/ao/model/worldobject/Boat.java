@@ -83,4 +83,15 @@ public class Boat extends AbstractDefensiveItem {
 	public int getMaxHit() {
 		return ((BoatProperties) properties).getMaxHit();
 	}
+	
+	/**
+	 * Retrieves the damage bonus to be applied by the boat.
+	 * @return The damage bonus to be applied by the boat.
+	 */
+	public int getDamageBonus() {
+		int minModifier = ((BoatProperties) properties).getMinHit();
+		int maxModifier = ((BoatProperties) properties).getMaxHit();
+		
+		return (int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier;
+	}
 }

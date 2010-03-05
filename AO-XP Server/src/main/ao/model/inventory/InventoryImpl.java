@@ -49,7 +49,6 @@ public class InventoryImpl implements Inventory {
 	public int addItem(Item item) {
 		int i;
 		
-		// FIXME : This doesn't prevent non-falling items to be placed in the slots belonging to backpacks
 		if ((i = hasItem(item)) != -1) {
 			int amount = item.getAmount();
 			int newAmount, oldAmount;
@@ -254,7 +253,7 @@ public class InventoryImpl implements Inventory {
 			tmpInventory[i] = inventory[i];
 		}
 		
-		// TODO : Throw all other items
+		// TODO : Throw all other items. What happens to non-falling items in such slots?
 		
 		inventory = tmpInventory;
 	}

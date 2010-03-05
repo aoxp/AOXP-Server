@@ -24,7 +24,7 @@ import ao.model.worldobject.properties.StaffProperties;
 /**
  * A magic staff.
  */
-public class Staff extends AbstractEquipableItem implements Weapon {
+public class Staff extends Weapon {
 
 	/**
 	 * Creates a new Staff instance.
@@ -43,13 +43,12 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 		return ((StaffProperties) properties).getMagicPower();
 	}
 	
-	/*
-	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Weapon#getAttackPower()
+	/**
+	 * The damage bonus for this staff.
+	 * @return The damage bonus for this staff.
 	 */
-	@Override
-	public int getAttackPower() {
-		return ((StaffProperties) properties).getAttackPower();
+	public int getDamageBonus() {
+		return ((StaffProperties) properties).getDamageBonus();
 	}
 
 	/*
@@ -67,7 +66,6 @@ public class Staff extends AbstractEquipableItem implements Weapon {
 	 */
 	@Override
 	public void use(Character character) {
-		// TODO Auto-generated method stub
-		
+		// Staffs aren't used
 	}
 }

@@ -33,15 +33,6 @@ public class Teleport extends AbstractWorldObject {
 		super(properties);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see ao.model.worldobject.AbstractItem#clone()
-	 */
-	@Override
-	public Item clone() {
-		return (Item) new Teleport((TeleportProperties) properties);
-	}
-
 	/**
 	 * Retrieves the teleport's radius.
 	 * @return The teleport's radius.
