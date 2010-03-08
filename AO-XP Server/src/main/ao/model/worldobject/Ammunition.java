@@ -19,19 +19,19 @@
 package ao.model.worldobject;
 
 import ao.model.character.Character;
-import ao.model.worldobject.properties.WeaponProperties;
+import ao.model.worldobject.properties.AmmunitionProperties;
 
 /**
- * A weapon.
+ * An ammunition.
  */
-public class Weapon extends AbstractEquipableItem {
+public class Ammunition extends AbstractEquipableItem {
 
 	/**
-	 * Creates a new Weapon instance.
+	 * Creates a new Ammunition instance.
 	 * @param properties The item's properties.
 	 * @param amount The item's amount.
 	 */
-	public Weapon(WeaponProperties properties, int amount) {
+	public Ammunition(AmmunitionProperties properties, int amount) {
 		super(properties, amount);
 	}
 	
@@ -41,7 +41,7 @@ public class Weapon extends AbstractEquipableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new Weapon((WeaponProperties) properties, amount);
+		return new Ammunition((AmmunitionProperties) properties, amount);
 	}
 
 	/*
@@ -50,35 +50,21 @@ public class Weapon extends AbstractEquipableItem {
 	 */
 	@Override
 	public void use(Character character) {
-		// Weapons can't be used.
-	}
-	
-	/**
-	 * @return the true if this item stabs, false otherwise
-	 */
-	public boolean getStabs() {
-		return ((WeaponProperties) properties).getStabs();
-	}
-
-	/**
-	 * @return the piercingDamage
-	 */
-	public int getPiercingDamage() {
-		return ((WeaponProperties) properties).getPiercingDamage();
+		// Ammunitions can't be used.
 	}
 
 	/**
 	 * @return the minHit
 	 */
 	public int getMinHit() {
-		return ((WeaponProperties) properties).getMinHit();
+		return ((AmmunitionProperties) properties).getMinHit();
 	}
 
 	/**
 	 * @return the maxHit
 	 */
 	public int getMaxHit() {
-		return ((WeaponProperties) properties).getMaxHit();
+		return ((AmmunitionProperties) properties).getMaxHit();
 	}
 
 	/**
@@ -86,8 +72,8 @@ public class Weapon extends AbstractEquipableItem {
 	 * @return The damage to be applied by the item.
 	 */
 	public int getDamage() {
-		int minModifier = ((WeaponProperties) properties).getMinHit();
-		int maxModifier = ((WeaponProperties) properties).getMaxHit();
+		int minModifier = ((AmmunitionProperties) properties).getMinHit();
+		int maxModifier = ((AmmunitionProperties) properties).getMaxHit();
 		
 		return (int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier;
 	}

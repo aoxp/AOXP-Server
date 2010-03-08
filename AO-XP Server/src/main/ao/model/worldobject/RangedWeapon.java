@@ -19,29 +19,30 @@
 package ao.model.worldobject;
 
 import ao.model.character.Character;
+import ao.model.worldobject.properties.RangedWeaponProperties;
 import ao.model.worldobject.properties.WeaponProperties;
 
 /**
- * A weapon.
+ * A ranged weapon.
  */
-public class Weapon extends AbstractEquipableItem {
+public class RangedWeapon extends Weapon {
 
 	/**
-	 * Creates a new Weapon instance.
+	 * Creates a new RangedWeapon instance.
 	 * @param properties The item's properties.
 	 * @param amount The item's amount.
 	 */
-	public Weapon(WeaponProperties properties, int amount) {
+	public RangedWeapon(RangedWeaponProperties properties, int amount) {
 		super(properties, amount);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see ao.model.worldobject.AbstractItem#clone()
 	 */
 	@Override
 	public Item clone() {
-		return new Weapon((WeaponProperties) properties, amount);
+		return new RangedWeapon((RangedWeaponProperties) properties, amount);
 	}
 
 	/*
@@ -50,45 +51,26 @@ public class Weapon extends AbstractEquipableItem {
 	 */
 	@Override
 	public void use(Character character) {
-		// Weapons can't be used.
+		// RangedWeapons can't be used.
 	}
 	
-	/**
-	 * @return the true if this item stabs, false otherwise
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.Weapon#getDamage()
 	 */
-	public boolean getStabs() {
-		return ((WeaponProperties) properties).getStabs();
-	}
-
-	/**
-	 * @return the piercingDamage
-	 */
-	public int getPiercingDamage() {
-		return ((WeaponProperties) properties).getPiercingDamage();
-	}
-
-	/**
-	 * @return the minHit
-	 */
-	public int getMinHit() {
-		return ((WeaponProperties) properties).getMinHit();
-	}
-
-	/**
-	 * @return the maxHit
-	 */
-	public int getMaxHit() {
-		return ((WeaponProperties) properties).getMaxHit();
-	}
-
-	/**
-	 * Retrieves the damage to be applied by the item.
-	 * @return The damage to be applied by the item.
-	 */
+	@Override
 	public int getDamage() {
 		int minModifier = ((WeaponProperties) properties).getMinHit();
 		int maxModifier = ((WeaponProperties) properties).getMaxHit();
 		
 		return (int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier;
+	}
+	
+	/**
+	 * Checks wether the weapon needs or not ammunition.
+	 * @return True of the weapon requires ammunition, false otherwise.
+	 */
+	public boolean getNeedsAmmunition() {
+		return ((RangedWeaponProperties) properties).getNeedsAmmunition();
 	}
 }
