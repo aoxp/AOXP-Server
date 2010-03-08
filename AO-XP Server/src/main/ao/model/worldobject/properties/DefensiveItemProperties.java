@@ -40,7 +40,6 @@ public class DefensiveItemProperties extends EquippableItemProperties {
 	 * @param graphic The graphic for the item.
 	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
@@ -50,11 +49,11 @@ public class DefensiveItemProperties extends EquippableItemProperties {
 	 * @param maxMagicDef The maximum magic defense granted by this item.
 	 */
 	public DefensiveItemProperties(int id, String name, int graphic,
-			boolean tradeable, int value, int usageDifficulty,
+			boolean tradeable, int value,
 			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, boolean newbie,
 			int equippedGraphic, int minDef, int maxDef, int minMagicDef, int maxMagicDef) {
-		super(id, name, graphic, tradeable, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
+		super(id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
 
 		this.minDef = minDef;
 		this.maxDef = maxDef;

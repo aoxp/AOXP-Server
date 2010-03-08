@@ -36,7 +36,6 @@ public class RangedWeaponProperties extends WeaponProperties {
 	 * @param graphic The graphic for the item.
 	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
@@ -47,11 +46,11 @@ public class RangedWeaponProperties extends WeaponProperties {
 	 * @param needsAmmunition True if the weapon needs ammunition, false of it's a throwable weapon.
 	 */
 	public RangedWeaponProperties(int id, String name, int graphic,
-			boolean tradeable, int value, int usageDifficulty,
+			boolean tradeable, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
 			boolean newbie, int equippedGraphic, boolean stabs,
 			int piercingDamage, int minHit, int maxHit, boolean needsAmmunition) {
-		super(id, name, graphic, tradeable, value, usageDifficulty,
+		super(id, name, graphic, tradeable, value,
 				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic,
 				stabs, piercingDamage, minHit, maxHit);
 		

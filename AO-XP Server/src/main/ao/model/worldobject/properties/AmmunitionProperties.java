@@ -37,7 +37,6 @@ public class AmmunitionProperties extends EquippableItemProperties {
 	 * @param graphic The graphic for the item.
 	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
@@ -45,10 +44,10 @@ public class AmmunitionProperties extends EquippableItemProperties {
 	 * @param maxHit The maximum hit done by this item.
 	 */
 	public AmmunitionProperties(int id, String name, int graphic,
-			boolean tradeable, int value, int usageDifficulty,
+			boolean tradeable, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
 			boolean newbie, int equippedGraphic, int minHit, int maxHit) {
-		super(id, name, graphic, tradeable, value, usageDifficulty,
+		super(id, name, graphic, tradeable, value,
 				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
 		
 		this.maxHit = maxHit;

@@ -117,15 +117,6 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Item#getUsageDifficulty()
-	 */
-	@Override
-	public int getUsageDifficulty() {
-		return ((ItemProperties) properties).getUsageDifficulty();
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see ao.model.worldobject.Item#isTradeable()
 	 */
 	@Override

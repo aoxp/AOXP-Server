@@ -40,16 +40,17 @@ public class BoatTest extends AbstractDefensiveItemTest {
 
 	private static final int MIN_MAGIC_DEF = 10;
 	private static final int MAX_MAGIC_DEF = 50;
+	private static final int USAGE_DIFFICULTY = 3;
 	
 	private Boat boat1;
 	private Boat boat2;
 	
 	@Before
 	public void setUp() throws Exception {
-		BoatProperties props1 = new BoatProperties(1, "Small Boat", 1, true, 1, 0, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
+		BoatProperties props1 = new BoatProperties(1, "Small Boat", 1, true, 1, USAGE_DIFFICULTY, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
 		boat1 = new Boat(props1, 5);
 		
-		BoatProperties props2 = new BoatProperties(1, "Small Boat", 1, true, 1, 0, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
+		BoatProperties props2 = new BoatProperties(1, "Small Boat", 1, true, 1, USAGE_DIFFICULTY, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
 		boat2 = new Boat(props2, 1);
 		
 		object = boat1;
@@ -122,5 +123,11 @@ public class BoatTest extends AbstractDefensiveItemTest {
 	public void testCanBeStolen() {
 		assertFalse(boat1.canBeStolen());
 		assertFalse(boat2.canBeStolen());
+	}
+	
+	@Test
+	public void testGetUsageDifficulty() {
+		assertEquals(USAGE_DIFFICULTY, boat1.getUsageDifficulty());
+		assertEquals(USAGE_DIFFICULTY, boat2.getUsageDifficulty());
 	}
 }

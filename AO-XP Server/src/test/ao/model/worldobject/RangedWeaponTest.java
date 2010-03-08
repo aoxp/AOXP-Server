@@ -39,10 +39,10 @@ public class RangedWeaponTest extends AbstractEquipableItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		RangedWeaponProperties props1 = new RangedWeaponProperties(1, "Throw Knifes", 1, true, 1, 0, 0, null, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT, false);
+		RangedWeaponProperties props1 = new RangedWeaponProperties(1, "Throw Knifes", 1, true, 1, 0, null, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT, false);
 		weapon1 = new RangedWeapon(props1, 5);
 		
-		RangedWeaponProperties props2 = new RangedWeaponProperties(1, "Crossbow", 1, true, 1, 0, 0, null, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT, true);
+		RangedWeaponProperties props2 = new RangedWeaponProperties(1, "Crossbow", 1, true, 1, 0, null, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT, true);
 		weapon2 = new RangedWeapon(props2, 1);
 		
 		object = weapon1;
@@ -120,5 +120,11 @@ public class RangedWeaponTest extends AbstractEquipableItemTest {
 		assertTrue(damage >= MIN_HIT);
 		assertTrue(damage <= MAX_HIT);
 		assertEquals(MAX_HIT, weapon2.getDamage());
+	}
+	
+	@Test
+	public void testGetNeedsAmmunition() {
+		assertFalse(weapon1.getNeedsAmmunition());
+		assertTrue(weapon2.getNeedsAmmunition());
 	}
 }

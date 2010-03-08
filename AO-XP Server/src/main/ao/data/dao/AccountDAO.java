@@ -18,6 +18,8 @@
 
 package ao.data.dao;
 
+import ao.data.dao.exception.DAOException;
+import ao.data.dao.exception.NameAlreadyTakenException;
 import ao.model.user.Account;
 
 public interface AccountDAO {

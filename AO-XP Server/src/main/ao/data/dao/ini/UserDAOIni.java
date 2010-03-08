@@ -34,9 +34,9 @@ import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 
 import ao.data.dao.AccountDAO;
-import ao.data.dao.DAOException;
-import ao.data.dao.NameAlreadyTakenException;
 import ao.data.dao.UserCharacterDAO;
+import ao.data.dao.exception.DAOException;
+import ao.data.dao.exception.NameAlreadyTakenException;
 import ao.model.character.Attribute;
 import ao.model.character.Gender;
 import ao.model.character.Race;

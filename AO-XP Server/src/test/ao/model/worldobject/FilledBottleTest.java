@@ -18,6 +18,8 @@
 
 package ao.model.worldobject;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import junit.framework.Assert;
 
 import org.easymock.Capture;
@@ -41,8 +43,8 @@ public class FilledBottleTest extends AbstractItemTest {
 
 	@Before
 	public void setUp() throws Exception {
-		StatModifyingItemProperties props = new StatModifyingItemProperties(1, "Water Bottle", 1, true, 1, 0, 0, null, false, THIRST, THIRST);
-		ItemProperties emptyProps = new ItemProperties(1, "Water Bottle", 1, true, 1, 0, 0, null, false);
+		StatModifyingItemProperties props = new StatModifyingItemProperties(1, "Water Bottle", 1, true, 1, 0, null, false, THIRST, THIRST);
+		ItemProperties emptyProps = new ItemProperties(1, "Water Bottle", 1, true, 1, 0, null, false);
 		bottle1 = new FilledBottle(props, 5, emptyProps);
 		
 		bottle2 = new FilledBottle(props, 1, emptyProps);
@@ -105,5 +107,34 @@ public class FilledBottleTest extends AbstractItemTest {
 		EmptyBottle emptyBottle = (EmptyBottle) addedItem.getValue();
 		Assert.assertEquals(bottle1.emptyBottleProperties, emptyBottle.properties);
 		Assert.assertEquals(1, emptyBottle.amount);
+	}
+	
+	@Test
+	public void testClone() {
+		
+		FilledBottle clone = (FilledBottle) bottle1.clone();
+		
+		// Make sure all fields match
+		assertEquals(bottle1.amount, clone.amount);
+		assertEquals(bottle1.properties, clone.properties);
+		
+		// Make sure the object itself is different
+		assertFalse(bottle1 == clone);
+		
+		
+		clone = (FilledBottle) bottle2.clone();
+		
+		// Make sure all fields match
+		assertEquals(bottle2.amount, clone.amount);
+		assertEquals(bottle2.properties, clone.properties);
+		
+		// Make sure the object itself is different
+		assertFalse(bottle2 == clone);
+	}
+	
+	@Test
+	public void testGetThirst() {
+		assertEquals(THIRST, bottle1.getThirst());
+		assertEquals(THIRST, bottle2.getThirst());
 	}
 }

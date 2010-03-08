@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.data.dao;
+package ao.data.dao.exception;
 
 public class DAOException extends Exception {
 

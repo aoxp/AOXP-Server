@@ -39,10 +39,10 @@ public class WeaponTest extends AbstractEquipableItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		WeaponProperties props1 = new WeaponProperties(1, "Bastard Sword", 1, true, 1, 0, 0, null, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT);
+		WeaponProperties props1 = new WeaponProperties(1, "Bastard Sword", 1, true, 1, 0, null, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT);
 		weapon1 = new Weapon(props1, 5);
 		
-		WeaponProperties props2 = new WeaponProperties(1, "Halberd", 1, true, 1, 0, 0, null, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT);
+		WeaponProperties props2 = new WeaponProperties(1, "Halberd", 1, true, 1, 0, null, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT);
 		weapon2 = new Weapon(props2, 1);
 		
 		object = weapon1;

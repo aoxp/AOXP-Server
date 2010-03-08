@@ -103,4 +103,12 @@ public class Boat extends AbstractDefensiveItem {
 	public boolean canBeStolen() {
 		return false;	// Boats can't be stolen
 	}
+	
+	/**
+	 * Retrieves the usage difficulty of the item.
+	 * @return The usage difficulty of the item.
+	 */
+	public int getUsageDifficulty() {
+		return ((BoatProperties) properties).getUsageDifficulty();
+	}
 }

@@ -37,7 +37,6 @@ public class StatModifyingItemProperties extends ItemProperties {
 	 * @param graphic The graphic for the item.
 	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
@@ -45,11 +44,11 @@ public class StatModifyingItemProperties extends ItemProperties {
 	 * @param maxModifier The maximum amount by which the stats is to be modified.
 	 */
 	public StatModifyingItemProperties(int id, String name, int graphic,
-			boolean tradeable, int value, int usageDifficulty,
+			boolean tradeable, int value,
 			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, boolean newbie,
 			int minModifier, int maxModifier) {
-		super(id, name, graphic, tradeable, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, newbie);
+		super(id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, newbie);
 		
 		this.minModifier = minModifier;
 		this.maxModifier = maxModifier;

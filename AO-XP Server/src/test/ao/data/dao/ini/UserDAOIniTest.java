@@ -28,7 +28,7 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
-import ao.data.dao.DAOException;
+import ao.data.dao.exception.DAOException;
 import ao.model.character.Gender;
 import ao.model.character.Race;
 import ao.model.character.Skill;

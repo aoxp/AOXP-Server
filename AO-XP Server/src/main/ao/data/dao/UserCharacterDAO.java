@@ -18,6 +18,8 @@
 
 package ao.data.dao;
 
+import ao.data.dao.exception.DAOException;
+import ao.data.dao.exception.NameAlreadyTakenException;
 import ao.model.character.Gender;
 import ao.model.character.Race;
 import ao.model.character.UserCharacter;

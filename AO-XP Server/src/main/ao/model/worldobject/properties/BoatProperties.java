@@ -30,6 +30,8 @@ public class BoatProperties extends DefensiveItemProperties {
 	protected int minHit;
 	protected int maxHit;
 	
+	protected int usageDifficulty;
+	
 	/**
 	 * Creates a new BoatProperties instance.
 	 * @param id The id of the item.
@@ -53,12 +55,14 @@ public class BoatProperties extends DefensiveItemProperties {
 			List<UserArchetype> forbiddenArchetypes, boolean newbie,
 			int equippedGraphic, int minDef, int maxDef, int minMagicDef,
 			int maxMagicDef, int minHit, int maxHit) {
-		super(id, name, graphic, tradeable, value, usageDifficulty,
+		super(id, name, graphic, tradeable, value,
 				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic,
 				minDef, maxDef, minMagicDef, maxMagicDef);
 		
 		this.minHit = minHit;
 		this.maxHit = maxHit;
+		
+		this.usageDifficulty = usageDifficulty;
 	}
 
 	/**
@@ -73,5 +77,12 @@ public class BoatProperties extends DefensiveItemProperties {
 	 */
 	public int getMaxHit() {
 		return maxHit;
+	}
+
+	/**
+	 * @return the usageDifficulty
+	 */
+	public int getUsageDifficulty() {
+		return usageDifficulty;
 	}
 }

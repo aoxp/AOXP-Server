@@ -29,7 +29,6 @@ public class ItemProperties extends WorldObjectProperties {
 
 	protected boolean tradeable;
 	protected int value;
-	protected int usageDifficulty;
 	protected int manufactureDifficulty;
 	protected boolean newbie;
 	
@@ -42,20 +41,18 @@ public class ItemProperties extends WorldObjectProperties {
 	 * @param graphic The graphic for the item.
 	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
-	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
 	 */
 	public ItemProperties(int id, String name, int graphic,
-			boolean tradeable, int value, int usageDifficulty,
+			boolean tradeable, int value,
 			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, boolean newbie) {
 		super(id, name, graphic);
 		
 		this.tradeable = tradeable;
 		this.value = value;
-		this.usageDifficulty = usageDifficulty;
 		this.manufactureDifficulty = manufactureDifficulty;
 		this.forbiddenArchetypes = forbiddenArchetypes;
 		this.newbie = newbie;
@@ -73,13 +70,6 @@ public class ItemProperties extends WorldObjectProperties {
 	 */
 	public int getValue() {
 		return value;
-	}
-
-	/**
-	 * @return the usageDifficulty
-	 */
-	public int getUsageDifficulty() {
-		return usageDifficulty;
 	}
 
 	/**

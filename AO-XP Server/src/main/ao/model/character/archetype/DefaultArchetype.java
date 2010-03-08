@@ -144,7 +144,7 @@ public abstract class DefaultArchetype implements Archetype {
 
 	@Override
 	public boolean canWoodWork(int woodWorkSkill, Item item) {
-		return woodWorkSkill / getWoodWorkingModifier() >= item.getUsageDifficulty();
+		return woodWorkSkill / getWoodWorkingModifier() >= item.getManufactureDifficulty();
 	}
 
 	@Override

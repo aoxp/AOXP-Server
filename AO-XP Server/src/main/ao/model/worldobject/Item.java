@@ -62,12 +62,6 @@ public interface Item extends WorldObject, Cloneable {
 	int getManufactureDifficulty(); // Nota, esto reemplaza a minSkill para carpinteria, fundicion y herreria
 	
 	/**
-	 * Retrieves the usage difficulty of the item.
-	 * @return The usage difficulty of the item.
-	 */
-	int getUsageDifficulty(); // Nota, esto reemplaza minSkill para navegar, con lo que los separamos.
-	
-	/**
 	 * Gets a deep clone of the item
 	 * @return a copy of the item.
 	 */

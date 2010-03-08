@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.LinkedList;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -57,7 +55,7 @@ public class MapServiceImpl implements MapService {
 	private static final byte BITFLAG_NPC = 2;
 	private static final byte BITFLAG_OBJECT = 4;
 	
-	protected List<WorldMap> maps = new LinkedList<WorldMap>();
+	protected WorldMap[] maps;
 	private String mapsPath;
 	protected int mapsAmount;
 	
@@ -66,11 +64,11 @@ public class MapServiceImpl implements MapService {
 
 		this.mapsPath = mapsPath;
 		this.mapsAmount = mapsAmount;
+		this.maps = new WorldMap[mapsAmount];
 
 		for (int i = 1; i <= mapsAmount; i++) {
-			maps.add(new WorldMap(i));
+			maps[i - 1] = new WorldMap(i);
 		}
-		
 	}
 	
 	/**
@@ -90,7 +88,7 @@ public class MapServiceImpl implements MapService {
 	 */
 	public WorldMap getMap(int id) {
 		if (id > 0 && id <= mapsAmount) {
-			return maps.get(id - 1);
+			return maps[id - 1];
 		}
 		
 		return null;
