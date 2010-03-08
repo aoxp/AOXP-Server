@@ -141,6 +141,15 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 	public boolean isNewbie() {
 		return ((ItemProperties) properties).isNewbie();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.Item#canBeStolen()
+	 */
+	@Override
+	public boolean canBeStolen() {
+		return true;	// Everything can be stolen by default
+	}
 
 	/*
 	 * (non-Javadoc)

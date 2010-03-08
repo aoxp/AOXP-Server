@@ -87,4 +87,10 @@ public abstract class AbstractItemTest extends AbstractWorldObjectTest {
 		ItemProperties itemProps = (ItemProperties) objectProps;
 		assertEquals(itemProps.isNewbie(), item.isNewbie());
 	}
+	
+	@Test
+	public void testCanBeStolen() {
+		AbstractItem item = (AbstractItem) object;
+		assertTrue(item.canBeStolen());
+	}
 }

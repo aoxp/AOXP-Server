@@ -90,4 +90,10 @@ public interface Item extends WorldObject, Cloneable {
 	 * @return Whether the item is newbie or not.
 	 */
 	boolean isNewbie();
+	
+	/**
+	 * Checks if the item can be stolen.
+	 * @return True if the item can be stolen, false otherwise.
+	 */
+	boolean canBeStolen();
 }

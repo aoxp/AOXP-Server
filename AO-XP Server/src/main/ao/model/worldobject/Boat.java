@@ -94,4 +94,13 @@ public class Boat extends AbstractDefensiveItem {
 		
 		return (int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier;
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.AbstractItem#canBeStolen()
+	 */
+	@Override
+	public boolean canBeStolen() {
+		return false;	// Boats can't be stolen
+	}
 }

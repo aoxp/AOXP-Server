@@ -116,4 +116,11 @@ public class BoatTest extends AbstractDefensiveItemTest {
 		assertTrue(damage <= MAX_HIT);
 		assertEquals(MAX_HIT, boat2.getDamageBonus());
 	}
+	
+	@Test
+	@Override
+	public void testCanBeStolen() {
+		assertFalse(boat1.canBeStolen());
+		assertFalse(boat2.canBeStolen());
+	}
 }
