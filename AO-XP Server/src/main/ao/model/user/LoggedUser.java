@@ -497,13 +497,13 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	}
 
 	@Override
-	public void addToAgility(int points) {
+	public void addToAgility(int points, int duration) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void addToStrength(int points) {
+	public void addToStrength(int points, int duration) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -369,12 +369,14 @@ public interface Character {
 	/**
 	 * Adds (or subtracts if the given number is negative) points to the character's agility.
 	 * @param points	The points to add.
+	 * @param duration		The time for which the effect is valid.
 	 */
-	void addToAgility(int points);
+	void addToAgility(int points, int duration);
 
 	/**
 	 * Adds (or subtracts if the given number is negative) points to the character's strength.
 	 * @param points	The points to add.
+	 * @param duration		The time for which the effect is valid.
 	 */
-	void addToStrength(int points);
+	void addToStrength(int points, int duration);
 }

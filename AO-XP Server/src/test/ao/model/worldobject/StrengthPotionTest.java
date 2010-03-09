@@ -28,22 +28,23 @@ import org.junit.Test;
 
 import ao.model.character.Character;
 import ao.model.inventory.Inventory;
-import ao.model.worldobject.properties.StatModifyingItemProperties;
+import ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
 
 public class StrengthPotionTest extends AbstractItemTest {
 
 	private static final int MIN_STR = 1;
 	private static final int MAX_STR = 5;
+	private static final int DURATION = 300;
 	
 	private StrengthPotion potion1;
 	private StrengthPotion potion2;
 	
 	@Before
 	public void setUp() throws Exception {
-		StatModifyingItemProperties props1 = new StatModifyingItemProperties(WorldObjectType.POTION, 1, "Green Potion", 1, true, 1, 0, null, null, false, MIN_STR, MAX_STR);
+		TemporalStatModifyingItemProperties props1 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Green Potion", 1, true, 1, 0, null, null, false, MIN_STR, MAX_STR, DURATION);
 		potion1 = new StrengthPotion(props1, 5);
 		
-		StatModifyingItemProperties props2 = new StatModifyingItemProperties(WorldObjectType.POTION, 1, "Big Green Potion", 1, true, 1, 0, null, null, false, MAX_STR, MAX_STR);
+		TemporalStatModifyingItemProperties props2 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Big Green Potion", 1, true, 1, 0, null, null, false, MAX_STR, MAX_STR, DURATION);
 		potion2 = new StrengthPotion(props2, 1);
 		
 		object = potion2;
@@ -65,7 +66,7 @@ public class StrengthPotionTest extends AbstractItemTest {
 		
 		// Consumption of potion2 requires these 2 calls.
 		inventory.cleanup();
-		character.addToStrength(MAX_STR);
+		character.addToStrength(MAX_STR, DURATION);
 		
 		EasyMock.replay(inventory, character);
 		
@@ -85,7 +86,7 @@ public class StrengthPotionTest extends AbstractItemTest {
 		Capture<Integer> capture = new Capture<Integer>();
 		
 		// Consumption of potion1 requires just a call to addToStrength.
-		character.addToStrength(EasyMock.capture(capture));
+		character.addToStrength(EasyMock.capture(capture), EasyMock.eq(DURATION));
 		
 		EasyMock.replay(inventory, character);
 		
@@ -135,4 +136,9 @@ public class StrengthPotionTest extends AbstractItemTest {
 		assertFalse(potion2 == clone);
 	}
 	
+	@Test
+	public void testGetEffectDuration() {
+		assertEquals(DURATION, potion1.getEffectDuration());
+		assertEquals(DURATION, potion2.getEffectDuration());
+	}
 }

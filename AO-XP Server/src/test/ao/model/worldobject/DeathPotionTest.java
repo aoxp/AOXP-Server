@@ -39,10 +39,10 @@ public class DeathPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props1 = new ItemProperties(WorldObjectType.POTION, 1, "Black Potion", 1, true, 1, 0, null, null, false);
+		ItemProperties props1 = new ItemProperties(WorldObjectType.DEATH_POTION, 1, "Black Potion", 1, true, 1, 0, null, null, false);
 		potion1 = new DeathPotion(props1, 5);
 		
-		ItemProperties props2 = new ItemProperties(WorldObjectType.POTION, 1, "Black Potion", 1, true, 1, 0, null, null, false);
+		ItemProperties props2 = new ItemProperties(WorldObjectType.DEATH_POTION, 1, "Black Potion", 1, true, 1, 0, null, null, false);
 		potion2 = new DeathPotion(props2, 1);
 		
 		object = potion2;

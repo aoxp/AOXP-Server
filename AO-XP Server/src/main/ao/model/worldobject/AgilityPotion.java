@@ -19,19 +19,21 @@
 package ao.model.worldobject;
 
 import ao.model.character.Character;
-import ao.model.worldobject.properties.StatModifyingItemProperties;
+import ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
 
 /**
  * A potion to increase agility.
  */
 public class AgilityPotion extends ConsumableItem {
 	
+	// TODO : Add timing for effect!!
+	
 	/**
 	 * Creates a new AgilityPotion instance.
 	 * @param properties The item's properties.
 	 * @param amount The item's amount.
 	 */
-	public AgilityPotion(StatModifyingItemProperties properties, int amount) {
+	public AgilityPotion(TemporalStatModifyingItemProperties properties, int amount) {
 		super(properties, amount);
 	}
 
@@ -41,7 +43,7 @@ public class AgilityPotion extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new AgilityPotion((StatModifyingItemProperties) properties, amount);
+		return new AgilityPotion((TemporalStatModifyingItemProperties) properties, amount);
 	}
 
 	/*
@@ -52,11 +54,12 @@ public class AgilityPotion extends ConsumableItem {
 	public void use(Character character) {
 		super.use(character);
 		
-		int minModifier = ((StatModifyingItemProperties) properties).getMinModifier();
-		int maxModifier = ((StatModifyingItemProperties) properties).getMaxModifier();
+		int minModifier = ((TemporalStatModifyingItemProperties) properties).getMinModifier();
+		int maxModifier = ((TemporalStatModifyingItemProperties) properties).getMaxModifier();
+		int time = ((TemporalStatModifyingItemProperties) properties).getEffectDuration();
 		
 		// increase agility!
-		character.addToAgility((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier);
+		character.addToAgility((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier, time);
 	}
 
 	/**
@@ -64,7 +67,7 @@ public class AgilityPotion extends ConsumableItem {
 	 * @return The minimum modifier for this potion.
 	 */
 	public int getMinModifier() {
-		return ((StatModifyingItemProperties) properties).getMinModifier();
+		return ((TemporalStatModifyingItemProperties) properties).getMinModifier();
 	}
 
 	/**
@@ -72,6 +75,14 @@ public class AgilityPotion extends ConsumableItem {
 	 * @return The maximim modifier for this potion.
 	 */
 	public int getMaxModifier() {
-		return ((StatModifyingItemProperties) properties).getMaxModifier();
+		return ((TemporalStatModifyingItemProperties) properties).getMaxModifier();
+	}
+
+	/**
+	 * Retrieves the effect's duration.
+	 * @return The effect's duration
+	 */
+	public int getEffectDuration() {
+		return ((TemporalStatModifyingItemProperties) properties).getEffectDuration();
 	}
 }
