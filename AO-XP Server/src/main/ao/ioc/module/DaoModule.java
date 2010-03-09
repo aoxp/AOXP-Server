@@ -22,7 +22,9 @@ import java.util.Properties;
 
 import ao.data.dao.AccountDAO;
 import ao.data.dao.UserCharacterDAO;
+import ao.data.dao.WorldObjectPropertiesDAO;
 import ao.data.dao.ini.UserDAOIni;
+import ao.data.dao.ini.WorldObjectPropertiesDAOIni;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
@@ -46,5 +48,9 @@ public class DaoModule extends AbstractModule {
 		bind(UserCharacterDAO.class).to(UserDAOIni.class).in(Singleton.class);
 		
 		bind(String.class).annotatedWith(Names.named("CharfilesPath")).toInstance(properties.getProperty("config.path.charfiles"));
+		
+		
+		bind(WorldObjectPropertiesDAO.class).to(WorldObjectPropertiesDAOIni.class).in(Singleton.class);
+		bind(String.class).annotatedWith(Names.named("objectsFilePath")).toInstance(properties.getProperty("config.path.objsdat"));
 	}
 }
