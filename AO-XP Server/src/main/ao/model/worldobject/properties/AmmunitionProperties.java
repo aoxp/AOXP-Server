@@ -20,7 +20,9 @@ package ao.model.worldobject.properties;
 
 import java.util.List;
 
+import ao.model.character.Race;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.WorldObjectType;
 
 /**
  * Defines an Equippable Item's properties. Allows a lightweight pattern implementation.
@@ -30,8 +32,11 @@ public class AmmunitionProperties extends EquippableItemProperties {
 	protected int minHit;
 	protected int maxHit;
 	
+	// TODO : add poison and paralizing modifiers!
+	
 	/**
 	 * Creates a new AmmunitionProperties instance.
+	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
@@ -39,16 +44,17 @@ public class AmmunitionProperties extends EquippableItemProperties {
 	 * @param value The item's value.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
 	 * @param minHit The minimum hit done by this item.
 	 * @param maxHit The maximum hit done by this item.
 	 */
-	public AmmunitionProperties(int id, String name, int graphic,
+	public AmmunitionProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
 			boolean newbie, int equippedGraphic, int minHit, int maxHit) {
-		super(id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
+		super(type, id, name, graphic, tradeable, value,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic);
 		
 		this.maxHit = maxHit;
 		this.minHit = minHit;

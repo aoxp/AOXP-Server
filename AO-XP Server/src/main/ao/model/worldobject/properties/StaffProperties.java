@@ -20,7 +20,9 @@ package ao.model.worldobject.properties;
 
 import java.util.List;
 
+import ao.model.character.Race;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.WorldObjectType;
 
 /**
  * Defines an Staff's properties. Allows a lightweight pattern implementation.
@@ -32,6 +34,7 @@ public class StaffProperties extends WeaponProperties {
 	
 	/**
 	 * Creates a new StaffProperties instance.
+	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
@@ -39,6 +42,7 @@ public class StaffProperties extends WeaponProperties {
 	 * @param value The item's value.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
 	 * @param stabs Wether if this item stabs or not.
 	 * @param piercingDamage The pircing damage (not reduced by any kind of armor or defense) done by this item.
@@ -47,13 +51,13 @@ public class StaffProperties extends WeaponProperties {
 	 * @param magicPower The magic power of the staff.
 	 * @param damageBonus The attack bonus of the item.
 	 */
-	public StaffProperties(int id, String name, int graphic, boolean tradeable,
+	public StaffProperties(WorldObjectType type, int id, String name, int graphic, boolean tradeable,
 			int value, int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie,
+			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			int equippedGraphic, boolean stabs, int piercingDamage,
 			int minHit, int maxHit, int magicPower, int damageBonus) {
-		super(id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, newbie,
+		super(type, id, name, graphic, tradeable, value,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie,
 				equippedGraphic, stabs, piercingDamage, minHit, maxHit);
 		
 		this.damageBonus = damageBonus;

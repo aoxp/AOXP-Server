@@ -41,10 +41,10 @@ public class HelmetTest extends AbstractDefensiveItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		DefensiveItemProperties props1 = new DefensiveItemProperties(1, "Viking Helmet", 1, true, 1, 0, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
+		DefensiveItemProperties props1 = new DefensiveItemProperties(WorldObjectType.HELMET, 1, "Viking Helmet", 1, true, 1, 0, null, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF);
 		helmet1 = new Helmet(props1, 5);
 		
-		DefensiveItemProperties props2 = new DefensiveItemProperties(1, "Viking Helmet", 1, true, 1, 0, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
+		DefensiveItemProperties props2 = new DefensiveItemProperties(WorldObjectType.HELMET, 1, "Viking Helmet", 1, true, 1, 0, null, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF);
 		helmet2 = new Helmet(props2, 1);
 		
 		object = helmet1;

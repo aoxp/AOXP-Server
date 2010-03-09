@@ -20,7 +20,9 @@ package ao.model.worldobject.properties;
 
 import java.util.List;
 
+import ao.model.character.Race;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.WorldObjectType;
 
 /**
  * Defines a Ranged Weapon's properties. Allows a lightweight pattern implementation.
@@ -31,6 +33,7 @@ public class RangedWeaponProperties extends WeaponProperties {
 	
 	/**
 	 * Creates a new RangedWeaponProperties instance.
+	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
@@ -38,6 +41,7 @@ public class RangedWeaponProperties extends WeaponProperties {
 	 * @param value The item's value.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
 	 * @param stabs Wether if this item stabs or not.
 	 * @param piercingDamage The pircing damage (not reduced by any kind of armor or defense) done by this item.
@@ -45,13 +49,13 @@ public class RangedWeaponProperties extends WeaponProperties {
 	 * @param maxHit The maximum hit done by this item.
 	 * @param needsAmmunition True if the weapon needs ammunition, false of it's a throwable weapon.
 	 */
-	public RangedWeaponProperties(int id, String name, int graphic,
+	public RangedWeaponProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
 			boolean newbie, int equippedGraphic, boolean stabs,
 			int piercingDamage, int minHit, int maxHit, boolean needsAmmunition) {
-		super(id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic,
+		super(type, id, name, graphic, tradeable, value,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic,
 				stabs, piercingDamage, minHit, maxHit);
 		
 		this.needsAmmunition = needsAmmunition;

@@ -20,7 +20,9 @@ package ao.model.worldobject.properties;
 
 import java.util.List;
 
+import ao.model.character.Race;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.WorldObjectType;
 
 /**
  * Defines an Item's properties. Allows a lightweight pattern implementation.
@@ -33,9 +35,11 @@ public class ItemProperties extends WorldObjectProperties {
 	protected boolean newbie;
 	
 	protected List<UserArchetype> forbiddenArchetypes;
+	protected List<Race> forbiddenRaces;
 	
 	/**
 	 * Creates a new ItemProperties instance.
+	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
@@ -43,18 +47,20 @@ public class ItemProperties extends WorldObjectProperties {
 	 * @param value The item's value.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
 	 */
-	public ItemProperties(int id, String name, int graphic,
+	public ItemProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie) {
-		super(id, name, graphic);
+			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie) {
+		super(type, id, name, graphic);
 		
 		this.tradeable = tradeable;
 		this.value = value;
 		this.manufactureDifficulty = manufactureDifficulty;
 		this.forbiddenArchetypes = forbiddenArchetypes;
+		this.forbiddenRaces = forbiddenRaces;
 		this.newbie = newbie;
 	}
 
@@ -91,5 +97,12 @@ public class ItemProperties extends WorldObjectProperties {
 	 */
 	public List<UserArchetype> getForbiddenArchetypes() {
 		return forbiddenArchetypes;
+	}
+
+	/**
+	 * @return the forbiddenRaces
+	 */
+	public List<Race> getForbiddenRaces() {
+		return forbiddenRaces;
 	}
 }

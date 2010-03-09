@@ -76,10 +76,17 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 	public boolean canBeUsedBy(Race race, Gender gender,
 			UserArchetype archetype, Reputation reputation) {
 		
-		// Race is only important for armors and clothes
+		// Check if the archetype can use this item
 		List<UserArchetype> forbiddenArchetypes = ((ItemProperties) properties).getForbiddenArchetypes();
 		
 		if (forbiddenArchetypes != null && forbiddenArchetypes.contains(archetype)) {
+			return false;
+		}
+		
+		// Check if the race can use this item
+		List<Race> forbiddenRaces = ((ItemProperties) properties).getForbiddenRaces();
+		
+		if (forbiddenRaces != null && forbiddenRaces.contains(race)) {
 			return false;
 		}
 		

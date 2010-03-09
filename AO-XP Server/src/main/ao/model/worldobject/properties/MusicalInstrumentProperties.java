@@ -20,7 +20,9 @@ package ao.model.worldobject.properties;
 
 import java.util.List;
 
+import ao.model.character.Race;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.WorldObjectType;
 
 /**
  * Defines a Musical Instrument's properties. Allows a lightweight pattern implementation.
@@ -31,6 +33,7 @@ public class MusicalInstrumentProperties extends EquippableItemProperties {
 	
 	/**
 	 * Creates a new MusicalInstrumentProperties instance.
+	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
@@ -38,15 +41,16 @@ public class MusicalInstrumentProperties extends EquippableItemProperties {
 	 * @param value The item's value.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
 	 * @param sounds The possible sounds to be reproduced by this isntrument.
 	 */
-	public MusicalInstrumentProperties(int id, String name, int graphic,
+	public MusicalInstrumentProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
-			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
+			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
 			boolean newbie, int equippedGraphic, List<Integer> sounds) {
-		super(id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic);
+		super(type, id, name, graphic, tradeable, value,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic);
 		
 		this.sounds = sounds;
 	}

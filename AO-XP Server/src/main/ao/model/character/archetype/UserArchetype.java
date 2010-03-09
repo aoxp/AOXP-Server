@@ -78,7 +78,7 @@ public enum UserArchetype {
 	public static UserArchetype valueOf(Archetype archetype) {
 		String archetypeClassName = archetype.getClass().getSimpleName();
 		
-		for (UserArchetype arch : UserArchetype.values()) {
+		for (UserArchetype arch : values) {
 			if (arch.getArchetype().getClass().getSimpleName().equals(archetypeClassName)) {
 				return arch;
 			}

@@ -37,10 +37,10 @@ public class PoisonPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props1 = new ItemProperties(1, "Violet Potion", 1, true, 1, 0, null, false);
+		ItemProperties props1 = new ItemProperties(WorldObjectType.POTION, 1, "Violet Potion", 1, true, 1, 0, null, null, false);
 		potion1 = new PoisonPotion(props1, 5);
 		
-		ItemProperties props2 = new ItemProperties(1, "Violet Potion", 1, true, 1, 0, null, false);
+		ItemProperties props2 = new ItemProperties(WorldObjectType.POTION, 1, "Violet Potion", 1, true, 1, 0, null, null, false);
 		potion2 = new PoisonPotion(props2, 1);
 		
 		object = potion2;

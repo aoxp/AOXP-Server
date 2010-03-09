@@ -41,10 +41,10 @@ public class HPPotionTest extends AbstractItemTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		StatModifyingItemProperties props1 = new StatModifyingItemProperties(1, "Red Potion", 1, true, 1, 0, null, false, MIN_HP, MAX_HP);
+		StatModifyingItemProperties props1 = new StatModifyingItemProperties(WorldObjectType.POTION, 1, "Red Potion", 1, true, 1, 0, null, null, false, MIN_HP, MAX_HP);
 		potion1 = new HPPotion(props1, 5);
 		
-		StatModifyingItemProperties props2 = new StatModifyingItemProperties(1, "Big Red Potion", 1, true, 1, 0, null, false, MAX_HP, MAX_HP);
+		StatModifyingItemProperties props2 = new StatModifyingItemProperties(WorldObjectType.POTION, 1, "Big Red Potion", 1, true, 1, 0, null, null, false, MAX_HP, MAX_HP);
 		potion2 = new HPPotion(props2, 1);
 		
 		object = potion2;

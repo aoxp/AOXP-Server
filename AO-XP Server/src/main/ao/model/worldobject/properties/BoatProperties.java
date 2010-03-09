@@ -20,7 +20,9 @@ package ao.model.worldobject.properties;
 
 import java.util.List;
 
+import ao.model.character.Race;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.WorldObjectType;
 
 /**
  * Defines a Boat's properties. Allows a lightweight pattern implementation.
@@ -34,6 +36,7 @@ public class BoatProperties extends DefensiveItemProperties {
 	
 	/**
 	 * Creates a new BoatProperties instance.
+	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
@@ -42,6 +45,7 @@ public class BoatProperties extends DefensiveItemProperties {
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
+	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
 	 * @param minDef The minimum defense granted by this item.
 	 * @param maxDef The maximum defense granted by this item.
@@ -50,13 +54,13 @@ public class BoatProperties extends DefensiveItemProperties {
 	 * @param minHit The minimum hit granted by this boat.
 	 * @param maxHit The maximum hit granted by this boat.
 	 */
-	public BoatProperties(int id, String name, int graphic, boolean tradeable,
+	public BoatProperties(WorldObjectType type, int id, String name, int graphic, boolean tradeable,
 			int value, int usageDifficulty, int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, boolean newbie,
+			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			int equippedGraphic, int minDef, int maxDef, int minMagicDef,
 			int maxMagicDef, int minHit, int maxHit) {
-		super(id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, newbie, equippedGraphic,
+		super(type, id, name, graphic, tradeable, value,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic,
 				minDef, maxDef, minMagicDef, maxMagicDef);
 		
 		this.minHit = minHit;

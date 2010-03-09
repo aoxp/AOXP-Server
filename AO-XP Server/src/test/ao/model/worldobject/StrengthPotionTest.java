@@ -40,10 +40,10 @@ public class StrengthPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		StatModifyingItemProperties props1 = new StatModifyingItemProperties(1, "Green Potion", 1, true, 1, 0, null, false, MIN_STR, MAX_STR);
+		StatModifyingItemProperties props1 = new StatModifyingItemProperties(WorldObjectType.POTION, 1, "Green Potion", 1, true, 1, 0, null, null, false, MIN_STR, MAX_STR);
 		potion1 = new StrengthPotion(props1, 5);
 		
-		StatModifyingItemProperties props2 = new StatModifyingItemProperties(1, "Big Green Potion", 1, true, 1, 0, null, false, MAX_STR, MAX_STR);
+		StatModifyingItemProperties props2 = new StatModifyingItemProperties(WorldObjectType.POTION, 1, "Big Green Potion", 1, true, 1, 0, null, null, false, MAX_STR, MAX_STR);
 		potion2 = new StrengthPotion(props2, 1);
 		
 		object = potion2;
