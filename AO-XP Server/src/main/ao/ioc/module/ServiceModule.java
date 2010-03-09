@@ -49,8 +49,9 @@ public class ServiceModule extends AbstractModule {
 		bind(MapService.class).to(MapServiceImpl.class).in(Singleton.class);
 		bind(TimedEventsService.class).to(TimedEventsServiceImpl.class).in(Singleton.class);
 		
-		bind(String.class).annotatedWith(Names.named("MapsPath")).toInstance(properties.getProperty("config.path.maps"));
-		bind(Integer.class).annotatedWith(Names.named("MapsAmount")).toInstance(Integer.parseInt(properties.getProperty("config.maps.amount")));
+		bind(String.class).annotatedWith(Names.named("mapsPath")).toInstance(properties.getProperty("config.path.maps"));
+		bind(Integer.class).annotatedWith(Names.named("mapsAmount")).toInstance(Integer.parseInt(properties.getProperty("config.maps.amount")));
+		bind(String.class).annotatedWith(Names.named("mapsConfigFile")).toInstance("resources/maps.properties");
 	}
 
 }

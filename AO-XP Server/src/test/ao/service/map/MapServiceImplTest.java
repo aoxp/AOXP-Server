@@ -35,10 +35,11 @@ public class MapServiceImplTest {
 
 	private MapServiceImpl service;
 	private static final String MAPS_PATH = "src/test/resources/maps/";
+	private static final String MAPS_CONFIG_FILE = "resources/maps.properties";
 	
 	@Before
 	public void setUp() {
-		service = new MapServiceImpl(MAPS_PATH, (int) 1);
+		service = new MapServiceImpl(MAPS_PATH, 1, MAPS_CONFIG_FILE);
 	}
 
 	@Test
@@ -67,10 +68,7 @@ public class MapServiceImplTest {
 		assertEquals(map.getTile(1, 0).getTrigger(), Trigger.NONE);
 		assertEquals(map.getTile(49, 49).getTrigger(), Trigger.NONE);
 
-		assertEquals(map.getTile(0, 0).getLayer((byte) 1), 6005);	
-		assertEquals(map.getTile(1, 0).getLayer((byte) 3), 9434);
-		assertEquals(map.getTile(49, 49).getLayer((byte) 2), 7331);
-		assertEquals(map.getTile(49, 49).getLayer((byte) 4), 0);
+		// TODO: Test for water, lava, under roof and safe zone.
 		
 		assertEquals(map.getTile(0, 0).getTileExit(), tileExit1);
 		assertEquals(map.getTile(1, 0).getTileExit(), tileExit2);

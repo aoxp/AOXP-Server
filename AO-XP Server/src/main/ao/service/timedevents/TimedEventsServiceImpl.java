@@ -97,7 +97,9 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		// If the character had no previous events, create his events container (this needs some synchronization).
 		if (characterEvents == null) {
 			synchronized (events) {
+				// In case another thread just created the Map (race condition against this method itself).
 				characterEvents = events.get(chara);
+				
 				if (characterEvents == null) {
 					characterEvents = new HashMap<TimedEvent, TimerTaskAdapter>();
 					events.put(chara, characterEvents);

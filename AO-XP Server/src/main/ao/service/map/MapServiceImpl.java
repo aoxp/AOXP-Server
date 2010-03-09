@@ -18,10 +18,16 @@
 
 package ao.service.map;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Properties;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -55,37 +61,42 @@ public class MapServiceImpl implements MapService {
 	private static final byte BITFLAG_NPC = 2;
 	private static final byte BITFLAG_OBJECT = 4;
 	
+	private static final String CONFIG_VALUES_DELIMITER = ",";
+	private static final String CONFIG_RANGE_INDICATOR = "-";
+	
 	protected WorldMap[] maps;
 	private String mapsPath;
 	protected int mapsAmount;
 	
+	private Set<Short> waterGrhs = new HashSet<Short>();
+	private Set<Short> lavaGrhs = new HashSet<Short>();
+	
 	@Inject
-	public MapServiceImpl(@Named("MapsPath") String mapsPath, @Named("MapsAmount") int mapsAmount) {
+	public MapServiceImpl(@Named("mapsPath") String mapsPath, @Named("mapsAmount") int mapsAmount, @Named("mapsConfigFile") String mapsConfigFile) {
 
 		this.mapsPath = mapsPath;
 		this.mapsAmount = mapsAmount;
 		this.maps = new WorldMap[mapsAmount];
 
+		loadMapsConfig(mapsConfigFile);
+		
+		// Maps enumeration starts at 1, not 0.
 		for (int i = 1; i <= mapsAmount; i++) {
+			// Initialize all maps empty, this way references to not yet loaded maps can be correctly handled.
 			maps[i - 1] = new WorldMap(i);
 		}
 	}
 	
-	/**
-	 * Loads all maps
-	 */
+	@Override
 	public void loadMaps() {
 		
+		// Maps enumeration starts at 1, not 0.
 		for (int i = 1; i <= mapsAmount; i++) {
 			loadMap(i);
 		}		
 	}
 	
-	/**
-	 * Retrieves the map with the given id.
-	 * @param id The number map to be returned
-	 * @return The WorldMap loaded
-	 */
+	@Override
 	public WorldMap getMap(int id) {
 		if (id > 0 && id <= mapsAmount) {
 			return maps[id - 1];
@@ -95,40 +106,41 @@ public class MapServiceImpl implements MapService {
 	}
 	
 	/**
-	 * Loads the given map from the map path.
-	 * @param map The number map to be loaded
-	 * @return The WorldMap loaded
+	 * Loads and retrieves the map with the given id.
+	 * @param mapId The map's id.
+	 * @return The loaded map.
 	 */
-	private WorldMap loadMap(int map) {
+	private WorldMap loadMap(int mapId) {
 	
 		byte flag;
-		RandomAccessFile dataInf = null;
-		RandomAccessFile dataMap = null;
-		byte[] bufInf = null;
-		byte[] bufMap = null;
+		RandomAccessFile dataInf;
+		RandomAccessFile dataMap;
+		byte[] bufInf;
+		byte[] bufMap;
 				
 		try {
-			// Completely read both files
-			dataInf = new RandomAccessFile(mapsPath + MAP_FILE_NAME + map + INF_EXTENSION, "r");
-			dataMap = new RandomAccessFile(mapsPath + MAP_FILE_NAME + map + MAP_EXTENSION, "r");
+			// Completely read both files.
+			dataInf = new RandomAccessFile(mapsPath + MAP_FILE_NAME + mapId + INF_EXTENSION, "r");
+			dataMap = new RandomAccessFile(mapsPath + MAP_FILE_NAME + mapId + MAP_EXTENSION, "r");
+			
 			bufInf = new byte[(int) dataInf.length()];
 			bufMap = new byte[(int) dataMap.length()];
+			
 			dataInf.readFully(bufInf);		
 			dataMap.readFully(bufMap);
 		} catch (IOException e) {
-			logger.error("Map " + map + " loading failed!", e);
+			logger.error("Map " + mapId + " loading failed!", e);
 			throw new RuntimeException(e);
 		}
 		
 		ByteBuffer infBuffer = ByteBuffer.wrap(bufInf);
 		ByteBuffer mapBuffer = ByteBuffer.wrap(bufMap);
 		
-		// VB writes with Little Endian and the default byte order in Java is Big Endian.
+		// The map files are written with Little Endian and the default byte order in Java is Big Endian.
 		infBuffer.order(ByteOrder.LITTLE_ENDIAN);
 		mapBuffer.order(ByteOrder.LITTLE_ENDIAN);
 
-		// Get the map header
-
+		// Load the map header.
 		short mapVersion = mapBuffer.getShort(); 
 
 		byte[] description = new byte[255];
@@ -148,14 +160,16 @@ public class MapServiceImpl implements MapService {
 		Tile[] tiles = new Tile[WorldMap.MAP_HEIGHT * WorldMap.MAP_WIDTH];
 
 		boolean blocked;
+		boolean isWater;
+		boolean isLava;
+		
 		Trigger trigger;
 		Position tileExit;
-		short[] layers;
 		
 		for (int y = 0; y < WorldMap.MAP_HEIGHT; y++) {
 			for (int x = 0; x < WorldMap.MAP_HEIGHT; x++) {
 
-				blocked = false;
+				blocked = isWater = isLava = false;
 				trigger = Trigger.NONE;
 				tileExit = null;
 				
@@ -166,21 +180,37 @@ public class MapServiceImpl implements MapService {
 					blocked = true;
 				}
 				
-				layers = new short[Tile.LAYERS_AMOUNT];
-
 				// Every tile must have the first layer.
-				layers[0] = mapBuffer.getShort();
-
+				short floor = mapBuffer.getShort();
+				
+				
+				// In this layer goes stuff that should appear over the floor.
 				if ((flag & BITFLAG_LAYER2) == BITFLAG_LAYER2) {
-					layers[1] = mapBuffer.getShort();
+					// Remove the short from the buffer so we can fetch the next value.
+					mapBuffer.getShort();
+				} else {
+					
+					// Are we on water?
+					if (waterGrhs.contains(floor)) {
+						isWater = true;
+					} else if (lavaGrhs.contains(floor)) { // Are we on lava?
+						isLava = true;
+					}
 				}
 				
+				// In this layer goes stuff that is over the chars but is not a roof.
 				if ((flag & BITFLAG_LAYER3) == BITFLAG_LAYER3) {
-					layers[2] = mapBuffer.getShort();
+					// Remove the short from the buffer so we can fetch the next value.
+					mapBuffer.getShort();
 				}
-
+				
+				// This layer determines the roof, if any.
 				if ((flag & BITFLAG_LAYER4) == BITFLAG_LAYER4) {
-					layers[3] = mapBuffer.getShort();
+					/*
+					 * Don't really care, whether the tile has roof or not is determined by the trigger.
+					 * Remove the short from the buffer so we can fetch the next value.
+					 */
+					mapBuffer.getShort();
 				}
 
 				if ((flag & BITFLAG_TRIGGER) == BITFLAG_TRIGGER) {
@@ -188,13 +218,14 @@ public class MapServiceImpl implements MapService {
 					try {
 						trigger = Trigger.get(mapBuffer.getShort());
 					} catch (ArrayIndexOutOfBoundsException e) {
-						logger.warn(String.format("The position (%d, %d, %d) has an invalid trigger.", map, x, y));
+						logger.warn(String.format("The position (%d, %d, %d) has an invalid trigger.", mapId, x, y));
 						trigger = Trigger.NONE;
 					}
 				}
 
 				flag = infBuffer.get();
 
+				// The tile takes you to another position.
 				if ((flag & BITFLAG_TILEEXIT) == BITFLAG_TILEEXIT) {
 					tileExit = new Position(
 											(byte) infBuffer.getShort(), 
@@ -216,20 +247,71 @@ public class MapServiceImpl implements MapService {
 					// The object's amount.
 					infBuffer.getShort();
 					
-					// TODO: instantiate the WorldObject object.				
+					// TODO: instantiate the WorldObject object.
 				}
 				
 				// TODO: Replace the nulls with the NPCCharacter and WorldObject objects.
-				tiles[WorldMap.getTileKey(x, y)] = new Tile(blocked, layers, trigger, tileExit, null, null);
+				tiles[WorldMap.getTileKey(x, y)] = new Tile(blocked, isWater, isLava, trigger, tileExit, null, null);
 		
 				}
 				
 		}
 		
-		WorldMap buffMap = getMap(map);
-		buffMap.setTiles(tiles);
+		// The map object already exists, we only need to set it the loaded data.
+		WorldMap map = getMap(mapId);
+		map.setTiles(tiles);
 		
-		return buffMap;
+		return map;
 	}
 
+	/**
+	 * Loads the maps configuration from the given file.
+	 * @param configFile The file path to the config file.
+	 */
+	private void loadMapsConfig(String configFile) {
+		Properties props = new Properties();
+		
+		try {
+			props.load(new FileReader(configFile));
+		} catch (IOException e) {
+			logger.fatal("Error loading maps properties file(" + configFile + ")");
+			throw new RuntimeException(e);
+		}
+		
+		waterGrhs.addAll(parseRanges(props.getProperty("maps.water")));
+		lavaGrhs.addAll(parseRanges(props.getProperty("maps.lava")));
+	}
+	
+	/**
+	 * Parses a comma-separated list of numbers and retrieves it.
+	 * The list also can contain numerical ranges indicated with dashes which also
+	 * separates the starting and ending number of the numerical range, both inclusive.
+	 * e.g:
+	 * The following string: "1,2,3-5,6-9,10" would produce the following return:
+	 * [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	 * @param value The string value to be parsed.
+	 * @return The list of numbers extracted from the list.
+	 */
+	private List<Short> parseRanges(String value) {
+		String[] splittedValues = value.split(CONFIG_VALUES_DELIMITER);
+		List<Short> ret = new ArrayList<Short>();
+		
+		for(String val : splittedValues) {
+			if (val.contains(CONFIG_RANGE_INDICATOR)) {
+				String[] rangePoints = val.split(CONFIG_RANGE_INDICATOR);
+				short from = Short.valueOf(rangePoints[0]);
+				short to = Short.valueOf(rangePoints[1]);
+				
+				for (short i = from; i <= to; i++) {
+					ret.add(i);
+				}
+				
+			} else {
+				ret.add(Short.valueOf(val));
+			}
+		}
+		
+		return ret;
+	}
+	
 }

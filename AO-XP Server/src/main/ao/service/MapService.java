@@ -23,16 +23,14 @@ import ao.model.map.WorldMap;
 public interface MapService {
 
 	/**
-	 * Loads the given map from the map path.
-	 * @param map The number map to be loaded
-	 * @return The WorldMap loaded
+	 * Loads all maps.
 	 */
 	void loadMaps();
 	
 	/**
 	 * Retrieves the map with the given id.
-	 * @param id The number map to be returned
-	 * @return The WorldMap loaded
+	 * @param id The map's id.
+	 * @return The loaded map.
 	 */
 	WorldMap getMap(int id);
 

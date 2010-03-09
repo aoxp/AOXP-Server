@@ -23,12 +23,12 @@ package ao.model.map;
  */
 public enum Trigger {
 	NONE,
-    UNDERROOF,
+    UNDER_ROOF,
     trigger_2, // TODO: What is this?
-    INVALIDPOSITION,
-    SAFEZONE,
-    ANTIPICKET,
-    FIGHTZONE;
+    INVALID_POSITION,
+    SAFE_ZONE,
+    ANTI_PICKET,
+    FIGHT_ZONE;
 
 
 	/**
@@ -37,8 +37,8 @@ public enum Trigger {
 	private static Trigger[] values = Trigger.values();
 	
 	/**
-	 * Retrieves the gender with the given index.
-	 * @param index The gender index.
+	 * Retrieves the trigger with the given index.
+	 * @param index The trigger index.
 	 * @return The gender.
 	 */
 	public static Trigger get(short index) {

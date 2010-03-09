@@ -22,75 +22,56 @@ import ao.model.character.Character;
 import ao.model.worldobject.WorldObject;
 
 /**
- * A map's tile.
+ * A map tile.
  */
 public class Tile {
 
-	public static final byte LAYERS_AMOUNT = 4; 
-	public static final byte OBLIGATORY_LAYERS_AMOUNT = 1;
-	
 	protected Character character;
 	protected WorldObject worldObject;
 	protected Trigger trigger;
-	protected short[] layers; 
-	protected boolean blocked; 
+	protected boolean blocked;
+	protected boolean isWater;
+	protected boolean isLava;
 	protected Position tileExit;
 
 	/**
 	 * Creates a new tile.
 	 * @param blocked Whether the tile is blocked or not.
-	 * @param layers Indices of the graphics in the different layers.
+	 * @param isWater Whether the tile is water or not.
+	 * @param isLava Whether the tile is lava or not.
 	 * @param trigger The trigger ruling over this tile.
 	 * @param tileExit Position to which this tile leads, if any.
 	 * @param character The character currently standing on this position, if any.
 	 * @param worldObject The object laying in this position, if any.
 	 */
-	public Tile(boolean blocked, short[] layers, Trigger trigger, Position tileExit, Character character, WorldObject worldObject) {
+	public Tile(boolean blocked, boolean isWater, boolean isLava, Trigger trigger, Position tileExit, Character character, WorldObject worldObject) {
 		this.blocked = blocked;
-		this.layers = layers;
+		this.isWater = isWater;
+		this.isLava = isLava;
 		this.trigger = trigger;
 		this.tileExit = tileExit;
-		
 		this.worldObject = worldObject;
 		this.character = character;
 	}
 	
 	/**
-	 * Sets the given graphic at the given layer.
-	 * @param graphic The graphic to be set.
-	 * @param layer The layer where the graphic must be set.
-	 */
-	public void setLayer(short graphic, byte layer) {
-		this.layers[layer - 1] = graphic;
-	}	
-	
-	/**
-	 * Retrieves the graphic in the given layer. 
-	 * @param layer The layer of the tile.
-	 * @return The graphic in the given layer.
-	 */
-	public int getLayer(byte layer) {
-		return layers[layer - 1];
-	}
-	
-	/**
-	 * Retrieves the tile exit at the tile. 
-	 * @return The tile exit at the tile.
+	 * Retrieves the position to which this tile leads.
+	 * @return The tile exit.
 	 */
 	public Position getTileExit() {
 		return tileExit;
 	}
 	
 	/**
-	 * Sets the tile exit at the tile. 
-	 * @param tileExit The tileExit to be set at the tile.
+	 * Sets the position to which this tile leads.
+	 * @param tileExit The new tile exit.
 	 */
 	public void setTileExit(Position tileExit) {
 		this.tileExit = tileExit;
 	}
 
 	/**
-	 * Retrieves the blocked at the tile.
+	 * Retrieves the block status.
 	 * @return True if the tile is blocked, false otherwise.
 	 */
 	public boolean isBlocked() {
@@ -98,8 +79,8 @@ public class Tile {
 	}
 	
 	/**
-	 * Sets the block at the tile.
-	 * @param block The blocked to be set at the tile.
+	 * Sets the block status.
+	 * @param block Whether the tile is blocked, or not.
 	 */
 	public void setBlocked(boolean block) {	
 		this.blocked = block;
@@ -152,4 +133,37 @@ public class Tile {
 	public void setTrigger(Trigger trigger) {
 		this.trigger = trigger;
 	}
+	
+	/**
+	 * Checks if the tile is water.
+	 * @return True if this tile is water, false otherwise.
+	 */
+	public boolean isWater() {
+		return isWater;
+	}
+	
+	/**
+	 * Checks if the tile is lava.
+	 * @return True if this tile is lava, false otherwise.
+	 */
+	public boolean isLava() {
+		return isLava;
+	}
+	
+	/**
+	 * Checks if the tile is under roof.
+	 * @return True if this tile is under roof, false otherwise.
+	 */
+	public boolean isUnderRoof() {
+		return trigger == Trigger.UNDER_ROOF;
+	}
+	
+	/**
+	 * Checks if the tile is a safe zone.
+	 * @return True if this tile is safe zone, false otherwise.
+	 */
+	public boolean isSafeZone() {
+		return trigger == Trigger.SAFE_ZONE;
+	}
+	
 }
