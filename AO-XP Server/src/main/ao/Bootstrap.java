@@ -29,8 +29,10 @@ import org.apache.log4j.Logger;
 
 import ao.config.ServerConfig;
 import ao.context.ApplicationContext;
+import ao.data.dao.exception.DAOException;
 import ao.network.ConnectionManager;
 import ao.service.MapService;
+import ao.service.WorldObjectService;
 
 /**
  * Bootstraps the application.
@@ -47,10 +49,8 @@ public class Bootstrap {
 		
 		try {
 			server = Bootstrap.bootstrap();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			logger.fatal("Server bootstraping failed!", e);
-			
-			e.printStackTrace();
 			
 			System.exit(-1);
 		}
@@ -63,8 +63,9 @@ public class Bootstrap {
 	 * Bootstraps the application.
 	 * @return The application.
 	 * @throws IOException 
+	 * @throws DAOException 
 	 */
-	private static AOXPServer bootstrap() throws IOException {
+	private static AOXPServer bootstrap() throws IOException, DAOException {
 		
 		AOXPServer server = new AOXPServer();
 		
@@ -122,6 +123,7 @@ public class Bootstrap {
 		
 		logger.info("Starting up game timers...");
 		
+		// TODO : Go over this... use a Timer instead with all scheduled tasks??
 		// TODO : repeat for each timer
 		ExecutorService timer = Executors.newSingleThreadScheduledExecutor();
 		
@@ -132,7 +134,7 @@ public class Bootstrap {
 	 * Loads the application context on the given server.
 	 * @param server The server on which to load the application context.
 	 */
-	private static void loadApplicationContext(AOXPServer server) {
+	private static void loadApplicationContext(AOXPServer server) throws DAOException {
 		
 		logger.info("Loading application context...");
 		
@@ -142,6 +144,10 @@ public class Bootstrap {
 		logger.info("Loading maps...");
 		MapService mapService = ApplicationContext.getInstance(MapService.class);
 		mapService.loadMaps();
+		
+		logger.info("Loading world objects...");
+		WorldObjectService objectService = ApplicationContext.getInstance(WorldObjectService.class);
+		objectService.loadObjects();
 		
 		// TODO : Load other services and classes from application context
 	}

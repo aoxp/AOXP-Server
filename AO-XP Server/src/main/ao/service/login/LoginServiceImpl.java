@@ -57,6 +57,7 @@ public class LoginServiceImpl implements LoginService {
 	private static final int INITIAL_SKILL_POINTS = 10;
 	
 	private String[] clientHashes;
+	// FIXME : Have these injected in a constructor by Guice, not hardwired like this!
 	private final AccountDAO accDAO = ApplicationContext.getInstance(AccountDAO.class);
 	private final UserCharacterDAO charDAO = ApplicationContext.getInstance(UserCharacterDAO.class);
 	private final ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);

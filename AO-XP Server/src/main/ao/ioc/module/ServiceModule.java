@@ -23,9 +23,11 @@ import java.util.Properties;
 import ao.service.LoginService;
 import ao.service.MapService;
 import ao.service.TimedEventsService;
+import ao.service.WorldObjectService;
 import ao.service.login.LoginServiceImpl;
 import ao.service.map.MapServiceImpl;
 import ao.service.timedevents.TimedEventsServiceImpl;
+import ao.service.worldobject.WorldObjectServiceImpl;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
@@ -48,6 +50,7 @@ public class ServiceModule extends AbstractModule {
 		bind(LoginService.class).to(LoginServiceImpl.class).in(Singleton.class);
 		bind(MapService.class).to(MapServiceImpl.class).in(Singleton.class);
 		bind(TimedEventsService.class).to(TimedEventsServiceImpl.class).in(Singleton.class);
+		bind(WorldObjectService.class).to(WorldObjectServiceImpl.class).in(Singleton.class);
 		
 		bind(String.class).annotatedWith(Names.named("mapsPath")).toInstance(properties.getProperty("config.path.maps"));
 		bind(Integer.class).annotatedWith(Names.named("mapsAmount")).toInstance(Integer.parseInt(properties.getProperty("config.maps.amount")));
