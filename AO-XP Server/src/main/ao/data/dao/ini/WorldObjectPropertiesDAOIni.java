@@ -102,9 +102,10 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String EQUIPPED_WEAPON_GRAPHIC_KEY = "Anim";
 	
 	private static final Map<String, UserArchetype> archetypesByName;
+	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
 	
-	// Populate aliases from spanish config files to internal types
 	static {
+		// Populate aliases from spanish config files to internal types
 		archetypesByName = new HashMap<String, UserArchetype>();
 		
 		archetypesByName.put("MAGO", UserArchetype.MAGE);
@@ -123,6 +124,26 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		archetypesByName.put("MINERO", UserArchetype.MINER);
 		archetypesByName.put("CARPINTERO", UserArchetype.CARPENTER);
 		archetypesByName.put("PIRATA", UserArchetype.PIRATE);
+		
+		
+		// Populate mappings from old object types to new ones.
+		worldObjectTypeMapper = new HashMap<LegacyWorldObjectType, WorldObjectType>();
+		
+		// TODO : Add more mappings as more objects are modeled and loaded
+		// BEWARE : Some objects have no mapping since they need extra info to be mapped (potions and weapons for instance).
+		worldObjectTypeMapper.put(LegacyWorldObjectType.ARMOR, WorldObjectType.ARMOR);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.ARROW, WorldObjectType.AMMUNITION);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.BOAT, WorldObjectType.BOAT);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.DRINK, WorldObjectType.DRINK);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.EMPTY_BOTTLE, WorldObjectType.EMPTY_BOTTLE);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.FILLED_BOTTLE, WorldObjectType.FILLED_BOTTLE);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.HELMET, WorldObjectType.HELMET);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.MINERAL, WorldObjectType.MINERAL);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.MUSICAL_INSTRUMENT, WorldObjectType.MUSICAL_INSTRUMENT);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.RING, WorldObjectType.ACCESSORY);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.SHIELD, WorldObjectType.SHIELD);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.TELEPORT, WorldObjectType.TELEPORT);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.USE_ONCE, WorldObjectType.FOOD);
 	}
 	
 	private String objectsFilePath;
@@ -183,47 +204,48 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		LegacyWorldObjectType type = LegacyWorldObjectType.valueOf(objectType);
 		
 		switch (type) {
-			case ACCESSORY:
+			case RING:
 			case HELMET:
 			case ARMOR:
 			case SHIELD:
-				obj = loadDefensiveItem(type, id, name, graphic, section);
+				obj = loadDefensiveItem(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case WEAPON:
-				obj = loadWeapon(type, id, name, graphic, section);
+				obj = loadWeapon(id, name, graphic, section);
 				break;
 				
-			case AMMUNITION:
-				obj = loadAmmunition(type, id, name, graphic, section);
+			case ARROW:
+				obj = loadAmmunition(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case BOAT:
-				obj = loadBoat(type, id, name, graphic, section);
+				obj = loadBoat(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case DRINK:
-				obj = loadDrink(type, id, name, graphic, section);
+			case FILLED_BOTTLE:
+				obj = loadDrink(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
-			case FOOD:
-				obj = loadFood(type, id, name, graphic, section);
+			case USE_ONCE:
+				obj = loadFood(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case EMPTY_BOTTLE:
-			case FILLED_BOTTLE:
+				obj = loadGenericItem(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case MUSICAL_INSTRUMENT:
-				obj = loadMusicalInstrument(type, id, name, graphic, section);
+				obj = loadMusicalInstrument(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case TELEPORT:
-				obj = loadTeleport(type, id, name, graphic, section);
+				obj = loadTeleport(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case POTION:
-				obj = loadPotion(type, id, name, graphic, section);
+				obj = loadPotion(id, name, graphic, section);
 				break;
 				
 			default:
@@ -242,7 +264,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadDefensiveItem(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadDefensiveItem(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 		
 		boolean tradeable = getTradeable(section);
@@ -257,32 +279,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		
-		WorldObjectType objType;
-		
-		// Get the new object type to use based on the legacy one.
-		switch (type) {
-			case SHIELD:
-				objType = WorldObjectType.SHIELD;
-				break;
-				
-			case HELMET:
-				objType = WorldObjectType.HELMET;
-				break;
-				
-			case ACCESSORY:
-				objType = WorldObjectType.ACCESSORY;
-				break;
-				
-			case ARMOR:
-				objType = WorldObjectType.ARMOR;
-				break;
-			
-			default:
-				logger.fatal("An unexpected legacy object type was found loading a defensive object.");
-				throw new RuntimeException();
-		}
-		
-		return new DefensiveItemProperties(objType, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef);
+		return new DefensiveItemProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef);
 	}
 
 	/**
@@ -294,24 +291,45 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadTeleport(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadTeleport(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 		
 		int radius = getRadius(section);
 		
-		return new TeleportProperties(WorldObjectType.TELEPORT, id, name, graphic, radius);
+		return new TeleportProperties(type, id, name, graphic, radius);
+	}
+	
+	/**
+	 * Creates a generic item's properties from the given section.
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The generic item created.
+	 */
+	private WorldObjectProperties loadGenericItem(WorldObjectType type, int id, String name, int graphic,
+			Section section) {
+		
+		boolean tradeable = getTradeable(section);
+		int value = getValue(section);
+		int manufactureDifficulty = getManufactureDifficulty(section);
+		boolean newbie = getNewbie(section);
+		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
+		List<Race> forbiddenRaces = getForbiddenRaces(section);
+		
+		return new ItemProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie);
 	}
 	
 	/**
 	 * Creates a potion's properties from the given section.
-	 * @param type The object's type.
 	 * @param id The object's id.
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadPotion(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadPotion(int id, String name, int graphic,
 			Section section) {
 		
 		boolean tradeable = getTradeable(section);
@@ -363,7 +381,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadMusicalInstrument(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadMusicalInstrument(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 		
 		boolean tradeable = getTradeable(section);
@@ -375,7 +393,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		List<Integer> sounds = getSounds(section);
 		
-		return new MusicalInstrumentProperties(WorldObjectType.MUSICAL_INSTRUMENT, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, sounds);
+		return new MusicalInstrumentProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, sounds);
 	}
 	
 	/**
@@ -387,7 +405,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadBoat(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadBoat(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 		
 		boolean tradeable = getTradeable(section);
@@ -405,7 +423,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		int minHit = getMinHit(section);
 		int maxHit = getMaxHit(section);
 		
-		return new BoatProperties(WorldObjectType.BOAT, id, name, graphic, tradeable, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef, minHit, maxHit);
+		return new BoatProperties(type, id, name, graphic, tradeable, value, usageDifficulty, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, minDef, maxDef, minMagicDef, maxMagicDef, minHit, maxHit);
 	}
 	
 	
@@ -418,7 +436,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadFood(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadFood(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 		
 		boolean tradeable = getTradeable(section);
@@ -429,7 +447,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		
-		return new StatModifyingItemProperties(WorldObjectType.FOOD, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, modifier, modifier);
+		return new StatModifyingItemProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, modifier, modifier);
 	}
 
 	/**
@@ -441,7 +459,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadDrink(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadDrink(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 		
 		boolean tradeable = getTradeable(section);
@@ -452,19 +470,18 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		
-		return new StatModifyingItemProperties(WorldObjectType.DRINK, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, modifier, modifier);
+		return new StatModifyingItemProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, modifier, modifier);
 	}
 
 	/**
 	 * Creates a weapon's properties from the given section.
-	 * @param type The object's type.
 	 * @param id The object's id.
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadWeapon(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadWeapon(int id, String name, int graphic,
 			Section section) {
 		
 		// Load basic data
@@ -505,7 +522,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadAmmunition(LegacyWorldObjectType type, int id, String name, int graphic,
+	private WorldObjectProperties loadAmmunition(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 		
 		boolean tradeable = getTradeable(section);
@@ -518,7 +535,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		
-		return new AmmunitionProperties(WorldObjectType.AMMUNITION, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, minHit, maxHit);
+		return new AmmunitionProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, minHit, maxHit);
 	}
 	
 	/**
@@ -934,7 +951,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * World Object Type enumeration, as it was known in the old days of Visual Basic.
 	 */
 	private enum LegacyWorldObjectType {
-		FOOD(1),
+		USE_ONCE(1),
 		WEAPON(2),
 		ARMOR(3),
 		TREE(4),
@@ -951,7 +968,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		BONFIRE(15),
 		SHIELD(16),
 		HELMET(17),
-		ACCESSORY(18),
+		RING(18),
 		TELEPORT(19),
 		FURNITURE(20),
 		JEWELRY(21),
@@ -964,7 +981,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		GEMS(29),
 		FLOWERS(30),
 		BOAT(31),
-		AMMUNITION(32),
+		ARROW(32),
 		EMPTY_BOTTLE(33),
 		FILLED_BOTTLE(34),
 		STAIN(35),
