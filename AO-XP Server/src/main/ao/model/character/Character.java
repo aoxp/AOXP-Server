@@ -379,4 +379,11 @@ public interface Character {
 	 * @param duration		The time for which the effect is valid.
 	 */
 	void addToStrength(int points, int duration);
+	
+	/**
+	 * Adds the given spell.
+	 * @param spell Spell to be added
+	 */
+	void addSpell(Spell spell);
+	
 }

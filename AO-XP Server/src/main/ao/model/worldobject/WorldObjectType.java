@@ -47,4 +47,5 @@ public enum WorldObjectType {
 	FILLED_BOTTLE,
 	PROP,
 	GRABABLE_PROP,
+	PARCHMENT
 }

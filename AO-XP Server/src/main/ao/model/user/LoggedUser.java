@@ -508,4 +508,10 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 		
 	}
 
+	@Override
+	public void addSpell(Spell spell) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

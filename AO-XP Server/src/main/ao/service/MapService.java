@@ -18,6 +18,7 @@
 
 package ao.service;
 
+import ao.model.map.Position;
 import ao.model.map.WorldMap;
 
 public interface MapService {
