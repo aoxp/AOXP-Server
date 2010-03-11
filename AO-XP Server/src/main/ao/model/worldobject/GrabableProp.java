@@ -24,7 +24,7 @@ import ao.model.worldobject.properties.ItemProperties;
 /**
  * A prop that can be picked up or sold, but still does nothing.
  */
-public class GrabableProp extends ConsumableItem {
+public class GrabableProp extends AbstractItem {
 
 	/**
 	 * Creates a new GrabableProp instance.
