@@ -100,6 +100,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String MAX_MODIFIER = "MaxModificador";
 	private static final String MODIFIER_TIME = "DuracionEfecto";
 	private static final String EQUIPPED_WEAPON_GRAPHIC_KEY = "Anim";
+	private static final String UNGRABABLE_KEY = "Agarrable";
 	
 	private static final Map<String, UserArchetype> archetypesByName;
 	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
@@ -180,7 +181,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		WorldObjectProperties[] objects = new WorldObjectProperties[totalObjects];
 		
 		for (int i = 1; i < totalObjects; i++) {
-			objects[i] = loadObject(i, iniFile.get(OBJECT_SECTION_PREFIX + i));
+			objects[i - 1] = loadObject(i, iniFile.get(OBJECT_SECTION_PREFIX + i));
 		}
 		
 		return objects;
@@ -248,6 +249,10 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				obj = loadPotion(id, name, graphic, section);
 				break;
 				
+			case FLOWERS:
+				obj = loadFlowers(id, name, graphic, section);
+				break;
+				
 			default:
 				logger.error("Unexpected object type found: " + objectType);
 		}
@@ -297,6 +302,26 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		int radius = getRadius(section);
 		
 		return new TeleportProperties(type, id, name, graphic, radius);
+	}
+	
+	/**
+	 * Creates a flower's properties from the given section.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadFlowers(int id, String name, int graphic,
+			Section section) {
+		
+		// Is it grabable or is it just a prop?
+		if (!isGrabable(section)) {
+			// It's a prop
+			return new WorldObjectProperties(WorldObjectType.PROP, id, name, graphic);
+		}
+		
+		return loadGenericItem(WorldObjectType.GRABABLE_PROP, id, name, graphic, section);
 	}
 	
 	/**
@@ -863,6 +888,16 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private boolean isStaff(Section section) {
 		String data = section.get(MAGIC_POWER_KEY);
 		return data != null && !"0".equals(data);
+	}
+	
+	/**
+	 * Checks if the section corresponds to a staff.
+	 * @param section The section for the item to check.
+	 * @return True if the item is a staff, false otherwise.
+	 */
+	private boolean isGrabable(Section section) {
+		String data = section.get(UNGRABABLE_KEY);
+		return data == null || !"0".equals(data);
 	}
 	
 	/**

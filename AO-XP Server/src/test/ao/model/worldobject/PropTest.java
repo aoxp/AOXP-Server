@@ -18,33 +18,27 @@
 
 package ao.model.worldobject;
 
+import org.junit.After;
+import org.junit.Before;
 
-/**
- * World Object Type enumeration.
- */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
+import ao.model.worldobject.properties.TeleportProperties;
+
+public class PropTest extends AbstractWorldObjectTest {
+
+	private static final int RADIUS = 4;
+	
+	private Prop prop1;
+	
+	@Before
+	public void setUp() throws Exception {
+		TeleportProperties props1 = new TeleportProperties(WorldObjectType.PROP, 1, "Teleport", 1, RADIUS);
+		prop1 = new Prop(props1);
+		
+		object = prop1;
+		objectProps = props1;
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
 }

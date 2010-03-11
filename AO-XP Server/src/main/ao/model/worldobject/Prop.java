@@ -18,33 +18,18 @@
 
 package ao.model.worldobject;
 
+import ao.model.worldobject.properties.WorldObjectProperties;
 
 /**
- * World Object Type enumeration.
+ * A prop object. Does nothing, just sits around.
  */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
+public class Prop extends AbstractWorldObject {
+
+	/**
+	 * Creates a new Prop instance.
+	 * @param properties The object's properties.
+	 */
+	public Prop(WorldObjectProperties properties) {
+		super(properties);
+	}
 }

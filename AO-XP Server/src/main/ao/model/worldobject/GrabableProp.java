@@ -18,33 +18,38 @@
 
 package ao.model.worldobject;
 
+import ao.model.character.Character;
+import ao.model.worldobject.properties.ItemProperties;
 
 /**
- * World Object Type enumeration.
+ * A prop that can be picked up or sold, but still does nothing.
  */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
+public class GrabableProp extends ConsumableItem {
+
+	/**
+	 * Creates a new GrabableProp instance.
+	 * @param properties The item's properties.
+	 * @param amount The item's amount.
+	 */
+	public GrabableProp(ItemProperties properties, int amount) {
+		super(properties, amount);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.AbstractItem#clone()
+	 */
+	@Override
+	public Item clone() {
+		return new GrabableProp((ItemProperties) properties, amount);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.ConsumableItem#use(ao.model.character.Character)
+	 */
+	@Override
+	public void use(Character character) {
+		// We do nothing, it's still just a prop
+	}
 }
