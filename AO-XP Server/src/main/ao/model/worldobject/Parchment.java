@@ -58,7 +58,7 @@ public class Parchment extends ConsumableItem {
 		boolean hasSpell = false;
 		
 		for (int i = 0; i < spells.length; i++) {
-			if (spells[i].equals(spell)) {
+			if (spell.equals(spells[i])) {
 				hasSpell = true;
 				break;
 			}
