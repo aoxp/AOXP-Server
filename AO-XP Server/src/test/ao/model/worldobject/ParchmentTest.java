@@ -2,8 +2,8 @@ package ao.model.worldobject;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import junit.framework.Assert;
 
-import org.easymock.Capture;
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
@@ -52,15 +52,21 @@ public class ParchmentTest extends AbstractItemTest {
 		Inventory inventory = EasyMock.createMock(Inventory.class);
 		
 		Character character = EasyMock.createMock(Character.class);
+
+		Spell[] spells = new Spell[] {};
+		
 		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
+		EasyMock.expect(character.getSpells()).andReturn(spells).anyTimes();
 		
 		// Consumption of parchment1 requires these 2 calls.
 		inventory.cleanup();
-		character.addSpell(parchment1.getSpell());
+		character.addSpell(spell1);
 		
 		EasyMock.replay(inventory, character);
-		
+
 		parchment1.use(character);
+		
+		assertEquals(character.getSpells(), spells);
 		
 		EasyMock.verify(inventory, character);
 	}
@@ -70,20 +76,44 @@ public class ParchmentTest extends AbstractItemTest {
 		
 		Inventory inventory = EasyMock.createMock(Inventory.class);
 		
-		Character character = EasyMock.createMock(Character.class);		
+		Character character = EasyMock.createMock(Character.class);
+		
+		Spell[] spells = new Spell[] {};
+		
 		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
+		EasyMock.expect(character.getSpells()).andReturn(spells).anyTimes();
 		
-		Capture<Spell> capture = new Capture<Spell>();
-		
-		// Consumption of parchment1 requires just a call to addSpell
-		character.addSpell(EasyMock.capture(capture));
+		// Consumption of parchment1 requires just a call to addSpell.
+		character.addSpell(spell2);
 		
 		EasyMock.replay(inventory, character);
 		
 		parchment2.use(character);
 		
-		/// Make sure the value is in the correct range
-		assertEquals(capture.getValue(), parchment2.getSpell());
+		assertEquals(character.getSpells(), spells);
+		
+		EasyMock.verify(inventory, character);
+	}
+
+	@Test
+	public void testUseWithASpellAlreadyLearnt() {
+		
+		Inventory inventory = EasyMock.createMock(Inventory.class);
+		
+		Character character = EasyMock.createMock(Character.class);
+		
+		Spell[] spells = new Spell[] {spell1};
+		
+		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
+		EasyMock.expect(character.getSpells()).andReturn(spells).anyTimes();
+		
+		// Consumption of parchment1 already learnt doesn't requires any call.
+				
+		EasyMock.replay(inventory, character);
+		
+		parchment1.use(character);
+		
+		assertEquals(character.getSpells(), spells);
 		
 		EasyMock.verify(inventory, character);
 	}
@@ -91,15 +121,17 @@ public class ParchmentTest extends AbstractItemTest {
 	@Test
 	public void testClone() {
 		Parchment clone1 = (Parchment) parchment1.clone();
+		
 		assertEquals(clone1.getAmount(), parchment1.getAmount());
 		assertEquals(clone1.getSpell(), parchment1.getSpell());
-	
+		assertEquals(clone1.properties, parchment1.properties);		
 		assertFalse(clone1 == parchment1);
 		
 		Parchment clone2 = (Parchment) parchment2.clone();
+		
 		assertEquals(clone2.getAmount(), parchment2.getAmount());
 		assertEquals(clone2.getSpell(), parchment2.getSpell());
-		
+		assertEquals(clone2.properties, parchment2.properties);		
 		assertFalse(clone2 == parchment2);
 	}
 	

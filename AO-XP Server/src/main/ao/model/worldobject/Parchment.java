@@ -20,6 +20,7 @@ package ao.model.worldobject;
 
 import ao.model.character.Character;
 import ao.model.spell.Spell;
+
 import ao.model.worldobject.properties.ParchmentProperties;
 
 /**
@@ -51,9 +52,23 @@ public class Parchment extends ConsumableItem {
 	 */
 	@Override
 	public void use(Character character) {
-		super.use(character);
+		Spell spell = ((ParchmentProperties) properties).getSpell();
+		Spell[] spells = character.getSpells();
+		
+		boolean hasSpell = false;
+		
+		for (int i = 0; i < spells.length; i++) {
+			if (spells[i].equals(spell)) {
+				hasSpell = true;
+				break;
+			}
+		}
+		
+		if (!hasSpell) {
+			super.use(character);
+			character.addSpell(((ParchmentProperties) properties).getSpell());
+		}
 
-		character.addSpell(((ParchmentProperties) properties).getSpell());
 	}
 	
 	/**
