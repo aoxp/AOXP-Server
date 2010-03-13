@@ -40,6 +40,7 @@ import ao.model.worldobject.properties.BoatProperties;
 import ao.model.worldobject.properties.DefensiveItemProperties;
 import ao.model.worldobject.properties.ItemProperties;
 import ao.model.worldobject.properties.MusicalInstrumentProperties;
+import ao.model.worldobject.properties.ParchmentProperties;
 import ao.model.worldobject.properties.RangedWeaponProperties;
 import ao.model.worldobject.properties.StaffProperties;
 import ao.model.worldobject.properties.StatModifyingItemProperties;
@@ -101,6 +102,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String MODIFIER_TIME = "DuracionEfecto";
 	private static final String EQUIPPED_WEAPON_GRAPHIC_KEY = "Anim";
 	private static final String UNGRABABLE_KEY = "Agarrable";
+	private static final String SPELL_INDEX_KEY = "HechizoIndex";
 	
 	private static final Map<String, UserArchetype> archetypesByName;
 	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
@@ -145,6 +147,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.SHIELD, WorldObjectType.SHIELD);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.TELEPORT, WorldObjectType.TELEPORT);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.USE_ONCE, WorldObjectType.FOOD);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.PARCHMENT, WorldObjectType.PARCHMENT);
 	}
 	
 	private String objectsFilePath;
@@ -251,6 +254,10 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				
 			case FLOWERS:
 				obj = loadFlowers(id, name, graphic, section);
+				break;
+				
+			case PARCHMENT:
+				obj = loadParchment(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			default:
@@ -561,6 +568,30 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		
 		return new AmmunitionProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic, minHit, maxHit);
+	}
+	
+	/**
+	 * Creates an parchment items's properties from the given section.
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadParchment(WorldObjectType type, int id, String name, int graphic, Section section) {
+		
+		boolean tradeable = getTradeable(section);
+		int value = getValue(section);
+		int manufactureDifficulty = getManufactureDifficulty(section);
+		boolean newbie = getNewbie(section);
+		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
+		List<Race> forbiddenRaces = getForbiddenRaces(section);
+		
+		int spellIndex = getSpellIndex(section);
+		//TODO Create the Spell implementation.
+		
+		return new ParchmentProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, null);
 	}
 	
 	/**
@@ -980,6 +1011,9 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		return Integer.parseInt(section.get(MODIFIER_TIME));
 	}
 	
+	private int getSpellIndex(Section section) {
+		return Integer.parseInt(section.get(SPELL_INDEX_KEY));
+	}
 	
 	
 	/**
