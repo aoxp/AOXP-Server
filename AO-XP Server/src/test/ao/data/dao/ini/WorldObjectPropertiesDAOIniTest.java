@@ -33,7 +33,7 @@ import ao.model.worldobject.properties.StatModifyingItemProperties;
 import ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
 import ao.model.worldobject.properties.WorldObjectProperties;
 
-public class WorldObjectDAOPropertiesIniTest {
+public class WorldObjectPropertiesDAOIniTest {
 	
 	private static final int YELLOW_POTION_INDEX = 35;
 	private static final int BLUE_POTION_INDEX = 36;

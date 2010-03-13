@@ -253,7 +253,9 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 				
 			case FLOWERS:
-				obj = loadFlowers(id, name, graphic, section);
+			case GEMS:
+			case JEWELRY:
+				obj = loadProps(id, name, graphic, section);
 				break;
 				
 			case PARCHMENT:
@@ -319,7 +321,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadFlowers(int id, String name, int graphic,
+	private WorldObjectProperties loadProps(int id, String name, int graphic,
 			Section section) {
 		
 		// Is it grabable or is it just a prop?
