@@ -148,7 +148,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.TELEPORT, WorldObjectType.TELEPORT);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.USE_ONCE, WorldObjectType.FOOD);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.PARCHMENT, WorldObjectType.PARCHMENT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MONEY, WorldObjectType.GOLD);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.MONEY, WorldObjectType.MONEY);
 	}
 	
 	private String objectsFilePath;
@@ -238,6 +238,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 				
 			case EMPTY_BOTTLE:
+			case MONEY:
 				obj = loadGenericItem(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
@@ -260,7 +261,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case STAIN:
 			case CONTAINER:
 			case FURNITURE:
-			case MONEY:
 				obj = loadProps(id, name, graphic, section);
 				break;
 				

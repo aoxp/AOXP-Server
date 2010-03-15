@@ -48,5 +48,5 @@ public enum WorldObjectType {
 	PROP,
 	GRABABLE_PROP,
 	PARCHMENT,
-	GOLD
+	MONEY
 }
