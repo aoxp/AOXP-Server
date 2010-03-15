@@ -47,7 +47,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private Race race;
 	private Gender gender;
 	private Archetype archetype;
-
+	
 	/*
 	 * UserFlags
 	 */
@@ -71,8 +71,6 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private byte level;
 	private String name;
 	private String description;
-	
-
 	
 	public LoggedUser(Reputation reputation, Race race, Gender gender,
 			Archetype archetype, boolean poisoned, boolean paralyzed,
@@ -512,6 +510,18 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	public void addSpell(Spell spell) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void addMoney(int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getMoney() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

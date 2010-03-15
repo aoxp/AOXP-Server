@@ -14,39 +14,39 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package ao.model.worldobject;
 
+import ao.model.character.Character;
+import ao.model.worldobject.properties.ItemProperties;
 
-/**
- * World Object Type enumeration.
- */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
-	PARCHMENT,
-	GOLD
+public class Gold extends ConsumableItem {
+
+	public Gold(ItemProperties properties, int amount) {
+		super(properties, amount);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.AbstractItem#clone()
+	 */
+	@Override
+	public Item clone() {
+		return new Gold((ItemProperties) properties, amount);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.ConsumableItem#use(ao.model.character.Character)
+	 */
+	@Override
+	public void use(Character character) {
+		character.addMoney(amount);
+		
+		//It's used all at once. 
+		amount = 0;
+		character.getInventory().cleanup();
+	}
+
 }

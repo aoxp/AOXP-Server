@@ -386,4 +386,16 @@ public interface Character {
 	 */
 	void addSpell(Spell spell);
 	
+	/**
+	 * Retrieves the character's money.
+	 * @return The character's money.
+	 */
+	int getMoney();
+	
+	/**
+	 * Increases the amount of money.
+	 * @param The amount of gold to add.
+	 */
+	void addMoney(int amount);
+
 }

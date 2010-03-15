@@ -148,6 +148,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.TELEPORT, WorldObjectType.TELEPORT);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.USE_ONCE, WorldObjectType.FOOD);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.PARCHMENT, WorldObjectType.PARCHMENT);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.MONEY, WorldObjectType.GOLD);
 	}
 	
 	private String objectsFilePath;
@@ -255,13 +256,18 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case FLOWERS:
 			case GEMS:
 			case JEWELRY:
+			case BOOK:
+			case STAIN:
+			case CONTAINER:
+			case FURNITURE:
+			case MONEY:
 				obj = loadProps(id, name, graphic, section);
 				break;
 				
 			case PARCHMENT:
 				obj = loadParchment(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
-				
+			
 			default:
 				logger.error("Unexpected object type found: " + objectType);
 		}
