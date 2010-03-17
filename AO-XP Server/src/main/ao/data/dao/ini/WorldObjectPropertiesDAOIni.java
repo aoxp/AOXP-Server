@@ -34,6 +34,7 @@ import ao.data.dao.WorldObjectPropertiesDAO;
 import ao.data.dao.exception.DAOException;
 import ao.model.character.Race;
 import ao.model.character.archetype.UserArchetype;
+import ao.model.worldobject.WoodType;
 import ao.model.worldobject.WorldObjectType;
 import ao.model.worldobject.properties.AmmunitionProperties;
 import ao.model.worldobject.properties.BoatProperties;
@@ -46,6 +47,7 @@ import ao.model.worldobject.properties.StaffProperties;
 import ao.model.worldobject.properties.StatModifyingItemProperties;
 import ao.model.worldobject.properties.TeleportProperties;
 import ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
+import ao.model.worldobject.properties.TreeProperties;
 import ao.model.worldobject.properties.WeaponProperties;
 import ao.model.worldobject.properties.WorldObjectProperties;
 
@@ -106,6 +108,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	
 	private static final Map<String, UserArchetype> archetypesByName;
 	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
+	private static final Map<LegacyWorldObjectType, WoodType> woodTypeMapper;
 	
 	static {
 		// Populate aliases from spanish config files to internal types
@@ -149,6 +152,14 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.USE_ONCE, WorldObjectType.FOOD);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.PARCHMENT, WorldObjectType.PARCHMENT);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.MONEY, WorldObjectType.MONEY);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.TREE, WorldObjectType.TREE);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WorldObjectType.TREE);
+		
+		
+		// Set up wood type mappings
+		woodTypeMapper = new HashMap<LegacyWorldObjectType, WoodType>();
+		woodTypeMapper.put(LegacyWorldObjectType.TREE, WoodType.NORMAL);
+		woodTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WoodType.ELVEN);
 	}
 	
 	private String objectsFilePath;
@@ -267,6 +278,11 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case PARCHMENT:
 				obj = loadParchment(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
+				
+			case TREE:
+			case ELVEN_TREE:
+				obj = loadTree(worldObjectTypeMapper.get(type), id, name, graphic, section, woodTypeMapper.get(type));
+				break;
 			
 			default:
 				logger.error("Unexpected object type found: " + objectType);
@@ -275,6 +291,21 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		return obj;
 	}
 	
+	/**
+	 * Creates a tree's properties from the given section.
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @param woodType The type of wood produced by the tree.
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadTree(WorldObjectType type,
+			int id, String name, int graphic, Section section, WoodType woodType) {
+		return new TreeProperties(type, id, name, graphic, woodType);
+	}
+
 	/**
 	 * Creates a defensive items's properties from the given section.
 	 * @param type The object's type.

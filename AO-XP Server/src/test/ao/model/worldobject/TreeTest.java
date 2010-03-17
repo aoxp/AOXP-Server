@@ -18,36 +18,38 @@
 
 package ao.model.worldobject;
 
+import static org.junit.Assert.assertEquals;
 
-/**
- * World Object Type enumeration.
- */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
-	PARCHMENT,
-	MONEY,
-	TREE
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import ao.model.worldobject.properties.TreeProperties;
+
+public class TreeTest extends AbstractWorldObjectTest {
+
+	private Tree tree1;
+	private Tree tree2;
+	
+	@Before
+	public void setUp() throws Exception {
+		TreeProperties props1 = new TreeProperties(WorldObjectType.TREE, 1, "Elven Tree", 1, WoodType.ELVEN);
+		tree1 = new Tree(props1);
+		
+		TreeProperties props2 = new TreeProperties(WorldObjectType.TREE, 1, "Jungle Tree", 1, WoodType.NORMAL);
+		tree2 = new Tree(props2);
+		
+		object = tree1;
+		objectProps = props1;
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+	
+	@Test
+	public void testGetWoodType() {
+		assertEquals(WoodType.ELVEN, tree1.getWoodType());
+		assertEquals(WoodType.NORMAL, tree2.getWoodType());
+	}
 }

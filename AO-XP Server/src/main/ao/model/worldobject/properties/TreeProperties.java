@@ -16,38 +16,36 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.model.worldobject;
+package ao.model.worldobject.properties;
 
+import ao.model.worldobject.WoodType;
+import ao.model.worldobject.WorldObjectType;
 
 /**
- * World Object Type enumeration.
+ * Defines a WorldObject's properties. Allows a lightweight pattern implementation.
  */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
-	PARCHMENT,
-	MONEY,
-	TREE
+public class TreeProperties extends WorldObjectProperties {
+
+	protected WoodType woodType;
+	
+	/**
+	 * Creates a new WorldObjectProperties instance.
+	 * @param type The type of the item.
+	 * @param id The id of the item.
+	 * @param name The name of the item.
+	 * @param graphic The graphic for the item.
+	 * @param woodType The type of wood produced by the tree.
+	 */
+	public TreeProperties(WorldObjectType type, int id, String name, int graphic, WoodType woodType) {
+		super(type, id, name, graphic);
+		
+		this.woodType = woodType;
+	}
+
+	/**
+	 * @return the woodType
+	 */
+	public WoodType getWoodType() {
+		return woodType;
+	}
 }

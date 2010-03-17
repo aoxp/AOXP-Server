@@ -18,36 +18,26 @@
 
 package ao.model.worldobject;
 
+import ao.model.worldobject.properties.TreeProperties;
 
 /**
- * World Object Type enumeration.
+ * A tree. Does nothing, just sits around.
  */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
-	PARCHMENT,
-	MONEY,
-	TREE
+public class Tree extends AbstractWorldObject {
+
+	/**
+	 * Creates a new Tree instance.
+	 * @param properties The object's properties.
+	 */
+	public Tree(TreeProperties properties) {
+		super(properties);
+	}
+	
+	/**
+	 * Retrieves the type of wood produced by this tree.
+	 * @return The type of wood produced by this tree.
+	 */
+	public WoodType getWoodType() {
+		return ((TreeProperties) properties).getWoodType();
+	}
 }
