@@ -49,6 +49,7 @@ import ao.model.worldobject.properties.TeleportProperties;
 import ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
 import ao.model.worldobject.properties.TreeProperties;
 import ao.model.worldobject.properties.WeaponProperties;
+import ao.model.worldobject.properties.WoodProperties;
 import ao.model.worldobject.properties.WorldObjectProperties;
 
 import com.google.inject.Inject;
@@ -106,6 +107,9 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String UNGRABABLE_KEY = "Agarrable";
 	private static final String SPELL_INDEX_KEY = "HechizoIndex";
 	
+	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
+	private static final int ELVEN_WOOD_INDEX = 1006;
+	
 	private static final Map<String, UserArchetype> archetypesByName;
 	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
 	private static final Map<LegacyWorldObjectType, WoodType> woodTypeMapper;
@@ -154,6 +158,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.MONEY, WorldObjectType.MONEY);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.TREE, WorldObjectType.TREE);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WorldObjectType.TREE);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.WOOD, WorldObjectType.WOOD);
 		
 		
 		// Set up wood type mappings
@@ -283,6 +288,10 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case ELVEN_TREE:
 				obj = loadTree(worldObjectTypeMapper.get(type), id, name, graphic, section, woodTypeMapper.get(type));
 				break;
+				
+			case WOOD:
+				obj = loadWood(worldObjectTypeMapper.get(type), id, name, graphic, section, id == ELVEN_WOOD_INDEX ? WoodType.ELVEN : WoodType.NORMAL);
+				break;
 			
 			default:
 				logger.error("Unexpected object type found: " + objectType);
@@ -291,6 +300,29 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		return obj;
 	}
 	
+	/**
+	 * Creates a wood's properties from the given section.
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @param woodType The type of wood this is.
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadWood(WorldObjectType worldObjectType,
+			int id, String name, int graphic, Section section, WoodType woodType) {
+		
+		boolean tradeable = getTradeable(section);
+		int value = getValue(section);
+		int manufactureDifficulty = getManufactureDifficulty(section);
+		boolean newbie = getNewbie(section);
+		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
+		List<Race> forbiddenRaces = getForbiddenRaces(section);
+		
+		return new WoodProperties(worldObjectType, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, woodType);
+	}
+
 	/**
 	 * Creates a tree's properties from the given section.
 	 * @param type The object's type.

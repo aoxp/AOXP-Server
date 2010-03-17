@@ -49,5 +49,6 @@ public enum WorldObjectType {
 	GRABABLE_PROP,
 	PARCHMENT,
 	MONEY,
-	TREE
+	TREE,
+	WOOD
 }

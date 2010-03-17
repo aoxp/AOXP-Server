@@ -18,9 +18,9 @@
 
 package ao.model.worldobject;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import junit.framework.Assert;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -31,7 +31,7 @@ import ao.model.character.Character;
 import ao.model.inventory.Inventory;
 import ao.model.spell.Spell;
 import ao.model.spell.effect.Effect;
-import ao.model.worldobject.properties.ParchmentProperties;;
+import ao.model.worldobject.properties.ParchmentProperties;
 
 public class ParchmentTest extends AbstractItemTest {
 
@@ -84,7 +84,7 @@ public class ParchmentTest extends AbstractItemTest {
 
 		parchment1.use(character);
 		
-		assertEquals(character.getSpells(), spells);
+		assertArrayEquals(character.getSpells(), spells);
 		
 		EasyMock.verify(inventory, character);
 	}
@@ -108,7 +108,7 @@ public class ParchmentTest extends AbstractItemTest {
 		
 		parchment2.use(character);
 		
-		assertEquals(character.getSpells(), spells);
+		assertArrayEquals(character.getSpells(), spells);
 		
 		EasyMock.verify(inventory, character);
 	}
@@ -131,7 +131,7 @@ public class ParchmentTest extends AbstractItemTest {
 		
 		parchment1.use(character);
 		
-		assertEquals(character.getSpells(), spells);
+		assertArrayEquals(character.getSpells(), spells);
 		
 		EasyMock.verify(inventory, character);
 	}
