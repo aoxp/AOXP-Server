@@ -51,5 +51,7 @@ public enum WorldObjectType {
 	MONEY,
 	TREE,
 	WOOD,
-	MINE
+	MINE,
+	KEY,
+	DOOR
 }

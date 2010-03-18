@@ -39,7 +39,9 @@ import ao.model.worldobject.WorldObjectType;
 import ao.model.worldobject.properties.AmmunitionProperties;
 import ao.model.worldobject.properties.BoatProperties;
 import ao.model.worldobject.properties.DefensiveItemProperties;
+import ao.model.worldobject.properties.DoorProperties;
 import ao.model.worldobject.properties.ItemProperties;
+import ao.model.worldobject.properties.KeyProperties;
 import ao.model.worldobject.properties.MusicalInstrumentProperties;
 import ao.model.worldobject.properties.ParchmentProperties;
 import ao.model.worldobject.properties.RangedWeaponProperties;
@@ -107,6 +109,13 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String UNGRABABLE_KEY = "Agarrable";
 	private static final String SPELL_INDEX_KEY = "HechizoIndex";
 	private static final String MINERAL_INDEX_KEY = "MineralIndex";
+	private static final String KEY_KEY = "Clave";
+	private static final String OPEN_KEY = "Abierta";
+	private static final String LOCKED_KEY = "Llave";
+	private static final String OPEN_ID_KEY = "IndexAbierta"; 
+	private static final String CLOSED_ID_KEY = "IndexCerrada";
+	private static final String LOCKED_ID_KEY = "IndexCerradaLlave";
+				
 	
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
 	private static final int WOOD_INDEX = 58;
@@ -161,6 +170,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WorldObjectType.TREE);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.WOOD, WorldObjectType.WOOD);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.MINE, WorldObjectType.MINE);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.KEY, WorldObjectType.KEY);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.DOOR, WorldObjectType.DOOR);
 	}
 	
 	private String objectsFilePath;
@@ -290,6 +301,14 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				obj = loadWood(worldObjectTypeMapper.get(type), id, name, graphic, section, id == ELVEN_WOOD_INDEX ? WoodType.ELVEN : WoodType.NORMAL);
 				break;
 			
+			case KEY:
+				obj = loadKey(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				break;
+				
+			case DOOR:
+				obj = loadDoor(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				break;
+				
 			default:
 				logger.error("Unexpected object type found: " + objectType);
 		}
@@ -681,6 +700,41 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		//TODO Create the Spell implementation.
 		
 		return new ParchmentProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, null);
+	}
+	
+	private WorldObjectProperties loadKey(WorldObjectType type, int id, String name, int graphic,
+			Section section) {
+		
+		boolean tradeable = getTradeable(section);
+		int value = getValue(section);
+		int manufactureDifficulty = getManufactureDifficulty(section);
+		boolean newbie = getNewbie(section);
+		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
+		List<Race> forbiddenRaces = getForbiddenRaces(section);
+		int code = getCode(section);
+		
+		return new KeyProperties(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, code);
+	}
+
+	private WorldObjectProperties loadDoor(WorldObjectType type, int id, String name, int graphic,
+			Section section) {
+		
+
+		boolean locked = false;
+		int code = 0;
+		
+		boolean open = getOpen(section);
+		
+		if (!open) {
+			locked = getLocked(section);
+			code = getCode(section);
+		}
+		
+		int openId = getOpenId(section);
+		int closedId = getClosedId(section);
+		int lockedId = getLockedId(section);
+		
+		return new DoorProperties(type, id, name, graphic, open, locked, code, openId, closedId, lockedId);
 	}
 	
 	/**
@@ -1118,6 +1172,34 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		return Integer.parseInt(section.get(MINERAL_INDEX_KEY));
 	}
 	
+	/**
+	 * Retrieves the key's code.
+	 * @param section The section from which to read the value.
+	 * @return The key's code.
+	 */
+	private int getCode(Section section) {
+		return Integer.parseInt(section.get(KEY_KEY));
+	}
+	
+	private boolean getOpen(Section section) {
+		return Boolean.parseBoolean(section.get(OPEN_KEY));
+	}
+	
+	private boolean getLocked(Section section) {
+		return Boolean.parseBoolean(section.get(LOCKED_KEY));
+	}
+	
+	private int getLockedId(Section section) {
+		return Integer.parseInt(section.get(LOCKED_ID_KEY));
+	}
+
+	private int getClosedId(Section section) {
+		return Integer.parseInt(section.get(CLOSED_ID_KEY));
+	}
+	
+	private int getOpenId(Section section) {
+		return Integer.parseInt(section.get(OPEN_ID_KEY));
+	}
 	
 	/**
 	 * World Object Type enumeration, as it was known in the old days of Visual Basic.
