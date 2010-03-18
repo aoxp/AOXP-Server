@@ -47,7 +47,7 @@ import ao.model.worldobject.properties.StaffProperties;
 import ao.model.worldobject.properties.StatModifyingItemProperties;
 import ao.model.worldobject.properties.TeleportProperties;
 import ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
-import ao.model.worldobject.properties.TreeProperties;
+import ao.model.worldobject.properties.ResourceSourceProperties;
 import ao.model.worldobject.properties.WeaponProperties;
 import ao.model.worldobject.properties.WoodProperties;
 import ao.model.worldobject.properties.WorldObjectProperties;
@@ -106,13 +106,14 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String EQUIPPED_WEAPON_GRAPHIC_KEY = "Anim";
 	private static final String UNGRABABLE_KEY = "Agarrable";
 	private static final String SPELL_INDEX_KEY = "HechizoIndex";
+	private static final String MINERAL_INDEX_KEY = "MineralIndex";
 	
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
+	private static final int WOOD_INDEX = 58;
 	private static final int ELVEN_WOOD_INDEX = 1006;
 	
 	private static final Map<String, UserArchetype> archetypesByName;
 	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
-	private static final Map<LegacyWorldObjectType, WoodType> woodTypeMapper;
 	
 	static {
 		// Populate aliases from spanish config files to internal types
@@ -159,12 +160,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.TREE, WorldObjectType.TREE);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WorldObjectType.TREE);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.WOOD, WorldObjectType.WOOD);
-		
-		
-		// Set up wood type mappings
-		woodTypeMapper = new HashMap<LegacyWorldObjectType, WoodType>();
-		woodTypeMapper.put(LegacyWorldObjectType.TREE, WoodType.NORMAL);
-		woodTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WoodType.ELVEN);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.MINE, WorldObjectType.MINE);
 	}
 	
 	private String objectsFilePath;
@@ -286,7 +282,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				
 			case TREE:
 			case ELVEN_TREE:
-				obj = loadTree(worldObjectTypeMapper.get(type), id, name, graphic, section, woodTypeMapper.get(type));
+			case MINE:
+				obj = loadResourceSource(worldObjectTypeMapper.get(type), id, name, graphic, section, type);
 				break;
 				
 			case WOOD:
@@ -324,18 +321,39 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	}
 
 	/**
-	 * Creates a tree's properties from the given section.
+	 * Creates a resource source's properties from the given section.
 	 * @param type The object's type.
 	 * @param id The object's id.
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @param woodType The type of wood produced by the tree.
+	 * @param legactType The legacy type of the item.
 	 * @return The world object created.
 	 */
-	private WorldObjectProperties loadTree(WorldObjectType type,
-			int id, String name, int graphic, Section section, WoodType woodType) {
-		return new TreeProperties(type, id, name, graphic, woodType);
+	private WorldObjectProperties loadResourceSource(WorldObjectType type,
+			int id, String name, int graphic, Section section, LegacyWorldObjectType legactType) {
+		
+		int resourceId = -1;
+		
+		// Get the resource id
+		switch (legactType) {
+			case TREE:
+				resourceId = WOOD_INDEX;
+				break;
+				
+			case ELVEN_TREE:
+				resourceId = ELVEN_WOOD_INDEX;
+				break;
+				
+			case MINE:
+				resourceId = getMineralIndex(section);
+				break;
+				
+			default:
+				logger.error("Unexpected resource source of type " + type.name());
+		}
+		
+		return new ResourceSourceProperties(type, id, name, graphic, resourceId);
 	}
 
 	/**
@@ -1082,8 +1100,22 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		return Integer.parseInt(section.get(MODIFIER_TIME));
 	}
 	
+	/**
+	 * Retrieves the spell's index.
+	 * @param section The section from which to read the value.
+	 * @return The object's spell index.
+	 */
 	private int getSpellIndex(Section section) {
 		return Integer.parseInt(section.get(SPELL_INDEX_KEY));
+	}
+	
+	/**
+	 * Retrieves the mineral's index.
+	 * @param section The section from which to read the value.
+	 * @return The object's mineral index.
+	 */
+	private int getMineralIndex(Section section) {
+		return Integer.parseInt(section.get(MINERAL_INDEX_KEY));
 	}
 	
 	

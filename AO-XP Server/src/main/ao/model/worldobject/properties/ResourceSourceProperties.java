@@ -18,34 +18,33 @@
 
 package ao.model.worldobject.properties;
 
-import ao.model.worldobject.WoodType;
 import ao.model.worldobject.WorldObjectType;
 
 /**
- * Defines a WorldObject's properties. Allows a lightweight pattern implementation.
+ * Defines a ResourceSourceProperties properties. Allows a lightweight pattern implementation.
  */
-public class TreeProperties extends WorldObjectProperties {
+public class ResourceSourceProperties extends WorldObjectProperties {
 
-	protected WoodType woodType;
+	protected int resourceWorldObjctId;
 	
 	/**
-	 * Creates a new WorldObjectProperties instance.
+	 * Creates a new ResourceSourceProperties instance.
 	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
-	 * @param woodType The type of wood produced by the tree.
+	 * @param resourceWorldObjctId The id of the world object being produced by this resources source.
 	 */
-	public TreeProperties(WorldObjectType type, int id, String name, int graphic, WoodType woodType) {
+	public ResourceSourceProperties(WorldObjectType type, int id, String name, int graphic, int resourceWorldObjctId) {
 		super(type, id, name, graphic);
 		
-		this.woodType = woodType;
+		this.resourceWorldObjctId = resourceWorldObjctId;
 	}
 
 	/**
-	 * @return the woodType
+	 * @return the resourceWorldObjctId
 	 */
-	public WoodType getWoodType() {
-		return woodType;
+	public int getResourceWorldObjctId() {
+		return resourceWorldObjctId;
 	}
 }

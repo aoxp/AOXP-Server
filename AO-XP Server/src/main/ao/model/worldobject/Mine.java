@@ -18,25 +18,18 @@
 
 package ao.model.worldobject;
 
-import org.junit.After;
-import org.junit.Before;
-
 import ao.model.worldobject.properties.ResourceSourceProperties;
 
-public class TreeTest extends AbstractResourceSourceTest {
+/**
+ * A mine. Does nothing, just sits around.
+ */
+public class Mine extends AbstractResourceSource {
 
-	private Tree tree1;
-	
-	@Before
-	public void setUp() throws Exception {
-		ResourceSourceProperties props1 = new ResourceSourceProperties(WorldObjectType.TREE, 1, "Elven Tree", 1, 5);
-		tree1 = new Tree(props1);
-		
-		object = tree1;
-		objectProps = props1;
-	}
-
-	@After
-	public void tearDown() throws Exception {
+	/**
+	 * Creates a new Mine instance.
+	 * @param properties The object's properties.
+	 */
+	public Mine(ResourceSourceProperties properties) {
+		super(properties);
 	}
 }

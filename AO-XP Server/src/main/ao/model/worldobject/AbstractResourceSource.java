@@ -18,25 +18,26 @@
 
 package ao.model.worldobject;
 
-import org.junit.After;
-import org.junit.Before;
-
 import ao.model.worldobject.properties.ResourceSourceProperties;
 
-public class TreeTest extends AbstractResourceSourceTest {
+/**
+ * An AbstractResourceSource. Does nothing, just sits around.
+ */
+public abstract class AbstractResourceSource extends AbstractWorldObject {
 
-	private Tree tree1;
-	
-	@Before
-	public void setUp() throws Exception {
-		ResourceSourceProperties props1 = new ResourceSourceProperties(WorldObjectType.TREE, 1, "Elven Tree", 1, 5);
-		tree1 = new Tree(props1);
-		
-		object = tree1;
-		objectProps = props1;
+	/**
+	 * Creates a new AbstractResourceSource instance.
+	 * @param properties The object's properties.
+	 */
+	public AbstractResourceSource(ResourceSourceProperties properties) {
+		super(properties);
 	}
-
-	@After
-	public void tearDown() throws Exception {
+	
+	/**
+	 * Retrieves the id of the produced resource's world object.
+	 * @return The id of the produced resource's world object.
+	 */
+	public int getResourceWorldObjctId() {
+		return ((ResourceSourceProperties) properties).getResourceWorldObjctId();
 	}
 }

@@ -50,5 +50,6 @@ public enum WorldObjectType {
 	PARCHMENT,
 	MONEY,
 	TREE,
-	WOOD
+	WOOD,
+	MINE
 }

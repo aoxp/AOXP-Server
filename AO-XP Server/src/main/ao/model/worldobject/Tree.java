@@ -18,26 +18,18 @@
 
 package ao.model.worldobject;
 
-import ao.model.worldobject.properties.TreeProperties;
+import ao.model.worldobject.properties.ResourceSourceProperties;
 
 /**
  * A tree. Does nothing, just sits around.
  */
-public class Tree extends AbstractWorldObject {
+public class Tree extends AbstractResourceSource {
 
 	/**
 	 * Creates a new Tree instance.
 	 * @param properties The object's properties.
 	 */
-	public Tree(TreeProperties properties) {
+	public Tree(ResourceSourceProperties properties) {
 		super(properties);
-	}
-	
-	/**
-	 * Retrieves the type of wood produced by this tree.
-	 * @return The type of wood produced by this tree.
-	 */
-	public WoodType getWoodType() {
-		return ((TreeProperties) properties).getWoodType();
 	}
 }
