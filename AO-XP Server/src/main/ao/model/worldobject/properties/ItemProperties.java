@@ -37,6 +37,10 @@ public class ItemProperties extends WorldObjectProperties {
 	protected List<UserArchetype> forbiddenArchetypes;
 	protected List<Race> forbiddenRaces;
 	
+	protected boolean noLog;
+	protected boolean falls;
+	protected boolean respawnable;
+	
 	/**
 	 * Creates a new ItemProperties instance.
 	 * @param type The type of the item.
@@ -53,7 +57,9 @@ public class ItemProperties extends WorldObjectProperties {
 	public ItemProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
 			int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie) {
+			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie, 
+			boolean noLog, boolean falls, boolean respawnable) {
+		
 		super(type, id, name, graphic);
 		
 		this.tradeable = tradeable;
@@ -62,6 +68,9 @@ public class ItemProperties extends WorldObjectProperties {
 		this.forbiddenArchetypes = forbiddenArchetypes;
 		this.forbiddenRaces = forbiddenRaces;
 		this.newbie = newbie;
+		this.noLog = noLog;
+		this.falls = falls;
+		this.respawnable = respawnable;
 	}
 
 	/**
@@ -104,5 +113,24 @@ public class ItemProperties extends WorldObjectProperties {
 	 */
 	public List<Race> getForbiddenRaces() {
 		return forbiddenRaces;
+	}
+	
+	/**
+	 * @return the noLog.
+	 */
+	public boolean isNoLog() {
+		return noLog;
+	}
+	/**
+	 * @return the falls.
+	 */
+	public boolean isFalls() {
+		return falls;
+	}
+	/**
+	 * @return the respawn.
+	 */
+	public boolean isRespawnable() {
+		return respawnable;
 	}
 }

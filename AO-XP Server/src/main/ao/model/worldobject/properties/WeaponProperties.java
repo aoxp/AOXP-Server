@@ -58,8 +58,9 @@ public class WeaponProperties extends EquippableItemProperties {
 			boolean tradeable, int value,
 			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
+			boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, boolean stabs, int piercingDamage, int minHit, int maxHit) {
-		super(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic);
+		super(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 
 		this.stabs = stabs;
 		this.piercingDamage = piercingDamage;

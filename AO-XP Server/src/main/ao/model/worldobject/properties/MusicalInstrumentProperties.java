@@ -48,9 +48,10 @@ public class MusicalInstrumentProperties extends EquippableItemProperties {
 	public MusicalInstrumentProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
-			boolean newbie, int equippedGraphic, List<Integer> sounds) {
+			boolean newbie, boolean noLog, boolean falls, boolean respawnable, 
+			int equippedGraphic, List<Integer> sounds) {
 		super(type, id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic);
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 		
 		this.sounds = sounds;
 	}

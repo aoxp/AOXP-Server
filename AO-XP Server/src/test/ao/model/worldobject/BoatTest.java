@@ -47,10 +47,10 @@ public class BoatTest extends AbstractDefensiveItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		BoatProperties props1 = new BoatProperties(WorldObjectType.BOAT, 1, "Small Boat", 1, true, 1, USAGE_DIFFICULTY, 0, null, null, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
+		BoatProperties props1 = new BoatProperties(WorldObjectType.BOAT, 1, "Small Boat", 1, true, 1, USAGE_DIFFICULTY, 0, null, null, false, false, false, false, 1, MIN_DEF, MAX_DEF, MIN_MAGIC_DEF, MAX_MAGIC_DEF, MIN_HIT, MAX_HIT);
 		boat1 = new Boat(props1, 5);
 		
-		BoatProperties props2 = new BoatProperties(WorldObjectType.BOAT, 1, "Small Boat", 1, true, 1, USAGE_DIFFICULTY, 0, null, null, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
+		BoatProperties props2 = new BoatProperties(WorldObjectType.BOAT, 1, "Small Boat", 1, true, 1, USAGE_DIFFICULTY, 0, null, null, false, false, false, false, 1, MAX_DEF, MAX_DEF, MAX_MAGIC_DEF, MAX_MAGIC_DEF, MAX_HIT, MAX_HIT);
 		boat2 = new Boat(props2, 1);
 		
 		object = boat1;

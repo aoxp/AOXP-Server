@@ -35,7 +35,7 @@ public class GoldTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props = new ItemProperties(WorldObjectType.MONEY, 13, "Monedas de oro", 1, true, 1, 1, null, null, false);
+		ItemProperties props = new ItemProperties(WorldObjectType.MONEY, 13, "Monedas de oro", 1, true, 1, 1, null, null, false, true, true, true);
 		gold1 = new Gold(props, 1000);
 		gold2 = new Gold(props, 2000);
 		

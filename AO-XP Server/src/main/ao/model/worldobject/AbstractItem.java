@@ -155,4 +155,28 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 	 */
 	@Override
 	public abstract Item clone();
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.Item#isFalls()
+	 */
+	public boolean isFalls() {
+		return ((ItemProperties) properties).isFalls();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.Item#isNoLog()
+	 */
+	public boolean isNoLog() {
+		return ((ItemProperties) properties).isNoLog();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see ao.model.worldobject.Item#isRespawnable()
+	 */
+	public boolean isRespawnable() {
+		return ((ItemProperties) properties).isRespawnable();
+	}
 }

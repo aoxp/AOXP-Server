@@ -54,10 +54,11 @@ public class StaffProperties extends WeaponProperties {
 	public StaffProperties(WorldObjectType type, int id, String name, int graphic, boolean tradeable,
 			int value, int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
+			boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, boolean stabs, int piercingDamage,
 			int minHit, int maxHit, int magicPower, int damageBonus) {
 		super(type, id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, 
 				equippedGraphic, stabs, piercingDamage, minHit, maxHit);
 		
 		this.damageBonus = damageBonus;

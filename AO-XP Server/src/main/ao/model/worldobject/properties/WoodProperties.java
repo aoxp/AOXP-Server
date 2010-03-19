@@ -49,9 +49,10 @@ public class WoodProperties extends ItemProperties {
 	public WoodProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value, int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
-			boolean newbie, WoodType woodType) {
+			boolean newbie, boolean noLog, boolean falls, boolean respawnable, 
+			WoodType woodType) {
 		super(type, id, name, graphic, tradeable, value, manufactureDifficulty,
-				forbiddenArchetypes, forbiddenRaces, newbie);
+				forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable);
 		
 		this.woodType = woodType;
 	}

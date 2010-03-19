@@ -52,9 +52,10 @@ public class AmmunitionProperties extends EquippableItemProperties {
 	public AmmunitionProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
-			boolean newbie, int equippedGraphic, int minHit, int maxHit) {
+			boolean newbie, boolean noLog, boolean falls, boolean respawnable, 
+			int equippedGraphic, int minHit, int maxHit) {
 		super(type, id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic);
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 		
 		this.maxHit = maxHit;
 		this.minHit = minHit;

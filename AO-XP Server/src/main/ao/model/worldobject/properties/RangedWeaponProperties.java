@@ -52,10 +52,10 @@ public class RangedWeaponProperties extends WeaponProperties {
 	public RangedWeaponProperties(WorldObjectType type, int id, String name, int graphic,
 			boolean tradeable, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
-			boolean newbie, int equippedGraphic, boolean stabs,
+			boolean newbie, boolean noLog, boolean falls, boolean respawnable, int equippedGraphic, boolean stabs,
 			int piercingDamage, int minHit, int maxHit, boolean needsAmmunition) {
 		super(type, id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic,
 				stabs, piercingDamage, minHit, maxHit);
 		
 		this.needsAmmunition = needsAmmunition;

@@ -36,10 +36,10 @@ public class StaffTest extends WeaponTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		StaffProperties props1 = new StaffProperties(WorldObjectType.WEAPON, 1, "Walnut Rod", 1, true, 1, 0, null, null, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT, MAGIC_POWER, DAMAGE_BONUS);
+		StaffProperties props1 = new StaffProperties(WorldObjectType.WEAPON, 1, "Walnut Rod", 1, true, 1, 0, null, null, false, false, false, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT, MAGIC_POWER, DAMAGE_BONUS);
 		weapon1 = new Staff(props1, 5);
 		
-		StaffProperties props2 = new StaffProperties(WorldObjectType.WEAPON, 1, "Plum Rod", 1, true, 1, 0, null, null, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT, MAGIC_POWER, DAMAGE_BONUS);
+		StaffProperties props2 = new StaffProperties(WorldObjectType.WEAPON, 1, "Plum Rod", 1, true, 1, 0, null, null, false, false, false, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT, MAGIC_POWER, DAMAGE_BONUS);
 		weapon2 = new Staff(props2, 1);
 		
 		object = weapon1;

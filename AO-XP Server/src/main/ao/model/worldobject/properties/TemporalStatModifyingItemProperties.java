@@ -51,10 +51,11 @@ public class TemporalStatModifyingItemProperties extends
 	public TemporalStatModifyingItemProperties(WorldObjectType type, int id,
 			String name, int graphic, boolean tradeable, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			List<Race> forbiddenRaces, boolean newbie, int minModifier,
-			int maxModifier, int effectTime) {
+			List<Race> forbiddenRaces, boolean newbie,
+			boolean noLog, boolean falls, boolean respawnable, 
+			int minModifier, int maxModifier, int effectTime) {
 		super(type, id, name, graphic, tradeable, value, manufactureDifficulty,
-				forbiddenArchetypes, forbiddenRaces, newbie, minModifier, maxModifier);
+				forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, minModifier, maxModifier);
 		
 		this.effectTime = effectTime;
 	}

@@ -31,9 +31,11 @@ public class KeyProperties extends ItemProperties {
 	public KeyProperties(WorldObjectType type, int id, String name,
 			int graphic, boolean tradeable, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
-			List<Race> forbiddenRaces, boolean newbie, int code) {
+			List<Race> forbiddenRaces, boolean newbie,
+			boolean noLog, boolean falls, boolean respawnable, 
+			int code) {
 		super(type, id, name, graphic, tradeable, value, manufactureDifficulty,
-				forbiddenArchetypes, forbiddenRaces, newbie);
+				forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable);
 		
 		this.code = code;
 	}

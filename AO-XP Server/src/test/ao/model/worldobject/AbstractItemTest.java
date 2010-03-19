@@ -86,4 +86,23 @@ public abstract class AbstractItemTest extends AbstractWorldObjectTest {
 		AbstractItem item = (AbstractItem) object;
 		assertTrue(item.canBeStolen());
 	}
+	
+	@Test
+	public void testIsNoLog() {
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.isNoLog(), item.isNoLog());		
+	}
+	public void testIsFalls() {
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.isFalls(), item.isFalls());
+	}
+	
+	@Test
+	public void testIsRespawneable() {
+		AbstractItem item = (AbstractItem) object;
+		ItemProperties itemProps = (ItemProperties) objectProps;
+		assertEquals(itemProps.isRespawnable(), item.isRespawnable());		
+	}
 }

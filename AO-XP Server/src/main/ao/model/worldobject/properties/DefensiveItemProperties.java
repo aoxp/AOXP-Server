@@ -56,8 +56,9 @@ public class DefensiveItemProperties extends EquippableItemProperties {
 			boolean tradeable, int value,
 			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
+			boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, int minDef, int maxDef, int minMagicDef, int maxMagicDef) {
-		super(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic);
+		super(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 
 		this.minDef = minDef;
 		this.maxDef = maxDef;

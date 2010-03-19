@@ -57,10 +57,11 @@ public class BoatProperties extends DefensiveItemProperties {
 	public BoatProperties(WorldObjectType type, int id, String name, int graphic, boolean tradeable,
 			int value, int usageDifficulty, int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
+			boolean noLog, boolean falls, boolean respawnable,
 			int equippedGraphic, int minDef, int maxDef, int minMagicDef,
 			int maxMagicDef, int minHit, int maxHit) {
 		super(type, id, name, graphic, tradeable, value,
-				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, equippedGraphic,
+				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic,
 				minDef, maxDef, minMagicDef, maxMagicDef);
 		
 		this.minHit = minHit;
