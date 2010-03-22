@@ -37,10 +37,10 @@ public class EmptyBottleTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props1 = new ItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, true, 1, 0, null, null, false, false, false, false);
+		ItemProperties props1 = new ItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, 1, 0, null, null, false, false, false, false);
 		bottle1 = new EmptyBottle(props1, 1);
 		
-		ItemProperties props2 = new ItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, true, 1, 0, null, null, false, false, false, false);
+		ItemProperties props2 = new ItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, 1, 0, null, null, false, false, false, false);
 		bottle2 = new EmptyBottle(props2, 1);
 		
 		object = bottle2;

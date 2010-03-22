@@ -48,11 +48,10 @@ public class StatModifyingItemProperties extends ItemProperties {
 	 * @param maxModifier The maximum amount by which the stats is to be modified.
 	 */
 	public StatModifyingItemProperties(WorldObjectType type, int id, String name, int graphic,
-			boolean tradeable, int value,
-			int manufactureDifficulty,
+			int value,	int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			boolean noLog, boolean falls, boolean respawnable, int minModifier, int maxModifier) {
-		super(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable);
+		super(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable);
 		
 		this.minModifier = minModifier;
 		this.maxModifier = maxModifier;

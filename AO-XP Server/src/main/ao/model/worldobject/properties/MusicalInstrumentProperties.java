@@ -46,11 +46,11 @@ public class MusicalInstrumentProperties extends EquippableItemProperties {
 	 * @param sounds The possible sounds to be reproduced by this isntrument.
 	 */
 	public MusicalInstrumentProperties(WorldObjectType type, int id, String name, int graphic,
-			boolean tradeable, int value,
+			int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
 			boolean newbie, boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, List<Integer> sounds) {
-		super(type, id, name, graphic, tradeable, value,
+		super(type, id, name, graphic, value,
 				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 		
 		this.sounds = sounds;

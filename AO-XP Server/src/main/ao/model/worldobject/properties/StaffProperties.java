@@ -38,7 +38,6 @@ public class StaffProperties extends WeaponProperties {
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
-	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
@@ -51,13 +50,13 @@ public class StaffProperties extends WeaponProperties {
 	 * @param magicPower The magic power of the staff.
 	 * @param damageBonus The attack bonus of the item.
 	 */
-	public StaffProperties(WorldObjectType type, int id, String name, int graphic, boolean tradeable,
+	public StaffProperties(WorldObjectType type, int id, String name, int graphic,
 			int value, int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, boolean stabs, int piercingDamage,
 			int minHit, int maxHit, int magicPower, int damageBonus) {
-		super(type, id, name, graphic, tradeable, value,
+		super(type, id, name, graphic, value,
 				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, 
 				equippedGraphic, stabs, piercingDamage, minHit, maxHit);
 		

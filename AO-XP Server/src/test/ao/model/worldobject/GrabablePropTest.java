@@ -36,10 +36,10 @@ public class GrabablePropTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props1 = new ItemProperties(WorldObjectType.GRABABLE_PROP, 1, "Black Potion", 1, true, 1, 0, null, null, false, true, false, true);
+		ItemProperties props1 = new ItemProperties(WorldObjectType.GRABABLE_PROP, 1, "Black Potion", 1, 1, 0, null, null, false, true, false, true);
 		prop1 = new GrabableProp(props1, 5);
 		
-		ItemProperties props2 = new ItemProperties(WorldObjectType.GRABABLE_PROP, 1, "Black Potion", 1, true, 1, 0, null, null, false, false, false, true);
+		ItemProperties props2 = new ItemProperties(WorldObjectType.GRABABLE_PROP, 1, "Black Potion", 1, 1, 0, null, null, false, false, false, true);
 		prop2 = new GrabableProp(props2, 1);
 		
 		object = prop2;

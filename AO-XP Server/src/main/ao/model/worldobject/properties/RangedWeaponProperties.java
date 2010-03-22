@@ -50,11 +50,11 @@ public class RangedWeaponProperties extends WeaponProperties {
 	 * @param needsAmmunition True if the weapon needs ammunition, false of it's a throwable weapon.
 	 */
 	public RangedWeaponProperties(WorldObjectType type, int id, String name, int graphic,
-			boolean tradeable, int value,
+			int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
 			boolean newbie, boolean noLog, boolean falls, boolean respawnable, int equippedGraphic, boolean stabs,
 			int piercingDamage, int minHit, int maxHit, boolean needsAmmunition) {
-		super(type, id, name, graphic, tradeable, value,
+		super(type, id, name, graphic, value,
 				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic,
 				stabs, piercingDamage, minHit, maxHit);
 		

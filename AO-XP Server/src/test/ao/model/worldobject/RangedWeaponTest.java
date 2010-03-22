@@ -39,10 +39,10 @@ public class RangedWeaponTest extends AbstractEquipableItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		RangedWeaponProperties props1 = new RangedWeaponProperties(WorldObjectType.WEAPON, 1, "Throw Knifes", 1, true, 1, 0, null, null, false, false, false, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT, false);
+		RangedWeaponProperties props1 = new RangedWeaponProperties(WorldObjectType.WEAPON, 1, "Throw Knifes", 1, 1, 0, null, null, false, false, false, false, 1, true, PIERCING_DAMAGE, MIN_HIT, MAX_HIT, false);
 		weapon1 = new RangedWeapon(props1, 5);
 		
-		RangedWeaponProperties props2 = new RangedWeaponProperties(WorldObjectType.WEAPON, 1, "Crossbow", 1, true, 1, 0, null, null, false, false, false, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT, true);
+		RangedWeaponProperties props2 = new RangedWeaponProperties(WorldObjectType.WEAPON, 1, "Crossbow", 1, 1, 0, null, null, false, false, false, false, 1, false, PIERCING_DAMAGE, MAX_HIT, MAX_HIT, true);
 		weapon2 = new RangedWeapon(props2, 1);
 		
 		object = weapon1;

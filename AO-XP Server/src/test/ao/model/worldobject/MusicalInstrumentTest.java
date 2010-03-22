@@ -53,10 +53,10 @@ public class MusicalInstrumentTest extends AbstractItemTest {
 		sounds2 = new LinkedList<Integer>();
 		sounds2.add(2);
 		
-		MusicalInstrumentProperties props1 = new MusicalInstrumentProperties(WorldObjectType.MUSICAL_INSTRUMENT, 1, "Horn", 1, true, 1, 0, null, null, false, false, false, false, 1, sounds1);
+		MusicalInstrumentProperties props1 = new MusicalInstrumentProperties(WorldObjectType.MUSICAL_INSTRUMENT, 1, "Horn", 1, 1, 0, null, null, false, false, false, false, 1, sounds1);
 		instrument1 = new MusicalInstrument(props1, 5);
 		
-		MusicalInstrumentProperties props2 = new MusicalInstrumentProperties(WorldObjectType.MUSICAL_INSTRUMENT, 1, "Drum", 1, true, 1, 0, null, null, false, false, false, false, 1, sounds2);
+		MusicalInstrumentProperties props2 = new MusicalInstrumentProperties(WorldObjectType.MUSICAL_INSTRUMENT, 1, "Drum", 1, 1, 0, null, null, false, false, false, false, 1, sounds2);
 		instrument2 = new MusicalInstrument(props2, 1);
 		
 		object = instrument1;

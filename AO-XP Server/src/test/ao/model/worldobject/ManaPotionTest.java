@@ -40,10 +40,10 @@ public class ManaPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		StatModifyingItemProperties props1 = new StatModifyingItemProperties(WorldObjectType.MANA_POTION, 1, "Blue Potion", 1, true, 1, 0, null, null, false, false, false, false, MIN_MANA, MAX_MANA);
+		StatModifyingItemProperties props1 = new StatModifyingItemProperties(WorldObjectType.MANA_POTION, 1, "Blue Potion", 1, 1, 0, null, null, false, false, false, false, MIN_MANA, MAX_MANA);
 		potion1 = new ManaPotion(props1, 5);
 		
-		StatModifyingItemProperties props2 = new StatModifyingItemProperties(WorldObjectType.MANA_POTION, 1, "Big Blue Potion", 1, true, 1, 0, null, null, false, false, false, false, MAX_MANA, MAX_MANA);
+		StatModifyingItemProperties props2 = new StatModifyingItemProperties(WorldObjectType.MANA_POTION, 1, "Big Blue Potion", 1, 1, 0, null, null, false, false, false, false, MAX_MANA, MAX_MANA);
 		potion2 = new ManaPotion(props2, 1);
 		
 		object = potion2;

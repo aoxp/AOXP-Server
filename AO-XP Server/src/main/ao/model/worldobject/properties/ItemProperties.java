@@ -29,7 +29,6 @@ import ao.model.worldobject.WorldObjectType;
  */
 public class ItemProperties extends WorldObjectProperties {
 
-	protected boolean tradeable;
 	protected int value;
 	protected int manufactureDifficulty;
 	protected boolean newbie;
@@ -55,14 +54,13 @@ public class ItemProperties extends WorldObjectProperties {
 	 * @param newbie Whether the item is newbie or not.
 	 */
 	public ItemProperties(WorldObjectType type, int id, String name, int graphic,
-			boolean tradeable, int value,
+			int value,
 			int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie, 
 			boolean noLog, boolean falls, boolean respawnable) {
 		
 		super(type, id, name, graphic);
 		
-		this.tradeable = tradeable;
 		this.value = value;
 		this.manufactureDifficulty = manufactureDifficulty;
 		this.forbiddenArchetypes = forbiddenArchetypes;
@@ -71,13 +69,6 @@ public class ItemProperties extends WorldObjectProperties {
 		this.noLog = noLog;
 		this.falls = falls;
 		this.respawnable = respawnable;
-	}
-
-	/**
-	 * @return the tradeable
-	 */
-	public boolean isTradeable() {
-		return tradeable;
 	}
 
 	/**

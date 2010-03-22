@@ -124,15 +124,6 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 
 	/*
 	 * (non-Javadoc)
-	 * @see ao.model.worldobject.Item#isTradeable()
-	 */
-	@Override
-	public boolean isTradeable() {
-		return ((ItemProperties) properties).isTradeable();
-	}
-	
-	/*
-	 * (non-Javadoc)
 	 * @see ao.model.worldobject.Item#isNewbie()
 	 */
 	@Override

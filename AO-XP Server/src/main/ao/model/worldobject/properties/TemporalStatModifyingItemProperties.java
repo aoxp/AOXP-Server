@@ -49,12 +49,12 @@ public class TemporalStatModifyingItemProperties extends
 	 * @param effectTime The time for which the effect is valid.
 	 */
 	public TemporalStatModifyingItemProperties(WorldObjectType type, int id,
-			String name, int graphic, boolean tradeable, int value,
+			String name, int graphic, int value,
 			int manufactureDifficulty, List<UserArchetype> forbiddenArchetypes,
 			List<Race> forbiddenRaces, boolean newbie,
 			boolean noLog, boolean falls, boolean respawnable, 
 			int minModifier, int maxModifier, int effectTime) {
-		super(type, id, name, graphic, tradeable, value, manufactureDifficulty,
+		super(type, id, name, graphic, value, manufactureDifficulty,
 				forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, minModifier, maxModifier);
 		
 		this.effectTime = effectTime;

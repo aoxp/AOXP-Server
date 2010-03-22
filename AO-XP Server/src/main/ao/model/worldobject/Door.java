@@ -25,7 +25,6 @@ public class Door extends AbstractWorldObject {
 
 	public Door(WorldObjectProperties properties) {
 		super(properties);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -50,24 +49,17 @@ public class Door extends AbstractWorldObject {
 	}
 	
 	/**
-	 * @return the openId.
+	 * @return the openGraphic.
 	 */
-	public int getOpenId() {
-		return ((DoorProperties) properties).getOpenId();
+	public int getOpenGrh() {
+		return ((DoorProperties) properties).getOpenGrh();
 	}
 	
 	/**
-	 * @return the closedId.
+	 * @return the closedGraphic
 	 */
-	public int getClosedId() {
-		return ((DoorProperties) properties).getClosedId();
-	}
-	
-	/**
-	 * @return the lockedId.
-	 */
-	public int getLockedId() {
-		return ((DoorProperties) properties).getLockedId();
+	public int getClosedGrh() {
+		return ((DoorProperties) properties).getClosedGrh();
 	}
 	
 }

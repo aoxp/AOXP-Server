@@ -25,21 +25,19 @@ public class DoorProperties extends WorldObjectProperties {
 	protected boolean open;
 	protected boolean locked;
 	protected int code;
-	protected int openId;
-	protected int closedId;
-	protected int lockedId;
+	protected int openGrh;
+	protected int closedGrh;
 	
 	public DoorProperties(WorldObjectType type, int id, String name, int graphic, 
 			boolean open, boolean locked, int code, 
-			int openId, int closedId, int lockedId ) {
+			int openGrh, int closedGrh) {
 		super(type, id, name, graphic);
 		
 		this.open = open;
 		this.locked = locked;
 		this.code = code;
-		this.openId = openId;
-		this.closedId = closedId;
-		this.lockedId = lockedId;
+		this.openGrh = openGrh;
+		this.closedGrh = closedGrh;
 	}
 
 	/**
@@ -66,22 +64,15 @@ public class DoorProperties extends WorldObjectProperties {
 	/**
 	 * @return the openId.
 	 */
-	public int getOpenId() {
-		return openId;
+	public int getOpenGrh() {
+		return openGrh;
 	}
 	
 	/**
 	 * @return the closedId.
 	 */
-	public int getClosedId() {
-		return closedId;
-	}
-	
-	/**
-	 * @return the lockedId.
-	 */
-	public int getLockedId() {
-		return lockedId;
+	public int getClosedGrh() {
+		return closedGrh;
 	}
 	
 }

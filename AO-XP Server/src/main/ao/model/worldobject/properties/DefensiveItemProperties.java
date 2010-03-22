@@ -53,12 +53,11 @@ public class DefensiveItemProperties extends EquippableItemProperties {
 	 * @param maxMagicDef The maximum magic defense granted by this item.
 	 */
 	public DefensiveItemProperties(WorldObjectType type, int id, String name, int graphic,
-			boolean tradeable, int value,
-			int manufactureDifficulty,
+			int value,	int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, int minDef, int maxDef, int minMagicDef, int maxMagicDef) {
-		super(type, id, name, graphic, tradeable, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
+		super(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 
 		this.minDef = minDef;
 		this.maxDef = maxDef;

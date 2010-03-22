@@ -31,16 +31,15 @@ public class DoorTest extends AbstractWorldObjectTest {
 	private static final boolean OPEN = true;
 	private static final boolean LOCKED = false;
 	private static final int CODE = 123;
-	private static final int OPEN_ID = 50;
-	private static final int CLOSED_ID = 51;
-	private static final int LOCKED_ID = 52;
+	private static final int OPEN_GRH = 50;
+	private static final int CLOSED_GRH = 51;
 	
 	private Door door1;
 	
 	@Before
 	public void setUp() throws Exception {
 		DoorProperties props1 = new DoorProperties(WorldObjectType.DOOR, 1, "Puerta abierta", 1,
-				OPEN, LOCKED, CODE, OPEN_ID, CLOSED_ID, LOCKED_ID);
+				OPEN, LOCKED, CODE, OPEN_GRH, CLOSED_GRH);
 		door1 = new Door(props1);
 		
 		object = door1;
@@ -63,18 +62,13 @@ public class DoorTest extends AbstractWorldObjectTest {
 	}
 	
 	@Test
-	public void testGetOpenId() {
-		assertEquals(OPEN_ID, door1.getOpenId());
+	public void testGetOpenGrh() {
+		assertEquals(OPEN_GRH, door1.getOpenGrh());
 	}
 	
 	@Test
-	public void testGetClosedId() {
-		assertEquals(CLOSED_ID, door1.getClosedId());
-	}
-	
-	@Test
-	public void testGetLockedId() {
-		assertEquals(LOCKED_ID, door1.getLockedId());
+	public void testGetClosedGrh() {
+		assertEquals(CLOSED_GRH, door1.getClosedGrh());
 	}
 	
 }

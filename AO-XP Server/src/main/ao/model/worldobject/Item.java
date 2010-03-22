@@ -68,12 +68,6 @@ public interface Item extends WorldObject, Cloneable {
 	Item clone();
 	
 	/**
-	 * Check if the item is tradeable
-	 * @return True if the item is tradeable, false otherwise
-	 */
-	boolean isTradeable();
-	
-	/**
 	 * Retrieves the item's value
 	 * @return The item's value.
 	 */

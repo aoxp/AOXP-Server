@@ -40,7 +40,6 @@ public class BoatProperties extends DefensiveItemProperties {
 	 * @param id The id of the item.
 	 * @param name The name of the item.
 	 * @param graphic The graphic for the item.
-	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
 	 * @param usageDifficulty The item's usage difficulty.
 	 * @param manufactureDifficulty The item's manufacture difficulty.
@@ -54,13 +53,12 @@ public class BoatProperties extends DefensiveItemProperties {
 	 * @param minHit The minimum hit granted by this boat.
 	 * @param maxHit The maximum hit granted by this boat.
 	 */
-	public BoatProperties(WorldObjectType type, int id, String name, int graphic, boolean tradeable,
-			int value, int usageDifficulty, int manufactureDifficulty,
+	public BoatProperties(WorldObjectType type, int id, String name, int graphic, int value, int usageDifficulty, int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			boolean noLog, boolean falls, boolean respawnable,
 			int equippedGraphic, int minDef, int maxDef, int minMagicDef,
 			int maxMagicDef, int minHit, int maxHit) {
-		super(type, id, name, graphic, tradeable, value,
+		super(type, id, name, graphic, value,
 				manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic,
 				minDef, maxDef, minMagicDef, maxMagicDef);
 		
