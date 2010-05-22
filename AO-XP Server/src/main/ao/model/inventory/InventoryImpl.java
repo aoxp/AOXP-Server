@@ -191,8 +191,9 @@ public class InventoryImpl implements Inventory {
 		Item itemRemoved = item.clone();
 		int left = item.addAmount(-amount);
 		
-		if (left == 0){
+		if (left <= 0){
 			inventory[slot] = null;
+			left = 0;
 		}
 		
 		itemRemoved.addAmount(-left);
