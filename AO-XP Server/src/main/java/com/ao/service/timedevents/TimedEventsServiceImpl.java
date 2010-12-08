@@ -28,9 +28,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.ao.model.character.Character;
 import com.ao.service.TimedEventsService;
 
+/**
+ * Implementation of TimedEventService using a simple daemon Timer thread.
+ */
 public class TimedEventsServiceImpl implements TimedEventsService {
 
-	protected Map<Character, Map<TimedEvent, TimerTaskAdapter>> events = new ConcurrentHashMap<Character, Map<TimedEvent, TimerTaskAdapter>>();
+	protected ConcurrentHashMap<Character, Map<TimedEvent, TimerTaskAdapter>> events = new ConcurrentHashMap<Character, Map<TimedEvent, TimerTaskAdapter>>();
 	protected Timer timer = new Timer(true);
 	
 	/**
@@ -94,17 +97,11 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 	public void addEvent(Character chara, TimedEvent event, long delay, long interval, long repeatFor) {
 		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(chara);
 		
-		// If the character had no previous events, create his events container (this needs some synchronization).
+		// If the character had no previous events, create his events container.
 		if (characterEvents == null) {
-			synchronized (events) {
-				// In case another thread just created the Map (race condition against this method itself).
-				characterEvents = events.get(chara);
-				
-				if (characterEvents == null) {
-					characterEvents = new HashMap<TimedEvent, TimerTaskAdapter>();
-					events.put(chara, characterEvents);
-				}
-			}
+			// The putIfAbsent prevents further synchronization
+			events.putIfAbsent(chara, new HashMap<TimedEvent, TimerTaskAdapter>());
+			characterEvents = events.get(chara);
 		}
 		
 		TimerTaskAdapter adaptedEvent = new TimerTaskAdapter(event, interval, repeatFor);
@@ -152,6 +149,7 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 			return;
 		}
 		
+		// This is synchronized to prevent race conditions against addEvent and RemoveEvent
 		synchronized (characterEvents) {
 			Iterator<TimedEvent> it = characterEvents.keySet().iterator();
 			
@@ -172,12 +170,15 @@ public class TimedEventsServiceImpl implements TimedEventsService {
 		Map<TimedEvent, TimerTaskAdapter> characterEvents = events.get(event.getCharacter());
 		
 		if (characterEvents != null) {
+			TimerTaskAdapter task;
+			
+			// Prevent race condition against removeCharacterEvents
 			synchronized (characterEvents) {
-				TimerTaskAdapter task = characterEvents.remove(event);
-				
-				if (task != null) {
-					task.cancel();
-				}
+				task = characterEvents.remove(event);
+			}
+			
+			if (task != null) {
+				task.cancel();
 			}
 		}
 	}
