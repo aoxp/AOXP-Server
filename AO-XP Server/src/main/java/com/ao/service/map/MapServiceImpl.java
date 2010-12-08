@@ -36,6 +36,7 @@ import com.ao.model.map.Tile;
 import com.ao.model.map.Trigger;
 import com.ao.model.map.WorldMap;
 import com.ao.service.MapService;
+import com.ao.utils.RangeParser;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -60,9 +61,6 @@ public class MapServiceImpl implements MapService {
 	private static final byte BITFLAG_TILEEXIT = 1;
 	private static final byte BITFLAG_NPC = 2;
 	private static final byte BITFLAG_OBJECT = 4;
-	
-	private static final String CONFIG_VALUES_DELIMITER = ",";
-	private static final String CONFIG_RANGE_INDICATOR = "-";
 	
 	protected WorldMap[] maps;
 	private String mapsPath;
@@ -278,40 +276,7 @@ public class MapServiceImpl implements MapService {
 			throw new RuntimeException(e);
 		}
 		
-		waterGrhs.addAll(parseRanges(props.getProperty("maps.water")));
-		lavaGrhs.addAll(parseRanges(props.getProperty("maps.lava")));
+		waterGrhs.addAll(RangeParser.parseShorts(props.getProperty("maps.water")));
+		lavaGrhs.addAll(RangeParser.parseShorts(props.getProperty("maps.lava")));
 	}
-	
-	/**
-	 * Parses a comma-separated list of numbers and retrieves it.
-	 * The list also can contain numerical ranges indicated with dashes which also
-	 * separates the starting and ending number of the numerical range, both inclusive.
-	 * e.g:
-	 * The following string: "1,2,3-5,6-9,10" would produce the following return:
-	 * [1, 2, 3, 4, 5, 6, 7, 8, 9]
-	 * @param value The string value to be parsed.
-	 * @return The list of numbers extracted from the list.
-	 */
-	private List<Short> parseRanges(String value) {
-		String[] splittedValues = value.split(CONFIG_VALUES_DELIMITER);
-		List<Short> ret = new ArrayList<Short>();
-		
-		for(String val : splittedValues) {
-			if (val.contains(CONFIG_RANGE_INDICATOR)) {
-				String[] rangePoints = val.split(CONFIG_RANGE_INDICATOR);
-				short from = Short.valueOf(rangePoints[0]);
-				short to = Short.valueOf(rangePoints[1]);
-				
-				for (short i = from; i <= to; i++) {
-					ret.add(i);
-				}
-				
-			} else {
-				ret.add(Short.valueOf(val));
-			}
-		}
-		
-		return ret;
-	}
-	
 }
