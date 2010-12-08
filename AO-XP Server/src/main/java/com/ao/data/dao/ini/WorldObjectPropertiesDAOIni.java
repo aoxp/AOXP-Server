@@ -1178,13 +1178,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @return The object's hunger restored.
 	 */
 	private int getHunger(Section section) {
-		String data = section.get(HUNGER_KEY);
-		
-		if (data == null) {
-			return 0;
-		}
-		
-		return Integer.parseInt(data);
+		return Integer.parseInt(section.get(HUNGER_KEY));
 	}
 	
 	/**
