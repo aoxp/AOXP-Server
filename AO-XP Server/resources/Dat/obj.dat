@@ -1,59 +1,75 @@
-#<--------------------Tipo de objetos------------------->
-# 1: Comida
-# 2: Armas
-# 3: Armaduras
-# 4: Arboles
-# 5: Dinero
-# 6: Puertas
-# 7: Objetos contenedores (por ejemplo bolsas y cofres)
-# 8: Carteles
-# 9: Llaves
-# 10: Foros
-# 11: Pociones
-# 12: Libros
-# 13: Bebida
-# 14: Leña
-# 15: Fogata
-# 16: escudos
-# 17: cascos
-# 18: Anillos
-# 19: telep
-# 20: Muebles
-# 21: joyas
-# 22: yacimiento
-# 23: metales
-# 24: pergaminos
-# 25: aura
-# 26: Instrumentos Musicales
-# 27: Yunque
-# 28: Fragua
-# 29: Gemas
-# 30: Flores
-# 31: barcos
-# 32: flechas
-# 33: botellas vacias
-# 34: botellas llenas
-# 35: manchas
+##############################################
+#########TIPOS  DE OBJETOS (ObjType)##########
+##############################################
 
-#<--------------------Tipo de pociones------------------->
-#1 Modifica la Agilidad
-#2 Modifica la Fuerza
-#3 Repone HP
-#4 Repone Mana
-#5 Cura Envenenamiento
+' 1: Comida
+' 2: Armas
+' 3: Armaduras
+' 4: Arboles
+' 5: Dinero
+' 6: Puertas
+' 7: Objetos contenedores (x ej. bolsas y cofres)
+' 8: Carteles
+' 9: Llaves
+' 10: Foros
+' 11: Pociones
+' 12: Libros
+' 13: Bebida
+' 14: Leña
+' 15: Fogata
+' 16: escudos
+' 17: cascos
+' 18: Anillos
+' 19: telep
+' 20: Muebles
+' 21: joyas
+' 22: yacimiento
+' 23: metales
+' 24: pergaminos
+' 25: aura
+' 26: Instrumentos Musicales
+' 27: Yunque
+' 28: Fragua
+' 29: Gemas
+' 30: Flores
+' 31: barcos
+' 32: flechas
+' 33: botellas vacias
+' 34: botellas llenas
+' 35: manchas
 
 
-################################
-#numero de OBJs libres (cuando se pueda hay que utilizarlos)
-#491, 494, 498, 522, 550, 557, 612, 622, 854, 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 907.
-################################
+##############################################
+#############TIPOS  DE POCIONES###############
+##############################################
 
+'1 Modifica la Agilidad
+'2 Modifica la Fuerza
+'3 Repone HP
+'4 Repone Mana
+'5 Cura Envenenamiento
+
+
+##############################################
+#############NRO DE OBJS LIBRES###############
+##############################################
+
+'cuando se pueda hay que utilizarlos, intentando
+usar primero los nros más bajos.
+
+(Todos usados)
+
+
+##############################################
+##############################################
+##############################################
 
 
 [INIT]
-#aca va el numero de OBJ mas alto, NO la cantidad de OBJs.
-#esto sirve para que los GMS puedan ver la lista completa de items para crear en una ventanita.
-NumOBJs=987
+'aca va el numero de OBJ mas alto, NO la cantidad de OBJs.
+'esto sirve para que los GMS puedan ver la lista completa de items para crear en una ventanita.
+NumOBJs=1052
+
 
 
 
@@ -62,7 +78,7 @@ Name=Manzana Roja
 GrhIndex=506
 ObjType=1
 Agarrable=0
-MinHam=10
+MinHAM=10
 Valor=2
 Crucial=1
 
@@ -71,7 +87,8 @@ Name=Espada Larga
 GrhIndex=504
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=21
+RazaEnanaAnim=72
 MinHit=1
 MaxHit=8
 Valor=210
@@ -91,7 +108,7 @@ Name=Hacha
 GrhIndex=505
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=25
 MinHit=2
 MaxHit=6
 Valor=140
@@ -100,11 +117,8 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
+CP5=ASESINO
 CP6=CLERIGO
-CP7=ASESINO
-CP8=PESCADOR
-CP9=MINERO
 LingH=2
 LingP=0
 LingO=0
@@ -128,8 +142,7 @@ GrhIndex=7002
 ObjType=4
 Agarrable=1
 
-#Puerta para negocio porque no tiene clave
-[OBJ7]
+[OBJ7] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=5592
 ObjType=6
@@ -140,8 +153,7 @@ IndexAbierta=7
 IndexCerrada=8
 IndexCerradaLlave=8
 
-#Puerta para negocio porque no tiene clave
-[OBJ8]
+[OBJ8] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=5593
 ObjType=6
@@ -157,7 +169,7 @@ Name=Horquilla
 GrhIndex=508
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=26
 MinHit=1
 MaxHit=2
 Valor=70
@@ -166,12 +178,8 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
+CP5=ASESINO
 CP6=CLERIGO
-CP7=ASESINO
-CP8=PESCADOR
-CP9=MINERO
-CP10=LEÑADOR
 LingH=1
 LingP=0
 LingO=0
@@ -225,6 +233,7 @@ GrhIndex=510
 ObjType=2
 Agarrable=0
 Anim=12
+RazaEnanaAnim=48
 MinHit=1
 MaxHit=2
 Apuñala=1
@@ -233,10 +242,10 @@ Crucial=1
 LingH=2
 LingP=0
 LingO=0
+Upgrade=165
 SkHerreria=10
 
-#CASA RUINAS
-[OBJ16]
+[OBJ16] 'CASA RUINAS
 Name=Puerta de madera abierta 2
 GrhIndex=5599
 ObjType=6
@@ -247,8 +256,7 @@ IndexAbierta=16
 IndexCerrada=17
 IndexCerradaLlave=17
 
-#CASA RUINAS
-[OBJ17]
+[OBJ17] 'CASA RUINAS
 Name=Puerta de madera cerrada 2
 GrhIndex=5600
 ObjType=6
@@ -269,10 +277,11 @@ Texto=¡La mejor comida, al mejor precio!
 
 [OBJ19]
 Name=Espada Dos Manos
-GrhIndex=504
+GrhIndex=5748
 ObjType=2
 Agarrable=0
 Anim=1
+RazaEnanaAnim=66
 MinHit=4
 MaxHit=9
 Valor=1120
@@ -281,12 +290,8 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
+CP5=ASESINO
 CP6=CLERIGO
-CP7=ASESINO
-CP8=PESCADOR
-CP9=MINERO
-CP10=LEÑADOR
 LingH=16
 LingP=0
 LingO=0
@@ -392,7 +397,6 @@ MinDef=10
 Valor=4600
 Crucial=1
 CP1=MAGO
-CP2=PIRATA
 
 [OBJ31]
 Name=Vestimentas Comunes
@@ -448,8 +452,8 @@ GrhIndex=540
 ObjType=11
 Agarrable=0
 TipoPocion=1
-MaxModificador=10
-MinModificador=1
+MaxModificador=5
+MinModificador=3
 DuracionEfecto=1000
 Valor=120
 Crucial=1
@@ -482,10 +486,10 @@ GrhIndex=543
 ObjType=11
 Agarrable=0
 TipoPocion=2
-MaxModificador=5
-MinModificador=1
+MaxModificador=6
+MinModificador=2
 DuracionEfecto=1000
-Valor=250
+Valor=180
 Crucial=1
 
 [OBJ40]
@@ -541,45 +545,40 @@ MinDef=0
 Valor=80
 Crucial=1
 
-#Nieve 1
-[OBJ46]
+[OBJ46]'Nieve 1
 Name=Árbol
 GrhIndex=641
 ObjType=4
 Agarrable=1
 
-#Nieve 2
-[OBJ47]
+[OBJ47]'Nieve 2
 Name=Árbol
 GrhIndex=642
 ObjType=4
 Agarrable=1
 
-#Nieve 3
-[OBJ48]
+[OBJ48]'Nieve 3
 Name=Árbol
 GrhIndex=641
 ObjType=4
 Agarrable=1
 
-#Nieve 4
-[OBJ49]
+[OBJ49]'Nieve 4
 Name=Árbol
 GrhIndex=644
 ObjType=4
 Agarrable=1
 
-#Nieve 5
-[OBJ50]
+[OBJ50]'Nieve 5
 Name=Árbol
 GrhIndex=647
 ObjType=4
 Agarrable=1
 
 
-#<--------------------------------CASAS ULLA-------------------------------->
+'<--------------------------------CASAS ULLA-------------------------------->
 
-#<<<<<<<<<<<casa 1 Ullathorpe>>>>>>>>>>>>
+'<<<<<<<<<<<casa 1 Ullathorpe>>>>>>>>>>>>
 [OBJ51]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -706,7 +705,7 @@ MinHam=10
 Valor=2
 Respawn=1 ' Hace ReSpawn
 
-#<<<<<<<<<<<casa 2 Ullathorpe>>>>>>>>>>>>
+'<<<<<<<<<<<casa 2 Ullathorpe>>>>>>>>>>>>
 [OBJ65] 
 Name=Llave Ullathorpe Casa Nro 2
 GrhIndex=509
@@ -752,7 +751,7 @@ IndexAbierta=66
 IndexCerrada=67
 IndexCerradaLlave=68
 
-#<<<<<<<<<<<casa 3 Ullathorpe>>>>>>>>>>>>
+'<<<<<<<<<<<casa 3 Ullathorpe>>>>>>>>>>>>
 [OBJ69] 
 Name=Llave Ullathorpe Casa Nro 3
 GrhIndex=509
@@ -798,7 +797,7 @@ IndexAbierta=70
 IndexCerrada=71
 IndexCerradaLlave=72
 
-#<<<<<<<<<<<casa 4 Ullathorpe>>>>>>>>>>>>
+'<<<<<<<<<<<casa 4 Ullathorpe>>>>>>>>>>>>
 [OBJ73] 
 Name=Llave Ullathorpe Casa Nro 4
 GrhIndex=509
@@ -930,9 +929,9 @@ Agarrable=1
 Texto=Residencia Privada.
 
 
-#<--------------------------------CASAS NIX-------------------------------->
+'<--------------------------------CASAS NIX-------------------------------->
 
-#<<<<<<<<<<<casa 1 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 1 Nix>>>>>>>>>>>>
 [OBJ87]
 Name=Llave Nix casa Nro 1
 GrhIndex=509
@@ -978,7 +977,7 @@ IndexAbierta=88
 IndexCerrada=89
 IndexCerradaLlave=90
 
-#<<<<<<<<<<<casa 2 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 2 Nix>>>>>>>>>>>>
 [OBJ91]
 Name=Llave Nix Casa Nro 2
 GrhIndex=509
@@ -1024,7 +1023,7 @@ IndexAbierta=92
 IndexCerrada=93
 IndexCerradaLlave=94
 
-#<<<<<<<<<<<casa 3 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 3 Nix>>>>>>>>>>>>
 [OBJ95]
 Name=Llave Nix Casa Nro 3
 GrhIndex=509
@@ -1070,7 +1069,7 @@ IndexAbierta=96
 IndexCerrada=97
 IndexCerradaLlave=98
 
-#<<<<<<<<<<<casa 4 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 4 Nix>>>>>>>>>>>>
 [OBJ99]
 Name=Llave Nix Casa Nro 4
 GrhIndex=509
@@ -1114,7 +1113,7 @@ IndexAbierta=100
 IndexCerrada=101
 IndexCerradaLlave=102
 
-#<<<<<<<<<<<casa 5 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 5 Nix>>>>>>>>>>>>
 [OBJ103]
 Name=Llave Nix Casa Nro 5
 GrhIndex=509
@@ -1160,7 +1159,7 @@ IndexAbierta=104
 IndexCerrada=105
 IndexCerradaLlave=106
 
-#<<<<<<<<<<<casa 6 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 6 Nix>>>>>>>>>>>>
 [OBJ107]
 Name=Llave Nix Casa Nro 6
 GrhIndex=509
@@ -1206,7 +1205,7 @@ IndexAbierta=108
 IndexCerrada=109
 IndexCerradaLlave=110
 
-#<<<<<<<<<<<casa 7 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 7 Nix>>>>>>>>>>>>
 [OBJ111]
 Name=Llave Nix Casa Nro 7
 GrhIndex=509
@@ -1252,7 +1251,7 @@ IndexAbierta=112
 IndexCerrada=113
 IndexCerradaLlave=114
 
-#<<<<<<<<<<<casa 8 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 8 Nix>>>>>>>>>>>>
 [OBJ115]
 Name=Llave Nix Casa Nro 8
 GrhIndex=509
@@ -1298,7 +1297,7 @@ IndexAbierta=116
 IndexCerrada=117
 IndexCerradaLlave=118
 
-#<<<<<<<<<<<casa 9 Nix>>>>>>>>>>>>
+'<<<<<<<<<<<casa 9 Nix>>>>>>>>>>>>
 [OBJ119]
 Name=Llave Nix Casa Nro 9
 GrhIndex=509
@@ -1349,7 +1348,8 @@ Name=Espada Vikinga
 GrhIndex=561
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=22
+RazaEnanaAnim=55
 MinHit=6
 MaxHit=17
 Valor=4200
@@ -1360,10 +1360,8 @@ CP3=LADRON
 CP4=BARDO
 CP5=CLERIGO
 CP6=ASESINO
-CP7=PESCADOR
-CP8=CARPINTERO
-CP9=LEÑADOR
-CP10=PALADIN
+CP7=PALADIN
+CP8=PIRATA
 LingH=60
 LingP=0
 LingO=0
@@ -1374,7 +1372,8 @@ Name=Katana
 GrhIndex=562
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=27
+RazaEnanaAnim=54
 MinHit=5
 MaxHit=15
 Valor=3010
@@ -1383,8 +1382,6 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
-CP6=MINERO
 LingH=43
 LingP=0
 LingO=0
@@ -1392,27 +1389,30 @@ SkHerreria=55
 
 [OBJ125]
 Name=Sable
-GrhIndex=563
+GrhIndex=22723
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=56
+RazaEnanaAnim=57
 MinHit=6
-MaxHit=11
-Valor=2310
+MaxHit=17
+Valor=4200
 Crucial=1
-CP1=MAGO
-CP2=DRUIDA
-CP3=LADRON
-CP4=BARDO
-CP5=PIRATA
-CP6=CLERIGO
-CP7=PESCADOR
-CP8=CARPINTERO
-CP9=LEÑADOR
-LingH=33
+LingH=60
 LingP=0
 LingO=0
-SkHerreria=30
+SkHerreria=70
+CP1=MAGO
+CP2=PALADIN
+CP3=LADRON
+CP4=BARDO
+CP5=DRUIDA
+CP6=GUERRERO
+CP7=ASESINO
+CP8=BANDIDO
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
 
 [OBJ126]
 Name=Hacha Larga de Guerra
@@ -1420,6 +1420,7 @@ GrhIndex=564
 ObjType=2
 Agarrable=0
 Anim=3
+RazaEnanaAnim=67
 MinHit=10
 MaxHit=18
 Valor=6300
@@ -1431,11 +1432,7 @@ CP4=BARDO
 CP5=PIRATA
 CP6=CLERIGO
 CP7=ASESINO
-CP8=PESCADOR
-CP9=MINERO
-CP10=CARPINTERO
-CP11=HERRERO
-CP12=LEÑADOR
+CP8=TRABAJADOR
 LingH=90
 LingP=0
 LingO=0
@@ -1446,7 +1443,7 @@ Name=Hacha de Leñador
 GrhIndex=565
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=23
 MinHit=2
 MaxHit=3
 Valor=350
@@ -1473,12 +1470,8 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=60
 LingP=0
 LingO=0
@@ -1489,7 +1482,7 @@ Name=Hacha de Guerra Dos Filos
 GrhIndex=566
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=24
 MinHit=7
 MaxHit=20
 Valor=5950
@@ -1500,12 +1493,9 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
+CP9=BANDIDO
 LingH=85
 LingP=0
 LingO=0
@@ -1528,12 +1518,8 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=100
 LingP=50
 LingO=0
@@ -1555,10 +1541,6 @@ CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
-CP6=LEÑADOR
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
 LingH=65
 LingP=0
 LingO=0
@@ -1577,9 +1559,11 @@ Valor=700
 Crucial=0
 CP1=MAGO
 CP2=DRUIDA
+CP3=PIRATA
 LingH=10
 LingP=0
 LingO=0
+Upgrade=131
 SkHerreria=45
 
 [OBJ133]
@@ -1600,9 +1584,6 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
 LingH=60
 LingP=30
 LingO=0
@@ -1647,6 +1628,8 @@ Name=Caña de Pescar
 GrhIndex=574
 ObjType=2
 Agarrable=0
+Anim=20
+RazaEnanaAnim=76
 MinHit=1
 MaxHit=1
 Valor= 200
@@ -1663,7 +1646,7 @@ MinHam=75
 Valor=8
 Crucial=1
 
-#<--------------------MANSION NIX------------------------>
+'<--------------------MANSION NIX------------------------>
 [OBJ140]
 Name=Llave Nix Mansión
 GrhIndex=509
@@ -1804,7 +1787,7 @@ Name=Banana
 GrhIndex=581
 ObjType=1
 Agarrable=0
-MinHam=10
+MinHAM=10
 Valor=2
 Crucial=1
 
@@ -1813,7 +1796,7 @@ Name=Hacha de Bárbaro
 GrhIndex=583
 ObjType=2
 Agarrable=0
-Anim=18
+Anim=19
 MinHit=6
 MaxHit=19
 Valor=4690
@@ -1824,11 +1807,7 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=CLERIGO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=LEÑADOR
-CP11=ASESINO
+CP7=ASESINO
 LingH=67
 LingP=0
 LingO=0
@@ -1878,6 +1857,7 @@ GrhIndex=588
 ObjType=2
 Agarrable=0
 Anim=14
+RazaEnanaAnim=64
 MinHit=1
 MaxHit=5
 Apuñala=1
@@ -1890,10 +1870,11 @@ SkHerreria=40
 
 [OBJ165]
 Name=Daga +1
-GrhIndex=510
+GrhIndex=4999
 ObjType=2
 Agarrable=0
-Anim=12
+Anim=34
+RazaEnanaAnim=49
 MinHit=2
 MaxHit=4
 Apuñala=1
@@ -1902,6 +1883,7 @@ Crucial=0
 LingH=7
 LingP=0
 LingO=0
+Upgrade=365
 SkHerreria=15
 
 [OBJ166] 
@@ -1951,11 +1933,10 @@ MinDef=0
 Valor=50
 Crucial=1
 
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#			Puertas Catacumbas Ulla/NiX
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#CASA RUINAS
-[OBJ171]
+'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+'			Puertas Catacumbas Ulla/NiX
+'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+[OBJ171] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5599
 ObjType=6
@@ -1967,8 +1948,7 @@ IndexAbierta=171
 IndexCerrada=172
 IndexCerradaLlave=173
 
-#CASA RUINAS
-[OBJ172]
+[OBJ172] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -1980,8 +1960,7 @@ IndexAbierta=171
 IndexCerrada=172
 IndexCerradaLlave=173
 
-#CASA RUINAS
-[OBJ173]
+[OBJ173] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2001,8 +1980,7 @@ Agarrable=0
 Clave=17
 Crucial=0
 
-#CASA RUINAS
-[OBJ175]
+[OBJ175] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5599
 ObjType=6
@@ -2014,8 +1992,7 @@ IndexAbierta=175
 IndexCerrada=176
 IndexCerradaLlave=177
 
-#CASA RUINAS
-[OBJ176]
+[OBJ176] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2027,8 +2004,7 @@ IndexAbierta=175
 IndexCerrada=176
 IndexCerradaLlave=177
 
-#CASA RUINAS
-[OBJ177]
+[OBJ177] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2048,8 +2024,7 @@ Agarrable=0
 Clave=18
 Crucial=0
 
-#CASA RUINAS
-[OBJ179]
+[OBJ179] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5599
 ObjType=6
@@ -2061,8 +2036,7 @@ IndexAbierta=179
 IndexCerrada=180
 IndexCerradaLlave=181
 
-#CASA RUINAS
-[OBJ180]
+[OBJ180] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2074,8 +2048,7 @@ IndexAbierta=179
 IndexCerrada=180
 IndexCerradaLlave=181
 
-#CASA RUINAS
-[OBJ181]
+[OBJ181] 'CASA RUINAS
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2095,8 +2068,7 @@ Agarrable=0
 Clave=19
 Crucial=0
 
-#FUERTE SUR OESTE ULLA
-[OBJ183]
+[OBJ183] 'FUERTE SUR OESTE ULLA
 Name=Llave Fuerte
 GrhIndex=509
 ObjType=9
@@ -2104,8 +2076,7 @@ Agarrable=0
 Clave=20
 Crucial=0
 
-#Fuerte suroeste Ullathorpe
-[OBJ184]
+[OBJ184]'Fuerte suroeste Ullathorpe
 Name=Puerta
 GrhIndex=5592
 ObjType=6
@@ -2117,8 +2088,7 @@ IndexAbierta=184
 IndexCerrada=185
 IndexCerradaLlave=186
 
-#Fuerte suroeste Ullathorpe
-[OBJ185]
+[OBJ185]'Fuerte suroeste Ullathorpe
 Name=Puerta
 GrhIndex=5593
 ObjType=6
@@ -2130,8 +2100,7 @@ IndexAbierta=184
 IndexCerrada=185
 IndexCerradaLlave=186
 
-#Fuerte suroeste Ullathorpe
-[OBJ186]
+[OBJ186]'Fuerte suroeste Ullathorpe
 Name=Puerta
 GrhIndex=5593
 ObjType=6
@@ -2148,7 +2117,8 @@ Name=Piquete de Minero
 GrhIndex=608
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=30
+RazaEnanaAnim=74
 MinHit=2
 MaxHit=3
 Valor=210
@@ -2232,15 +2202,12 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=392
 LingP=0
 LingO=0
+Upgrade=390
 SkHerreria=70
 
 [OBJ196]
@@ -2268,7 +2235,8 @@ Name=Serrucho
 GrhIndex=607
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=31
+RazaEnanaAnim=73
 MinHit=1
 MaxHit=2
 Valor=140
@@ -2297,7 +2265,7 @@ Crucial=1
 HechizoIndex=1
 
 [OBJ201]
-Name=Aura Sanadora
+Name=Curar Heridas Leves
 GrhIndex=609
 ObjType=24
 Agarrable=0
@@ -2315,7 +2283,7 @@ Crucial=1
 HechizoIndex=4
 
 [OBJ203]
-Name=Aura Sanadora Avanzada
+Name=Curar Heridas Graves
 GrhIndex=609
 ObjType=24
 Agarrable=0
@@ -2333,7 +2301,7 @@ Crucial=1
 HechizoIndex=7
 
 [OBJ205]
-Name=Proyectil Etéreo
+Name=Proyectil Mágico
 GrhIndex=609
 ObjType=24
 Agarrable=0
@@ -2361,7 +2329,7 @@ HechizoIndex=10
 
 [OBJ208]
 Name=Flauta Mágica
-GrhIndex=1522
+GrhIndex=686
 ObjType=18
 Agarrable=0
 StaffPower=2
@@ -2370,20 +2338,16 @@ MaxHit=1
 Valor=4500
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=MAGO
-CP14=BARDO
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=MAGO
+CP10=BARDO
+CP11=TRABAJADOR
 Madera=1500
 SkCarpinteria=100
 
@@ -2602,17 +2566,6 @@ ObjType=12
 Agarrable=0
 Crucial=0
 
-[OBJ237]
-Name=Túnica Roja Burda
-GrhIndex=657
-ObjType=3
-NumRopaje=50
-Agarrable=0
-MaxDef=5
-MinDef=2
-Valor=600
-Crucial=1
-
 [OBJ238]
 Name=Túnica Azul
 GrhIndex=656
@@ -2647,8 +2600,7 @@ MinDef=0
 Valor=40
 Crucial=1
 
-#Puerta para negocio porque no tiene clave
-[OBJ241]
+[OBJ241] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=8685
 ObjType=6
@@ -2659,8 +2611,7 @@ IndexAbierta=241
 IndexCerrada=242
 IndexCerradaLlave=241
 
-#Puerta para negocio porque no tiene clave
-[OBJ242]
+[OBJ242] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=8684
 ObjType=6
@@ -2688,19 +2639,16 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=CARPINTERO
-CP9=CAZADOR
-CP10=LEÑADOR
+CP7=CAZADOR
 LingH=392
 LingP=0
 LingO=0
+Upgrade=392
 SkHerreria=70
 
-#-------------------------------------------------------
+'-------------------------------------------------------
 
-#Puerta para negocio porque no tiene clave
-[OBJ244]
+[OBJ244] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=9199
 ObjType=6
@@ -2711,8 +2659,7 @@ IndexAbierta=244
 IndexCerrada=245
 IndexCerradaLlave=245
 
-#Puerta para negocio porque no tiene clave
-[OBJ245]
+[OBJ245] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=9193
 ObjType=6
@@ -2723,10 +2670,9 @@ IndexAbierta=244
 IndexCerrada=245
 IndexCerradaLlave=245
 
-#-------------------------------------------------------
+'-------------------------------------------------------
 
-#Puerta para negocio porque no tiene clave
-[OBJ246]
+[OBJ246] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=9200
 ObjType=6
@@ -2737,8 +2683,7 @@ IndexAbierta=246
 IndexCerrada=247
 IndexCerradaLlave=247
 
-#Puerta para negocio porque no tiene clave
-[OBJ247]
+[OBJ247] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=9194
 ObjType=6
@@ -2749,10 +2694,9 @@ IndexAbierta=246
 IndexCerrada=247
 IndexCerradaLlave=247
 
-#------------------------------------------------------
+'------------------------------------------------------
 
-#Puerta para negocio porque no tiene clave
-[OBJ248]
+[OBJ248] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=9201
 ObjType=6
@@ -2763,8 +2707,7 @@ IndexAbierta=248
 IndexCerrada=249
 IndexCerradaLlave=249
 
-#Puerta para negocio porque no tiene clave
-[OBJ249]
+[OBJ249] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=9195
 ObjType=6
@@ -2775,10 +2718,9 @@ IndexAbierta=248
 IndexCerrada=249
 IndexCerradaLlave=249
 
-#------------------------------------------------------
+'------------------------------------------------------
 
-#Puerta para negocio porque no tiene clave
-[OBJ250]
+[OBJ250] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=9202
 ObjType=6
@@ -2789,8 +2731,7 @@ IndexAbierta=250
 IndexCerrada=251
 IndexCerradaLlave=251
 
-#Puerta para negocio porque no tiene clave
-[OBJ251]
+[OBJ251] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=9196
 ObjType=6
@@ -2801,10 +2742,9 @@ IndexAbierta=250
 IndexCerrada=251
 IndexCerradaLlave=251
 
-#------------------------------------------------------
+'------------------------------------------------------
 
-#Puerta para negocio porque no tiene clave
-[OBJ252]
+[OBJ252] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=9203
 ObjType=6
@@ -2815,8 +2755,7 @@ IndexAbierta=252
 IndexCerrada=253
 IndexCerradaLlave=253
 
-#Puerta para negocio porque no tiene clave
-[OBJ253]
+[OBJ253] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=9197
 ObjType=6
@@ -2827,10 +2766,9 @@ IndexAbierta=252
 IndexCerrada=253
 IndexCerradaLlave=253
 
-#------------------------------------------------------
+'------------------------------------------------------
 
-#Puerta para negocio porque no tiene clave
-[OBJ254]
+[OBJ254] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera abierta
 GrhIndex=9204
 ObjType=6
@@ -2841,8 +2779,7 @@ IndexAbierta=254
 IndexCerrada=255
 IndexCerradaLlave=255
 
-#Puerta para negocio porque no tiene clave
-[OBJ255]
+[OBJ255] 'Puerta para negocio porque no tiene clave
 Name=Puerta de madera cerrada
 GrhIndex=9198
 ObjType=6
@@ -2853,7 +2790,7 @@ IndexAbierta=254
 IndexCerrada=255
 IndexCerradaLlave=255
 
-#------------------------------------------------------
+'------------------------------------------------------
 
 [OBJ256]
 Name=Foro
@@ -2910,9 +2847,9 @@ Agarrable=1
 Texto=El Gran Consejo.
 
 
-#<------------------------------CASAS BANDERBILL----------------------------->
+'<------------------------------CASAS BANDERBILL----------------------------->
 
-#<<<<<<<<<<<<<<<Casa 1 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 1 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ263]
 Name=Puerta abierta
@@ -2959,7 +2896,7 @@ Clave=25
 Valor=6000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 2 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 2 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ267]
 Name=Puerta abierta
@@ -3006,7 +2943,7 @@ Clave=26
 Valor=4600000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 3 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 3 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ271]
 Name=Puerta abierta
@@ -3053,7 +2990,7 @@ Clave=27
 Valor=6000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 4 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 4 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ275]
 Name=Puerta abierta
@@ -3101,7 +3038,7 @@ Clave=28
 Valor=3250000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 5 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 5 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ279]
 Name=Puerta abierta
@@ -3148,7 +3085,7 @@ Clave=29
 Valor=4600000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 6 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 6 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ283]
 Name=Puerta abierta
@@ -3195,7 +3132,7 @@ Clave=30
 Valor=6000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 7 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 7 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ287]
 Name=Puerta abierta
@@ -3242,7 +3179,7 @@ Clave=31
 Valor=3250000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 8 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 8 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ291]
 Name=Puerta abierta
@@ -3289,7 +3226,7 @@ Clave=32
 Valor=6000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 9 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 9 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ295]
 Name=Puerta abierta
@@ -3336,7 +3273,7 @@ Clave=33
 Valor=6000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Gran Consejo de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Gran Consejo de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ299]
 Name=Puerta abierta
@@ -3383,7 +3320,7 @@ Clave=34
 Valor=0
 Crucial=0
 
-#<<<<<<<<<<<<<<<Puerta del vault 1 del gran consejo de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Puerta del vault 1 del gran consejo de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ303]
 Name=Puerta abierta
@@ -3430,7 +3367,7 @@ Clave=35
 Valor=0
 Crucial=0
 
-#<<<<<<<<<<<<<<<Puerta del vault 2 del gran consejo de Rázgul>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Puerta del vault 2 del gran consejo de Rázgul>>>>>>>>>>>>>>>>>
 
 [OBJ307]
 Name=Puerta abierta
@@ -3476,7 +3413,7 @@ Agarrable=0
 Clave=36
 Crucial=0
 
-#<<<<<<<<<<<<<<<Puerta de la Bóveda Goliath>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Puerta de la Bóveda Goliath>>>>>>>>>>>>>>>>>
 
 [OBJ311]
 Name=Puerta abierta
@@ -3523,7 +3460,7 @@ Clave=78
 Valor=0
 Crucial=0
 
-#-------------------------------------------------------
+'-------------------------------------------------------
 
 [OBJ315]
 Name=Cartel Muelles
@@ -3567,7 +3504,7 @@ Valor=290000
 Crucial=1
 HechizoIndex=11
 
-#<<<<<<<<<<<<<<<Casa 10 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 10 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ320]
 Name=Puerta abierta
@@ -3614,7 +3551,7 @@ Clave=37
 Valor=8000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 11 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 11 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ324]
 Name=Puerta abierta
@@ -3661,7 +3598,7 @@ Clave=38
 Valor=9000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 12 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 12 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ328]
 Name=Puerta abierta
@@ -3708,7 +3645,7 @@ Clave=39
 Valor=8000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 13 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 13 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ332]
 Name=Puerta abierta
@@ -3755,7 +3692,7 @@ Clave=40
 Valor=8000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 14 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 14 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ336]
 Name=Puerta abierta
@@ -3802,7 +3739,7 @@ Clave=41
 Valor=10000000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 15 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 15 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ340]
 Name=Puerta abierta
@@ -3849,7 +3786,7 @@ Clave=42
 Valor=2500000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 16 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 16 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ344]
 Name=Puerta abierta
@@ -3896,7 +3833,7 @@ Clave=43
 Valor=2500000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 17 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 17 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ348]
 Name=Puerta abierta
@@ -3943,7 +3880,7 @@ Clave=44
 Valor=2500000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 18 de Banderbill>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 18 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ352]
 Name=Puerta abierta
@@ -3990,7 +3927,7 @@ Clave=45
 Valor=2500000
 Crucial=0
 
-#-------------------------------------------------------
+'-------------------------------------------------------
 
 [OBJ356]
 Name=Armadura de las Sombras
@@ -4006,17 +3943,13 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=BARDO
 CP4=PIRATA
-CP5=PESCADOR
-CP6=MINERO
-CP7=CARPINTERO
-CP8=HERRERO
-CP9=CAZADOR
-CP10=LEÑADOR
-CP11=GUERRERO
-CP12=PALADIN
-CP13=BANDIDO
-CP14=CLERIGO
-CP15=LADRON
+CP5=CAZADOR
+CP6=GUERRERO
+CP7=PALADIN
+CP8=BANDIDO
+CP9=CLERIGO
+CP10=LADRON
+CP11=TRABAJADOR
 LingH=329
 LingP=0
 LingO=0
@@ -4068,20 +4001,16 @@ MinDef=10
 Valor=17000
 Crucial=1
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ361]
 Name=Tormenta de Fuego
@@ -4115,7 +4044,7 @@ Crucial=1
 HechizoIndex=12
 
 [OBJ364]
-Name=Terrible Hambre de Igör
+Name=Terrible Hambre de Igôr
 GrhIndex=609
 ObjType=24
 Agarrable=0
@@ -4128,7 +4057,8 @@ Name=Daga +2
 GrhIndex=710
 ObjType=2
 Agarrable=0
-Anim=12
+Anim=35
+RazaEnanaAnim=50
 MinHit=3
 MaxHit=6
 Apuñala=1
@@ -4137,6 +4067,7 @@ Crucial=0
 LingH=28
 LingP=0
 LingO=0
+Upgrade=366
 SkHerreria=35
 
 [OBJ366]
@@ -4144,44 +4075,45 @@ Name=Daga +3
 GrhIndex=711
 ObjType=2
 Agarrable=0
-Anim=12
+Anim=36
+RazaEnanaAnim=51
 MinHit=4
 MaxHit=7
 Apuñala=1
 Valor=2660
 Crucial=0
 CP1=GUERRERO
+CP2=PIRATA
 LingH=38
 LingP=0
 LingO=0
+Upgrade=367
 SkHerreria=50
 
 [OBJ367]
 Name=Daga +4
-GrhIndex=711
+GrhIndex=5595
 ObjType=2
 Agarrable=0
-Anim=12
+Anim=52
+RazaEnanaAnim=53
 MinHit=5
 MaxHit=8
 Apuñala=1
 Valor=3500
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=CAZADOR
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=CAZADOR
+
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 LingH=50
 LingP=0
 LingO=0
@@ -4222,25 +4154,21 @@ ObjType=17
 NumRopaje=2
 Agarrable=0
 Anim=9
-MaxDef=20
-MinDef=10
+MaxDef=14
+MinDef=6
 Valor=4550
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ371]
 Name=Tumba de Nebeth
@@ -4264,19 +4192,15 @@ Real=1
 CP1=GUERRERO
 CP2=PALADIN
 CP3=CAZADOR
-CP4=MINERO
-CP5=HERRERO
-CP6=ASESINO
-CP7=PIRATA
-CP8=PESCADOR
-CP9=LEÑADOR
-CP10=BANDIDO
-CP11=MAGO
-CP12=LADRON
-CP13=CARPINTERO
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
 
 
-#<<<<<<<<<<<<<<<Puerta Isla Beleta>>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Puerta Isla Beleta>>>>>>>>>>>>>>>>>
 
 [OBJ373]
 Name=Puerta abierta
@@ -4323,7 +4247,7 @@ Clave=49
 Valor=0
 Crucial=0
 
-#-------------------------------------------------------
+'-------------------------------------------------------
 
 [OBJ377]
 Name=Foro
@@ -4337,6 +4261,7 @@ Name=Teleport
 GrhIndex=669
 ObjType=19
 Agarrable=1
+Radio=0
 
 [OBJ379]
 Name=Armadura Legionaria (E/G)
@@ -4351,7 +4276,6 @@ MinDef=7
 Valor=3010
 Crucial=1
 CP1=MAGO
-CP2=DRUIDA
 LingH=43
 LingP=0
 LingO=0
@@ -4388,6 +4312,31 @@ MaxDef=3
 MinDef=2
 Valor=275
 Crucial=1
+
+[OBJ383]
+Name=Sombrero Mágico
+GrhIndex=18994
+ObjType=17
+NumRopaje=2
+Agarrable=0
+Anim=7
+MaxDef=1
+MinDef=1
+DefensaMagicaMin=7
+DefensaMagicaMax=10
+Valor=10000
+Crucial=1
+CP1=PIRATA
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ384]
 Name=Yunque
@@ -4430,7 +4379,8 @@ Name=Martillo de Herrero
 GrhIndex=726
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=29
+RazaEnanaAnim=75
 MinHit=2
 MaxHit=2
 Valor=140
@@ -4456,14 +4406,11 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=LEÑADOR
+CP7=TRABAJADOR
 LingH=505
 LingP=0
 LingO=0
+Upgrade=391
 SkHerreria=85
 
 [OBJ391]
@@ -4482,11 +4429,7 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=LEÑADOR
+CP7=TRABAJADOR
 LingH=680
 LingP=0
 LingO=0
@@ -4509,14 +4452,11 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=LEÑADOR
+CP7=TRABAJADOR
 LingH=505
 LingP=0
 LingO=0
+Upgrade=393
 SkHerreria=85
 
 [OBJ393]
@@ -4536,11 +4476,7 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=LEÑADOR
+CP7=TRABAJADOR
 LingH=680
 LingP=0
 LingO=0
@@ -4588,6 +4524,7 @@ GrhIndex=714
 ObjType=2
 Agarrable=0
 Anim=4
+RazaEnanaAnim=70
 MinHit=1
 MaxHit=3
 Valor=100
@@ -4596,7 +4533,6 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
 
 [OBJ399]
 Name=Cimitarra
@@ -4604,6 +4540,7 @@ GrhIndex=709
 ObjType=2
 Agarrable=0
 Anim=5
+RazaEnanaAnim=71
 MinHit=7
 MaxHit=13
 Valor=3500
@@ -4623,6 +4560,7 @@ GrhIndex=715
 ObjType=2
 Agarrable=0
 Anim=6
+RazaEnanaAnim=58
 MinHit=5
 MaxHit=15
 StaffPower=2
@@ -4630,20 +4568,16 @@ StaffDamageBonus=38
 Valor=85500
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 LingH=50
 LingP=100
 LingO=200
@@ -4654,7 +4588,8 @@ Name=Martillo de Guerra
 GrhIndex=708
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=28
+RazaEnanaAnim=77
 MinHit=6
 MaxHit=11
 Valor=2310
@@ -4663,7 +4598,6 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
 LingH=33
 LingP=0
 LingO=0
@@ -4675,6 +4609,7 @@ GrhIndex=716
 ObjType=2
 Agarrable=0
 Anim=15
+RazaEnanaAnim=65
 MinHit=100
 MaxHit=100
 Valor=188000
@@ -4683,16 +4618,12 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
-CP6=CARPINTERO
-CP7=MINERO
-CP8=HERRERO
-CP9=LEÑADOR
-CP10=PESCADOR
+CP5=TRABAJADOR
 LingH=500
 LingP=400
 LingO=300
 SkHerreria=100
+Log=1
 
 [OBJ403]
 Name=Espada de Plata
@@ -4700,6 +4631,7 @@ GrhIndex=713
 ObjType=2
 Agarrable=0
 Anim=13
+RazaEnanaAnim=63
 MinHit=13
 MaxHit=20
 Valor=36200
@@ -4710,14 +4642,10 @@ CP3=DRUIDA
 CP4=LADRON
 CP5=BARDO
 CP6=PIRATA
-CP7=CARPINTERO
-CP8=CAZADOR
-CP9=HERRERO
-CP10=MINERO
-CP11=LEÑADOR
-CP12=PESCADOR
-CP13=ASESINO
-CP14=BANDIDO
+CP7=CAZADOR
+CP8=ASESINO
+CP9=BANDIDO
+CP10=TRABAJADOR
 LingH=140
 LingP=220
 LingO=0
@@ -4736,6 +4664,8 @@ Valor=350
 Crucial=1
 CP1=MAGO
 CP2=DRUIDA
+CP3=PIRATA
+CP4=LADRON
 LingH=5
 LingP=0
 LingO=0
@@ -4757,10 +4687,6 @@ CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
-CP6=LEÑADOR
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
 LingH=150
 LingP=130
 LingO=0
@@ -4844,9 +4770,9 @@ ObjType=30
 Valor=100
 Crucial=0
 
-#<-------------------------------CASAS LINDOS------------------------------->
+'<-------------------------------CASAS LINDOS------------------------------->
 
-#<<<<<<<<<<<Casa 1 de Lindos>>>>>>>>>>>>
+'<<<<<<<<<<<Casa 1 de Lindos>>>>>>>>>>>>
 [OBJ417]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -4892,7 +4818,7 @@ Clave=50
 Valor=1800000
 Crucial=0
 
-#<<<<<<<<<<<Casa 2 de Lindos>>>>>>>>>>>>
+'<<<<<<<<<<<Casa 2 de Lindos>>>>>>>>>>>>
 [OBJ421]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -4938,7 +4864,7 @@ Clave=51
 Valor=1800000
 Crucial=0
 
-#<<<<<<<<<<<Casa 3 de Lindos>>>>>>>>>>>>
+'<<<<<<<<<<<Casa 3 de Lindos>>>>>>>>>>>>
 [OBJ425]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -4984,7 +4910,7 @@ Clave=52
 Valor=1800000
 Crucial=0
 
-#<<<<<<<<<<<Casa 4 de Lindos>>>>>>>>>>>>
+'<<<<<<<<<<<Casa 4 de Lindos>>>>>>>>>>>>
 [OBJ429]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -5030,7 +4956,7 @@ Clave=53
 Valor=1000000
 Crucial=0
 
-#<<<<<<<<<<<Casa 5 de Lindos>>>>>>>>>>>>
+'<<<<<<<<<<<Casa 5 de Lindos>>>>>>>>>>>>
 [OBJ433]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -5076,7 +5002,7 @@ Clave=54
 Valor=1000000
 Crucial=0
 
-#<<<<<<<<<<<Casa 6 de Lindos>>>>>>>>>>>>
+'<<<<<<<<<<<Casa 6 de Lindos>>>>>>>>>>>>
 [OBJ437]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -5122,7 +5048,7 @@ Clave=55
 Valor=1000000
 Crucial=0
 
-#<<<<< Abadía de Lindos >>>>>>>>
+'<<<<< Abadía de Lindos >>>>>>>>
 [OBJ441]
 Name=Puerta de madera abierta
 GrhIndex=9203
@@ -5168,7 +5094,7 @@ Clave=56
 Valor=20000000
 Crucial=0
 
-#<<<<< Vault Abadía >>>>>>>>
+'<<<<< Vault Abadía >>>>>>>>
 [OBJ445]
 Name=Puerta de madera abierta
 GrhIndex=9203
@@ -5214,7 +5140,7 @@ Clave=57
 Valor=0
 Crucial=0
 
-#<<<<< PRISIÓN BANDERBILL >>>>>>>>
+'<<<<< PRISIÓN BANDERBILL >>>>>>>>
 
 [OBJ449]
 Name=Puerta de madera abierta
@@ -5288,8 +5214,7 @@ GrhIndex=669
 ObjType=19
 Agarrable=1
 
-#Prisión 1
-[OBJ457]
+[OBJ457]'Prisión 1
 Name=Cartel
 GrhIndex=718
 VGrande=501
@@ -5297,8 +5222,7 @@ ObjType=8
 Agarrable=1
 Texto=Prisión del Reino
 
-#Prisión 2
-[OBJ458]
+[OBJ458]'Prisión 2
 Name=Cartel
 GrhIndex=720
 VGrande=501
@@ -5306,8 +5230,7 @@ ObjType=8
 Agarrable=1
 Texto=Prisión
 
-#Abadía de Lindos
-[OBJ459]
+[OBJ459]'Abadía de Lindos
 Name=Cartel
 GrhIndex=721
 VGrande=501
@@ -5321,14 +5244,14 @@ GrhIndex=510
 ObjType=2
 Agarrable=0
 Anim=12
+RazaEnanaAnim=48
 newbie=1
 MinHit=1
 MaxHit=3
 Apuñala=1
 Crucial=0
 
-#Repone HP
-[OBJ461]
+[OBJ461] 'Repone HP
 Name=Poción Roja (Newbie)
 GrhIndex=542
 ObjType=11
@@ -5339,8 +5262,7 @@ MaxModificador=30
 MinModificador=30
 Crucial=0
 
-#Mod Fuerza
-[OBJ462]
+[OBJ462] 'Mod Fuerza
 Name=Poción Verde (Newbie)
 GrhIndex=543
 ObjType=11
@@ -5403,7 +5325,7 @@ GrhIndex=506
 ObjType=1
 Agarrable=0
 newbie=1
-MinHam=10
+MinHAM=10
 Crucial=0
 
 [OBJ468]
@@ -5478,34 +5400,35 @@ SkCarpinteria=40
 
 [OBJ475]
 Name=Galera
-GrhIndex=749
+GrhIndex=5587
 ObjType=31
 NumRopaje=85
 Agarrable=0
 MinHit=25
-MaxHit=45
+MaxHit=35
 MinDef=10
 MaxDef=20
 Valor=53000
 Crucial=0
 MinSkill=55
-Madera=20000
+MaderaElfica=10000
 SkCarpinteria=65
+Upgrade=476
 
 [OBJ476]
 Name=Galeón
-GrhIndex=749
+GrhIndex=5594
 ObjType=31
 NumRopaje=86
 Agarrable=0
 MinHit=45
-MaxHit=105
-MinDef=20
-MaxDef=30
+MaxHit=55
+MinDef=15
+MaxDef=25
 Valor=87000
 Crucial=0
 MinSkill=65
-Madera=30000
+MaderaElfica=15000
 SkCarpinteria=90
 
 [OBJ477]
@@ -5521,7 +5444,8 @@ Name=Arco Simple
 GrhIndex=750
 ObjType=2
 Agarrable=0
-Anim=7
+Anim=41
+RazaEnanaAnim=40
 Proyectil=1
 Municiones=1
 MinHit=1
@@ -5531,6 +5455,7 @@ Crucial=0
 CP1=MAGO
 CP2=DRUIDA
 Madera=42
+Upgrade=663
 SkCarpinteria=20
 
 [OBJ479]
@@ -5539,6 +5464,7 @@ GrhIndex=751
 ObjType=2
 Agarrable=0
 Anim=7
+RazaEnanaAnim=59
 Proyectil=1
 Municiones=1
 MinHit=4
@@ -5547,11 +5473,9 @@ Valor=1080
 Crucial=0
 CP1=MAGO
 CP2=DRUIDA
-CP3=PESCADOR
-CP4=MINERO
-CP5=HERRERO
-CP6=PIRATA
+CP3=PIRATA
 Madera=450
+Upgrade=664
 SkCarpinteria=40
 
 [OBJ480]
@@ -5561,11 +5485,12 @@ ObjType=32
 Agarrable=0
 MinHit=1
 MaxHit=3
-Valor=3
-Crucial=0
+Valor=16
+Crucial=1
 CP1=MAGO
 CP2=DRUIDA
 Madera=1
+Upgrade=551
 SkCarpinteria=20
 
 [OBJ481]
@@ -5579,16 +5504,12 @@ MinDef=60
 Valor=540000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=PIRATA
-CP8=LEÑADOR
-CP9=ASESINO
-CP10=HERRERO
-CP11=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=PIRATA
+CP6=ASESINO
+CP7=TRABAJADOR
 LingH=1000
 LingP=1000
 LingO=1000
@@ -5606,16 +5527,12 @@ MinDef=60
 Valor=540000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=PIRATA
-CP8=LEÑADOR
-CP9=ASESINO
-CP10=HERRERO
-CP11=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=PIRATA
+CP6=ASESINO
+CP7=TRABAJADOR
 LingH=1000
 LingP=1000
 LingO=1000
@@ -5633,16 +5550,12 @@ MinDef=60
 Valor=540000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=PIRATA
-CP8=LEÑADOR
-CP9=ASESINO
-CP10=HERRERO
-CP11=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=PIRATA
+CP6=ASESINO
+CP7=TRABAJADOR
 LingH=1000
 LingP=1000
 LingO=1000
@@ -5659,16 +5572,12 @@ MinDef=10
 Valor=4620
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
 LingH=66
 LingP=0
 LingO=0
@@ -5685,16 +5594,12 @@ MinDef=55
 Valor=328000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=ASESINO
-CP10=HERRERO
-CP11=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
 LingH=1000
 LingP=400
 LingO=600
@@ -5724,18 +5629,14 @@ MinDef=55
 Valor=398000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
-CP13=CAZADOR
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=CAZADOR
+CP9=TRABAJADOR
 LingH=1000
 LingP=400
 LingO=800
@@ -5764,17 +5665,13 @@ MinDef=40
 Valor=59000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=TRABAJADOR
 LingH=500
 LingP=200
 LingO=0
@@ -5794,6 +5691,20 @@ CP1=MAGO
 CP2=PIRATA
 CP3=DRUIDA
 
+[OBJ491]
+Name=Escudo Real RM
+GrhIndex=560
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=1
+MaxDef=1
+MinDef=1
+Valor=350
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+
 [OBJ492]
 Name=Armadura Real (E/G)
 GrhIndex=768
@@ -5808,6 +5719,8 @@ Valor=3010
 Crucial=1
 CP1=MAGO
 CP2=DRUIDA
+CP3=CLERIGO
+CP4=BARDO
 LingH=43
 LingP=0
 LingO=0
@@ -5825,21 +5738,31 @@ MinDef=35
 Valor=53750
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=TRABAJADOR
 LingH=425
 LingP=200
 LingO=0
 SkHerreria=82
+
+[OBJ494]
+Name=Escudo Legionario RM
+GrhIndex=13255
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=5
+MaxDef=1
+MinDef=1
+Valor=1
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
 
 [OBJ495]
 Name=Armadura Escarlata
@@ -5852,18 +5775,14 @@ MinDef=50
 Valor=86000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
-CP13=CAZADOR
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=CAZADOR
+CP9=TRABAJADOR
 LingH=800
 LingP=250
 LingO=0
@@ -5880,18 +5799,14 @@ MinDef=45
 Valor=69500
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
-CP13=CAZADOR
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=CAZADOR
+CP9=TRABAJADOR
 LingH=650
 LingP=200
 LingO=0
@@ -5908,21 +5823,26 @@ MinDef=42
 Valor=56640
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=TRABAJADOR
 LingH=600
 LingP=122
 LingO=0
 SkHerreria=85
+
+[OBJ498]
+Name=Sidra
+GrhIndex=20509
+ObjType=13
+Agarrable=0
+MinAgu=30
+Valor=30
+Crucial=1
 
 [OBJ499]
 Name=Cota de Mallas (H/E/EO-M)
@@ -5955,17 +5875,13 @@ MinDef=40
 Valor=59000
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=TRABAJADOR
 LingH=500
 LingP=200
 LingO=0
@@ -6044,7 +5960,6 @@ MaxDef=3
 MinDef=1
 Valor=200
 Crucial=1
-CP1=PIRATA
 
 [OBJ506]
 Name=Atuendo Rosa (H/E/EO-M)
@@ -6057,7 +5972,6 @@ MaxDef=3
 MinDef=1
 Valor=200
 Crucial=1
-CP1=PIRATA
 
 [OBJ507]
 Name=Ropa Violeta (E/G)
@@ -6071,7 +5985,6 @@ MinDef=2
 Valor=410
 Crucial=1
 CP1=MAGO
-CP2=PIRATA
 
 [OBJ508]
 Name=Ropa Estuaria (H/E/EO-M)
@@ -6085,7 +5998,6 @@ MinDef=8
 Valor=4000
 Crucial=1
 CP1=MAGO
-CP2=PIRATA
 
 [OBJ509]
 Name=Túnica de Maga Oscura (H/E/EO-M)
@@ -6103,17 +6015,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=LADRON
-CP15=CARPINTERO
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ510]
 Name=Vestido Indulgente (H/E/EO-M)
@@ -6207,17 +6115,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ517]
 Name=Túnica de Mago del Imperio
@@ -6234,17 +6138,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ518]
 Name=Túnica de Mago Oscuro
@@ -6261,17 +6161,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ519]
 Name=Túnica Legendaria
@@ -6301,17 +6197,12 @@ Crucial=1
 CP1=GUERRERO
 CP2=PALADIN
 CP3=CAZADOR
-CP4=MINERO
-CP5=HERRERO
-CP6=ASESINO
-CP7=PIRATA
-CP8=PESCADOR
-CP9=LEÑADOR
-CP10=BANDIDO
-CP11=MAGO
-CP12=CARPINTERO
-CP13=LADRON
-CP14=DRUIDA
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
 LingH=132
 LingP=0
 LingO=0
@@ -6328,14 +6219,23 @@ MaxDef=13
 MinDef=7
 Valor=3010
 Crucial=1
-CP1=DRUIDA
+CP1=MAGO
 CP2=CLERIGO
-CP3=BARDO
-CP4=MAGO
+CP3=DRUIDA
+CP4=BARDO
 LingH=43
 LingP=0
 LingO=0
 SkHerreria=35
+
+[OBJ522]
+Name=Hipocrás
+GrhIndex=20507
+ObjType=13
+Agarrable=0
+MinAgu=40
+Valor=40
+Crucial=1
 
 [OBJ523]
 Name=Manto de Sacerdote Demoníaco
@@ -6351,16 +6251,12 @@ Crucial=1
 CP1=GUERRERO
 CP2=PALADIN
 CP3=CAZADOR
-CP4=MINERO
-CP5=HERRERO
-CP6=ASESINO
-CP7=PIRATA
-CP8=PESCADOR
-CP9=LEÑADOR
-CP10=BANDIDO
-CP11=MAGO
-CP12=CARPINTERO
-CP13=LADRON
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
 
 [OBJ524]
 Name=Túnica Roja Especial (E/G)
@@ -6385,6 +6281,7 @@ MaxDef=35
 MinDef=30
 Valor=20000
 Crucial=1
+CP1=MAGO
 
 [OBJ526]
 Name=Túnica Combinada de Mujer (E/G-M)
@@ -6455,6 +6352,7 @@ Agarrable=0
 Valor=1200000
 Crucial=1
 HechizoIndex=23
+Log=1
 
 [OBJ532]
 Name=Apocalipsis
@@ -6464,6 +6362,7 @@ Agarrable=0
 Valor=2400000
 Crucial=1
 HechizoIndex=25
+Log=1
 
 [OBJ533]
 Name=Odre
@@ -6512,6 +6411,7 @@ Agarrable=0
 Valor=350000
 Crucial=1
 HechizoIndex=27
+Log=1
 
 [OBJ538]
 Name=Invocar Elemental de Tierra
@@ -6554,7 +6454,7 @@ Crucial=1
 HechizoIndex=30
 
 [OBJ542]
-Name=Turbación
+Name=Aturdir
 GrhIndex=609
 ObjType=24
 Agarrable=0
@@ -6603,15 +6503,15 @@ GrhIndex=863
 VGrande=501
 ObjType=8
 Agarrable=1
-Texto=¡¡Cuidado!! El D�ngeon de Veriil es uno de los lugares más peligrosos de todo Argentum; pocos son los aventureros que logran salir con vida de él.
+Texto=¡¡Cuidado!! El Dúngeon de Veriil es uno de los lugares más peligrosos de todo Argentum; pocos son los aventureros que logran salir con vida de él.
 
 [OBJ548]
-Name=Cartel Arghál
+Name=Cartel Arghâl
 GrhIndex=864
 VGrande=501
 ObjType=8
 Agarrable=1
-Texto=¡¡¡Bienvenidos a Arghál!!!
+Texto=¡¡¡Bienvenidos a Arghâl!!!
 
 [OBJ549]
 Name=Túnica de Mago del Imperio (E/G)
@@ -6629,17 +6529,22 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
+
+[OBJ550]
+Name=Porrón de cerveza
+GrhIndex=20508
+ObjType=13
+Agarrable=0
+MinAgu=50
+Valor=50
+Crucial=1
 
 [OBJ551]
 Name=Flecha +1
@@ -6651,21 +6556,18 @@ MaxHit=4
 Valor=10
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 Madera=4
+Upgrade=552
 SkCarpinteria=40
 
 [OBJ552]
@@ -6678,20 +6580,16 @@ MaxHit=5
 Valor=16
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 Madera=6
 SkCarpinteria=65
 
@@ -6705,21 +6603,17 @@ MaxHit=6
 Valor=23
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
-Madera=8
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
+MaderaElfica=2
 SkCarpinteria=90
 
 [OBJ554]
@@ -6740,6 +6634,7 @@ GrhIndex=716
 ObjType=2
 Agarrable=0
 Anim=15
+RazaEnanaAnim=65
 MinHit=1000
 MaxHit=1000
 Valor=188000
@@ -6748,6 +6643,15 @@ LingH=500
 LingP=400
 LingO=300
 SkHerreria=1000
+
+[OBJ557]
+Name=Vino de canela
+GrhIndex=20504
+ObjType=13
+Agarrable=0
+MinAgu=70
+Valor=70
+Crucial=1
 
 [OBJ558]
 Name=Túnica de Mago Oscuro (E/G)
@@ -6765,17 +6669,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ559]
 Name=Daga de Plata
@@ -6792,6 +6692,7 @@ LingH=58
 LingP=0
 LingO=0
 SkHerreria=69
+CP1=PIRATA
 
 [OBJ560]
 Name=Gema Sagrada Recuperada por Shadow VX
@@ -6801,60 +6702,68 @@ Agarrable=0
 Crucial=0
 
 [OBJ561]
-Name=Piquete de Minero
-GrhIndex=608
+Name=Hacha de Leñador (Newbie)
+GrhIndex=565
 ObjType=2
 Agarrable=0
-Anim=1
-MinHit=2
-MaxHit=3
-Valor=280
+Anim=23
+MinHit=1
+MaxHit=2
+Valor=150
+Newbie=1
 Crucial=1
-LingH=4
-LingP=0
-LingO=0
-SkHerreria=12
 
 [OBJ562]
 Name=Piquete de Minero (Newbie)
 GrhIndex=608
 ObjType=2
 Agarrable=0
-Anim=1
+Anim=30
+RazaEnanaAnim=74
 MinHit=1
-MaxHit=1
+MaxHit=2
+Valor=150
 Newbie=1
-Crucial=0
+Crucial=1
 
 [OBJ563]
 Name=Caña de pescar (Newbie)
 GrhIndex=574
 ObjType=2
 Agarrable=0
+Anim=20
+RazaEnanaAnim=76
 MinHit=1
-MaxHit=1
+MaxHit=2
+Valor=150
 Newbie=1
-Crucial=0
+Crucial=1
 
 [OBJ564]
 Name=Serrucho (Newbie)
 GrhIndex=607
 ObjType=2
 Agarrable=0
+Anim=31
+RazaEnanaAnim=73
 MinHit=1
-MaxHit=1
+MaxHit=2
+Valor=150
 Newbie=1
-Crucial=0
+Crucial=1
 
 [OBJ565]
 Name=Martillo de Herrero (Newbie)
 GrhIndex=726
 ObjType=2
 Agarrable=0
+Anim=29
+RazaEnanaAnim=75
 MinHit=1
-MaxHit=1
+MaxHit=2
+Valor=150
 Newbie=1
-Crucial=0
+Crucial=1
 
 [OBJ566]
 Name=Flores
@@ -6904,14 +6813,13 @@ GrhIndex=874
 ObjType=30
 Agarrable=1
 
-#Yendo a Arghal
-[OBJ574]
+[OBJ574]'Yendo a Arghal
 Name=Cartel
 GrhIndex=875
 VGrande=501
 ObjType=8
 Agarrable=1
-Texto=La mística ciudad de Arghál se encuentra hacia el este.
+Texto=La mística ciudad de Arghâl se encuentra hacia el este.
 
 [OBJ575]
 Name=Foro
@@ -6927,8 +6835,7 @@ GrhIndex=529
 ObjType=10
 Agarrable=1
 
-#Mesón Río Grande
-[OBJ577]
+[OBJ577]'Mesón Río Grande
 Name=Cartel
 GrhIndex=876
 VGrande=501
@@ -6936,17 +6843,15 @@ ObjType=8
 Agarrable=1
 Texto=El refugio de los aventureros, lugar propicio para beber y emprender nuevas aventuras.
 
-#Arghál Central
-[OBJ578]
+[OBJ578]'Arghâl Central
 Name=Cartel
 GrhIndex=877
 VGrande=501
 ObjType=8
 Agarrable=1
-Texto=Al este se encuentra el centro histórico de Arghál.
+Texto=Al este se encuentra el centro histórico de Arghâl.
 
-#Arghál Central
-[OBJ579]
+[OBJ579]'Arghâl Central
 Name=Cartel
 GrhIndex=878
 VGrande=501
@@ -6954,9 +6859,9 @@ ObjType=8
 Agarrable=1
 Texto=El famoso espacio donde se congregan los más grandes artistas y poetas de Argentum.
 
-#<-------------------------------CASAS ARKHEIN------------------------------->
+'<-------------------------------CASAS ARKHEIN------------------------------->
 
-#<<<<<<<<<<<<<<<Casa 1 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 1 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ580]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7002,7 +6907,7 @@ Clave=70
 Valor=1700000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 2 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 2 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ584]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7048,7 +6953,7 @@ Clave=71
 Valor=1700000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 3 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 3 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ588]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7094,7 +6999,7 @@ Clave=72
 Valor=1700000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 4 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 4 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ592]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7140,7 +7045,7 @@ Clave=73
 Valor=1700000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 5 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 5 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ596]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7186,7 +7091,7 @@ Clave=74
 Valor=1700000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 6 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 6 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ600]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7232,7 +7137,7 @@ Clave=75
 Valor=1700000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 7 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 7 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ604]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7278,7 +7183,7 @@ Clave=76
 Valor=1700000
 Crucial=0
 
-#<<<<<<<<<<<<<<<Casa 8 de Arkhein>>>>>>>>>>>>>>>>
+'<<<<<<<<<<<<<<<Casa 8 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ608]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7324,6 +7229,15 @@ Clave=77
 Valor=1700000
 Crucial=0
 
+[OBJ612]
+Name=Cerveza de los enanos
+GrhIndex=20506
+ObjType=13
+Agarrable=0
+MinAgu=90
+Valor=90
+Crucial=1
+
 [OBJ613]
 Name=Gema Sagrada
 GrhIndex=700
@@ -7331,8 +7245,7 @@ ObjType=29
 Agarrable=0
 Crucial=0
 
-#2da Jerarq
-[OBJ614]
+[OBJ614]'2da Jerarq
 Name=Túnica de Archimago
 GrhIndex=806
 ObjType=3
@@ -7343,24 +7256,19 @@ MinDef=38
 Valor=0
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 NoSeCae=1
 
-#2da Jerarq
-[OBJ615]
+[OBJ615]]'2da Jerarq
 Name=Túnica de Archimago (E/G)
 GrhIndex=657
 ObjType=3
@@ -7372,24 +7280,19 @@ MinDef=38
 Valor=0
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 NoSeCae=1
 
-#2da Jerarq
-[OBJ616]
+[OBJ616]]'2da Jerarq
 Name=Armadura de Guerrero Campeón
 GrhIndex=756
 ObjType=3
@@ -7399,22 +7302,17 @@ MaxDef=85
 MinDef=80
 Valor=0
 Crucial=0
-CP1=CARPINTERO
-CP2=MINERO
-CP3=PESCADOR
-CP4=GUERRERO
-CP5=DRUIDA
-CP6=LADRON
-CP7=BARDO
-CP8=CLERIGO
-CP9=PIRATA
-CP10=LEÑADOR
-CP11=ASESINO
-CP12=HERRERO
+CP1=GUERRERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=TRABAJADOR
 NoSeCae=1
 
-#2da Jerarq
-[OBJ617]
+[OBJ617]]]'2da Jerarq
 Name=Armadura de Guerrero Campeón (E/G)
 GrhIndex=758
 ObjType=3
@@ -7425,18 +7323,14 @@ MaxDef=65
 MinDef=60
 Valor=60000
 Crucial=0
-CP1=CARPINTERO
-CP2=MINERO
-CP3=PESCADOR
-CP4=GUERRERO
-CP5=DRUIDA
-CP6=LADRON
-CP7=BARDO
-CP8=CLERIGO
-CP9=PIRATA
-CP10=LEÑADOR
-CP11=ASESINO
-CP12=HERRERO
+CP1=GUERRERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=TRABAJADOR
 NoSeCae=1
 
 [OBJ618]
@@ -7478,6 +7372,15 @@ ObjType=8
 Agarrable=1
 Texto=Teleport a las Catacumbas.
 
+[OBJ622]
+Name=Barrilito de cerveza
+GrhIndex=20505
+ObjType=13
+Agarrable=0
+MinAgu=100
+Valor=100
+Crucial=1 
+
 [OBJ623]
 Name=Foro
 ID=FOROGMS1
@@ -7509,9 +7412,6 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
 LingH=25000
 LingP=0
 LingO=0
@@ -7531,8 +7431,7 @@ VGrande=501
 ObjType=12
 Agarrable=1
 
-#2da Jerarq
-[OBJ628]
+[OBJ628]'2da Jerarq
 Name=Túnica de Archimago Imperial
 GrhIndex=687
 ObjType=3
@@ -7544,20 +7443,16 @@ MinDef=35
 Valor=0
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ629]
 Name=Armadura Nobilísima
@@ -7579,8 +7474,7 @@ LingP=0
 LingO=0
 SkHerreria=70
 
-#2da Jerarq
-[OBJ630]
+[OBJ630] '2da Jerarq
 Name=Túnica Celestial
 GrhIndex=767
 ObjType=3
@@ -7592,21 +7486,16 @@ MinDef=40
 Valor=0
 Crucial=0
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=CAZADOR
-CP6=PALADIN
-CP7=GUERRERO
-CP8=ASESINO
-CP9=PESCADOR
-CP10=MINERO
-CP11=LADRON
-CP12=BANDIDO
-CP13=HERRERO
+CP2=PIRATA
+CP3=CAZADOR
+CP4=PALADIN
+CP5=GUERRERO
+CP6=ASESINO
+CP7=LADRON
+CP8=BANDIDO
+CP9=TRABAJADOR
 
-#la "Jennifer" 2da jerarq
-[OBJ631]
+[OBJ631] 'la "Jennifer" 2da jerarq
 Name=Armadura de Líder Imperial (H/E/EO-M)
 GrhIndex=797
 ObjType=3
@@ -7623,9 +7512,9 @@ CP3=CLERIGO
 CP4=GUERRERO
 CP5=BARDO
 CP6=DRUIDA
+CP7=PIRATA
 
-#Enanos guerres y derivados 2da Jerarq
-[OBJ632]
+[OBJ632] 'Enanos guerres y derivados 2da Jerarq
 Name=Armadura de Guerrero Real (E/G)
 GrhIndex=776
 ObjType=3
@@ -7641,9 +7530,9 @@ CP1=MAGO
 CP2=CLERIGO
 CP3=BARDO
 CP4=DRUIDA
+CP5=PIRATA
 
-#2da jerarq
-[OBJ633]
+[OBJ633] '2da jerarq
 Name=Túnica Marrón de Mago Imperial (E/G)
 GrhIndex=802
 ObjType=3
@@ -7659,19 +7548,15 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
-#''''CAOS!
+'''''CAOS!
 
 [OBJ634]
 Name=Túnica Egregia de Mago Oscuro
@@ -7688,20 +7573,16 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ635]
-Name=Armadura Lúbrega (H/E/EO-M)
+Name=Armadura Lóbrega (H/E/EO-M)
 GrhIndex=770
 ObjType=3
 NumRopaje=104
@@ -7716,13 +7597,13 @@ CP1=DRUIDA
 CP2=CLERIGO
 CP3=BARDO
 CP4=MAGO
+CP5=PIRATA
 LingH=169
 LingP=0
 LingO=0
 SkHerreria=70
 
-#2da jerarq
-[OBJ636]
+[OBJ636] '2da jerarq
 Name=Túnica de Líder del Caos (E/G)
 GrhIndex=657
 ObjType=3
@@ -7734,21 +7615,16 @@ MaxDef=35
 MinDef=35
 Valor=0
 Crucial=0
-CP1=LEÑADOR
-CP2=PIRATA
-CP3=CARPINTERO
-CP4=CAZADOR
-CP5=PALADIN
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
+CP1=PIRATA
+CP2=CAZADOR
+CP3=PALADIN
+CP4=ASESINO
+CP5=LADRON
+CP6=BANDIDO
+CP7=GUERRERO
+CP8=TRABAJADOR
 
-#2da jerarq
-[OBJ637]
+[OBJ637] '2da jerarq
 Name=Túnica de líder del Caos
 GrhIndex=806
 ObjType=3
@@ -7760,21 +7636,16 @@ MinDef=40
 Valor=0
 Crucial=0
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=CAZADOR
-CP6=PALADIN
-CP8=ASESINO
-CP9=PESCADOR
-CP10=MINERO
-CP11=LADRON
-CP12=BANDIDO
-CP13=HERRERO
-CP14=GUERRERO
+CP2=PIRATA
+CP3=CAZADOR
+CP4=PALADIN
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=TRABAJADOR
 
-#2da Jerarq
-[OBJ638]
+[OBJ638] '2da Jerarq
 Name=Armadura de Guardián del Demonio
 GrhIndex=756
 ObjType=3
@@ -7789,9 +7660,9 @@ CP1=MAGO
 CP2=CLERIGO
 CP3=BARDO
 CP4=DRUIDA
+CP5=PIRATA
 
-#2da jerarq
-[OBJ639]
+[OBJ639] '2da jerarq
 Name=Armadura de Guardián del Demonio (E/G)
 GrhIndex=758
 ObjType=3
@@ -7807,9 +7678,9 @@ CP1=MAGO
 CP2=CLERIGO
 CP3=BARDO
 CP4=DRUIDA
+CP5=PIRATA
 
-#2da jerarq
-[OBJ640]
+[OBJ640]'2da jerarq
 Name=Túnica de Archimago del Caos
 GrhIndex=657
 ObjType=3
@@ -7821,20 +7692,16 @@ MinDef=55
 Valor=0
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ641]
 Name=Ropa de Pordiosero
@@ -7911,20 +7778,16 @@ MinDef=10
 Valor=17000
 Crucial=1
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ649]
 Name=Cartel
@@ -7953,7 +7816,7 @@ ObjType=30
 Agarrable=1
 
 [OBJ652]
-Name=Piedra de Arghál
+Name=Piedra de Arghâl
 GrhIndex=705
 ObjType=29
 
@@ -7988,7 +7851,7 @@ Nosecae=1
 RazaEnana=1
 
 [OBJ657]
-Name=Quitar la turbación
+Name=Desaturdir
 GrhIndex=609
 ObjType=24
 Agarrable=0
@@ -8002,6 +7865,7 @@ GrhIndex=932
 ObjType=2
 Agarrable=0
 Anim=8
+RazaEnanaAnim=60
 MinHit=1
 MaxHit=1
 StaffPower=1
@@ -8009,20 +7873,16 @@ StaffDamageBonus=22
 Valor=800
 Crucial=1
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ659]
 Name=Bastón Nudoso
@@ -8030,6 +7890,7 @@ GrhIndex=959
 ObjType=2
 Agarrable=0
 Anim=9
+RazaEnanaAnim=61
 MinHit=1
 MaxHit=1
 StaffPower=2
@@ -8037,20 +7898,16 @@ StaffDamageBonus=30
 Valor=2500
 Crucial=1
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ660]
 Name=Báculo Engarzado
@@ -8059,6 +7916,7 @@ GrhIndex=986
 ObjType=2
 Agarrable=0
 Anim=10
+RazaEnanaAnim=62
 MinHit=1
 MaxHit=1
 StaffPower=2
@@ -8066,24 +7924,18 @@ StaffDamageBonus=34
 Valor=13000
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
-LingH=100
-LingP=50
-LingO=0
-SkHerreria=85
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
+MaderaElfica=2900
+SkCarpinteria=85
 
 [OBJ661]
 Name=Sombrero de Aprendiz
@@ -8099,49 +7951,16 @@ DefensaMagicaMax=7
 Valor=6000
 Crucial=1
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
-
-[OBJ383]
-Name=Sombrero Mágico
-GrhIndex=18994
-ObjType=17
-NumRopaje=2
-Agarrable=0
-Anim=11
-MaxDef=1
-MinDef=1
-DefensaMagicaMin=7
-DefensaMagicaMax=10
-Valor=10000
-Crucial=1
-CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ662]
 Name=Sombrero de Mago
@@ -8157,27 +7976,24 @@ DefensaMagicaMax=15
 Valor=25000
 Crucial=1
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
 
 [OBJ663]
 Name=Arco Simple Reforzado
 GrhIndex=1024
 ObjType=2
 Agarrable=0
-Anim=7
+Anim=43
+RazaEnanaAnim=42
 Proyectil=1
 Municiones=1
 Refuerzo=4
@@ -8195,7 +8011,8 @@ Name=Arco Compuesto Reforzado
 GrhIndex=1025
 ObjType=2
 Agarrable=0
-Anim=7
+Anim=45
+RazaEnanaAnim=44
 Proyectil=1
 Municiones=1
 Refuerzo=8
@@ -8204,18 +8021,14 @@ MaxHit=10
 Valor=1788
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=HERRERO
-CP11=BARDO
-CP12=DRUIDA
-CP13=LEÑADOR
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BARDO
+CP8=DRUIDA
+CP9=TRABAJADOR
 Madera=650
 SkCarpinteria=75
 
@@ -8224,7 +8037,8 @@ Name=Arco de Cazador
 GrhIndex=1023
 ObjType=2
 Agarrable=0
-Anim=11
+Anim=47
+RazaEnanaAnim=46
 Proyectil=1
 Municiones=1
 Refuerzo=12
@@ -8233,21 +8047,17 @@ MaxHit=11
 Valor=3000
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=MAGO
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=BARDO
-CP14=DRUIDA
-CP15=LEÑADOR
-Madera=1000
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
+MaderaElfica=500
 SkCarpinteria=100
 
 [OBJ666]
@@ -8308,13 +8118,9 @@ CP2=DRUIDA
 CP3=ASESINO
 CP4=CAZADOR
 CP5=PALADIN
-CP6=HERRERO
-CP7=MINERO
-CP8=CLERIGO
-CP9=BANDIDO
-CP10=PIRATA
-CP11=PESCADOR
-CP12=LEÑADOR
+CP6=CLERIGO
+CP7=BANDIDO
+CP8=PIRATA
 
 [OBJ670]
 Name=Túnica de Mago (E/G)
@@ -8439,17 +8245,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ680]
 Name=Armadura de Gran Sacerdote Imperial
@@ -8465,17 +8267,12 @@ Crucial=1
 CP1=GUERRERO
 CP2=PALADIN
 CP3=CAZADOR
-CP4=MINERO
-CP5=HERRERO
-CP6=ASESINO
-CP7=PIRATA
-CP8=PESCADOR
-CP9=LEÑADOR
-CP10=BANDIDO
-CP11=MAGO
-CP12=CARPINTERO
-CP13=LADRON
-CP14=DRUIDA
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
 LingH=132
 LingP=0
 LingO=0
@@ -8494,7 +8291,6 @@ MinDef=15
 Valor=11830
 Crucial=1
 CP1=MAGO
-CP2=DRUIDA
 LingH=169
 LingP=0
 LingO=0
@@ -8516,17 +8312,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ683]
 Name=Armadura Lóbrega
@@ -8562,17 +8354,12 @@ Crucial=1
 CP1=GUERRERO
 CP2=PALADIN
 CP3=CAZADOR
-CP4=MINERO
-CP5=HERRERO
-CP6=ASESINO
-CP7=PIRATA
-CP8=PESCADOR
-CP9=LEÑADOR
-CP10=BANDIDO
-CP11=MAGO
-CP12=CARPINTERO
-CP13=LADRON
-CP14=DRUIDA
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
 LingH=132
 LingP=0
 LingO=0
@@ -8591,7 +8378,6 @@ MinDef=15
 Valor=11830
 Crucial=1
 CP1=MAGO
-CP2=DRUIDA
 LingH=169
 LingP=0
 LingO=0
@@ -8613,17 +8399,13 @@ CP1=GUERRERO
 CP2=PALADIN
 CP3=DRUIDA
 CP4=CAZADOR
-CP5=MINERO
-CP6=CLERIGO
-CP7=HERRERO
-CP8=ASESINO
-CP9=PIRATA
-CP10=PESCADOR
-CP11=LEÑADOR
-CP12=BANDIDO
-CP13=BARDO
-CP14=CARPINTERO
-CP15=LADRON
+CP5=CLERIGO
+CP6=ASESINO
+CP7=PIRATA
+CP8=BANDIDO
+CP9=BARDO
+CP10=LADRON
+CP11=TRABAJADOR
 
 [OBJ687]
 Name=Túnica Palatina
@@ -8696,44 +8478,18 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=250
 LingP=63
 LingO=0
 SkHerreria=80
 
 [OBJ692]
-Name=Armadura Magna
-GrhIndex=798
-ObjType=3
-NumRopaje=132
-Agarrable=0
-Real=1
-MaxDef=40
-MinDef=35
-Valor=25060
-Crucial=1
-CP1=MAGO
-CP2=DRUIDA
-CP3=LADRON
-CP4=BARDO
-CP5=PIRATA
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
-LingH=250
-LingP=63
-LingO=0
-SkHerreria=80
+Name=Teleport a Nemahuak
+GrhIndex=669
+ObjType=19
+Agarrable=1
 
 [OBJ693]
 Name=Armadura Magna (H/E/EO-M)
@@ -8753,12 +8509,8 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=250
 LingP=70
 LingO=0
@@ -8782,12 +8534,8 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=250
 LingP=63
 LingO=0
@@ -8811,12 +8559,8 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=250
 LingP=63
 LingO=0
@@ -8824,7 +8568,7 @@ SkHerreria=80
 
 [OBJ696]
 Name=Laúd Mágico
-GrhIndex=1523
+GrhIndex=685
 ObjType=18
 Agarrable=0
 StaffPower=2
@@ -8833,21 +8577,17 @@ MaxHit=1
 Valor=6030
 Crucial=0
 CP1=PIRATA
-CP2=CARPINTERO
-CP3=CAZADOR
-CP4=PALADIN
-CP5=CLERIGO
-CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=LADRON
-CP10=BANDIDO
-CP11=HERRERO
-CP12=GUERRERO
-CP13=MAGO
-CP14=DRUIDA
-CP15=LEÑADOR
-Madera=3000
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=MAGO
+CP10=DRUIDA
+CP11=TRABAJADOR
+Madera=1500
 SkCarpinteria=100
 
 [OBJ697]
@@ -8864,12 +8604,8 @@ CP2=DRUIDA
 CP3=LADRON
 CP4=GUERRERO
 CP5=PIRATA
-CP6=CARPINTERO
-CP7=HERRERO
-CP8=MINERO
-CP9=LEÑADOR
-CP10=PESCADOR
-CP11=BANDIDO
+CP6=BANDIDO
+CP7=TRABAJADOR
 LingH=50
 LingP=0
 LingO=0
@@ -8889,15 +8625,10 @@ CP2=DRUIDA
 CP3=LADRON
 CP4=GUERRERO
 CP5=PIRATA
-CP6=CARPINTERO
-CP7=HERRERO
-CP8=MINERO
-CP9=LEÑADOR
-CP10=PESCADOR
-CP11=BANDIDO
-CP12=ASESINO
-CP13=PALADIN
-CP14=CAZADOR
+CP6=BANDIDO
+CP7=PALADIN
+CP8=CAZADOR
+CP9=TRABAJADOR
 LingH=50
 LingP=50
 LingO=0
@@ -8917,14 +8648,10 @@ CP2=DRUIDA
 CP3=LADRON
 CP4=GUERRERO
 CP5=PIRATA
-CP6=CARPINTERO
-CP7=HERRERO
-CP8=MINERO
-CP9=LEÑADOR
-CP10=PESCADOR
-CP11=BANDIDO
-CP12=PALADIN
-CP13=CAZADOR
+CP6=BANDIDO
+CP7=PALADIN
+CP8=CAZADOR
+CP9=TRABAJADOR
 LingH=200
 LingP=100
 LingO=50
@@ -8961,12 +8688,8 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
-CP10=HERRERO
-CP11=CAZADOR
-CP12=LEÑADOR
+CP7=CAZADOR
+CP8=TRABAJADOR
 LingH=250
 LingP=63
 LingO=0
@@ -9027,9 +8750,6 @@ CP3=LADRON
 CP4=BARDO
 CP5=PIRATA
 CP6=ASESINO
-CP7=PESCADOR
-CP8=MINERO
-CP9=CARPINTERO
 LingH=60
 LingP=30
 LingO=0
@@ -9054,7 +8774,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Aquí descansan los restos de la Diosa Valkira, quien dej� todo de ella para ser la gran fuerza ordenadora de estas tierras durante largos a�os. El mundo de Argentum siempre te lo agradecer�.
+Texto=Aquí descansan los restos de la Diosa Valkira, quien dejó todo de ella para ser la gran fuerza ordenadora de estas tierras durante largos años. El mundo de Argentum siempre te lo agradecerá.
 
 [OBJ712]
 Name=Tumba de Jennifer
@@ -9062,7 +8782,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Aqu� descansan los restos de Jennifer de Nix. Largo fue el camino desde su infancia como gitana hasta diosa de la ciudad del sur, quien luch� con los peores males que estas tierras han conocido. Que este mundo no olvide tu sacrificio y tu lucha contra los dioses malignos que gobernaron en otras �pocas. Que tu hijo EL OSO vele por tu esp�ritu en este pac�fico lugar.
+Texto=Aquí descansan los restos de Jennifer de Nix. Largo fue el camino desde su infancia como gitana hasta diosa de la ciudad del sur, quien luchó con los peores males que estas tierras han conocido. Que este mundo no olvide tu sacrificio y tu lucha contra los dioses malignos que gobernaron en otras épocas. Que tu hijo EL OSO vele por tu espíritu en este pacífico lugar.
 
 [OBJ713]
 Name=Tumba de Jareth
@@ -9070,7 +8790,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Aqu� descansan los restos de Jareth. Antiguo luchador y l�der del ej�rcito real de Banderbill. Que tu esp�ritu proteja a la ciudad.
+Texto=Aquí descansan los restos de Jareth. Antiguo luchador y líder del ejército real de Banderbill. Que tu espíritu proteja a la ciudad.
 
 [OBJ714]
 Name=Tumba de Gold Fire
@@ -9078,7 +8798,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Aqu� descansan los restos de Gold Fire. L�der supremo del ej�rcito de Banderbill en la s�ptima era de este mundo.
+Texto=Aquí descansan los restos de Gold Fire. Líder supremo del ejército de Banderbill en la séptima era de este mundo.
 
 [OBJ715]
 Name=Tumba de Amenakhte
@@ -9086,7 +8806,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Aqu� descansan los restos de Amenakhte. L�der supremo del ej�rcito de la legi�n oscura en la novena era, gan� el respeto de este mundo a fuerza de espada y sangre.
+Texto=Aquí descansan los restos de Amenakhte. Líder supremo del ejército de la legión oscura en la novena era, ganó el respeto de este mundo a fuerza de espada y sangre.
 
 [OBJ716]
 Name=Rueca
@@ -9173,7 +8893,7 @@ ObjType=20
 Agarrable=1
 
 [OBJ730]
-Name=C�ntaro
+Name=Cántaro
 GrhIndex=99
 ObjType=20
 Agarrable=1
@@ -9221,7 +8941,7 @@ ObjType=21
 Agarrable=1
 
 [OBJ737]
-Name=C�moda
+Name=Cómoda
 GrhIndex=493
 ObjType=20
 Agarrable=1
@@ -9234,13 +8954,13 @@ Agarrable=0
 Crucial=0
 
 [OBJ739]
-Name=Ba�l Abierto
+Name=Baúl Abierto
 GrhIndex=496
 ObjType=7
 Agarrable=0
 
 [OBJ740]
-Name=Ba�l Cerrado
+Name=Baúl Cerrado
 GrhIndex=495
 ObjType=7
 Agarrable=0
@@ -9288,7 +9008,7 @@ ObjType=20
 Agarrable=1
 
 [OBJ748]
-Name=Sill�n 
+Name=Sillón 
 GrhIndex=525
 ObjType=20
 Agarrable=0
@@ -9310,13 +9030,13 @@ ObjType=20
 Agarrable=1
 
 [OBJ751]
-Name=Barril Peque�o
+Name=Barril Pequeño
 GrhIndex=580
 ObjType=20
 Agarrable=1
 
 [OBJ752]
-Name=Barril Peque�o
+Name=Barril Pequeño
 GrhIndex=582
 ObjType=20
 Agarrable=1
@@ -9335,14 +9055,13 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=LADRON
 CP4=BARDO
-CP5=PIRATA
 LingH=2
 LingP=0
 LingO=0
 SkHerreria=25
 
 [OBJ754]
-Name=R�bano
+Name=Rábano
 GrhIndex=591
 ObjType=1
 Agarrable=0
@@ -9357,7 +9076,7 @@ ObjType=20
 Agarrable=1
 
 [OBJ756]
-Name=Mueble R�stico
+Name=Mueble Rústico
 GrhIndex=594
 ObjType=20
 Agarrable=0
@@ -9521,7 +9240,7 @@ ObjType=20
 Agarrable=1
 
 [OBJ781]
-Name=�rgano 
+Name=Órgano 
 GrhIndex=1477
 ObjType=20
 Agarrable=1
@@ -9563,7 +9282,7 @@ ObjType=20
 Agarrable=1
 
 [OBJ788]
-Name=Sill�n
+Name=Sillón
 GrhIndex=1484
 ObjType=20
 Agarrable=0
@@ -9573,7 +9292,7 @@ Madera=50
 SkCarpinteria=9
 
 [OBJ789]
-Name=Sill�n
+Name=Sillón
 GrhIndex=1485
 ObjType=20
 Agarrable=0
@@ -9583,7 +9302,7 @@ Madera=60
 SkCarpinteria=15
 
 [OBJ790]
-Name=Sill�n Azul
+Name=Sillón Azul
 GrhIndex=1485
 ObjType=20
 Agarrable=0
@@ -9593,7 +9312,7 @@ Madera=60
 SkCarpinteria=15
 
 [OBJ791]
-Name=Sill�n Azul Doble
+Name=Sillón Azul Doble
 GrhIndex=1485
 ObjType=20
 Agarrable=0
@@ -9809,37 +9528,37 @@ ObjType=20
 Agarrable=1
 
 [OBJ825]
-Name=�rbol
+Name=Árbol
 GrhIndex=1529
 ObjType=4
 Agarrable=1
 
 [OBJ826]
-Name=�rbol
+Name=Árbol
 GrhIndex=1530
 ObjType=4
 Agarrable=1
 
 [OBJ827]
-Name=�rbol
+Name=Árbol
 GrhIndex=1531
 ObjType=4
 Agarrable=1
 
 [OBJ828]
-Name=�rbol
+Name=Árbol
 GrhIndex=1532
 ObjType=4
 Agarrable=1
 
 [OBJ829]
-Name=�rbol
+Name=Árbol
 GrhIndex=1533
 ObjType=4
 Agarrable=1
 
 [OBJ830]
-Name=�rbol
+Name=Árbol
 GrhIndex=1534
 ObjType=4
 Agarrable=1
@@ -9864,13 +9583,13 @@ Agarrable=0
 Crucial=0
 
 [OBJ834]
-Name=F�sil
+Name=Fósil
 GrhIndex=1538
 ObjType=20
 Agarrable=1
 
 [OBJ835]
-Name=F�sil
+Name=Fósil
 GrhIndex=1539
 ObjType=20
 Agarrable=1
@@ -9971,7 +9690,7 @@ GrhIndex=55
 ObjType=17
 NumRopaje=2
 Agarrable=0
-Anim=7
+Anim=5
 DefensaMagicaMax=0
 DefensaMagicaMin=0
 MaxDef=0
@@ -9991,24 +9710,218 @@ GrhIndex=4489
 ObjType=20
 Agarrable=1
 
+[OBJ854]
+Name=Armadura de las Sombras (E/G)
+GrhIndex=22039
+ObjType=3
+NumRopaje=539
+RazaEnana=1
+Agarrable=0
+MaxDef=37
+MinDef=30
+Valor=23030
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=BARDO
+CP4=PIRATA
+CP5=CAZADOR
+CP6=GUERRERO
+CP7=PALADIN
+CP8=BANDIDO
+CP9=CLERIGO
+CP10=LADRON
+CP11=TRABAJADOR
+LingH=329
+LingP=0
+LingO=0
+SkHerreria=75
+
+[OBJ855]
+Name=Poción Amarilla (Newbie)
+GrhIndex=540
+ObjType=11
+Agarrable=0
+TipoPocion=1
+MaxModificador=5
+MinModificador=3
+DuracionEfecto=1000
+Valor=4
+Newbie=1
+Crucial=1
+
+[OBJ856] 
+Name=Poción Azul (Newbie)
+GrhIndex=541
+ObjType=11
+Agarrable=0
+TipoPocion=4
+MaxModificador=20
+MinModificador=12
+Valor=10
+Newbie=1
+Crucial=1
+
+[OBJ857]
+Name=Poción Roja (Newbie)
+GrhIndex=542
+ObjType=11
+Agarrable=0
+TipoPocion=3
+MaxModificador=10
+MinModificador=10
+Valor=4
+Newbie=1
+Crucial=1
+
+[OBJ858]
+Name=Poción Verde (Newbie)
+GrhIndex=543
+ObjType=11
+Agarrable=0
+TipoPocion=2
+MaxModificador=6
+MinModificador=2
+DuracionEfecto=1000
+Valor=8
+Newbie=1
+Crucial=1
+
+[OBJ859]
+Name=Arco (Newbie)
+GrhIndex=750
+ObjType=2
+Agarrable=0
+Anim=41
+RazaEnanaAnim=40
+Proyectil=1
+Municiones=1
+MinHit=1
+MaxHit=2
+Newbie=1
+Valor=100
+Crucial=0
+CP1=MAGO
+CP2=DRUIDA
+
+[OBJ860]
+Name=Flecha (Newbie)
+GrhIndex=752
+ObjType=32
+Agarrable=0
+MinHit=1
+MaxHit=1
+Newbie=1
+Valor=2
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+
+[OBJ861]
+Name=Espada (Newbie)
+GrhIndex=504
+ObjType=2
+Agarrable=0
+Anim=21
+MinHit=1
+MaxHit=3
+Newbie=1
+Valor=150
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=PIRATA
+
+[OBJ862]
+Name=Bastón de Mago (Newbie)
+GrhIndex=932
+ObjType=2
+Agarrable=0
+Anim=8
+MinHit=1
+MaxHit=1
+Newbie=1
+Valor=100
+Crucial=1
+CP1=PIRATA
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
+
+[OBJ863]
+Name=Flauta Mágica (Newbie)
+GrhIndex=686
+ObjType=18
+Agarrable=0
+MinHit=1
+MaxHit=1
+Newbie=1
+Valor=100
+Crucial=0
+CP1=PIRATA
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=MAGO
+CP10=BARDO
+CP11=TRABAJADOR
+
+[OBJ864]
+Name=Laúd Mágico (Newbie)
+GrhIndex=685
+ObjType=18
+Agarrable=0
+Newbie=1
+MinHit=1
+MaxHit=1
+Valor=100
+Crucial=0
+CP1=PIRATA
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=MAGO
+CP10=DRUIDA
+CP11=TRABAJADOR
+
 [OBJ865]
 Name=Alforja
 GrhIndex=388
-ObjType=2
+ObjType=37
 Agarrable=0
 Anim=16
 Crucial=0
+Valor=15000
+MochilaType=2
 
 [OBJ866]
 Name=Mochila de Viajero
 GrhIndex=403
-ObjType=2
+ObjType=37
 Agarrable=0
 Anim=17
 MinHit=1
 MaxHit=1
-Valor=1
+Valor=10000
 Crucial=0
+MochilaType=1
 
 [OBJ867]
 Name=Túnica de Gnomo (E/G)
@@ -10028,7 +9941,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Yacen bajo esta tumba los restos del Gran Dios Chatillon, que dej� su vida por la gloria y el orden de estas tierras. 
+Texto=Yacen bajo esta tumba los restos del Gran Dios Chatillon, que dejó su vida por la gloria y el orden de estas tierras. 
 
 [OBJ869]
 Name=Tumba de Nightsorrow
@@ -10036,7 +9949,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Aqu� descansan los restos del Dios Nightsorrow, que mucho colabor� por la justicia del Argentum.
+Texto=Aquí descansan los restos del Dios Nightsorrow, que mucho colaboró por la justicia del Argentum.
 
 [OBJ870]
 Name=Tumba de Shep
@@ -10044,7 +9957,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Bajo esta piedra reposan en paz los restos del gran Shep, aquel Dios que dedic� su vida entera a estas tierras y sus habitantes.
+Texto=Bajo esta piedra reposan en paz los restos del gran Shep, aquel Dios que dedicó su vida entera a estas tierras y sus habitantes.
 
 [OBJ871]
 Name=Tumba de Patrick
@@ -10052,7 +9965,7 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Yacen aqu� los restos de Patrick, aquel bondadoso Dios que con esfuerzo y trabajo mucho di� por estas tierras.
+Texto=Yacen aquí los restos de Patrick, aquel bondadoso Dios que con esfuerzo y trabajo mucho dió por estas tierras.
 
 [OBJ872]
 Name=Tumba de EL OSO
@@ -10060,31 +9973,28 @@ GrhIndex=513
 VGrande=514
 ObjType=8
 Agarrable=1
-Texto=Aqu� descansan los restos del m�tico EL OSO, poderoso Dios que durante siglos fue el responsable de darle el h�lito de vida a este hermoso mundo gracias a su gran ciencia, bondad y dedicaci�n. Por siempre el pueblo del Argentum glorificar� tu paso por estas tierras y te estrar� eternamente agradecido.
+Texto=Aquí descansan los restos del mítico EL OSO, poderoso Dios que durante siglos fue el responsable de darle el hálito de vida a este hermoso mundo gracias a su gran ciencia, bondad y dedicación. Por siempre el pueblo del Argentum glorificará tu paso por estas tierras y te estrará eternamente agradecido.
 
 [OBJ873]
 Name=Guantes de Hurto
 GrhIndex=1469
 ObjType=18
 Agarrable=0
-DefensaMagicaMax=0
-DefensaMagicaMin=0
+Guante=1
+MinHit=1
+MaxHit=2
 Valor=5000
-Crucial=0
+Crucial=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=CAZADOR
-CP6=PALADIN
-CP7=ASESINO
-CP8=PESCADOR
-CP9=MINERO
-CP10=DRUIDA
-CP11=BARDO
-CP12=HERRERO
-CP13=GUERRERO
-CP14=CLERIGO
+CP2=PIRATA
+CP3=CAZADOR
+CP4=PALADIN
+CP5=ASESINO
+CP6=DRUIDA
+CP7=BARDO
+CP8=GUERRERO
+CP9=CLERIGO
+CP10=TRABAJADOR
 
 [OBJ874]
 Name=Cuerno de llamado Armada
@@ -10118,8 +10028,7 @@ MaxDef=0
 MinDef=0
 NoSeCae=1
 
-#enano
-[OBJ877]
+[OBJ877] 'enano
 Name=Túnica de Gran Hechicero (E/G)
 GrhIndex=15519
 ObjType=3
@@ -10131,8 +10040,7 @@ Valor=10500
 Crucial=1
 RazaEnana=1
 
-#enano mujer
-[OBJ878]
+[OBJ878] 'enano mujer
 Name=Túnica de Gran Hechicera (E/G-M)
 GrhIndex=15303
 ObjType=3
@@ -10145,8 +10053,7 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-#humano mujer
-[OBJ879]
+[OBJ879] 'humano mujer
 Name=Vestido Bordado de Gala (H/E/EO-M)
 GrhIndex=16302
 ObjType=3
@@ -10158,9 +10065,8 @@ Valor=105
 Crucial=1
 Mujer=1
 
-#humano mujer
-[OBJ880]
-Name=Túnica del Or�culo (H/E/EO-M)
+[OBJ880] 'humano mujer
+Name=Túnica del Oráculo (H/E/EO-M)
 GrhIndex=16194
 ObjType=3
 NumRopaje=336
@@ -10172,15 +10078,10 @@ Crucial=1
 Mujer=1
 CP1=GUERRERO
 CP2=CAZADOR
-CP3=PESCADOR
-CP4=MINERO
-CP5=HERRERO
-CP6=CARPINTERO
-CP7=LEÑADOR
+CP3=TRABAJADOR
 
-#humano Mujer
-[OBJ881]
-Name=Armadura de la Ci�naga (H/E/EO-M)
+[OBJ881] 'humano Mujer
+Name=Armadura de la Ciénaga (H/E/EO-M)
 GrhIndex=772
 ObjType=3
 NumRopaje=232
@@ -10191,25 +10092,20 @@ Valor=69500
 Crucial=0
 Mujer=1
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
-CP13=CAZADOR
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=CAZADOR
+CP9=TRABAJADOR
 LingH=650
 LingP=200
 LingO=0
 SkHerreria=90
 
-#humano
-[OBJ882]
+[OBJ882] 'humano
 Name=Anillas Livianas de Aventurero (H/E/EO)
 GrhIndex=16167
 ObjType=3
@@ -10227,8 +10123,7 @@ LingP=0
 LingO=0
 SkHerreria=15
 
-#humano
-[OBJ883]
+[OBJ883] 'humano
 Name=Cota de Anillas Compuesta (H/E/EO)
 GrhIndex=15627
 ObjType=3
@@ -10246,8 +10141,7 @@ LingP=0
 LingO=0
 SkHerreria=32
 
-#humano mujer
-[OBJ884]
+[OBJ884] 'humano mujer
 Name=Cota de Anillas Compuesta (H/E/EO-M)
 GrhIndex=15870
 ObjType=3
@@ -10266,8 +10160,7 @@ LingP=0
 LingO=0
 SkHerreria=32
 
-#humano
-[OBJ885]
+[OBJ885] 'humano
 Name=Armadura Liviana de Hierro (H/E/EO)
 GrhIndex=15789
 ObjType=3
@@ -10285,8 +10178,7 @@ LingP=0
 LingO=0
 SkHerreria=44
 
-#humano mujer
-[OBJ886]
+[OBJ886] 'humano mujer
 Name=Vestido de Arquera (H/E/EO-M)
 GrhIndex=15897
 ObjType=3
@@ -10298,24 +10190,19 @@ Valor=3500
 Crucial=1
 Mujer=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=PALADIN
-CP7=ASESINO
-CP8=BANDIDO
-CP9=PESCADOR
-CP10=MINERO
-CP11=BARDO
-CP12=DRUIDA
-CP13=HERRERO
-CP14=GUERRERO
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=PALADIN
+CP5=ASESINO
+CP6=BANDIDO
+CP7=BARDO
+CP8=DRUIDA
+CP9=GUERRERO
+CP10=CLERIGO
+CP11=TRABAJADOR
 
-#humano
-[OBJ887]
-Name=Cotas de Manto Marr�n (H/E/EO)
+[OBJ887] 'humano
+Name=Cotas de Manto Marrón (H/E/EO)
 GrhIndex=16221
 ObjType=3
 NumRopaje=337
@@ -10328,8 +10215,7 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=BARDO
 
-#humano
-[OBJ888]
+[OBJ888] 'humano
 Name=Brial del Bosque (H/E/EO)
 GrhIndex=16275
 ObjType=3
@@ -10345,8 +10231,7 @@ CP3=BARDO
 CP4=GUERRERO
 CP5=PALADIN
 
-#humano
-[OBJ889]
+[OBJ889] 'humano
 Name=Anillas Con Manto Verde (H/E/EO)
 GrhIndex=15600
 ObjType=3
@@ -10364,8 +10249,7 @@ LingP=0
 LingO=0
 SkHerreria=65
 
-#humano
-[OBJ890]
+[OBJ890] 'humano
 Name=Armadura de Cuero de Oso Pardo (H/E/EO)
 GrhIndex=15762
 ObjType=3
@@ -10380,8 +10264,7 @@ CP2=GUERRERO
 CP3=BARDO
 CP4=PALADIN
 
-#humano mujer
-[OBJ891]
+[OBJ891] 'humano mujer
 Name=Armadura de Cuero de Oso Pardo (H/E/EO-M)
 GrhIndex=15951
 ObjType=3
@@ -10397,8 +10280,7 @@ CP2=GUERRERO
 CP3=BARDO
 CP4=PALADIN
 
-#humano mujer
-[OBJ892]
+[OBJ892] 'humano mujer
 Name=Coraza Compuesta Roja (H/E/EO-M)
 GrhIndex=15978
 ObjType=3
@@ -10413,13 +10295,13 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 CP4=ASESINO
+CP5=PIRATA
 LingH=175
 LingP=0
 LingO=0
 SkHerreria=72
 
-#humano mujer
-[OBJ893]
+[OBJ893] 'humano mujer
 Name=Anillas Con Manto Verde (H/E/EO-M)
 GrhIndex=16005
 ObjType=3
@@ -10433,13 +10315,13 @@ Mujer=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=105
 LingP=0
 LingO=0
 SkHerreria=65
 
-#humano mujer
-[OBJ894]
+[OBJ894] 'humano mujer
 Name=Armadura de Cruzada (H/E/EO-M)
 GrhIndex=16032
 ObjType=3
@@ -10451,26 +10333,21 @@ Valor=8540
 Crucial=1
 Mujer=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=CAZADOR
-CP7=ASESINO
-CP8=BANDIDO
-CP9=PESCADOR
-CP10=MINERO
-CP11=BARDO
-CP12=DRUIDA
-CP13=HERRERO
-CP14=GUERRERO
+CP2=PIRATA
+CP3=LADRON
+CP4=CAZADOR
+CP5=ASESINO
+CP6=BANDIDO
+CP7=BARDO
+CP8=DRUIDA
+CP9=GUERRERO
+CP10=TRABAJADOR
 LingH=122
 LingP=0
 LingO=0
 SkHerreria=72
 
-#humano mujer
-[OBJ895]
+[OBJ895] 'humano mujer
 Name=Armadura Legendaria (H/E/EO-M)
 GrhIndex=761
 ObjType=3
@@ -10482,23 +10359,18 @@ Valor=358000
 Crucial=0
 Mujer=1
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=ASESINO
-CP10=HERRERO
-CP11=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
 LingH=1000
 LingP=400
 LingO=600
 SkHerreria=100
 
-#humano mujer
-[OBJ896]
+[OBJ896] 'humano mujer
 Name=Túnica de Morgana (H/E/EO-M)
 GrhIndex=16248
 ObjType=3
@@ -10511,8 +10383,7 @@ Crucial=1
 Mujer=1
 CP1=BARDO
 
-#humano
-[OBJ897]
+[OBJ897] 'humano
 Name=Cota de Piquero (H/E/EO)
 GrhIndex=16113
 ObjType=3
@@ -10525,13 +10396,13 @@ Crucial=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=105
 LingP=0
 LingO=0
 SkHerreria=65
 
-#humano Mujer
-[OBJ898]
+[OBJ898] 'humano Mujer
 Name=Armadura de Placas de Gala (H/E/EO-M)
 GrhIndex=773
 ObjType=3
@@ -10542,24 +10413,19 @@ MinDef=42
 Valor=56640
 Crucial=0
 CP1=MAGO
-CP2=MINERO
-CP3=PESCADOR
-CP4=DRUIDA
-CP5=LADRON
-CP6=BARDO
-CP7=CLERIGO
-CP8=PIRATA
-CP9=LEÑADOR
-CP10=ASESINO
-CP11=HERRERO
-CP12=CARPINTERO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=CLERIGO
+CP6=PIRATA
+CP7=ASESINO
+CP8=TRABAJADOR
 LingH=600
 LingP=122
 LingO=0
 SkHerreria=85
 
-#humano mujer
-[OBJ899]
+[OBJ899] 'humano mujer
 Name=Cota de Peto Liso (H/E/EO-M)
 GrhIndex=15924
 ObjType=3
@@ -10573,13 +10439,13 @@ Mujer=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=175
 LingP=0
 LingO=0
 SkHerreria=72
 
-#humano mujer
-[OBJ900]
+[OBJ900] 'humano mujer
 Name=Anillas Con Manto Desgastado (H/E/EO-M)
 GrhIndex=16140
 ObjType=3
@@ -10592,13 +10458,13 @@ Crucial=1
 Mujer=1
 CP1=MAGO
 CP2=DRUIDA
+CP3=PIRATA
 LingH=132
 LingP=0
 LingO=0
 SkHerreria=70
 
-#humano mujer
-[OBJ901]
+[OBJ901] 'humano mujer
 Name=Coraza Compuesta de Mujer (H/E/EO-M)
 GrhIndex=15816
 ObjType=3
@@ -10612,13 +10478,13 @@ Mujer=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=200
 LingP=0
 LingO=0
 SkHerreria=70
 
-#humano mujer
-[OBJ902]
+[OBJ902] 'humano mujer
 Name=Cota de Mallas Enteriza (H/E/EO-M)
 GrhIndex=15843
 ObjType=3
@@ -10632,14 +10498,14 @@ Mujer=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=211
 LingP=0
 LingO=0
 SkHerreria=73
 
-#humano
-[OBJ903]
-Name=Armadura de Campe�n (H/E/EO)
+[OBJ903] 'humano
+Name=Armadura de Campeón (H/E/EO)
 GrhIndex=15681
 ObjType=3
 NumRopaje=317
@@ -10652,13 +10518,13 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 CP4=ASESINO
+CP5=PIRATA
 LingH=320
 LingP=0
 LingO=0
 SkHerreria=80
 
-#humano mujer
-[OBJ904]
+[OBJ904] 'humano mujer
 Name=Placas Combinadas (H/E/EO-M)
 GrhIndex=16059
 ObjType=3
@@ -10671,13 +10537,13 @@ Mujer=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=210
 LingP=70
 LingO=0
 SkHerreria=80
 
-#humano
-[OBJ905]
+[OBJ905] 'humano
 Name=Suprema Armadura Dorada (H/E/EO)
 GrhIndex=15708
 ObjType=3
@@ -10688,25 +10554,20 @@ MaxDef=45
 Valor=51500
 Crucial=0
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=PESCADOR
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=BARDO
+CP7=DRUIDA
+CP8=TRABAJADOR
 LingH=150
 LingP=50
 LingO=100
 SkHerreria=85
 
-#humano
-[OBJ906]
-Name=Manto del Drag�n (H/E/EO)
+[OBJ906] 'humano
+Name=Manto del Dragón (H/E/EO)
 GrhIndex=16329
 ObjType=3
 NumRopaje=342
@@ -10716,24 +10577,31 @@ MaxDef=68
 Valor=622000
 Crucial=0
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=PESCADOR
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=BARDO
+CP7=DRUIDA
+CP8=TRABAJADOR
 LingH=1000
 LingP=1100
 LingO=1200
 SkHerreria=100
 
-#gnomo
-[OBJ908]
+[OBJ907]
+Name=Túnica Real Pretoriana (E/G)
+GrhIndex=13282
+ObjType=3
+NumRopaje=180
+Agarrable=0
+MaxDef=0
+MinDef=0
+Valor=675000
+RazaEnana=1
+Crucial=0
+
+[OBJ908] 'gnomo
 Name=Vestimentas de Pescador (E/G)
 GrhIndex=15276
 ObjType=3
@@ -10745,23 +10613,18 @@ Valor=100
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+CP9=PALADIN
+CP10=CAZADOR
+CP11=CLERIGO
 
-#gnomo mujer
-[OBJ909]
+[OBJ909] 'gnomo mujer
 Name=Vestido de Novia (E/G-M)
 GrhIndex=14952
 ObjType=3
@@ -10774,8 +10637,7 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-#gnomo
-[OBJ910]
+[OBJ910] 'gnomo
 Name=Atuendo de Gnomo (E/G)
 GrhIndex=14655
 ObjType=3
@@ -10787,8 +10649,7 @@ Valor=110
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ911]
+[OBJ911] 'gnomo
 Name=Vestimenta Bordo de Poblador (E/G)
 GrhIndex=15141
 ObjType=3
@@ -10800,8 +10661,7 @@ Valor=110
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ912]
+[OBJ912] 'gnomo
 Name=Vestimenta Verde de Poblador (E/G)
 GrhIndex=15087
 ObjType=3
@@ -10813,9 +10673,8 @@ Valor=110
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ913]
-Name=Ropaje de Ermita�o (E/G)
+[OBJ913] 'gnomo
+Name=Ropaje de Ermitaño (E/G)
 GrhIndex=14736
 ObjType=3
 NumRopaje=281
@@ -10826,8 +10685,7 @@ Valor=150
 Crucial=1
 RazaEnana=1
 
-#gnomo mujer
-[OBJ914]
+[OBJ914] 'gnomo mujer
 Name=Ropaje de Aldeana (E/G-M)
 GrhIndex=14925
 ObjType=3
@@ -10840,8 +10698,7 @@ Crucial=1
 Mujer=1
 RazaEnana=1
 
-#gnomo
-[OBJ915]
+[OBJ915] 'gnomo
 Name=Ropaje de Aldeano (E/G)
 GrhIndex=15006
 ObjType=3
@@ -10853,8 +10710,7 @@ Valor=150
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ916]
+[OBJ916] 'gnomo
 Name=Vestimenta Elegante (E/G)
 GrhIndex=15033
 ObjType=3
@@ -10866,8 +10722,7 @@ Valor=200
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ917]
+[OBJ917] 'gnomo
 Name=Vestimenta de Minero (E/G)
 GrhIndex=15114
 ObjType=3
@@ -10879,24 +10734,19 @@ Valor=200
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=PESCADOR
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+CP9=PALADIN
+CP10=CAZADOR
+CP11=CLERIGO
 
-#gnomo
-[OBJ918]
-Name=Gab�n de Cuero Peque�o (E/G)
+[OBJ918] 'gnomo
+Name=Gabán de Cuero Pequeño (E/G)
 GrhIndex=14574
 ObjType=3
 NumRopaje=282
@@ -10910,8 +10760,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#gnomo
-[OBJ919]
+[OBJ919] 'gnomo
 Name=Alifafe de Serpiente (E/G)
 GrhIndex=14979
 ObjType=3
@@ -10926,8 +10775,7 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=BARDO
 
-#gnomo
-[OBJ920]
+[OBJ920] 'gnomo
 Name=Ropaje de Herrero (E/G)
 GrhIndex=15060
 ObjType=3
@@ -10939,24 +10787,19 @@ Valor=275
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=PESCADOR
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+CP9=PALADIN
+CP10=CAZADOR
+CP11=CLERIGO
 
-#gnomo
-[OBJ921]
-Name=Túnica S�rica Elegante (E/G)
+[OBJ921] 'gnomo
+Name=Túnica Sírica Elegante (E/G)
 GrhIndex=15168
 ObjType=3
 NumRopaje=297
@@ -10967,9 +10810,8 @@ Valor=450
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ922]
-Name=Traje de Capit�n Pirata (E/G)
+[OBJ922] 'gnomo
+Name=Traje de Capitán Pirata (E/G)
 GrhIndex=15195
 ObjType=3
 NumRopaje=298
@@ -10980,23 +10822,18 @@ Valor=600
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PESCADOR
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=LADRON
+CP3=ASESINO
+CP4=BANDIDO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+CP8=PALADIN
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
 
-#gnomo
-[OBJ923]
+[OBJ923] 'gnomo
 Name=Traje de Noble (E/G)
 GrhIndex=15222
 ObjType=3
@@ -11008,8 +10845,7 @@ Valor=700
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ924]
+[OBJ924] 'gnomo
 Name=Vestimenta de Explorador (E/G)
 GrhIndex=14520
 ObjType=3
@@ -11024,8 +10860,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#gnomo mujer
-[OBJ925]
+[OBJ925] 'gnomo mujer
 Name=Peto de Gladiadora (E/G-M)
 GrhIndex=14547
 ObjType=3
@@ -11046,8 +10881,7 @@ LingO=0
 SkHerreria=15
 
 
-#gnomo mujer
-[OBJ926]
+[OBJ926] 'gnomo mujer
 Name=Hombreras de Amazona (E/G-M)
 GrhIndex=14601
 ObjType=3
@@ -11063,8 +10897,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#gnomo
-[OBJ927]
+[OBJ927] 'gnomo
 Name=Alifafe de Lobo (E/G)
 GrhIndex=14682
 ObjType=3
@@ -11076,24 +10909,19 @@ Valor=1400
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=PESCADOR
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=PALADIN
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
 
-#gnomo
-[OBJ928]
-Name=Barrag�n de Cazador (E/G)
+[OBJ928] 'gnomo
+Name=Barragán de Cazador (E/G)
 GrhIndex=14628
 ObjType=3
 NumRopaje=277
@@ -11104,24 +10932,19 @@ Valor=2550
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=PESCADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+CP9=PALADIN
+CP10=CLERIGO
+CP11=TRABAJADOR
 
-#gnomo
-[OBJ929]
-Name=Barrag�n Compuesto (E/G)
+[OBJ929] 'gnomo
+Name=Barragán Compuesto (E/G)
 GrhIndex=14709
 ObjType=3
 NumRopaje=280
@@ -11135,8 +10958,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=PIRATA
 
-#gnomo
-[OBJ930]
+[OBJ930] 'gnomo
 Name=Toga de Aprendiz (E/G)
 GrhIndex=15465
 ObjType=3
@@ -11148,9 +10970,8 @@ Valor=2700
 Crucial=1
 RazaEnana=1
 
-#gnomo mujer
-[OBJ931]
-Name=Vestido Elegante P�rpura (E/G-M)
+[OBJ931] 'gnomo mujer
+Name=Vestido Elegante Púrpura (E/G-M)
 GrhIndex=15384
 ObjType=3
 NumRopaje=307
@@ -11162,8 +10983,7 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-#gnomo
-[OBJ932]
+[OBJ932] 'gnomo
 Name=Sotana de Gran Hechicero (E/G)
 GrhIndex=15492
 ObjType=3
@@ -11179,15 +10999,10 @@ CP2=PALADIN
 CP3=PIRATA
 CP4=ASESINO
 CP5=BANDIDO
-CP6=LEÑADOR
-CP7=MINERO
-CP8=HERRERO
-CP9=CARPINTERO
-CP10=PESCADOR
-CP11=CAZADOR
+CP6=CAZADOR
+CP7=TRABAJADOR
 
-#gnomo mujer
-[OBJ933]
+[OBJ933] 'gnomo mujer
 Name=Cota Liviana Verde (E/G-M)
 GrhIndex=14817
 ObjType=3
@@ -11206,8 +11021,7 @@ LingP=0
 LingO=0
 SkHerreria=40
 
-#gnomo
-[OBJ934]
+[OBJ934] 'gnomo
 Name=Cotas Livianas (E/G)
 GrhIndex=14871
 ObjType=3
@@ -11222,8 +11036,7 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=BARDO
 
-#gnomo mujer
-[OBJ935]
+[OBJ935] 'gnomo mujer
 Name=Cotas con Peto Compuesto (E/G-M)
 GrhIndex=14844
 ObjType=3
@@ -11238,13 +11051,13 @@ Mujer=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=86
 LingP=0
 LingO=0
 SkHerreria=57
 
-#gnomo mujer 
-[OBJ936]
+[OBJ936] 'gnomo mujer 
 Name=Túnica de Gran Hechicera (E/G-M)
 GrhIndex=15303
 ObjType=3
@@ -11257,9 +11070,8 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-#gnomo
-[OBJ937]
-Name=Cota de Peto P�rpura (E/G)
+[OBJ937] 'gnomo
+Name=Cota de Peto Púrpura (E/G)
 GrhIndex=14790
 ObjType=3
 NumRopaje=283
@@ -11272,13 +11084,13 @@ RazaEnana=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=105
 LingP=0
 LingO=0
 SkHerreria=65
 
-#gnomo mujer
-[OBJ938]
+[OBJ938] 'gnomo mujer
 Name=Traje de Bruja (E/G-M)
 GrhIndex=15330
 ObjType=3
@@ -11292,8 +11104,7 @@ Mujer=1
 RazaEnana=1
 CP1=GUERRERO
 
-#gnomo
-[OBJ939]
+[OBJ939] 'gnomo
 Name=Túnica de Gala Roja (E/G)
 GrhIndex=15546
 ObjType=3
@@ -11305,8 +11116,7 @@ Valor=13500
 Crucial=1
 RazaEnana=1
 
-#gnomo
-[OBJ940]
+[OBJ940] 'gnomo
 Name=Cota de Mallas Enteriza (E/G)
 GrhIndex=14898
 ObjType=3
@@ -11320,13 +11130,13 @@ RazaEnana=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=219
 LingP=0
 LingO=0
 SkHerreria=75
 
-#gnomo mujer
-[OBJ941]
+[OBJ941] 'gnomo mujer
 Name=Traje Seductor de Pitonisa (E/G-M)
 GrhIndex=15411
 ObjType=3
@@ -11342,8 +11152,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#gnomo mujer
-[OBJ942]
+[OBJ942] 'gnomo mujer
 Name=Vestido de Gala Turquesa (E/G-M)
 GrhIndex=15438
 ObjType=3
@@ -11359,9 +11168,8 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#elfo
-[OBJ943]
-Name=Sobrevesta �lfica (H/E/EO)
+[OBJ943] 'elfo
+Name=Sobrevesta Élfica (H/E/EO)
 GrhIndex=16356
 ObjType=3
 NumRopaje=390
@@ -11371,9 +11179,8 @@ MaxDef=0
 Valor=50
 Crucial=1
 
-#elfo mujer
-[OBJ944]
-Name=Vestido Aur� (H/E/EO-M)
+[OBJ944] 'elfo mujer
+Name=Vestido Aurë (H/E/EO-M)
 GrhIndex=16410
 ObjType=3
 NumRopaje=343
@@ -11384,8 +11191,7 @@ Valor=50
 Crucial=1
 Mujer=1
 
-#elfo mujer
-[OBJ945]
+[OBJ945] 'elfo mujer
 Name=Vestido de Gala Alcarinqua (H/E/EO-M)
 GrhIndex=16383
 ObjType=3
@@ -11397,9 +11203,8 @@ Valor=105
 Crucial=1
 Mujer=1
 
-#elfo
-[OBJ946]
-Name=Vestimentas de Poblador �lfico (H/E/EO)
+[OBJ946] 'elfo
+Name=Vestimentas de Poblador Élfico (H/E/EO)
 GrhIndex=16625
 ObjType=3
 NumRopaje=351
@@ -11409,9 +11214,8 @@ MaxDef=1
 Valor=110
 Crucial=1
 
-#elfo
-[OBJ947]
-Name=H�bito Liviano de Ritual (H/E/EO)
+[OBJ947] 'elfo
+Name=Hábito Liviano de Ritual (H/E/EO)
 GrhIndex=16679
 ObjType=3
 NumRopaje=353
@@ -11421,8 +11225,7 @@ MaxDef=4
 Valor=420
 Crucial=1
 
-#elfo mujer
-[OBJ948]
+[OBJ948] 'elfo mujer
 Name=Vestido Bordado de Elite (H/E/EO-M)
 GrhIndex=16707
 ObjType=3
@@ -11434,9 +11237,8 @@ Valor=300
 Crucial=1
 Mujer=1
 
-#elfo Mujer
-[OBJ949]
-Name=H�bito Liviano de Ritual (H/E/EO-M)
+[OBJ949] 'elfo Mujer
+Name=Hábito Liviano de Ritual (H/E/EO-M)
 GrhIndex=16571
 ObjType=3
 NumRopaje=349
@@ -11447,9 +11249,8 @@ Valor=450
 Crucial=1
 Mujer=1
 
-#elfo mujer
-[OBJ950]
-Name=S�rica �lfica Rojiza (H/E/EO-M)
+[OBJ950] 'elfo mujer
+Name=Sírica Élfica Rojiza (H/E/EO-M)
 GrhIndex=16652
 ObjType=3
 NumRopaje=352
@@ -11460,8 +11261,7 @@ Valor=550
 Crucial=1
 Mujer=1
 
-#elfo mujer
-[OBJ951]
+[OBJ951] 'elfo mujer
 Name=Prenda de la Naturaleza (H/E/EO-M)
 GrhIndex=16598
 ObjType=3
@@ -11473,23 +11273,18 @@ Valor=700
 Crucial=1
 Mujer=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=PESCADOR
-CP12=HERRERO
-CP13=PALADIN
-CP14=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=PALADIN
+CP9=CLERIGO
+CP10=TRABAJADOR
 
-#elfo
-[OBJ952]
-Name=Ropa de Explorador �lfico (H/E/EO)
+[OBJ952] 'elfo
+Name=Ropa de Explorador Élfico (H/E/EO)
 GrhIndex=16544
 ObjType=3
 NumRopaje=348
@@ -11500,9 +11295,8 @@ Valor=850
 Crucial=1
 CP1=MAGO
 
-#elfo mujer 
-[OBJ953]
-Name=Manto �lfico P�rpura (H/E/EO-M)
+[OBJ953] 'elfo mujer 
+Name=Manto Élfico Púrpura (H/E/EO-M)
 GrhIndex=16437
 ObjType=3
 NumRopaje=345
@@ -11513,9 +11307,8 @@ Valor=3550
 Crucial=1
 Mujer=1
 
-#elfo
-[OBJ954]
-Name=H�bito de Ritual de Hombre (H/E/EO)
+[OBJ954] 'elfo
+Name=Hábito de Ritual de Hombre (H/E/EO)
 GrhIndex=16490
 ObjType=3
 NumRopaje=346
@@ -11525,9 +11318,8 @@ MaxDef=20
 Valor=8000
 Crucial=1
 
-#elfo mujer
-[OBJ955]
-Name=H�bito de Ritual Femenino (H/E/EO-M)
+[OBJ955] 'elfo mujer
+Name=Hábito de Ritual Femenino (H/E/EO-M)
 GrhIndex=16517
 ObjType=3
 NumRopaje=347
@@ -11538,8 +11330,7 @@ Valor=8000
 Crucial=1
 Mujer=1
 
-#elfo mujer 
-[OBJ956]
+[OBJ956] 'elfo mujer 
 Name=Valya Silmeanar (H/E/EO-M)
 GrhIndex=16734
 ObjType=3
@@ -11558,8 +11349,7 @@ LingP=34
 LingO=0
 SkHerreria=73
 
-#enano mujer
-[OBJ957]
+[OBJ957] 'enano mujer
 Name=Vestido de Enana (E/G-M)
 GrhIndex=17274
 ObjType=3
@@ -11572,9 +11362,8 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-#enano
-[OBJ958]
-Name=Vestimenta Com�n (E/G)
+[OBJ958] 'enano
+Name=Vestimenta Común (E/G)
 GrhIndex=17139
 ObjType=3
 NumRopaje=370
@@ -11585,8 +11374,7 @@ Valor=50
 Crucial=1
 RazaEnana=1
 
-#enano
-[OBJ959]
+[OBJ959] 'enano
 Name=Ropa de Carpintero Enano (E/G)
 GrhIndex=17220
 ObjType=3
@@ -11598,24 +11386,19 @@ Valor=100
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=PESCADOR
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+CP9=PALADIN
+CP10=CAZADOR
+CP11=CLERIGO
 
-#enano
-[OBJ960]
-Name=Ropa de LEÑADOR (E/G)
+[OBJ960] 'enano
+Name=Ropa de Leñador (E/G)
 GrhIndex=17085
 ObjType=3
 NumRopaje=368
@@ -11626,23 +11409,18 @@ Valor=100
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=PESCADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+CP9=PALADIN
+CP10=CAZADOR
+CP11=CLERIGO
 
-#enano
-[OBJ961]
+[OBJ961] 'enano
 Name=Ropa de Minero (E/G)
 GrhIndex=16977
 ObjType=3
@@ -11654,23 +11432,18 @@ Valor=125
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PIRATA
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=PESCADOR
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=PIRATA
+CP3=LADRON
+CP4=ASESINO
+CP5=BANDIDO
+CP6=GUERRERO
+CP7=BARDO
+CP8=DRUIDA
+CP9=PALADIN
+CP10=CAZADOR
+CP11=CLERIGO
 
-#enano
-[OBJ962]
+[OBJ962] 'enano
 Name=Túnica Elegante (E/G)
 GrhIndex=17166
 ObjType=3
@@ -11682,8 +11455,7 @@ Valor=200
 Crucial=1
 RazaEnana=1
 
-#enano
-[OBJ963]
+[OBJ963] 'enano
 Name=Ropaje de Luchador de Las Minas (E/G)
 GrhIndex=17247
 ObjType=3
@@ -11696,8 +11468,7 @@ Crucial=1
 RazaEnana=1
 Hombre=1
 
-#enano
-[OBJ964]
+[OBJ964] 'enano
 Name=Ropa de Viajero (E/G)
 GrhIndex=16896
 ObjType=3
@@ -11709,8 +11480,7 @@ Valor=400
 Crucial=1
 RazaEnana=1
 
-#enano
-[OBJ965]
+[OBJ965] 'enano
 Name=Antigua Armadura Dorada (E/G)
 GrhIndex=16869
 ObjType=3
@@ -11723,8 +11493,7 @@ Crucial=1
 RazaEnana=1
 CP1=DRUIDA
 
-#enano
-[OBJ966]
+[OBJ966] 'enano
 Name=Alifafe de Pirata (E/G)
 GrhIndex=17193
 ObjType=3
@@ -11736,23 +11505,18 @@ Valor=3200
 Crucial=1
 RazaEnana=1
 CP1=MAGO
-CP2=LEÑADOR
-CP3=PESCADOR
-CP4=CARPINTERO
-CP5=LADRON
-CP6=ASESINO
-CP7=BANDIDO
-CP8=GUERRERO
-CP9=MINERO
-CP10=BARDO
-CP11=DRUIDA
-CP12=HERRERO
-CP13=PALADIN
-CP14=CAZADOR
-CP15=CLERIGO
+CP2=LADRON
+CP3=ASESINO
+CP4=BANDIDO
+CP5=GUERRERO
+CP6=BARDO
+CP7=DRUIDA
+CP8=PALADIN
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
 
-#enano
-[OBJ967]
+[OBJ967] 'enano
 Name=Ropas de Buscador (E/G)
 GrhIndex=17301
 ObjType=3
@@ -11763,9 +11527,9 @@ MaxDef=17
 Valor=3600
 Crucial=1
 RazaEnana=1
+CP1=PIRATA
 
-#enano
-[OBJ968]
+[OBJ968] 'enano
 Name=Armadura Grabada Completa (E/G)
 GrhIndex=16842
 ObjType=3
@@ -11778,13 +11542,13 @@ Crucial=1
 RazaEnana=1
 CP1=MAGO
 CP2=DRUIDA
+CP2=PIRATA
 LingH=64
 LingP=0
 LingO=0
 SkHerreria=47
 
-#enano
-[OBJ969]
+[OBJ969] 'enano
 Name=Túnica Dorada de Gala (E/G)
 GrhIndex=16950
 ObjType=3
@@ -11796,8 +11560,7 @@ Valor=10000
 Crucial=1
 RazaEnana=1
 
-#enano
-[OBJ970]
+[OBJ970] 'enano
 Name=Armadura de Placas Livianas Thor (E/G)
 GrhIndex=16761
 ObjType=3
@@ -11812,8 +11575,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#enano
-[OBJ971]
+[OBJ971] 'enano
 Name=Armadura Metal Oscuro (E/G)
 GrhIndex=16923
 ObjType=3
@@ -11827,13 +11589,13 @@ RazaEnana=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=196
 LingP=0
 LingO=0
 SkHerreria=70
 
-#enano
-[OBJ972]
+[OBJ972] 'enano
 Name=Túnica de Mahal (E/G)
 GrhIndex=17004
 ObjType=3
@@ -11847,8 +11609,7 @@ RazaEnana=1
 CP1=BARDO
 CP2=DRUIDA
 
-#enano mujer
-[OBJ973]
+[OBJ973] 'enano mujer
 Name=Armadura de Placas Livianas Thor (E/G-M)
 GrhIndex=17328
 ObjType=3
@@ -11863,13 +11624,13 @@ Mujer=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=141
 LingP=29
 LingO=0
 SkHerreria=70
 
-#enano
-[OBJ974]
+[OBJ974] 'enano
 Name=Capa de Monje Cocida con Mithril (E/G)
 GrhIndex=17058
 ObjType=3
@@ -11883,9 +11644,9 @@ RazaEnana=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 
-#enano
-[OBJ975]
+[OBJ975] 'enano
 Name=Cota de Mallas Larga (E/G)
 GrhIndex=17031
 ObjType=3
@@ -11899,13 +11660,13 @@ RazaEnana=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=330
 LingP=0
 LingO=0
 SkHerreria=80
 
-#enano
-[OBJ976]
+[OBJ976] 'enano
 Name=Armadura Pesada de Hierro y Bronce (E/G)
 GrhIndex=16788
 ObjType=3
@@ -11919,13 +11680,13 @@ RazaEnana=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 LingH=600
 LingP=100
 LingO=0
 SkHerreria=85
 
-#elfo oscuro
-[OBJ977]
+[OBJ977] 'elfo oscuro
 Name=Vestimenta Esclava (EO)
 GrhIndex=17409
 ObjType=3
@@ -11937,8 +11698,7 @@ Valor=50
 Crucial=1
 RazaDrow=1
 
-#elfo oscuro
-[OBJ978]
+[OBJ978] 'elfo oscuro
 Name=Harapos de la Cueva (EO)
 GrhIndex=17382
 ObjType=3
@@ -11950,8 +11710,7 @@ Valor=105
 Crucial=1
 RazaDrow=1
 
-#elfo oscuro
-[OBJ979]
+[OBJ979] 'elfo oscuro
 Name=Armadura Maghtere Roja (EO)
 GrhIndex=17355
 ObjType=3
@@ -11968,8 +11727,7 @@ LingO=0
 SkHerreria=63
 CP1=DRUIDA
 
-#elfo oscuro
-[OBJ980]
+[OBJ980] 'elfo oscuro
 Name=Armadura de Combate Liviana (EO)
 GrhIndex=16706
 ObjType=3
@@ -11982,8 +11740,7 @@ Crucial=1
 RazaDrow=1
 CP1=DRUIDA
 
-#elfo oscuro
-[OBJ981]
+[OBJ981] 'elfo oscuro
 Name=Piwafwi de Fuego (EO)
 GrhIndex=17436
 ObjType=3
@@ -11995,8 +11752,7 @@ Valor=11000
 Crucial=1
 RazaDrow=1
 
-#elfo oscuro
-[OBJ982]
+[OBJ982] 'elfo oscuro
 Name=Armadura Melee de Explorador (EO)
 GrhIndex=17463
 ObjType=3
@@ -12010,9 +11766,9 @@ RazaDrow=1
 CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
+CP4=PIRATA
 
-#elfo oscuro
-[OBJ983]
+[OBJ983] 'elfo oscuro
 Name=Piwafwi Purpura del Silencio (EO-M)
 GrhIndex=17490
 ObjType=3
@@ -12028,8 +11784,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#elfo oscuro
-[OBJ984]
+[OBJ984] 'elfo oscuro
 Name=Piwafwi Alto Narbondel (EO)
 GrhIndex=17517
 ObjType=3
@@ -12044,8 +11799,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#elfo oscuro mujer
-[OBJ985]
+[OBJ985] 'elfo oscuro mujer
 Name=Piwafwi Socere de Lloth (EO-M)
 GrhIndex=17544
 ObjType=3
@@ -12061,8 +11815,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-#Túnica de Druida
-[OBJ986]
+[OBJ986] Túnica de Druida
 Name=Túnica de Druida
 GrhIndex=681
 ObjType=3
@@ -12078,5 +11831,842 @@ Name=Estatua de Otto Wallace
 GrhIndex=0
 VGrande=18996
 ObjType=8
+Agarrable=1
+Texto= 
+
+[OBJ988]
+Name=Teleport a Arghal
+GrhIndex=669
+ObjType=19
+Agarrable=1
+
+[OBJ989]
+Name=Estatua del Panda
+GrhIndex=0
+VGrande=19715
+ObjType=8
+Agarrable=1
+Texto= 
+
+[OBJ990]
+Name=Mazo del Juicio
+GrhIndex=20233
+ObjType=2
 Agarrable=0
-Texto=
+Anim=32
+RazaEnanaAnim=68
+MinHit=5
+MaxHit=16
+Valor=4100
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=LADRON
+CP4=BARDO
+CP5=PIRATA
+CP6=GUERRERO
+CP7=BANDIDO
+CP8=CAZADOR
+CP9=TRABAJADOR
+
+[OBJ991]
+Name=Vestimentas Olímpicas (EO)
+GrhIndex=20239
+ObjType=3
+NumRopaje=479
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+RazaDrow=1
+
+[OBJ992]
+Name=Vestimentas Olímpicas (EO-M)
+GrhIndex=20266
+ObjType=3
+NumRopaje=480
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+Mujer=1
+RazaDrow=1
+
+[OBJ993]
+Name=Vestimentas Olímpicas (E-M)
+GrhIndex=20293
+ObjType=3
+NumRopaje=481
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+Mujer=1
+RazaEnana=1
+
+[OBJ994]
+Name=Vestimentas Olímpicas (E)
+GrhIndex=20320
+ObjType=3
+NumRopaje=482
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+RazaEnana=1
+
+[OBJ995]
+Name=Vestimentas Olímpicas (H-M)
+GrhIndex=20347
+ObjType=3
+NumRopaje=483
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+Mujer=1
+RazaDrow=0
+
+[OBJ996]
+Name=Vestimentas Olímpicas (H)
+GrhIndex=20374
+ObjType=3
+NumRopaje=484
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+RazaDrow=0
+
+[OBJ997]
+Name=Antorcha Olímpica
+GrhIndex=20405
+ObjType=20
+Agarrable=1
+
+[OBJ998]
+Name=Vestimentas Olímpicas (G-M)
+GrhIndex=20406
+ObjType=3
+NumRopaje=485
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+Mujer=1
+RazaEnana=1
+
+[OBJ999]
+Name=Vestimentas Olímpicas (G)
+GrhIndex=20433
+ObjType=3
+NumRopaje=486
+Agarrable=0
+MinDef=1
+MaxDef=1
+Valor=50
+Crucial=0
+RazaEnana=1
+
+[OBJ1000]
+Name=Antorcha Olímpica de Mano
+GrhIndex=20460
+ObjType=2
+Agarrable=0
+Anim=33
+RazaEnanaAnim=69
+MinHit=1
+MaxHit=8
+Valor=210
+Crucial=0
+
+[OBJ1001]
+Name=Casco de Águila
+GrhIndex=20238
+ObjType=17
+NumRopaje=2
+Agarrable=0
+Anim=14
+MaxDef=5
+MinDef=1
+Valor=2500
+Crucial=0
+CP1=PIRATA
+
+[OBJ1002]
+Name=Casco de Lobo
+GrhIndex=20066
+ObjType=17
+NumRopaje=2
+Agarrable=0
+Anim=11
+MaxDef=7
+MinDef=3
+Valor=4200
+Crucial=1
+CP1=MAGO
+
+[OBJ1003]
+Name=Casco de Oso
+GrhIndex=20067
+ObjType=17
+NumRopaje=2
+Agarrable=0
+Anim=12
+MaxDef=15
+MinDef=10
+DefensaMagicaMin=4
+DefensaMagicaMax=6
+Valor=10500
+Crucial=1
+CP1=MAGO
+CP2=PALADIN
+CP3=LADRON
+CP4=BARDO
+CP5=PIRATA
+CP6=GUERRERO
+CP7=ASESINO
+CP8=BANDIDO
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
+
+[OBJ1004]
+Name=Casco de Tigre
+GrhIndex=20068
+ObjType=17
+NumRopaje=2
+Agarrable=0
+Anim=13
+MaxDef=15
+MinDef=10
+DefensaMagicaMin=8
+DefensaMagicaMax=12
+Valor=18500
+Crucial=1
+CP1=MAGO
+CP2=PALADIN
+CP3=LADRON
+CP4=BARDO
+CP5=PIRATA
+CP6=GUERRERO
+CP7=ASESINO
+CP8=BANDIDO
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
+
+[OBJ1005]
+Name=Hacha de leña Elfica
+GrhIndex=603
+ObjType=2
+Agarrable=0
+Anim=37
+MinHit=3
+MaxHit=8
+Valor=1750
+Crucial=1
+LingH=15
+LingP=0
+LingO=0
+SkHerreria=30
+
+[OBJ1006]
+Name=Leña Elfica
+GrhIndex=1999
+ObjType=14
+Agarrable=0
+Valor=5
+Crucial=0
+
+[OBJ1007]
+Name=Invocar Mascota
+GrhIndex=609
+ObjType=24
+Agarrable=0
+Valor=100000
+Crucial=1
+HechizoIndex=46
+
+[OBJ1008]
+Name=Árbol élfico
+GrhIndex=18802
+ObjType=36
+Agarrable=1
+
+[OBJ1009]
+Name=Cuchillas
+GrhIndex=2341
+ObjType=2
+Anim=38
+RazaEnanaAnim=39
+Agarrable=0
+Proyectil=1
+MinHit=7
+MaxHit=16
+Valor=50
+Crucial=1
+Acuchilla=1
+LingH=1
+SkHerreria=10
+CP1=MAGO
+CP2=PALADIN
+CP3=LADRON
+CP4=BARDO
+CP5=DRUIDA
+CP6=GUERRERO
+CP7=ASESINO
+CP8=BANDIDO
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
+
+[OBJ1010]
+Name=Sombrero Pirata
+GrhIndex=22034
+ObjType=17
+Agarrable=0
+Anim=15
+MaxDef=6
+MinDef=2
+DefensaMagicaMin=5
+DefensaMagicaMax=9
+Valor=25000
+Crucial=1
+CP1=MAGO
+CP2=PALADIN
+CP3=LADRON
+CP4=BARDO
+CP5=DRUIDA
+CP6=GUERRERO
+CP7=ASESINO
+CP8=BANDIDO
+CP9=CAZADOR
+CP10=CLERIGO
+CP11=TRABAJADOR
+
+[OBJ1011]
+Name=Farola
+GrhIndex=2639
+ObjType=20
+Agarrable=1
+
+[OBJ1012]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=0
+
+[OBJ1013]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=1
+
+[OBJ1014]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=2
+
+[OBJ1015]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=3
+
+[OBJ1016]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=4
+
+[OBJ1017]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=5
+
+[OBJ1018]
+Name=Teleport
+GrhIndex=669
+ObjType=19
+Agarrable=1
+Radio=6
+
+[OBJ1019]
+Name=Cartel Asesino
+GrhIndex=21969
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Asesinos
+
+[OBJ1020]
+Name=Cartel Bandido
+GrhIndex=21970
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Bandidos
+
+[OBJ1021]
+Name=Cartel Bardo
+GrhIndex=21971
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Bardos
+
+[OBJ1022]
+Name=Cartel Clérigo
+GrhIndex=21972
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Clérigos
+
+[OBJ1023]
+Name=Cartel Druida
+GrhIndex=21973
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Druidas
+
+[OBJ1024]
+Name=Cartel Guerrero
+GrhIndex=21974
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Guerreros
+
+[OBJ1025]
+Name=Cartel Cazador
+GrhIndex=21975
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Cazadores
+
+[OBJ1026]
+Name=Cartel Ladrón
+GrhIndex=21976
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Ladrónes
+
+[OBJ1027]
+Name=Cartel Mago
+GrhIndex=21977
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Magos
+
+[OBJ1028]
+Name=Cartel Paladín
+GrhIndex=21978
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Paladínes
+
+[OBJ1029]
+Name=Cartel Pirata
+GrhIndex=21979
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Piratas
+
+[OBJ1030]
+Name=Cartel Trabajador
+GrhIndex=21980
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Trabajadores
+
+[OBJ1031]
+Name=Cartel Gremio de Trabajadores
+GrhIndex=4909
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Gremio de Trabajadores
+
+[OBJ1032]
+Name=Cartel Leñadores
+GrhIndex=3716
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Leñadores
+
+[OBJ1033]' Cartel Ulla
+Name=Cartel
+GrhIndex=4986
+VGrande=4987
+ObjType=8
+Agarrable=1
+Texto=Desde que se desató la Guerra que conllevó a la Plaga, Ullathorpe dejó de formar parte del Reino de Banderbill, para pasar a ser una zona comercial e ideal para todos los viajeros. Aquí podrás pasear, comerciar y platicar libremente, mientras no disturbes a sus pobladores, la paz ni el orden.
+Alcaldía de Ullathorpe.
+
+
+[OBJ1034]' Cartel NIx
+Name=Cartel
+GrhIndex=4986
+VGrande=4987
+ObjType=8
+Agarrable=1
+Texto=Has llegado a la gran Ciudad de Nix, conocida por tener la Bahía de los Pescadores, actualmente es una ciudad neutral, ya que el Reino de Banderbill decidió retirar sus Guardias Reales. Desde ese momento Nix se convirtió en una zona portuaria ideal para los pescadores. Esta es una ciudad libre, donde ningún reino apuesta sus guardias, regida bajo nuestras propias leyes de paz y seguridad.
+
+[OBJ1035]
+Name=Cartel Nemahuak
+GrhIndex=4923
+VGrande=501
+ObjType=8
+Agarrable=1
+Texto=Bienvenido a Nemahuak
+
+[OBJ1036]
+Name=Guantes de Lucha
+GrhIndex=22033
+ObjType=18
+Agarrable=0
+Guante=1
+MinHit=2
+MaxHit=5
+Valor=10000
+Crucial=1
+CP1=MAGO
+CP2=PIRATA
+CP3=CAZADOR
+CP4=PALADIN
+CP5=ASESINO
+CP6=DRUIDA
+CP7=BARDO
+CP8=GUERRERO
+CP9=CLERIGO
+CP10=TRABAJADOR
+
+[OBJ1037]
+Name=Escudo Legionario
+GrhIndex=23069
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=9
+Caos=1
+MaxDef=1
+MinDef=1
+Valor=350
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=PIRATA
+CP4=LADRON
+LingH=5
+LingP=0
+LingO=0
+SkHerreria=20
+
+[OBJ1038]
+Name=Escudo Real
+GrhIndex=23068
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=7
+Real=1
+MaxDef=1
+MinDef=1
+Valor=350
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=PIRATA
+CP4=LADRON
+LingH=5
+LingP=0
+LingO=0
+SkHerreria=20
+
+[OBJ1039]
+Name=Manto de Sacerdote del Imperio (E/G)
+GrhIndex=23150
+ObjType=3
+NumRopaje=547
+Agarrable=0
+MaxDef=12
+MinDef=6
+Valor=2900
+Crucial=1
+Real=1
+RazaEnana=1
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
+
+[OBJ1040]
+Name=Armadura de Gran Sacerdote Imperial (E/G)
+GrhIndex=23096
+ObjType=3
+NumRopaje=545
+Agarrable=0
+Real=1
+RazaEnana=1
+MaxDef=22
+MinDef=15
+Valor=9240
+Crucial=1
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
+LingH=132
+LingP=0
+LingO=0
+SkHerreria=70
+
+[OBJ1041]
+Name=Manto de Sacerdote Demoníaco (E/G)
+GrhIndex=23177
+ObjType=3
+NumRopaje=548
+Agarrable=0
+Caos=1
+RazaEnana=1
+MaxDef=12
+MinDef=6
+Valor=2900
+Crucial=1
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
+
+[OBJ1042]
+Name=Armadura de Gran Sacerdote Demoníaco (E/G)
+GrhIndex=23123
+ObjType=3
+NumRopaje=546
+Agarrable=0
+Caos=1
+RazaEnana=1
+MaxDef=22
+MinDef=15
+Valor=9240
+Crucial=1
+CP1=GUERRERO
+CP2=PALADIN
+CP3=CAZADOR
+CP4=ASESINO
+CP5=PIRATA
+CP6=BANDIDO
+CP7=MAGO
+CP8=LADRON
+CP9=TRABAJADOR
+LingH=132
+LingP=0
+LingO=0
+SkHerreria=70
+
+[OBJ1043]
+Name=No ves nada interesante.
+GrhIndex=0
+ObjType=19
+Agarrable=1
+
+[OBJ1044]
+Name=Túnica (H/E/EO) (Newbie)
+GrhIndex=606
+ObjType=3
+NumRopaje=46
+Agarrable=0
+MaxDef=0
+MinDef=0
+Valor=40
+Newbie=1
+Crucial=1
+
+[OBJ1045]
+Name=Túnica (E/G) (Newbie)
+GrhIndex=1208
+ObjType=3
+NumRopaje=159
+Agarrable=0
+RazaEnana=1
+MaxDef=0
+MinDef=0
+Valor=40
+Newbie=1
+Crucial=1
+
+[OBJ1046]
+Name=Armadura de Cuero (H/E/EO) (Newbie)
+GrhIndex=526
+ObjType=3
+NumRopaje=22
+Agarrable=0
+MaxDef=1
+MinDef=0
+Valor=60
+Crucial=1
+Newbie=1
+CP1=MAGO
+CP2=BARDO
+CP3=DRUIDA
+
+[OBJ1047]
+Name=Armadura de Cuero (E/G) (Newbie)
+GrhIndex=1154
+ObjType=3
+NumRopaje=157
+Agarrable=0
+RazaEnana=1
+MaxDef=1
+MinDef=0
+Valor=60
+Newbie=1
+Crucial=1
+CP1=MAGO
+CP2=BARDO
+CP3=DRUIDA
+
+[OBJ1048]
+Name=Escudo (Newbie)
+GrhIndex=712
+ObjType=16
+NumRopaje=2
+Agarrable=0
+Anim=3
+MaxDef=1
+MinDef=0
+Valor=100
+Newbie=1
+Crucial=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=PIRATA
+CP4=LADRON
+
+[OBJ1049]
+Name=Laúd Élfico
+GrhIndex=1523
+ObjType=18
+Agarrable=0
+StaffPower=2
+MinHit=1
+MaxHit=1
+Valor=11000
+Crucial=0
+CP1=PIRATA
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=MAGO
+CP10=DRUIDA
+CP11=TRABAJADOR
+MaderaElfica=1150
+SkCarpinteria=100
+
+[OBJ1050]
+Name=Flauta Élfica
+GrhIndex=1522
+ObjType=18
+Agarrable=0
+StaffPower=2
+MinHit=1
+MaxHit=1
+Valor=10000
+Crucial=0
+CP1=PIRATA
+CP2=CAZADOR
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=MAGO
+CP10=BARDO
+CP11=TRABAJADOR
+MaderaElfica=1000
+SkCarpinteria=100
+
+[OBJ1051]
+Name=Casco Simple (Newbie)
+GrhIndex=559
+ObjType=17
+NumRopaje=2
+Agarrable=0
+Anim=1
+MaxDef=1
+MinDef=1
+Valor=120
+Crucial=1
+Newbie=1
+CP1=MAGO
+CP2=DRUIDA
+CP3=PIRATA
+
+[OBJ1052]
+Name=Capucha de Cazador (Newbie)
+GrhIndex=467
+ObjType=17
+NumRopaje=2
+Agarrable=0
+Anim=9
+MaxDef=1
+MinDef=1
+Valor=125
+Crucial=1
+Newbie=1
+CP1=PIRATA
+CP2=MAGO
+CP3=PALADIN
+CP4=CLERIGO
+CP5=ASESINO
+CP6=LADRON
+CP7=BANDIDO
+CP8=GUERRERO
+CP9=BARDO
+CP10=DRUIDA
+CP11=TRABAJADOR
