@@ -34,6 +34,8 @@ import com.ao.model.user.ConnectedUser;
 import com.ao.security.SecurityManager;
 import com.ao.service.LoginService;
 import com.ao.service.ValidatorService;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class LoginServiceImpl implements LoginService {
 	
@@ -63,9 +65,13 @@ public class LoginServiceImpl implements LoginService {
 	private final ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
 	private String currentClientVersion = config.getVersion();
 	
+	private int initialAvailableSkills;
+	
+	
+	
 	@Override
 	public void connectNewCharacter(ConnectedUser user, String username, String password, byte bRace,
-			byte bGender, byte bArchetype, byte[] skills, String mail, 
+			byte bGender, byte bArchetype, int head, String mail, 
 			byte homeland, String clientHash,
 			String version) throws LoginErrorException {
 		
@@ -117,17 +123,7 @@ public class LoginServiceImpl implements LoginService {
 		
 		// TODO: Check for valid homeland.
 		
-		// Prevent skills hack.
-		int totalSkills = 0;
-		
-		for(int i = 0; i < skills.length; i++) {
-			totalSkills += skills[i];
-			
-			if (totalSkills > INITIAL_SKILL_POINTS || skills[i] > INITIAL_SKILL_POINTS || skills[1] < 0) {
-				throw new LoginErrorException(INVALID_SKILLS_POINTS_ERROR);
-			}
-			
-		}
+		// TODO: Check for valid head
 		
 		// First, we have to create the new account.
 		Account acc;
@@ -147,9 +143,10 @@ public class LoginServiceImpl implements LoginService {
 		// Once we have the account, lets create the character itself!
 		try {
 			UserCharacter chara = charDAO.create(username, race, gender, archetype,
-					skills, homeland, user.getAttribute(Attribute.STRENGTH), 
+					head, homeland, user.getAttribute(Attribute.STRENGTH), 
 					user.getAttribute(Attribute.AGILITY), user.getAttribute(Attribute.INTELLIGENCE),
-					user.getAttribute(Attribute.CHARISMA), user.getAttribute(Attribute.CONSTITUTION) );
+					user.getAttribute(Attribute.CHARISMA), user.getAttribute(Attribute.CONSTITUTION),
+					initialAvailableSkills);
 		} catch (DAOException e) {
 			accDAO.delete(username);
 			
@@ -164,6 +161,12 @@ public class LoginServiceImpl implements LoginService {
 		
 	}
 	
+	@Inject
+	public LoginServiceImpl(@Named("initialAvailableSkills") int initialAvailableSkills) {
+		super();
+		this.initialAvailableSkills = initialAvailableSkills;
+	}
+
 	@Override
 	public void connectExistingCharacter(ConnectedUser user, String name, String password, String version,
 			String clientHash) throws LoginErrorException {

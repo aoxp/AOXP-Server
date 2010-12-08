@@ -45,7 +45,7 @@ public interface LoginService {
 	 * @param race 			The character's race.
 	 * @param gender 		The character's gender.
 	 * @param archetype 	The character's archetype.
-	 * @param skills 		The character's skills.
+	 * @param head	 		The character's head.
 	 * @param mail 			The character's mail.
 	 * @param homeland 		The character's homeland.
 	 * @param clientHash 	The client's integrity check hash.
@@ -54,7 +54,7 @@ public interface LoginService {
 	 * @throws LoginErrorException
 	 */
 	void connectNewCharacter(ConnectedUser user, String username, String password, byte race,
-			byte gender, byte archetype, byte[] skills, String mail, 
+			byte gender, byte archetype, int head, String mail, 
 			byte homeland, String clientHash,
 			String version) throws LoginErrorException;
 	

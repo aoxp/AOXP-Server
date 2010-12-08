@@ -274,8 +274,8 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 
 	@Override
 	public UserCharacter create(String name, Race race, Gender gender,
-			UserArchetype archetype, byte[] skills, byte homeland, byte strength,
-			byte agility, byte intelligence, byte charisma, byte constitution)
+			UserArchetype archetype, int head, byte homeland, byte strength,
+			byte agility, byte intelligence, byte charisma, byte constitution, int initialAvailableSkills)
 			throws DAOException, NameAlreadyTakenException {
 		Ini chara = new Ini();
 		
@@ -288,7 +288,8 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		chara.put(INIT_HEADER, SHIELD_KEY, NO_SHIELD);
 		chara.put(INIT_HEADER, HELMET_KEY, NO_HELMET);
 		chara.put(INIT_HEADER, UPTIME_KEY, 0);
-		// TODO: Assign head and body.
+		chara.put(INIT_HEADER, HEAD_KEY, head);
+		// TODO: Assign body.
 		// TODO: Assign position depending on the homeland.
 		// TODO: Save last ip?
 		
@@ -328,8 +329,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		chara.put(ATTRIBUTES_HEADER, String.format(ATTRIBUTE_FORMAT_KEY, Attribute.INTELLIGENCE.ordinal() + 1), intelligence);
 		
 		for (byte i = 1; i < Skill.AMOUNT; i++) {
-			chara.put(SKILLS_HEADER, String.format(SKILL_KEY_FORMAT, i + 1), skills[i]);
+			chara.put(SKILLS_HEADER, String.format(SKILL_KEY_FORMAT, i + 1), 0);
 		}
+		
+		chara.put(STATS_HEADER, FREE_SKILL_POINTS_KEY, initialAvailableSkills);
 		
 		chara.put(STATS_HEADER, GOLD_KEY, 0);
 		chara.put(STATS_HEADER, DEPOSITED_GOLD_KEY, 0);

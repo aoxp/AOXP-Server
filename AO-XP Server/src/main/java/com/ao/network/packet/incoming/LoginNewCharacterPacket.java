@@ -54,13 +54,13 @@ public class LoginNewCharacterPacket implements IncomingPacket {
 		byte race = buffer.get();
 		byte gender = buffer.get();
 		byte archetype = buffer.get();
-		byte[] skills = buffer.getBlock(Skill.AMOUNT);
+		int head = buffer.get();
 		String mail = buffer.getASCIIString();
 		byte homeland = buffer.get();
 		
 		try {
 			service.connectNewCharacter((ConnectedUser) connection.getUser(), 
-					nick, password, race, gender, archetype, skills, mail,
+					nick, password, race, gender, archetype, head, mail,
 					homeland, clientHash, version);
 			
 		} catch (LoginErrorException e) {
