@@ -28,7 +28,6 @@ import com.ao.mock.MockFactory;
 import com.ao.network.Connection;
 import com.ao.network.DataBuffer;
 import com.ao.network.packet.IncomingPacket;
-import com.ao.security.Hashing;
 import com.ao.security.SecurityManager;
 import com.ao.service.LoginService;
 import com.ao.service.login.LoginServiceImpl;
@@ -43,10 +42,10 @@ public class LoginExistingCharacterPacketTest {
 	private static final byte CLIENT_MINOR = 12;
 	private static final byte CLIENT_VERSION = 2;
 	
-	Connection connection;
-	IncomingPacket packet;
-	ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
-	SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
+	private Connection connection;
+	private IncomingPacket packet;
+	private ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
+	private SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
 	
 	@Before
 	public void setUp() throws Exception {

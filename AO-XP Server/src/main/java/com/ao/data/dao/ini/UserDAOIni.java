@@ -202,6 +202,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	public Account retrieve(String username) throws DAOException {
 		Ini chara = readCharFile(username);
 		
+		if (null == chara) {
+			return null;
+		}
+		
 		// Add the single character's name.
 		Set<String> characters = new HashSet<String>();
 		characters.add(username);
@@ -394,6 +398,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	@Override
 	public UserCharacter load(String username) throws DAOException {
 		Ini chara = readCharFile(username);
+		
+		if (null == chara) {
+			return null;
+		}
 		
 		int assassinPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, ASSASSIN_POINTS_KEY));
 		int banditPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, BANDIT_POINTS_KEY));
