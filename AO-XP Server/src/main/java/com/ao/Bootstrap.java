@@ -19,6 +19,7 @@
 package com.ao;
 
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
@@ -102,13 +103,14 @@ public class Bootstrap {
 	 * @throws IOException
 	 */
 	private static void startNetworking(AOXPServer server) throws IOException {
+		byte[] addr = {0,0,0,0};
 		
 		logger.info("Initializing server socket...");
 		
 		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 		
 		ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
-		InetSocketAddress endpoint = new InetSocketAddress(InetAddress.getLocalHost(), config.getServerListeningPort());
+		InetSocketAddress endpoint = new InetSocketAddress(Inet4Address.getByAddress(addr), config.getServerListeningPort());
 		
 		serverSocketChannel.socket().bind(endpoint, config.getListeningBacklog());
 		
