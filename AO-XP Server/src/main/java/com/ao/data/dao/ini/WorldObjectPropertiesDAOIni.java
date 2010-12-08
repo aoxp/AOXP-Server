@@ -48,16 +48,15 @@ import com.ao.model.worldobject.properties.MineralProperties;
 import com.ao.model.worldobject.properties.MusicalInstrumentProperties;
 import com.ao.model.worldobject.properties.ParchmentProperties;
 import com.ao.model.worldobject.properties.RangedWeaponProperties;
+import com.ao.model.worldobject.properties.ResourceSourceProperties;
 import com.ao.model.worldobject.properties.SignProperties;
 import com.ao.model.worldobject.properties.StaffProperties;
 import com.ao.model.worldobject.properties.StatModifyingItemProperties;
 import com.ao.model.worldobject.properties.TeleportProperties;
 import com.ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
-import com.ao.model.worldobject.properties.ResourceSourceProperties;
 import com.ao.model.worldobject.properties.WeaponProperties;
 import com.ao.model.worldobject.properties.WoodProperties;
 import com.ao.model.worldobject.properties.WorldObjectProperties;
-
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 

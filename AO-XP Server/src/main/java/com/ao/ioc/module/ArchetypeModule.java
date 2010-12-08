@@ -36,7 +36,6 @@ import com.ao.model.character.archetype.PaladinArchetype;
 import com.ao.model.character.archetype.PirateArchetype;
 import com.ao.model.character.archetype.ThiefArchetype;
 import com.ao.model.character.archetype.WarriorArchetype;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 

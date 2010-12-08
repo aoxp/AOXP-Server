@@ -22,7 +22,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.BufferUnderflowException;
 
 import com.ao.context.ApplicationContext;
-import com.ao.model.character.Skill;
 import com.ao.model.user.ConnectedUser;
 import com.ao.network.Connection;
 import com.ao.network.DataBuffer;
