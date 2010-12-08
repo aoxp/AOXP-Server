@@ -2,62 +2,60 @@
 #########TIPOS  DE OBJETOS (ObjType)##########
 ##############################################
 
-' 1: Comida
-' 2: Armas
-' 3: Armaduras
-' 4: Arboles
-' 5: Dinero
-' 6: Puertas
-' 7: Objetos contenedores (x ej. bolsas y cofres)
-' 8: Carteles
-' 9: Llaves
-' 10: Foros
-' 11: Pociones
-' 12: Libros
-' 13: Bebida
-' 14: Leña
-' 15: Fogata
-' 16: escudos
-' 17: cascos
-' 18: Anillos
-' 19: telep
-' 20: Muebles
-' 21: joyas
-' 22: yacimiento
-' 23: metales
-' 24: pergaminos
-' 25: aura
-' 26: Instrumentos Musicales
-' 27: Yunque
-' 28: Fragua
-' 29: Gemas
-' 30: Flores
-' 31: barcos
-' 32: flechas
-' 33: botellas vacias
-' 34: botellas llenas
-' 35: manchas
+# 1: Comida
+# 2: Armas
+# 3: Armaduras
+# 4: Arboles
+# 5: Dinero
+# 6: Puertas
+# 7: Objetos contenedores (x ej. bolsas y cofres)
+# 8: Carteles
+# 9: Llaves#
+# 10: Foros
+# 11: Pociones
+# 12: Libros
+# 13: Bebida
+# 14: Leña
+# 15: Fogata
+# 16: escudos
+# 17: cascos
+# 18: Anillos
+# 19: telep
+# 20: Muebles
+# 21: joyas
+# 22: yacimiento
+# 23: metales
+# 24: pergaminos
+# 25: aura
+# 26: Instrumentos Musicales
+# 27: Yunque
+# 28: Fragua
+# 29: Gemas
+# 30: Flores
+# 31: barcos
+# 32: flechas
+# 33: botellas vacias#
+# 34: botellas llenas
+# 35: manchas
 
 
 ##############################################
 #############TIPOS  DE POCIONES###############
 ##############################################
 
-'1 Modifica la Agilidad
-'2 Modifica la Fuerza
-'3 Repone HP
-'4 Repone Mana
-'5 Cura Envenenamiento
+#1 Modifica la Agilidad#
+#2 Modifica la Fuerza
+#3 Repone HP
+#4 Repone Mana
+#5 Cura Envenenamiento
 
-
-##############################################
+#############################################
 #############NRO DE OBJS LIBRES###############
 ##############################################
 
-'cuando se pueda hay que utilizarlos, intentando
-usar primero los nros más bajos.
+#cuando se pueda hay que utilizarlos, intentando usar primero los nros más bajos.
 
-(Todos usados)
+#(Todos usados)
 
 
 ##############################################
@@ -66,8 +64,8 @@ usar primero los nros más bajos.
 
 
 [INIT]
-'aca va el numero de OBJ mas alto, NO la cantidad de OBJs.
-'esto sirve para que los GMS puedan ver la lista completa de items para crear en una ventanita.
+#aca va el numero de OBJ mas alto, NO la cantidad de OBJs.
+#esto sirve para que los GMS puedan ver la lista completa de items para crear en una ventanita.
 NumOBJs=1052
 
 
@@ -142,7 +140,8 @@ GrhIndex=7002
 ObjType=4
 Agarrable=1
 
-[OBJ7] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ7] 
 Name=Puerta de madera abierta
 GrhIndex=5592
 ObjType=6
@@ -153,7 +152,8 @@ IndexAbierta=7
 IndexCerrada=8
 IndexCerradaLlave=8
 
-[OBJ8] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ8] 
 Name=Puerta de madera cerrada
 GrhIndex=5593
 ObjType=6
@@ -245,7 +245,8 @@ LingO=0
 Upgrade=165
 SkHerreria=10
 
-[OBJ16] 'CASA RUINAS
+#CASA RUINAS
+[OBJ16] 
 Name=Puerta de madera abierta 2
 GrhIndex=5599
 ObjType=6
@@ -256,7 +257,8 @@ IndexAbierta=16
 IndexCerrada=17
 IndexCerradaLlave=17
 
-[OBJ17] 'CASA RUINAS
+#CASA RUINAS
+[OBJ17] 
 Name=Puerta de madera cerrada 2
 GrhIndex=5600
 ObjType=6
@@ -545,40 +547,45 @@ MinDef=0
 Valor=80
 Crucial=1
 
-[OBJ46]'Nieve 1
+#Nieve 1
+[OBJ46]
 Name=Árbol
 GrhIndex=641
 ObjType=4
 Agarrable=1
 
-[OBJ47]'Nieve 2
+#Nieve 2
+[OBJ47]
 Name=Árbol
 GrhIndex=642
 ObjType=4
 Agarrable=1
 
-[OBJ48]'Nieve 3
+#Nieve 3
+[OBJ48]
 Name=Árbol
 GrhIndex=641
 ObjType=4
 Agarrable=1
 
-[OBJ49]'Nieve 4
+#Nieve 4
+[OBJ49]
 Name=Árbol
 GrhIndex=644
 ObjType=4
 Agarrable=1
 
-[OBJ50]'Nieve 5
+#Nieve 5
+[OBJ50]
 Name=Árbol
 GrhIndex=647
 ObjType=4
 Agarrable=1
 
 
-'<--------------------------------CASAS ULLA-------------------------------->
+#<--------------------------------CASAS ULLA-------------------------------->
 
-'<<<<<<<<<<<casa 1 Ullathorpe>>>>>>>>>>>>
+#<<<<<<<<<<<casa 1 Ullathorpe>>>>>>>>>>>>
 [OBJ51]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -703,9 +710,9 @@ GrhIndex=506
 ObjType=1
 MinHam=10
 Valor=2
-Respawn=1 ' Hace ReSpawn
+Respawn=1 
 
-'<<<<<<<<<<<casa 2 Ullathorpe>>>>>>>>>>>>
+#<<<<<<<<<<<casa 2 Ullathorpe>>>>>>>>>>>>
 [OBJ65] 
 Name=Llave Ullathorpe Casa Nro 2
 GrhIndex=509
@@ -751,7 +758,7 @@ IndexAbierta=66
 IndexCerrada=67
 IndexCerradaLlave=68
 
-'<<<<<<<<<<<casa 3 Ullathorpe>>>>>>>>>>>>
+#<<<<<<<<<<<casa 3 Ullathorpe>>>>>>>>>>>>
 [OBJ69] 
 Name=Llave Ullathorpe Casa Nro 3
 GrhIndex=509
@@ -797,7 +804,7 @@ IndexAbierta=70
 IndexCerrada=71
 IndexCerradaLlave=72
 
-'<<<<<<<<<<<casa 4 Ullathorpe>>>>>>>>>>>>
+#<<<<<<<<<<<casa 4 Ullathorpe>>>>>>>>>>>>
 [OBJ73] 
 Name=Llave Ullathorpe Casa Nro 4
 GrhIndex=509
@@ -929,9 +936,9 @@ Agarrable=1
 Texto=Residencia Privada.
 
 
-'<--------------------------------CASAS NIX-------------------------------->
+#<--------------------------------CASAS NIX-------------------------------->
 
-'<<<<<<<<<<<casa 1 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 1 Nix>>>>>>>>>>>>
 [OBJ87]
 Name=Llave Nix casa Nro 1
 GrhIndex=509
@@ -977,7 +984,7 @@ IndexAbierta=88
 IndexCerrada=89
 IndexCerradaLlave=90
 
-'<<<<<<<<<<<casa 2 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 2 Nix>>>>>>>>>>>>
 [OBJ91]
 Name=Llave Nix Casa Nro 2
 GrhIndex=509
@@ -1023,7 +1030,7 @@ IndexAbierta=92
 IndexCerrada=93
 IndexCerradaLlave=94
 
-'<<<<<<<<<<<casa 3 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 3 Nix>>>>>>>>>>>>
 [OBJ95]
 Name=Llave Nix Casa Nro 3
 GrhIndex=509
@@ -1069,7 +1076,7 @@ IndexAbierta=96
 IndexCerrada=97
 IndexCerradaLlave=98
 
-'<<<<<<<<<<<casa 4 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 4 Nix>>>>>>>>>>>>
 [OBJ99]
 Name=Llave Nix Casa Nro 4
 GrhIndex=509
@@ -1113,7 +1120,7 @@ IndexAbierta=100
 IndexCerrada=101
 IndexCerradaLlave=102
 
-'<<<<<<<<<<<casa 5 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 5 Nix>>>>>>>>>>>>
 [OBJ103]
 Name=Llave Nix Casa Nro 5
 GrhIndex=509
@@ -1159,7 +1166,7 @@ IndexAbierta=104
 IndexCerrada=105
 IndexCerradaLlave=106
 
-'<<<<<<<<<<<casa 6 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 6 Nix>>>>>>>>>>>>
 [OBJ107]
 Name=Llave Nix Casa Nro 6
 GrhIndex=509
@@ -1205,7 +1212,7 @@ IndexAbierta=108
 IndexCerrada=109
 IndexCerradaLlave=110
 
-'<<<<<<<<<<<casa 7 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 7 Nix>>>>>>>>>>>>
 [OBJ111]
 Name=Llave Nix Casa Nro 7
 GrhIndex=509
@@ -1251,7 +1258,7 @@ IndexAbierta=112
 IndexCerrada=113
 IndexCerradaLlave=114
 
-'<<<<<<<<<<<casa 8 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 8 Nix>>>>>>>>>>>>
 [OBJ115]
 Name=Llave Nix Casa Nro 8
 GrhIndex=509
@@ -1297,7 +1304,7 @@ IndexAbierta=116
 IndexCerrada=117
 IndexCerradaLlave=118
 
-'<<<<<<<<<<<casa 9 Nix>>>>>>>>>>>>
+#<<<<<<<<<<<casa 9 Nix>>>>>>>>>>>>
 [OBJ119]
 Name=Llave Nix Casa Nro 9
 GrhIndex=509
@@ -1646,7 +1653,7 @@ MinHam=75
 Valor=8
 Crucial=1
 
-'<--------------------MANSION NIX------------------------>
+#<--------------------MANSION NIX------------------------>
 [OBJ140]
 Name=Llave Nix Mansión
 GrhIndex=509
@@ -1843,6 +1850,7 @@ SkCarpinteria=9
 
 [OBJ163]
 Name=Cuchara
+
 GrhIndex=587
 ObjType=20
 Agarrable=0
@@ -1933,10 +1941,11 @@ MinDef=0
 Valor=50
 Crucial=1
 
-'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-'			Puertas Catacumbas Ulla/NiX
-'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-[OBJ171] 'CASA RUINAS
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#			Puertas Catacumbas Ulla/NiX
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#CASA RUINAS
+[OBJ171] 
 Name=Puerta
 GrhIndex=5599
 ObjType=6
@@ -1948,7 +1957,8 @@ IndexAbierta=171
 IndexCerrada=172
 IndexCerradaLlave=173
 
-[OBJ172] 'CASA RUINAS
+ #CASA RUINAS
+[OBJ172]
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -1960,7 +1970,8 @@ IndexAbierta=171
 IndexCerrada=172
 IndexCerradaLlave=173
 
-[OBJ173] 'CASA RUINAS
+#CASA RUINAS
+[OBJ173] 
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -1980,7 +1991,8 @@ Agarrable=0
 Clave=17
 Crucial=0
 
-[OBJ175] 'CASA RUINAS
+#CASA RUINAS
+[OBJ175] 
 Name=Puerta
 GrhIndex=5599
 ObjType=6
@@ -1992,7 +2004,8 @@ IndexAbierta=175
 IndexCerrada=176
 IndexCerradaLlave=177
 
-[OBJ176] 'CASA RUINAS
+#CASA RUINAS
+[OBJ176] 
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2004,7 +2017,8 @@ IndexAbierta=175
 IndexCerrada=176
 IndexCerradaLlave=177
 
-[OBJ177] 'CASA RUINAS
+#CASA RUINAS
+[OBJ177] 
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2024,7 +2038,8 @@ Agarrable=0
 Clave=18
 Crucial=0
 
-[OBJ179] 'CASA RUINAS
+#CASA RUINAS
+[OBJ179] 
 Name=Puerta
 GrhIndex=5599
 ObjType=6
@@ -2036,7 +2051,8 @@ IndexAbierta=179
 IndexCerrada=180
 IndexCerradaLlave=181
 
-[OBJ180] 'CASA RUINAS
+#CASA RUINAS
+[OBJ180] 
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2048,7 +2064,8 @@ IndexAbierta=179
 IndexCerrada=180
 IndexCerradaLlave=181
 
-[OBJ181] 'CASA RUINAS
+#CASA RUINAS
+[OBJ181] 
 Name=Puerta
 GrhIndex=5600
 ObjType=6
@@ -2068,7 +2085,8 @@ Agarrable=0
 Clave=19
 Crucial=0
 
-[OBJ183] 'FUERTE SUR OESTE ULLA
+#FUERTE SUR OESTE ULLA
+[OBJ183] 
 Name=Llave Fuerte
 GrhIndex=509
 ObjType=9
@@ -2076,7 +2094,8 @@ Agarrable=0
 Clave=20
 Crucial=0
 
-[OBJ184]'Fuerte suroeste Ullathorpe
+#Fuerte suroeste Ullathorpe
+[OBJ184]
 Name=Puerta
 GrhIndex=5592
 ObjType=6
@@ -2088,7 +2107,8 @@ IndexAbierta=184
 IndexCerrada=185
 IndexCerradaLlave=186
 
-[OBJ185]'Fuerte suroeste Ullathorpe
+#Fuerte suroeste Ullathorpe
+[OBJ185]
 Name=Puerta
 GrhIndex=5593
 ObjType=6
@@ -2100,7 +2120,8 @@ IndexAbierta=184
 IndexCerrada=185
 IndexCerradaLlave=186
 
-[OBJ186]'Fuerte suroeste Ullathorpe
+#Fuerte suroeste Ullathorpe
+[OBJ186]
 Name=Puerta
 GrhIndex=5593
 ObjType=6
@@ -2600,7 +2621,8 @@ MinDef=0
 Valor=40
 Crucial=1
 
-[OBJ241] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ241] 
 Name=Puerta de madera abierta
 GrhIndex=8685
 ObjType=6
@@ -2611,7 +2633,8 @@ IndexAbierta=241
 IndexCerrada=242
 IndexCerradaLlave=241
 
-[OBJ242] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ242] 
 Name=Puerta de madera cerrada
 GrhIndex=8684
 ObjType=6
@@ -2646,9 +2669,10 @@ LingO=0
 Upgrade=392
 SkHerreria=70
 
-'-------------------------------------------------------
+#-------------------------------------------------------
 
-[OBJ244] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ244]
 Name=Puerta de madera abierta
 GrhIndex=9199
 ObjType=6
@@ -2659,7 +2683,8 @@ IndexAbierta=244
 IndexCerrada=245
 IndexCerradaLlave=245
 
-[OBJ245] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ245]
 Name=Puerta de madera cerrada
 GrhIndex=9193
 ObjType=6
@@ -2670,9 +2695,10 @@ IndexAbierta=244
 IndexCerrada=245
 IndexCerradaLlave=245
 
-'-------------------------------------------------------
+#-------------------------------------------------------
 
-[OBJ246] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ246]
 Name=Puerta de madera abierta
 GrhIndex=9200
 ObjType=6
@@ -2683,7 +2709,8 @@ IndexAbierta=246
 IndexCerrada=247
 IndexCerradaLlave=247
 
-[OBJ247] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ247] 
 Name=Puerta de madera cerrada
 GrhIndex=9194
 ObjType=6
@@ -2694,9 +2721,10 @@ IndexAbierta=246
 IndexCerrada=247
 IndexCerradaLlave=247
 
-'------------------------------------------------------
+#------------------------------------------------------
 
-[OBJ248] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ248]
 Name=Puerta de madera abierta
 GrhIndex=9201
 ObjType=6
@@ -2707,7 +2735,8 @@ IndexAbierta=248
 IndexCerrada=249
 IndexCerradaLlave=249
 
-[OBJ249] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ249]
 Name=Puerta de madera cerrada
 GrhIndex=9195
 ObjType=6
@@ -2718,9 +2747,10 @@ IndexAbierta=248
 IndexCerrada=249
 IndexCerradaLlave=249
 
-'------------------------------------------------------
+#------------------------------------------------------
 
-[OBJ250] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ250] 
 Name=Puerta de madera abierta
 GrhIndex=9202
 ObjType=6
@@ -2731,7 +2761,8 @@ IndexAbierta=250
 IndexCerrada=251
 IndexCerradaLlave=251
 
-[OBJ251] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ251]
 Name=Puerta de madera cerrada
 GrhIndex=9196
 ObjType=6
@@ -2742,9 +2773,10 @@ IndexAbierta=250
 IndexCerrada=251
 IndexCerradaLlave=251
 
-'------------------------------------------------------
+#------------------------------------------------------
 
-[OBJ252] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ252]
 Name=Puerta de madera abierta
 GrhIndex=9203
 ObjType=6
@@ -2755,7 +2787,8 @@ IndexAbierta=252
 IndexCerrada=253
 IndexCerradaLlave=253
 
-[OBJ253] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ253] 
 Name=Puerta de madera cerrada
 GrhIndex=9197
 ObjType=6
@@ -2766,9 +2799,10 @@ IndexAbierta=252
 IndexCerrada=253
 IndexCerradaLlave=253
 
-'------------------------------------------------------
+#------------------------------------------------------
 
-[OBJ254] 'Puerta para negocio porque no tiene clave
+ #Puerta para negocio porque no tiene clave
+[OBJ254]
 Name=Puerta de madera abierta
 GrhIndex=9204
 ObjType=6
@@ -2779,7 +2813,8 @@ IndexAbierta=254
 IndexCerrada=255
 IndexCerradaLlave=255
 
-[OBJ255] 'Puerta para negocio porque no tiene clave
+#Puerta para negocio porque no tiene clave
+[OBJ255] 
 Name=Puerta de madera cerrada
 GrhIndex=9198
 ObjType=6
@@ -2790,7 +2825,7 @@ IndexAbierta=254
 IndexCerrada=255
 IndexCerradaLlave=255
 
-'------------------------------------------------------
+#------------------------------------------------------
 
 [OBJ256]
 Name=Foro
@@ -2847,9 +2882,9 @@ Agarrable=1
 Texto=El Gran Consejo.
 
 
-'<------------------------------CASAS BANDERBILL----------------------------->
+#<------------------------------CASAS BANDERBILL----------------------------->
 
-'<<<<<<<<<<<<<<<Casa 1 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 1 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ263]
 Name=Puerta abierta
@@ -2896,7 +2931,7 @@ Clave=25
 Valor=6000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 2 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 2 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ267]
 Name=Puerta abierta
@@ -2943,7 +2978,7 @@ Clave=26
 Valor=4600000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 3 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 3 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ271]
 Name=Puerta abierta
@@ -2990,7 +3025,7 @@ Clave=27
 Valor=6000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 4 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 4 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ275]
 Name=Puerta abierta
@@ -3038,7 +3073,7 @@ Clave=28
 Valor=3250000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 5 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 5 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ279]
 Name=Puerta abierta
@@ -3085,7 +3120,7 @@ Clave=29
 Valor=4600000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 6 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 6 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ283]
 Name=Puerta abierta
@@ -3132,7 +3167,7 @@ Clave=30
 Valor=6000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 7 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 7 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ287]
 Name=Puerta abierta
@@ -3179,7 +3214,7 @@ Clave=31
 Valor=3250000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 8 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 8 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ291]
 Name=Puerta abierta
@@ -3226,7 +3261,7 @@ Clave=32
 Valor=6000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 9 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 9 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ295]
 Name=Puerta abierta
@@ -3273,7 +3308,7 @@ Clave=33
 Valor=6000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Gran Consejo de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Gran Consejo de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ299]
 Name=Puerta abierta
@@ -3320,7 +3355,7 @@ Clave=34
 Valor=0
 Crucial=0
 
-'<<<<<<<<<<<<<<<Puerta del vault 1 del gran consejo de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Puerta del vault 1 del gran consejo de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ303]
 Name=Puerta abierta
@@ -3367,7 +3402,7 @@ Clave=35
 Valor=0
 Crucial=0
 
-'<<<<<<<<<<<<<<<Puerta del vault 2 del gran consejo de Rázgul>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Puerta del vault 2 del gran consejo de Rázgul>>>>>>>>>>>>>>>>>
 
 [OBJ307]
 Name=Puerta abierta
@@ -3413,7 +3448,7 @@ Agarrable=0
 Clave=36
 Crucial=0
 
-'<<<<<<<<<<<<<<<Puerta de la Bóveda Goliath>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Puerta de la Bóveda Goliath>>>>>>>>>>>>>>>>>
 
 [OBJ311]
 Name=Puerta abierta
@@ -3460,7 +3495,7 @@ Clave=78
 Valor=0
 Crucial=0
 
-'-------------------------------------------------------
+#-------------------------------------------------------
 
 [OBJ315]
 Name=Cartel Muelles
@@ -3504,7 +3539,7 @@ Valor=290000
 Crucial=1
 HechizoIndex=11
 
-'<<<<<<<<<<<<<<<Casa 10 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 10 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ320]
 Name=Puerta abierta
@@ -3551,7 +3586,7 @@ Clave=37
 Valor=8000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 11 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 11 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ324]
 Name=Puerta abierta
@@ -3598,7 +3633,7 @@ Clave=38
 Valor=9000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 12 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 12 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ328]
 Name=Puerta abierta
@@ -3645,7 +3680,7 @@ Clave=39
 Valor=8000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 13 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 13 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ332]
 Name=Puerta abierta
@@ -3692,7 +3727,7 @@ Clave=40
 Valor=8000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 14 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 14 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ336]
 Name=Puerta abierta
@@ -3739,7 +3774,7 @@ Clave=41
 Valor=10000000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 15 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 15 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ340]
 Name=Puerta abierta
@@ -3786,7 +3821,7 @@ Clave=42
 Valor=2500000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 16 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 16 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ344]
 Name=Puerta abierta
@@ -3833,7 +3868,7 @@ Clave=43
 Valor=2500000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 17 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 17 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ348]
 Name=Puerta abierta
@@ -3880,7 +3915,7 @@ Clave=44
 Valor=2500000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 18 de Banderbill>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 18 de Banderbill>>>>>>>>>>>>>>>>>
 
 [OBJ352]
 Name=Puerta abierta
@@ -3927,7 +3962,7 @@ Clave=45
 Valor=2500000
 Crucial=0
 
-'-------------------------------------------------------
+#-------------------------------------------------------
 
 [OBJ356]
 Name=Armadura de las Sombras
@@ -4200,7 +4235,7 @@ CP8=LADRON
 CP9=TRABAJADOR
 
 
-'<<<<<<<<<<<<<<<Puerta Isla Beleta>>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Puerta Isla Beleta>>>>>>>>>>>>>>>>>
 
 [OBJ373]
 Name=Puerta abierta
@@ -4247,7 +4282,7 @@ Clave=49
 Valor=0
 Crucial=0
 
-'-------------------------------------------------------
+#-------------------------------------------------------
 
 [OBJ377]
 Name=Foro
@@ -4770,9 +4805,9 @@ ObjType=30
 Valor=100
 Crucial=0
 
-'<-------------------------------CASAS LINDOS------------------------------->
+#<-------------------------------CASAS LINDOS------------------------------->
 
-'<<<<<<<<<<<Casa 1 de Lindos>>>>>>>>>>>>
+#<<<<<<<<<<<Casa 1 de Lindos>>>>>>>>>>>>
 [OBJ417]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -4818,7 +4853,7 @@ Clave=50
 Valor=1800000
 Crucial=0
 
-'<<<<<<<<<<<Casa 2 de Lindos>>>>>>>>>>>>
+#<<<<<<<<<<<Casa 2 de Lindos>>>>>>>>>>>>
 [OBJ421]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -4864,7 +4899,7 @@ Clave=51
 Valor=1800000
 Crucial=0
 
-'<<<<<<<<<<<Casa 3 de Lindos>>>>>>>>>>>>
+#<<<<<<<<<<<Casa 3 de Lindos>>>>>>>>>>>>
 [OBJ425]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -4910,7 +4945,7 @@ Clave=52
 Valor=1800000
 Crucial=0
 
-'<<<<<<<<<<<Casa 4 de Lindos>>>>>>>>>>>>
+#<<<<<<<<<<<Casa 4 de Lindos>>>>>>>>>>>>
 [OBJ429]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -4956,7 +4991,7 @@ Clave=53
 Valor=1000000
 Crucial=0
 
-'<<<<<<<<<<<Casa 5 de Lindos>>>>>>>>>>>>
+#<<<<<<<<<<<Casa 5 de Lindos>>>>>>>>>>>>
 [OBJ433]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -5002,7 +5037,7 @@ Clave=54
 Valor=1000000
 Crucial=0
 
-'<<<<<<<<<<<Casa 6 de Lindos>>>>>>>>>>>>
+#<<<<<<<<<<<Casa 6 de Lindos>>>>>>>>>>>>
 [OBJ437]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -5048,7 +5083,7 @@ Clave=55
 Valor=1000000
 Crucial=0
 
-'<<<<< Abadía de Lindos >>>>>>>>
+#<<<<< Abadía de Lindos >>>>>>>>
 [OBJ441]
 Name=Puerta de madera abierta
 GrhIndex=9203
@@ -5094,7 +5129,7 @@ Clave=56
 Valor=20000000
 Crucial=0
 
-'<<<<< Vault Abadía >>>>>>>>
+#<<<<< Vault Abadía >>>>>>>>
 [OBJ445]
 Name=Puerta de madera abierta
 GrhIndex=9203
@@ -5140,7 +5175,7 @@ Clave=57
 Valor=0
 Crucial=0
 
-'<<<<< PRISIÓN BANDERBILL >>>>>>>>
+#<<<<< PRISIÓN BANDERBILL >>>>>>>>
 
 [OBJ449]
 Name=Puerta de madera abierta
@@ -5214,7 +5249,8 @@ GrhIndex=669
 ObjType=19
 Agarrable=1
 
-[OBJ457]'Prisión 1
+#Prisión 1
+[OBJ457]
 Name=Cartel
 GrhIndex=718
 VGrande=501
@@ -5222,7 +5258,8 @@ ObjType=8
 Agarrable=1
 Texto=Prisión del Reino
 
-[OBJ458]'Prisión 2
+#Prisión 2
+[OBJ458]
 Name=Cartel
 GrhIndex=720
 VGrande=501
@@ -5230,7 +5267,8 @@ ObjType=8
 Agarrable=1
 Texto=Prisión
 
-[OBJ459]'Abadía de Lindos
+#Abadía de Lindos
+[OBJ459]
 Name=Cartel
 GrhIndex=721
 VGrande=501
@@ -5251,7 +5289,8 @@ MaxHit=3
 Apuñala=1
 Crucial=0
 
-[OBJ461] 'Repone HP
+#Repone HP
+[OBJ461] 
 Name=Poción Roja (Newbie)
 GrhIndex=542
 ObjType=11
@@ -5262,7 +5301,8 @@ MaxModificador=30
 MinModificador=30
 Crucial=0
 
-[OBJ462] 'Mod Fuerza
+#Mod Fuerza
+[OBJ462] 
 Name=Poción Verde (Newbie)
 GrhIndex=543
 ObjType=11
@@ -6813,7 +6853,8 @@ GrhIndex=874
 ObjType=30
 Agarrable=1
 
-[OBJ574]'Yendo a Arghal
+#Yendo a Arghal
+[OBJ574]
 Name=Cartel
 GrhIndex=875
 VGrande=501
@@ -6835,7 +6876,8 @@ GrhIndex=529
 ObjType=10
 Agarrable=1
 
-[OBJ577]'Mesón Río Grande
+#Mesón Río Grande
+[OBJ577]
 Name=Cartel
 GrhIndex=876
 VGrande=501
@@ -6843,7 +6885,8 @@ ObjType=8
 Agarrable=1
 Texto=El refugio de los aventureros, lugar propicio para beber y emprender nuevas aventuras.
 
-[OBJ578]'Arghâl Central
+#Arghâl Central
+[OBJ578]
 Name=Cartel
 GrhIndex=877
 VGrande=501
@@ -6851,7 +6894,8 @@ ObjType=8
 Agarrable=1
 Texto=Al este se encuentra el centro histórico de Arghâl.
 
-[OBJ579]'Arghâl Central
+#Arghâl Central
+[OBJ579]
 Name=Cartel
 GrhIndex=878
 VGrande=501
@@ -6859,9 +6903,9 @@ ObjType=8
 Agarrable=1
 Texto=El famoso espacio donde se congregan los más grandes artistas y poetas de Argentum.
 
-'<-------------------------------CASAS ARKHEIN------------------------------->
+#<-------------------------------CASAS ARKHEIN------------------------------->
 
-'<<<<<<<<<<<<<<<Casa 1 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 1 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ580]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -6907,7 +6951,7 @@ Clave=70
 Valor=1700000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 2 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 2 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ584]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -6953,7 +6997,7 @@ Clave=71
 Valor=1700000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 3 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 3 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ588]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -6999,7 +7043,7 @@ Clave=72
 Valor=1700000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 4 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 4 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ592]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7045,7 +7089,7 @@ Clave=73
 Valor=1700000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 5 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 5 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ596]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7091,7 +7135,7 @@ Clave=74
 Valor=1700000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 6 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 6 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ600]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7137,7 +7181,7 @@ Clave=75
 Valor=1700000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 7 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 7 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ604]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7183,7 +7227,7 @@ Clave=76
 Valor=1700000
 Crucial=0
 
-'<<<<<<<<<<<<<<<Casa 8 de Arkhein>>>>>>>>>>>>>>>>
+#<<<<<<<<<<<<<<<Casa 8 de Arkhein>>>>>>>>>>>>>>>>
 [OBJ608]
 Name=Puerta de madera abierta
 GrhIndex=5592
@@ -7245,7 +7289,8 @@ ObjType=29
 Agarrable=0
 Crucial=0
 
-[OBJ614]'2da Jerarq
+#2da Jerarq
+[OBJ614]
 Name=Túnica de Archimago
 GrhIndex=806
 ObjType=3
@@ -7268,7 +7313,8 @@ CP10=DRUIDA
 CP11=TRABAJADOR
 NoSeCae=1
 
-[OBJ615]]'2da Jerarq
+#2da Jerarq
+[OBJ615]]
 Name=Túnica de Archimago (E/G)
 GrhIndex=657
 ObjType=3
@@ -7292,7 +7338,8 @@ CP10=DRUIDA
 CP11=TRABAJADOR
 NoSeCae=1
 
-[OBJ616]]'2da Jerarq
+#2da Jerarq
+[OBJ616]]
 Name=Armadura de Guerrero Campeón
 GrhIndex=756
 ObjType=3
@@ -7312,7 +7359,8 @@ CP7=ASESINO
 CP8=TRABAJADOR
 NoSeCae=1
 
-[OBJ617]]]'2da Jerarq
+#2da Jerarq
+[OBJ617]]]
 Name=Armadura de Guerrero Campeón (E/G)
 GrhIndex=758
 ObjType=3
@@ -7431,7 +7479,8 @@ VGrande=501
 ObjType=12
 Agarrable=1
 
-[OBJ628]'2da Jerarq
+#2da Jerarq
+[OBJ628]
 Name=Túnica de Archimago Imperial
 GrhIndex=687
 ObjType=3
@@ -7474,7 +7523,8 @@ LingP=0
 LingO=0
 SkHerreria=70
 
-[OBJ630] '2da Jerarq
+#2da Jerarq
+[OBJ630] 
 Name=Túnica Celestial
 GrhIndex=767
 ObjType=3
@@ -7495,7 +7545,8 @@ CP7=LADRON
 CP8=BANDIDO
 CP9=TRABAJADOR
 
-[OBJ631] 'la "Jennifer" 2da jerarq
+#la "Jennifer" 2da jerarq
+[OBJ631] 
 Name=Armadura de Líder Imperial (H/E/EO-M)
 GrhIndex=797
 ObjType=3
@@ -7514,7 +7565,7 @@ CP5=BARDO
 CP6=DRUIDA
 CP7=PIRATA
 
-[OBJ632] 'Enanos guerres y derivados 2da Jerarq
+[OBJ632] 
 Name=Armadura de Guerrero Real (E/G)
 GrhIndex=776
 ObjType=3
@@ -7532,7 +7583,8 @@ CP3=BARDO
 CP4=DRUIDA
 CP5=PIRATA
 
-[OBJ633] '2da jerarq
+#2da jerarq
+[OBJ633] 
 Name=Túnica Marrón de Mago Imperial (E/G)
 GrhIndex=802
 ObjType=3
@@ -7556,7 +7608,7 @@ CP9=BARDO
 CP10=LADRON
 CP11=TRABAJADOR
 
-'''''CAOS!
+#####CAOS!
 
 [OBJ634]
 Name=Túnica Egregia de Mago Oscuro
@@ -7603,7 +7655,8 @@ LingP=0
 LingO=0
 SkHerreria=70
 
-[OBJ636] '2da jerarq
+#2da jerarq
+[OBJ636] 
 Name=Túnica de Líder del Caos (E/G)
 GrhIndex=657
 ObjType=3
@@ -7624,7 +7677,8 @@ CP6=BANDIDO
 CP7=GUERRERO
 CP8=TRABAJADOR
 
-[OBJ637] '2da jerarq
+#2da jerarq
+[OBJ637] 
 Name=Túnica de líder del Caos
 GrhIndex=806
 ObjType=3
@@ -7645,7 +7699,8 @@ CP7=BANDIDO
 CP8=GUERRERO
 CP9=TRABAJADOR
 
-[OBJ638] '2da Jerarq
+#2da Jerarq
+[OBJ638] 
 Name=Armadura de Guardián del Demonio
 GrhIndex=756
 ObjType=3
@@ -7662,7 +7717,8 @@ CP3=BARDO
 CP4=DRUIDA
 CP5=PIRATA
 
-[OBJ639] '2da jerarq
+#2da jerarq
+[OBJ639] 
 Name=Armadura de Guardián del Demonio (E/G)
 GrhIndex=758
 ObjType=3
@@ -7680,7 +7736,8 @@ CP3=BARDO
 CP4=DRUIDA
 CP5=PIRATA
 
-[OBJ640]'2da jerarq
+#2da jerarq
+[OBJ640]
 Name=Túnica de Archimago del Caos
 GrhIndex=657
 ObjType=3
@@ -10028,7 +10085,8 @@ MaxDef=0
 MinDef=0
 NoSeCae=1
 
-[OBJ877] 'enano
+
+[OBJ877] 
 Name=Túnica de Gran Hechicero (E/G)
 GrhIndex=15519
 ObjType=3
@@ -10040,7 +10098,8 @@ Valor=10500
 Crucial=1
 RazaEnana=1
 
-[OBJ878] 'enano mujer
+
+[OBJ878] 
 Name=Túnica de Gran Hechicera (E/G-M)
 GrhIndex=15303
 ObjType=3
@@ -10053,7 +10112,8 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-[OBJ879] 'humano mujer
+#humano mujer
+[OBJ879] 
 Name=Vestido Bordado de Gala (H/E/EO-M)
 GrhIndex=16302
 ObjType=3
@@ -10065,7 +10125,8 @@ Valor=105
 Crucial=1
 Mujer=1
 
-[OBJ880] 'humano mujer
+#humano mujer
+[OBJ880] 
 Name=Túnica del Oráculo (H/E/EO-M)
 GrhIndex=16194
 ObjType=3
@@ -10080,7 +10141,8 @@ CP1=GUERRERO
 CP2=CAZADOR
 CP3=TRABAJADOR
 
-[OBJ881] 'humano Mujer
+#humano Mujer
+[OBJ881] 
 Name=Armadura de la Ciénaga (H/E/EO-M)
 GrhIndex=772
 ObjType=3
@@ -10105,7 +10167,8 @@ LingP=200
 LingO=0
 SkHerreria=90
 
-[OBJ882] 'humano
+#humano
+[OBJ882] 
 Name=Anillas Livianas de Aventurero (H/E/EO)
 GrhIndex=16167
 ObjType=3
@@ -10123,7 +10186,7 @@ LingP=0
 LingO=0
 SkHerreria=15
 
-[OBJ883] 'humano
+[OBJ883] 
 Name=Cota de Anillas Compuesta (H/E/EO)
 GrhIndex=15627
 ObjType=3
@@ -10141,7 +10204,8 @@ LingP=0
 LingO=0
 SkHerreria=32
 
-[OBJ884] 'humano mujer
+#humano mujer
+[OBJ884] 
 Name=Cota de Anillas Compuesta (H/E/EO-M)
 GrhIndex=15870
 ObjType=3
@@ -10160,7 +10224,8 @@ LingP=0
 LingO=0
 SkHerreria=32
 
-[OBJ885] 'humano
+#humano
+[OBJ885] 
 Name=Armadura Liviana de Hierro (H/E/EO)
 GrhIndex=15789
 ObjType=3
@@ -10178,7 +10243,8 @@ LingP=0
 LingO=0
 SkHerreria=44
 
-[OBJ886] 'humano mujer
+#humano mujer
+[OBJ886] 
 Name=Vestido de Arquera (H/E/EO-M)
 GrhIndex=15897
 ObjType=3
@@ -10201,7 +10267,8 @@ CP9=GUERRERO
 CP10=CLERIGO
 CP11=TRABAJADOR
 
-[OBJ887] 'humano
+#humano
+[OBJ887] 
 Name=Cotas de Manto Marrón (H/E/EO)
 GrhIndex=16221
 ObjType=3
@@ -10215,7 +10282,8 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=BARDO
 
-[OBJ888] 'humano
+#humano
+[OBJ888] 
 Name=Brial del Bosque (H/E/EO)
 GrhIndex=16275
 ObjType=3
@@ -10231,7 +10299,8 @@ CP3=BARDO
 CP4=GUERRERO
 CP5=PALADIN
 
-[OBJ889] 'humano
+#humano
+[OBJ889] 
 Name=Anillas Con Manto Verde (H/E/EO)
 GrhIndex=15600
 ObjType=3
@@ -10249,7 +10318,8 @@ LingP=0
 LingO=0
 SkHerreria=65
 
-[OBJ890] 'humano
+#humano
+[OBJ890] 
 Name=Armadura de Cuero de Oso Pardo (H/E/EO)
 GrhIndex=15762
 ObjType=3
@@ -10263,8 +10333,8 @@ CP1=MAGO
 CP2=GUERRERO
 CP3=BARDO
 CP4=PALADIN
-
-[OBJ891] 'humano mujer
+#humano mujer
+[OBJ891] 
 Name=Armadura de Cuero de Oso Pardo (H/E/EO-M)
 GrhIndex=15951
 ObjType=3
@@ -10280,7 +10350,8 @@ CP2=GUERRERO
 CP3=BARDO
 CP4=PALADIN
 
-[OBJ892] 'humano mujer
+#humano mujer
+[OBJ892] 
 Name=Coraza Compuesta Roja (H/E/EO-M)
 GrhIndex=15978
 ObjType=3
@@ -10301,7 +10372,8 @@ LingP=0
 LingO=0
 SkHerreria=72
 
-[OBJ893] 'humano mujer
+#humano mujer
+[OBJ893] 
 Name=Anillas Con Manto Verde (H/E/EO-M)
 GrhIndex=16005
 ObjType=3
@@ -10321,7 +10393,8 @@ LingP=0
 LingO=0
 SkHerreria=65
 
-[OBJ894] 'humano mujer
+#humano mujer
+[OBJ894] 
 Name=Armadura de Cruzada (H/E/EO-M)
 GrhIndex=16032
 ObjType=3
@@ -10347,7 +10420,8 @@ LingP=0
 LingO=0
 SkHerreria=72
 
-[OBJ895] 'humano mujer
+#humano mujer
+[OBJ895] 
 Name=Armadura Legendaria (H/E/EO-M)
 GrhIndex=761
 ObjType=3
@@ -10370,7 +10444,8 @@ LingP=400
 LingO=600
 SkHerreria=100
 
-[OBJ896] 'humano mujer
+#humano mujer
+[OBJ896] 
 Name=Túnica de Morgana (H/E/EO-M)
 GrhIndex=16248
 ObjType=3
@@ -10383,7 +10458,8 @@ Crucial=1
 Mujer=1
 CP1=BARDO
 
-[OBJ897] 'humano
+ #humano
+[OBJ897]
 Name=Cota de Piquero (H/E/EO)
 GrhIndex=16113
 ObjType=3
@@ -10402,7 +10478,8 @@ LingP=0
 LingO=0
 SkHerreria=65
 
-[OBJ898] 'humano Mujer
+#humano Mujer
+[OBJ898] 
 Name=Armadura de Placas de Gala (H/E/EO-M)
 GrhIndex=773
 ObjType=3
@@ -10425,7 +10502,8 @@ LingP=122
 LingO=0
 SkHerreria=85
 
-[OBJ899] 'humano mujer
+#humano mujer
+[OBJ899] 
 Name=Cota de Peto Liso (H/E/EO-M)
 GrhIndex=15924
 ObjType=3
@@ -10445,7 +10523,8 @@ LingP=0
 LingO=0
 SkHerreria=72
 
-[OBJ900] 'humano mujer
+#humano mujer
+[OBJ900] 
 Name=Anillas Con Manto Desgastado (H/E/EO-M)
 GrhIndex=16140
 ObjType=3
@@ -10464,7 +10543,8 @@ LingP=0
 LingO=0
 SkHerreria=70
 
-[OBJ901] 'humano mujer
+#humano mujer
+[OBJ901] 
 Name=Coraza Compuesta de Mujer (H/E/EO-M)
 GrhIndex=15816
 ObjType=3
@@ -10484,7 +10564,8 @@ LingP=0
 LingO=0
 SkHerreria=70
 
-[OBJ902] 'humano mujer
+#humano mujer
+[OBJ902] 
 Name=Cota de Mallas Enteriza (H/E/EO-M)
 GrhIndex=15843
 ObjType=3
@@ -10504,7 +10585,8 @@ LingP=0
 LingO=0
 SkHerreria=73
 
-[OBJ903] 'humano
+#humano
+[OBJ903] 
 Name=Armadura de Campeón (H/E/EO)
 GrhIndex=15681
 ObjType=3
@@ -10524,7 +10606,8 @@ LingP=0
 LingO=0
 SkHerreria=80
 
-[OBJ904] 'humano mujer
+#humano mujer
+[OBJ904] 
 Name=Placas Combinadas (H/E/EO-M)
 GrhIndex=16059
 ObjType=3
@@ -10543,7 +10626,8 @@ LingP=70
 LingO=0
 SkHerreria=80
 
-[OBJ905] 'humano
+#humano
+[OBJ905] 
 Name=Suprema Armadura Dorada (H/E/EO)
 GrhIndex=15708
 ObjType=3
@@ -10566,7 +10650,8 @@ LingP=50
 LingO=100
 SkHerreria=85
 
-[OBJ906] 'humano
+#humano
+[OBJ906] 
 Name=Manto del Dragón (H/E/EO)
 GrhIndex=16329
 ObjType=3
@@ -10601,7 +10686,7 @@ Valor=675000
 RazaEnana=1
 Crucial=0
 
-[OBJ908] 'gnomo
+[OBJ908] 
 Name=Vestimentas de Pescador (E/G)
 GrhIndex=15276
 ObjType=3
@@ -10624,7 +10709,7 @@ CP9=PALADIN
 CP10=CAZADOR
 CP11=CLERIGO
 
-[OBJ909] 'gnomo mujer
+[OBJ909] 
 Name=Vestido de Novia (E/G-M)
 GrhIndex=14952
 ObjType=3
@@ -10637,7 +10722,7 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-[OBJ910] 'gnomo
+[OBJ910] 
 Name=Atuendo de Gnomo (E/G)
 GrhIndex=14655
 ObjType=3
@@ -10649,7 +10734,7 @@ Valor=110
 Crucial=1
 RazaEnana=1
 
-[OBJ911] 'gnomo
+[OBJ911] 
 Name=Vestimenta Bordo de Poblador (E/G)
 GrhIndex=15141
 ObjType=3
@@ -10661,7 +10746,7 @@ Valor=110
 Crucial=1
 RazaEnana=1
 
-[OBJ912] 'gnomo
+[OBJ912] 
 Name=Vestimenta Verde de Poblador (E/G)
 GrhIndex=15087
 ObjType=3
@@ -10673,7 +10758,7 @@ Valor=110
 Crucial=1
 RazaEnana=1
 
-[OBJ913] 'gnomo
+[OBJ913] 
 Name=Ropaje de Ermitaño (E/G)
 GrhIndex=14736
 ObjType=3
@@ -10685,7 +10770,7 @@ Valor=150
 Crucial=1
 RazaEnana=1
 
-[OBJ914] 'gnomo mujer
+[OBJ914] 
 Name=Ropaje de Aldeana (E/G-M)
 GrhIndex=14925
 ObjType=3
@@ -10698,7 +10783,7 @@ Crucial=1
 Mujer=1
 RazaEnana=1
 
-[OBJ915] 'gnomo
+[OBJ915] 
 Name=Ropaje de Aldeano (E/G)
 GrhIndex=15006
 ObjType=3
@@ -10710,7 +10795,7 @@ Valor=150
 Crucial=1
 RazaEnana=1
 
-[OBJ916] 'gnomo
+[OBJ916] 
 Name=Vestimenta Elegante (E/G)
 GrhIndex=15033
 ObjType=3
@@ -10722,7 +10807,7 @@ Valor=200
 Crucial=1
 RazaEnana=1
 
-[OBJ917] 'gnomo
+[OBJ917] 
 Name=Vestimenta de Minero (E/G)
 GrhIndex=15114
 ObjType=3
@@ -10745,7 +10830,7 @@ CP9=PALADIN
 CP10=CAZADOR
 CP11=CLERIGO
 
-[OBJ918] 'gnomo
+[OBJ918] 
 Name=Gabán de Cuero Pequeño (E/G)
 GrhIndex=14574
 ObjType=3
@@ -10760,7 +10845,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ919] 'gnomo
+[OBJ919] 
 Name=Alifafe de Serpiente (E/G)
 GrhIndex=14979
 ObjType=3
@@ -10775,7 +10860,7 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=BARDO
 
-[OBJ920] 'gnomo
+[OBJ920] 
 Name=Ropaje de Herrero (E/G)
 GrhIndex=15060
 ObjType=3
@@ -10798,7 +10883,7 @@ CP9=PALADIN
 CP10=CAZADOR
 CP11=CLERIGO
 
-[OBJ921] 'gnomo
+[OBJ921] 
 Name=Túnica Sírica Elegante (E/G)
 GrhIndex=15168
 ObjType=3
@@ -10810,7 +10895,7 @@ Valor=450
 Crucial=1
 RazaEnana=1
 
-[OBJ922] 'gnomo
+[OBJ922] 
 Name=Traje de Capitán Pirata (E/G)
 GrhIndex=15195
 ObjType=3
@@ -10833,7 +10918,7 @@ CP9=CAZADOR
 CP10=CLERIGO
 CP11=TRABAJADOR
 
-[OBJ923] 'gnomo
+[OBJ923] 
 Name=Traje de Noble (E/G)
 GrhIndex=15222
 ObjType=3
@@ -10845,7 +10930,7 @@ Valor=700
 Crucial=1
 RazaEnana=1
 
-[OBJ924] 'gnomo
+[OBJ924] 
 Name=Vestimenta de Explorador (E/G)
 GrhIndex=14520
 ObjType=3
@@ -10860,7 +10945,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ925] 'gnomo mujer
+[OBJ925] 
 Name=Peto de Gladiadora (E/G-M)
 GrhIndex=14547
 ObjType=3
@@ -10881,7 +10966,7 @@ LingO=0
 SkHerreria=15
 
 
-[OBJ926] 'gnomo mujer
+[OBJ926] 
 Name=Hombreras de Amazona (E/G-M)
 GrhIndex=14601
 ObjType=3
@@ -10897,7 +10982,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ927] 'gnomo
+[OBJ927] 
 Name=Alifafe de Lobo (E/G)
 GrhIndex=14682
 ObjType=3
@@ -10920,7 +11005,7 @@ CP9=CAZADOR
 CP10=CLERIGO
 CP11=TRABAJADOR
 
-[OBJ928] 'gnomo
+[OBJ928] 
 Name=Barragán de Cazador (E/G)
 GrhIndex=14628
 ObjType=3
@@ -10943,7 +11028,7 @@ CP9=PALADIN
 CP10=CLERIGO
 CP11=TRABAJADOR
 
-[OBJ929] 'gnomo
+[OBJ929] 
 Name=Barragán Compuesto (E/G)
 GrhIndex=14709
 ObjType=3
@@ -10958,7 +11043,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=PIRATA
 
-[OBJ930] 'gnomo
+[OBJ930] 
 Name=Toga de Aprendiz (E/G)
 GrhIndex=15465
 ObjType=3
@@ -10970,7 +11055,7 @@ Valor=2700
 Crucial=1
 RazaEnana=1
 
-[OBJ931] 'gnomo mujer
+[OBJ931] 
 Name=Vestido Elegante Púrpura (E/G-M)
 GrhIndex=15384
 ObjType=3
@@ -10983,7 +11068,7 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-[OBJ932] 'gnomo
+[OBJ932] 
 Name=Sotana de Gran Hechicero (E/G)
 GrhIndex=15492
 ObjType=3
@@ -11002,7 +11087,7 @@ CP5=BANDIDO
 CP6=CAZADOR
 CP7=TRABAJADOR
 
-[OBJ933] 'gnomo mujer
+[OBJ933] 
 Name=Cota Liviana Verde (E/G-M)
 GrhIndex=14817
 ObjType=3
@@ -11021,7 +11106,7 @@ LingP=0
 LingO=0
 SkHerreria=40
 
-[OBJ934] 'gnomo
+[OBJ934] 
 Name=Cotas Livianas (E/G)
 GrhIndex=14871
 ObjType=3
@@ -11036,7 +11121,7 @@ CP1=MAGO
 CP2=DRUIDA
 CP3=BARDO
 
-[OBJ935] 'gnomo mujer
+[OBJ935] 
 Name=Cotas con Peto Compuesto (E/G-M)
 GrhIndex=14844
 ObjType=3
@@ -11057,7 +11142,7 @@ LingP=0
 LingO=0
 SkHerreria=57
 
-[OBJ936] 'gnomo mujer 
+[OBJ936]  
 Name=Túnica de Gran Hechicera (E/G-M)
 GrhIndex=15303
 ObjType=3
@@ -11070,7 +11155,7 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-[OBJ937] 'gnomo
+[OBJ937] 
 Name=Cota de Peto Púrpura (E/G)
 GrhIndex=14790
 ObjType=3
@@ -11090,7 +11175,7 @@ LingP=0
 LingO=0
 SkHerreria=65
 
-[OBJ938] 'gnomo mujer
+[OBJ938] 
 Name=Traje de Bruja (E/G-M)
 GrhIndex=15330
 ObjType=3
@@ -11104,7 +11189,7 @@ Mujer=1
 RazaEnana=1
 CP1=GUERRERO
 
-[OBJ939] 'gnomo
+[OBJ939] 
 Name=Túnica de Gala Roja (E/G)
 GrhIndex=15546
 ObjType=3
@@ -11116,7 +11201,7 @@ Valor=13500
 Crucial=1
 RazaEnana=1
 
-[OBJ940] 'gnomo
+[OBJ940] 
 Name=Cota de Mallas Enteriza (E/G)
 GrhIndex=14898
 ObjType=3
@@ -11136,7 +11221,7 @@ LingP=0
 LingO=0
 SkHerreria=75
 
-[OBJ941] 'gnomo mujer
+[OBJ941] 
 Name=Traje Seductor de Pitonisa (E/G-M)
 GrhIndex=15411
 ObjType=3
@@ -11152,7 +11237,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ942] 'gnomo mujer
+[OBJ942] 
 Name=Vestido de Gala Turquesa (E/G-M)
 GrhIndex=15438
 ObjType=3
@@ -11168,7 +11253,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ943] 'elfo
+[OBJ943] 
 Name=Sobrevesta Élfica (H/E/EO)
 GrhIndex=16356
 ObjType=3
@@ -11179,7 +11264,7 @@ MaxDef=0
 Valor=50
 Crucial=1
 
-[OBJ944] 'elfo mujer
+[OBJ944] 
 Name=Vestido Aurë (H/E/EO-M)
 GrhIndex=16410
 ObjType=3
@@ -11191,7 +11276,7 @@ Valor=50
 Crucial=1
 Mujer=1
 
-[OBJ945] 'elfo mujer
+[OBJ945] 
 Name=Vestido de Gala Alcarinqua (H/E/EO-M)
 GrhIndex=16383
 ObjType=3
@@ -11203,7 +11288,7 @@ Valor=105
 Crucial=1
 Mujer=1
 
-[OBJ946] 'elfo
+[OBJ946] 
 Name=Vestimentas de Poblador Élfico (H/E/EO)
 GrhIndex=16625
 ObjType=3
@@ -11214,7 +11299,7 @@ MaxDef=1
 Valor=110
 Crucial=1
 
-[OBJ947] 'elfo
+[OBJ947] 
 Name=Hábito Liviano de Ritual (H/E/EO)
 GrhIndex=16679
 ObjType=3
@@ -11225,7 +11310,7 @@ MaxDef=4
 Valor=420
 Crucial=1
 
-[OBJ948] 'elfo mujer
+[OBJ948] 
 Name=Vestido Bordado de Elite (H/E/EO-M)
 GrhIndex=16707
 ObjType=3
@@ -11237,7 +11322,7 @@ Valor=300
 Crucial=1
 Mujer=1
 
-[OBJ949] 'elfo Mujer
+[OBJ949] 
 Name=Hábito Liviano de Ritual (H/E/EO-M)
 GrhIndex=16571
 ObjType=3
@@ -11249,7 +11334,7 @@ Valor=450
 Crucial=1
 Mujer=1
 
-[OBJ950] 'elfo mujer
+[OBJ950] 
 Name=Sírica Élfica Rojiza (H/E/EO-M)
 GrhIndex=16652
 ObjType=3
@@ -11261,7 +11346,7 @@ Valor=550
 Crucial=1
 Mujer=1
 
-[OBJ951] 'elfo mujer
+[OBJ951] 
 Name=Prenda de la Naturaleza (H/E/EO-M)
 GrhIndex=16598
 ObjType=3
@@ -11283,7 +11368,7 @@ CP8=PALADIN
 CP9=CLERIGO
 CP10=TRABAJADOR
 
-[OBJ952] 'elfo
+[OBJ952] 
 Name=Ropa de Explorador Élfico (H/E/EO)
 GrhIndex=16544
 ObjType=3
@@ -11295,7 +11380,7 @@ Valor=850
 Crucial=1
 CP1=MAGO
 
-[OBJ953] 'elfo mujer 
+[OBJ953]  
 Name=Manto Élfico Púrpura (H/E/EO-M)
 GrhIndex=16437
 ObjType=3
@@ -11307,7 +11392,7 @@ Valor=3550
 Crucial=1
 Mujer=1
 
-[OBJ954] 'elfo
+[OBJ954] 
 Name=Hábito de Ritual de Hombre (H/E/EO)
 GrhIndex=16490
 ObjType=3
@@ -11318,7 +11403,7 @@ MaxDef=20
 Valor=8000
 Crucial=1
 
-[OBJ955] 'elfo mujer
+[OBJ955] 
 Name=Hábito de Ritual Femenino (H/E/EO-M)
 GrhIndex=16517
 ObjType=3
@@ -11330,7 +11415,7 @@ Valor=8000
 Crucial=1
 Mujer=1
 
-[OBJ956] 'elfo mujer 
+[OBJ956]  
 Name=Valya Silmeanar (H/E/EO-M)
 GrhIndex=16734
 ObjType=3
@@ -11349,7 +11434,7 @@ LingP=34
 LingO=0
 SkHerreria=73
 
-[OBJ957] 'enano mujer
+[OBJ957] 
 Name=Vestido de Enana (E/G-M)
 GrhIndex=17274
 ObjType=3
@@ -11362,7 +11447,7 @@ Crucial=1
 RazaEnana=1
 Mujer=1
 
-[OBJ958] 'enano
+[OBJ958] 
 Name=Vestimenta Común (E/G)
 GrhIndex=17139
 ObjType=3
@@ -11374,7 +11459,7 @@ Valor=50
 Crucial=1
 RazaEnana=1
 
-[OBJ959] 'enano
+[OBJ959] 
 Name=Ropa de Carpintero Enano (E/G)
 GrhIndex=17220
 ObjType=3
@@ -11397,7 +11482,7 @@ CP9=PALADIN
 CP10=CAZADOR
 CP11=CLERIGO
 
-[OBJ960] 'enano
+[OBJ960] 
 Name=Ropa de Leñador (E/G)
 GrhIndex=17085
 ObjType=3
@@ -11420,7 +11505,7 @@ CP9=PALADIN
 CP10=CAZADOR
 CP11=CLERIGO
 
-[OBJ961] 'enano
+[OBJ961] 
 Name=Ropa de Minero (E/G)
 GrhIndex=16977
 ObjType=3
@@ -11443,7 +11528,7 @@ CP9=PALADIN
 CP10=CAZADOR
 CP11=CLERIGO
 
-[OBJ962] 'enano
+[OBJ962] 
 Name=Túnica Elegante (E/G)
 GrhIndex=17166
 ObjType=3
@@ -11455,7 +11540,7 @@ Valor=200
 Crucial=1
 RazaEnana=1
 
-[OBJ963] 'enano
+[OBJ963] 
 Name=Ropaje de Luchador de Las Minas (E/G)
 GrhIndex=17247
 ObjType=3
@@ -11468,7 +11553,7 @@ Crucial=1
 RazaEnana=1
 Hombre=1
 
-[OBJ964] 'enano
+[OBJ964] 
 Name=Ropa de Viajero (E/G)
 GrhIndex=16896
 ObjType=3
@@ -11480,7 +11565,7 @@ Valor=400
 Crucial=1
 RazaEnana=1
 
-[OBJ965] 'enano
+[OBJ965] 
 Name=Antigua Armadura Dorada (E/G)
 GrhIndex=16869
 ObjType=3
@@ -11493,7 +11578,7 @@ Crucial=1
 RazaEnana=1
 CP1=DRUIDA
 
-[OBJ966] 'enano
+[OBJ966] 
 Name=Alifafe de Pirata (E/G)
 GrhIndex=17193
 ObjType=3
@@ -11516,7 +11601,7 @@ CP9=CAZADOR
 CP10=CLERIGO
 CP11=TRABAJADOR
 
-[OBJ967] 'enano
+[OBJ967] 
 Name=Ropas de Buscador (E/G)
 GrhIndex=17301
 ObjType=3
@@ -11529,7 +11614,7 @@ Crucial=1
 RazaEnana=1
 CP1=PIRATA
 
-[OBJ968] 'enano
+[OBJ968] 
 Name=Armadura Grabada Completa (E/G)
 GrhIndex=16842
 ObjType=3
@@ -11548,7 +11633,7 @@ LingP=0
 LingO=0
 SkHerreria=47
 
-[OBJ969] 'enano
+[OBJ969] 
 Name=Túnica Dorada de Gala (E/G)
 GrhIndex=16950
 ObjType=3
@@ -11560,7 +11645,7 @@ Valor=10000
 Crucial=1
 RazaEnana=1
 
-[OBJ970] 'enano
+[OBJ970] 
 Name=Armadura de Placas Livianas Thor (E/G)
 GrhIndex=16761
 ObjType=3
@@ -11575,7 +11660,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ971] 'enano
+[OBJ971] 
 Name=Armadura Metal Oscuro (E/G)
 GrhIndex=16923
 ObjType=3
@@ -11595,7 +11680,7 @@ LingP=0
 LingO=0
 SkHerreria=70
 
-[OBJ972] 'enano
+[OBJ972] 
 Name=Túnica de Mahal (E/G)
 GrhIndex=17004
 ObjType=3
@@ -11609,7 +11694,7 @@ RazaEnana=1
 CP1=BARDO
 CP2=DRUIDA
 
-[OBJ973] 'enano mujer
+[OBJ973] 
 Name=Armadura de Placas Livianas Thor (E/G-M)
 GrhIndex=17328
 ObjType=3
@@ -11630,7 +11715,7 @@ LingP=29
 LingO=0
 SkHerreria=70
 
-[OBJ974] 'enano
+[OBJ974] 
 Name=Capa de Monje Cocida con Mithril (E/G)
 GrhIndex=17058
 ObjType=3
@@ -11646,7 +11731,7 @@ CP2=BARDO
 CP3=DRUIDA
 CP4=PIRATA
 
-[OBJ975] 'enano
+[OBJ975] 
 Name=Cota de Mallas Larga (E/G)
 GrhIndex=17031
 ObjType=3
@@ -11666,7 +11751,7 @@ LingP=0
 LingO=0
 SkHerreria=80
 
-[OBJ976] 'enano
+[OBJ976] 
 Name=Armadura Pesada de Hierro y Bronce (E/G)
 GrhIndex=16788
 ObjType=3
@@ -11686,7 +11771,7 @@ LingP=100
 LingO=0
 SkHerreria=85
 
-[OBJ977] 'elfo oscuro
+[OBJ977] 
 Name=Vestimenta Esclava (EO)
 GrhIndex=17409
 ObjType=3
@@ -11698,7 +11783,7 @@ Valor=50
 Crucial=1
 RazaDrow=1
 
-[OBJ978] 'elfo oscuro
+[OBJ978] 
 Name=Harapos de la Cueva (EO)
 GrhIndex=17382
 ObjType=3
@@ -11710,7 +11795,7 @@ Valor=105
 Crucial=1
 RazaDrow=1
 
-[OBJ979] 'elfo oscuro
+[OBJ979] 
 Name=Armadura Maghtere Roja (EO)
 GrhIndex=17355
 ObjType=3
@@ -11727,7 +11812,7 @@ LingO=0
 SkHerreria=63
 CP1=DRUIDA
 
-[OBJ980] 'elfo oscuro
+[OBJ980] 
 Name=Armadura de Combate Liviana (EO)
 GrhIndex=16706
 ObjType=3
@@ -11740,7 +11825,7 @@ Crucial=1
 RazaDrow=1
 CP1=DRUIDA
 
-[OBJ981] 'elfo oscuro
+[OBJ981] 
 Name=Piwafwi de Fuego (EO)
 GrhIndex=17436
 ObjType=3
@@ -11752,7 +11837,7 @@ Valor=11000
 Crucial=1
 RazaDrow=1
 
-[OBJ982] 'elfo oscuro
+[OBJ982] 
 Name=Armadura Melee de Explorador (EO)
 GrhIndex=17463
 ObjType=3
@@ -11768,7 +11853,7 @@ CP2=BARDO
 CP3=DRUIDA
 CP4=PIRATA
 
-[OBJ983] 'elfo oscuro
+[OBJ983] 
 Name=Piwafwi Purpura del Silencio (EO-M)
 GrhIndex=17490
 ObjType=3
@@ -11784,7 +11869,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ984] 'elfo oscuro
+[OBJ984] 
 Name=Piwafwi Alto Narbondel (EO)
 GrhIndex=17517
 ObjType=3
@@ -11799,7 +11884,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ985] 'elfo oscuro mujer
+[OBJ985] 
 Name=Piwafwi Socere de Lloth (EO-M)
 GrhIndex=17544
 ObjType=3
@@ -11815,7 +11900,7 @@ CP1=MAGO
 CP2=BARDO
 CP3=DRUIDA
 
-[OBJ986] Túnica de Druida
+[OBJ986] 
 Name=Túnica de Druida
 GrhIndex=681
 ObjType=3
@@ -12319,17 +12404,18 @@ ObjType=8
 Agarrable=1
 Texto=Leñadores
 
-[OBJ1033]' Cartel Ulla
+# Cartel Ulla
+[OBJ1033]
 Name=Cartel
 GrhIndex=4986
 VGrande=4987
 ObjType=8
 Agarrable=1
-Texto=Desde que se desató la Guerra que conllevó a la Plaga, Ullathorpe dejó de formar parte del Reino de Banderbill, para pasar a ser una zona comercial e ideal para todos los viajeros. Aquí podrás pasear, comerciar y platicar libremente, mientras no disturbes a sus pobladores, la paz ni el orden.
-Alcaldía de Ullathorpe.
+Texto=Desde que se desató la Guerra que conllevó a la Plaga, Ullathorpe dejó de formar parte del Reino de Banderbill, para pasar a ser una zona comercial e ideal para todos los viajeros. Aquí podrás pasear, comerciar y platicar libremente, mientras no disturbes a sus pobladores, la paz ni el orden. Alcaldía de Ullathorpe.
 
 
-[OBJ1034]' Cartel NIx
+# Cartel NIx
+[OBJ1034]
 Name=Cartel
 GrhIndex=4986
 VGrande=4987
