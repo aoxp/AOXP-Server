@@ -21,6 +21,8 @@ package com.ao.data.dao.ini;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Reader;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -124,11 +126,13 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String TEXT_KEY = "Texto";
 	private static final String FORUM_NAME_KEY = "ID";
 	private static final String BACKPACK_TYPE_KEY = "MochilaType";
-	private static final String INGOT_OBJECT_INDEX = "Lingoteindex";
+	private static final String INGOT_OBJECT_INDEX_KEY = "Lingoteindex";
 	
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
 	private static final int WOOD_INDEX = 58;
 	private static final int ELVEN_WOOD_INDEX = 1006;
+	private static final int[] INGOTES = {386, 387, 388};
+	
 	
 	private static final Map<String, UserArchetype> archetypesByName;
 	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
@@ -186,7 +190,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.BACKPACK, WorldObjectType.BACKPACK);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.ANVIL, WorldObjectType.ANVIL);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.FORGE, WorldObjectType.FORGE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.GEMS, WorldObjectType.INGOT);
+		
 	}
 	
 	private String objectsFilePath;
@@ -296,8 +300,11 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				obj = loadPotion(id, name, graphic, section);
 				break;
 				
-			case FLOWERS:
 			case GEMS:
+				obj = loadGem(id, name, graphic, section);
+				break;
+				
+			case FLOWERS:
 			case JEWELRY:
 			case BOOK:
 			case STAIN:
@@ -843,9 +850,20 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private WorldObjectProperties loadBackpack(WorldObjectType type, int id, String name, int graphic, Section section) {
 		
 		// TODO : Esto es un valor que está mapeado en el server a la cantidad de slots que agrega, ¿habría que reemplarlo directamente por la cantidad de slots que agrega la mochila?
+		int value = getValue(section);
+		int manufactureDifficulty = getManufactureDifficulty(section);
+		boolean newbie = getNewbie(section);
+		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
+		List<Race> forbiddenRaces = getForbiddenRaces(section);
+		boolean noLog = getNoLog(section);
+		boolean falls = getFalls(section);
+		boolean respawneable = getRespawneable(section);
+
+		int equippedGraphic = getEquippedGraphic(section);
 		int backpackType = getBackpackType(section);
+		int slots = getAmountForBackpackType(backpackType);
 		
-		return new BackpackProperties(type, id, name, graphic, backpackType, backpackType, null, null, false, false, false, false, backpackType, backpackType);
+		return new BackpackProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, equippedGraphic, slots);
 	}
 
 	/**
@@ -873,6 +891,48 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		int ingotObjectIndex = getIngotObjectIndex(section);
 		
 		return new MineralProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, ingotObjectIndex);
+	}
+	
+	/**
+	 * Creates a ingot properties from the given section.
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The ingot item created.
+	 */
+	private WorldObjectProperties loadIngot(WorldObjectType type, int id, String name, int graphic, Section section) {
+		
+		int value = getValue(section);
+		int manufactureDifficulty = getManufactureDifficulty(section);
+		boolean newbie = getNewbie(section);
+		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
+		List<Race> forbiddenRaces = getForbiddenRaces(section);
+		boolean noLog = getNoLog(section);
+		boolean falls = getFalls(section);
+		boolean respawneable = getRespawneable(section);
+		
+		return new ItemProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
+	}
+	
+	/**
+	 * Creates a gem properties from the given section.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The gem item created.
+	 */
+	private WorldObjectProperties loadGem(int id, String name, int graphic, Section section) {
+		for (int i = 0; i < INGOTES.length; i++) {
+			if (INGOTES.equals(id)) {
+				return loadIngot(WorldObjectType.INGOT, id, name, graphic, section);
+			}
+		}
+		
+		return loadProps(id, name, graphic, section);
+		
 	}
 	
 	/**
@@ -1470,13 +1530,22 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @return the backpack type.
 	 */
 	private int getIngotObjectIndex(Section section) {
-		String data = section.get(INGOT_OBJECT_INDEX);
+		String data = section.get(INGOT_OBJECT_INDEX_KEY);
 		
 		if (data == null) {
 			return 0;
 		}
 		
 		return Integer.parseInt(data);
+	}
+	
+	/**
+	 * Retrieves the amount for the given backpack type
+	 * @param backpackType The backpack type
+	 * @return The amount for the given backpack type
+	 */
+	private int getAmountForBackpackType(int backpackType) {
+		return backpackType * 5;
 	}
 	
 	

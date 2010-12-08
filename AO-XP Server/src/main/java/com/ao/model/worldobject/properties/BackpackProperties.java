@@ -29,7 +29,7 @@ import com.ao.model.worldobject.WorldObjectType;
  */
 public class BackpackProperties extends EquippableItemProperties {
 
-	protected int backpackType;
+	protected int slots;
 	
 	/**
 	 * Creates a new WeaponProperties instance.
@@ -43,22 +43,22 @@ public class BackpackProperties extends EquippableItemProperties {
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
-	 * @param backpackType the backpack type
+	 * @param slots The slots to be added.
 	 */
 	public BackpackProperties(WorldObjectType type, int id, String name, int graphic,
 			int value,	int manufactureDifficulty,
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			boolean noLog, boolean falls, boolean respawnable, 
-			int equippedGraphic, int backpackType) {
+			int equippedGraphic, int slots) {
 		super(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 
-		this.backpackType = backpackType;
+		this.slots = slots;
 	}
 
 	/**
 	 * @return the backpack's type.
 	 */
-	public int getBackpackType() {
-		return backpackType;
+	public int getSlots() {
+		return slots;
 	}
 }
