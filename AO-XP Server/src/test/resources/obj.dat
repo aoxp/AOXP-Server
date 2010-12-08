@@ -76,7 +76,7 @@ Name=Manzana Roja
 GrhIndex=506
 ObjType=1
 Agarrable=0
-MinHAM=10
+MinHam=10
 Valor=2
 Crucial=1
 
