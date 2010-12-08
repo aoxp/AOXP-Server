@@ -1794,7 +1794,7 @@ Name=Banana
 GrhIndex=581
 ObjType=1
 Agarrable=0
-MinHAM=10
+MinHam=10
 Valor=2
 Crucial=1
 
@@ -5365,7 +5365,7 @@ GrhIndex=506
 ObjType=1
 Agarrable=0
 newbie=1
-MinHAM=10
+MinHam=10
 Crucial=0
 
 [OBJ468]
