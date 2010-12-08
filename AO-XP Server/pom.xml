@@ -87,6 +87,11 @@
       <version>2.5.2</version>
     </dependency>
     <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+    <dependency>
       <groupId>com.ao</groupId>
       <artifactId>aoxp-server-security</artifactId>
       <version>1.0-SNAPSHOT</version>
