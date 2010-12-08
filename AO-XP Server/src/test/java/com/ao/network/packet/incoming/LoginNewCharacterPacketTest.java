@@ -53,7 +53,8 @@ public class LoginNewCharacterPacketTest {
 	private static final byte CHARACTER_RACE = (byte) Race.DARK_ELF.ordinal();
 	private static final byte CHARACTER_GENDER = (byte) Gender.FEMALE.ordinal();
 	private static final byte CHARACTER_HOMELAND = 1;
-	private static final byte[] CHARACTER_SKILLS = {10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	private static final byte CHARACTER_HEAD = 10;
+	
 	private static final byte CLIENT_MAJOR = 0;
 	private static final byte CLIENT_MINOR = 12;
 	private static final byte CLIENT_VERSION = 2;
@@ -89,7 +90,7 @@ public class LoginNewCharacterPacketTest {
 	public void invalidEmailTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, "foo", CHARACTER_HOMELAND, LoginServiceImpl.INVALID_EMAIL_ERROR);
+				CHARACTER_HEAD, "foo", CHARACTER_HOMELAND, LoginServiceImpl.INVALID_EMAIL_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -100,7 +101,7 @@ public class LoginNewCharacterPacketTest {
 		
 		writeLogin("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_NAME_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_NAME_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -110,7 +111,7 @@ public class LoginNewCharacterPacketTest {
 	public void successfulCharacterCreation() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 		
 		packet.handle(connection);
 		
@@ -130,7 +131,7 @@ public class LoginNewCharacterPacketTest {
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, (byte) 0, (byte) 0, 
 				(byte) 0, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION));
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION));
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -142,36 +143,7 @@ public class LoginNewCharacterPacketTest {
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.ACCOUNT_NAME_TAKEN_ERROR);
-		
-		packet.handle(connection);
-		EasyMock.verify(connection.getOutputBuffer());
-	}
-	
-	@Test
-	public void skillsHackingTest() throws Exception {
-		
-		byte[] skills = CHARACTER_SKILLS.clone();
-		skills[1] = 20;
-		
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
-				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				skills, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_SKILLS_POINTS_ERROR);
-		
-		packet.handle(connection);
-		EasyMock.verify(connection.getOutputBuffer());
-	}
-	
-	@Test
-	public void skillsHacking2Test() throws Exception {
-		
-		byte[] skills = CHARACTER_SKILLS.clone();
-		skills[2] += 50;
-		skills[3] -= 50;
-		
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
-				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				skills, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_SKILLS_POINTS_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.ACCOUNT_NAME_TAKEN_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -185,7 +157,7 @@ public class LoginNewCharacterPacketTest {
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.MUST_THROW_DICES_BEFORE_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.MUST_THROW_DICES_BEFORE_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -195,7 +167,7 @@ public class LoginNewCharacterPacketTest {
 	public void invalidRaceTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", (byte) -1, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_RACE_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_RACE_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -206,7 +178,7 @@ public class LoginNewCharacterPacketTest {
 	public void invalidGenderTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, (byte) -1, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_GENDER_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_GENDER_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -217,7 +189,7 @@ public class LoginNewCharacterPacketTest {
 	public void invalidArchetypeTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, (byte) -1,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_ARCHETYPE_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_ARCHETYPE_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -231,7 +203,7 @@ public class LoginNewCharacterPacketTest {
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.CHARACTER_CREATION_DISABLED_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.CHARACTER_CREATION_DISABLED_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -243,7 +215,7 @@ public class LoginNewCharacterPacketTest {
 		
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_SKILLS, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.ONLY_ADMINS_ERROR);
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.ONLY_ADMINS_ERROR);
 		
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
@@ -251,14 +223,14 @@ public class LoginNewCharacterPacketTest {
 	
 	private void writeLogin(String charName, String password, byte major,
 			byte minor, byte version, String hash, byte race, byte gender,
-			byte archetype, byte[] skills, String mail, byte homeland) throws Exception {
+			byte archetype, byte head, String mail, byte homeland) throws Exception {
 		writeLogin(charName, password, major, minor, version, hash, race, gender,
-				archetype, skills, mail, homeland, "");
+				archetype, head, mail, homeland, "");
 	}
 	
 	private void writeLogin(String charName, String password, byte major,
 			byte minor, byte version, String hash, byte race, byte gender,
-			byte archetype, byte[] skills, String mail, byte homeland, String error) throws Exception {
+			byte archetype, byte head, String mail, byte homeland, String error) throws Exception {
 		DataBuffer buffer = connection.getInputBuffer();
 		DataBuffer outBuffer = connection.getOutputBuffer();
 
@@ -273,7 +245,7 @@ public class LoginNewCharacterPacketTest {
 		EasyMock.expect(buffer.get()).andReturn(race).once();
 		EasyMock.expect(buffer.get()).andReturn(gender).once();
 		EasyMock.expect(buffer.get()).andReturn(archetype).once();
-		EasyMock.expect(buffer.getBlock(Skill.AMOUNT)).andReturn(skills).once();
+		EasyMock.expect(buffer.get()).andReturn(head).once();
 		EasyMock.expect(buffer.getASCIIString()).andReturn(mail).once();
 		EasyMock.expect(buffer.get()).andReturn(homeland).once();
 		

@@ -37,7 +37,6 @@ import com.ao.data.dao.AccountDAO;
 import com.ao.data.dao.UserCharacterDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.data.dao.exception.NameAlreadyTakenException;
-import com.ao.ioc.ArchetypeLocator;
 import com.ao.model.character.Attribute;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
