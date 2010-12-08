@@ -16,45 +16,36 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao.model.worldobject;
+package ao.model.worldobject.properties;
 
+import ao.model.worldobject.WorldObjectType;
 
 /**
- * World Object Type enumeration.
+ * Defines a Teleport's properties. Allows a lightweight pattern implementation.
  */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
-	PARCHMENT,
-	MONEY,
-	TREE,
-	WOOD,
-	MINE,
-	KEY,
-	DOOR,
-	SIGN,
-	FORUM,
-	BACKPACK
+public class ForumProperties extends WorldObjectProperties {
+	
+	protected String forumName;
+	
+	/**
+	 * Creates a new ForumProperties instance.
+	 * @param type The type of the item.
+	 * @param id The id of the item.
+	 * @param name The name of the item.
+	 * @param graphic The graphic for the item.
+	 * @param bigGraphic The big graphic for the item.
+	 * @param text The text for the item.
+	 */
+	public ForumProperties(WorldObjectType type, int id, String name, int graphic, String forumName) {
+		super(type, id, name, graphic);
+		
+		this.forumName = forumName;
+	}
+
+	/**
+	 * @return the forum name.
+	 */
+	public String getForumName() {
+		return forumName;
+	}
 }

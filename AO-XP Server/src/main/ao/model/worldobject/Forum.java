@@ -18,43 +18,23 @@
 
 package ao.model.worldobject;
 
+import ao.model.worldobject.properties.ForumProperties;
 
-/**
- * World Object Type enumeration.
- */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
-	PARCHMENT,
-	MONEY,
-	TREE,
-	WOOD,
-	MINE,
-	KEY,
-	DOOR,
-	SIGN,
-	FORUM,
-	BACKPACK
+public class Forum extends AbstractWorldObject {
+
+	/**
+	 * Creates a new Sign instance.
+	 * @param properties The object's properties.
+	 */
+	public Forum(ForumProperties properties) {
+		super(properties);
+	}
+
+	/**
+	 * Retrieves the forum's name.
+	 * @return The forum's name.
+	 */
+	public String getForumName() {
+		return ((ForumProperties) properties).getForumName();
+	}
 }

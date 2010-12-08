@@ -18,43 +18,32 @@
 
 package ao.model.worldobject;
 
+import ao.model.worldobject.properties.SignProperties;
 
-/**
- * World Object Type enumeration.
- */
-public enum WorldObjectType {
-	FOOD,
-	WEAPON,
-	RANGED_WEAPON,
-	STAFF,
-	ARMOR,
-	DEATH_POTION,
-	HP_POTION,
-	MANA_POTION,
-	POISON_POTION,
-	AGILITY_POTION,
-	STRENGTH_POTION,
-	DRINK,
-	SHIELD,
-	HELMET,
-	ACCESSORY,
-	TELEPORT,
-	MINERAL,
-	MUSICAL_INSTRUMENT,
-	BOAT,
-	AMMUNITION,
-	EMPTY_BOTTLE,
-	FILLED_BOTTLE,
-	PROP,
-	GRABABLE_PROP,
-	PARCHMENT,
-	MONEY,
-	TREE,
-	WOOD,
-	MINE,
-	KEY,
-	DOOR,
-	SIGN,
-	FORUM,
-	BACKPACK
+public class Sign extends AbstractWorldObject {
+
+	/**
+	 * Creates a new Sign instance.
+	 * @param properties The object's properties.
+	 */
+	public Sign(SignProperties properties) {
+		super(properties);
+	}
+
+	/**
+	 * Retrieves the sign's big graphic.
+	 * @return The sign's big graphic.
+	 */
+	public int getBigGraphic() {
+		return ((SignProperties) properties).getBigGraphic();
+	}
+	
+	/**
+	 * Retrieves the sign's text.
+	 * @return The sign's text.
+	 */
+	public String getText() {
+		return ((SignProperties) properties).getText();
+	}
+	
 }

@@ -37,14 +37,17 @@ import ao.model.character.archetype.UserArchetype;
 import ao.model.worldobject.WoodType;
 import ao.model.worldobject.WorldObjectType;
 import ao.model.worldobject.properties.AmmunitionProperties;
+import ao.model.worldobject.properties.BackpackProperties;
 import ao.model.worldobject.properties.BoatProperties;
 import ao.model.worldobject.properties.DefensiveItemProperties;
 import ao.model.worldobject.properties.DoorProperties;
+import ao.model.worldobject.properties.ForumProperties;
 import ao.model.worldobject.properties.ItemProperties;
 import ao.model.worldobject.properties.KeyProperties;
 import ao.model.worldobject.properties.MusicalInstrumentProperties;
 import ao.model.worldobject.properties.ParchmentProperties;
 import ao.model.worldobject.properties.RangedWeaponProperties;
+import ao.model.worldobject.properties.SignProperties;
 import ao.model.worldobject.properties.StaffProperties;
 import ao.model.worldobject.properties.StatModifyingItemProperties;
 import ao.model.worldobject.properties.TeleportProperties;
@@ -117,6 +120,10 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String RESPAWNEABLE_KEY = "Crucial";
 	private static final String FALLS_KEY = "NoSeCae";
 	private static final String NO_LOG_KEY = "NoLog";				
+	private static final String BIG_GRAPHIC_KEY = "VGrande";
+	private static final String TEXT_KEY = "Texto";
+	private static final String FORUM_NAME_KEY = "ID";
+	private static final String BACKPACK_TYPE_KEY = "MochilaType";
 	
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
 	private static final int WOOD_INDEX = 58;
@@ -173,6 +180,9 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.MINE, WorldObjectType.MINE);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.KEY, WorldObjectType.KEY);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.DOOR, WorldObjectType.DOOR);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.SIGN, WorldObjectType.SIGN);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.FORUM, WorldObjectType.FORUM);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.BACKPACK, WorldObjectType.BACKPACK);
 	}
 	
 	private String objectsFilePath;
@@ -289,6 +299,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case STAIN:
 			case CONTAINER:
 			case FURNITURE:
+			case BONFIRE:
 				obj = loadProps(id, name, graphic, section);
 				break;
 				
@@ -314,6 +325,15 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				obj = loadDoor(worldObjectTypeMapper.get(type), id, name, graphic, section, iniFile);
 				break;
 				
+			case SIGN:
+				obj = loadSign(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				
+			case FORUM:
+				obj = loadForum(worldObjectTypeMapper.get(type), id, name, graphic, section);
+			
+			case BACKPACK:
+				obj = loadBackpack(worldObjectTypeMapper.get(type), id, name, graphic, section);
+			
 			default:
 				logger.error("Unexpected object type found: " + objectType);
 		}
@@ -757,6 +777,62 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		int closedGrh = getClosedGrh(section, iniFile);
 		
 		return new DoorProperties(type, id, name, graphic, open, locked, code, openGrh, closedGrh);
+	}
+	
+	/**
+	 * Creates a sign items's properties from the given section.
+	 * 
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * 
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadSign(WorldObjectType type, int id, String name, int graphic, Section section) {
+		
+		int bigGraphic = getBigGraphic(section);
+		String text = getText(section);
+		
+		return new SignProperties(type, id, name, graphic, bigGraphic, text);
+	}
+
+	/**
+	 * Creates a forum items's properties from the given section.
+	 * 
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * 
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadForum(WorldObjectType type, int id, String name, int graphic, Section section) {
+		
+		String forumName = getForumName(section);
+		
+		return new ForumProperties(type, id, name, graphic, forumName);
+	}
+
+	/**
+	 * Creates a backpack items's properties from the given section.
+	 * 
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * 
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadBackpack(WorldObjectType type, int id, String name, int graphic, Section section) {
+		
+		// TODO : Esto es un valor que está mapeado en el server a la cantidad de slots que agrega, ¿habría que reemplarlo directamente por la cantidad de slots que agrega la mochila?
+		int backpackType = getBackpackType(section);
+		
+		return new BackpackProperties(type, id, name, graphic, backpackType, backpackType, null, null, false, false, false, false, backpackType, backpackType);
 	}
 	
 	/**
@@ -1280,6 +1356,66 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private boolean getRespawneable(Section section) {
 		String data = section.get(RESPAWNEABLE_KEY);
 		return data != null && "1".equals(data);
+	}
+	
+	/**
+	 * Retrieves the big graphic.
+	 * @param section The section from which to read the object's value.
+	 * @return The big graphic.
+	 */
+	private int getBigGraphic(Section section) {
+		String data = section.get(BIG_GRAPHIC_KEY);
+		
+		if (data == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(data);
+	}
+
+	/**
+	 * Retrieves the text.
+	 * @param section The section from which to read the object's value.
+	 * @return The text.
+	 */
+	private String getText(Section section) {
+		String data = section.get(TEXT_KEY);
+		
+		if (data == null) {
+			return "";
+		}
+		
+		return data;
+	}
+
+	/**
+	 * Retrieves the text.
+	 * @param section The section from which to read the object's value.
+	 * @return The text.
+	 */
+	private String getForumName(Section section) {
+		String data = section.get(FORUM_NAME_KEY);
+		
+		if (data == null) {
+			return "";
+		}
+		
+		return data;
+	}
+	
+	/**
+	 * Retrieves the backpack type.
+	 * @param section The section from which to read the objet's value.
+	 * @return the backpack type.
+	 */
+	private int getBackpackType(Section section) {
+		String data = section.get(BACKPACK_TYPE_KEY);
+		
+		if (data == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(data);
 	}
 	
 	/**
