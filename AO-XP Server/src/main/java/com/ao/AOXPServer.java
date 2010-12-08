@@ -70,14 +70,17 @@ public class AOXPServer {
 					} else if ((key.readyOps() & SelectionKey.OP_READ) != 0) {
 						final SocketChannel sc = (SocketChannel) key.channel();
 						
-						// Handle data
-						threadPool.execute(new Runnable() {
+						if (connectionManager.readAllData(sc)) {
 							
-							@Override
-							public void run() {
-								connectionManager.handleIncomingData(sc);
-							}
-						});
+							// Handle data
+							threadPool.execute(new Runnable() {
+								
+								@Override
+								public void run() {
+									connectionManager.handleIncomingData(sc);
+								}
+							});
+						}
 					}
 				}
 				

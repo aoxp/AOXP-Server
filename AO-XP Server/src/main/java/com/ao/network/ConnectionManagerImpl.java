@@ -77,9 +77,48 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	@Override
 	public void handleIncomingData(SocketChannel sc) {
 
+		synchronized (sc) {
+			Connection connection = scToConnection.get(sc);
+			ByteBuffer buffer = connection.inputBuffer.buffer;
+			
+			try {
+				// Handle every packet we may
+				while (buffer.hasRemaining()) {
+					// Mark the current position to revert it if there is not enough data for this packet.
+					buffer.mark();
+					
+					ClientPacketsManager.handle(connection);
+				}
+			} catch (BufferUnderflowException e) {
+				// Not enough data received, restore the buffer to the last mark of a completed packet.
+				buffer.reset();
+			} catch (ArrayIndexOutOfBoundsException e) {
+				// Whooa, what are you doing? The packet doesn't exists, close the connection!
+				logger.error("Seems an unexpected packet id was received.", e);
+				connection.disconnect();
+				return;
+			} catch (IOException e) {
+				logger.fatal("Unexpected error reading data from socket.", e);
+				connection.disconnect();
+				return;
+			}
+			
+			// Delete all bytes read in handled packets, leave the pointer at the end for the next incoming message.
+			buffer.compact();
+		}
+	}
+	
+	@Override
+	public boolean readAllData(SocketChannel sc) {
 		// Everything is synchronized over the socket. This allows to keep only one running thread per client at a time.
 		synchronized (sc) {
 			Connection connection = scToConnection.get(sc);
+			
+			// Check if the connection wasn't removed by an executing thread handling packages.
+			if (null == connection) {
+				return false;
+			}
+			
 			ByteBuffer buffer = connection.inputBuffer.buffer;
 			
 			try {
@@ -92,33 +131,15 @@ public class ConnectionManagerImpl implements ConnectionManager {
 					
 					// Decrypt the data before trying to handle the packet.
 					security.decrypt(buffer, sc);
-					
-					try {
-						// Handle every packet we may
-						while (buffer.hasRemaining()) {
-							// Mark the current position to revert it if there is not enough data for this packet.
-							buffer.mark();
-							
-							ClientPacketsManager.handle(connection);
-						}
-					} catch (BufferUnderflowException e) {
-						// Not enough data received, restore the buffer to the last mark of a completed packet.
-						buffer.reset();
-					} catch(ArrayIndexOutOfBoundsException e) {
-						// Whooa, what are you doing? The packet doesn't exists, close the connection!
-						connection.disconnect();
-						return;
-					}
-					
-					// Delete all bytes read in handled packets, leave the pointer at the end for the next incoming message.
-					buffer.compact();
 				}
 			} catch (IOException e) {
 				logger.error("Unexpected error reading data from socket.", e);
-				
-				e.printStackTrace();
+				connection.disconnect();
+				return false;
 			}
 		}
+		
+		return true;
 	}
 
 	/*

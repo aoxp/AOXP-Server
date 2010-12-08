@@ -61,10 +61,16 @@ public interface ConnectionManager {
 	DataBuffer getOutputBuffer(User user);
 
 	/**
-	 * 
 	 * Flushes the output buffer associated with the given user.
 	 * @param user The user whose output buffer is being flushed.
 	 * @throws IOException
 	 */
 	void flushOutputBuffer(User user) throws IOException;
+	
+	/**
+	 * Reads all data from the given socket channel.
+	 * @param sc The socket channel from which to read all data.
+	 * @return True if the data was read successfully and can be handled, false otherwise.
+	 */
+	boolean readAllData(SocketChannel sc);
 }
