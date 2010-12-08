@@ -52,5 +52,6 @@ public class DaoModule extends AbstractModule {
 		
 		bind(WorldObjectPropertiesDAO.class).to(WorldObjectPropertiesDAOIni.class).in(Singleton.class);
 		bind(String.class).annotatedWith(Names.named("objectsFilePath")).toInstance(properties.getProperty("config.path.objsdat"));
+		bind(Integer.class).annotatedWith(Names.named("itemsPerRow")).toInstance(Integer.parseInt(properties.getProperty("config.inventory.itemperrow")));
 	}
 }

@@ -53,12 +53,13 @@ public class WorldObjectPropertiesDAOIniTest {
 	
 
 	private static final String TEST_OBJ_DAT = "src/test/resources/obj.dat";
+	private static final int TEST_ITEMS_PER_ROW = 5;
 	
 	protected WorldObjectPropertiesDAOIni dao;
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new WorldObjectPropertiesDAOIni(TEST_OBJ_DAT);
+		dao = new WorldObjectPropertiesDAOIni(TEST_OBJ_DAT, TEST_ITEMS_PER_ROW);
 	}
 
 	@After

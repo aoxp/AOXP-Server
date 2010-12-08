@@ -36,6 +36,8 @@ import com.ao.data.dao.WorldObjectPropertiesDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.character.Race;
 import com.ao.model.character.archetype.UserArchetype;
+import com.ao.model.inventory.InventoryImpl;
+import com.ao.model.inventory.InventoryImplTest;
 import com.ao.model.worldobject.WoodType;
 import com.ao.model.worldobject.WorldObjectType;
 import com.ao.model.worldobject.properties.AmmunitionProperties;
@@ -194,14 +196,17 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	}
 	
 	private String objectsFilePath;
+	private int itemsPerRow;
 	
 	/**
 	 * Creates a new WorldObjectDAOIni instance.
 	 * @param objectsFilePath The path to the file with all objects definitions.
 	 */
 	@Inject
-	public WorldObjectPropertiesDAOIni(@Named("objectsFilePath") String objectsFilePath) {
+	public WorldObjectPropertiesDAOIni(@Named("objectsFilePath") String objectsFilePath,
+		@Named("itemsPerRow") int itemsPerRow) {
 		this.objectsFilePath = objectsFilePath;
+		this.itemsPerRow = itemsPerRow;
 	}
 	
 	/*
@@ -1545,7 +1550,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @return The amount for the given backpack type
 	 */
 	private int getAmountForBackpackType(int backpackType) {
-		return backpackType * 5;
+		return backpackType * itemsPerRow ;
 	}
 	
 	
