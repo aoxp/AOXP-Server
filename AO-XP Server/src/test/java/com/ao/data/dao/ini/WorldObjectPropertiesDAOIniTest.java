@@ -28,7 +28,11 @@ import org.junit.Test;
 
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.worldobject.WorldObjectType;
+import com.ao.model.worldobject.properties.BackpackProperties;
+import com.ao.model.worldobject.properties.ForumProperties;
 import com.ao.model.worldobject.properties.ItemProperties;
+import com.ao.model.worldobject.properties.MineralProperties;
+import com.ao.model.worldobject.properties.SignProperties;
 import com.ao.model.worldobject.properties.StatModifyingItemProperties;
 import com.ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
 import com.ao.model.worldobject.properties.WorldObjectProperties;
@@ -41,6 +45,12 @@ public class WorldObjectPropertiesDAOIniTest {
 	private static final int GREEN_POTION_INDEX = 38;
 	private static final int VIOLET_POTION_INDEX = 165;
 	private static final int BLACK_POTION_INDEX = 644;
+
+	private static final int SIGN_INDEX = 12;
+	private static final int ULLATHORPE_FORUM_INDEX = 33;
+	private static final int BACKPACK_INDEX = 865;
+	private static final int MINERAL_INDEX = 191;
+	
 
 	private static final String TEST_OBJ_DAT = "src/test/resources/obj.dat";
 	
@@ -88,6 +98,23 @@ public class WorldObjectPropertiesDAOIniTest {
 		WorldObjectProperties blackPotion = objectProperties[BLACK_POTION_INDEX];
 		assertTrue(blackPotion instanceof ItemProperties);
 		assertEquals(WorldObjectType.DEATH_POTION, blackPotion.getType());
+
+		WorldObjectProperties sign = objectProperties[SIGN_INDEX];
+		assertTrue(sign instanceof SignProperties);
+		assertEquals(WorldObjectType.SIGN, sign.getType());
+		
+		WorldObjectProperties ullathorpeForum = objectProperties[ULLATHORPE_FORUM_INDEX];
+		assertTrue(ullathorpeForum instanceof ForumProperties);
+		assertEquals(WorldObjectType.FORUM, ullathorpeForum.getType());
+		
+		WorldObjectProperties backpack = objectProperties[BACKPACK_INDEX];
+		assertTrue(backpack instanceof BackpackProperties);
+		assertEquals(WorldObjectType.BACKPACK, backpack.getType());
+		
+		WorldObjectProperties mineral = objectProperties[MINERAL_INDEX];		
+		assertTrue(mineral instanceof MineralProperties);               		
+		assertEquals(WorldObjectType.MINERAL, mineral.getType());
+		
 		
 		// TODO : Keep doing this with other object types. Also check some other attributes are properly loaded...
 	}

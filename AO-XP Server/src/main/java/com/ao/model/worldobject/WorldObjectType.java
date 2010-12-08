@@ -56,5 +56,8 @@ public enum WorldObjectType {
 	DOOR,
 	SIGN,
 	FORUM,
-	BACKPACK
+	BACKPACK,
+	ANVIL,
+	FORGE,
+	INGOT
 }

@@ -44,6 +44,7 @@ import com.ao.model.worldobject.properties.DoorProperties;
 import com.ao.model.worldobject.properties.ForumProperties;
 import com.ao.model.worldobject.properties.ItemProperties;
 import com.ao.model.worldobject.properties.KeyProperties;
+import com.ao.model.worldobject.properties.MineralProperties;
 import com.ao.model.worldobject.properties.MusicalInstrumentProperties;
 import com.ao.model.worldobject.properties.ParchmentProperties;
 import com.ao.model.worldobject.properties.RangedWeaponProperties;
@@ -124,6 +125,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String TEXT_KEY = "Texto";
 	private static final String FORUM_NAME_KEY = "ID";
 	private static final String BACKPACK_TYPE_KEY = "MochilaType";
+	private static final String INGOT_OBJECT_INDEX = "Lingoteindex";
 	
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
 	private static final int WOOD_INDEX = 58;
@@ -183,6 +185,9 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		worldObjectTypeMapper.put(LegacyWorldObjectType.SIGN, WorldObjectType.SIGN);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.FORUM, WorldObjectType.FORUM);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.BACKPACK, WorldObjectType.BACKPACK);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.ANVIL, WorldObjectType.ANVIL);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.FORGE, WorldObjectType.FORGE);
+		worldObjectTypeMapper.put(LegacyWorldObjectType.GEMS, WorldObjectType.INGOT);
 	}
 	
 	private String objectsFilePath;
@@ -300,6 +305,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case CONTAINER:
 			case FURNITURE:
 			case BONFIRE:
+			case FORGE:
+			case ANVIL:
 				obj = loadProps(id, name, graphic, section);
 				break;
 				
@@ -327,13 +334,20 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				
 			case SIGN:
 				obj = loadSign(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				break;
 				
 			case FORUM:
 				obj = loadForum(worldObjectTypeMapper.get(type), id, name, graphic, section);
-			
+				break;
+				
 			case BACKPACK:
 				obj = loadBackpack(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				break;
 			
+			case MINERAL:
+				obj = loadMineral(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				break;
+				
 			default:
 				logger.error("Unexpected object type found: " + objectType);
 		}
@@ -834,6 +848,33 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		
 		return new BackpackProperties(type, id, name, graphic, backpackType, backpackType, null, null, false, false, false, false, backpackType, backpackType);
 	}
+
+	/**
+	 * Creates a backpack items's properties from the given section.
+	 * 
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * 
+	 * @return The world object created.
+	 */
+	private WorldObjectProperties loadMineral(WorldObjectType type, int id, String name, int graphic, Section section) {
+
+		int value = getValue(section);
+		int manufactureDifficulty = getManufactureDifficulty(section);
+		boolean newbie = getNewbie(section);
+		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
+		List<Race> forbiddenRaces = getForbiddenRaces(section);
+		boolean noLog = getNoLog(section);
+		boolean falls = getFalls(section);
+		boolean respawneable = getRespawneable(section);
+		
+		int ingotObjectIndex = getIngotObjectIndex(section);
+		
+		return new MineralProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, ingotObjectIndex);
+	}
 	
 	/**
 	 * Retrieves a list of all forbidden archetypes for this item, if any. Null if all are permited.
@@ -1073,7 +1114,13 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @return The object's hunger restored.
 	 */
 	private int getHunger(Section section) {
-		return Integer.parseInt(section.get(HUNGER_KEY));
+		String data = section.get(HUNGER_KEY);
+		
+		if (data == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(data);
 	}
 	
 	/**
@@ -1417,6 +1464,22 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		
 		return Integer.parseInt(data);
 	}
+
+	/**
+	 * Retrieves the backpack type.
+	 * @param section The section from which to read the objet's value.
+	 * @return the backpack type.
+	 */
+	private int getIngotObjectIndex(Section section) {
+		String data = section.get(INGOT_OBJECT_INDEX);
+		
+		if (data == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(data);
+	}
+	
 	
 	/**
 	 * World Object Type enumeration, as it was known in the old days of Visual Basic.
