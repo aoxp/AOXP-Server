@@ -33,6 +33,7 @@ import com.ao.model.user.Account;
 import com.ao.model.user.ConnectedUser;
 import com.ao.security.SecurityManager;
 import com.ao.service.LoginService;
+import com.ao.service.UserService;
 import com.ao.service.ValidatorService;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -55,8 +56,7 @@ public class LoginServiceImpl implements LoginService {
 	public static final String ACCOUNT_NAME_TAKEN_ERROR = "Ya existe el personaje.";
 	public static final String INVALID_NAME_ERROR = "El nombre ingresado no es válido.";
 	public static final String INVALID_EMAIL_ERROR = "La dirección de e-mail ingresada no es válida.";
-	
-	private static final int INITIAL_SKILL_POINTS = 10;
+	public static final String CHARACTER_IS_LOGGED_IN = "El personaje está conectado.";
 	
 	private String[] clientHashes;
 	// FIXME : Have these injected in a constructor by Guice, not hardwired like this!
@@ -65,9 +65,20 @@ public class LoginServiceImpl implements LoginService {
 	private final ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
 	private String currentClientVersion = config.getVersion();
 	
+	private final UserService userService;
+
 	private int initialAvailableSkills;
 	
-	
+	/**
+	 * Creates a LoginService instance
+	 * @param userService UserService in use
+	 */
+	@Inject
+	public LoginServiceImpl(UserService userService, @Named("initialAvailableSkills") int initialAvailableSkills) {
+		super();
+		this.initialAvailableSkills = initialAvailableSkills;
+		this.userService = userService;
+	}
 	
 	@Override
 	public void connectNewCharacter(ConnectedUser user, String username, String password, byte bRace,
@@ -160,12 +171,6 @@ public class LoginServiceImpl implements LoginService {
 		// TODO: Put it in the world!
 		
 	}
-	
-	@Inject
-	public LoginServiceImpl(@Named("initialAvailableSkills") int initialAvailableSkills) {
-		super();
-		this.initialAvailableSkills = initialAvailableSkills;
-	}
 
 	@Override
 	public void connectExistingCharacter(ConnectedUser user, String name, String password, String version,
@@ -185,17 +190,37 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(DAO_ERROR);
 		}
 		
+		//TODO : Is the ip in use?
+		
 		if (acc == null) {
 			throw new LoginErrorException(CHARACTER_NOT_FOUND_ERROR);
+		}
+		
+		if (!acc.authenticate(password)) {
+			throw new LoginErrorException(INCORRECT_PASSWORD_ERROR);
 		}
 		
 		if (acc.isBanned()) {
 			throw new LoginErrorException(BANNED_CHARACTER_ERROR);
 		}
 		
-		if (!acc.authenticate(password)) {
-			throw new LoginErrorException(INCORRECT_PASSWORD_ERROR);
+		if (userService.isLoggedIn(user)) {
+			throw new LoginErrorException(CHARACTER_IS_LOGGED_IN);
 		}
+		
+		// TODO : Add ip to connected ips
+		
+		// TODO : If user is a GM, log it to admin's log with it's ip.
+				
+		// TODO : Do something with the account!!!
+		
+		UserCharacter character = acc.getCharacter(name);
+		
+		// TODO : send all data!
+		
+		user.setAccount(acc);
+		
+		userService.logIn(user);
 	}
 	
 	/**

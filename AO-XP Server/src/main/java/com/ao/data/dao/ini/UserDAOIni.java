@@ -27,7 +27,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -37,6 +37,7 @@ import com.ao.data.dao.AccountDAO;
 import com.ao.data.dao.UserCharacterDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.data.dao.exception.NameAlreadyTakenException;
+import com.ao.ioc.ArchetypeLocator;
 import com.ao.model.character.Attribute;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
@@ -44,12 +45,12 @@ import com.ao.model.character.Reputation;
 import com.ao.model.character.ReputationImpl;
 import com.ao.model.character.Skill;
 import com.ao.model.character.UserCharacter;
+import com.ao.model.character.archetype.Archetype;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.map.Heading;
 import com.ao.model.user.Account;
 import com.ao.model.user.AccountImpl;
 import com.ao.model.user.LoggedUser;
-
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -200,24 +201,10 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	
 	@Override
 	public Account retrieve(String username) throws DAOException {
-		Ini chara;
-		
-		try {
-			// Make sure the reader is closed, since Ini4J gives no guarantees.
-			Reader reader = new BufferedReader(new FileReader(getCharFilePath(username)));
-			chara = new Ini(reader);
-			reader.close();
-		} catch (FileNotFoundException e) {
-			// The account doesn't exists.
-			return null;
-			
-		} catch (IOException e) {
-			logger.error("Charfile loading failed!", e);
-			throw new DAOException();
-		}
+		Ini chara = readCharFile(username);
 		
 		// Add the single character's name.
-		Set<String> characters = new LinkedHashSet<String>();
+		Set<String> characters = new HashSet<String>();
 		characters.add(username);
 		
 		return new AccountImpl(
@@ -254,7 +241,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			throw new DAOException();
 		}
 		
-		return new AccountImpl(name, password, mail, new LinkedHashSet<String>(), false);
+		return new AccountImpl(name, password, mail, new HashSet<String>(), false);
 	}
 
 	@Override
@@ -404,5 +391,76 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	protected String getCharFilePath(String name) {
 		return charfilesPath + name.toUpperCase() + FILE_EXTENSION;
 	}
+
+	@Override
+	public UserCharacter load(String username) throws DAOException {
+		Ini chara = readCharFile(username);
+		
+		int assassinPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, ASSASSIN_POINTS_KEY));
+		int banditPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, BANDIT_POINTS_KEY));
+		int bourgeoisPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, BOURGEOIS_POINTS_KEY));
+		int thiefPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, THIEF_POINTS_KEY));
+		int noblePoints = Integer.parseInt(chara.get(REPUTATION_HEADER, NOBLE_POINTS_KEY));
+		boolean belongsToFaction = chara.get(REPUTATION_HEADER, BELONGS_TO_CHAOS_KEY).equals("1") || chara.get(REPUTATION_HEADER, BELONGS_TO_ARMY_KEY).equals("1");
+		
+		Reputation reputation = new ReputationImpl(assassinPoints, banditPoints, bourgeoisPoints, thiefPoints, noblePoints, 
+				belongsToFaction);
+		
+		Race race = Race.get(Byte.parseByte(chara.get(INIT_HEADER, RACE_KEY)));
+		
+		Gender gender = Gender.get(Byte.parseByte(chara.get(INIT_HEADER, GENDER_KEY)));
+		
+		Archetype archetype = UserArchetype.get(Byte.parseByte(chara.get(INIT_HEADER, ARCHETYPE_KEY))).getArchetype();
+		
+		boolean poisoned = chara.get(FLAGS_HEADER, POISONED_KEY).equals("1");
+		
+		boolean paralyzed = chara.get(FLAGS_HEADER, PARALYZED_KEY).equals("1");
+		
+		// TODO : check what to do, immobilized state isn't saved in charfile
+		boolean immobilized = false;
+		
+		boolean invisible = false;
+		
+		boolean mimetized = false;
+		
+		boolean dumbed = false;
+		
+		boolean hidden = chara.get(FLAGS_HEADER, HIDDEN_KEY).equals("1");
+		
+		int maxMana = Integer.parseInt(chara.get(STATS_HEADER, MAX_MANA_KEY)); 
+		int maxHitPoints = Integer.parseInt(chara.get(STATS_HEADER, MAX_HIT_KEY));
+		int mana = Integer.parseInt(chara.get(STATS_HEADER, MIN_MANA_KEY));
+		int hitpoints = Integer.parseInt(chara.get(STATS_HEADER, MIN_HIT_KEY));
+		int thirstiness = Integer.parseInt(chara.get(STATS_HEADER, MIN_THIRSTINESS_KEY));
+		int hunger = Integer.parseInt(chara.get(STATS_HEADER, MIN_THIRSTINESS_KEY));
+		byte lvl = Byte.parseByte(chara.get(STATS_HEADER, LEVEL_KEY));
+		
+		// TODO : Complete description
+		String description = "";
+		
+		// TODO : Validate character
+		UserCharacter userCharacter = new LoggedUser(reputation, race, gender, archetype, poisoned, paralyzed, immobilized, invisible, mimetized, dumbed, hidden, maxMana, maxHitPoints, mana, hitpoints, thirstiness, hunger, lvl, username, description);
+		
+		return userCharacter;
+	}
 	
+	private Ini readCharFile(String username) throws DAOException { 
+		Ini chara;
+		
+		try {
+			// Make sure the reader is closed, since Ini4J gives no guarantees.
+			Reader reader = new BufferedReader(new FileReader(getCharFilePath(username)));
+			chara = new Ini(reader);
+			reader.close();
+		} catch (FileNotFoundException e) {
+			// The account doesn't exists.
+			return null;
+			
+		} catch (IOException e) {
+			logger.error("Charfile loading failed!", e);
+			throw new DAOException();
+		}
+		
+		return chara;
+	}
 }

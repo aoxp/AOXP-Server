@@ -26,6 +26,14 @@ import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
 
 public interface UserCharacterDAO {
+	
+	/**
+	 * Return the character with the given name
+	 * @param name Character's name
+	 * @return
+	 * @throws DAOException 
+	 */
+	UserCharacter load(String name) throws DAOException;
 
 	/**
 	 * Creates and persists a new user character.

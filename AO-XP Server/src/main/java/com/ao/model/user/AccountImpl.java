@@ -20,7 +20,9 @@ package com.ao.model.user;
 
 import java.util.Set;
 
+import com.ao.context.ApplicationContext;
 import com.ao.model.character.UserCharacter;
+import com.ao.service.UserService;
 
 /**
  * A user account.
@@ -104,7 +106,7 @@ public class AccountImpl implements Account {
 	@Override
 	public UserCharacter getCharacter(String name) {
 		// TODO : Fill this in!
-		return null;
+		return ApplicationContext.getInstance(UserService.class).getCharacter(name);
 	}
 	
 	/* (non-Javadoc)
