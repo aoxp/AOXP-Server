@@ -23,6 +23,7 @@ import java.nio.BufferUnderflowException;
 
 import com.ao.network.packet.IncomingPacket;
 import com.ao.network.packet.incoming.LoginExistingCharacterPacket;
+import com.ao.network.packet.incoming.ThrowDicesPacket;
 
 /**
  * Manager for client-side packets.
@@ -33,7 +34,8 @@ public class ClientPacketsManager {
 	 * Enumerates client packets.
 	 */
 	private enum ClientPackets {
-		LOGIN(LoginExistingCharacterPacket.class);
+		LOGIN(LoginExistingCharacterPacket.class),
+		THROW_DICE(ThrowDicesPacket.class);
 		
 		protected IncomingPacket handler;
 

@@ -18,6 +18,7 @@
 
 package com.ao.model.user;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.ao.model.character.Attribute;
@@ -25,7 +26,7 @@ import com.ao.model.character.Attribute;
 public class ConnectedUser implements User {
 
 	private Account account;
-	private Map<Attribute, Byte> attributes;
+	private Map<Attribute, Byte> attributes = new HashMap<Attribute, Byte>();
 	
 	/**
 	 * Retrieves the user's account.

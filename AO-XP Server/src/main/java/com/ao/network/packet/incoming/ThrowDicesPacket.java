@@ -5,7 +5,7 @@ import java.nio.BufferUnderflowException;
 import java.util.Random;
 
 import com.ao.model.character.Attribute;
-import com.ao.model.user.LoggedUser;
+import com.ao.model.user.ConnectedUser;
 import com.ao.network.Connection;
 import com.ao.network.ServerPacketsManager;
 import com.ao.network.packet.IncomingPacket;
@@ -28,7 +28,7 @@ public class ThrowDicesPacket implements IncomingPacket {
 	public void handle(Connection connection) throws BufferUnderflowException,
 			UnsupportedEncodingException {
 		
-		LoggedUser user = (LoggedUser) connection.getUser();
+		ConnectedUser user = (ConnectedUser) connection.getUser();
 		
 		byte strength = (byte) Math.max(MIN_STRENGTH, 13 + rnd.nextInt(4) + rnd.nextInt(3));
 		byte agility = (byte) Math.max(MIN_AGILITY, 12 + rnd.nextInt(4) + rnd.nextInt(4));
@@ -43,9 +43,9 @@ public class ThrowDicesPacket implements IncomingPacket {
 		user.setAttribute(Attribute.CONSTITUTION, constitution);
 		
 		ServerPacketsManager.write(
-				new DiceRollPacket(strength, agility, intelligence, charisma, constitution),
-				connection.getOutputBuffer()
-			);
+			new DiceRollPacket(strength, agility, intelligence, charisma, constitution),
+			connection.getOutputBuffer()
+		);
 	}
 
 }

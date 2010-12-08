@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ao.network.packet.OutgoingPacket;
+import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
 
 /**
@@ -34,7 +35,8 @@ public class ServerPacketsManager {
 	 * Enumerates server packets.
 	 */
 	private enum ServerPackets {
-		ERROR_MESSAGE(ErrorMessagePacket.class);
+		ERROR_MESSAGE(ErrorMessagePacket.class),
+		ROLL_DICE(DiceRollPacket.class);
 		
 		protected Class<? extends OutgoingPacket> packetClass;
 		

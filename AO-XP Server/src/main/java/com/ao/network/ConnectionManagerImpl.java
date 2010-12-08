@@ -82,29 +82,34 @@ public class ConnectionManagerImpl implements ConnectionManager {
 			ByteBuffer buffer = connection.inputBuffer.buffer;
 			
 			try {
-				// Handle every packet we may
-				while (buffer.hasRemaining()) {
-					// Mark the current position to revert it if there is not enough data for this packet.
-					buffer.mark();
-					
-					ClientPacketsManager.handle(connection);
+				try {
+					// Handle every packet we may
+					while (buffer.hasRemaining()) {
+						// Mark the current position to revert it if there is not enough data for this packet.
+						buffer.mark();
+						
+						ClientPacketsManager.handle(connection);
+					}
+				} catch (BufferUnderflowException e) {
+					// Not enough data received, restore the buffer to the last mark of a completed packet.
+					buffer.reset();
+				} catch (ArrayIndexOutOfBoundsException e) {
+					// Whooa, what are you doing? The packet doesn't exists, close the connection!
+					logger.error("Seems an unexpected packet id was received.", e);
+					connection.disconnect();
+					return;
 				}
-			} catch (BufferUnderflowException e) {
-				// Not enough data received, restore the buffer to the last mark of a completed packet.
-				buffer.reset();
-			} catch (ArrayIndexOutOfBoundsException e) {
-				// Whooa, what are you doing? The packet doesn't exists, close the connection!
-				logger.error("Seems an unexpected packet id was received.", e);
-				connection.disconnect();
-				return;
+				
+				// Delete all bytes read in handled packets, leave the pointer at the end for the next incoming message.
+				buffer.compact();
+				
+				// Send all outgoing data pending in the buffer
+				flushOutputBuffer(connection.getUser());
 			} catch (IOException e) {
-				logger.fatal("Unexpected error reading data from socket.", e);
+				logger.fatal("Unexpected IO error handlingincoming data.", e);
 				connection.disconnect();
 				return;
 			}
-			
-			// Delete all bytes read in handled packets, leave the pointer at the end for the next incoming message.
-			buffer.compact();
 		}
 	}
 	
