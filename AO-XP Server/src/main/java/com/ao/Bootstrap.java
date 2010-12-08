@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package ao;
+package com.ao;
 
 import java.io.IOException;
 import java.net.InetAddress;

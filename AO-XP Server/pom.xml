@@ -86,6 +86,11 @@
       <artifactId>easymockclassextension</artifactId>
       <version>2.5.2</version>
     </dependency>
+    <dependecy>
+      <groupId>com.ao</groupId>
+      <artifactId>aoxp-server-security</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependecy>
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
