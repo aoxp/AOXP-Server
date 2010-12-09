@@ -22,7 +22,7 @@ import com.ao.model.character.Character;
 import com.ao.model.worldobject.properties.ItemProperties;
 
 /**
- * A Ingot.
+ * An Ingot.
  */
 public class Ingot extends AbstractItem {
 

@@ -850,7 +850,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 */
 	private WorldObjectProperties loadBackpack(WorldObjectType type, int id, String name, int graphic, Section section) {
 		
-		// TODO : Esto es un valor que está mapeado en el server a la cantidad de slots que agrega, ¿habría que reemplarlo directamente por la cantidad de slots que agrega la mochila?
 		int value = getValue(section);
 		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
@@ -927,13 +926,12 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 */
 	private WorldObjectProperties loadGem(int id, String name, int graphic, Section section) {
 		for (int i = 0; i < INGOTES.length; i++) {
-			if (INGOTES.equals(id)) {
+			if (INGOTES[i] == id) {
 				return loadIngot(WorldObjectType.INGOT, id, name, graphic, section);
 			}
 		}
 		
 		return loadProps(id, name, graphic, section);
-		
 	}
 	
 	/**
@@ -1542,7 +1540,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private int getAmountForBackpackType(int backpackType) {
 		return backpackType * itemsPerRow ;
 	}
-	
 	
 	/**
 	 * World Object Type enumeration, as it was known in the old days of Visual Basic.
