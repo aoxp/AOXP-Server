@@ -286,6 +286,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				
 			case EMPTY_BOTTLE:
 			case MONEY:
+			case FORGE:
+			case ANVIL:
 				obj = loadGenericItem(worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
@@ -312,8 +314,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case CONTAINER:
 			case FURNITURE:
 			case BONFIRE:
-			case FORGE:
-			case ANVIL:
 				obj = loadProps(id, name, graphic, section);
 				break;
 				
