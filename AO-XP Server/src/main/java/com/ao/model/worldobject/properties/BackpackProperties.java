@@ -25,14 +25,14 @@ import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.worldobject.WorldObjectType;
 
 /**
- * Defines a Weapon's properties. Allows a lightweight pattern implementation.
+ * Defines a Backpack's properties. Allows a lightweight pattern implementation.
  */
 public class BackpackProperties extends EquippableItemProperties {
 
 	protected int slots;
 	
 	/**
-	 * Creates a new WeaponProperties instance.
+	 * Creates a new BackpackProperties instance.
 	 * @param type The type of the item.
 	 * @param id The id of the item.
 	 * @param name The name of the item.
