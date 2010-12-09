@@ -20,25 +20,32 @@ package com.ao.model.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ao.context.ApplicationContext;
+import com.ao.data.dao.UserCharacterDAO;
+import com.ao.data.dao.ini.UserDAOIni;
+
 public class AccountImplTest {
 
 	private static final String ACCOUNT_NAME = "an account";
 	private static final String ACCOUNT_PASSWORD = "a password";
+	private static final String ACCOUNT_INVALID_PASSWORD = "invalid pass";
 	private static final String ACCOUNT_EMAIL = "anemail@address.com";
 	private static final boolean ACCOUNT_BANNED = false;
-	private static final Set<String> ACCOUNT_CHARACTERS = new LinkedHashSet<String>();
-	private static final String TEST_CHARACTER_NAME = "a character";
+	private static final Set<String> ACCOUNT_CHARACTERS = new HashSet<String>();
+	private static final String TEST_CHARACTER_NAME = "TEST";
+	private static final String NON_EXISTING_CHARACTER_NAME = "non existing character";
 	
-	AccountImpl account;
+	private AccountImpl account;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -64,7 +71,7 @@ public class AccountImplTest {
 	@Test
 	public void testHasCharacter() {
 		assertTrue(account.hasCharacter(TEST_CHARACTER_NAME));
-		assertFalse(account.hasCharacter(TEST_CHARACTER_NAME + "aa"));
+		assertFalse(account.hasCharacter(NON_EXISTING_CHARACTER_NAME));
 	}
 
 	@Test
@@ -78,12 +85,15 @@ public class AccountImplTest {
 
 	@Test
 	public void testGetCharacter() {
-		fail("Not yet implemented");
+		// TODO : Find a nice way to test this...
+		// assertNotNull(account.getCharacter(TEST_CHARACTER_NAME));
+		assertNull(account.getCharacter(NON_EXISTING_CHARACTER_NAME));
 	}
 
 	@Test
 	public void testAuthenticate() {
 		assertTrue(account.authenticate(ACCOUNT_PASSWORD));
+		assertFalse(account.authenticate(ACCOUNT_INVALID_PASSWORD));
 	}
 
 	@Test

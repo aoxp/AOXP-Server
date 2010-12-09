@@ -105,7 +105,6 @@ public class AccountImpl implements Account {
 	 */
 	@Override
 	public UserCharacter getCharacter(String name) {
-		// TODO : Fill this in!
 		return ApplicationContext.getInstance(UserService.class).getCharacter(name);
 	}
 	
