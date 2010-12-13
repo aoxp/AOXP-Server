@@ -50,8 +50,8 @@ public class LoginNewCharacterPacketTest {
 	private static final String CHARACTER_PASSWORD = "a";
 	private static final String CHARACTER_MAIL = "thistestisnotgoingtofail@aoxp.com";
 	private static final byte CHARACTER_ARCHETYPE = (byte) UserArchetype.ASSASIN.ordinal();
-	private static final byte CHARACTER_RACE = (byte) Race.DARK_ELF.ordinal();
-	private static final byte CHARACTER_GENDER = (byte) Gender.FEMALE.ordinal();
+	private static final byte CHARACTER_RACE = (byte) Race.HUMAN.ordinal();
+	private static final byte CHARACTER_GENDER = (byte) Gender.MALE.ordinal();
 	private static final byte CHARACTER_HOMELAND = 1;
 	private static final byte CHARACTER_HEAD = 10;
 	

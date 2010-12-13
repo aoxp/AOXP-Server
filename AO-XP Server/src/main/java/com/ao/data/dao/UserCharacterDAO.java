@@ -37,17 +37,18 @@ public interface UserCharacterDAO {
 
 	/**
 	 * Creates and persists a new user character.
-	 * @param race 			The character's race.
-	 * @param gender 		The character's gender.
-	 * @param archetype 	The character's archetype.
-	 * @param head	 		The character's head.
-	 * @param homeland 		The character's homeland.
-	 * @param strength		The character's strength attribute.
-	 * @param agility		The character's agility attribute.
-	 * @param intelligence	The character's intelligence attribute.
-	 * @param charisma		The character's charisma attribute.
-	 * @param constitution	The character's constitution attribute.
-	 * @return 				The created user character.
+	 * @param race 						The character's race.
+	 * @param gender 					The character's gender.
+	 * @param archetype 				The character's archetype.
+	 * @param head	 					The character's head.
+	 * @param homeland 					The character's homeland.
+	 * @param strength					The character's strength attribute.
+	 * @param agility					The character's agility attribute.
+	 * @param intelligence				The character's intelligence attribute.
+	 * @param charisma					The character's charisma attribute.
+	 * @param constitution				The character's constitution attribute.
+	 * @param initialAvailableSkills 	The character's initial available skills
+	 * @return 							The created user character.
 	 */
 	UserCharacter create(String name, Race race, Gender gender,
 			UserArchetype archetype, int head, byte homeland, byte strength,

@@ -18,6 +18,7 @@
 
 package com.ao.ioc.module;
 
+import java.util.List;
 import java.util.Properties;
 
 import com.ao.service.LoginService;
@@ -30,9 +31,13 @@ import com.ao.service.map.MapServiceImpl;
 import com.ao.service.timedevents.TimedEventsServiceImpl;
 import com.ao.service.user.UserServiceImpl;
 import com.ao.service.worldobject.WorldObjectServiceImpl;
+import com.ao.service.CharacterBodyService;
+import com.ao.service.CharacterBodyServiceImpl;
+import com.ao.utils.RangeParser;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
+import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 
 public class ServiceModule extends AbstractModule {
@@ -54,11 +59,26 @@ public class ServiceModule extends AbstractModule {
 		bind(TimedEventsService.class).to(TimedEventsServiceImpl.class).in(Singleton.class);
 		bind(WorldObjectService.class).to(WorldObjectServiceImpl.class).in(Singleton.class);
 		bind(UserService.class).to(UserServiceImpl.class).in(Singleton.class);
+		bind(CharacterBodyService.class).to(CharacterBodyServiceImpl.class).in(Singleton.class);
 		
 		bind(String.class).annotatedWith(Names.named("mapsPath")).toInstance(properties.getProperty("config.path.maps"));
 		bind(Integer.class).annotatedWith(Names.named("mapsAmount")).toInstance(Integer.parseInt(properties.getProperty("config.maps.amount")));
 		bind(String.class).annotatedWith(Names.named("mapsConfigFile")).toInstance("resources/maps.properties");
-		bind(Integer.class).annotatedWith(Names.named("initialAvailableSkills")).toInstance(Integer.parseInt(properties.getProperty("config.maps.amount")));
+		bind(Integer.class).annotatedWith(Names.named("initialAvailableSkills")).toInstance(Integer.parseInt(properties.getProperty("config.loginservice.initialavailableskills")));
+		
+		
+		
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsDarkelfMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.darkelf.male")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsDarkelfFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.darkelf.female")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsDwarfMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.dwarf.male")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsDwarfFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.dwarf.female")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsElfMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.elf.male")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsElfFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.elf.female")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsGnomeMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.gnome.male")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsGnomeFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.gnome.female")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsHumanMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.human.male")));
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsHumanFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.human.female")));	
+		
 	}
 
 }

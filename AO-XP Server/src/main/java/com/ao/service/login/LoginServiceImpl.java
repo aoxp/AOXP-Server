@@ -32,6 +32,7 @@ import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.user.Account;
 import com.ao.model.user.ConnectedUser;
 import com.ao.security.SecurityManager;
+import com.ao.service.CharacterBodyService;
 import com.ao.service.LoginService;
 import com.ao.service.UserService;
 import com.ao.service.ValidatorService;
@@ -57,6 +58,7 @@ public class LoginServiceImpl implements LoginService {
 	public static final String INVALID_NAME_ERROR = "El nombre ingresado no es válido.";
 	public static final String INVALID_EMAIL_ERROR = "La dirección de e-mail ingresada no es válida.";
 	public static final String CHARACTER_IS_LOGGED_IN = "El personaje está conectado.";
+	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es válida.";
 	
 	private String[] clientHashes;
 	// FIXME : Have these injected in a constructor by Guice, not hardwired like this!
@@ -66,6 +68,7 @@ public class LoginServiceImpl implements LoginService {
 	private String currentClientVersion = config.getVersion();
 	
 	private final UserService userService;
+	private final CharacterBodyService characterBodyService;
 
 	private int initialAvailableSkills;
 	
@@ -74,10 +77,11 @@ public class LoginServiceImpl implements LoginService {
 	 * @param userService UserService in use
 	 */
 	@Inject
-	public LoginServiceImpl(UserService userService, @Named("initialAvailableSkills") int initialAvailableSkills) {
+	public LoginServiceImpl(UserService userService, CharacterBodyService characterBodyService, @Named("initialAvailableSkills") int initialAvailableSkills) {
 		super();
 		this.initialAvailableSkills = initialAvailableSkills;
 		this.userService = userService;
+		this.characterBodyService = characterBodyService;
 	}
 	
 	@Override
@@ -134,7 +138,12 @@ public class LoginServiceImpl implements LoginService {
 		
 		// TODO: Check for valid homeland.
 		
-		// TODO: Check for valid head
+		boolean lala;
+		lala = characterBodyService.isValidHead(head, Race.get(bRace), Gender.get(bGender));
+		
+		if (!characterBodyService.isValidHead(head, Race.get(bRace), Gender.get(bGender))){
+			throw new LoginErrorException(INVALID_HEAD_ERROR);
+		}
 		
 		// First, we have to create the new account.
 		Account acc;
