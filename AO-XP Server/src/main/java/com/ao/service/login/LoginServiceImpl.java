@@ -138,9 +138,6 @@ public class LoginServiceImpl implements LoginService {
 		
 		// TODO: Check for valid homeland.
 		
-		boolean lala;
-		lala = characterBodyService.isValidHead(head, Race.get(bRace), Gender.get(bGender));
-		
 		if (!characterBodyService.isValidHead(head, Race.get(bRace), Gender.get(bGender))){
 			throw new LoginErrorException(INVALID_HEAD_ERROR);
 		}

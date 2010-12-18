@@ -186,6 +186,16 @@ public class LoginNewCharacterPacketTest {
 	}
 	
 	@Test
+	public void invalidHeadTest() throws Exception{
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
+				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
+				(byte) -1, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_HEAD_ERROR);
+		
+		packet.handle(connection);
+		EasyMock.verify(connection.getOutputBuffer());
+	}
+	
+	@Test
 	public void invalidArchetypeTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, (byte) -1,
