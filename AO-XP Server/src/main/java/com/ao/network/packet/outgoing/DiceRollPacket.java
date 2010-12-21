@@ -23,7 +23,6 @@ public class DiceRollPacket implements OutgoingPacket {
 		this.constitution = constitution;
 	}
 
-
 	@Override
 	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
 		

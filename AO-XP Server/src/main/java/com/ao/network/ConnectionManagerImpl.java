@@ -46,16 +46,17 @@ public class ConnectionManagerImpl implements ConnectionManager {
 	
 	private ConcurrentMap<SocketChannel, Connection> scToConnection;
 	private ConcurrentMap<User, Connection> userToConnection;
-	private SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
+	private SecurityManager security;
 	
 	/**
 	 * Creates a new ConnectionManagerImpl
 	 * @param config The server's configuration.
 	 */
 	@Inject
-	public ConnectionManagerImpl(ServerConfig config) {
+	public ConnectionManagerImpl(ServerConfig config, SecurityManager security) {
 		int concurrencyLevel = Runtime.getRuntime().availableProcessors();
 		int maxExpectedUsers = config.getMaximumConcurrentUsers();
+		this.security = security;
 		
 		scToConnection = new ConcurrentHashMap<SocketChannel, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);
 		userToConnection = new ConcurrentHashMap<User, Connection>(maxExpectedUsers, DEFAULT_LOAD_FACTOR, concurrencyLevel);

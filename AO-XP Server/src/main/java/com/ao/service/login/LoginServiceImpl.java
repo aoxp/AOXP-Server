@@ -61,29 +61,30 @@ public class LoginServiceImpl implements LoginService {
 	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es válida.";
 	
 	private String[] clientHashes;
-	// FIXME : Have these injected in a constructor by Guice, not hardwired like this!
-	private final AccountDAO accDAO = ApplicationContext.getInstance(AccountDAO.class);
-	private final UserCharacterDAO charDAO = ApplicationContext.getInstance(UserCharacterDAO.class);
-	private final ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
-	private String currentClientVersion = config.getVersion();
-	
+
+	private final AccountDAO accDAO;
+	private final UserCharacterDAO charDAO;
+	private final ServerConfig config;
+	private String currentClientVersion;
+	private final int initialAvailableSkills;
 	private final UserService userService;
 	private final CharacterBodyService characterBodyService;
-
-	private int initialAvailableSkills;
 	
-	/**
-	 * Creates a LoginService instance
-	 * @param userService UserService in use
-	 */
 	@Inject
-	public LoginServiceImpl(UserService userService, CharacterBodyService characterBodyService, @Named("initialAvailableSkills") int initialAvailableSkills) {
-		super();
+	public LoginServiceImpl(AccountDAO accDAO, UserCharacterDAO charDAO,
+			ServerConfig config, UserService userService,
+			CharacterBodyService characterBodyService,
+			@Named("initialAvailableSkills") int initialAvailableSkills) {
+		this.accDAO = accDAO;
+		this.charDAO = charDAO;
+		this.config = config;
 		this.initialAvailableSkills = initialAvailableSkills;
 		this.userService = userService;
 		this.characterBodyService = characterBodyService;
+		
+		currentClientVersion = config.getVersion();
 	}
-	
+
 	@Override
 	public void connectNewCharacter(ConnectedUser user, String username, String password, byte bRace,
 			byte bGender, byte bArchetype, int head, String mail, 
