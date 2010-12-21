@@ -34,7 +34,6 @@ import com.ao.service.worldobject.WorldObjectServiceImpl;
 import com.ao.service.CharacterBodyService;
 import com.ao.service.CharacterBodyServiceImpl;
 import com.ao.utils.RangeParser;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
@@ -61,9 +60,6 @@ public class ServiceModule extends AbstractModule {
 		bind(UserService.class).to(UserServiceImpl.class).in(Singleton.class);
 		bind(CharacterBodyService.class).to(CharacterBodyServiceImpl.class).in(Singleton.class);
 		
-		bind(String.class).annotatedWith(Names.named("mapsPath")).toInstance(properties.getProperty("config.path.maps"));
-		bind(Integer.class).annotatedWith(Names.named("mapsAmount")).toInstance(Integer.parseInt(properties.getProperty("config.maps.amount")));
-		bind(String.class).annotatedWith(Names.named("mapsConfigFile")).toInstance("resources/maps.properties");
 		bind(Integer.class).annotatedWith(Names.named("initialAvailableSkills")).toInstance(Integer.parseInt(properties.getProperty("config.loginservice.initialavailableskills")));
 		
 		

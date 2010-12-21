@@ -165,5 +165,13 @@ public class Tile {
 	public boolean isSafeZone() {
 		return trigger == Trigger.SAFE_ZONE;
 	}
+
+	@Override
+	public String toString() {
+		return "Tile [character=" + character + ", worldObject=" + worldObject
+				+ ", trigger=" + trigger + ", blocked=" + blocked
+				+ ", isWater=" + isWater + ", isLava=" + isLava + ", tileExit="
+				+ tileExit + "]";
+	}
 	
 }

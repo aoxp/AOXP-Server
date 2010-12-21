@@ -22,6 +22,7 @@ package com.ao.model.map;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
 import com.ao.model.character.Character;
 
 /**
@@ -33,6 +34,7 @@ public class WorldMap {
 	public static final int MAP_HEIGHT = 100;
 	public static final int VISIBLE_AREA_WIDTH = 8;
 	public static final int VISIBLE_AREA_HEIGHT = 6;
+	public static final int MAX_DISTANCE = 12;
 	
 	public static final int MAX_X = 99;
 	public static final int MAX_Y = 99;
@@ -57,7 +59,7 @@ public class WorldMap {
 		this.id = id;
 		this.tiles = tiles;
 	}
-
+ 
 	/**
 	 * Creates a new Map.
 	 * @param id The unique id of the map.
@@ -151,8 +153,65 @@ public class WorldMap {
 		return charList;
 	}
 
+	/**
+	 * Puts the given character at the given position.
+	 * If the tile is unavailable this will look around for an available one.
+	 * @param chara The character to put.
+	 * @param pos The position where to put it.
+	 */
+	public void putCharacterAtPos(Character chara, byte x, byte y) {
+		synchronized (tiles) {
+			Tile tile = getTile(x, y);
+			
+			if (tile.getCharacter() != null) {
+				tile = getEmptyTileAround(x, y, chara.canWalkInWater(), !chara.canWalkInWater());
+			}
+			
+			tile.setCharacter(chara);
+		}
+	}
+	
+	/**
+	 * Searchs for an empty tile around the given one and retrieves it.
+	 * If there is no empty tile around the given one this will continue
+	 * searching in the next "row" of tiles, starting at top left.
+	 * This method should be called from a synchronized block.
+	 * @param lookAroundX The tile's X value.
+	 * @param lookAroundY The tile's Y value.
+	 * @param canBeWater Whether the found tile can be water, or not.
+	 * @param canBeLand Whether the found tile can be land, or not.
+	 * @return The empty tile.
+	 */
+	private Tile getEmptyTileAround(byte lookAroundX, byte lookAroundY, boolean canBeWater, boolean canBeLand) {
+		byte distance = 1;
+		Tile t;
+
+		while (distance < MAX_DISTANCE) {
+			for (int x = Math.max(lookAroundX - distance, 1); x < lookAroundX + distance && x <= MAP_HEIGHT; x++) {
+				for (int y = Math.max(lookAroundY - distance, 1); y < lookAroundY + distance && y <= MAP_WIDTH; y++) {
+					
+					// Don't look on the tile we're supposed to look around or on tiles already checked.
+					if (Math.abs(x - lookAroundX) != distance && Math.abs(y - lookAroundY) != distance) {
+						continue;
+					}
+
+					t = getTile(x, y);
+
+					if (t.getCharacter() == null && !t.isBlocked() && t.getTileExit() == null
+							&& ((t.isWater() && canBeWater) || (!t.isWater() && canBeLand))) {
+						return t; // Found it!
+					}
+				}
+			}
+
+			distance++;
+		}
+
+		return null;
+	}
+	
 	@Override
-	public boolean equals(Object obj) {
+ 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -170,5 +229,10 @@ public class WorldMap {
 		if (!Arrays.equals(tiles, other.tiles))
 			return false;
 		return true;
+	}
+	
+	public Tile[] dame()
+	{
+		return tiles;
 	}
 }

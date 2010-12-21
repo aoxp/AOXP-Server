@@ -18,7 +18,9 @@
 
 package com.ao.service;
 
+import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
+import com.ao.model.character.Character;
 
 public interface MapService {
 
@@ -34,4 +36,10 @@ public interface MapService {
 	 */
 	WorldMap getMap(int id);
 
+	/**
+	 * Puts a character at the given position
+	 * @param chara The character to be put.
+	 * @param pos The position where to put the character.
+	 */
+	void putCharacterAtPos(Character chara, Position pos);
 }

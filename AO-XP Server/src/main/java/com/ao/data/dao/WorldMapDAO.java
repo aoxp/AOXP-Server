@@ -16,46 +16,15 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.ao.service.map;
+package com.ao.data.dao;
 
-import com.ao.data.dao.WorldMapDAO;
-import com.ao.model.character.Character;
-import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
-import com.ao.service.MapService;
-import com.google.inject.Inject;
 
-/**
- * Concrete implementation of MapService.
- */
-public class MapServiceImpl implements MapService {
+public interface WorldMapDAO {
 
-	private WorldMapDAO mapsDAO;
-	private WorldMap[] maps;
-	
-	@Inject
-	public MapServiceImpl(WorldMapDAO mapsDAO) {
-		this.mapsDAO = mapsDAO;
-	}
-	
-	@Override
-	public void loadMaps() {
-		maps = mapsDAO.retrieveAll();
-	}
-	
-	@Override
-	public WorldMap getMap(int id) {
-		if (id < 1 || id > maps.length) {
-			return null;
-		}
-		
-		// Maps enumeration starts at 1, not 0.
-		return maps[id - 1];
-	}
-	
-	@Override
-	public void putCharacterAtPos(Character chara, Position pos) {
-		pos.getMap().putCharacterAtPos(chara, pos.getX(), pos.getY());
-	}
-	
+	/**
+	 * Loads and retrieves all maps.
+	 * @return The loaded maps.
+	 */
+	WorldMap[] retrieveAll();
 }
