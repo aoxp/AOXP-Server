@@ -107,7 +107,7 @@ public class UserDAOIniTest {
 		// TODO: Use constants!!
 		UserCharacter chara = dao.create(NEW_CHARACTER_NICK, Race.HUMAN, Gender.FEMALE,
 				UserArchetype.ASSASIN, (int) 75, (byte) 1, (byte) 18, (byte) 18,
-				(byte) 18, (byte) 18, (byte) 18, (int) 10);
+				(byte) 18, (byte) 18, (byte) 18, (int) 10, (int)1);
 		
 		File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
 		

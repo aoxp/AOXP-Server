@@ -265,7 +265,8 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	@Override
 	public UserCharacter create(String name, Race race, Gender gender,
 			UserArchetype archetype, int head, byte homeland, byte strength,
-			byte agility, byte intelligence, byte charisma, byte constitution, int initialAvailableSkills)
+			byte agility, byte intelligence, byte charisma, byte constitution, 
+			int initialAvailableSkills, int body)
 			throws DAOException, NameAlreadyTakenException {
 		Ini chara = new Ini();
 		
@@ -279,7 +280,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		chara.put(INIT_HEADER, HELMET_KEY, NO_HELMET);
 		chara.put(INIT_HEADER, UPTIME_KEY, 0);
 		chara.put(INIT_HEADER, HEAD_KEY, head);
-		// TODO: Assign body.
+		chara.put(INIT_HEADER, BODY_KEY, body);
 		// TODO: Assign position depending on the homeland.
 		// TODO: Save last ip?
 		

@@ -27,6 +27,17 @@ public class CharacterBodyServiceTest {
 	private List<Integer> headsHumanMale = RangeParser.parseIntegers("1-40");
 	private List<Integer> headsHumanFemale = RangeParser.parseIntegers("70-89");
 	
+	private int DarkelfMaleBody = 3;
+	private int DarkelfFemaleBody = 3;
+	private int DwarfMaleBodyBody = 300;
+	private int DwarfFemaleBody = 300;
+	private int ElfMaleBody = 2;
+	private int ElfFemaleBody = 2;
+	private int GnomeMaleBody = 300;
+	private int GnomeFemaleBody = 300;
+	private int HumanMaleBody = 1;
+	private int HumanFemaleBody = 1;
+	
 	private static final int INVALID_HEAD = 0;
 	
 	private static final int VALID_DARKELF_MALE_HEAD = 201;
@@ -40,9 +51,26 @@ public class CharacterBodyServiceTest {
 	private static final int VALID_HUMAN_MALE_HEAD = 1;
 	private static final int VALID_HUMAN_FEMALE_HEAD = 70;
 	
+	private static final int INVALID_BODY = 0;
+	
+	private static final int VALID_DARKELF_MALE_BODY = 3;
+	private static final int VALID_DARKELF_FEMALE_BODY = 3;
+	private static final int VALID_DWARF_MALE_BODY = 300;
+	private static final int VALID_DWARF_FEMALE_BODY = 300;
+	private static final int VALID_ELF_MALE_BODY = 2;
+	private static final int VALID_ELF_FEMALE_BODY = 2;
+	private static final int VALID_GNOME_MALE_BODY = 300;
+	private static final int VALID_GNOME_FEMALE_BODY = 300;
+	private static final int VALID_HUMAN_MALE_BODY = 1;
+	private static final int VALID_HUMAN_FEMALE_BODY = 1;
+	
 	@Before
 	public void setUp() throws Exception {
-		characterBodyService = new CharacterBodyServiceImpl(headsDarkelfMale, headsDarkelfFemale, headsDwarfMale, headsDwarfFemale, headsElfMale, headsElfFemale, headsGnomeMale, headsGnomeFemale, headsHumanMale, headsHumanFemale);
+		characterBodyService = new CharacterBodyServiceImpl(headsDarkelfMale, headsDarkelfFemale, 
+				headsDwarfMale, headsDwarfFemale, headsElfMale, headsElfFemale, headsGnomeMale, 
+				headsGnomeFemale, headsHumanMale, headsHumanFemale, DarkelfMaleBody, DarkelfFemaleBody, 
+				DwarfMaleBodyBody, DwarfFemaleBody, ElfMaleBody, ElfFemaleBody, GnomeMaleBody, 
+				GnomeFemaleBody, HumanMaleBody, HumanFemaleBody);
 	}
 
 	@After
@@ -50,7 +78,7 @@ public class CharacterBodyServiceTest {
 	}
 
 	@Test
-	public void testIsValidHead() {
+	public void testValidHead() {
 		assertFalse(characterBodyService.isValidHead(INVALID_HEAD, Race.DARK_ELF, Gender.MALE));
 		assertTrue(characterBodyService.isValidHead(VALID_DARKELF_MALE_HEAD, Race.DARK_ELF, Gender.MALE));
 		
@@ -86,4 +114,40 @@ public class CharacterBodyServiceTest {
 		assertTrue(characterBodyService.isValidHead(VALID_HUMAN_FEMALE_HEAD, Race.HUMAN, Gender.FEMALE));
 	}
 
+	@Test
+	public void GetBody() {
+		assertFalse(characterBodyService.GetBody(Race.DARK_ELF, Gender.MALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.DARK_ELF, Gender.MALE) == VALID_DARKELF_MALE_BODY);
+		
+		assertFalse(characterBodyService.GetBody(Race.DARK_ELF, Gender.FEMALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.DARK_ELF, Gender.FEMALE) == VALID_DARKELF_FEMALE_BODY);
+		
+		
+		assertFalse(characterBodyService.GetBody(Race.DWARF, Gender.MALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.DWARF, Gender.MALE) == VALID_DWARF_MALE_BODY);
+		
+		assertFalse(characterBodyService.GetBody(Race.DWARF, Gender.FEMALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.DWARF, Gender.FEMALE) == VALID_DWARF_FEMALE_BODY);
+		
+		
+		assertFalse(characterBodyService.GetBody(Race.ELF, Gender.MALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.ELF, Gender.MALE) == VALID_ELF_MALE_BODY);
+		
+		assertFalse(characterBodyService.GetBody(Race.ELF, Gender.FEMALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.ELF, Gender.FEMALE) == VALID_ELF_FEMALE_BODY);
+		
+		
+		assertFalse(characterBodyService.GetBody(Race.GNOME, Gender.MALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.GNOME, Gender.MALE) == VALID_GNOME_MALE_BODY);
+		
+		assertFalse(characterBodyService.GetBody(Race.GNOME, Gender.FEMALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.GNOME, Gender.FEMALE) == VALID_GNOME_FEMALE_BODY);
+		
+		
+		assertFalse(characterBodyService.GetBody(Race.HUMAN, Gender.MALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.HUMAN, Gender.MALE) == VALID_HUMAN_MALE_BODY);
+		
+		assertFalse(characterBodyService.GetBody(Race.HUMAN, Gender.FEMALE) == INVALID_BODY);
+		assertTrue(characterBodyService.GetBody(Race.HUMAN, Gender.FEMALE) == VALID_HUMAN_FEMALE_BODY);
+	}
 }

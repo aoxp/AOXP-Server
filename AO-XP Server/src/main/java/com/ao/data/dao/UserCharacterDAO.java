@@ -48,11 +48,13 @@ public interface UserCharacterDAO {
 	 * @param charisma					The character's charisma attribute.
 	 * @param constitution				The character's constitution attribute.
 	 * @param initialAvailableSkills 	The character's initial available skills
+	 * @param body					 	The character's body
 	 * @return 							The created user character.
 	 */
 	UserCharacter create(String name, Race race, Gender gender,
 			UserArchetype archetype, int head, byte homeland, byte strength,
-			byte agility, byte intelligence, byte charisma, byte constitution, int initialAvailableSkills)
+			byte agility, byte intelligence, byte charisma, byte constitution, 
+			int initialAvailableSkills, int body)
 			throws DAOException, NameAlreadyTakenException;
 
 	/**

@@ -24,8 +24,21 @@ import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import com.google.inject.name.Names;
 
 public class CharacterBodyServiceImpl implements CharacterBodyService {
+	
+	private int darkElfMaleBody;
+	private int darkElfFemaleBody;
+	private int dwarfMaleBody;
+	private int dwarfFemaleBody;
+	private int elfMaleBody;
+	private int elfFemaleBody;
+	private int gnomeMaleBody;
+	private int gnomeFemaleBody;
+	private int humanMaleBody;
+	private int humanFemaleBody;
+
 	
 	private List<Integer> headsDarkelfMale;
 	private List<Integer> headsDarkelfFemale;
@@ -48,7 +61,17 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 			@Named("headsGnomeMale")  List<Integer> headsGnomeMale, 
 			@Named("headsGnomeFemale") List<Integer> headsGnomeFemale,
 			@Named("headsHumanMale") List<Integer> headsHumanMale,
-			@Named("headsHumanFemale")  List<Integer> headsHumanFemale) {
+			@Named("headsHumanFemale")  List<Integer> headsHumanFemale, 
+			@Named("darkElfMaleBody")  int darkElfMaleBody,
+			@Named("darkElfFemaleBody")  int darkElfFemaleBody,
+			@Named("dwarfMaleBody")  int dwarfMaleBody,
+			@Named("dwarfFemaleBody")  int dwarfFemaleBody,
+			@Named("elfMaleBody")  int elfMaleBody,
+			@Named("elfFemaleBody")  int elfFemaleBody,
+			@Named("gnomeMaleBody")  int gnomeMaleBody,
+			@Named("gnomeFemaleBody")  int gnomeFemaleBody,
+			@Named("humanMaleBody")  int humanMaleBody,
+			@Named("humanFemaleBody")  int humanFemaleBody) {
 		super();
 		this.headsDarkelfMale = headsDarkelfMale;
 		this.headsDarkelfFemale = headsDarkelfFemale;
@@ -60,6 +83,18 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 		this.headsGnomeFemale = headsGnomeFemale;
 		this.headsHumanMale = headsHumanMale;
 		this.headsHumanFemale = headsHumanFemale;
+		
+		this.darkElfMaleBody = darkElfMaleBody;
+		this.darkElfFemaleBody = darkElfFemaleBody ;
+		this.dwarfMaleBody = dwarfMaleBody;
+		this.dwarfFemaleBody = dwarfFemaleBody;
+		this.elfMaleBody = elfMaleBody;
+		this.elfFemaleBody = elfFemaleBody;
+		this.gnomeMaleBody = gnomeMaleBody;
+		this.gnomeFemaleBody = gnomeFemaleBody;
+		this.humanMaleBody = humanMaleBody;
+		this.humanFemaleBody = humanFemaleBody;
+		
 	}
 	
 	/* (non-Javadoc)
@@ -107,5 +142,51 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 		
 	}
 	
+	@Override
+	public int GetBody(Race race, Gender gender){
+		
+		int body = 0;
+
+		switch (race) {
+			case DARK_ELF:
+				if (gender == Gender.MALE)
+					body=darkElfMaleBody;
+				else
+					body=darkElfFemaleBody;
+				break;
+				
+			case DWARF:
+				if (gender == Gender.MALE)
+					body=dwarfMaleBody;
+				else
+					body=dwarfFemaleBody;
+				break;
+				
+			case ELF:
+				if (gender == Gender.MALE)
+					body=elfMaleBody;
+				else
+					body=elfFemaleBody;
+				break;
+				
+			case GNOME:
+				if (gender == Gender.MALE)
+					body=gnomeMaleBody;
+				else
+					body=gnomeFemaleBody;
+				break;
+				
+			case HUMAN:
+				if (gender == Gender.MALE)
+					body=humanMaleBody;
+				else
+					body=humanFemaleBody;
+				break;
+				
+			default:
+				break;
+		}
 	
+		return body;
+	}
 }

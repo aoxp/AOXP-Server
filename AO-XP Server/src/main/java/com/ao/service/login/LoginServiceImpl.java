@@ -59,6 +59,7 @@ public class LoginServiceImpl implements LoginService {
 	public static final String INVALID_EMAIL_ERROR = "La dirección de e-mail ingresada no es válida.";
 	public static final String CHARACTER_IS_LOGGED_IN = "El personaje está conectado.";
 	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es válida.";
+	public static final String INVALID_BODY_ERROR = "No existe un cuerpo para la combinaci�n seleccionada.";
 	
 	private String[] clientHashes;
 
@@ -139,9 +140,16 @@ public class LoginServiceImpl implements LoginService {
 		
 		// TODO: Check for valid homeland.
 		
-		if (!characterBodyService.isValidHead(head, Race.get(bRace), Gender.get(bGender))){
+		if (!characterBodyService.isValidHead(head, race, gender)){
 			throw new LoginErrorException(INVALID_HEAD_ERROR);
 		}
+		
+		// Get default body
+		int body = characterBodyService.GetBody(race, gender) ;
+		
+		if (body == 0){
+			throw new LoginErrorException(INVALID_BODY_ERROR);
+		}	
 		
 		// First, we have to create the new account.
 		Account acc;
@@ -164,7 +172,7 @@ public class LoginServiceImpl implements LoginService {
 					head, homeland, user.getAttribute(Attribute.STRENGTH), 
 					user.getAttribute(Attribute.AGILITY), user.getAttribute(Attribute.INTELLIGENCE),
 					user.getAttribute(Attribute.CHARISMA), user.getAttribute(Attribute.CONSTITUTION),
-					initialAvailableSkills);
+					initialAvailableSkills, body);
 		} catch (DAOException e) {
 			accDAO.delete(username);
 			
