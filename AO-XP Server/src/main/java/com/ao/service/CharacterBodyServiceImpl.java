@@ -105,34 +105,44 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 		
 		switch (race) {
 			case DARK_ELF:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					return headsDarkelfMale.contains(head);
-				else
+				}
+				else{
 					return headsDarkelfFemale.contains(head);
+				}
 			
 			case DWARF:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					return headsDwarfMale.contains(head);
-				else
+				}
+				else{
 					return headsDwarfFemale.contains(head);
+				}
 			
 			case ELF:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					return headsElfMale.contains(head);
-				else
+				}
+				else{
 					return headsElfFemale.contains(head);
+				}
 				
 			case GNOME:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					return headsGnomeMale.contains(head);
-				else
+				}
+				else{
 					return headsGnomeFemale.contains(head);
+				}
 				
 			case HUMAN:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					return headsHumanMale.contains(head);
-				else
+				}
+				else{
 					return headsHumanFemale.contains(head);
+				}
 	
 			default:
 				break;
@@ -143,44 +153,54 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 	}
 	
 	@Override
-	public int GetBody(Race race, Gender gender){
+	public int getBody(Race race, Gender gender){
 		
 		int body = 0;
 
 		switch (race) {
 			case DARK_ELF:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					body=darkElfMaleBody;
-				else
+				}
+				else{
 					body=darkElfFemaleBody;
+				}
 				break;
 				
 			case DWARF:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					body=dwarfMaleBody;
-				else
+				}
+				else{
 					body=dwarfFemaleBody;
+				}
 				break;
 				
 			case ELF:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					body=elfMaleBody;
-				else
+				}
+				else{
 					body=elfFemaleBody;
+				}
 				break;
 				
 			case GNOME:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					body=gnomeMaleBody;
-				else
+				}
+				else{
 					body=gnomeFemaleBody;
+				}
 				break;
 				
 			case HUMAN:
-				if (gender == Gender.MALE)
+				if (gender == Gender.MALE){
 					body=humanMaleBody;
-				else
+				}
+				else{
 					body=humanFemaleBody;
+				}
 				break;
 				
 			default:

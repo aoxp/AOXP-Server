@@ -41,24 +41,24 @@ import com.google.inject.name.Named;
 
 public class LoginServiceImpl implements LoginService {
 	
-	public static final String DAO_ERROR = "Ocurri√≥ un error, intent√° de nuevo.";
+	public static final String DAO_ERROR = "OcurriÛ un error, intent· de nuevo.";
 	public static final String CHARACTER_NOT_FOUND_ERROR = "El personaje no existe.";
-	public static final String CLIENT_OUT_OF_DATE_ERROR_FORMAT = "Esta versi√≥n del juego es obsoleta, la versi√≥n correcta es %s. La misma se encuentra disponible en http://www.argentumonline.com.ar/.";
-	public static final String CORRUPTED_CLIENT_ERROR = "El cliente est√° da√±ado, por favor desc√°rguelo nuevamente desde http://www.argentumonline.com.ar/";
+	public static final String CLIENT_OUT_OF_DATE_ERROR_FORMAT = "Esta versiÛn del juego es obsoleta, la versiÛn correcta es %s. La misma se encuentra disponible en http://www.argentumonline.com.ar/.";
+	public static final String CORRUPTED_CLIENT_ERROR = "El cliente est· daÒado, por favor desc·rguelo nuevamente desde http://www.argentumonline.com.ar/";
 	public static final String BANNED_CHARACTER_ERROR = "Se te ha prohibido la entrada a Argentum debido a tu mal comportamiento. Puedes consultar el reglamento y el sistema de soporte desde www.argentumonline.com.ar";
-	public static final String INCORRECT_PASSWORD_ERROR = "Contrase√±a incorrecta.";
-	public static final String CHARACTER_CREATION_DISABLED_ERROR = "La creaci√≥n de personajes en este servidor se ha deshabilitado.";
-	public static final String ONLY_ADMINS_ERROR = "Servidor restringido a administradores. Consulte la p√°gina oficial o el foro oficial para m√°s informaci√≥n.";
+	public static final String INCORRECT_PASSWORD_ERROR = "ContraseÒa incorrecta.";
+	public static final String CHARACTER_CREATION_DISABLED_ERROR = "La creaciÛn de personajes en este servidor se ha deshabilitado.";
+	public static final String ONLY_ADMINS_ERROR = "Servidor restringido a administradores. Consulte la p·gina oficial o el foro oficial para m·s informaciÛn.";
 	public static final String MUST_THROW_DICES_BEFORE_ERROR = "Debe tirar los dados antes de poder crear un personaje.";
-	public static final String INVALID_RACE_ERROR = "La raza seleccionada no es v√°lida.";
-	public static final String INVALID_GENDER_ERROR = "El g√©nero seleccionado no es v√°lido.";
-	public static final String INVALID_ARCHETYPE_ERROR = "La clase seleccionada no es v√°lida.";
-	public static final String INVALID_SKILLS_POINTS_ERROR = "Los skills asignados no son v√°lidos.";
+	public static final String INVALID_RACE_ERROR = "La raza seleccionada no es v·lida.";
+	public static final String INVALID_GENDER_ERROR = "El gÈnero seleccionado no es v·lido.";
+	public static final String INVALID_ARCHETYPE_ERROR = "La clase seleccionada no es v·lida.";
+	public static final String INVALID_SKILLS_POINTS_ERROR = "Los skills asignados no son v·lidos.";
 	public static final String ACCOUNT_NAME_TAKEN_ERROR = "Ya existe el personaje.";
-	public static final String INVALID_NAME_ERROR = "El nombre ingresado no es v√°lido.";
-	public static final String INVALID_EMAIL_ERROR = "La direcci√≥n de e-mail ingresada no es v√°lida.";
-	public static final String CHARACTER_IS_LOGGED_IN = "El personaje est√° conectado.";
-	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es v√°lida.";
+	public static final String INVALID_NAME_ERROR = "El nombre ingresado no es v·lido.";
+	public static final String INVALID_EMAIL_ERROR = "La direcciÛn de e-mail ingresada no es v·lida.";
+	public static final String CHARACTER_IS_LOGGED_IN = "El personaje est· conectado.";
+	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es v·lida.";
 	public static final String INVALID_BODY_ERROR = "No existe un cuerpo para la combinaciÛn seleccionada.";
 	
 	private String[] clientHashes;
@@ -145,7 +145,7 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		// Get default body
-		int body = characterBodyService.GetBody(race, gender) ;
+		int body = characterBodyService.getBody(race, gender) ;
 		
 		if (body == 0){
 			throw new LoginErrorException(INVALID_BODY_ERROR);

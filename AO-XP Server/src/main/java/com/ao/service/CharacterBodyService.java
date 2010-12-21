@@ -38,5 +38,5 @@ public interface CharacterBodyService {
 	 * @param gender	The character's gender
 	 * @return			The character' body
 	 */
-	int GetBody(Race race, Gender gender);
+	int getBody(Race race, Gender gender);
 }
