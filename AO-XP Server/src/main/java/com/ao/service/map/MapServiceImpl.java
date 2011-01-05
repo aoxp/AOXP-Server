@@ -19,9 +19,12 @@
 package com.ao.service.map;
 
 import com.ao.data.dao.WorldMapDAO;
+import com.ao.data.dao.CityDAO;
+import com.ao.data.dao.exception.DAOException;
 import com.ao.model.character.Character;
 import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
+import com.ao.model.map.City;
 import com.ao.service.MapService;
 import com.google.inject.Inject;
 
@@ -33,9 +36,13 @@ public class MapServiceImpl implements MapService {
 	private WorldMapDAO mapsDAO;
 	private WorldMap[] maps;
 	
+	private CityDAO citiesDAO;
+	private City[] cities;
+	
 	@Inject
-	public MapServiceImpl(WorldMapDAO mapsDAO) {
+	public MapServiceImpl(WorldMapDAO mapsDAO, CityDAO citiesDAO) {
 		this.mapsDAO = mapsDAO;
+		this.citiesDAO = citiesDAO;
 	}
 	
 	@Override
@@ -51,6 +58,26 @@ public class MapServiceImpl implements MapService {
 		
 		// Maps enumeration starts at 1, not 0.
 		return maps[id - 1];
+	}
+	
+	@Override
+	public void loadCities() {
+		try {
+			cities = citiesDAO.retrieveAll();
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public City getCity(byte id) {
+		if (id < 1 || id > cities.length) {
+			return null;
+		}
+		
+		// Cities enumeration starts at 1, not 0.
+		return cities[id - 1];
 	}
 	
 	@Override

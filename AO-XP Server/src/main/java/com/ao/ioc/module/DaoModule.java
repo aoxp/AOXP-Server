@@ -24,8 +24,10 @@ import com.ao.data.dao.AccountDAO;
 import com.ao.data.dao.UserCharacterDAO;
 import com.ao.data.dao.WorldMapDAO;
 import com.ao.data.dao.WorldObjectPropertiesDAO;
+import com.ao.data.dao.CityDAO;
 import com.ao.data.dao.ini.UserDAOIni;
 import com.ao.data.dao.ini.WorldObjectPropertiesDAOIni;
+import com.ao.data.dao.ini.CityDAOIni;
 import com.ao.data.dao.map.WorldMapDAOImpl;
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
@@ -58,5 +60,8 @@ public class DaoModule extends AbstractModule {
 		bind(WorldObjectPropertiesDAO.class).to(WorldObjectPropertiesDAOIni.class).in(Singleton.class);
 		bind(String.class).annotatedWith(Names.named("objectsFilePath")).toInstance(properties.getProperty("config.path.objsdat"));
 		bind(Integer.class).annotatedWith(Names.named("itemsPerRow")).toInstance(Integer.parseInt(properties.getProperty("config.inventory.itemperrow")));
+	
+		bind(CityDAO.class).to(CityDAOIni.class).in(Singleton.class);
+		bind(String.class).annotatedWith(Names.named("citiesFilePath")).toInstance(properties.getProperty("config.path.citiesdat"));
 	}
 }

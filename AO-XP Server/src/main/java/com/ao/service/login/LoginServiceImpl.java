@@ -31,13 +31,16 @@ import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.user.Account;
 import com.ao.model.user.ConnectedUser;
+import com.ao.model.map.City;
 import com.ao.security.SecurityManager;
 import com.ao.service.CharacterBodyService;
 import com.ao.service.LoginService;
 import com.ao.service.UserService;
 import com.ao.service.ValidatorService;
+import com.ao.service.MapService;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+
 
 public class LoginServiceImpl implements LoginService {
 	
@@ -60,6 +63,7 @@ public class LoginServiceImpl implements LoginService {
 	public static final String CHARACTER_IS_LOGGED_IN = "El personaje está conectado.";
 	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es válida.";
 	public static final String INVALID_BODY_ERROR = "No existe un cuerpo para la combinación seleccionada.";
+	public static final String INVALID_HOMELAND_ERROR = "El hogar seleccionado no es válido.";
 	
 	private String[] clientHashes;
 
@@ -70,11 +74,12 @@ public class LoginServiceImpl implements LoginService {
 	private final int initialAvailableSkills;
 	private final UserService userService;
 	private final CharacterBodyService characterBodyService;
+	private final MapService mapService;
 	
 	@Inject
 	public LoginServiceImpl(AccountDAO accDAO, UserCharacterDAO charDAO,
 			ServerConfig config, UserService userService,
-			CharacterBodyService characterBodyService,
+			CharacterBodyService characterBodyService, MapService mapService,
 			@Named("initialAvailableSkills") int initialAvailableSkills) {
 		this.accDAO = accDAO;
 		this.charDAO = charDAO;
@@ -82,14 +87,14 @@ public class LoginServiceImpl implements LoginService {
 		this.initialAvailableSkills = initialAvailableSkills;
 		this.userService = userService;
 		this.characterBodyService = characterBodyService;
-		
+		this.mapService = mapService;
 		currentClientVersion = config.getVersion();
 	}
 
 	@Override
 	public void connectNewCharacter(ConnectedUser user, String username, String password, byte bRace,
 			byte bGender, byte bArchetype, int head, String mail, 
-			byte homeland, String clientHash,
+			byte bHomeland, String clientHash,
 			String version) throws LoginErrorException {
 		
 		checkClient(clientHash, version);
@@ -138,7 +143,12 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(INVALID_ARCHETYPE_ERROR);
 		}
 		
-		// TODO: Check for valid homeland.
+		// Get city
+		City homeland = mapService.getCity(bHomeland);;
+
+		if (homeland == null){
+			throw new LoginErrorException(INVALID_HOMELAND_ERROR);
+		}
 		
 		if (!characterBodyService.isValidHead(head, race, gender)){
 			throw new LoginErrorException(INVALID_HEAD_ERROR);

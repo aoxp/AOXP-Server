@@ -18,6 +18,7 @@
 
 package com.ao.service;
 
+import com.ao.model.map.City;
 import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
 import com.ao.model.character.Character;
@@ -35,7 +36,19 @@ public interface MapService {
 	 * @return The loaded map.
 	 */
 	WorldMap getMap(int id);
-
+	
+	/**
+	 * Loads all cities.
+	 */
+	void loadCities();
+	
+	/**
+	 * Retrieves the city with the given id.
+	 * @param id The City's id.
+	 * @return The city.
+	 */
+	City getCity(byte id);
+	
 	/**
 	 * Puts a character at the given position
 	 * @param chara The character to be put.

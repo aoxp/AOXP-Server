@@ -24,7 +24,9 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import com.ao.data.dao.WorldMapDAO;
+import com.ao.data.dao.CityDAO;
 import com.ao.model.map.WorldMap;
+import com.ao.model.map.City;
 import com.ao.service.MapService;
 
 public class MapServiceImplTest {
@@ -32,10 +34,13 @@ public class MapServiceImplTest {
 	@Test
 	public void testLoadMaps() {
 		WorldMapDAO dao = EasyMock.createMock(WorldMapDAO.class);
+		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
 		EasyMock.expect(dao.retrieveAll()).andReturn(null).once();
 		EasyMock.replay(dao);
 		
-		MapService service = new MapServiceImpl(dao);
+		
+		
+		MapService service = new MapServiceImpl(dao, cityDao);
 		service.loadMaps();
 		
 		EasyMock.verify(dao);
@@ -47,11 +52,12 @@ public class MapServiceImplTest {
 		
 		WorldMap map = new WorldMap(mapId);
 		WorldMapDAO dao = EasyMock.createMock(WorldMapDAO.class);
+		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
 		
 		EasyMock.expect(dao.retrieveAll()).andReturn(new WorldMap[] {map}).once();
 		EasyMock.replay(dao);
 		
-		MapService service = new MapServiceImpl(dao);
+		MapService service = new MapServiceImpl(dao,cityDao);
 		service.loadMaps();
 		
 		Assert.assertEquals(service.getMap(mapId), map);

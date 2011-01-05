@@ -24,6 +24,7 @@ import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
+import com.ao.model.map.City;
 
 public interface UserCharacterDAO {
 	
@@ -52,7 +53,7 @@ public interface UserCharacterDAO {
 	 * @return 							The created user character.
 	 */
 	UserCharacter create(String name, Race race, Gender gender,
-			UserArchetype archetype, int head, byte homeland, byte strength,
+			UserArchetype archetype, int head, City homeland, byte strength,
 			byte agility, byte intelligence, byte charisma, byte constitution, 
 			int initialAvailableSkills, int body)
 			throws DAOException, NameAlreadyTakenException;

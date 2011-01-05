@@ -47,6 +47,8 @@ import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.Archetype;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.map.Heading;
+import com.ao.model.map.City;
+import com.ao.model.map.Position;
 import com.ao.model.user.Account;
 import com.ao.model.user.AccountImpl;
 import com.ao.model.user.LoggedUser;
@@ -264,7 +266,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 
 	@Override
 	public UserCharacter create(String name, Race race, Gender gender,
-			UserArchetype archetype, int head, byte homeland, byte strength,
+			UserArchetype archetype, int head, City homeland, byte strength,
 			byte agility, byte intelligence, byte charisma, byte constitution, 
 			int initialAvailableSkills, int body)
 			throws DAOException, NameAlreadyTakenException {
@@ -281,7 +283,9 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		chara.put(INIT_HEADER, UPTIME_KEY, 0);
 		chara.put(INIT_HEADER, HEAD_KEY, head);
 		chara.put(INIT_HEADER, BODY_KEY, body);
-		// TODO: Assign position depending on the homeland.
+		
+		String positionKey = homeland.getMap() + "-" + homeland.getX() + "-" + homeland.getY();
+		chara.put(INIT_HEADER, POSITION_KEY, positionKey );
 		// TODO: Save last ip?
 		
 		chara.put(FLAGS_HEADER, BANNED_KEY, 0);

@@ -25,20 +25,24 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
+import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ao.data.dao.CityDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.Skill;
 import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
+import com.ao.model.map.City;
 import com.ao.model.user.Account;
 
 public class UserDAOIniTest {
 
 	private UserDAOIni dao;
+	
 	private static final String CHARACTER_NICK = "test";
 	private static final String NEW_CHARACTER_NICK = "newchartest";
 	private static final String CHARACTER_MAIL = "test@test.com";
@@ -104,9 +108,12 @@ public class UserDAOIniTest {
 			}
 		}
 		
+		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
+		City cities[] = cityDao.retrieveAll();
+		
 		// TODO: Use constants!!
 		UserCharacter chara = dao.create(NEW_CHARACTER_NICK, Race.HUMAN, Gender.FEMALE,
-				UserArchetype.ASSASIN, (int) 75, (byte) 1, (byte) 18, (byte) 18,
+				UserArchetype.ASSASIN, (int) 75, cities[0], (byte) 18, (byte) 18,
 				(byte) 18, (byte) 18, (byte) 18, (int) 10, (int)1);
 		
 		File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
