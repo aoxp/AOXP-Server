@@ -33,7 +33,6 @@ import com.ao.data.dao.AccountDAO;
 import com.ao.mock.MockFactory;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
-import com.ao.model.character.Skill;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.user.Account;
 import com.ao.model.user.ConnectedUser;
@@ -42,6 +41,7 @@ import com.ao.network.DataBuffer;
 import com.ao.network.packet.IncomingPacket;
 import com.ao.security.SecurityManager;
 import com.ao.service.LoginService;
+import com.ao.service.MapService;
 import com.ao.service.login.LoginServiceImpl;
 
 public class LoginNewCharacterPacketTest {
@@ -59,10 +59,11 @@ public class LoginNewCharacterPacketTest {
 	private static final byte CLIENT_MINOR = 12;
 	private static final byte CLIENT_VERSION = 2;
 	
-	Connection connection;
-	IncomingPacket packet;
-	ServerConfig config;
-	SecurityManager security;
+	private Connection connection;
+	private IncomingPacket packet;
+	private ServerConfig config;
+	private SecurityManager security;
+	private MapService mapService;
 	
 	static {
 		ApplicationProperties.loadProperties("test.properties");
@@ -76,6 +77,9 @@ public class LoginNewCharacterPacketTest {
 		
 		config = ApplicationContext.getInstance(ServerConfig.class);
 		security = ApplicationContext.getInstance(SecurityManager.class);
+		
+		mapService = ApplicationContext.getInstance(MapService.class);
+		mapService.loadCities();
 		
 		config.setRestrictedToAdmins(false);
 		config.setCharacterCreationEnabled(true);
