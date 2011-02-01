@@ -27,16 +27,16 @@ public class CharacterBodyServiceTest {
 	private List<Integer> headsHumanMale = RangeParser.parseIntegers("1-40");
 	private List<Integer> headsHumanFemale = RangeParser.parseIntegers("70-89");
 	
-	private int DarkelfMaleBody = 3;
-	private int DarkelfFemaleBody = 3;
-	private int DwarfMaleBodyBody = 300;
-	private int DwarfFemaleBody = 300;
-	private int ElfMaleBody = 2;
-	private int ElfFemaleBody = 2;
-	private int GnomeMaleBody = 300;
-	private int GnomeFemaleBody = 300;
-	private int HumanMaleBody = 1;
-	private int HumanFemaleBody = 1;
+	private int darkelfMaleBody = 3;
+	private int darkelfFemaleBody = 4;
+	private int dwarfMaleBody = 300;
+	private int dwarfFemaleBody = 301;
+	private int elfMaleBody = 2;
+	private int elfFemaleBody = 5;
+	private int gnomeMaleBody = 302;
+	private int gnomeFemaleBody = 303;
+	private int humanMaleBody = 1;
+	private int humanFemaleBody = 6;
 	
 	private static final int INVALID_HEAD = 0;
 	
@@ -51,26 +51,13 @@ public class CharacterBodyServiceTest {
 	private static final int VALID_HUMAN_MALE_HEAD = 1;
 	private static final int VALID_HUMAN_FEMALE_HEAD = 70;
 	
-	private static final int INVALID_BODY = 0;
-	
-	private static final int VALID_DARKELF_MALE_BODY = 3;
-	private static final int VALID_DARKELF_FEMALE_BODY = 4;
-	private static final int VALID_DWARF_MALE_BODY = 300;
-	private static final int VALID_DWARF_FEMALE_BODY = 301;
-	private static final int VALID_ELF_MALE_BODY = 2;
-	private static final int VALID_ELF_FEMALE_BODY = 5;
-	private static final int VALID_GNOME_MALE_BODY = 302;
-	private static final int VALID_GNOME_FEMALE_BODY = 303;
-	private static final int VALID_HUMAN_MALE_BODY = 1;
-	private static final int VALID_HUMAN_FEMALE_BODY = 6;
-	
 	@Before
 	public void setUp() throws Exception {
 		characterBodyService = new CharacterBodyServiceImpl(headsDarkelfMale, headsDarkelfFemale, 
 				headsDwarfMale, headsDwarfFemale, headsElfMale, headsElfFemale, headsGnomeMale, 
-				headsGnomeFemale, headsHumanMale, headsHumanFemale, DarkelfMaleBody, DarkelfFemaleBody, 
-				DwarfMaleBodyBody, DwarfFemaleBody, ElfMaleBody, ElfFemaleBody, GnomeMaleBody, 
-				GnomeFemaleBody, HumanMaleBody, HumanFemaleBody);
+				headsGnomeFemale, headsHumanMale, headsHumanFemale, darkelfMaleBody, darkelfFemaleBody, 
+				dwarfMaleBody, dwarfFemaleBody, elfMaleBody, elfFemaleBody, gnomeMaleBody, 
+				gnomeFemaleBody, humanMaleBody, humanFemaleBody);
 	}
 
 	@After
@@ -116,24 +103,24 @@ public class CharacterBodyServiceTest {
 
 	@Test
 	public void GetBody() {
-		assertEquals(VALID_DARKELF_MALE_BODY, characterBodyService.getBody(Race.DARK_ELF, Gender.MALE));
+		assertEquals(darkelfMaleBody, characterBodyService.getBody(Race.DARK_ELF, Gender.MALE));
 		
-		assertEquals(VALID_DARKELF_FEMALE_BODY, characterBodyService.getBody(Race.DARK_ELF, Gender.FEMALE));
+		assertEquals(darkelfFemaleBody, characterBodyService.getBody(Race.DARK_ELF, Gender.FEMALE));
 		
-		assertEquals(VALID_DWARF_MALE_BODY, characterBodyService.getBody(Race.DWARF, Gender.MALE));
+		assertEquals(dwarfMaleBody, characterBodyService.getBody(Race.DWARF, Gender.MALE));
 		
-		assertEquals(VALID_DWARF_FEMALE_BODY, characterBodyService.getBody(Race.DWARF, Gender.FEMALE));
+		assertEquals(dwarfFemaleBody, characterBodyService.getBody(Race.DWARF, Gender.FEMALE));
 		
-		assertEquals(VALID_ELF_MALE_BODY, characterBodyService.getBody(Race.ELF, Gender.MALE));
+		assertEquals(elfMaleBody, characterBodyService.getBody(Race.ELF, Gender.MALE));
 		
-		assertEquals(VALID_ELF_FEMALE_BODY, characterBodyService.getBody(Race.ELF, Gender.FEMALE));
+		assertEquals(elfFemaleBody, characterBodyService.getBody(Race.ELF, Gender.FEMALE));
 		
-		assertEquals(VALID_GNOME_MALE_BODY, characterBodyService.getBody(Race.GNOME, Gender.MALE));
+		assertEquals(gnomeMaleBody, characterBodyService.getBody(Race.GNOME, Gender.MALE));
 		
-		assertEquals(VALID_GNOME_FEMALE_BODY, characterBodyService.getBody(Race.GNOME, Gender.FEMALE));
+		assertEquals(gnomeFemaleBody, characterBodyService.getBody(Race.GNOME, Gender.FEMALE));
 		
-		assertEquals(VALID_HUMAN_MALE_BODY, characterBodyService.getBody(Race.HUMAN, Gender.MALE));
+		assertEquals(humanMaleBody, characterBodyService.getBody(Race.HUMAN, Gender.MALE));
 		
-		assertEquals(VALID_HUMAN_FEMALE_BODY, characterBodyService.getBody(Race.HUMAN, Gender.FEMALE));
+		assertEquals(humanFemaleBody, characterBodyService.getBody(Race.HUMAN, Gender.FEMALE));
 	}
 }
