@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
-import java.util.concurrent.ExecutorService;
+import java.util.Timer;
 import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
@@ -124,11 +124,9 @@ public class Bootstrap {
 		
 		logger.info("Starting up game timers...");
 		
-		// TODO : Go over this... use a Timer instead with all scheduled tasks??
-		// TODO : repeat for each timer
-		ExecutorService timer = Executors.newSingleThreadScheduledExecutor();
+		Timer timer = new Timer(true);
 		
-		// TODO : get runnable for each timer class (use the app context) and the interval for execution
+		// TODO : get task for each timer class (use the app context) and the interval for execution
 	}
 
 	/**
