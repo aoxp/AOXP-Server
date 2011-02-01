@@ -45,10 +45,13 @@ public class WeaponProperties extends EquippableItemProperties {
 	 * @param graphic The graphic for the item.
 	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
+	 * @param noLog Whether this item should be logged or not.
+	 * @param falls Whether this item falls or not.
+	 * @param respawnable Whether this item respawns or not when in a merchant NPC's inventory.
+	 * @param equippedGraphic The id of the grpahic to display when equipped.
 	 * @param stabs Wether if this item stabs or not.
 	 * @param piercingDamage The pircing damage (not reduced by any kind of armor or defense) done by this item.
 	 * @param minHit The minimum hit done by this item.
@@ -59,7 +62,8 @@ public class WeaponProperties extends EquippableItemProperties {
 			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
 			boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, boolean stabs, int piercingDamage, int minHit, int maxHit) {
-		super(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
+		super(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces,
+					newbie, noLog, falls, respawnable, equippedGraphic);
 
 		this.stabs = stabs;
 		this.piercingDamage = piercingDamage;

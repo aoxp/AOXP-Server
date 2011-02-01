@@ -36,10 +36,10 @@ public class WoodTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		WoodProperties props1 = new WoodProperties(WorldObjectType.WOOD, 1, "Black Potion", 1, 1, 0, null, null, false, false, false, false, WoodType.NORMAL);
+		WoodProperties props1 = new WoodProperties(WorldObjectType.WOOD, 1, "Black Potion", 1, 1, null, null, false, false, false, false, WoodType.NORMAL);
 		wood1 = new Wood(props1, 5);
 		
-		WoodProperties props2 = new WoodProperties(WorldObjectType.WOOD, 1, "Black Potion", 1, 1, 0, null, null, false, false, false, false, WoodType.ELVEN);
+		WoodProperties props2 = new WoodProperties(WorldObjectType.WOOD, 1, "Black Potion", 1, 1, null, null, false, false, false, false, WoodType.ELVEN);
 		wood2 = new Wood(props2, 1);
 		
 		object = wood2;

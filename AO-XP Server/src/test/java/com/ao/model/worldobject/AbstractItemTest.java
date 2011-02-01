@@ -61,13 +61,6 @@ public abstract class AbstractItemTest extends AbstractWorldObjectTest {
 	}
 
 	@Test
-	public void testGetManufactureDifficulty() {
-		AbstractItem item = (AbstractItem) object;
-		ItemProperties itemProps = (ItemProperties) objectProps;
-		assertEquals(itemProps.getManufactureDifficulty(), item.getManufactureDifficulty());
-	}
-
-	@Test
 	public void testIsNewbie() {
 		AbstractItem item = (AbstractItem) object;
 		ItemProperties itemProps = (ItemProperties) objectProps;

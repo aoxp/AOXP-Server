@@ -56,12 +56,6 @@ public interface Item extends WorldObject, Cloneable {
 	boolean canBeUsedBy(Race race, Gender gender, UserArchetype archetype, Reputation reputation);
 	
 	/**
-	 * Retrieves the manufacture difficulty of the item (how hard it's to make).
-	 * @return The manufacture difficulty of the item (how hard it's to make).
-	 */
-	int getManufactureDifficulty(); // Nota, esto reemplaza a minSkill para carpinteria, fundicion y herreria
-	
-	/**
 	 * Gets a deep clone of the item
 	 * @return a copy of the item.
 	 */

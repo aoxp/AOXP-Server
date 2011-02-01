@@ -149,13 +149,13 @@ public class LoginServiceImpl implements LoginService {
 		}
 		
 		// Get city
-		City homeland = mapService.getCity(bHomeland);;
+		City homeland = mapService.getCity(bHomeland);
 
 		if (homeland == null){
 			throw new LoginErrorException(INVALID_HOMELAND_ERROR);
 		}
 		
-		if (!characterBodyService.isValidHead(head, race, gender)){
+		if (!characterBodyService.isValidHead(head, race, gender)) {
 			throw new LoginErrorException(INVALID_HEAD_ERROR);
 		}
 		

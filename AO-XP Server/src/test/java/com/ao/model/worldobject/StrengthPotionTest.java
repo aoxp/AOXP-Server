@@ -41,10 +41,10 @@ public class StrengthPotionTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		TemporalStatModifyingItemProperties props1 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Green Potion", 1, 1, 0, null, null, false, false, false, false, MIN_STR, MAX_STR, DURATION);
+		TemporalStatModifyingItemProperties props1 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Green Potion", 1, 1, null, null, false, false, false, false, MIN_STR, MAX_STR, DURATION);
 		potion1 = new StrengthPotion(props1, 5);
 		
-		TemporalStatModifyingItemProperties props2 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Big Green Potion", 1, 1, 0, null, null, false, false, false, false, MAX_STR, MAX_STR, DURATION);
+		TemporalStatModifyingItemProperties props2 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Big Green Potion", 1, 1, null, null, false, false, false, false, MAX_STR, MAX_STR, DURATION);
 		potion2 = new StrengthPotion(props2, 1);
 		
 		object = potion2;

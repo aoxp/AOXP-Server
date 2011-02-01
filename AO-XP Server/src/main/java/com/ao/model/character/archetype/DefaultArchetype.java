@@ -21,8 +21,9 @@ package com.ao.model.character.archetype;
 import com.ao.model.spell.Spell;
 import com.ao.model.worldobject.Boat;
 import com.ao.model.worldobject.EquipableItem;
-import com.ao.model.worldobject.Item;
 import com.ao.model.worldobject.Weapon;
+import com.ao.model.worldobject.properties.manufacture.Manufacturable;
+import com.ao.model.worldobject.properties.manufacture.ManufactureType;
 
 /**
  * Implements Archetype setting default values.
@@ -93,8 +94,9 @@ public abstract class DefaultArchetype implements Archetype {
 	}
 	
 	@Override
-	public boolean canBlacksmith(int blacksmithSkill, Item item) {
-		return blacksmithSkill / getBlacksmithModifier() >= item.getManufactureDifficulty();
+	public boolean canBlacksmith(int blacksmithSkill, Manufacturable item) {
+		return item.getManufactureType() == ManufactureType.BLACKSMITH
+			&& blacksmithSkill / getBlacksmithModifier() >= item.getManufactureDifficulty();
 	}
 
 	@Override
@@ -118,8 +120,9 @@ public abstract class DefaultArchetype implements Archetype {
 	}
 
 	@Override
-	public boolean canIronWork(int ironWorkingSkill, Item item) {
-		return ironWorkingSkill / getIronWorkingModifier() >= item.getManufactureDifficulty();
+	public boolean canIronWork(int ironWorkingSkill, Manufacturable item) {
+		return item.getManufactureType() == ManufactureType.IRONWORK
+			&& ironWorkingSkill / getIronWorkingModifier() >= item.getManufactureDifficulty();
 	}
 
 	@Override
@@ -143,8 +146,9 @@ public abstract class DefaultArchetype implements Archetype {
 	}
 
 	@Override
-	public boolean canWoodWork(int woodWorkSkill, Item item) {
-		return woodWorkSkill / getWoodWorkingModifier() >= item.getManufactureDifficulty();
+	public boolean canWoodWork(int woodWorkSkill, Manufacturable item) {
+		return item.getManufactureType() == ManufactureType.WOODWORK
+			&& woodWorkSkill / getWoodWorkingModifier() >= item.getManufactureDifficulty();
 	}
 
 	@Override

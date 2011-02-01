@@ -40,10 +40,10 @@ public class AmmunitionTest extends AbstractEquipableItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		AmmunitionProperties props1 = new AmmunitionProperties(WorldObjectType.AMMUNITION, 1, "Arrow", 1, 1, 0, null, null, false, false, false, false, 1, MIN_HIT, MAX_HIT);
+		AmmunitionProperties props1 = new AmmunitionProperties(WorldObjectType.AMMUNITION, 1, "Arrow", 1, 1, null, null, false, false, false, false, 1, MIN_HIT, MAX_HIT);
 		ammunition1 = new Ammunition(props1, 5);
 		
-		AmmunitionProperties props2 = new AmmunitionProperties(WorldObjectType.AMMUNITION, 1, "Fire Arrow", 1, 1, 0, null, null, false, false, false, false, 1, MAX_HIT, MAX_HIT);
+		AmmunitionProperties props2 = new AmmunitionProperties(WorldObjectType.AMMUNITION, 1, "Fire Arrow", 1, 1, null, null, false, false, false, false, 1, MAX_HIT, MAX_HIT);
 		ammunition2 = new Ammunition(props2, 1);
 		
 		object = ammunition1;

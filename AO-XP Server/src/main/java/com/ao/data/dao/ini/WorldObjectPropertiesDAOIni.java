@@ -125,6 +125,11 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String FORUM_NAME_KEY = "ID";
 	private static final String BACKPACK_TYPE_KEY = "MochilaType";
 	private static final String INGOT_OBJECT_INDEX_KEY = "Lingoteindex";
+	private static final String WOOD_AMOUNT_KEY = "Madera";
+	private static final String ELVEN_WOOD_AMOUNT_KEY = "MaderaElfica";
+	private static final String INGOT_GOLD_AMOUNT_KEY = "LingO";
+	private static final String INGOT_SILVER_AMOUNT_KEY = "LingP";
+	private static final String INGOT_IRON_AMOUNT_KEY = "LingH";
 	
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
 	private static final int WOOD_INDEX = 58;
@@ -160,7 +165,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		// Populate mappings from old object types to new ones.
 		worldObjectTypeMapper = new HashMap<LegacyWorldObjectType, WorldObjectType>();
 		
-		// TODO : Add more mappings as more objects are modeled and loaded
 		// BEWARE : Some objects have no mapping since they need extra info to be mapped (potions and weapons for instance).
 		worldObjectTypeMapper.put(LegacyWorldObjectType.ARMOR, WorldObjectType.ARMOR);
 		worldObjectTypeMapper.put(LegacyWorldObjectType.ARROW, WorldObjectType.AMMUNITION);
@@ -359,6 +363,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				logger.error("Unexpected object type found: " + objectType);
 		}
 		
+		// TODO : Check if object is manufacturable, and store such data appropriately for carpinteria, fundición and herreria skills.
+		
 		return obj;
 	}
 	
@@ -376,7 +382,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			int id, String name, int graphic, Section section, WoodType woodType) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
@@ -384,7 +389,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		boolean falls = getFalls(section);
 		boolean respawneable = getRespawneable(section);
 		
-		return new WoodProperties(worldObjectType, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, woodType);
+		return new WoodProperties(worldObjectType, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, woodType);
 	}
 
 	/**
@@ -470,7 +475,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	}
 	
 	/**
-	 * Creates a flower's properties from the given section.
+	 * Creates a prop's properties from the given section.
 	 * @param id The object's id.
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
@@ -502,7 +507,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
@@ -510,7 +514,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		boolean falls = getFalls(section);
 		boolean respawneable = getRespawneable(section);
 		
-		return new ItemProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
+		return new ItemProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
 	}
 	
 	/**
@@ -525,7 +529,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
@@ -537,9 +540,9 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		
 		// Is it a death potion?
 		if (potionType == PotionType.DEATH) {
-			return new ItemProperties(WorldObjectType.DEATH_POTION, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
+			return new ItemProperties(WorldObjectType.DEATH_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
 		} else if (potionType == PotionType.POISON) {	// Poison potion?
-			return new ItemProperties(WorldObjectType.POISON_POTION, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
+			return new ItemProperties(WorldObjectType.POISON_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
 		}
 		
 		int minModifier = getMinModifier(section);
@@ -547,18 +550,18 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		
 		// Is it an HP potion
 		if (potionType == PotionType.HP) {
-			return new StatModifyingItemProperties(WorldObjectType.HP_POTION, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier);
+			return new StatModifyingItemProperties(WorldObjectType.HP_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier);
 		} else if (potionType == PotionType.MANA) {		// Mana potion?
-			return new StatModifyingItemProperties(WorldObjectType.MANA_POTION, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier);
+			return new StatModifyingItemProperties(WorldObjectType.MANA_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier);
 		}
 		
 		int effectTime = getEffectTime(section);
 		
 		// Strength potion?
 		if (potionType == PotionType.STRENGTH) {
-			return new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier, effectTime);
+			return new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier, effectTime);
 		} else if (potionType == PotionType.AGILITY) { 	// Agility potion?
-			return new TemporalStatModifyingItemProperties(WorldObjectType.AGILITY_POTION, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier, effectTime);
+			return new TemporalStatModifyingItemProperties(WorldObjectType.AGILITY_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier, effectTime);
 		}
 		
 		// This should never happen...
@@ -579,7 +582,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		boolean noLog = getNoLog(section);
 		boolean falls = getFalls(section);
@@ -590,7 +592,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		List<Integer> sounds = getSounds(section);
 		
-		return new MusicalInstrumentProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, equippedGraphic, sounds);
+		return new MusicalInstrumentProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, equippedGraphic, sounds);
 	}
 	
 	/**
@@ -639,7 +641,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		int modifier = getHunger(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
@@ -647,8 +648,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		boolean noLog = getNoLog(section);
 		boolean falls = getFalls(section);
 		boolean respawneable = getRespawneable(section);
-				
-		return new StatModifyingItemProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, modifier, modifier);
+		
+		return new StatModifyingItemProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, modifier, modifier);
 	}
 
 	/**
@@ -664,7 +665,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		int modifier = getThirst(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
@@ -672,8 +672,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		boolean noLog = getNoLog(section);
 		boolean falls = getFalls(section);
 		boolean respawneable = getRespawneable(section);
-				
-		return new StatModifyingItemProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, modifier, modifier);
+		
+		return new StatModifyingItemProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, modifier, modifier);
 	}
 
 	/**
@@ -731,7 +731,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		int equippedGraphic = getEquippedGraphic(section);
 		int minHit = getMinHit(section);
@@ -741,8 +740,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		boolean noLog = getNoLog(section);
 		boolean falls = getFalls(section);
 		boolean respawneable = getRespawneable(section);
-				
-		return new AmmunitionProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, equippedGraphic, minHit, maxHit);
+		
+		return new AmmunitionProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, equippedGraphic, minHit, maxHit);
 	}
 	
 	/**
@@ -757,7 +756,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private WorldObjectProperties loadParchment(WorldObjectType type, int id, String name, int graphic, Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
@@ -768,7 +766,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		int spellIndex = getSpellIndex(section);
 		//TODO Create the Spell implementation.
 		
-		return new ParchmentProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, null);
+		return new ParchmentProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, null);
 	}
 	
 	private WorldObjectProperties loadKey(WorldObjectType type, int id, String name, int graphic,
@@ -851,7 +849,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private WorldObjectProperties loadBackpack(WorldObjectType type, int id, String name, int graphic, Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
@@ -863,7 +860,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		int backpackType = getBackpackType(section);
 		int slots = getAmountForBackpackType(backpackType);
 		
-		return new BackpackProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, equippedGraphic, slots);
+		return new BackpackProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, equippedGraphic, slots);
 	}
 
 	/**
@@ -880,7 +877,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private WorldObjectProperties loadMineral(WorldObjectType type, int id, String name, int graphic, Section section) {
 
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
@@ -890,7 +886,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		
 		int ingotObjectIndex = getIngotObjectIndex(section);
 		
-		return new MineralProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, ingotObjectIndex);
+		return new MineralProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, ingotObjectIndex);
 	}
 	
 	/**
@@ -905,7 +901,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private WorldObjectProperties loadIngot(WorldObjectType type, int id, String name, int graphic, Section section) {
 		
 		int value = getValue(section);
-		int manufactureDifficulty = getManufactureDifficulty(section);
 		boolean newbie = getNewbie(section);
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
@@ -913,7 +908,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		boolean falls = getFalls(section);
 		boolean respawneable = getRespawneable(section);
 		
-		return new ItemProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
+		return new ItemProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable);
 	}
 	
 	/**
@@ -1033,6 +1028,81 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			if (value == null) {
 				return 0;
 			}
+		}
+		
+		return Integer.parseInt(value);
+	}
+	
+	/**
+	 * Retrieves the amount of wood required for manufacturing an item.
+	 * @param section The section from which to read the object's value.
+	 * @return The obejct's required wood for manufacture.
+	 */
+	private int getRequiredWoodForManufacture(Section section) {
+		String value = section.get(WOOD_AMOUNT_KEY);
+		
+		if (value == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(value);
+	}
+	
+	/**
+	 * Retrieves the amount of elven wood required for manufacturing an item.
+	 * @param section The section from which to read the object's value.
+	 * @return The obejct's required elven wood for manufacture.
+	 */
+	private int getRequiredElvenWoodForManufacture(Section section) {
+		String value = section.get(ELVEN_WOOD_AMOUNT_KEY);
+		
+		if (value == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(value);
+	}
+	
+	/**
+	 * Retrieves the amount of gold ingots required for manufacturing an item.
+	 * @param section The section from which to read the object's value.
+	 * @return The obejct's required gold ingots for manufacture.
+	 */
+	private int getRequiredGoldIngotsForManufacture(Section section) {
+		String value = section.get(INGOT_GOLD_AMOUNT_KEY);
+		
+		if (value == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(value);
+	}
+	
+	/**
+	 * Retrieves the amount of silver ingots required for manufacturing an item.
+	 * @param section The section from which to read the object's value.
+	 * @return The obejct's required silver ingots for manufacture.
+	 */
+	private int getRequiredSilverIngotsForManufacture(Section section) {
+		String value = section.get(INGOT_SILVER_AMOUNT_KEY);
+		
+		if (value == null) {
+			return 0;
+		}
+		
+		return Integer.parseInt(value);
+	}
+	
+	/**
+	 * Retrieves the amount of iron ingots required for manufacturing an item.
+	 * @param section The section from which to read the object's value.
+	 * @return The obejct's required iron ingots for manufacture.
+	 */
+	private int getRequiredIronIngotsForManufacture(Section section) {
+		String value = section.get(INGOT_IRON_AMOUNT_KEY);
+		
+		if (value == null) {
+			return 0;
 		}
 		
 		return Integer.parseInt(value);

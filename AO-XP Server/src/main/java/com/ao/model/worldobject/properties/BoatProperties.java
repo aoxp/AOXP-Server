@@ -46,6 +46,10 @@ public class BoatProperties extends DefensiveItemProperties {
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
+	 * @param noLog Whether this item should be logged or not.
+	 * @param falls Whether this item falls or not.
+	 * @param respawnable Whether this item respawns or not when in a merchant NPC's inventory.
+	 * @param equippedGraphic The id of the grpahic to display when equipped.
 	 * @param minDef The minimum defense granted by this item.
 	 * @param maxDef The maximum defense granted by this item.
 	 * @param minMagicDef The minimum magic defense granted by this item.

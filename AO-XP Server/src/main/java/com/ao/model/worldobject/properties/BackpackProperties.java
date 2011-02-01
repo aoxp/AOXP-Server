@@ -39,18 +39,20 @@ public class BackpackProperties extends EquippableItemProperties {
 	 * @param graphic The graphic for the item.
 	 * @param tradeable True if it's tradeable, false otherwise.
 	 * @param value The item's value.
-	 * @param manufactureDifficulty The item's manufacture difficulty.
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
+	 * @param noLog Whether this item should be logged or not.
+	 * @param falls Whether this item falls or not.
+	 * @param respawnable Whether this item respawns or not when in a merchant NPC's inventory.
+	 * @param equippedGraphic The id of the grpahic to display when equipped.
 	 * @param slots The slots to be added.
 	 */
 	public BackpackProperties(WorldObjectType type, int id, String name, int graphic,
-			int value,	int manufactureDifficulty,
-			List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces, boolean newbie,
-			boolean noLog, boolean falls, boolean respawnable, 
+			int value, List<UserArchetype> forbiddenArchetypes, List<Race> forbiddenRaces,
+			boolean newbie, boolean noLog, boolean falls, boolean respawnable, 
 			int equippedGraphic, int slots) {
-		super(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
+		super(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawnable, equippedGraphic);
 
 		this.slots = slots;
 	}

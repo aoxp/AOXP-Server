@@ -15,41 +15,23 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package com.ao.model.worldobject;
-
-import com.ao.model.character.Character;
-import com.ao.model.worldobject.properties.DefensiveItemProperties;
+package com.ao.model.worldobject.properties.manufacture;
 
 /**
- * Accessory items such as rings.
+ * Defines a manufacturable item.
+ * @author jsotuyod
  */
-public class Accessory extends AbstractDefensiveItem {
+public interface Manufacturable {
 
 	/**
-	 * Creates a new Accessory instance.
-	 * @param properties The item's properties.
-	 * @param amount The item's amount.
+	 * Retrieves the type of manufacturable the item is.
+	 * @return The type of manufacturable the described item is.
 	 */
-	public Accessory(DefensiveItemProperties properties, int amount) {
-		super(properties, amount);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.ao.model.worldobject.AbstractItem#clone()
+	ManufactureType getManufactureType();
+	
+	/**
+	 * Retrieves the difficulty to manufacture this item.
+	 * @return The difficulty to manufacture this item.
 	 */
-	@Override
-	public Item clone() {
-		return new Accessory((DefensiveItemProperties) properties, amount);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.ao.model.worldobject.Item#use(ao.model.character.Character)
-	 */
-	@Override
-	public void use(Character character) {
-		// Accessories are not used, just equipped
-	}
-
+	int getManufactureDifficulty();
 }

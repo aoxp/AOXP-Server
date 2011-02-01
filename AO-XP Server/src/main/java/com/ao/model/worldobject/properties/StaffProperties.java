@@ -43,6 +43,10 @@ public class StaffProperties extends WeaponProperties {
 	 * @param forbiddenArchetypes List of UserArchetypes not allowed to use this item.
 	 * @param forbiddenRaces List of Races not allowed to use this item.
 	 * @param newbie Whether the item is newbie or not.
+	 * @param noLog Whether this item should be logged or not.
+	 * @param falls Whether this item falls or not.
+	 * @param respawnable Whether this item respawns or not when in a merchant NPC's inventory.
+	 * @param equippedGraphic The id of the grpahic to display when equipped.
 	 * @param stabs Wether if this item stabs or not.
 	 * @param piercingDamage The pircing damage (not reduced by any kind of armor or defense) done by this item.
 	 * @param minHit The minimum hit done by this item.

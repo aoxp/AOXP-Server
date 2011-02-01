@@ -37,10 +37,10 @@ public class MineralTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props1 = new ItemProperties(WorldObjectType.MINERAL, 1, "Gold", 1, 1, 0, null, null, false, false, false, false);
+		ItemProperties props1 = new ItemProperties(WorldObjectType.MINERAL, 1, "Gold", 1, 1, null, null, false, false, false, false);
 		mineral1 = new Mineral(props1, 1);
 		
-		ItemProperties props2 = new ItemProperties(WorldObjectType.MINERAL, 1, "Cooper", 1, 1, 0, null, null, false, false, false, false);
+		ItemProperties props2 = new ItemProperties(WorldObjectType.MINERAL, 1, "Cooper", 1, 1, null, null, false, false, false, false);
 		mineral2 = new Mineral(props2, 1);
 		
 		object = mineral2;

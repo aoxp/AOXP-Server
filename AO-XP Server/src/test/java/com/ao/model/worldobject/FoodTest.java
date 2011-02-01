@@ -40,10 +40,10 @@ public class FoodTest extends AbstractItemTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		StatModifyingItemProperties props1 = new StatModifyingItemProperties(WorldObjectType.FOOD, 1, "Apple", 1, 1, 0, null, null, false, false, false, false, MIN_HUN, MAX_HUN);
+		StatModifyingItemProperties props1 = new StatModifyingItemProperties(WorldObjectType.FOOD, 1, "Apple", 1, 1, null, null, false, false, false, false, MIN_HUN, MAX_HUN);
 		food1 = new Food(props1, 5);
 		
-		StatModifyingItemProperties props2 = new StatModifyingItemProperties(WorldObjectType.FOOD, 1, "Green Apple", 1, 1, 0, null, null, false, false, false, false, MAX_HUN, MAX_HUN);
+		StatModifyingItemProperties props2 = new StatModifyingItemProperties(WorldObjectType.FOOD, 1, "Green Apple", 1, 1, null, null, false, false, false, false, MAX_HUN, MAX_HUN);
 		food2 = new Food(props2, 1);
 		
 		object = food2;

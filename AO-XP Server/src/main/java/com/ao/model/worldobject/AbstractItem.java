@@ -115,15 +115,6 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ao.model.worldobject.Item#getManufactureDifficulty()
-	 */
-	@Override
-	public int getManufactureDifficulty() {
-		return ((ItemProperties) properties).getManufactureDifficulty();
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.ao.model.worldobject.Item#isNewbie()
 	 */
 	@Override
