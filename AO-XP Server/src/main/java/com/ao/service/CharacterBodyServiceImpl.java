@@ -24,7 +24,6 @@ import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.google.inject.name.Names;
 
 public class CharacterBodyServiceImpl implements CharacterBodyService {
 	
@@ -105,42 +104,37 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 		
 		switch (race) {
 			case DARK_ELF:
-				if (gender == Gender.MALE){
+				if (gender == Gender.MALE) {
 					return headsDarkelfMale.contains(head);
-				}
-				else{
+				} else {
 					return headsDarkelfFemale.contains(head);
 				}
 			
 			case DWARF:
-				if (gender == Gender.MALE){
+				if (gender == Gender.MALE) {
 					return headsDwarfMale.contains(head);
-				}
-				else{
+				} else {
 					return headsDwarfFemale.contains(head);
 				}
 			
 			case ELF:
-				if (gender == Gender.MALE){
+				if (gender == Gender.MALE) {
 					return headsElfMale.contains(head);
-				}
-				else{
+				} else {
 					return headsElfFemale.contains(head);
 				}
 				
 			case GNOME:
-				if (gender == Gender.MALE){
+				if (gender == Gender.MALE) {
 					return headsGnomeMale.contains(head);
-				}
-				else{
+				} else {
 					return headsGnomeFemale.contains(head);
 				}
 				
 			case HUMAN:
 				if (gender == Gender.MALE){
 					return headsHumanMale.contains(head);
-				}
-				else{
+				} else {
 					return headsHumanFemale.contains(head);
 				}
 	
@@ -149,57 +143,51 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 		}
 		
 		return false;
-		
 	}
 	
 	@Override
-	public int getBody(Race race, Gender gender){
+	public int getBody(Race race, Gender gender) {
 		
 		int body = 0;
 
 		switch (race) {
 			case DARK_ELF:
-				if (gender == Gender.MALE){
-					body=darkElfMaleBody;
-				}
-				else{
-					body=darkElfFemaleBody;
+				if (gender == Gender.MALE) {
+					body = darkElfMaleBody;
+				} else {
+					body = darkElfFemaleBody;
 				}
 				break;
 				
 			case DWARF:
-				if (gender == Gender.MALE){
-					body=dwarfMaleBody;
-				}
-				else{
-					body=dwarfFemaleBody;
+				if (gender == Gender.MALE) {
+					body = dwarfMaleBody;
+				} else {
+					body = dwarfFemaleBody;
 				}
 				break;
 				
 			case ELF:
-				if (gender == Gender.MALE){
-					body=elfMaleBody;
-				}
-				else{
-					body=elfFemaleBody;
+				if (gender == Gender.MALE) {
+					body = elfMaleBody;
+				} else {
+					body = elfFemaleBody;
 				}
 				break;
 				
 			case GNOME:
-				if (gender == Gender.MALE){
-					body=gnomeMaleBody;
-				}
-				else{
-					body=gnomeFemaleBody;
+				if (gender == Gender.MALE) {
+					body = gnomeMaleBody;
+				} else {
+					body = gnomeFemaleBody;
 				}
 				break;
 				
 			case HUMAN:
 				if (gender == Gender.MALE){
-					body=humanMaleBody;
-				}
-				else{
-					body=humanFemaleBody;
+					body = humanMaleBody;
+				} else {
+					body = humanFemaleBody;
 				}
 				break;
 				
