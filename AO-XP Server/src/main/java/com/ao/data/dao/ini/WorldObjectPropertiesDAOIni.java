@@ -220,7 +220,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			reader.close();
 		} catch (Exception e) {
 			logger.error("World Object loading failed!", e);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		
 		int totalObjects = Integer.parseInt(iniFile.get(INIT_HEADER, NUM_OBJECTS_KEY));

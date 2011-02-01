@@ -15,11 +15,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 package com.ao.data.dao;
 
 
-import com.ao.data.dao.exception.DAOException;
 import com.ao.model.map.City;
 
 /**
@@ -30,7 +28,6 @@ public interface CityDAO {
 	/**
 	 * Loads all Cities.
 	 * @return The complete list of Cities positions.
-	 * @throws DAOException
 	 */
-	City[] retrieveAll() throws DAOException;
+	City[] retrieveAll();
 }

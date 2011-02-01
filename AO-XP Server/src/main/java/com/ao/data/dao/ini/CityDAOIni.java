@@ -1,20 +1,39 @@
+/*
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 package com.ao.data.dao.ini;
-
-import com.ao.data.dao.CityDAO;
-import com.ao.data.dao.exception.DAOException;
-import com.ao.model.map.City;
-
-import org.apache.log4j.Logger;
-import org.ini4j.Ini;
-import org.ini4j.Profile.Section;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Reader;
 
+import org.apache.log4j.Logger;
+import org.ini4j.Ini;
+import org.ini4j.Profile.Section;
+
+import com.ao.data.dao.CityDAO;
+import com.ao.model.map.City;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+/**
+ * Implementation of the City DAO backed by ini files.
+ * @author zaxtor
+ */
 public class CityDAOIni implements CityDAO {
 	
 	private static final Logger logger = Logger.getLogger(CityDAOIni.class);
@@ -25,7 +44,7 @@ public class CityDAOIni implements CityDAO {
 	private static final String CITY_SECTION_PREFIX = "CIUDAD";
 	private static final String X_KEY = "X";
 	private static final String Y_KEY = "Y";
-	private static final String MAP_KEY = "Mapa";
+	private static final String MAP_KEY = "MAPA";
 	
 	private String citiesFilePath;
 	
@@ -43,7 +62,7 @@ public class CityDAOIni implements CityDAO {
 	 * @see com.ao.data.dao.CityDAO#retrieveAll()
 	 */
 	@Override
-	public City[] retrieveAll() throws DAOException {
+	public City[] retrieveAll() {
 		Ini iniFile;
 		
 		try {
@@ -53,14 +72,14 @@ public class CityDAOIni implements CityDAO {
 			reader.close();
 		} catch (Exception e) {
 			logger.error("Cities loading failed!", e);
-			throw new DAOException();
+			throw new RuntimeException(e);
 		}
 		
 		int totalCities = Integer.parseInt(iniFile.get(INIT_HEADER, NUM_CITIES_KEY));
 		
 		City[] cities = new City[totalCities];
 		
-		for (int i = 1; i < totalCities; i++) {
+		for (int i = 1; i <= totalCities; i++) {
 			cities[i - 1] = loadCity(i, iniFile);
 		}
 		
@@ -86,8 +105,6 @@ public class CityDAOIni implements CityDAO {
 		byte x = Byte.parseByte(section.get(X_KEY));
 		byte y = Byte.parseByte(section.get(Y_KEY));
 		
-		City city = new City(map, x, y);
-		
-		return city;
+		return new City(map, x, y);
 	}
 }

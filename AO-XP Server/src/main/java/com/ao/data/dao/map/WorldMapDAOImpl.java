@@ -83,7 +83,6 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 		}
 		
 		return maps;
-		
 	}
 
 	/**

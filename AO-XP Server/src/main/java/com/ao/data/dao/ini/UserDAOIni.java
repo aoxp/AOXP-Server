@@ -243,7 +243,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			writer.close();
 		} catch (IOException e) {
 			logger.error("Charfile (account data) creation failed!", e);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		
 		return new AccountImpl(name, password, mail, new HashSet<String>(), false);
@@ -377,7 +377,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			writer.close();
 		} catch (IOException e) {
 			logger.error("Charfile (full charfile) creation failed!", e);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		
 		// TODO: Update this when hp, mana and hit points get updated!
@@ -470,7 +470,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			
 		} catch (IOException e) {
 			logger.error("Charfile loading failed!", e);
-			throw new DAOException();
+			throw new DAOException(e);
 		}
 		
 		return chara;

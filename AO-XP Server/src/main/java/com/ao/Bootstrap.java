@@ -20,7 +20,6 @@ package com.ao;
 
 import java.io.IOException;
 import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.channels.ServerSocketChannel;
 import java.util.concurrent.ExecutorService;
@@ -146,6 +145,9 @@ public class Bootstrap {
 		logger.info("Loading maps...");
 		MapService mapService = ApplicationContext.getInstance(MapService.class);
 		mapService.loadMaps();
+		
+		logger.info("Loading cities...");
+		mapService.loadCities();
 		
 		logger.info("Loading world objects...");
 		WorldObjectService objectService = ApplicationContext.getInstance(WorldObjectService.class);

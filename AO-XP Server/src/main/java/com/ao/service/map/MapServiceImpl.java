@@ -15,16 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 package com.ao.service.map;
 
-import com.ao.data.dao.WorldMapDAO;
 import com.ao.data.dao.CityDAO;
-import com.ao.data.dao.exception.DAOException;
+import com.ao.data.dao.WorldMapDAO;
 import com.ao.model.character.Character;
+import com.ao.model.map.City;
 import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
-import com.ao.model.map.City;
 import com.ao.service.MapService;
 import com.google.inject.Inject;
 
@@ -62,12 +60,7 @@ public class MapServiceImpl implements MapService {
 	
 	@Override
 	public void loadCities() {
-		try {
-			cities = citiesDAO.retrieveAll();
-		} catch (DAOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		cities = citiesDAO.retrieveAll();
 	}
 	
 	@Override

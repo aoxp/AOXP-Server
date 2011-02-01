@@ -26,6 +26,9 @@ import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.map.City;
 
+/**
+ * A DAO for user characters.
+ */
 public interface UserCharacterDAO {
 	
 	/**
