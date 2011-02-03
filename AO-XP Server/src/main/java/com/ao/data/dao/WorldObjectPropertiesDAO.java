@@ -19,8 +19,11 @@
 package com.ao.data.dao;
 
 
+import java.util.Map;
+
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.worldobject.properties.WorldObjectProperties;
+import com.ao.model.worldobject.properties.manufacture.Manufacturable;
 
 /**
  * DAO for WorldObjectProperties.
@@ -33,4 +36,11 @@ public interface WorldObjectPropertiesDAO {
 	 * @throws DAOException
 	 */
 	WorldObjectProperties[] retrieveAll() throws DAOException;
+	
+	/**
+	 * Retrieves all loaded manufacturables.
+	 * @return The complte set of manufacturables.
+	 * @throws DAOException
+	 */
+	Map<Integer, Manufacturable> getAllManufacturables() throws DAOException;
 }

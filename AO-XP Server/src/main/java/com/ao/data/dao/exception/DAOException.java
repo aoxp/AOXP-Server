@@ -32,12 +32,20 @@ public class DAOException extends Exception {
 	public DAOException() {
 		super();
 	}
-
+	
 	/**
 	 * Create a new DAOException with the given clause.
 	 * @param cause The cause of the exception.
 	 */
 	public DAOException(Throwable cause) {
 		super(cause);
+	}
+
+	/**
+	 * Create a new DAOException with the given message.
+	 * @param message The message of the exception.
+	 */
+	public DAOException(String message) {
+		super(message);
 	}
 }

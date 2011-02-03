@@ -57,6 +57,8 @@ import com.ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
 import com.ao.model.worldobject.properties.WeaponProperties;
 import com.ao.model.worldobject.properties.WoodProperties;
 import com.ao.model.worldobject.properties.WorldObjectProperties;
+import com.ao.model.worldobject.properties.manufacture.Manufacturable;
+import com.ao.model.worldobject.properties.manufacture.ManufactureType;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -197,6 +199,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	
 	private String objectsFilePath;
 	private int itemsPerRow;
+
+	private Map<Integer, Manufacturable> manufacturables;
 	
 	/**
 	 * Creates a new WorldObjectDAOIni instance.
@@ -211,11 +215,28 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	
 	/*
 	 * (non-Javadoc)
+	 * @see com.ao.data.dao.WorldObjectPropertiesDAO#getAllManufacturables()
+	 */
+	@Override
+	public Map<Integer, Manufacturable> getAllManufacturables() throws DAOException {
+		if (null == manufacturables) {
+			// Force the ini to be loaded!
+			retrieveAll();
+		}
+		
+		return manufacturables;
+	}
+	
+	/*
+	 * (non-Javadoc)
 	 * @see com.ao.data.dao.WorldObjectDAO#retrieveAll()
 	 */
 	@Override
 	public WorldObjectProperties[] retrieveAll() throws DAOException {
 		Ini iniFile;
+		
+		// Reset manufacturables
+		manufacturables = new HashMap<Integer, Manufacturable>();
 		
 		try {
 			// Make sure the reader is closed, since Ini4J gives no guarantees.
@@ -363,14 +384,92 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				logger.error("Unexpected object type found: " + objectType);
 		}
 		
-		// TODO : Check if object is manufacturable, and store such data appropriately for carpinteria, fundición and herreria skills.
+		// Check if the item is manufacturable
+		if (getManufactureType(section, obj) != null) {
+			try {
+				manufacturables.put(obj.getId(), loadManufacturable(section, obj));
+			} catch (DAOException e) {
+				logger.error("Item " + id + " seems like manufacturable, but it's not!");
+			}
+		}
 		
 		return obj;
 	}
 	
 	/**
+	 * Loads manufacture data from the given section for the provided object.
+	 * 
+	 * @param section The section from which to load the manufacture data.
+	 * @param obj The properties of the object whose manufacture data to laod.
+	 * @return The loaded manufacturable.
+	 * @throws DAOException
+	 */
+	private Manufacturable loadManufacturable(Section section,
+			WorldObjectProperties obj) throws DAOException {
+		
+		ManufactureType manufactureType = getManufactureType(section, obj);
+		
+		if (null != manufactureType) {
+			throw new DAOException("Item is not manufacturable");
+		}
+		
+		int manufactureDifficulty;
+		
+		/*
+		 * AO's OBJ.dat is totally inconsistent, so MinSkill for Minerals is the required
+		 * skill level to build ingots from them, while for boats it's the required
+		 * skill level to use them and SkCarpitenria is the skill level required
+		 * to build them. If you ever edit this format, or create a new DAO,
+		 * I beg you to try to avoid this and be consistent.
+		 */
+		if (obj instanceof MineralProperties) {
+			manufactureDifficulty = getUsageDifficulty(section);
+		} else {
+			manufactureDifficulty = getManufactureDifficulty(section);
+		}
+		
+		int requiredWood = getRequiredWoodForManufacture(section);
+		int requiredElvenWood = getRequiredElvenWoodForManufacture(section);
+		int requiredGoldIngot = getRequiredGoldIngotsForManufacture(section);
+		int requiredSilverIngot = getRequiredSilverIngotsForManufacture(section);
+		int requiredIronIngot = getRequiredIronIngotsForManufacture(section);
+		
+		return new Manufacturable(obj, manufactureType, manufactureDifficulty,
+					requiredWood, requiredElvenWood, requiredGoldIngot,
+					requiredSilverIngot, requiredIronIngot);
+	}
+
+	/**
+	 * Determines the manufacturable type of the item (if any).
+	 * 
+	 * @param section The section from which to read the object's value.
+	 * @param obj The object's properties.
+	 * @return The obejct's manufacturable type.
+	 */
+	private ManufactureType getManufactureType(Section section,
+			WorldObjectProperties obj) {
+		if (obj instanceof MineralProperties) {
+			return ManufactureType.BLACKSMITH;
+		}
+		
+		String value = section.get(WOODWORKING_DIFFICULTY_KEY);
+		
+		if (value != null) {
+			return ManufactureType.WOODWORK;
+		}
+		
+		value = section.get(IRONWORKING_DIFFICULTY_KEY);
+		
+		if (value != null) {
+			return ManufactureType.IRONWORK;
+		}
+		
+		return null;
+	}
+
+	/**
 	 * Creates a wood's properties from the given section.
-	 * @param type The object's type.
+	 * @param manufactureType The object's type.
 	 * @param id The object's id.
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
@@ -1016,6 +1115,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	
 	/**
 	 * Retrieves an object's manufacture difficulty from it's section.
+	 * 
 	 * @param section The section from which to read the object's value.
 	 * @return The object's manufacture difficulty.
 	 */
