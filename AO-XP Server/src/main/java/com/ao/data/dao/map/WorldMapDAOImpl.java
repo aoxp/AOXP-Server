@@ -148,8 +148,8 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 		short floor;
 		
 		// Tiles enumeration starts at 1.
-		for (int y = WorldMap.MIN_Y; y < WorldMap.MAX_Y; y++) {
-			for (int x = WorldMap.MIN_X; x < WorldMap.MAX_X; x++) {
+		for (int y = WorldMap.MIN_Y; y <= WorldMap.MAX_Y; y++) {
+			for (int x = WorldMap.MIN_X; x <= WorldMap.MAX_X; x++) {
 
 				blocked = isWater = isLava = false;
 				trigger = Trigger.NONE;
