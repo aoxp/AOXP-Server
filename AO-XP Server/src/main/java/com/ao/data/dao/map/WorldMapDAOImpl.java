@@ -165,18 +165,18 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 				// Every tile must have the first layer.
 				floor = mapBuffer.getShort();
 				
+				// Are we on water?
+				if (waterGrhs.contains(floor)) {
+					isWater = true;
+				} else if (lavaGrhs.contains(floor)) { // Are we on lava?
+					isLava = true;
+				}
+				
 				
 				// In this layer goes stuff that should appear over the floor.
 				if ((flag & BITFLAG_LAYER2) == BITFLAG_LAYER2) {
 					// Remove the short from the buffer so we can fetch the next value.
 					mapBuffer.getShort();
-				} else {
-					// Are we on water?
-					if (waterGrhs.contains(floor)) {
-						isWater = true;
-					} else if (lavaGrhs.contains(floor)) { // Are we on lava?
-						isLava = true;
-					}
 				}
 				
 				// In this layer goes stuff that is over the chars but is not a roof.
