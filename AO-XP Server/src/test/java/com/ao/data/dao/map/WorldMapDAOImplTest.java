@@ -2,6 +2,7 @@ package com.ao.data.dao.map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -29,23 +30,28 @@ public class WorldMapDAOImplTest {
 		WorldMap[] maps = dao.retrieveAll();
 		WorldMap map = maps[0];
 		
-		Position tileExit1 = new Position((byte) 1, (byte) 1, map);
-		Position tileExit2 = new Position((byte) 11, (byte) 11, new WorldMap(11));
-		Position tileExit3 = null;
-
+		// Check for blocked / non-blocked
 		assertTrue(map.getTile(0, 0).isBlocked());
-		assertFalse(map.getTile(1, 0).isBlocked());
-		assertFalse(map.getTile(50, 50).isBlocked());
+		assertFalse(map.getTile(83, 28).isBlocked());
+		
+		// Check if tile exits are where expected
+		assertNull(map.getTile(49, 49).getTileExit());
+		// TODO : This tile currently references to map 275 and will be ignored!! Fix this on the map by making it a telep to another pos on map 1!
+//		assertTrue(map.getTile(83, 28).getTileExit() != null);
+//		assertTrue(map.getTile(83, 28).getTileExit().getX() >= WorldMap.MIN_X);
+//		assertTrue(map.getTile(83, 28).getTileExit().getX() <= WorldMap.MAX_X);
+//		assertTrue(map.getTile(83, 28).getTileExit().getY() >= WorldMap.MIN_Y);
+//		assertTrue(map.getTile(83, 28).getTileExit().getY() <= WorldMap.MAX_Y);
 
 		assertEquals(map.getTile(0, 0).getTrigger(), Trigger.NONE);
-		assertEquals(map.getTile(1, 0).getTrigger(), Trigger.NONE);
-		assertEquals(map.getTile(49, 49).getTrigger(), Trigger.NONE);
-
-		// TODO: Test for water, lava, under roof and safe zone.
+//		assertEquals(map.getTile(56, 59).getTrigger(), Trigger.INVALID_POSITION);
+		// TODO : The map also has trigger 4, 6 and 5... test for those...
 		
-		assertEquals(map.getTile(0, 0).getTileExit(), tileExit1);
-		assertEquals(map.getTile(1, 0).getTileExit(), tileExit2);
-		assertEquals(map.getTile(49, 49).getTileExit(), tileExit3);
+		assertTrue(map.getTile(71, 55).isLava());
+		assertFalse(map.getTile(71, 55).isWater());
+
+		assertFalse(map.getTile(76, 72).isLava());
+		assertTrue(map.getTile(76, 72).isWater());
 	}
 
 }
