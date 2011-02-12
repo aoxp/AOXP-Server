@@ -36,16 +36,20 @@ public class WorldMapDAOImplTest {
 		
 		// Check if tile exits are where expected
 		assertNull(map.getTile(49, 49).getTileExit());
-		// TODO : This tile currently references to map 275 and will be ignored!! Fix this on the map by making it a telep to another pos on map 1!
-//		assertTrue(map.getTile(83, 28).getTileExit() != null);
-//		assertTrue(map.getTile(83, 28).getTileExit().getX() >= WorldMap.MIN_X);
-//		assertTrue(map.getTile(83, 28).getTileExit().getX() <= WorldMap.MAX_X);
-//		assertTrue(map.getTile(83, 28).getTileExit().getY() >= WorldMap.MIN_Y);
-//		assertTrue(map.getTile(83, 28).getTileExit().getY() <= WorldMap.MAX_Y);
+		
+		Position tileExit = map.getTile(19, 84).getTileExit();
+		assertTrue(tileExit != null);
+		assertTrue(tileExit.getX() >= WorldMap.MIN_X);
+		assertTrue(tileExit.getX() <= WorldMap.MAX_X);
+		assertTrue(tileExit.getY() >= WorldMap.MIN_Y);
+		assertTrue(tileExit.getY() <= WorldMap.MAX_Y);
 
 		assertEquals(map.getTile(0, 0).getTrigger(), Trigger.NONE);
-//		assertEquals(map.getTile(56, 59).getTrigger(), Trigger.INVALID_POSITION);
-		// TODO : The map also has trigger 4, 6 and 5... test for those...
+		assertEquals(map.getTile(23, 32).getTrigger(), Trigger.UNDER_ROOF);
+		assertEquals(map.getTile(57, 44).getTrigger(), Trigger.INVALID_POSITION);
+		assertEquals(map.getTile(40, 74).getTrigger(), Trigger.SAFE_ZONE);
+		assertEquals(map.getTile(28, 20).getTrigger(), Trigger.ANTI_PICKET);
+		assertEquals(map.getTile(23, 33).getTrigger(), Trigger.FIGHT_ZONE);
 		
 		assertTrue(map.getTile(71, 55).isLava());
 		assertFalse(map.getTile(71, 55).isWater());

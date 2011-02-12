@@ -39,7 +39,7 @@ public interface WorldObjectPropertiesDAO {
 	
 	/**
 	 * Retrieves all loaded manufacturables.
-	 * @return The complte set of manufacturables.
+	 * @return The complete set of manufacturables.
 	 * @throws DAOException
 	 */
 	Map<Integer, Manufacturable> getAllManufacturables() throws DAOException;
