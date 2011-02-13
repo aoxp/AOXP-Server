@@ -27,7 +27,7 @@ public class ValidatorService {
 
 	private static final int CHARACTER_NAME_MIN_LENGTH = 1;
 	private static final int CHARACTER_NAME_MAX_LENGTH = 30;
-	private static final String CHARACTER_NAME_REGEXP = "^[^ ][A-Za-z ]+";
+	private static final String CHARACTER_NAME_REGEXP = "^[A-Za-z][A-Za-z ]*";
 
 	/**
 	 * Checks if the given character name is valid, or not.
