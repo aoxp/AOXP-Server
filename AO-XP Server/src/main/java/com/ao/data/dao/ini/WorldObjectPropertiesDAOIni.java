@@ -36,6 +36,7 @@ import com.ao.model.character.Race;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.worldobject.WoodType;
 import com.ao.model.worldobject.WorldObjectType;
+import com.ao.data.dao.ini.LegacyWorldObjectType;
 import com.ao.model.worldobject.properties.AmmunitionProperties;
 import com.ao.model.worldobject.properties.BackpackProperties;
 import com.ao.model.worldobject.properties.BoatProperties;
@@ -140,7 +141,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	
 	
 	private static final Map<String, UserArchetype> archetypesByName;
-	private static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;
 	
 	static {
 		// Populate aliases from spanish config files to internal types
@@ -162,39 +162,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		archetypesByName.put("MINERO", UserArchetype.MINER);
 		archetypesByName.put("CARPINTERO", UserArchetype.CARPENTER);
 		archetypesByName.put("PIRATA", UserArchetype.PIRATE);
-		
-		
-		// Populate mappings from old object types to new ones.
-		worldObjectTypeMapper = new HashMap<LegacyWorldObjectType, WorldObjectType>();
-		
-		// BEWARE : Some objects have no mapping since they need extra info to be mapped (potions and weapons for instance).
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ARMOR, WorldObjectType.ARMOR);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ARROW, WorldObjectType.AMMUNITION);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.BOAT, WorldObjectType.BOAT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.DRINK, WorldObjectType.DRINK);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.EMPTY_BOTTLE, WorldObjectType.EMPTY_BOTTLE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.FILLED_BOTTLE, WorldObjectType.FILLED_BOTTLE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.HELMET, WorldObjectType.HELMET);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MINERAL, WorldObjectType.MINERAL);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MUSICAL_INSTRUMENT, WorldObjectType.MUSICAL_INSTRUMENT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.RING, WorldObjectType.ACCESSORY);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.SHIELD, WorldObjectType.SHIELD);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.TELEPORT, WorldObjectType.TELEPORT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.USE_ONCE, WorldObjectType.FOOD);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.PARCHMENT, WorldObjectType.PARCHMENT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MONEY, WorldObjectType.MONEY);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.TREE, WorldObjectType.TREE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WorldObjectType.TREE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.WOOD, WorldObjectType.WOOD);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MINE, WorldObjectType.MINE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.KEY, WorldObjectType.KEY);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.DOOR, WorldObjectType.DOOR);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.SIGN, WorldObjectType.SIGN);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.FORUM, WorldObjectType.FORUM);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.BACKPACK, WorldObjectType.BACKPACK);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ANVIL, WorldObjectType.ANVIL);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.FORGE, WorldObjectType.FORGE);
-		
 	}
 	
 	private String objectsFilePath;
@@ -285,7 +252,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case HELMET:
 			case ARMOR:
 			case SHIELD:
-				obj = loadDefensiveItem(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadDefensiveItem(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case WEAPON:
@@ -293,35 +260,35 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 				
 			case ARROW:
-				obj = loadAmmunition(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadAmmunition(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case BOAT:
-				obj = loadBoat(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadBoat(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case DRINK:
 			case FILLED_BOTTLE:
-				obj = loadDrink(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadDrink(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case USE_ONCE:
-				obj = loadFood(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadFood(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case EMPTY_BOTTLE:
 			case MONEY:
 			case FORGE:
 			case ANVIL:
-				obj = loadGenericItem(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadGenericItem(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case MUSICAL_INSTRUMENT:
-				obj = loadMusicalInstrument(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadMusicalInstrument(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case TELEPORT:
-				obj = loadTeleport(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadTeleport(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case POTION:
@@ -343,41 +310,41 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 				
 			case PARCHMENT:
-				obj = loadParchment(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadParchment(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case TREE:
 			case ELVEN_TREE:
 			case MINE:
-				obj = loadResourceSource(worldObjectTypeMapper.get(type), id, name, graphic, section, type);
+				obj = loadResourceSource(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section, type);
 				break;
 				
 			case WOOD:
-				obj = loadWood(worldObjectTypeMapper.get(type), id, name, graphic, section, id == ELVEN_WOOD_INDEX ? WoodType.ELVEN : WoodType.NORMAL);
+				obj = loadWood(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section, id == ELVEN_WOOD_INDEX ? WoodType.ELVEN : WoodType.NORMAL);
 				break;
 			
 			case KEY:
-				obj = loadKey(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadKey(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case DOOR:
-				obj = loadDoor(worldObjectTypeMapper.get(type), id, name, graphic, section, iniFile);
+				obj = loadDoor(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section, iniFile);
 				break;
 				
 			case SIGN:
-				obj = loadSign(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadSign(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case FORUM:
-				obj = loadForum(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadForum(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			case BACKPACK:
-				obj = loadBackpack(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadBackpack(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 			
 			case MINERAL:
-				obj = loadMineral(worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadMineral(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
 				break;
 				
 			default:
@@ -1709,73 +1676,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 */
 	private int getAmountForBackpackType(int backpackType) {
 		return backpackType * itemsPerRow ;
-	}
-	
-	/**
-	 * World Object Type enumeration, as it was known in the old days of Visual Basic.
-	 */
-	private enum LegacyWorldObjectType {
-		USE_ONCE(1),
-		WEAPON(2),
-		ARMOR(3),
-		TREE(4),
-		MONEY(5),
-		DOOR(6),
-		CONTAINER(7),
-		SIGN(8),
-		KEY(9),
-		FORUM(10),
-		POTION(11),
-		BOOK(12),
-		DRINK(13),
-		WOOD(14),
-		BONFIRE(15),
-		SHIELD(16),
-		HELMET(17),
-		RING(18),
-		TELEPORT(19),
-		FURNITURE(20),
-		JEWELRY(21),
-		MINE(22),
-		MINERAL(23),
-		PARCHMENT(24),
-		MUSICAL_INSTRUMENT(26),
-		ANVIL(27),
-		FORGE(28),
-		GEMS(29),
-		FLOWERS(30),
-		BOAT(31),
-		ARROW(32),
-		EMPTY_BOTTLE(33),
-		FILLED_BOTTLE(34),
-		STAIN(35),
-		ELVEN_TREE(36),
-		BACKPACK(37);
-		
-		protected int value;
-		
-		/**
-		 * Creates a new LegacyWorldObjectType.
-		 * @param value The value corresponding to the object type. Should be unique.
-		 */
-		private LegacyWorldObjectType(int value) {
-			this.value = value;
-		}
-		
-		/**
-		 * Retrieves the LegacyWorldObjectType associated with the given value.
-		 * @param value The value for which to search for a LegacyWorldObjectType.
-		 * @return The matched LegacyWorldObjectType, if any.
-		 */
-		public static LegacyWorldObjectType valueOf(int value) {
-			for (LegacyWorldObjectType type : LegacyWorldObjectType.values()) {
-				if (type.value == value) {
-					return type;
-				}
-			}
-			
-			return null;
-		}
 	}
 	
 	/**

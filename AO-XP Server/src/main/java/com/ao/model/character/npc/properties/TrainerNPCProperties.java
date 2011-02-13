@@ -16,30 +16,35 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.ao.model.map;
+package com.ao.model.character.npc.properties;
 
+import java.util.Map;
+
+import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
+import com.ao.model.map.Heading;
+import com.ao.model.character.AIType;
 
 /**
- * Defines plausible movement headings.
+ * Defines a NPC's properties. Allows a lightweight pattern implementation.
  */
-public enum Heading {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST;
-	
-	/**
-	 * Enum values.
-	 */
-	private static Heading[] values = Heading.values();
-	
-	/**
-	 * Retrieves the heading for the given index.
-	 * @param index The heading index.
-	 * @return The heading.
-	 */
-	public static Heading get(byte index) {
-		return values[index];
+public class TrainerNPCProperties extends AbstractNPCProperties {
+
+	protected Map<Integer, String> creatures;
+
+	public TrainerNPCProperties(NPCType type, int id, String name, short body,
+			short head, Heading heading, boolean respawn, 
+			String description, AIType AIType, Alignment alignment, Map<Integer, String> creatures) {
+		super(type, id, name, body, head, heading, respawn, description, AIType, alignment);
+
+		this.creatures = creatures;
 	}
+	
+	/**
+	 * @return the creatures
+	 */
+	public Map<Integer, String> getCreatures() {
+		return creatures;
+	}
+	
 }

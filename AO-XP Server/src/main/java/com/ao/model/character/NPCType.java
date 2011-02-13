@@ -23,6 +23,8 @@ package com.ao.model.character;
  */
 public enum NPCType {	
 	COMMON,
+	TRADER,
+	HOSTILE,
 	RESUCITATOR,
 	ROYAL_GUARD,
 	TRAINER,
@@ -31,5 +33,20 @@ public enum NPCType {
 	DRAGON,
 	GAMBLER,
 	CHAOS_GUARD,
-	NEWBIE_RESUCITATOR
+	NEWBIE_RESUCITATOR,
+	GOVERNOR;
+	
+	/**
+	 * Enum values.
+	 */
+	private static NPCType[] values = NPCType.values();
+	
+	/**
+	 * Retrieves the npc's type for the given index.
+	 * @param index The npc's type index.
+	 * @return The npc's type .
+	 */
+	public static NPCType get(byte index) {
+		return values[index];
+	}
 }

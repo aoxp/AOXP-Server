@@ -16,30 +16,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.ao.model.map;
+package com.ao.data.dao;
 
-import com.ao.model.character.NPCType;
+
+import com.ao.data.dao.exception.DAOException;
+import com.ao.model.character.npc.properties.NPCProperties;
 
 /**
- * Defines plausible movement headings.
+ * DAO for WorldObjectProperties.
  */
-public enum Heading {
-	NORTH,
-	EAST,
-	SOUTH,
-	WEST;
-	
+public interface NPCCharacterPropertiesDAO {
+
 	/**
-	 * Enum values.
+	 * Loads all World Objects Properties.
+	 * @return The complete list of WorldObjectsProperties.
+	 * @throws DAOException
 	 */
-	private static Heading[] values = Heading.values();
-	
-	/**
-	 * Retrieves the heading for the given index.
-	 * @param index The heading index.
-	 * @return The heading.
-	 */
-	public static Heading get(byte index) {
-		return values[index];
-	}
+	NPCProperties[] retrieveAll() throws DAOException;
 }

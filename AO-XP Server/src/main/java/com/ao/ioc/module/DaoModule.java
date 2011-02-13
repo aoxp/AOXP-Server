@@ -25,6 +25,7 @@ import com.ao.data.dao.UserCharacterDAO;
 import com.ao.data.dao.WorldMapDAO;
 import com.ao.data.dao.WorldObjectPropertiesDAO;
 import com.ao.data.dao.CityDAO;
+import com.ao.data.dao.ini.NPCPropertiesDAOIni;
 import com.ao.data.dao.ini.UserDAOIni;
 import com.ao.data.dao.ini.WorldObjectPropertiesDAOIni;
 import com.ao.data.dao.ini.CityDAOIni;
@@ -63,5 +64,8 @@ public class DaoModule extends AbstractModule {
 	
 		bind(CityDAO.class).to(CityDAOIni.class).in(Singleton.class);
 		bind(String.class).annotatedWith(Names.named("citiesFilePath")).toInstance(properties.getProperty("config.path.citiesdat"));
+		
+		bind(NPCPropertiesDAOIni.class).to(NPCPropertiesDAOIni.class).in(Singleton.class);
+		bind(String.class).annotatedWith(Names.named("npcsFilePath")).toInstance(properties.getProperty("config.path.npcsdat"));
 	}
 }
