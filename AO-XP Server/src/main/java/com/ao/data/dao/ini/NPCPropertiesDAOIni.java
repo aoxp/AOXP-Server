@@ -39,7 +39,9 @@ import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
+import com.ao.model.character.behavior.NullBehavior;
 import com.ao.model.character.movement.MovementStrategy;
+import com.ao.model.character.movement.QuietMovementStrategy;
 import com.ao.model.character.npc.properties.CreatureNPCProperties;
 import com.ao.model.character.npc.properties.GovernorNPCProperties;
 import com.ao.model.character.npc.properties.GuardNPCProperties;
@@ -1038,12 +1040,12 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 
 	private enum LegacyAIType {
 		// TODO : Complete this as we code the behaviors!
-		STATIC(1, null, null, null),
+		STATIC(1, NullBehavior.class, null, QuietMovementStrategy.class),
 	    RANDOM(2, null, null, null),
 	    BAD_ATTACKS_GOOD(3, null, null, null),
 	    DEFENSIVE(4, null, null, null),
 	    GUARD_ATTACK_CRIMINALS(5, null, null, null),
-	    NPC_OBJECT(6, null, null, null),
+	    NPC_OBJECT(6, null, null, QuietMovementStrategy.class),
 	    FOLLW_MASTER(8, null, null, null),
 	    ATTACK_NPC(9, null, null, null),
 	    PATHFINDING(10, null, null, null),
