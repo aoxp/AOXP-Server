@@ -132,6 +132,13 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		npcTypeMapper.put(LegacyNPCType.COMMON, NPCType.HOSTILE);
 		npcTypeMapper.put(LegacyNPCType.DRAGON, NPCType.HOSTILE);
 		npcTypeMapper.put(LegacyNPCType.TRAINER, NPCType.TRAINER);
+		npcTypeMapper.put(LegacyNPCType.GOVERNOR, NPCType.GOVERNOR);
+		npcTypeMapper.put(LegacyNPCType.CHAOS_GUARD, NPCType.CHAOS_GUARD);
+		npcTypeMapper.put(LegacyNPCType.ROYAL_GUARD, NPCType.ROYAL_GUARD);
+		npcTypeMapper.put(LegacyNPCType.NEWBIE_RESUCITATOR, NPCType.NEWBIE_RESUCITATOR);
+		npcTypeMapper.put(LegacyNPCType.RESUCITATOR, NPCType.RESUCITATOR);
+		npcTypeMapper.put(LegacyNPCType.GAMBLER, NPCType.GAMBLER);
+		npcTypeMapper.put(LegacyNPCType.BANKER, NPCType.BANKER);
 	}
 	
 	private String npcsFilePath;

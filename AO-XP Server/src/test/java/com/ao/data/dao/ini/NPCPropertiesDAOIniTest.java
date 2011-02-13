@@ -61,7 +61,7 @@ public class NPCPropertiesDAOIniTest {
 		
 		NPCProperties dragon = npcProperties[DRAGON_NPC_INDEX];
 		assertTrue(dragon instanceof CreatureNPCProperties);
-		assertEquals(NPCType.DRAGON, dragon.getType());
+		assertEquals(NPCType.HOSTILE, dragon.getType());
 		
 		NPCProperties trainer = npcProperties[TRAINER_NPC_INDEX];
 		assertTrue(trainer instanceof TrainerNPCProperties);
