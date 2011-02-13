@@ -60,7 +60,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	
 	private static final int MAX_SOUNDS = 3;
 	
-	protected static final String INIT_HEADER = "INIT";
+	private static final String INIT_HEADER = "INIT";
 	private static final String NUM_NPCS_KEY = "NumNPCs";
 	
 	private static final String NPC_SECTION_PREFIX = "NPC";
@@ -100,6 +100,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
   	private static final String CAN_POISON_KEY = "Veneno";
 	private static final String PARALYZABLE_KEY = "AfectaParalisis";
 	private static final String SOUND_PREFIX = "SND";
+	// TODO : Use this!
 	private static final String NPC_ATTACK_SOUND_KEY = "SND1";
 	private static final String NPC_RECEIVE_SOUND_KEY = "SND2";
 	private static final String NPC_DIE_SOUND_KEY = "SND3";
@@ -110,6 +111,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	private static final String ORIGINAL_POSITION_KEY = "PosOrig";
 
 
+// TODO : Use this!
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
 	private static final int NEWBIE_RESUCITATOR_INDEX = 119;
 	
@@ -119,11 +121,11 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		// Populate mappings from old object types to new ones.
 		npcTypeMapper = new HashMap<LegacyNPCType, NPCType>();
 		
+		// FIXME : This two lines are contradictory!!
 		npcTypeMapper.put(LegacyNPCType.COMMON, NPCType.TRADER);
 		npcTypeMapper.put(LegacyNPCType.COMMON, NPCType.HOSTILE);
 		npcTypeMapper.put(LegacyNPCType.DRAGON, NPCType.HOSTILE);
 		npcTypeMapper.put(LegacyNPCType.TRAINER, NPCType.TRAINER);
-		
 	}
 	
 	private String npcsFilePath;
@@ -198,27 +200,32 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 					npc = loadTrader(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
 				} else {
 					npc = loadCreature(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
-					break;
 				}
+				break;
 			
 			case TRAINER:
 				npc = loadTrainer(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
+				break;
 			
 			case GOVERNOR:
 				npc = loadGovernor(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
+				break;
 			
 			case ROYAL_GUARD:
 			case CHAOS_GUARD:
 				npc = loadGuard(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
+				break;
 				
 			case NEWBIE_RESUCITATOR:
 			case RESUCITATOR:
 				npc = loadResucitator(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
+				break;
 
 			case GAMBLER:
 			case BANKER:
 			case NOBLE:
 				npc = loadNPC(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
+				break;
 				
 			default:
 				logger.error("Unexpected object type found: " + npcType);
@@ -246,7 +253,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 
 	/**
-	 * Creates a Resucitaor NPC's properties from the given section.
+	 * Creates a Resucitator NPC's properties from the given section.
 	 * @param type the npc's type.
 	 * @param id the npc's id.
 	 * @param name the npc's name.
@@ -259,11 +266,9 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	 */
 	private NPCProperties loadResucitator(NPCType type, int id, String name,
 			short body, short head, Heading heading, boolean respawn, Section section) {
-		if (type == NPCType.RESUCITATOR) {
-			return new ResucitatorNPCProperties(type, id, name, body, head, heading, respawn, true);
-		} 
+		boolean isNewbie = type != NPCType.RESUCITATOR;
 		
-		return new ResucitatorNPCProperties(type, id, name, body, head, heading, respawn, true);
+		return new ResucitatorNPCProperties(type, id, name, body, head, heading, respawn, isNewbie);
 	}
 	
 	/**
@@ -282,12 +287,12 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			short body, short head, Heading heading, boolean respawn, Section section) {
 		
 		String description = getDescription(section);
-		AIType AIType = getAIType(section);
+		AIType aiType = getAIType(section);
 		Alignment alignment = getAlignment(section);
 		City city = getCity(section);
 		
 		return new GovernorNPCProperties(type, id, name, body, head, heading, respawn,
-			description, AIType, alignment, city
+			description, aiType, alignment, city
 		);
 	}
 	
@@ -306,7 +311,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	private NPCProperties loadTrader(NPCType type, int id, String name,
 			short body, short head, Heading heading, boolean respawn, Section section) {
 		
-		AIType AIType = getAIType(section);
+		AIType aiType = getAIType(section);
 		String description = getDescription(section);
 		Alignment alignment = getAlignment(section);
 		Inventory inventory = null;
@@ -314,7 +319,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		WorldObjectType itemsType = getItemsType(section);
 		
 		return new TraderNPCProperties(type, id, name, body, head, heading, respawn,
-			AIType, description, alignment, inventory, respawnInventory, itemsType
+			aiType, description, alignment, inventory, respawnInventory, itemsType
 		);
 	}
 
@@ -334,12 +339,12 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		short head, Heading heading, boolean respawn, Section section) {
 		
 		String description = getDescription(section);
-		AIType AIType = getAIType(section);
+		AIType aiType = getAIType(section);
 		Alignment alignment = getAlignment(section);
 		Map<Integer, String> creatures = getCreatures(section);
 		
 		return new TrainerNPCProperties(type, id, name, body, head, heading, respawn, 
-			description, AIType, alignment, creatures);
+			description, aiType, alignment, creatures);
 	}
 	
 	/**
@@ -358,7 +363,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		short head, Heading heading, boolean respawn, Section section) {
 		
 		String description = getDescription(section);
-		AIType AIType = getAIType(section);
+		AIType aiType = getAIType(section);
 		Alignment alignment = getAlignment(section);
 		int experience = getExperience(section);
 		int gold = getGold(section);
@@ -380,7 +385,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean tameable = isTameable(section);
 		
 		return new CreatureNPCProperties(type, id, name, body, head, heading, respawn, description, 
-			AIType, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
+			aiType, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
 			magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
 			poison, paralyzable, hostile, tameable);
 	}
@@ -401,7 +406,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		short head, Heading heading, boolean respawn, Section section) {
 		
 		String description = getDescription(section);
-		AIType AIType = getAIType(section);
+		AIType aiType = getAIType(section);
 		Alignment alignment = getAlignment(section);
 		int experience = getExperience(section);
 		int gold = getGold(section);
@@ -424,7 +429,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean originalPosition = hasOriginalPosition(section);
 		
 		return new GuardNPCProperties(type, id, name, body, head, heading, respawn, description, 
-			AIType, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
+			aiType, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
 			magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
 			poison, paralyzable, hostile, tameable, originalPosition);
 	}
@@ -697,7 +702,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		return data != null && !"0".equals(data);
 	}
 	
-	
+	// TODO : Documentar!
 	public Map<Integer, Integer> getDrops(Section section) {
 		String data = section.get(ITEMS_AMOUNT_KEY);
 		if (data == null) {
@@ -717,6 +722,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		return drops;
 	}
 	
+	// TODO : Documentar!
 	public Map<Integer, Integer> getInventory(Section section) {
 		String data = section.get(ITEMS_AMOUNT_KEY);
 		if (data == null) {
@@ -728,6 +734,9 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		for (byte i = 1; i <= Byte.parseByte(data); i++) {
 			slot = section.get(OBJECT_INVENTORY_PREFIX + i);
 			if (slot != null) {
+				if (null == inventory) {
+					inventory = new HashMap<Integer, Integer>();
+				}
 				String[] slotInfo = slot.split("-");
 				inventory.put(Integer.parseInt(slotInfo[0]), Integer.parseInt(slotInfo[1]));
 			}
@@ -736,6 +745,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		return inventory;
 	}
 
+	// TODO : Documentar!
 	public Map<Integer, String> getCreatures(Section section) {
 		String data = section.get(CREATURES_AMOUNT_KEY);
 		if (data == null) {
@@ -749,6 +759,9 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			creatureId = section.get(CREATURE_ID_PREFIX+ i);
 			creatureName = section.get(CREATURE_NAME_PREFIX+ i);
 			if (creatureId != null && creatureName != null) {
+				if (null == creatures) {
+					creatures = new HashMap<Integer, String>();
+				}
 				creatures.put(Integer.parseInt(creatureId), creatureName);
 			}
 		}
@@ -775,6 +788,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		return sounds;
 	}
 	
+	// TODO : Documentar!
 	private Alignment getAlignment(Section section) {
 		String data = section.get(ALIGNMENT_KEY);
 		
@@ -785,6 +799,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		return Alignment.valueOf(data);
 	}
 	
+	// TODO : Documentar!
 	private WorldObjectType getItemsType(Section section) {
 		String data = section.get(ITEMS_TYPE_KEY);
 		
@@ -863,6 +878,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	 * @return The object's value.
 	 */
 	private AIType getAIType(Section section) {
+		// FIXME : We should actually not use the old AITypes, but use them to map to movement strategy + attack strategy
 		String data = section.get(MOVEMENT_KEY);
 		
 		if (data == null) {
