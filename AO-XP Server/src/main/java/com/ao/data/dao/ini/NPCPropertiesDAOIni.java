@@ -21,10 +21,13 @@ package com.ao.data.dao.ini;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.Reader;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.ini4j.Ini;
@@ -315,10 +318,10 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		Alignment alignment = getAlignment(section);
 		Inventory inventory = null;
 		boolean respawnInventory = hasInventoryRespawn(section);
-		WorldObjectType itemsType = getItemsType(section);
+		Set<WorldObjectType> acceptedTypes = getItemsType(section);
 		
 		return new TraderNPCProperties(type, id, name, body, head, heading, respawn,
-			aiType, description, alignment, inventory, respawnInventory, itemsType
+			aiType, description, alignment, inventory, respawnInventory, acceptedTypes
 		);
 	}
 
@@ -815,17 +818,24 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 	
 	// TODO : Documentar!
-	private WorldObjectType getItemsType(Section section) {
+	private Set<WorldObjectType> getItemsType(Section section) {
 		String data = section.get(ITEMS_TYPE_KEY);
 		
 		if (data == null) {
 			return null;
 		}
 		
+		Set<WorldObjectType> acceptedTypes = null;
 		LegacyWorldObjectType objectType = LegacyWorldObjectType.valueOf(Integer.parseInt(data));
 		
-		// FIXME : This is not taking into account that not all LegacyWorldObjectTypes are mapped directly
-		return objectType.getCurrentType();
+		if (objectType == null) {
+			acceptedTypes = new HashSet<WorldObjectType>();
+			acceptedTypes.addAll(Arrays.asList(WorldObjectType.values()));
+		} else {
+			acceptedTypes = objectType.getPlausibleCurrentType();
+		}
+		
+		return acceptedTypes;
 	}
 
 	/**

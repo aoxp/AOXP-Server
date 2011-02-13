@@ -18,6 +18,8 @@
 
 package com.ao.model.character.npc.properties;
 
+import java.util.Set;
+
 import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.inventory.Inventory;
@@ -32,7 +34,7 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 
 	protected Inventory inventory;
 	protected boolean respawnInventory;
-	protected WorldObjectType itemsType;
+	protected Set<WorldObjectType> acceptedTypes;
 	
 	/**
 	 * Creates a new GuardNPCProperties instance.
@@ -48,16 +50,16 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 	 * @param alignment the npc's alignment.
 	 * @param inventory the npc's inventory.
 	 * @param respawnInventory Whether the npc's inventory has respawn or not.
-	 * @param itemsType the npc's items type.
+	 * @param acceptedTypes the npc's items type.
 	 */
 	public TraderNPCProperties(NPCType type, int id, String name, short body, short head,
 		Heading heading, boolean respawn, AIType AIType, String description, Alignment alignment, 
-		Inventory inventory, boolean respawnInventory, WorldObjectType itemsType) {
+		Inventory inventory, boolean respawnInventory, Set<WorldObjectType> acceptedTypes) {
 		super(type, id, name, body, head, heading, respawn, description, AIType, alignment);
 			
 		this.inventory = inventory;
 		this.respawnInventory = respawnInventory;
-		this.itemsType  = itemsType;
+		this.acceptedTypes  = acceptedTypes;
 	}
 	
 	/**
@@ -77,7 +79,7 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 	/**
 	 * @return The WorldObjectType
 	 */
-	public WorldObjectType getItemsType() {
-		return itemsType;
+	public Set<WorldObjectType> getAcceptedTypes() {
+		return acceptedTypes;
 	}
 }
