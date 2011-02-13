@@ -18,12 +18,15 @@
 
 package com.ao.service.login;
 
+import javax.management.InvalidAttributeValueException;
+
 import com.ao.config.ServerConfig;
 import com.ao.context.ApplicationContext;
 import com.ao.data.dao.AccountDAO;
 import com.ao.data.dao.UserCharacterDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.data.dao.exception.NameAlreadyTakenException;
+import com.ao.model.builder.UserCharacterBuilder;
 import com.ao.model.character.Attribute;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
@@ -102,7 +105,7 @@ public class LoginServiceImpl implements LoginService {
 			String version) throws LoginErrorException {
 		
 		checkClient(clientHash, version);
-
+		
 		if (!config.isCharacterCreationEnabled()) {
 			throw new LoginErrorException(CHARACTER_CREATION_DISABLED_ERROR);
 		}
@@ -118,43 +121,32 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(MUST_THROW_DICES_BEFORE_ERROR);
 		}
 		
-		if (!ValidatorService.validCharacterName(username)) {
-			throw new LoginErrorException(INVALID_NAME_ERROR);
-		}
-		
-		if (!ValidatorService.validEmail(mail)) {
-			throw new LoginErrorException(INVALID_EMAIL_ERROR);
-		}
+		UserCharacterBuilder userCharacterBuilder = new UserCharacterBuilder();
 		
 		Race race;
-		
 		try {
 			race = Race.get(bRace);
 		} catch(ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_RACE_ERROR);
 		}
-		
+
 		Gender gender;
-		
 		try {
 			gender = Gender.get(bGender);
 		} catch(ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_GENDER_ERROR);
 		}
 		
-		UserArchetype archetype;
+		City homeland = mapService.getCity(bHomeland);
+		if (homeland == null){
+			throw new LoginErrorException(INVALID_HOMELAND_ERROR);
+		}
 		
+		UserArchetype archetype;
 		try {
 			archetype = UserArchetype.get(bArchetype);
 		} catch(ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_ARCHETYPE_ERROR);
-		}
-		
-		// Get city
-		City homeland = mapService.getCity(bHomeland);
-
-		if (homeland == null){
-			throw new LoginErrorException(INVALID_HOMELAND_ERROR);
 		}
 		
 		if (!characterBodyService.isValidHead(head, race, gender)) {
@@ -166,6 +158,22 @@ public class LoginServiceImpl implements LoginService {
 		
 		if (body == 0) {
 			throw new LoginErrorException(INVALID_BODY_ERROR);
+		}
+		
+		try {
+			userCharacterBuilder.withName(username)
+				.withEmail(mail)
+				.withGender(gender)
+				.withCity(homeland)
+				.withRace(race)
+				.withArchetype(archetype)
+				.withHead(head)
+				.withBody(body);
+			
+			
+		} catch (InvalidAttributeValueException e1) {
+			// TODO Auto-generated catch block
+			throw new LoginErrorException(e1.getMessage());
 		}
 		
 		
