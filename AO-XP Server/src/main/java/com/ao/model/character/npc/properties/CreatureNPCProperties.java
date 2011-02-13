@@ -52,6 +52,37 @@ public class CreatureNPCProperties extends AbstractNPCProperties {
 	protected boolean hostile;
 	protected boolean tameable;
 
+	/**
+	 * Creates a new CreatureNPCProperties instance.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn the npc's respawn.
+	 * @param description the npc's description
+	 * @param AIType the npc's AI type.
+	 * @param alignment the npc's alignment
+	 * @param experience the npc's experience
+	 * @param gold the npc's gold.
+	 * @param minHP the npc's min hp.
+	 * @param maxHP the npc's max hp.
+	 * @param minDamage the npc's min damage.
+	 * @param maxDamage the npc's max damage.
+	 * @param defense the npc's defense
+	 * @param magicDefense the npc's magic defense
+	 * @param accuracy the npc's accuracy
+	 * @param dodge the npc's dodge
+	 * @param spells the npc's spells
+	 * @param canSwim Whether the npc is can swim or not.
+	 * @param canWalk Whether the npc is can walk or not.
+	 * @param attackable Whether the npc is attackable or not.
+	 * @param poison Whether the npc is poison or not.
+	 * @param paralyzable Whether the npc is paralyzable or not.
+	 * @param hostile Whether the npc is hostile or not.
+	 * @param tameable Whether the npc is tameable or not.
+	 */
 	public CreatureNPCProperties(NPCType type, int id, String name, short body, short head,
 		Heading heading, boolean respawn, String description, AIType AIType, Alignment alignment, 
 		int experience, int gold, int minHP, int maxHP, 

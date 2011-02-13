@@ -31,6 +31,20 @@ public class GovernorNPCProperties extends AbstractNPCProperties {
 
 	protected City city;
 	
+	/**
+	 * Creates a new GovernorNPCProperties instance.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn the npc's respawn.
+	 * @param description the npc's description
+	 * @param AIType the npc's AI type.
+	 * @param alignment the npc's alignment
+	 * @param city The city
+	 */
 	public GovernorNPCProperties(NPCType type, int id, String name, short body, short head,
 		Heading heading, boolean respawn, String description, AIType AIType, Alignment alignment, City city) {
 		super(type, id, name, body, head, heading, respawn, description, AIType, alignment);

@@ -32,6 +32,20 @@ public class TrainerNPCProperties extends AbstractNPCProperties {
 
 	protected Map<Integer, String> creatures;
 
+	/**
+	 * Creates a new GuardNPCProperties instance.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn the npc's respawn.
+	 * @param description the npc's description
+	 * @param AIType the npc's AI type.
+	 * @param alignment the npc's alignment
+	 * @param creatures the npc's creatures.
+	 */
 	public TrainerNPCProperties(NPCType type, int id, String name, short body,
 			short head, Heading heading, boolean respawn, 
 			String description, AIType AIType, Alignment alignment, Map<Integer, String> creatures) {

@@ -37,6 +37,7 @@ import com.ao.model.character.AIType;
 import com.ao.model.character.Alignment;
 import com.ao.model.character.npc.properties.CreatureNPCProperties;
 import com.ao.model.character.npc.properties.GovernorNPCProperties;
+import com.ao.model.character.npc.properties.GuardNPCProperties;
 import com.ao.model.character.npc.properties.NPCProperties;
 import com.ao.model.character.npc.properties.ResucitatorNPCProperties;
 import com.ao.model.character.npc.properties.TraderNPCProperties;
@@ -106,6 +107,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	private static final String CREATURES_AMOUNT_KEY = "NroCriaturas";
 	private static final String CREATURE_ID_PREFIX = "CI";
 	private static final String CREATURE_NAME_PREFIX = "CN";
+	private static final String ORIGINAL_POSITION_KEY = "PosOrig";
 
 
 	// Horrible, but it's completely hardwired in old VB version, and can't be induced from the dat
@@ -205,6 +207,10 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			case GOVERNOR:
 				npc = loadGovernor(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
 			
+			case ROYAL_GUARD:
+			case CHAOS_GUARD:
+				npc = loadGuard(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
+				
 			case NEWBIE_RESUCITATOR:
 			case RESUCITATOR:
 				npc = loadResucitator(npcTypeMapper.get(type), id, name, body, head, heading, respawn, section);
@@ -377,6 +383,50 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			AIType, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
 			magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
 			poison, paralyzable, hostile, tameable);
+	}
+	
+	/**
+	 * Creates a Bicho NPC's properties from the given section.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn 
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The NPC created.
+	 */
+	private NPCProperties loadGuard(NPCType type, int id, String name, short body, 
+		short head, Heading heading, boolean respawn, Section section) {
+		
+		String description = getDescription(section);
+		AIType AIType = getAIType(section);
+		Alignment alignment = getAlignment(section);
+		int experience = getExperience(section);
+		int gold = getGold(section);
+		int minHP = getMinHP(section);
+		int maxHP = getMaxHP(section);
+		int minDamage = getMinDamage(section);
+		int maxDamage = getMaxDamage(section);
+		short defense = getDefense(section);
+		short magicDefense = getMagicDefense(section);
+		short accuracy = getAccuracy(section);
+		short dodge = getDodge(section);
+		List<Spell> spells = getSpells(section);
+		boolean canSwim = canSwim(section);
+		boolean canWalk = canWalk(section);
+		boolean attackable = isAttackable(section);
+		boolean poison = canPoison(section);
+		boolean paralyzable = isParalyzable(section);
+		boolean hostile = isHostile(section);
+		boolean tameable = isTameable(section);
+		boolean originalPosition = hasOriginalPosition(section);
+		
+		return new GuardNPCProperties(type, id, name, body, head, heading, respawn, description, 
+			AIType, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
+			magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
+			poison, paralyzable, hostile, tameable, originalPosition);
 	}
 	
 	/**
@@ -618,9 +668,9 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	
 	
 	/**
-	 * Checks if the section corresponds to a ranged weapon.
-	 * @param section The section for the item to check.
-	 * @return True if the item is a ranged weapon, false otherwise.
+	 * Checks if the npc can poison.
+	 * @param section The section for the npc.
+	 * @return True if the npc can poison, false otherwise.
 	 */
 	private boolean canPoison(Section section) {
 		String data = section.get(CAN_POISON_KEY);
@@ -628,9 +678,19 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 	
 	/**
-	 * Checks if the section corresponds to a ranged weapon.
-	 * @param section The section for the item to check.
-	 * @return True if the item is a ranged weapon, false otherwise.
+	 * Checks if the section has a original position.
+	 * @param section The section for the npc.
+	 * @return True if the npc has original position, false otherwise.
+	 */
+	private boolean hasOriginalPosition(Section section) {
+		String data = section.get(ORIGINAL_POSITION_KEY);
+		return data != null && !"0".equals(data);
+	}
+	
+	/**
+	 * Checks if the section is paralyzable.
+	 * @param section The section for the npc.
+	 * @return True if the npc is paralyzable, false otherwise.
 	 */
 	private boolean isParalyzable(Section section) {
 		String data = section.get(PARALYZABLE_KEY);

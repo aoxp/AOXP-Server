@@ -34,6 +34,16 @@ public class NPCProperties {
 	protected Heading heading;
 	protected boolean respawn;
 
+	/**
+	 * Creates a new GuardNPCProperties instance.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn the npc's respawn.
+	 */
 	public NPCProperties(NPCType type, int id, String name, short body, short head,
 		Heading heading, boolean respawn) {
 		this.id = id;

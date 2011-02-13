@@ -33,6 +33,19 @@ public class AbstractNPCProperties extends NPCProperties {
 	protected AIType AIType;
 	protected Alignment alignment;
 	
+	/**
+	 * Creates a new AbstractNPCProperties instance.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn the npc's respawn.
+	 * @param description the npc's description
+	 * @param AIType the npc's AI type.
+	 * @param alignment the npc's alignment
+	 */
 	public AbstractNPCProperties(NPCType type, int id, String name, short body, short head,
 		Heading heading, boolean respawn, String description, AIType AIType, Alignment alignment) {
 		super(type, id, name, body, head, heading, respawn);

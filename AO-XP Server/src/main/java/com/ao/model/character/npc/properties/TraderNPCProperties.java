@@ -34,6 +34,22 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 	protected boolean respawnInventory;
 	protected WorldObjectType itemsType;
 	
+	/**
+	 * Creates a new GuardNPCProperties instance.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn the npc's respawn.
+	 * @param description the npc's description.
+	 * @param AIType the npc's AI type.
+	 * @param alignment the npc's alignment.
+	 * @param inventory the npc's inventory.
+	 * @param respawnInventory Whether the npc's inventory has respawn or not.
+	 * @param itemsType the npc's items type.
+	 */
 	public TraderNPCProperties(NPCType type, int id, String name, short body, short head,
 		Heading heading, boolean respawn, AIType AIType, String description, Alignment alignment, 
 		Inventory inventory, boolean respawnInventory, WorldObjectType itemsType) {

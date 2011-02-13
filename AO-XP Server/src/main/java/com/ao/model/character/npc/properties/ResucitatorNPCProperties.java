@@ -28,6 +28,17 @@ public class ResucitatorNPCProperties extends NPCProperties {
 
 	protected boolean newbie;
 	
+	/**
+	 * Creates a new GuardNPCProperties instance.
+	 * @param type the npc's type.
+	 * @param id the npc's id.
+	 * @param name the npc's name.
+	 * @param body the npc's body.
+	 * @param head the npc's head.
+	 * @param heading the npc's heading.
+	 * @param respawn the npc's respawn.
+	 * @param newbie Whether the npc is newbie or not.
+	 */
 	public ResucitatorNPCProperties(NPCType type, int id, String name, short body, short head,
 		Heading heading, boolean respawn, boolean newbie) {
 		super(type, id, name, body, head, heading, respawn);
