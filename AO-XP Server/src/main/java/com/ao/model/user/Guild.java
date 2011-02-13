@@ -15,40 +15,14 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-package com.ao.model.character;
+package com.ao.model.user;
 
 /**
- * Defines available skills.
+ * @author mvanotti
+ *
  */
-public enum Skill {
-	LUCK,
-	MAGIC,
-	STEAL,
-	COMBAT_TACTICS,
-	HAND_TO_HAND_COMBAT,
-	MEDITATE,
-	STAB,
-	HIDING,
-	SURVIVE,
-	LUMBER,
-	TRADE,
-	DEFENSE,
-	FISHING,
-	MINING,
-	WOODWORK,
-	IRONWORK,
-	LEADERSHIP,
-	TAME,
-	PROJECTILES,
-	WRESTLING,
-	SAILING;
+public class Guild {
 	
-	/**
-	 * The amount of existing skills.
-	 * 
-	 * TODO: I don't really like this...any better alternative?
-	 */
-	public static final int AMOUNT = Skill.values().length;
-	public static final Skill[] VALUES = Skill.values();
+	//TODO: Complete
+
 }
