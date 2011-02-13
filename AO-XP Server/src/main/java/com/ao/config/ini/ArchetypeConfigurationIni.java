@@ -96,6 +96,8 @@ public class ArchetypeConfigurationIni implements ArchetypeConfiguration {
 			return "Minero";
 		} else if (archetypeName.equals("Pirate")) {
 			return "Pirata";
+		} else if (archetypeName.equals("Worker")) {
+			return "Trabajador";
 		}
 		
 		return null;

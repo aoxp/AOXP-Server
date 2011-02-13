@@ -21,6 +21,7 @@ package com.ao.ioc.module;
 import java.util.Properties;
 
 import com.ao.data.dao.AccountDAO;
+import com.ao.data.dao.NPCCharacterPropertiesDAO;
 import com.ao.data.dao.UserCharacterDAO;
 import com.ao.data.dao.WorldMapDAO;
 import com.ao.data.dao.WorldObjectPropertiesDAO;
@@ -65,7 +66,7 @@ public class DaoModule extends AbstractModule {
 		bind(CityDAO.class).to(CityDAOIni.class).in(Singleton.class);
 		bind(String.class).annotatedWith(Names.named("citiesFilePath")).toInstance(properties.getProperty("config.path.citiesdat"));
 		
-		bind(NPCPropertiesDAOIni.class).to(NPCPropertiesDAOIni.class).in(Singleton.class);
+		bind(NPCCharacterPropertiesDAO.class).to(NPCPropertiesDAOIni.class).in(Singleton.class);
 		bind(String.class).annotatedWith(Names.named("npcsFilePath")).toInstance(properties.getProperty("config.path.npcsdat"));
 	}
 }
