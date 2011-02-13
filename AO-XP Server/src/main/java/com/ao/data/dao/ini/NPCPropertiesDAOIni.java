@@ -39,6 +39,7 @@ import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
+import com.ao.model.character.movement.MovementStrategy;
 import com.ao.model.character.npc.properties.CreatureNPCProperties;
 import com.ao.model.character.npc.properties.GovernorNPCProperties;
 import com.ao.model.character.npc.properties.GuardNPCProperties;
@@ -292,11 +293,12 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		String description = getDescription(section);
 		Class<? extends Behavior> behavior = getBehavior(section);
 		Class<? extends AttackStrategy> attackStrategy = getAttackStrategy(section);
+		Class<? extends MovementStrategy> movementStrategy = getMovementStrategy(section);
 		Alignment alignment = getAlignment(section);
 		City city = getCity(section);
 		
 		return new GovernorNPCProperties(type, id, name, body, head, heading, respawn,
-			description, behavior, attackStrategy, alignment, city
+			description, behavior, attackStrategy, movementStrategy, alignment, city
 		);
 	}
 	
@@ -317,6 +319,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		
 		Class<? extends Behavior> behavior = getBehavior(section);
 		Class<? extends AttackStrategy> attackStrategy = getAttackStrategy(section);
+		Class<? extends MovementStrategy> movementStrategy = getMovementStrategy(section);
 		String description = getDescription(section);
 		Alignment alignment = getAlignment(section);
 		Inventory inventory = null;
@@ -324,7 +327,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		Set<WorldObjectType> acceptedTypes = getItemsType(section);
 		
 		return new TraderNPCProperties(type, id, name, body, head, heading, respawn,
-			behavior, attackStrategy, description, alignment, inventory, respawnInventory, acceptedTypes
+			behavior, attackStrategy, movementStrategy, description, alignment, inventory, respawnInventory, acceptedTypes
 		);
 	}
 
@@ -346,11 +349,12 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		String description = getDescription(section);
 		Class<? extends Behavior> behavior = getBehavior(section);
 		Class<? extends AttackStrategy> attackStrategy = getAttackStrategy(section);
+		Class<? extends MovementStrategy> movementStrategy = getMovementStrategy(section);
 		Alignment alignment = getAlignment(section);
 		Map<Integer, String> creatures = getCreatures(section);
 		
 		return new TrainerNPCProperties(type, id, name, body, head, heading, respawn, 
-			description, behavior, attackStrategy, alignment, creatures);
+			description, behavior, attackStrategy, movementStrategy, alignment, creatures);
 	}
 	
 	/**
@@ -371,6 +375,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		String description = getDescription(section);
 		Class<? extends Behavior> behavior = getBehavior(section);
 		Class<? extends AttackStrategy> attackStrategy = getAttackStrategy(section);
+		Class<? extends MovementStrategy> movementStrategy = getMovementStrategy(section);
 		Alignment alignment = getAlignment(section);
 		int experience = getExperience(section);
 		int gold = getGold(section);
@@ -392,8 +397,8 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean tameable = isTameable(section);
 		
 		return new CreatureNPCProperties(type, id, name, body, head, heading, respawn, description, 
-			behavior, attackStrategy, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
-			magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
+			behavior, attackStrategy, movementStrategy, alignment, experience, gold, minHP, maxHP,
+			minDamage, maxDamage, defense, magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
 			poison, paralyzable, hostile, tameable);
 	}
 	
@@ -415,6 +420,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		String description = getDescription(section);
 		Class<? extends Behavior> behavior = getBehavior(section);
 		Class<? extends AttackStrategy> attackStrategy = getAttackStrategy(section);
+		Class<? extends MovementStrategy> movementStrategy = getMovementStrategy(section);
 		Alignment alignment = getAlignment(section);
 		int experience = getExperience(section);
 		int gold = getGold(section);
@@ -437,8 +443,8 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean originalPosition = hasOriginalPosition(section);
 		
 		return new GuardNPCProperties(type, id, name, body, head, heading, respawn, description, 
-			behavior, attackStrategy, alignment, experience, gold, minHP, maxHP, minDamage, maxDamage, defense, 
-			magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
+			behavior, attackStrategy, movementStrategy, alignment, experience, gold, minHP, maxHP, minDamage,
+			maxDamage, defense, magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable, 
 			poison, paralyzable, hostile, tameable, originalPosition);
 	}
 	
@@ -966,6 +972,28 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 	
 	/**
+	 * Retrieves an npc's movement strategy from it's section.
+	 * @param section The section from which to read the npc's movement strategy.
+	 * @return The npc's movement strategy.
+	 */
+	private Class<? extends MovementStrategy> getMovementStrategy(Section section) {
+		String data = section.get(MOVEMENT_KEY);
+		
+		if (data == null) {
+			return null;
+		}
+		
+		LegacyAIType aiType = LegacyAIType.valueOf(Integer.parseInt(data));
+		
+		if (null == aiType) {
+			logger.warn("Invalid AIType found! Value: " + data);
+			return null;
+		}
+		
+		return aiType.getMovementStrategy();
+	}
+	
+	/**
 	 * NPC Type enumeration, as it was known in the old days of Visual Basic.
 	 */
 	private enum LegacyNPCType {
@@ -1010,35 +1038,39 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 
 	private enum LegacyAIType {
 		// TODO : Complete this as we code the behaviors!
-		STATIC(1, null, null),
-	    RANDOM(2, null, null),
-	    BAD_ATTACKS_GOOD(3, null, null),
-	    DEFENSIVE(4, null, null),
-	    GUARD_ATTACK_CRIMINALS(5, null, null),
-	    NPC_OBJECT(6, null, null),
-	    FOLLW_MASTER(8, null, null),
-	    ATTACK_NPC(9, null, null),
-	    PATHFINDING(10, null, null),
-	    PRETORIAN_PRIEST(20, null, null),
-	    PRETORIAN_WARRIOR(21, null, null),
-	    PRETORIAN_MAGE(22, null, null),
-	    PRETORIAN_HUNTER(23, null, null),
-	    PRETORIAN_KING(24, null, null);
+		STATIC(1, null, null, null),
+	    RANDOM(2, null, null, null),
+	    BAD_ATTACKS_GOOD(3, null, null, null),
+	    DEFENSIVE(4, null, null, null),
+	    GUARD_ATTACK_CRIMINALS(5, null, null, null),
+	    NPC_OBJECT(6, null, null, null),
+	    FOLLW_MASTER(8, null, null, null),
+	    ATTACK_NPC(9, null, null, null),
+	    PATHFINDING(10, null, null, null),
+	    PRETORIAN_PRIEST(20, null, null, null),
+	    PRETORIAN_WARRIOR(21, null, null, null),
+	    PRETORIAN_MAGE(22, null, null, null),
+	    PRETORIAN_HUNTER(23, null, null, null),
+	    PRETORIAN_KING(24, null, null, null);
 
 		private int value;
 		private Class<? extends Behavior> behavior = null;
 		private Class<? extends AttackStrategy> attackStrategy = null;
+		private Class<? extends MovementStrategy> movementStrategy = null;
 
 		/**
 		 * @param value The numeric value associated with the AI Type.
 		 * @param behavior The behavior class to be used.
 		 * @param attackStrategy The attack strategy class to be used.
+		 * @param movementStrategy The movement strategy class to be used.
 		 */
 		private LegacyAIType(int value, Class<? extends Behavior> behavior,
-				Class<? extends AttackStrategy> attackStrategy) {
+				Class<? extends AttackStrategy> attackStrategy,
+				Class<? extends MovementStrategy> movementStrategy) {
 			this.value = value;
 			this.behavior = behavior;
 			this.attackStrategy = attackStrategy;
+			this.movementStrategy = movementStrategy;
 		}
 		
 		/**
@@ -1062,12 +1094,19 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		public Class<? extends Behavior> getBehavior() {
 			return behavior;
 		}
-
+		
 		/**
 		 * @return the attackStrategy
 		 */
 		public Class<? extends AttackStrategy> getAttackStrategy() {
 			return attackStrategy;
+		}
+
+		/**
+		 * @return the movementStrategy
+		 */
+		public Class<? extends MovementStrategy> getMovementStrategy() {
+			return movementStrategy;
 		}
 	}
 }

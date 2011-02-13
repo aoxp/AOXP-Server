@@ -24,6 +24,7 @@ import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
+import com.ao.model.character.movement.MovementStrategy;
 import com.ao.model.map.Heading;
 
 /**
@@ -45,15 +46,16 @@ public class TrainerNPCProperties extends AbstractNPCProperties {
 	 * @param description the npc's description
 	 * @param behavior the npc's behavior.
 	 * @param attackStrategy the npc's attack strategy.
+	 * @param movementStrategy 
 	 * @param alignment the npc's alignment
 	 * @param creatures the npc's creatures.
 	 */
 	public TrainerNPCProperties(NPCType type, int id, String name, short body,
 			short head, Heading heading, boolean respawn, 
 			String description, Class<? extends Behavior> behavior,
-			Class<? extends AttackStrategy> attackStrategy, Alignment alignment,
+			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy, Alignment alignment,
 			Map<Integer, String> creatures) {
-		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, alignment);
+		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, movementStrategy, alignment);
 
 		this.creatures = creatures;
 	}

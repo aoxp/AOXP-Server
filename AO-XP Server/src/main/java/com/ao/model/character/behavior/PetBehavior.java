@@ -29,7 +29,7 @@ public class PetBehavior implements Behavior {
 	private AttackStrategy attack;
 	private Character target;
 	
-	public PetBehavior(Character character, MovementStrategy movement, AttackStrategy attack) {
+	public PetBehavior(MovementStrategy movement, AttackStrategy attack, Character character) {
 		this.movement = movement;
 		this.character = character;
 		this.attack = attack;

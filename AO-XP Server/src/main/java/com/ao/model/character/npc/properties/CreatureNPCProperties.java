@@ -24,6 +24,7 @@ import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
+import com.ao.model.character.movement.MovementStrategy;
 import com.ao.model.map.Heading;
 import com.ao.model.spell.Spell;
 
@@ -63,6 +64,7 @@ public class CreatureNPCProperties extends AbstractNPCProperties {
 	 * @param description the npc's description
 	 * @param behavior the npc's behavior.
 	 * @param attackStrategy the npc's attack strategy.
+	 * @param movementStrategy the npc's movement strategy
 	 * @param alignment the npc's alignment
 	 * @param experience the npc's experience
 	 * @param gold the npc's gold.
@@ -85,12 +87,12 @@ public class CreatureNPCProperties extends AbstractNPCProperties {
 	 */
 	public CreatureNPCProperties(NPCType type, int id, String name, short body, short head,
 			Heading heading, boolean respawn, String description, Class<? extends Behavior> behavior,
-			Class<? extends AttackStrategy> attackStrategy, Alignment alignment, 
+			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy, Alignment alignment, 
 			int experience, int gold, int minHP, int maxHP, 
 			int minDamage, int maxDamage, short defense, short magicDefense, short accuracy, 
 			short dodge, List<Spell> spells, boolean canSwim, boolean canWalk, boolean attackable,
 			boolean poison, boolean paralyzable, boolean hostile, boolean tameable) {
-		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, alignment);
+		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, movementStrategy, alignment);
 		
 		this.experience = experience;
 		this.gold = gold;

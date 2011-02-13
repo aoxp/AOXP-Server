@@ -24,6 +24,7 @@ import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
+import com.ao.model.character.movement.MovementStrategy;
 import com.ao.model.inventory.Inventory;
 import com.ao.model.map.Heading;
 import com.ao.model.worldobject.WorldObjectType;
@@ -49,6 +50,7 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 	 * @param description the npc's description.
 	 * @param behavior the npc's behavior.
 	 * @param attackStrategy the npc's attack strategy.
+	 * @param movementStrategy 
 	 * @param alignment the npc's alignment.
 	 * @param inventory the npc's inventory.
 	 * @param respawnInventory Whether the npc's inventory has respawn or not.
@@ -56,9 +58,9 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 	 */
 	public TraderNPCProperties(NPCType type, int id, String name, short body, short head,
 			Heading heading, boolean respawn, Class<? extends Behavior> behavior,
-			Class<? extends AttackStrategy> attackStrategy, String description, Alignment alignment, 
+			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy, String description, Alignment alignment, 
 			Inventory inventory, boolean respawnInventory, Set<WorldObjectType> acceptedTypes) {
-		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, alignment);
+		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, movementStrategy, alignment);
 			
 		this.inventory = inventory;
 		this.respawnInventory = respawnInventory;

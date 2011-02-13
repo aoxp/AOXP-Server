@@ -22,6 +22,7 @@ import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
+import com.ao.model.character.movement.MovementStrategy;
 import com.ao.model.map.City;
 import com.ao.model.map.Heading;
 
@@ -44,13 +45,14 @@ public class GovernorNPCProperties extends AbstractNPCProperties {
 	 * @param description the npc's description
 	 * @param behavior the npc's behavior.
 	 * @param attackStrategy the npc's attack strategy.
+	 * @param movementStrategy 
 	 * @param alignment the npc's alignment
 	 * @param city The city
 	 */
 	public GovernorNPCProperties(NPCType type, int id, String name, short body, short head,
 			Heading heading, boolean respawn, String description, Class<? extends Behavior> behavior,
-			Class<? extends AttackStrategy> attackStrategy, Alignment alignment, City city) {
-		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, alignment);
+			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy, Alignment alignment, City city) {
+		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, movementStrategy, alignment);
 			
 		this.city = city;
 	}

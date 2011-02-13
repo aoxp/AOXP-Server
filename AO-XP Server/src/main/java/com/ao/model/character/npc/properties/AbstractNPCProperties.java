@@ -22,6 +22,7 @@ import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
+import com.ao.model.character.movement.MovementStrategy;
 import com.ao.model.map.Heading;
 
 /**
@@ -32,6 +33,7 @@ public class AbstractNPCProperties extends NPCProperties {
 	protected String description; // TODO : Debería ser una lista? Hay tres NPCs que tienen más de una desc pero ni se usan :p
 	protected Class<? extends Behavior> behavior;
 	protected Class<? extends AttackStrategy> attackStrategy;
+	protected Class<? extends MovementStrategy> movementStrategy;
 	protected Alignment alignment;
 	
 	/**
@@ -46,11 +48,13 @@ public class AbstractNPCProperties extends NPCProperties {
 	 * @param description the npc's description
 	 * @param behavior the npc's behavior.
 	 * @param attackStrategy the npc's attack strategy.
+	 * @param movementStrategy the npc's movement strategy.
 	 * @param alignment the npc's alignment
 	 */
 	public AbstractNPCProperties(NPCType type, int id, String name, short body, short head,
 			Heading heading, boolean respawn, String description, Class<? extends Behavior> behavior,
-			Class<? extends AttackStrategy> attackStrategy, Alignment alignment) {
+			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy,
+			Alignment alignment) {
 		super(type, id, name, body, head, heading, respawn);
 		
 		this.description = description;
@@ -79,11 +83,18 @@ public class AbstractNPCProperties extends NPCProperties {
 	public Class<? extends Behavior> getBehavior() {
 		return behavior;
 	}
-
+	
 	/**
 	 * @return the attackStrategy
 	 */
 	public Class<? extends AttackStrategy> getAttackStrategy() {
 		return attackStrategy;
+	}
+
+	/**
+	 * @return the movementStrategy
+	 */
+	public Class<? extends MovementStrategy> getmovementStrategy() {
+		return movementStrategy;
 	}
 }
