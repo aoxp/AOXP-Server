@@ -185,13 +185,12 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		
 		NPCProperties npc = null;
 		String name = section.get(NAME_KEY);
-		int npcType = Integer.parseInt(section.get(NPC_TYPE_KEY));
 		short body = Short.parseShort(section.get(BODY_KEY));
 		short head = Short.parseShort(section.get(HEAD_KEY));
-		Heading heading = Heading.valueOf(section.get(HEADING_KEY));
+		Heading heading = Heading.get((byte) (Byte.parseByte(section.get(HEADING_KEY)) - 1));
 		boolean respawn = hasRespawn(section);
 		
-		LegacyNPCType type = LegacyNPCType.valueOf(npcType);
+		LegacyNPCType type = getNpcType(section);
 		
 		switch (type) {
 			case COMMON:
@@ -228,7 +227,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 				break;
 				
 			default:
-				logger.error("Unexpected object type found: " + npcType);
+				logger.error("Unexpected object type found: " + type);
 		}
 		
 		return npc;
@@ -435,7 +434,23 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 	
 	/**
-	 * Retrieves an object's experience from it's section.
+	 * Retrieves an npc's type from it's section.
+	 * @param section The section from which to read the npc type.
+	 * @return The npc's type.
+	 */
+	private LegacyNPCType getNpcType(Section section) {
+		String data = section.get(NPC_TYPE_KEY);
+		int npcType = 0;
+		
+		if (data != null) {
+			npcType = Integer.parseInt(data);
+		}
+		
+		return LegacyNPCType.valueOf(npcType);
+	}
+	
+	/**
+	 * Retrieves an npc's experience from it's section.
 	 * @param section The section from which to read the npc experience.
 	 * @return The npc's experience.
 	 */
@@ -796,7 +811,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			return null;
 		}
 		
-		return Alignment.valueOf(data);
+		return Alignment.get(Byte.parseByte(data));
 	}
 	
 	// TODO : Documentar!
@@ -807,7 +822,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			return null;
 		}
 		
-		LegacyWorldObjectType objectType = LegacyWorldObjectType.valueOf(data);
+		LegacyWorldObjectType objectType = LegacyWorldObjectType.valueOf(Integer.parseInt(data));
 		
 		// FIXME : This is not taking into account that not all LegacyWorldObjectTypes are mapped directly
 		return objectType.getCurrentType();
@@ -888,7 +903,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			return null;
 		}
 		
-		return AIType.valueOf(data);
+		return AIType.get((byte) (Byte.parseByte(data) - 1));
 	}
 	
 	/**

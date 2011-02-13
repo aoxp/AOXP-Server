@@ -18,6 +18,7 @@
 
 package com.ao.model.character;
 
+
 /**
  * List of available AI behaviors.
  */
@@ -26,5 +27,19 @@ public enum AIType {
 	ASTAR,
 	PET,
 	FOLLOW_CHAR,
-	STAY_STILL
+	STAY_STILL;
+	
+	/**
+	 * Enum values.
+	 */
+	private static AIType[] values = AIType.values();
+	
+	/**
+	 * Retrieves the AI Type for the given index.
+	 * @param index The AI Type index.
+	 * @return The AI Type.
+	 */
+	public static AIType get(byte index) {
+		return values[index];
+	}
 }

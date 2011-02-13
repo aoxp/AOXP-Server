@@ -29,10 +29,8 @@ import org.apache.log4j.Logger;
 
 import com.ao.AOXPServer;
 import com.ao.config.ServerConfig;
-import com.ao.context.ApplicationContext;
 import com.ao.model.user.User;
 import com.ao.security.SecurityManager;
-
 import com.google.inject.Inject;
 
 /**

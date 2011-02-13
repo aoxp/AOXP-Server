@@ -32,6 +32,7 @@ import com.ao.context.ApplicationContext;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.network.ConnectionManager;
 import com.ao.service.MapService;
+import com.ao.service.NPCService;
 import com.ao.service.WorldObjectService;
 
 /**
@@ -150,6 +151,10 @@ public class Bootstrap {
 		logger.info("Loading world objects...");
 		WorldObjectService objectService = ApplicationContext.getInstance(WorldObjectService.class);
 		objectService.loadObjects();
+		
+//		logger.info("Loading NPCs...");
+//		NPCService npcService = ApplicationContext.getInstance(NPCService.class);
+//		npcService.loadNPCs();
 		
 		// TODO : Load other services and classes from application context
 	}

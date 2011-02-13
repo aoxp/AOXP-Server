@@ -15,48 +15,30 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 package com.ao.service;
 
-import com.ao.model.map.City;
-import com.ao.model.map.Position;
-import com.ao.model.map.WorldMap;
-import com.ao.model.character.Character;
+import com.ao.data.dao.NPCCharacterPropertiesDAO;
+import com.ao.data.dao.exception.DAOException;
+import com.ao.model.character.npc.properties.NPCProperties;
+import com.google.inject.Inject;
 
 /**
- * Map Service interface.
+ * Default NPC Service implementation.
  * @author jsotuyod
  */
-public interface MapService {
+public class NPCServiceImpl implements NPCService {
 
-	/**
-	 * Loads all maps.
-	 */
-	void loadMaps();
+	private NPCCharacterPropertiesDAO npcsDAO;
+	private NPCProperties[] npcs;
 	
-	/**
-	 * Retrieves the map with the given id.
-	 * @param id The map's id.
-	 * @return The loaded map.
-	 */
-	WorldMap getMap(int id);
+	@Inject
+	public NPCServiceImpl(NPCCharacterPropertiesDAO npcsDAO) {
+		this.npcsDAO = npcsDAO;
+	}
 	
-	/**
-	 * Loads all cities.
-	 */
-	void loadCities();
-	
-	/**
-	 * Retrieves the city with the given id.
-	 * @param id The City's id.
-	 * @return The city.
-	 */
-	City getCity(byte id);
-	
-	/**
-	 * Puts a character at the given position
-	 * @param chara The character to be put.
-	 * @param pos The position where to put the character.
-	 */
-	void putCharacterAtPos(Character chara, Position pos);
+	@Override
+	public void loadNPCs() throws DAOException {
+		npcs = npcsDAO.retrieveAll();
+	}
+
 }

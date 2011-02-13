@@ -18,7 +18,26 @@
 
 package com.ao.model.character;
 
+
+/**
+ * Alignment enum
+ * @author itirabasso
+ */
 public enum Alignment {
 	CITIZEN,
 	CRIMINAL;
+	
+	/**
+	 * Enum values.
+	 */
+	private static Alignment[] values = Alignment.values();
+	
+	/**
+	 * Retrieves the alignment for the given index.
+	 * @param index The alignment index.
+	 * @return The alignment.
+	 */
+	public static Alignment get(byte index) {
+		return values[index];
+	}
 }

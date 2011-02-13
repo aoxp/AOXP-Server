@@ -18,7 +18,6 @@
 
 package com.ao.model.map;
 
-import com.ao.model.character.NPCType;
 
 /**
  * Defines plausible movement headings.

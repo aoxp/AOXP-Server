@@ -23,6 +23,8 @@ import java.util.Properties;
 
 import com.ao.service.LoginService;
 import com.ao.service.MapService;
+import com.ao.service.NPCService;
+import com.ao.service.NPCServiceImpl;
 import com.ao.service.TimedEventsService;
 import com.ao.service.UserService;
 import com.ao.service.WorldObjectService;
@@ -59,6 +61,7 @@ public class ServiceModule extends AbstractModule {
 		bind(WorldObjectService.class).to(WorldObjectServiceImpl.class).in(Singleton.class);
 		bind(UserService.class).to(UserServiceImpl.class).in(Singleton.class);
 		bind(CharacterBodyService.class).to(CharacterBodyServiceImpl.class).in(Singleton.class);
+		bind(NPCService.class).to(NPCServiceImpl.class).in(Singleton.class);
 		
 		bind(Integer.class).annotatedWith(Names.named("initialAvailableSkills")).toInstance(Integer.parseInt(properties.getProperty("config.loginservice.initialavailableskills")));
 		
