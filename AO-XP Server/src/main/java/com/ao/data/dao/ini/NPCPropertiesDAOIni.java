@@ -807,7 +807,10 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			return null;
 		}
 		
-		return LegacyWorldObjectType.worldObjectTypeMapper.get(LegacyWorldObjectType.valueOf(data));
+		LegacyWorldObjectType objectType = LegacyWorldObjectType.valueOf(data);
+		
+		// FIXME : This is not taking into account that not all LegacyWorldObjectTypes are mapped directly
+		return objectType.getCurrentType();
 	}
 
 	/**

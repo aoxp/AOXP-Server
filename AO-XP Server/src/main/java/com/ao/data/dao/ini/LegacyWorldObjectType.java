@@ -1,96 +1,60 @@
 package com.ao.data.dao.ini;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.ao.model.worldobject.WorldObjectType;
 
 /**
  * World Object Type enumeration, as it was known in the old days of Visual Basic.
  */
 public enum LegacyWorldObjectType {
-	USE_ONCE(1),
-	WEAPON(2),
-	ARMOR(3),
-	TREE(4),
-	MONEY(5),
-	DOOR(6),
-	CONTAINER(7),
-	SIGN(8),
-	KEY(9),
-	FORUM(10),
-	POTION(11),
-	BOOK(12),
-	DRINK(13),
-	WOOD(14),
-	BONFIRE(15),
-	SHIELD(16),
-	HELMET(17),
-	RING(18),
-	TELEPORT(19),
-	FURNITURE(20),
-	JEWELRY(21),
-	MINE(22),
-	MINERAL(23),
-	PARCHMENT(24),
-	MUSICAL_INSTRUMENT(26),
-	ANVIL(27),
-	FORGE(28),
-	GEMS(29),
-	FLOWERS(30),
-	BOAT(31),
-	ARROW(32),
-	EMPTY_BOTTLE(33),
-	FILLED_BOTTLE(34),
-	STAIN(35),
-	ELVEN_TREE(36),
-	BACKPACK(37);
+	// Beware, some objects are not mapped because they have no direct mapping, and we need extra info to do that
+	USE_ONCE(1, WorldObjectType.FOOD),
+	WEAPON(2, null),
+	ARMOR(3, WorldObjectType.ARMOR),
+	TREE(4, WorldObjectType.TREE),
+	MONEY(5, WorldObjectType.MONEY),
+	DOOR(6, WorldObjectType.DOOR),
+	CONTAINER(7, null),
+	SIGN(8, WorldObjectType.SIGN),
+	KEY(9, WorldObjectType.KEY),
+	FORUM(10, WorldObjectType.FORUM),
+	POTION(11, null),
+	BOOK(12, null),
+	DRINK(13, WorldObjectType.DRINK),
+	WOOD(14, WorldObjectType.WOOD),
+	BONFIRE(15, null),
+	SHIELD(16, WorldObjectType.SHIELD),
+	HELMET(17, WorldObjectType.HELMET),
+	RING(18, WorldObjectType.ACCESSORY),
+	TELEPORT(19, WorldObjectType.TELEPORT),
+	FURNITURE(20, null),
+	JEWELRY(21, null),
+	MINE(22, WorldObjectType.MINE),
+	MINERAL(23, WorldObjectType.MINERAL),
+	PARCHMENT(24, WorldObjectType.PARCHMENT),
+	MUSICAL_INSTRUMENT(26, WorldObjectType.MUSICAL_INSTRUMENT),
+	ANVIL(27, WorldObjectType.ANVIL),
+	FORGE(28, WorldObjectType.FORGE),
+	GEMS(29, null),
+	FLOWERS(30, null),
+	BOAT(31, WorldObjectType.BOAT),
+	ARROW(32, WorldObjectType.AMMUNITION),
+	EMPTY_BOTTLE(33, WorldObjectType.EMPTY_BOTTLE),
+	FILLED_BOTTLE(34, WorldObjectType.FILLED_BOTTLE),
+	STAIN(35, null),
+	ELVEN_TREE(36, WorldObjectType.TREE),
+	BACKPACK(37, WorldObjectType.BACKPACK);
 	
-	protected static final Map<LegacyWorldObjectType, WorldObjectType> worldObjectTypeMapper;	
 	protected int value;
-	
-	static {
-		// Populate mappings from old object types to new ones.
-		worldObjectTypeMapper = new HashMap<LegacyWorldObjectType, WorldObjectType>();
-		
-		// BEWARE : Some objects have no mapping since they need extra info to be mapped (potions and weapons for instance).
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ARMOR, WorldObjectType.ARMOR);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ARROW, WorldObjectType.AMMUNITION);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.BOAT, WorldObjectType.BOAT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.DRINK, WorldObjectType.DRINK);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.EMPTY_BOTTLE, WorldObjectType.EMPTY_BOTTLE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.FILLED_BOTTLE, WorldObjectType.FILLED_BOTTLE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.HELMET, WorldObjectType.HELMET);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MINERAL, WorldObjectType.MINERAL);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MUSICAL_INSTRUMENT, WorldObjectType.MUSICAL_INSTRUMENT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.RING, WorldObjectType.ACCESSORY);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.SHIELD, WorldObjectType.SHIELD);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.TELEPORT, WorldObjectType.TELEPORT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.USE_ONCE, WorldObjectType.FOOD);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.PARCHMENT, WorldObjectType.PARCHMENT);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MONEY, WorldObjectType.MONEY);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.TREE, WorldObjectType.TREE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ELVEN_TREE, WorldObjectType.TREE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.WOOD, WorldObjectType.WOOD);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.MINE, WorldObjectType.MINE);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.KEY, WorldObjectType.KEY);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.DOOR, WorldObjectType.DOOR);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.SIGN, WorldObjectType.SIGN);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.FORUM, WorldObjectType.FORUM);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.BACKPACK, WorldObjectType.BACKPACK);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.ANVIL, WorldObjectType.ANVIL);
-		worldObjectTypeMapper.put(LegacyWorldObjectType.FORGE, WorldObjectType.FORGE);
-	}
-	
+	protected WorldObjectType currentType;
 	
 	/**
 	 * Creates a new LegacyWorldObjectType.
 	 * @param value The value corresponding to the object type. Should be unique.
 	 */
-	LegacyWorldObjectType(int value) {
+	LegacyWorldObjectType(int value, WorldObjectType currentType) {
 		this.value = value;
+		this.currentType = currentType;
 	}
-	
 	
 	/**
 	 * Retrieves the LegacyWorldObjectType associated with the given value.
@@ -105,5 +69,13 @@ public enum LegacyWorldObjectType {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Retrieves the current world obejt type.
+	 * @return The current world object type.
+	 */
+	public WorldObjectType getCurrentType() {
+		return currentType;
 	}
 }

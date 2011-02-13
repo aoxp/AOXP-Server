@@ -254,7 +254,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			case HELMET:
 			case ARMOR:
 			case SHIELD:
-				obj = loadDefensiveItem(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadDefensiveItem(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case WEAPON:
@@ -262,35 +262,35 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 				
 			case ARROW:
-				obj = loadAmmunition(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadAmmunition(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case BOAT:
-				obj = loadBoat(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadBoat(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case DRINK:
 			case FILLED_BOTTLE:
-				obj = loadDrink(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadDrink(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case USE_ONCE:
-				obj = loadFood(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadFood(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case EMPTY_BOTTLE:
 			case MONEY:
 			case FORGE:
 			case ANVIL:
-				obj = loadGenericItem(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadGenericItem(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case MUSICAL_INSTRUMENT:
-				obj = loadMusicalInstrument(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadMusicalInstrument(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case TELEPORT:
-				obj = loadTeleport(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadTeleport(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case POTION:
@@ -312,41 +312,41 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 				
 			case PARCHMENT:
-				obj = loadParchment(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadParchment(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case TREE:
 			case ELVEN_TREE:
 			case MINE:
-				obj = loadResourceSource(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section, type);
+				obj = loadResourceSource(type.getCurrentType(), id, name, graphic, section, type);
 				break;
 				
 			case WOOD:
-				obj = loadWood(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section, id == ELVEN_WOOD_INDEX ? WoodType.ELVEN : WoodType.NORMAL);
+				obj = loadWood(type.getCurrentType(), id, name, graphic, section, id == ELVEN_WOOD_INDEX ? WoodType.ELVEN : WoodType.NORMAL);
 				break;
 			
 			case KEY:
-				obj = loadKey(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadKey(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case DOOR:
-				obj = loadDoor(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section, iniFile);
+				obj = loadDoor(type.getCurrentType(), id, name, graphic, section, iniFile);
 				break;
 				
 			case SIGN:
-				obj = loadSign(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadSign(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case FORUM:
-				obj = loadForum(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadForum(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			case BACKPACK:
-				obj = loadBackpack(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadBackpack(type.getCurrentType(), id, name, graphic, section);
 				break;
 			
 			case MINERAL:
-				obj = loadMineral(LegacyWorldObjectType.worldObjectTypeMapper.get(type), id, name, graphic, section);
+				obj = loadMineral(type.getCurrentType(), id, name, graphic, section);
 				break;
 				
 			default:
