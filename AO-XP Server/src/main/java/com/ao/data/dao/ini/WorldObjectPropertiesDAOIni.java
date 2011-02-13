@@ -378,7 +378,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		
 		ManufactureType manufactureType = getManufactureType(section, obj);
 		
-		if (null != manufactureType) {
+		if (null == manufactureType) {
 			throw new DAOException("Item is not manufacturable");
 		}
 		
