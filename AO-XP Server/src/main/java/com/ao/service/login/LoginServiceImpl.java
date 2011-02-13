@@ -48,7 +48,6 @@ import com.google.inject.name.Named;
  * @author jsotuyod
  */
 public class LoginServiceImpl implements LoginService {
-	
 	public static final String DAO_ERROR = "Ocurrió un error, intentá de nuevo.";
 	public static final String CHARACTER_NOT_FOUND_ERROR = "El personaje no existe.";
 	public static final String CLIENT_OUT_OF_DATE_ERROR_FORMAT = "Esta versión del juego es obsoleta, la versión correcta es %s. La misma se encuentra disponible en http://www.argentumonline.com.ar/.";
@@ -69,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
 	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es válida.";
 	public static final String INVALID_BODY_ERROR = "No existe un cuerpo para la combinación seleccionada.";
 	public static final String INVALID_HOMELAND_ERROR = "El hogar seleccionado no es válido.";
-	
+
 	private String[] clientHashes;
 
 	private final AccountDAO accDAO;
@@ -111,6 +110,9 @@ public class LoginServiceImpl implements LoginService {
 		if (config.isRestrictedToAdmins()) {
 			throw new LoginErrorException(ONLY_ADMINS_ERROR);
 		}
+		
+		//TODO: Check to avoid mass characters creation for this IP
+		
 		
 		if (user.getAttribute(Attribute.AGILITY) == null) {
 			throw new LoginErrorException(MUST_THROW_DICES_BEFORE_ERROR);
@@ -164,7 +166,8 @@ public class LoginServiceImpl implements LoginService {
 		
 		if (body == 0) {
 			throw new LoginErrorException(INVALID_BODY_ERROR);
-		}	
+		}
+		
 		
 		// First, we have to create the new account.
 		Account acc;
