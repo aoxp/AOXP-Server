@@ -72,7 +72,7 @@ public enum LegacyWorldObjectType {
 	}
 	
 	/**
-	 * Retrieves the current world obejt type.
+	 * Retrieves the current world object type.
 	 * @return The current world object type.
 	 */
 	public WorldObjectType getCurrentType() {
