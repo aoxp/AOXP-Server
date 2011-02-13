@@ -18,7 +18,6 @@
 
 package com.ao.model.character.behavior;
 
-import com.ao.model.character.AIType;
 import com.ao.model.character.Character;
 
 /**
@@ -31,12 +30,6 @@ public interface Behavior {
 	 * @param character The character that attacked.
 	 */
 	void attackedBy(Character character);
-	
-	/**
-	 * Retrieves the NPC's AI type.
-	 * @return The NPC's AI type.
-	 */
-	AIType getAIType();
 	
 	/**
 	 * Performs an action according to the behavior.

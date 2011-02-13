@@ -18,7 +18,6 @@
 
 package com.ao.model.character.behavior;
 
-import com.ao.model.character.AIType;
 import com.ao.model.character.Character;
 import com.ao.model.character.NPCCharacter;
 import com.ao.model.character.UserCharacter;
@@ -42,11 +41,6 @@ public class HostileBehavior implements Behavior {
 	@Override
 	public void attackedBy(Character character) {
 		// Don't care, anyway this behavior will attack everyone in his range.
-	}
-
-	@Override
-	public AIType getAIType() {
-		return AIType.FOLLOW_CHAR;
 	}
 
 	@Override

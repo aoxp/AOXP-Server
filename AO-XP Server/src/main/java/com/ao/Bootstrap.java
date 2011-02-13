@@ -152,9 +152,9 @@ public class Bootstrap {
 		WorldObjectService objectService = ApplicationContext.getInstance(WorldObjectService.class);
 		objectService.loadObjects();
 		
-//		logger.info("Loading NPCs...");
-//		NPCService npcService = ApplicationContext.getInstance(NPCService.class);
-//		npcService.loadNPCs();
+		logger.info("Loading NPCs...");
+		NPCService npcService = ApplicationContext.getInstance(NPCService.class);
+		npcService.loadNPCs();
 		
 		// TODO : Load other services and classes from application context
 	}

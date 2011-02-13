@@ -22,8 +22,9 @@ import java.util.Map;
 
 import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
+import com.ao.model.character.attack.AttackStrategy;
+import com.ao.model.character.behavior.Behavior;
 import com.ao.model.map.Heading;
-import com.ao.model.character.AIType;
 
 /**
  * Defines a NPC's properties. Allows a lightweight pattern implementation.
@@ -42,14 +43,17 @@ public class TrainerNPCProperties extends AbstractNPCProperties {
 	 * @param heading the npc's heading.
 	 * @param respawn the npc's respawn.
 	 * @param description the npc's description
-	 * @param AIType the npc's AI type.
+	 * @param behavior the npc's behavior.
+	 * @param attackStrategy the npc's attack strategy.
 	 * @param alignment the npc's alignment
 	 * @param creatures the npc's creatures.
 	 */
 	public TrainerNPCProperties(NPCType type, int id, String name, short body,
 			short head, Heading heading, boolean respawn, 
-			String description, AIType AIType, Alignment alignment, Map<Integer, String> creatures) {
-		super(type, id, name, body, head, heading, respawn, description, AIType, alignment);
+			String description, Class<? extends Behavior> behavior,
+			Class<? extends AttackStrategy> attackStrategy, Alignment alignment,
+			Map<Integer, String> creatures) {
+		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, alignment);
 
 		this.creatures = creatures;
 	}

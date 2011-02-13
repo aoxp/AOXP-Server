@@ -22,10 +22,10 @@ import java.util.List;
 
 import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
-import com.ao.model.map.City;
+import com.ao.model.character.attack.AttackStrategy;
+import com.ao.model.character.behavior.Behavior;
 import com.ao.model.map.Heading;
 import com.ao.model.spell.Spell;
-import com.ao.model.character.AIType;
 
 /**
  * Defines a Guard NPC's properties. Allows a lightweight pattern implementation.
@@ -44,7 +44,8 @@ public class GuardNPCProperties extends CreatureNPCProperties {
 	 * @param heading the npc's heading.
 	 * @param respawn the npc's respawn.
 	 * @param description the npc's description
-	 * @param AIType the npc's AI type.
+	 * @param behavior the npc's behavior.
+	 * @param attackStrategy the npc's attack strategy.
 	 * @param alignment the npc's alignment
 	 * @param experience the npc's experience
 	 * @param gold the npc's gold.
@@ -68,14 +69,15 @@ public class GuardNPCProperties extends CreatureNPCProperties {
 	 */
 	public GuardNPCProperties(NPCType type, int id, String name, short body,
 			short head, Heading heading, boolean respawn, String description,
-			com.ao.model.character.AIType AIType, Alignment alignment,
+			Class<? extends Behavior> behavior,
+			Class<? extends AttackStrategy> attackStrategy, Alignment alignment,
 			int experience, int gold, int minHP, int maxHP, int minDamage,
 			int maxDamage, short defense, short magicDefense, short accuracy,
 			short dodge, List<Spell> spells, boolean canSwim, boolean canWalk,
 			boolean attackable, boolean poison, boolean paralyzable,
 			boolean hostile, boolean tameable, boolean originalPosition) {
 		super(type, id, name, body, head, heading, respawn, description,
-				AIType, alignment, experience, gold, minHP, maxHP, minDamage,
+				behavior, attackStrategy, alignment, experience, gold, minHP, maxHP, minDamage,
 				maxDamage, defense, magicDefense, accuracy, dodge, spells,
 				canSwim, canWalk, attackable, poison, paralyzable, hostile,
 				tameable);

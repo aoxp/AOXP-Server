@@ -22,10 +22,11 @@ import java.util.Set;
 
 import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
+import com.ao.model.character.attack.AttackStrategy;
+import com.ao.model.character.behavior.Behavior;
 import com.ao.model.inventory.Inventory;
 import com.ao.model.map.Heading;
 import com.ao.model.worldobject.WorldObjectType;
-import com.ao.model.character.AIType;
 
 /**
  * Defines a NPC's properties. Allows a lightweight pattern implementation.
@@ -46,16 +47,18 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 	 * @param heading the npc's heading.
 	 * @param respawn the npc's respawn.
 	 * @param description the npc's description.
-	 * @param AIType the npc's AI type.
+	 * @param behavior the npc's behavior.
+	 * @param attackStrategy the npc's attack strategy.
 	 * @param alignment the npc's alignment.
 	 * @param inventory the npc's inventory.
 	 * @param respawnInventory Whether the npc's inventory has respawn or not.
 	 * @param acceptedTypes the npc's items type.
 	 */
 	public TraderNPCProperties(NPCType type, int id, String name, short body, short head,
-		Heading heading, boolean respawn, AIType AIType, String description, Alignment alignment, 
-		Inventory inventory, boolean respawnInventory, Set<WorldObjectType> acceptedTypes) {
-		super(type, id, name, body, head, heading, respawn, description, AIType, alignment);
+			Heading heading, boolean respawn, Class<? extends Behavior> behavior,
+			Class<? extends AttackStrategy> attackStrategy, String description, Alignment alignment, 
+			Inventory inventory, boolean respawnInventory, Set<WorldObjectType> acceptedTypes) {
+		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, alignment);
 			
 		this.inventory = inventory;
 		this.respawnInventory = respawnInventory;

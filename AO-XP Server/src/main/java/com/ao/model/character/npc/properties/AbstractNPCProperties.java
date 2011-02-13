@@ -18,11 +18,11 @@
 
 package com.ao.model.character.npc.properties;
 
-import com.ao.model.character.AIType;
 import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
+import com.ao.model.character.attack.AttackStrategy;
+import com.ao.model.character.behavior.Behavior;
 import com.ao.model.map.Heading;
-import com.ao.model.character.npc.properties.NPCProperties;
 
 /**
  * Defines a NPC's properties. Allows a lightweight pattern implementation.
@@ -30,7 +30,8 @@ import com.ao.model.character.npc.properties.NPCProperties;
 public class AbstractNPCProperties extends NPCProperties {
 
 	protected String description; // TODO : Debería ser una lista? Hay tres NPCs que tienen más de una desc pero ni se usan :p
-	protected AIType AIType;
+	protected Class<? extends Behavior> behavior;
+	protected Class<? extends AttackStrategy> attackStrategy;
 	protected Alignment alignment;
 	
 	/**
@@ -43,15 +44,18 @@ public class AbstractNPCProperties extends NPCProperties {
 	 * @param heading the npc's heading.
 	 * @param respawn the npc's respawn.
 	 * @param description the npc's description
-	 * @param AIType the npc's AI type.
+	 * @param behavior the npc's behavior.
+	 * @param attackStrategy the npc's attack strategy.
 	 * @param alignment the npc's alignment
 	 */
 	public AbstractNPCProperties(NPCType type, int id, String name, short body, short head,
-		Heading heading, boolean respawn, String description, AIType AIType, Alignment alignment) {
+			Heading heading, boolean respawn, String description, Class<? extends Behavior> behavior,
+			Class<? extends AttackStrategy> attackStrategy, Alignment alignment) {
 		super(type, id, name, body, head, heading, respawn);
 		
 		this.description = description;
-		this.AIType= AIType;
+		this.behavior = behavior;
+		this.attackStrategy = attackStrategy;
 		this.alignment = alignment;
 	}
 	
@@ -63,16 +67,23 @@ public class AbstractNPCProperties extends NPCProperties {
 	}
 	
 	/**
-	 * @return the npc's AI type.
-	 */
-	public AIType getAIType() {
-		return AIType;
-	}
-	
-	/**
 	 * @return the npc's alignment.
 	 */
 	public Alignment getAlignment() {
 		return alignment;
+	}
+
+	/**
+	 * @return the behavior
+	 */
+	public Class<? extends Behavior> getBehavior() {
+		return behavior;
+	}
+
+	/**
+	 * @return the attackStrategy
+	 */
+	public Class<? extends AttackStrategy> getAttackStrategy() {
+		return attackStrategy;
 	}
 }

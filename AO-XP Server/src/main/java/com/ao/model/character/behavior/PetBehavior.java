@@ -18,7 +18,6 @@
 
 package com.ao.model.character.behavior;
 
-import com.ao.model.character.AIType;
 import com.ao.model.character.Character;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.movement.MovementStrategy;
@@ -42,11 +41,6 @@ public class PetBehavior implements Behavior {
 		if (target != character) {
 			movement.setTarget(character);
 		}
-	}
-
-	@Override
-	public AIType getAIType() {
-		return AIType.PET;
 	}
 
 	@Override
