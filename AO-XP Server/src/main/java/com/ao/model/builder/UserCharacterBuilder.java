@@ -22,10 +22,9 @@ import javax.management.InvalidAttributeValueException;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.UserCharacter;
-import com.ao.model.character.archetype.Archetype;
+import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.map.City;
 import com.ao.model.user.ConnectedUser;
-import com.ao.model.user.User;
 import com.ao.service.ValidatorService;
 
 
@@ -43,7 +42,8 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	protected Gender gender;
 	protected ConnectedUser user;
 	protected City homeland;
-	protected Archetype archetype;
+	protected UserArchetype archetype;
+	
 	private int head;
 	private int body;
 	
@@ -85,7 +85,7 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 		return this;
 	}
 	
-	public UserCharacterBuilder withArchetype(Archetype archetype){
+	public UserCharacterBuilder withArchetype(UserArchetype archetype){
 		this.archetype = archetype;
 		
 		return this;
