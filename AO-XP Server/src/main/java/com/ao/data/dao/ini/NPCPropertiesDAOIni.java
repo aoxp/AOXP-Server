@@ -750,7 +750,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 	
 	// TODO : Documentar!
-	public Map<Integer, Integer> getDrops(Section section) {
+	private Map<Integer, Integer> getDrops(Section section) {
 		String data = section.get(ITEMS_AMOUNT_KEY);
 		if (data == null) {
 			return null;
@@ -770,7 +770,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 	
 	// TODO : Documentar!
-	public Map<Integer, Integer> getInventory(Section section) {
+	private Map<Integer, Integer> getInventory(Section section) {
 		String data = section.get(ITEMS_AMOUNT_KEY);
 		if (data == null) {
 			return null;
@@ -793,7 +793,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	}
 
 	// TODO : Documentar!
-	public Map<Integer, String> getCreatures(Section section) {
+	private Map<Integer, String> getCreatures(Section section) {
 		String data = section.get(CREATURES_AMOUNT_KEY);
 		if (data == null) {
 			return null;

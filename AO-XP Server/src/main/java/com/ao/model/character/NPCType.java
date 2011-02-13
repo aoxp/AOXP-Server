@@ -22,7 +22,6 @@ package com.ao.model.character;
  * List of available NPC Types.
  */
 public enum NPCType {	
-	COMMON,
 	TRADER,
 	HOSTILE,
 	RESUCITATOR,

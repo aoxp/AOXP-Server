@@ -90,7 +90,7 @@ public class LoginNewCharacterPacketTest {
 		ApplicationContext.getInstance(AccountDAO.class).delete(CHARACTER_NAME);
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void invalidEmailTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
@@ -100,10 +100,10 @@ public class LoginNewCharacterPacketTest {
 		EasyMock.verify(connection.getOutputBuffer());
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void invalidNameTest() throws Exception {
 		
-		writeLogin("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
+		writeLogin("A", CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_NAME_ERROR);
 		
