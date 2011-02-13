@@ -63,20 +63,21 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	 * UserStats
 	 */
 	private int maxMana;
-	private int maxHitPoints;
-	private int mana;
-	private int hitpoints; 
-	private int thirstiness;
-	private int hunger;
+	private int maxHp;
+	private int minMana;
+	private int minHp; 
+	private int minThirstiness;
+	private int maxThirstiness;
+	private int maxHunger;
+	private int minHunger;
 	private byte level;
 	private String name;
 	private String description;
 	
 	public LoggedUser(Reputation reputation, Race race, Gender gender,
 			Archetype archetype, boolean poisoned, boolean paralyzed,
-			boolean immobilized, boolean invisible, boolean mimetized,
-			boolean dumbed, boolean hidden, int maxMana, int maxHitPoints,
-			int mana, int hitpoints, int thirstiness, int hunger, byte lvl,
+			boolean immobilized, boolean invisible, boolean dumbed, boolean hidden, int maxMana, int minMana, int maxHp,
+			int minHp, int maxThirstiness, int minThirstiness , int maxHunger, int minHunger, byte lvl,
 			String name, String description) {
 		
 		super();
@@ -88,15 +89,16 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 		this.paralyzed = paralyzed;
 		this.immobilized = immobilized;
 		this.invisible = invisible;
-		this.mimetized = mimetized;
 		this.dumbed = dumbed;
 		this.hidden = hidden;
 		this.maxMana = maxMana;
-		this.maxHitPoints = maxHitPoints;
-		this.mana = mana;
-		this.hitpoints = hitpoints;
-		this.thirstiness = thirstiness;
-		this.hunger = hunger;
+		this.maxHp = maxHp;
+		this.maxMana = maxMana;
+		this.minHp = minHp;
+		this.maxThirstiness = maxThirstiness;
+		this.maxHunger = maxHunger;
+		this.minThirstiness = minThirstiness;
+		this.minHunger = minHunger;
 		this.level = lvl;
 		this.name = name;
 		this.description = description;
@@ -173,33 +175,33 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public void addToHitPoints(int points) {
-		hitpoints += points;		//TODO: Check for overflows and underflows
+		minHp += points;		//TODO: Check for overflows and underflows
 		
-		if (hitpoints > maxHitPoints) {
-			hitpoints = maxHitPoints;
+		if (minHp > maxHp) {
+			minHp = maxHp;
 		}
 	}
 
 	@Override
 	public void addToHunger(int points) {
-		hunger += points;			//TODO: Check for overflows and underflows
+		minHunger += points;			//TODO: Check for overflows and underflows
 		
-		if (hunger > MAX_HUNGER) {
-			hunger = MAX_HUNGER;
+		if (minHunger > maxHunger) {
+			minHunger = maxHunger;
 		}
 	}
 
 	@Override
 	public void addToMana(int points) {
-		mana += points;				 //TODO: Check for overflows and underflows
-		if (mana > maxMana) {
-			mana = maxMana;
+		minMana += points;				 //TODO: Check for overflows and underflows
+		if (minMana > maxMana) {
+			minMana = maxMana;
 		}
 	}
 
 	@Override
 	public void addToMaxHitPoints(int points) {
-		maxHitPoints += points; 	//TODO: Check for overflows and underflows
+		maxHp += points; 	//TODO: Check for overflows and underflows
 	}
 
 	@Override
@@ -209,10 +211,10 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public void addToThirstiness(int points) {
-		thirstiness += points; 		//TODO: Check for overflows and underflows
+		minThirstiness += points; 		//TODO: Check for overflows and underflows
 		
-		if (thirstiness > MAX_THIRSTINESS) {
-			thirstiness = MAX_THIRSTINESS;
+		if (minThirstiness > maxThirstiness) {
+			minThirstiness = maxThirstiness;
 		}
 			
 	}
@@ -304,13 +306,13 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public int getHitPoints() {
 		// TODO Auto-generated method stub
-		return hitpoints;
+		return minHp;
 	}
 
 	@Override
 	public int getHunger() {
 		// TODO Auto-generated method stub
-		return hunger;
+		return minHunger;
 	}
 
 	@Override
@@ -328,13 +330,13 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public int getMana() {
 		// TODO Auto-generated method stub
-		return mana;
+		return minMana;
 	}
 
 	@Override
 	public int getMaxHitPoints() {
 		// TODO Auto-generated method stub
-		return maxHitPoints;
+		return maxHp;
 	}
 
 	@Override
@@ -378,12 +380,12 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public int getThirstiness() {
-		return thirstiness;
+		return minThirstiness;
 	}
 
 	@Override
 	public boolean isDead() {
-		return hitpoints > 0 ? false : true;
+		return minHp > 0 ? false : true;
 	}
 
 	@Override

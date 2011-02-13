@@ -33,6 +33,7 @@ import com.ao.model.map.Position;
 import com.ao.model.spell.Spell;
 import com.ao.model.user.ConnectedUser;
 import com.ao.model.user.Guild;
+import com.ao.model.user.LoggedUser;
 import com.ao.service.ValidatorService;
 import com.google.inject.internal.Preconditions;
 
@@ -53,32 +54,33 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	protected City homeland;
 	protected UserArchetype archetype;
 	
-	protected int minHp;
-	protected int maxHp;
+	protected Integer minHp;
+	protected Integer maxHp;
+	protected Integer minMana;
+	protected Integer maxMana;
 	
-	private int head;
-	private int body;
-	private int minMana;
-	private int maxMana;
-	private Map<Skill, Byte> skills;
-	private boolean paralyzed;
-	private boolean dumbed;
-	private String description;
-	private boolean hidden;
-	private boolean immobilized;
-	private boolean invisible;
-	private byte lvl;
-	private boolean poisoned;
-	private Guild guild;
-	private long exp;
-	private int maxThirstiness;
-	private int maxHunger;
-	private int minThirstiness;
-	private int minHunger;
-	private Inventory inventory;
-	private Spell[] spells;
-	private Reputation reputation;
-	private Position position;
+	
+	protected Integer head;
+	protected Integer body;
+	protected Map<Skill, Byte> skills;
+	protected boolean paralyzed = false;
+	protected boolean dumbed = false;
+	protected String description;
+	protected boolean hidden = false;
+	protected boolean immobilized = false;
+	protected boolean invisible = false;
+	protected byte lvl = 1;
+	protected boolean poisoned = false;
+	protected Guild guild;
+	protected Long exp;
+	protected int maxThirstiness = 100;
+	protected int maxHunger = 100;
+	protected int minThirstiness = 100;
+	protected int minHunger = 100;
+	protected Inventory inventory;
+	protected Spell[] spells;
+	protected Reputation reputation;
+	protected Position position;
 	
 	
 	public UserCharacterBuilder withCity(City homeland) {
@@ -299,9 +301,35 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	@Override
 	public UserCharacter build() {
 		// TODO Auto-generated method stub
+		Preconditions.checkNotNull(maxHp);
+		Preconditions.checkNotNull(minHp);
+		Preconditions.checkNotNull(maxMana);
+		Preconditions.checkNotNull(minMana);
+		Preconditions.checkNotNull(name);
+		Preconditions.checkNotNull(email);
+		Preconditions.checkNotNull(race);
+		Preconditions.checkNotNull(gender);
+		Preconditions.checkNotNull(user);
+		Preconditions.checkNotNull(homeland);
+		Preconditions.checkNotNull(archetype);
+		Preconditions.checkNotNull(head);
+		Preconditions.checkNotNull(body);
+		Preconditions.checkNotNull(skills);
+		Preconditions.checkNotNull(description);
+		Preconditions.checkNotNull(guild);
+		Preconditions.checkNotNull(exp);
+		Preconditions.checkNotNull(inventory);
+		Preconditions.checkNotNull(spells);
+		Preconditions.checkNotNull(reputation);
+		Preconditions.checkNotNull(position);
 		
+		LoggedUser user = new LoggedUser(reputation, race, gender, archetype.getArchetype(), poisoned,
+				paralyzed, immobilized, invisible, dumbed, hidden, maxMana, minMana, maxHp, minHp,
+				maxThirstiness, minThirstiness, maxHunger, minHunger, lvl, name, description);
 		
-		return null;
+		//TODO: Set everything!
+		
+		return user;
 	}
 
 }
