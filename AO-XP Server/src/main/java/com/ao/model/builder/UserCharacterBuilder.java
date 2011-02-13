@@ -17,15 +17,24 @@
 */
 package com.ao.model.builder;
 
+import java.util.Map;
+
 import javax.management.InvalidAttributeValueException;
 
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
+import com.ao.model.character.Reputation;
+import com.ao.model.character.Skill;
 import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
+import com.ao.model.inventory.Inventory;
 import com.ao.model.map.City;
+import com.ao.model.map.Position;
+import com.ao.model.spell.Spell;
 import com.ao.model.user.ConnectedUser;
+import com.ao.model.user.Guild;
 import com.ao.service.ValidatorService;
+import com.google.inject.internal.Preconditions;
 
 
 
@@ -44,23 +53,117 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	protected City homeland;
 	protected UserArchetype archetype;
 	
+	protected int minHp;
+	protected int maxHp;
+	
 	private int head;
 	private int body;
+	private int minMana;
+	private int maxMana;
+	private Map<Skill, Byte> skills;
+	private boolean paralyzed;
+	private boolean dumbed;
+	private String description;
+	private boolean hidden;
+	private boolean immobilized;
+	private boolean invisible;
+	private byte lvl;
+	private boolean poisoned;
+	private Guild guild;
+	private long exp;
+	private int maxThirstiness;
+	private int maxHunger;
+	private int minThirstiness;
+	private int minHunger;
+	private Inventory inventory;
+	private Spell[] spells;
+	private Reputation reputation;
+	private Position position;
 	
 	
 	public UserCharacterBuilder withCity(City homeland) {
+		Preconditions.checkNotNull(homeland);
 		this.homeland = homeland;
 		
 		return this;
 	}
 	
 	public UserCharacterBuilder withRace(Race race){
+		Preconditions.checkNotNull(race);
+		
 		this.race = race;
 		
 		return this;
 	}
 	
+	public UserCharacterBuilder withParalyzed(boolean paralyzed) {
+		this.paralyzed = paralyzed;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withPoisoned(boolean poisoned) {
+		this.poisoned = poisoned;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withImmobilized(boolean immobilized) {
+		this.immobilized = immobilized;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withInvisible(boolean invisible) {
+		this.invisible = invisible;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withDumbed(boolean dumbed) {
+		this.dumbed = dumbed;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withHidden(boolean hidden) {
+		this.hidden = hidden;
+		
+		return this;
+	}
+	
+	
+	public UserCharacterBuilder withLvl(byte lvl) {
+		this.lvl = lvl;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withThirsthiness(int minThirstiness, int maxThirstiness) {
+		this.minThirstiness = minThirstiness;
+		this.maxThirstiness = maxThirstiness;
+		
+		return this;
+	}
+	
+	
+	public UserCharacterBuilder withHunger(int minHunger, int maxHunger) {
+		this.minHunger = minHunger;
+		this.maxHunger = maxHunger;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withDescription(String description) {
+		Preconditions.checkArgument(ValidatorService.validCharacterName(name));
+		
+		this.description = description;
+		return this;
+		
+	}
+	
 	public UserCharacterBuilder withGender(Gender gender)  {
+		Preconditions.checkNotNull(gender);
 		this.gender = gender;
 		
 		return this;
@@ -68,30 +171,29 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	
 	
 	public UserCharacterBuilder withName(String name) throws InvalidAttributeValueException {
-		if (!ValidatorService.validCharacterName(name)) {
-			throw new InvalidAttributeValueException();
-		}
+		Preconditions.checkArgument(ValidatorService.validCharacterName(name));
 		
 		this.name = name;
 		return this;
 	}
 	
 	public UserCharacterBuilder withEmail(String email) throws InvalidAttributeValueException {
-		if (!ValidatorService.validEmail(email)) {
-			throw new InvalidAttributeValueException();
-		}
+		Preconditions.checkArgument(ValidatorService.validEmail(email));
 		
 		this.email = email;
 		return this;
 	}
 	
 	public UserCharacterBuilder withArchetype(UserArchetype archetype){
+		Preconditions.checkNotNull(archetype);
+		
 		this.archetype = archetype;
 		
 		return this;
 	}
 	
 	public UserCharacterBuilder withHead(int head) {
+		Preconditions.checkArgument(head >= 0);
 		this.head = head;
 		
 		
@@ -99,6 +201,7 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 	
 	public UserCharacterBuilder withBody(int body) {
+		Preconditions.checkArgument(body >= 0);
 		this.body = body;
 		
 		return this;
@@ -108,6 +211,88 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 		this.user = user;
 		
 		return this;
+	}
+	
+	
+	public UserCharacterBuilder withHp(int minHp, int maxHp) {
+		Preconditions.checkArgument(maxHp > 0 && minHp >= 0);
+		
+		this.minHp = minHp;
+		this.maxHp = maxHp;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withMana(int minMana, int maxMana) {
+		Preconditions.checkArgument(maxMana > 0 && minMana >= 0 );
+		
+		this.minMana = minMana;
+		this.maxMana = maxMana;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withSkills(Map<Skill, Byte> skills) throws InvalidAttributeValueException {		
+		Preconditions.checkContentsNotNull(skills.values());
+		
+		for (Skill skill : Skill.VALUES) { 
+			if (!skills.containsKey(skill)) {
+				throw new InvalidAttributeValueException();
+			}
+		}
+		
+		this.skills = skills;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withGuild(Guild guild) {
+		this.guild = guild;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withExp(long exp) {
+		this.exp = exp;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withInventory(Inventory inventory) {
+		Preconditions.checkNotNull(inventory);
+		
+		this.inventory = inventory;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withSpells(Spell[] spells) throws InvalidAttributeValueException {
+		for (Spell spell : spells) {
+			if (spell == null) {
+				throw new InvalidAttributeValueException();
+			}
+		}
+		
+		this.spells = spells;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withReputation(Reputation reputation) {
+		Preconditions.checkNotNull(reputation);
+		
+		this.reputation = reputation;
+		
+		return this;
+	}
+	
+	public UserCharacterBuilder withPosition(Position position) {
+		Preconditions.checkNotNull(position);
+		
+		this.position = position;
+		
+		return this;
+		
 	}
 	
 	
