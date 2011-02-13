@@ -156,12 +156,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		archetypesByName.put("BANDIDO", UserArchetype.BANDIT);
 		archetypesByName.put("PALADIN", UserArchetype.PALADIN);
 		archetypesByName.put("CAZADOR", UserArchetype.HUNTER);
-		archetypesByName.put("PESCADOR", UserArchetype.FISHER);
-		archetypesByName.put("HERRERO", UserArchetype.BLACKSMITH);
-		archetypesByName.put("LEÑADOR", UserArchetype.LUMBERJACK);
-		archetypesByName.put("MINERO", UserArchetype.MINER);
-		archetypesByName.put("CARPINTERO", UserArchetype.CARPENTER);
 		archetypesByName.put("PIRATA", UserArchetype.PIRATE);
+		archetypesByName.put("TRABAJADOR", UserArchetype.WORKER);
 	}
 	
 	private String objectsFilePath;

@@ -34,12 +34,8 @@ public enum UserArchetype {
 	BANDIT(ArchetypeLocator.getArchetype(BanditArchetype.class)),
 	PALADIN(ArchetypeLocator.getArchetype(PaladinArchetype.class)),
 	HUNTER(ArchetypeLocator.getArchetype(HunterArchetype.class)),
-	FISHER(ArchetypeLocator.getArchetype(FisherArchetype.class)),
-	BLACKSMITH(ArchetypeLocator.getArchetype(BlacksmithArchetype.class)),
-	LUMBERJACK(ArchetypeLocator.getArchetype(LumberjackArchetype.class)),
-	MINER(ArchetypeLocator.getArchetype(MinerArchetype.class)),
-	CARPENTER(ArchetypeLocator.getArchetype(CarpenterArchetype.class)),
-	PIRATE(ArchetypeLocator.getArchetype(PirateArchetype.class));
+	PIRATE(ArchetypeLocator.getArchetype(PirateArchetype.class)),
+	WORKER(ArchetypeLocator.getArchetype(WorkerArchetype.class));
 	
 	private static UserArchetype[] values = UserArchetype.values();
 	

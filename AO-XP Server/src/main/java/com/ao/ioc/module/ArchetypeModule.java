@@ -36,6 +36,7 @@ import com.ao.model.character.archetype.PaladinArchetype;
 import com.ao.model.character.archetype.PirateArchetype;
 import com.ao.model.character.archetype.ThiefArchetype;
 import com.ao.model.character.archetype.WarriorArchetype;
+import com.ao.model.character.archetype.WorkerArchetype;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
@@ -93,16 +94,6 @@ public class ArchetypeModule extends AbstractModule {
 	}
 	
 	@Provides
-	BlacksmithArchetype provideBlacksmithArchetype() throws Exception {
-		return (BlacksmithArchetype) getArchetype(BlacksmithArchetype.class);
-	}
-	
-	@Provides
-	CarpenterArchetype provideCarpenterArchetype() throws Exception {
-		return (CarpenterArchetype) getArchetype(CarpenterArchetype.class);
-	}
-	
-	@Provides
 	ClericArchetype provideClericArchetype() throws Exception {
 		return (ClericArchetype) getArchetype(ClericArchetype.class);
 	}
@@ -113,28 +104,13 @@ public class ArchetypeModule extends AbstractModule {
 	}
 	
 	@Provides
-	FisherArchetype provideFisherArchetype() throws Exception {
-		return (FisherArchetype) getArchetype(FisherArchetype.class);
-	}
-	
-	@Provides
 	HunterArchetype provideHunterArchetype() throws Exception {
 		return (HunterArchetype) getArchetype(HunterArchetype.class);
 	}
 	
 	@Provides
-	LumberjackArchetype provideLumberjackArchetype() throws Exception {
-		return (LumberjackArchetype) getArchetype(LumberjackArchetype.class);
-	}
-	
-	@Provides
 	MageArchetype provideMageArchetype() throws Exception {
 		return (MageArchetype) getArchetype(MageArchetype.class);
-	}
-	
-	@Provides
-	MinerArchetype provideMinerArchetype() throws Exception {
-		return (MinerArchetype) getArchetype(MinerArchetype.class);
 	}
 	
 	@Provides
@@ -156,4 +132,9 @@ public class ArchetypeModule extends AbstractModule {
 	WarriorArchetype provideWarriorArchetype() throws Exception {
 		return (WarriorArchetype) getArchetype(WarriorArchetype.class);
 	}
+	
+	@Provides
+	WorkerArchetype provideWorkerArchetype() throws Exception {
+		return (WorkerArchetype) getArchetype(WorkerArchetype.class);
+	}	
 }
