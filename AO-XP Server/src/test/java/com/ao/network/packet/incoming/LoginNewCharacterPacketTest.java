@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -31,6 +31,7 @@ import com.ao.context.ApplicationContext;
 import com.ao.context.ApplicationProperties;
 import com.ao.data.dao.AccountDAO;
 import com.ao.mock.MockFactory;
+import com.ao.model.builder.UserCharacterBuilder;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.archetype.UserArchetype;
@@ -54,171 +55,174 @@ public class LoginNewCharacterPacketTest {
 	private static final byte CHARACTER_GENDER = (byte) Gender.MALE.ordinal();
 	private static final byte CHARACTER_HOMELAND = 1;
 	private static final byte CHARACTER_HEAD = 10;
-	
+
+	private static final String INVALID_CHARACTER_NAME = " ";
+
 	private static final byte CLIENT_MAJOR = 0;
 	private static final byte CLIENT_MINOR = 12;
 	private static final byte CLIENT_VERSION = 2;
-	
+
 	private Connection connection;
 	private IncomingPacket packet;
 	private ServerConfig config;
 	private SecurityManager security;
 	private MapService mapService;
-	
+
 	static {
 		ApplicationProperties.loadProperties("test.properties");
 		ApplicationContext.reload();
 	}
-	
+
 	@Before
 	public void setUp() throws Exception {
 		packet = new LoginNewCharacterPacket();
 		connection = MockFactory.mockConnection(MockFactory.mockConnectedUser());
-		
+
 		config = ApplicationContext.getInstance(ServerConfig.class);
 		security = ApplicationContext.getInstance(SecurityManager.class);
-		
+
 		mapService = ApplicationContext.getInstance(MapService.class);
 		mapService.loadCities();
-		
+
 		config.setRestrictedToAdmins(false);
 		config.setCharacterCreationEnabled(true);
 	}
-	
+
 	@After
 	public void tearDown() {
 		ApplicationContext.getInstance(AccountDAO.class).delete(CHARACTER_NAME);
+		ApplicationContext.getInstance(AccountDAO.class).delete(INVALID_CHARACTER_NAME);
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test
 	public void invalidEmailTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_HEAD, "foo", CHARACTER_HOMELAND, LoginServiceImpl.INVALID_EMAIL_ERROR);
-		
+				CHARACTER_HEAD, "foo", CHARACTER_HOMELAND, UserCharacterBuilder.INVALID_EMAIL_ERROR);
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test
 	public void invalidNameTest() throws Exception {
-		
-		writeLogin("A", CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
+
+		writeLogin(INVALID_CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
-				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_NAME_ERROR);
-		
+				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, UserCharacterBuilder.INVALID_NAME_ERROR);
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
-	
+
 	@Test
 	public void successfulCharacterCreation() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
-		
+
 		packet.handle(connection);
-		
+
 		Account account = ((ConnectedUser) connection.getUser()).getAccount();
-		
+
 		assertTrue(account.hasCharacter(CHARACTER_NAME));
 		assertEquals(account.getName(), CHARACTER_NAME);
 		assertEquals(account.getMail(), CHARACTER_MAIL);
-		
+
 		// TODO: Check if the charfile was created.
 	}
-	
+
  	@Test
 	public void clientOutOfDateTest() throws Exception {
 		LoginServiceImpl service = (LoginServiceImpl) ApplicationContext.getInstance(LoginService.class);
 		service.setCurrentClientVersion(CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION);
-		
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, (byte) 0, (byte) 0, 
+
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, (byte) 0, (byte) 0,
 				(byte) 0, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION));
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
-	
+
 	@Test
 	public void nameTakenTest() throws Exception {
 		ApplicationContext.getInstance(AccountDAO.class).create(CHARACTER_NAME, CHARACTER_PASSWORD, CHARACTER_MAIL);
-		
+
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.ACCOUNT_NAME_TAKEN_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
-	
+
 	@Test
 	public void dicesThrewTest() throws Exception {
 
 		// Oops, I forgot to throw the dices!
 		EasyMock.reset(connection.getUser());
-		
+
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.MUST_THROW_DICES_BEFORE_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
-	
+
 	@Test
 	public void invalidRaceTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", (byte) -1, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_RACE_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
-		
+
 	}
-	
+
 	@Test
 	public void invalidGenderTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, (byte) -1, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_GENDER_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
-		
+
 	}
-	
+
 	@Test
 	public void invalidHeadTest() throws Exception{
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				(byte) -1, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_HEAD_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
-	
+
 	@Test
 	public void invalidArchetypeTest() throws Exception {
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, (byte) -1,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.INVALID_ARCHETYPE_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
-		
+
 	}
-	
+
 	@Test
 	public void characterCreationDisabledTest() throws Exception {
-		
+
 		config.setCharacterCreationEnabled(false);
-		
+
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.CHARACTER_CREATION_DISABLED_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
@@ -226,22 +230,22 @@ public class LoginNewCharacterPacketTest {
 	@Test
 	public void restrictedToAdminsTest() throws Exception {
 		config.setRestrictedToAdmins(true);
-		
+
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND, LoginServiceImpl.ONLY_ADMINS_ERROR);
-		
+
 		packet.handle(connection);
 		EasyMock.verify(connection.getOutputBuffer());
 	}
-	
+
 	private void writeLogin(String charName, String password, byte major,
 			byte minor, byte version, String hash, byte race, byte gender,
 			byte archetype, byte head, String mail, byte homeland) throws Exception {
 		writeLogin(charName, password, major, minor, version, hash, race, gender,
 				archetype, head, mail, homeland, "");
 	}
-	
+
 	private void writeLogin(String charName, String password, byte major,
 			byte minor, byte version, String hash, byte race, byte gender,
 			byte archetype, byte head, String mail, byte homeland, String error) throws Exception {
@@ -249,9 +253,9 @@ public class LoginNewCharacterPacketTest {
 		DataBuffer outBuffer = connection.getOutputBuffer();
 
 		EasyMock.expect(buffer.getASCIIString()).andReturn(charName).once();
-		
+
 		EasyMock.expect(buffer.getASCIIStringFixed(security.getPasswordHashLength())).andReturn(password).once();
-		
+
 		EasyMock.expect(buffer.get()).andReturn(major).once();
 		EasyMock.expect(buffer.get()).andReturn(minor).once();
 		EasyMock.expect(buffer.get()).andReturn(version).once();
@@ -262,14 +266,14 @@ public class LoginNewCharacterPacketTest {
 		EasyMock.expect(buffer.get()).andReturn(head).once();
 		EasyMock.expect(buffer.getASCIIString()).andReturn(mail).once();
 		EasyMock.expect(buffer.get()).andReturn(homeland).once();
-		
+
 		EasyMock.replay(buffer);
-		
+
 		if (error.length() > 0) {
 			EasyMock.expect(outBuffer.put(EasyMock.anyByte())).andReturn(outBuffer).once();
 			EasyMock.expect(outBuffer.putASCIIString(error)).andReturn(outBuffer).once();
 		}
-		
+
 		EasyMock.replay(outBuffer);
 	}
 }

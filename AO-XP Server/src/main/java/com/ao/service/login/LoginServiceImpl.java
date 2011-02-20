@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,8 +18,6 @@
 
 package com.ao.service.login;
 
-import javax.management.InvalidAttributeValueException;
-
 import com.ao.config.ServerConfig;
 import com.ao.context.ApplicationContext;
 import com.ao.data.dao.AccountDAO;
@@ -32,22 +30,21 @@ import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
+import com.ao.model.map.City;
 import com.ao.model.user.Account;
 import com.ao.model.user.ConnectedUser;
-import com.ao.model.map.City;
 import com.ao.security.SecurityManager;
 import com.ao.service.CharacterBodyService;
 import com.ao.service.LoginService;
-import com.ao.service.UserService;
-import com.ao.service.ValidatorService;
 import com.ao.service.MapService;
+import com.ao.service.UserService;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
  * Default implementation of the login service.
  * An account is the exact same as a character.
- * 
+ *
  * @author jsotuyod
  */
 public class LoginServiceImpl implements LoginService {
@@ -65,8 +62,6 @@ public class LoginServiceImpl implements LoginService {
 	public static final String INVALID_ARCHETYPE_ERROR = "La clase seleccionada no es válida.";
 	public static final String INVALID_SKILLS_POINTS_ERROR = "Los skills asignados no son válidos.";
 	public static final String ACCOUNT_NAME_TAKEN_ERROR = "Ya existe el personaje.";
-	public static final String INVALID_NAME_ERROR = "El nombre ingresado no es válido.";
-	public static final String INVALID_EMAIL_ERROR = "La dirección de e-mail ingresada no es válida.";
 	public static final String CHARACTER_IS_LOGGED_IN = "El personaje está conectado.";
 	public static final String INVALID_HEAD_ERROR = "La cabeza seleccionada no es válida.";
 	public static final String INVALID_BODY_ERROR = "No existe un cuerpo para la combinación seleccionada.";
@@ -82,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
 	private final UserService userService;
 	private final CharacterBodyService characterBodyService;
 	private final MapService mapService;
-	
+
 	@Inject
 	public LoginServiceImpl(AccountDAO accDAO, UserCharacterDAO charDAO,
 			ServerConfig config, UserService userService,
@@ -100,29 +95,29 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public void connectNewCharacter(ConnectedUser user, String username, String password, byte bRace,
-			byte bGender, byte bArchetype, int head, String mail, 
+			byte bGender, byte bArchetype, int head, String mail,
 			byte bHomeland, String clientHash,
 			String version) throws LoginErrorException {
-		
+
 		checkClient(clientHash, version);
-		
+
 		if (!config.isCharacterCreationEnabled()) {
 			throw new LoginErrorException(CHARACTER_CREATION_DISABLED_ERROR);
 		}
-		
+
 		if (config.isRestrictedToAdmins()) {
 			throw new LoginErrorException(ONLY_ADMINS_ERROR);
 		}
-		
+
 		//TODO: Check to avoid mass characters creation for this IP
-		
-		
+
+
 		if (user.getAttribute(Attribute.AGILITY) == null) {
 			throw new LoginErrorException(MUST_THROW_DICES_BEFORE_ERROR);
 		}
-		
+
 		UserCharacterBuilder userCharacterBuilder = new UserCharacterBuilder();
-		
+
 		Race race;
 		try {
 			race = Race.get(bRace);
@@ -136,30 +131,30 @@ public class LoginServiceImpl implements LoginService {
 		} catch(ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_GENDER_ERROR);
 		}
-		
+
 		City homeland = mapService.getCity(bHomeland);
 		if (homeland == null){
 			throw new LoginErrorException(INVALID_HOMELAND_ERROR);
 		}
-		
+
 		UserArchetype archetype;
 		try {
 			archetype = UserArchetype.get(bArchetype);
 		} catch(ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_ARCHETYPE_ERROR);
 		}
-		
+
 		if (!characterBodyService.isValidHead(head, race, gender)) {
 			throw new LoginErrorException(INVALID_HEAD_ERROR);
 		}
-		
+
 		// Get default body
 		int body = characterBodyService.getBody(race, gender);
-		
+
 		if (body == 0) {
 			throw new LoginErrorException(INVALID_BODY_ERROR);
 		}
-		
+
 		try {
 			userCharacterBuilder.withName(username)
 				.withEmail(mail)
@@ -169,101 +164,98 @@ public class LoginServiceImpl implements LoginService {
 				.withArchetype(archetype)
 				.withHead(head)
 				.withBody(body);
-			
-			
-		} catch (InvalidAttributeValueException e1) {
-			// TODO Auto-generated catch block
-			throw new LoginErrorException(e1.getMessage());
+		} catch (Exception e) {
+			throw new LoginErrorException(e.getMessage());
 		}
-		
-		
+
+
 		// First, we have to create the new account.
 		Account acc;
-		
+
 		try {
 			acc = accDAO.create(username, password, mail);
 		} catch(NameAlreadyTakenException e) {
 			throw new LoginErrorException(ACCOUNT_NAME_TAKEN_ERROR);
-			
+
 		} catch (DAOException e) {
 			accDAO.delete(username);
-			
+
 			throw new LoginErrorException(DAO_ERROR);
 		}
-			
-		
+
+
 		// Once we have the account, lets create the character itself!
 		try {
 			UserCharacter chara = charDAO.create(username, race, gender, archetype,
-					head, homeland, user.getAttribute(Attribute.STRENGTH), 
+					head, homeland, user.getAttribute(Attribute.STRENGTH),
 					user.getAttribute(Attribute.AGILITY), user.getAttribute(Attribute.INTELLIGENCE),
 					user.getAttribute(Attribute.CHARISMA), user.getAttribute(Attribute.CONSTITUTION),
 					initialAvailableSkills, body);
 		} catch (DAOException e) {
 			accDAO.delete(username);
-			
+
 			throw new LoginErrorException(e.getMessage());
 		}
-		
+
 		// Everything it's okay, associate the character with the account and the account with the user.
 		acc.addCharacter(username);
 		user.setAccount(acc);
-		
+
 		// TODO: Put it in the world!
-		
+
 	}
 
 	@Override
 	public void connectExistingCharacter(ConnectedUser user, String name, String password, String version,
 			String clientHash) throws LoginErrorException {
-		
+
 		checkClient(clientHash, version);
-		
+
 		if (config.isRestrictedToAdmins()) {
 			throw new LoginErrorException(ONLY_ADMINS_ERROR);
 		}
-		
+
 		Account acc;
-		
+
 		try {
 			acc = accDAO.retrieve(name);
 		} catch (DAOException e) {
 			throw new LoginErrorException(DAO_ERROR);
 		}
-		
+
 		//TODO : Is the ip in use?
-		
+
 		if (acc == null) {
 			throw new LoginErrorException(CHARACTER_NOT_FOUND_ERROR);
 		}
-		
+
 		if (!acc.authenticate(password)) {
 			throw new LoginErrorException(INCORRECT_PASSWORD_ERROR);
 		}
-		
+
 		if (acc.isBanned()) {
 			throw new LoginErrorException(BANNED_CHARACTER_ERROR);
 		}
-		
+
 		if (userService.isLoggedIn(user)) {
 			throw new LoginErrorException(CHARACTER_IS_LOGGED_IN);
 		}
-		
+
 		// TODO : Add ip to connected ips
-		
+
 		// TODO : If user is a GM, log it to admin's log with it's ip.
-				
+
 		// TODO : Do something with the account!!!
-		
+
 		UserCharacter character = acc.getCharacter(name);
-		
+
 		// TODO : send all data!
-		
+
 		user.setAccount(acc);
-		
+
 		userService.logIn(user);
 	}
-	
+
 	/**
 	 * Sets the current client's version.
 	 * @param version The new client version.
@@ -272,7 +264,7 @@ public class LoginServiceImpl implements LoginService {
 		// TODO: Update the config!
 		currentClientVersion = version;
 	}
-	
+
 	/**
 	 * Checks if the given hash matches any of the valid hashes and if the given version is up to date.
 	 * @param hash 	The hash to check.
@@ -280,26 +272,26 @@ public class LoginServiceImpl implements LoginService {
 	 * @throws LoginErrorException
 	 */
 	private void checkClient(String hash, String version) throws LoginErrorException {
-		
+
 		if (!currentClientVersion.equals(version)) {
 			throw new LoginErrorException(String.format(CLIENT_OUT_OF_DATE_ERROR_FORMAT, currentClientVersion));
 		}
-		
+
 		if (clientHashes == null) {
 			clientHashes = ApplicationContext.getInstance(SecurityManager.class).getValidClientHashes();
 		}
-		
+
 		if (clientHashes.length < 1) {
 			return;
 		}
-		
+
 		for (String validHash : clientHashes) {
 			if (hash.equals(validHash)) {
 				return;
 			}
 		}
-		
+
 		throw new LoginErrorException(CORRUPTED_CLIENT_ERROR);
 	}
-	
+
 }
