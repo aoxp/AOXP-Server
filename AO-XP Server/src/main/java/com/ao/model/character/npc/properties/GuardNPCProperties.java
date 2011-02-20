@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@ package com.ao.model.character.npc.properties;
 
 import java.util.List;
 
-import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
@@ -48,7 +47,6 @@ public class GuardNPCProperties extends CreatureNPCProperties {
 	 * @param behavior the npc's behavior.
 	 * @param attackStrategy the npc's attack strategy.
 	 * @param movementStrategy The npc's movement strategy.
-	 * @param alignment the npc's alignment
 	 * @param experience the npc's experience
 	 * @param gold the npc's gold.
 	 * @param minHP the npc's min hp.
@@ -72,26 +70,26 @@ public class GuardNPCProperties extends CreatureNPCProperties {
 	public GuardNPCProperties(NPCType type, int id, String name, short body,
 			short head, Heading heading, boolean respawn, String description,
 			Class<? extends Behavior> behavior,
-			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy, Alignment alignment,
+			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy,
 			int experience, int gold, int minHP, int maxHP, int minDamage,
 			int maxDamage, short defense, short magicDefense, short accuracy,
 			short dodge, List<Spell> spells, boolean canSwim, boolean canWalk,
 			boolean attackable, boolean poison, boolean paralyzable,
 			boolean hostile, boolean tameable, boolean originalPosition) {
 		super(type, id, name, body, head, heading, respawn, description,
-				behavior, attackStrategy, movementStrategy, alignment, experience, gold, minHP, maxHP, minDamage,
+				behavior, attackStrategy, movementStrategy, experience, gold, minHP, maxHP, minDamage,
 				maxDamage, defense, magicDefense, accuracy, dodge, spells,
 				canSwim, canWalk, attackable, poison, paralyzable, hostile,
 				tameable);
-		
+
 		this.originalPosition = originalPosition;
 	}
-	
+
 	/**
 	 * @return
 	 */
 	public boolean hasOriginalPosition() {
 		return originalPosition;
 	}
-	
+
 }

@@ -47,6 +47,7 @@ import com.ao.model.character.npc.properties.GovernorNPCProperties;
 import com.ao.model.character.npc.properties.GuardNPCProperties;
 import com.ao.model.character.npc.properties.MerchantNPCProperties;
 import com.ao.model.character.npc.properties.NPCProperties;
+import com.ao.model.character.npc.properties.NobleNPCProperties;
 import com.ao.model.character.npc.properties.TrainerNPCProperties;
 import com.ao.model.inventory.Inventory;
 import com.ao.model.map.City;
@@ -124,7 +125,6 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		npcTypeMapper.put(LegacyNPCType.CHAOS_GUARD, NPCType.CHAOS_GUARD);
 		npcTypeMapper.put(LegacyNPCType.ROYAL_GUARD, NPCType.ROYAL_GUARD);
 		npcTypeMapper.put(LegacyNPCType.NOBLE, NPCType.NOBLE);
-		// FIXME : If the old ini had the index of newbie resucitator hardwired, why is it in the legacy enum?
 		npcTypeMapper.put(LegacyNPCType.NEWBIE_RESUCITATOR, NPCType.NEWBIE_RESUCITATOR);
 		npcTypeMapper.put(LegacyNPCType.RESUCITATOR, NPCType.RESUCITATOR);
 		npcTypeMapper.put(LegacyNPCType.GAMBLER, NPCType.GAMBLER);
@@ -205,7 +205,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 					npc = loadMerchant(NPCType.MERCHANT, id, name, body, head, heading, respawn,
 							desc, behavior, attackStrategy, movementStrategy, section);
 				} else {
-					npc = loadCreature(NPCType.HOSTILE, id, name, body, head, heading, respawn,
+					npc = loadCreature(NPCType.COMMON, id, name, body, head, heading, respawn,
 							desc, behavior, attackStrategy, movementStrategy, section);
 				}
 				break;
@@ -232,12 +232,16 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 						desc, behavior, attackStrategy, movementStrategy, section);
 				break;
 
+			case NOBLE:
+				npc = loadNoble(npcTypeMapper.get(type), id, name, body, head, heading, respawn,
+						desc, behavior, attackStrategy, movementStrategy, section);
+				break;
+
 			case NEWBIE_RESUCITATOR:
 			case RESUCITATOR:
 			case GAMBLER:
 			case BANKER:
-			case NOBLE:
-				npc = loadNPC(npcTypeMapper.get(type), id, name, body, head, heading, respawn,
+				npc = loadBasicNpc(npcTypeMapper.get(type), id, name, body, head, heading, respawn,
 						desc, behavior, attackStrategy, movementStrategy, section);
 				break;
 
@@ -246,6 +250,18 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		}
 
 		return npc;
+	}
+
+	private NPCProperties loadNoble(NPCType type, int id, String name,
+			short body, short head, Heading heading, boolean respawn,
+			String desc, Class<? extends Behavior> behavior,
+			Class<? extends AttackStrategy> attackStrategy,
+			Class<? extends MovementStrategy> movementStrategy, Section section) {
+
+		Alignment alignment = getAlignment(section);
+
+		return new NobleNPCProperties(type, id, name, body, head, heading, respawn,
+				desc, behavior, attackStrategy, movementStrategy, alignment);
 	}
 
 	/**
@@ -264,7 +280,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @return The NPC created.
 	 */
-	private NPCProperties loadNPC(NPCType type, int id, String name,
+	private NPCProperties loadBasicNpc(NPCType type, int id, String name,
 			short body, short head, Heading heading, boolean respawn,
 			String desc, Class<? extends Behavior> behavior,
 			Class<? extends AttackStrategy> attackStrategy,
@@ -298,12 +314,10 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			Class<? extends MovementStrategy> movementStrategy,
 			Section section) {
 
-		// TODO : Do governors REALLY need the alignment?
-		Alignment alignment = getAlignment(section);
 		City city = getCity(section);
 
 		return new GovernorNPCProperties(type, id, name, body, head, heading, respawn,
-			desc, behavior, attackStrategy, movementStrategy, alignment, city
+			desc, behavior, attackStrategy, movementStrategy, city
 		);
 	}
 
@@ -330,9 +344,6 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			Class<? extends MovementStrategy> movementStrategy,
 			Section section) {
 
-		// TODO : Do merchants REALLY need the alignment?
-		Alignment alignment = getAlignment(section);
-
 		// TODO : Transform inventory items to inventory
 		Map<Integer, Integer> inventoryItems = getInventory(section);
 		Inventory inventory = null;
@@ -341,7 +352,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		Set<WorldObjectType> acceptedTypes = getItemsType(section);
 
 		return new MerchantNPCProperties(type, id, name, body, head, heading, respawn,
-			behavior, attackStrategy, movementStrategy, desc, alignment, inventory,
+			behavior, attackStrategy, movementStrategy, desc, inventory,
 			respawnInventory, acceptedTypes
 		);
 	}
@@ -369,12 +380,10 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		Class<? extends MovementStrategy> movementStrategy,
 		Section section) {
 
-		// TODO : Do trainers REALLY need the alignment?
-		Alignment alignment = getAlignment(section);
 		Map<Integer, String> creatures = getCreatures(section);
 
 		return new TrainerNPCProperties(type, id, name, body, head, heading, respawn,
-			desc, behavior, attackStrategy, movementStrategy, alignment, creatures);
+			desc, behavior, attackStrategy, movementStrategy, creatures);
 	}
 
 	/**
@@ -399,7 +408,6 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		Class<? extends MovementStrategy> movementStrategy,
 		Section section) {
 
-		Alignment alignment = getAlignment(section);
 		int experience = getExperience(section);
 		int gold = getGold(section);
 		int minHP = getMinHP(section);
@@ -420,7 +428,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean tameable = isTameable(section);
 
 		return new CreatureNPCProperties(type, id, name, body, head, heading, respawn, desc,
-			behavior, attackStrategy, movementStrategy, alignment, experience, gold, minHP, maxHP,
+			behavior, attackStrategy, movementStrategy, experience, gold, minHP, maxHP,
 			minDamage, maxDamage, defense, magicDefense, accuracy, dodge, spells, canSwim, canWalk,
 			attackable, poison, paralyzable, hostile, tameable);
 	}
@@ -448,8 +456,6 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		Class<? extends MovementStrategy> movementStrategy,
 		Section section) {
 
-		// TODO : Do guards REALLY need the alignment?
-		Alignment alignment = getAlignment(section);
 		int experience = getExperience(section);
 		int gold = getGold(section);
 		int minHP = getMinHP(section);
@@ -471,7 +477,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean originalPosition = hasOriginalPosition(section);
 
 		return new GuardNPCProperties(type, id, name, body, head, heading, respawn, desc,
-			behavior, attackStrategy, movementStrategy, alignment, experience, gold, minHP, maxHP, minDamage,
+			behavior, attackStrategy, movementStrategy, experience, gold, minHP, maxHP, minDamage,
 			maxDamage, defense, magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable,
 			poison, paralyzable, hostile, tameable, originalPosition);
 	}

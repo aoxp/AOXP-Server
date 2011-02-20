@@ -23,12 +23,12 @@ package com.ao.model.character;
  */
 public enum NPCType {
 	MERCHANT,
-	HOSTILE,
+	COMMON,
 	RESUCITATOR,
 	ROYAL_GUARD,
 	TRAINER,
 	BANKER,
-	NOBLE,	// TODO : What is this used for?
+	NOBLE,
 	GAMBLER,
 	CHAOS_GUARD,
 	NEWBIE_RESUCITATOR,

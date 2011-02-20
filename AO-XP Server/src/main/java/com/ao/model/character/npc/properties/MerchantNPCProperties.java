@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@ package com.ao.model.character.npc.properties;
 
 import java.util.Set;
 
-import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
@@ -32,12 +31,12 @@ import com.ao.model.worldobject.WorldObjectType;
 /**
  * Defines a NPC's properties. Allows a lightweight pattern implementation.
  */
-public class MerchantNPCProperties extends AbstractNPCProperties {
+public class MerchantNPCProperties extends NPCProperties {
 
 	protected Inventory inventory;
 	protected boolean respawnInventory;
 	protected Set<WorldObjectType> acceptedTypes;
-	
+
 	/**
 	 * Creates a new GuardNPCProperties instance.
 	 * @param type the npc's type.
@@ -50,23 +49,23 @@ public class MerchantNPCProperties extends AbstractNPCProperties {
 	 * @param description the npc's description.
 	 * @param behavior the npc's behavior.
 	 * @param attackStrategy the npc's attack strategy.
-	 * @param movementStrategy 
-	 * @param alignment the npc's alignment.
+	 * @param movementStrategy
 	 * @param inventory the npc's inventory.
 	 * @param respawnInventory Whether the npc's inventory has respawn or not.
 	 * @param acceptedTypes the npc's items type.
 	 */
 	public MerchantNPCProperties(NPCType type, int id, String name, short body, short head,
 			Heading heading, boolean respawn, Class<? extends Behavior> behavior,
-			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy, String description, Alignment alignment, 
+			Class<? extends AttackStrategy> attackStrategy,
+			Class<? extends MovementStrategy> movementStrategy, String description,
 			Inventory inventory, boolean respawnInventory, Set<WorldObjectType> acceptedTypes) {
-		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, movementStrategy, alignment);
-			
+		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, movementStrategy);
+
 		this.inventory = inventory;
 		this.respawnInventory = respawnInventory;
 		this.acceptedTypes  = acceptedTypes;
 	}
-	
+
 	/**
 	 * @return the npc's inventory
 	 */
@@ -80,7 +79,7 @@ public class MerchantNPCProperties extends AbstractNPCProperties {
 	public boolean canRespawnInventory() {
 		return respawnInventory;
 	}
-	
+
 	/**
 	 * @return The WorldObjectType
 	 */
