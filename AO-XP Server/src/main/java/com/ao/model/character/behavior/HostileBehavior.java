@@ -24,6 +24,10 @@ import com.ao.model.character.UserCharacter;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.movement.MovementStrategy;
 
+/**
+ * Default behavior for hostile creatures.
+ * @author jsotuyod
+ */
 public class HostileBehavior implements Behavior {
 	
 	private MovementStrategy movement;
@@ -32,6 +36,12 @@ public class HostileBehavior implements Behavior {
 	private Character character;
 	private Character target;
 	
+	/**
+	 * Creates a new HostileBehavior instance.
+	 * @param movement The movement strategy to be used.
+	 * @param attack The attack strategy to be used.
+	 * @param character The character on which this behavior is applied.
+	 */
 	public HostileBehavior(MovementStrategy movement, AttackStrategy attack, Character character) {
 		this.movement = movement;
 		this.attack = attack;
@@ -48,7 +58,7 @@ public class HostileBehavior implements Behavior {
 		for (Character chara : character.getPosition().getCharactersNearby()) {
 			if (chara != character && (chara instanceof UserCharacter || ((NPCCharacter) chara).getMaster() != null)) {
 				
-				// Is the same last target?
+				// Is it the same as last target?
 				if (target != chara) {
 					movement.setTarget(chara);
 				}

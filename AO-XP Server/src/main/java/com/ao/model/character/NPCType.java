@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -21,24 +21,25 @@ package com.ao.model.character;
 /**
  * List of available NPC Types.
  */
-public enum NPCType {	
-	TRADER,
+public enum NPCType {
+	MERCHANT,
 	HOSTILE,
 	RESUCITATOR,
 	ROYAL_GUARD,
 	TRAINER,
 	BANKER,
-	NOBLE,
+	NOBLE,	// TODO : What is this used for?
 	GAMBLER,
 	CHAOS_GUARD,
 	NEWBIE_RESUCITATOR,
-	GOVERNOR;
-	
+	GOVERNOR,
+	DRAGON;
+
 	/**
 	 * Enum values.
 	 */
 	private static NPCType[] values = NPCType.values();
-	
+
 	/**
 	 * Retrieves the npc's type for the given index.
 	 * @param index The npc's type index.

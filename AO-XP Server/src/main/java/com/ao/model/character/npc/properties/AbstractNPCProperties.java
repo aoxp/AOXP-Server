@@ -30,10 +30,7 @@ import com.ao.model.map.Heading;
  */
 public class AbstractNPCProperties extends NPCProperties {
 
-	protected String description; // TODO : Debería ser una lista? Hay tres NPCs que tienen más de una desc pero ni se usan :p
-	protected Class<? extends Behavior> behavior;
-	protected Class<? extends AttackStrategy> attackStrategy;
-	protected Class<? extends MovementStrategy> movementStrategy;
+	// TODO : Shouldn't this be in CreatureNPCProperties? Merchants, trainers, governors... do they need this?
 	protected Alignment alignment;
 	
 	/**
@@ -55,19 +52,10 @@ public class AbstractNPCProperties extends NPCProperties {
 			Heading heading, boolean respawn, String description, Class<? extends Behavior> behavior,
 			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy,
 			Alignment alignment) {
-		super(type, id, name, body, head, heading, respawn);
+		super(type, id, name, body, head, heading, respawn, description, behavior,
+				attackStrategy, movementStrategy);
 		
-		this.description = description;
-		this.behavior = behavior;
-		this.attackStrategy = attackStrategy;
 		this.alignment = alignment;
-	}
-	
-	/**
-	 * @return the npc's description.
-	 */
-	public String getDescription() {
-		return description;
 	}
 	
 	/**
@@ -75,26 +63,5 @@ public class AbstractNPCProperties extends NPCProperties {
 	 */
 	public Alignment getAlignment() {
 		return alignment;
-	}
-
-	/**
-	 * @return the behavior
-	 */
-	public Class<? extends Behavior> getBehavior() {
-		return behavior;
-	}
-	
-	/**
-	 * @return the attackStrategy
-	 */
-	public Class<? extends AttackStrategy> getAttackStrategy() {
-		return attackStrategy;
-	}
-
-	/**
-	 * @return the movementStrategy
-	 */
-	public Class<? extends MovementStrategy> getmovementStrategy() {
-		return movementStrategy;
 	}
 }

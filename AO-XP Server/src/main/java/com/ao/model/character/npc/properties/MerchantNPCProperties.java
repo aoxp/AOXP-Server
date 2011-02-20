@@ -32,7 +32,7 @@ import com.ao.model.worldobject.WorldObjectType;
 /**
  * Defines a NPC's properties. Allows a lightweight pattern implementation.
  */
-public class TraderNPCProperties extends AbstractNPCProperties {
+public class MerchantNPCProperties extends AbstractNPCProperties {
 
 	protected Inventory inventory;
 	protected boolean respawnInventory;
@@ -56,7 +56,7 @@ public class TraderNPCProperties extends AbstractNPCProperties {
 	 * @param respawnInventory Whether the npc's inventory has respawn or not.
 	 * @param acceptedTypes the npc's items type.
 	 */
-	public TraderNPCProperties(NPCType type, int id, String name, short body, short head,
+	public MerchantNPCProperties(NPCType type, int id, String name, short body, short head,
 			Heading heading, boolean respawn, Class<? extends Behavior> behavior,
 			Class<? extends AttackStrategy> attackStrategy, Class<? extends MovementStrategy> movementStrategy, String description, Alignment alignment, 
 			Inventory inventory, boolean respawnInventory, Set<WorldObjectType> acceptedTypes) {
