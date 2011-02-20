@@ -126,12 +126,12 @@ Obj1=87-1
 Obj2=91-1
 Obj3=95-1
 Obj4=99-1
-Obj5=103-1 'Llave Nix Casa Nro 5
-Obj6=107-1 'Llave Nix Casa Nro 6
+Obj5=103-1
+Obj6=107-1
 Obj7=111-1
 Obj8=115-1
 Obj9=119-1
-obj10=140-1 
+obj10=140-1
 InvReSpawn=1
 BackUp=1
 
@@ -162,9 +162,9 @@ Obj6=286-1
 Obj7=290-1
 Obj8=294-1
 Obj9=298-1
-Obj10=323-1 'Llave Banderbill Casa Nro 10
-Obj11=327-1 'Llave Banderbill Casa Nro 11
-Obj12=331-1 'Llave Banderbill Casa Nro 12
+Obj10=323-1
+Obj11=327-1
+Obj12=331-1
 Obj13=335-1
 Obj14=339-1
 Obj15=343-1
@@ -238,7 +238,7 @@ BackUp=1
 [NPC5]
 Name=Sacerdote
 NpcType=1
-Desc=�Hola, hijo m�o! Soy el Sacerdote de estas tierras. Si quieres que te resucite escribe /RESUCITAR, o haz doble click sobre m�. 
+Desc=�Hola, hijo m�o! Soy el Sacerdote de estas tierras. Si quieres que te resucite escribe /RESUCITAR, o haz doble click sobre m�.
 Head=3
 Heading=3
 Body=49
@@ -454,12 +454,12 @@ Domable=0
 Comercia=1
 TipoItems=11
 NROITEMS=6
-Obj1=36-1000 'Poci�n Amarilla
-Obj2=37-1000 'Poci�n Azul
-Obj3=38-1000 'Poci�n Roja
-Obj4=39-1000 'Poci�n Verde
-Obj5=166-1000 'Poci�n Violeta
-Obj6=645-1000 'Poci�n Negra
+Obj1=36-1000
+Obj2=37-1000
+Obj3=38-1000
+Obj4=39-1000
+Obj5=166-1000
+Obj6=645-1000
 BackUp=1
 
 #############################################
@@ -479,8 +479,8 @@ Domable=0
 Comercia=1
 TipoItems=14
 NROITEMS=2
-Obj1=127-1000 'Hacha de Le�ador
-Obj2=1005-1000 'Hacha de le�a Elfica
+Obj1=127-1000
+Obj2=1005-1000
 BackUp=1
 
 #############################################
@@ -501,11 +501,11 @@ Alineacion=0
 Comercia=1
 TipoItems=20
 NROITEMS=5
-Obj1=163-1000 'Cuchara
-Obj2=167-1000 'Mueble R�stico
-Obj3=168-1000 'Silla
-Obj4=198-1000 'Serrucho
-Obj5=480-10000 ' Flecha
+Obj1=163-1000
+Obj2=167-1000
+Obj3=168-1000
+Obj4=198-1000
+Obj5=480-10000
 BackUp=1
 
 #############################################
@@ -513,7 +513,7 @@ BackUp=1
 [NPC41]
 Name=Pescador
 NpcType=0
-Desc=�Bienvenido al gremio de pescadores! 
+Desc=�Bienvenido al gremio de pescadores!
 Head=2
 Heading=3
 Body=3
@@ -526,8 +526,8 @@ Alineacion=0
 Comercia=1
 TipoItems=1
 NROITEMS=2
-Obj1=138-1000 'Ca�a de Pescar
-Obj2=139-1000 'Pescado
+Obj1=138-1000
+Obj2=139-1000
 BackUp=1
 
 #############################################
@@ -548,8 +548,8 @@ Alineacion=0
 Comercia=1
 TipoItems=1
 NROITEMS=2
-Obj1=138-1000 'Ca�a de Pescar
-Obj2=139-1000 'Pescado
+Obj1=138-1000
+Obj2=139-1000
 BackUp=1
 
 #############################################
@@ -570,7 +570,7 @@ Alineacion=0
 Comercia=1
 TipoItems=23
 NROITEMS=1
-Obj1=187-1000 'Piquete de Minero
+Obj1=187-1000
 BackUp=1
 
 #############################################
@@ -591,7 +591,7 @@ Alineacion=0
 Comercia=1
 TipoItems=1000
 NROITEMS=1
-Obj1=534-1000 'Odre Vac�a
+Obj1=534-1000
 BackUp=1
 
 #############################################
@@ -612,9 +612,9 @@ Alineacion=0
 Comercia=1
 TipoItems=1
 NROITEMS=3
-Obj1=1-1000 'Manzana Roja
-Obj2=158-1000 'Banana
-Obj3=43-1000 'Botella de Agua
+Obj1=1-1000
+Obj2=158-1000
+Obj3=43-1000
 BackUp=1
 
 #############################################
@@ -635,12 +635,12 @@ Alineacion=0
 Comercia=1
 TipoItems=1
 NROITEMS=6
-Obj1=1-1000 'Manzana Roja
-Obj2=158-1000 'Banana
-Obj3=22-1000 'Frutas del Bosque
-Obj4=754-1000 'R�bano
-Obj5=29-1000 'Sand�a
-Obj6=43-1000 'Botella de Agua
+Obj1=1-1000
+Obj2=158-1000
+Obj3=22-1000
+Obj4=754-1000
+Obj5=29-1000
+Obj6=43-1000
 BackUp=1
 
 #############################################
@@ -661,19 +661,19 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=13
-Obj1=675-1000 'Vestimenta Imperial
-Obj2=516-1000 'T�nica de Maga del Imperio (H/E/EO-M)
-Obj3=517-1000 'T�nica de Mago del Imperio
-Obj4=372-1000 'Manto de Sacerdote del Imperio
-Obj5=521-1000 'Armadura Real
-Obj6=679-1000 'T�nica Conspicua de Mago Imperial
-Obj7=520-1000 'Armadura de Gran Sacerdotisa Imperial (H/E/EO-M)
-Obj8=680-1000 'Armadura de Gran Sacerdote Imperial
-Obj9=629-1000 'Armadura Nobil�sima
-Obj10=687-1000 'T�nica Palatina
-Obj11=691-1000 'Armadura de Ilustre Caballero
-Obj12=693-1000 'Armadura Magna (H/E/EO-M)
-Obj13=1038-1000 'Escudo Real
+Obj1=675-1000
+Obj2=516-1000
+Obj3=517-1000
+Obj4=372-1000
+Obj5=521-1000
+Obj6=679-1000
+Obj7=520-1000
+Obj8=680-1000
+Obj9=629-1000
+Obj10=687-1000
+Obj11=691-1000
+Obj12=693-1000
+Obj13=1038-1000
 BackUp=1
 
 #############################################
@@ -694,16 +694,16 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=10
-Obj1=676-1000 'Vestimenta Imperial (E/G)
-Obj2=549-1000 'T�nica de Mago del Imperio (E/G)
-Obj3=1039-1000 'Manto de Sacerdote del Imperio (E/G)
-Obj4=492-1000 'Armadura Real (E/G)
-Obj5=682-1000 'T�nica Conspicua de Mago Imperial (E/G)
-Obj6=1040-1000 'Armadura de Gran Sacerdote Imperial (E/G)
-Obj7=681-1000 'Armadura Nobil�sima (E/G)
-Obj8=688-1000 'Peque�a T�nica Palatina (E/G)
-Obj9=694-1000 'Armadura de Ilustre Caballero (E/G)
-Obj10=1038-1000 'Escudo Real
+Obj1=676-1000
+Obj2=549-1000
+Obj3=1039-1000
+Obj4=492-1000
+Obj5=682-1000
+Obj6=1040-1000
+Obj7=681-1000
+Obj8=688-1000
+Obj9=694-1000
+Obj10=1038-1000
 BackUp=1
 
 #############################################
@@ -724,18 +724,18 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=12
-Obj1=677-1000 'Vestimenta Legionaria
-Obj2=509-1000 'T�nica de Maga Oscura (H/E/EO-M)
-Obj3=518-1000 'T�nica de Mago Oscuro
-Obj4=523-1000 'Manto de Sacerdote Demon�aco
-Obj5=369-1000 'Armadura Legionaria
-Obj6=634-1000 'T�nica Egregia de Mago Oscuro
-Obj7=684-1000 'Armadura de Gran Sacerdote Demon�aco
-Obj8=635-1000 'Armadura L�brega (H/E/EO-M)
-Obj9=683-1000 'Armadura L�brega
-Obj10=689-1000 'T�nica Avernal
-Obj11=701-1000 'Armadura Infame
-Obj12=1037-1000 'Escudo Legionario
+Obj1=677-1000
+Obj2=509-1000
+Obj3=518-1000
+Obj4=523-1000
+Obj5=369-1000
+Obj6=634-1000
+Obj7=684-1000
+Obj8=635-1000
+Obj9=683-1000
+Obj10=689-1000
+Obj11=701-1000
+Obj12=1037-1000
 BackUp=1
 
 ##############################################
@@ -756,16 +756,16 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=10
-Obj1=678-1000 'Vestimenta Legionaria (E/G)
-Obj2=558-1000 'T�nica de Mago Oscuro (E/G)
-Obj3=1041-1000 'Manto de Sacerdote Demon�aco (E/G)
-Obj4=379-1000 'Armadura Legionaria (E/G)
-Obj5=686-1000 'T�nica Egregia de Mago Oscuro (E/G)
-Obj6=1042-1000 'Armadura de Gran Sacerdote Demon�aco (E/G)
-Obj7=685-1000 'Armadura L�brega (E/G)
-Obj8=690-1000 'Peque�a T�nica Avernal (E/G)
-Obj9=695-1000 'Armadura de Peque�o Pandemonium (E/G)
-Obj10=1037-1000 'Escudo Legionario
+Obj1=678-1000
+Obj2=558-1000
+Obj3=1041-1000
+Obj4=379-1000
+Obj5=686-1000
+Obj6=1042-1000
+Obj7=685-1000
+Obj8=690-1000
+Obj9=695-1000
+Obj10=1037-1000
 BackUp=1
 
 ##############################################
@@ -785,22 +785,22 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=15
-Obj1=879-1000 'Vestido Bordado de Gala (H/E/EO-M)
-Obj2=880-1000 'T�nica del Or�culo (H/E/EO-M)
+Obj1=879-1000
+Obj2=880-1000
 
-Obj3=884-1000 'Cota de Anillas Compuesta (H/E/EO-M)
-Obj4=885-1000 'Armadura Liviana de Hierro (H/E/EO-M)
-Obj5=886-1000 'Vestido de Arquera (H/E/EO-M)
-Obj6=891-1000 'Armadura de Cuero de Oso Pardo (H/E/EO-M)
-Obj7=892-1000 'Coraza Compuesta Roja (H/E/EO-M)
-Obj8=893-1000 'Anillas Con Manto Verde (H/E/EO-M)
-Obj9=894-1000 'Armadura de Cruzado (H/E/EO-M)
-Obj10=896-1000 'T�nica de Morgana (H/E/EO-M)
-Obj11=899-1000 'Cota de Peto Liso (H/E/EO-M)
-Obj12=900-1000 'Anillas Con Manto Desgastado (H/E/EO-M)
-Obj13=901-1000 'Coraza Compuesta de Mujer (H/E/EO-M)
-Obj14=902-1000 'Cota de Mallas Enteriza (H/E/EO-M)
-Obj15=904-1000 'Placas Combinadas (H/E/EO-M)
+Obj3=884-1000
+Obj4=885-1000
+Obj5=886-1000
+Obj6=891-1000
+Obj7=892-1000
+Obj8=893-1000
+Obj9=894-1000
+Obj10=896-1000
+Obj11=899-1000
+Obj12=900-1000
+Obj13=901-1000
+Obj14=902-1000
+Obj15=904-1000
 BackUp=1
 
 ##############################################
@@ -820,13 +820,13 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=7
-Obj1=882-1000 'Anillas Livianas de Aventurero (H/E/EO)
-Obj2=887-1000 'Cotas de Manto Marr�n (H/E/EO)
-Obj3=888-1000 'Brial del Bosque (H/E/EO)
-Obj4=889-1000 'Anillas Con Manto Verde (H/E/EO)
-Obj5=890-1000 'Armadura de Cuero de Oso Pardo (H/E/EO)
-Obj6=897-1000 'Cota de Piquero (H/E/EO)
-Obj7=903-1000 'Armadura de Campe�n (H/E/EO)
+Obj1=882-1000
+Obj2=887-1000
+Obj3=888-1000
+Obj4=889-1000
+Obj5=890-1000
+Obj6=897-1000
+Obj7=903-1000
 BackUp=1
 
 ##############################################
@@ -846,26 +846,26 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=20
-Obj1=908-1000 'Vestimentas de Pescador (E/G)
-Obj2=910-1000 'Atuendo de Gnomo (E/G)
-Obj3=911-1000 'Vestimenta Bordo de Poblador (E/G)
-Obj4=912-1000 'Vestimenta Verde de Poblador (E/G)
-Obj5=913-1000 'Ropaje de Ermita�o (E/G)
-Obj6=915-1000 'Ropaje de Aldeano (E/G)
-Obj7=916-1000 'Vestimenta Elegante (E/G)
-Obj8=917-1000 'Vestimenta de Minero (E/G)
-Obj9=918-1000 'Gab�n de Cuero Peque�o (E/G)
-Obj10=919-1000 'Alifafe de Serpiente (E/G)
-Obj11=920-1000 'Ropaje de Herrero (E/G)
-Obj12=921-1000 'T�nica S�rica Elegante (E/G)
-Obj13=922-1000 'Traje de Capit�n Pirata (E/G)
-Obj14=923-1000 'Traje de Noble (E/G)
-Obj15=924-1000 'Vestimenta de Explorador (E/G)
-Obj16=927-1000 'Alifafe de Lobo (E/G)
-Obj17=928-1000 'Barrag�n de Cazador (E/G)
-Obj18=929-1000 'Barrag�n Compuesto (E/G)
-Obj19=930-1000 'Toga de Aprendiz (E/G)
-Obj20=932-1000 'Sotana de Gran Hechicero (E/G)
+Obj1=908-1000
+Obj2=910-1000
+Obj3=911-1000
+Obj4=912-1000
+Obj5=913-1000
+Obj6=915-1000
+Obj7=916-1000
+Obj8=917-1000
+Obj9=918-1000
+Obj10=919-1000
+Obj11=920-1000
+Obj12=921-1000
+Obj13=922-1000
+Obj14=923-1000
+Obj15=924-1000
+Obj16=927-1000
+Obj17=928-1000
+Obj18=929-1000
+Obj19=930-1000
+Obj20=932-1000
 BackUp=1
 
 ##############################################
@@ -885,21 +885,21 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=15
-Obj1=909-1000 'Vestido de Novia (E/G-M)
-Obj2=914-1000 'Ropaje de Aldeana (E/G-M)
-Obj3=925-1000 'Peto de Gladiadora (E/G-M)
-Obj4=926-1000 'Hombreras de Amazona (E/G-M)
-Obj5=931-1000 'Vestido Elegante P�rpura (E/G)
-Obj6=933-1000 'Cota Liviana Verde (E/G-M)
-Obj7=935-1000 'Cotas con Peto Compuesto (E/G-M)
-Obj8=936-1000 'T�nica de Gran Hechicera (E/G-M)
-Obj9=938-1000 'Traje de Bruja (E/G-M)
-Obj10=941-1000 'Traje Seductor de Pitonisa (E/G-M)
-Obj11=942-1000 'Vestido de Gala Turquesa (E/G-M)
-Obj12=934-1000 'Cotas Livianas (E/G)
-Obj13=937-1000 'Cota de Peto P�rpura (E/G)
-Obj14=939-1000 'T�nica de Gala Roja (E/G)
-Obj15=940-1000 'Cota de Mallas Enteriza (E/G)
+Obj1=909-1000
+Obj2=914-1000
+Obj3=925-1000
+Obj4=926-1000
+Obj5=931-1000
+Obj6=933-1000
+Obj7=935-1000
+Obj8=936-1000
+Obj9=938-1000
+Obj10=941-1000
+Obj11=942-1000
+Obj12=934-1000
+Obj13=937-1000
+Obj14=939-1000
+Obj15=940-1000
 BackUp=1
 
 ##############################################
@@ -919,20 +919,20 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=14
-Obj1=943-1000 'Sobrevesta �lfica (H/E/EO)
-Obj2=944-1000 'Vestido Aur� (H/E/EO-M)
-Obj3=945-1000 'Vestido de Gala Alcarinqua (H/E/EO-M)
-Obj4=946-1000 'Vestimentas de Poblador �lfico (H/E/EO)
-Obj5=947-1000 'H�bito Liviano de Ritual (H/E/EO)
-Obj6=948-1000 'Vestido Bordado de Elite (H/E/EO-M)
-Obj7=949-1000 'H�bito Liviano de Ritual (H/E/EO-M)
-Obj8=950-1000 'S�rica �lfica Rojiza (H/E/EO-M)
-Obj9=951-1000 'Prenda de la Naturaleza (H/E/EO-M)
-Obj10=952-1000 'Ropa de Explorador �lfico (H/E/EO)
-Obj11=953-1000 'Manto �lfico P�rpura (H/E/EO-M)
-Obj12=954-1000 'H�bito de Ritual de Hombre (H/E/EO)
-Obj13=955-1000 'H�bito de Ritual Femenino (H/E/EO-M)
-Obj14=956-1000 'Valya Silmeanar (H/E/EO-M)
+Obj1=943-1000
+Obj2=944-1000
+Obj3=945-1000
+Obj4=946-1000
+Obj5=947-1000
+Obj6=948-1000
+Obj7=949-1000
+Obj8=950-1000
+Obj9=951-1000
+Obj10=952-1000
+Obj11=953-1000
+Obj12=954-1000
+Obj13=955-1000
+Obj14=956-1000
 BackUp=1
 
 ##############################################
@@ -952,24 +952,24 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=18
-Obj1=957-1000 'Vestido de Enana (E/G-M)
-Obj2=958-1000 'Vestimenta Com�n (E/G)
-Obj3=959-1000 'Ropa de Carpintero Enano (E/G)
-Obj4=960-1000 'Ropa de Le�ador (E/G)
-Obj5=961-1000 'Ropa de Minero (E/G)
-Obj6=962-1000 'T�nica Elegante (E/G)
-Obj7=963-1000 'Ropaje de Luchador de Las Minas (E/G)
-Obj8=964-1000 'Ropa de Viajero (E/G)
-Obj9=965-1000 'Antigua Armadura Dorada (E/G)
-Obj10=966-1000 'Alifafe de Pirata (E/G)
-Obj11=967-1000 'Ropas de Buscador (E/G)
-Obj12=968-1000 'Armadura Grabada Completa (E/G)
-Obj13=969-1000 'T�nica Dorada de Gala (E/G)
-Obj14=970-1000 'Armadura de Placas Livianas Thor (E/G)
-Obj15=971-1000 'Armadura Metal Oscuro (E/G)
-Obj16=972-1000 'T�nica de Mahal (E/G)
-Obj17=973-1000 'Armadura de Placas Livianas Thor (E/G-M)
-Obj18=974-1000 'Capa de Monje Cocida con Mithril (E/G)
+Obj1=957-1000
+Obj2=958-1000
+Obj3=959-1000
+Obj4=960-1000
+Obj5=961-1000
+Obj6=962-1000
+Obj7=963-1000
+Obj8=964-1000
+Obj9=965-1000
+Obj10=966-1000
+Obj11=967-1000
+Obj12=968-1000
+Obj13=969-1000
+Obj14=970-1000
+Obj15=971-1000
+Obj16=972-1000
+Obj17=973-1000
+Obj18=974-1000
 BackUp=1
 
 ##############################################
@@ -989,15 +989,15 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=9
-Obj1=977-1000 'Vestimenta Esclava (H/E/EO)
-Obj2=978-1000 'Harapos de la Cueva (H/E/EO)
-Obj3=979-1000 'Armadura Maghtere Roja (H/E/EO)
-Obj4=980-1000 'Armadura de Combate Liviana (H/E/EO)
-Obj5=981-1000 'Piwafwi de Fuego (H/E/EO)
-Obj6=982-1000 'Armadura Melee de Explorador (H/E/EO)
-Obj7=983-1000 'Piwafwi Purpura del Silencio (H/E/EO)
-Obj8=984-1000 'Piwafwi Alto Narbondel (H/E/EO)
-Obj9=985-1000 'Piwafwi Socere de Lloth (H/E/EO-M)
+Obj1=977-1000
+Obj2=978-1000
+Obj3=979-1000
+Obj4=980-1000
+Obj5=981-1000
+Obj6=982-1000
+Obj7=983-1000
+Obj8=984-1000
+Obj9=985-1000
 BackUp=1
 
 ##############################################
@@ -1339,7 +1339,7 @@ Comercia=0
 [NPC141]
 Name=Zairot
 NpcType=0
-Desc=Podrash caminar de norte a shur, *hip* podrash encontrar sherveza de la mejor *hip* pero ninguna como la del meshon *hip* 
+Desc=Podrash caminar de norte a shur, *hip* podrash encontrar sherveza de la mejor *hip* pero ninguna como la del meshon *hip*
 Head=0
 Body=416
 Heading=3
@@ -1436,14 +1436,14 @@ Alineacion=0
 Comercia=1
 TipoItems=13
 NROITEMS=8
-Obj1=498-1000 'Sidra
-Obj2=522-1000 'Hipocr�s
-Obj3=550-1000 'Porr�n de cerveza
-Obj4=160-1000 'Cerveza
-Obj5=557-1000 'Vino de canela
-Obj6=612-1000 'Cerveza de los enanos
-Obj7=42-1000 'Vino
-Obj8=622-1000 'Barrilito de cerveza
+Obj1=498-1000
+Obj2=522-1000
+Obj3=550-1000
+Obj4=160-1000
+Obj5=557-1000
+Obj6=612-1000
+Obj7=42-1000
+Obj8=622-1000
 BackUp=1
 
 ##############################################
@@ -1462,7 +1462,7 @@ Hostile=0
 Domable=0
 Alineacion=0
 Comercia=0
-BackUp=1 
+BackUp=1
 
 ##############################################################
 #####################NPCS ULLATHORPE##########################
@@ -1484,11 +1484,11 @@ Alineacion=0
 Comercia=1
 TipoItems=1
 NROITEMS=5
-Obj1=1-10000 'Manzana Roja
-Obj2=158-1000 'Banana
-Obj3=22-1000 'Frutas del Bosque
-Obj4=43-1000 'Botella de Agua
-Obj5=160-1000 'Cerveza
+Obj1=1-10000
+Obj2=158-1000
+Obj3=22-1000
+Obj4=43-1000
+Obj5=160-1000
 BackUp=1
 
 #############################################
@@ -1509,15 +1509,15 @@ Alineacion=0
 Comercia=1
 TipoItems=2
 NROITEMS=9
-Obj1=15-1000 'Daga
-Obj2=619-1000 'Daga Envenenada
-Obj3=165-1000 'Daga +1
-Obj4=9-1000 'Horquilla
-Obj5=2-1000 'Espada Larga
-Obj6=125-1000 'Sable
-Obj7=123-1000 'Vikinga
-Obj8=389-1000 'Martillo de Herrero
-Obj9=124-1000 'Katana
+Obj1=15-1000
+Obj2=619-1000
+Obj3=165-1000
+Obj4=9-1000
+Obj5=2-1000
+Obj6=125-1000
+Obj7=123-1000
+Obj8=389-1000
+Obj9=124-1000
 BackUp=1
 
 #############################################
@@ -1538,12 +1538,12 @@ Alineacion=0
 Comercia=1
 TipoItems=24
 NROITEMS=6
-Obj1=363-1000 'Ataque de Hambre
-Obj2=199-1000 'Dardo M�gico
-Obj3=200-1000 'Ant�doto M�gico
-Obj4=197-1000 'Flecha M�gica
-Obj5=658-1000 'Vara de Fresno
-Obj6=659-1000 'Bast�n nudoso
+Obj1=363-1000
+Obj2=199-1000
+Obj3=200-1000
+Obj4=197-1000
+Obj5=658-1000
+Obj6=659-1000
 BackUp=1
 
 #############################################
@@ -1564,15 +1564,15 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=9
-Obj1=31-1000 'Vestimentas Comunes
-Obj2=32-1000 'Vestimentas Comunes
-Obj3=35-1000 'Vestimentas Comunes
-Obj4=641-1000 'Ropa de Pordiosero
-Obj5=501-1000 'Ropa de Campesino
-Obj6=135-1000 'T�nica Roja Burda
-obj7=238-1000 'T�nica Azul
-obj8=239-1000 'T�nica Roja
-obj9=873-1000 'Guantes de hurto
+Obj1=31-1000
+Obj2=32-1000
+Obj3=35-1000
+Obj4=641-1000
+Obj5=501-1000
+Obj6=135-1000
+obj7=238-1000
+obj8=239-1000
+obj9=873-1000
 BackUp=1
 
 #############################################
@@ -1593,11 +1593,11 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=5
-Obj1=170-1000 'Vestimenta de Mujer (H/E/EO-M)
-Obj2=504-1000 'Atuendo Combinado (H/E/EO-M)
-Obj3=505-1000 'Atuendo Azul (H/E/EO-M)
-Obj4=506-1000 'Atuendo Rosa (H/E/EO-M)
-Obj5=382-1000 'Vestido Azul (H/E/EO-M)
+Obj1=170-1000
+Obj2=504-1000
+Obj3=505-1000
+Obj4=506-1000
+Obj5=382-1000
 BackUp=1
 
 #############################################
@@ -1618,12 +1618,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=240-1000 'Ropa de Enano (E/G)
-Obj2=527-1000 'Ropa de Enana (E/G-M)
-Obj3=486-1000 'Ropa de Estilo (E/G)
-Obj4=507-1000 'Ropa Violeta (E/G)
-Obj5=502-1000 'Ropa de Campesino (E/G)
-Obj6=707-1000 'Vestimenta de Noble (E/G)
+Obj1=240-1000
+Obj2=527-1000
+Obj3=486-1000
+Obj4=507-1000
+Obj5=502-1000
+Obj6=707-1000
 BackUp=1
 
 #############################################
@@ -1678,10 +1678,10 @@ Alineacion=0
 Comercia=1
 TipoItems=1
 NROITEMS=4
-Obj1=139-1000 'Pescado
-Obj2=26-1000 'Pollo
-Obj3=43-1000 'Botella de Agua
-Obj4=160-1000 'Cerveza
+Obj1=139-1000
+Obj2=26-1000
+Obj3=43-1000
+Obj4=160-1000
 BackUp=1
 
 #############################################
@@ -1702,15 +1702,15 @@ Alineacion=0
 Comercia=1
 TipoItems=2
 NROITEMS=9
-Obj1=15-1000 'Daga
-Obj2=619-1000 'Daga Envenenada
-Obj3=165-1000 'Daga +1
-Obj4=389-1000 'Martillo de Herrero
-Obj5=3-1000 'Hacha
-Obj6=2-1000 'Espada Larga
-Obj7=398-1000 'Garrote
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+Obj1=15-1000
+Obj2=619-1000
+Obj3=165-1000
+Obj4=389-1000
+Obj5=3-1000
+Obj6=2-1000
+Obj7=398-1000
+Obj8=990-1000
+Obj9=1009-1000
 BackUp=1
 
 #############################################
@@ -1731,15 +1731,15 @@ Alineacion=0
 Comercia=1
 TipoItems=24
 NROITEMS=9
-Obj1=201-1000 'Aura Sanadora
-Obj2=204-1000 'Flecha El�ctrica
-Obj3=364-1000 'Terrible Hambre de Ig�r
-Obj4=205-1000 'Proyectil Et�reo
-Obj5=380-1000 'Invocaci�n de Ultratumba
-Obj6=661-1000 'Sombrero de Aprendiz
-Obj7=383-1000 'Sombrero de Aprendiz Avanzado
-Obj8=658-1000 'Vara de Fresno
-Obj9=659-1000 'Bast�n nudoso
+Obj1=201-1000
+Obj2=204-1000
+Obj3=364-1000
+Obj4=205-1000
+Obj5=380-1000
+Obj6=661-1000
+Obj7=383-1000
+Obj8=658-1000
+Obj9=659-1000
 BackUp=1
 
 #############################################
@@ -1760,16 +1760,16 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=10
-Obj1=31-1000 'Vestimentas Comunes
-Obj2=32-1000 'Vestimentas Comunes
-Obj3=35-1000 'Vestimentas Comunes
-Obj4=45-1000 'Ropa de Clan
-Obj5=80-1000 'Ropa de Clan
-Obj6=501-1000 'Ropa de Campesino
-Obj7=135-1000 'T�nica Roja Burda
-obj8=238-1000 'T�nica Azul
-obj9=239-1000 'T�nica Roja
-obj10=1036-1000 'Guantes de lucha
+Obj1=31-1000
+Obj2=32-1000
+Obj3=35-1000
+Obj4=45-1000
+Obj5=80-1000
+Obj6=501-1000
+Obj7=135-1000
+obj8=238-1000
+obj9=239-1000
+obj10=1036-1000
 BackUp=1
 
 #############################################
@@ -1790,11 +1790,11 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=5
-Obj1=170-1000 'Vestimenta de Mujer (H/E/EO-M)
-Obj2=504-1000 'Atuendo Combinado (H/E/EO-M)
-Obj3=505-1000 'Atuendo Azul (H/E/EO-M)
-Obj4=506-1000 'Atuendo Rosa (H/E/EO-M)
-Obj5=382-1000 'Vestido Azul (H/E/EO-M)
+Obj1=170-1000
+Obj2=504-1000
+Obj3=505-1000
+Obj4=506-1000
+Obj5=382-1000
 BackUp=1
 
 #############################################
@@ -1815,12 +1815,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=240-1000 'Ropa de Enano (E/G)
-Obj2=527-1000 'Ropa de Enana (E/G-M)
-Obj3=486-1000 'Ropa de Estilo (E/G)
-Obj4=507-1000 'Ropa Violeta (E/G)
-Obj5=502-1000 'Ropa de Campesino (E/G)
-Obj6=707-1000 'Vestimenta de Noble (E/G)
+Obj1=240-1000
+Obj2=527-1000
+Obj3=486-1000
+Obj4=507-1000
+Obj5=502-1000
+Obj6=707-1000
 BackUp=1
 
 #############################################
@@ -1840,14 +1840,14 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=8
-Obj1=30-1000 'Armadura de Cuero
-Obj2=529-1000 'Armadura de Cuero (H/E/EO-M)
-Obj3=668-1000 'Armadura de Cuero (E/G)
-Obj4=359-1000 'Cota de Mallas
-Obj5=499-1000 'Cota de Mallas (H/E/EO-M)
-Obj6=667-1000 'Cota de Mallas (E/G)
-Obj7=1001-1000 'Casco de �guila
-Obj8=1002-1000 'Casco de Lobo
+Obj1=30-1000
+Obj2=529-1000
+Obj3=668-1000
+Obj4=359-1000
+Obj5=499-1000
+Obj6=667-1000
+Obj7=1001-1000
+Obj8=1002-1000
 BackUp=1
 
 
@@ -1873,16 +1873,16 @@ Alineacion=0
 Comercia=1
 TipoItems=13
 NROITEMS=10
-Obj1=21-1000 'Porci�n de Tarta
-Obj2=23-1000 'Pan de Trigo
-Obj3=24-1000 'Pan de Ma�z
-Obj4=28-1000 'Queso de Cabra
-Obj5=29-1000 'Sand�a
-Obj6=26-1000 'Pollo
-Obj7=25-1000 'Pastel
-Obj8=160-1000 'Cerveza
-Obj9=42-1000 'Vino
-Obj10=161-1000 'Jugo de Frutas
+Obj1=21-1000
+Obj2=23-1000
+Obj3=24-1000
+Obj4=28-1000
+Obj5=29-1000
+Obj6=26-1000
+Obj7=25-1000
+Obj8=160-1000
+Obj9=42-1000
+Obj10=161-1000
 BackUp=1
 
 #############################################
@@ -1903,15 +1903,15 @@ Alineacion=0
 Comercia=1
 TipoItems=2
 NROITEMS=9
-Obj1=164-1000 'Espada Corta
-Obj2=2-1000 'Espada Larga
-Obj3=19-1000 'Espada Dos Manos
-Obj4=123-1000 'Espada Vikinga
-Obj5=389-1000 'Martillo de Herrero
-Obj6=401-1000 'Martillo de Guerra
-Obj7=478-1000 'Arco Simple
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+Obj1=164-1000
+Obj2=2-1000
+Obj3=19-1000
+Obj4=123-1000
+Obj5=389-1000
+Obj6=401-1000
+Obj7=478-1000
+Obj8=990-1000
+Obj9=1009-1000
 BackUp=1
 
 #############################################
@@ -1932,19 +1932,19 @@ Alineacion=0
 Comercia=1
 TipoItems=24
 NROITEMS=13
-Obj1=394-1000 'Llamado a la Naturaleza
-Obj2=203-1000 'Aura Sanadora Avanzada
-Obj3=207-1000 'Devolver Movilidad
-Obj4=657-1000 'Quitar la turbaci�n
-Obj5=206-1000 'Paralizar
-Obj6=361-1000 'Tormenta de Fuego
-Obj7=319-1000 'Resucitar
-Obj8=531-1000 'Descarga El�ctrica
-Obj9=318-1000 'Invisibilidad
-Obj10=537-1000 'Invocar Elemental de Agua
-Obj11=662-1000 'Sombrero de Mago
-Obj12=658-1000 'Vara de Fresno
-Obj13=659-1000 'Bast�n nudoso
+Obj1=394-1000
+Obj2=203-1000
+Obj3=207-1000
+Obj4=657-1000
+Obj5=206-1000
+Obj6=361-1000
+Obj7=319-1000
+Obj8=531-1000
+Obj9=318-1000
+Obj10=537-1000
+Obj11=662-1000
+Obj12=658-1000
+Obj13=659-1000
 BackUp=1
 
 #############################################
@@ -1965,17 +1965,17 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=11
-Obj1=501-1000 'Ropa de Campesino
-Obj2=135-1000 'T�nica Roja Burda
-Obj3=238-1000 'T�nica Azul
-Obj4=239-1000 'T�nica Roja
-Obj5=381-1000 'T�nica de Monje
-Obj6=196-1000 'T�nica de Mago
-Obj7=357-1000 'T�nica de Monje
-Obj8=986-1000 'T�nica de Druida
-Obj9=873-1000 'Guantes de Hurto
-Obj10=1036-1000 'Guantes de Lucha
-Obj11=1010-1000 'Sombrero de Pirata
+Obj1=501-1000
+Obj2=135-1000
+Obj3=238-1000
+Obj4=239-1000
+Obj5=381-1000
+Obj6=196-1000
+Obj7=357-1000
+Obj8=986-1000
+Obj9=873-1000
+Obj10=1036-1000
+Obj11=1010-1000
 BackUp=1
 
 #############################################
@@ -1996,11 +1996,11 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=5
-Obj1=504-1000 'Atuendo Combinado (H/E/EO-M)
-Obj2=505-1000 'Atuendo Azul (H/E/EO-M)
-Obj3=506-1000 'Atuendo Rosa (H/E/EO-M)
-Obj4=382-1000 'Vestido Azul (H/E/EO-M)
-Obj5=511-1000 'Vestido de Novia Sensual (H/E/EO-M)
+Obj1=504-1000
+Obj2=505-1000
+Obj3=506-1000
+Obj4=382-1000
+Obj5=511-1000
 BackUp=1
 
 #############################################
@@ -2021,12 +2021,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=486-1000 'Ropa de Estilo (E/G)
-Obj2=507-1000 'Ropa Violeta (E/G)
-Obj3=502-1000 'Ropa de Campesino (E/G)
-Obj4=707-1000 'Vestimenta de Noble (E/G)
-Obj5=671-1000 'T�nica de Monje (E/G)
-Obj6=670-1000 'T�nica de Mago (E/G)
+Obj1=486-1000
+Obj2=507-1000
+Obj3=502-1000
+Obj4=707-1000
+Obj5=671-1000
+Obj6=670-1000
 BackUp=1
 
 #############################################
@@ -2046,12 +2046,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=359-1000 'Cota de Mallas
-Obj2=499-1000 'Cota de Mallas (H/E/EO-M)
-Obj3=667-1000 'Cota de Mallas (E/G)
-Obj4=360-1000 'Armadura de Cazador
-Obj5=648-1000 'Armadura de Cazador (E/G)
-Obj6=1003-1000 'Casco de Oso
+Obj1=359-1000
+Obj2=499-1000
+Obj3=667-1000
+Obj4=360-1000
+Obj5=648-1000
+Obj6=1003-1000
 BackUp=1
 
 
@@ -2077,10 +2077,10 @@ Alineacion=0
 Comercia=1
 TipoItems=13
 NROITEMS=4
-Obj1=139-1000 'Pescado
-Obj2=754-1000 'R�bano
-Obj3=43-1000 'Botella de Agua
-Obj4=160-1000 'Cerveza
+Obj1=139-1000
+Obj2=754-1000
+Obj3=43-1000
+Obj4=160-1000
 BackUp=1
 
 #############################################
@@ -2101,14 +2101,14 @@ Alineacion=0
 Comercia=1
 TipoItems=2
 NROITEMS=8
-Obj1=2-1000 'Espada Larga
-Obj2=19-1000 'Espada Dos Manos
-Obj3=123-1000 'Espada Vikinga
-Obj4=401-1000 'Martillo de Guerra
-Obj5=125-1000 'Sable
-Obj6=753-1000 'Mayal Triple
-Obj7=404-1000 'Escudo de Tortuga
-Obj8=990-1000 'Mazo del Juicio
+Obj1=2-1000
+Obj2=19-1000
+Obj3=123-1000
+Obj4=401-1000
+Obj5=125-1000
+Obj6=753-1000
+Obj7=404-1000
+Obj8=990-1000
 BackUp=1
 
 #############################################
@@ -2129,21 +2129,21 @@ Alineacion=0
 Comercia=1
 TipoItems=24
 NROITEMS=15
-Obj1=530-1000 'Inmovilizar
-Obj2=396-1000 'Celeridad
-Obj3=397-1000 'Torpeza
-Obj4=470-1000 'Fuerza
-Obj5=471-1000 'Debilidad
-Obj6=319-1000 'Resucitar	
-Obj7=673-1000 'Mimetismo
-Obj8=394-1000 'LLamado a la Naturaleza
-Obj9=395-1000 'Llamado Nigromante
-Obj10=538-1000 'Invocar Elemental de Tierra
-Obj11=536-1000 'Invocar Elemental de Fuego
-Obj12=532-1000 'Apocalipsis
-Obj13=542-1000 'Turbaci�n
-Obj14=658-1000 'Vara de Fresno
-Obj15=659-1000 'Bast�n nudoso
+Obj1=530-1000
+Obj2=396-1000
+Obj3=397-1000
+Obj4=470-1000
+Obj5=471-1000
+Obj6=319-1000
+Obj7=673-1000
+Obj8=394-1000
+Obj9=395-1000
+Obj10=538-1000
+Obj11=536-1000
+Obj12=532-1000
+Obj13=542-1000
+Obj14=658-1000
+Obj15=659-1000
 BackUp=1
 
 #############################################
@@ -2164,17 +2164,17 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=11
-Obj1=31-1000 'Vestimentas Comunes
-Obj2=32-1000 'Vestimentas Comunes
-Obj3=35-1000 'Vestimentas Comunes
-Obj4=135-1000 'T�nica Roja Burda
-Obj5=238-1000 'T�nica Azul
-Obj6=239-1000 'T�nica Roja
-Obj7=381-1000 'T�nica de Monje
-Obj8=196-1000 'T�nica de Mago
-Obj9=986-1000 'T�nica de Druida
-Obj10=873-1000 'Guantes de Hurto
-Obj11=1010-1000 'Sombrero de Pirata
+Obj1=31-1000
+Obj2=32-1000
+Obj3=35-1000
+Obj4=135-1000
+Obj5=238-1000
+Obj6=239-1000
+Obj7=381-1000
+Obj8=196-1000
+Obj9=986-1000
+Obj10=873-1000
+Obj11=1010-1000
 BackUp=1
 
 #############################################
@@ -2195,11 +2195,11 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=5
-Obj1=170-1000 'Vestimenta de Mujer (H/E/EO-M)
-Obj2=382-1000 'Vestido Azul (H/E/EO-M)
-Obj3=511-1000 'Vestido de Novia Sensual (H/E/EO-M)
-Obj4=488-1000 'White Lady (H/E/EO-M)
-Obj5=508-1000 'Ropa Estuaria (H/E/EO-M)
+Obj1=170-1000
+Obj2=382-1000
+Obj3=511-1000
+Obj4=488-1000
+Obj5=508-1000
 BackUp=1
 
 #############################################
@@ -2220,13 +2220,13 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=7
-Obj1=507-1000 'Ropa Violeta (E/G)
-Obj2=502-1000 'Ropa de Campesino (E/G)
-Obj3=707-1000 'Vestimenta de Noble (E/G)
-Obj4=671-1000 'T�nica de Monje (E/G)
-Obj5=670-1000 'T�nica de Mago (E/G)
-Obj6=524-1000 'T�nica Roja Especial (E/G)
-Obj7=370-1000 'Capucha de Cazador
+Obj1=507-1000
+Obj2=502-1000
+Obj3=707-1000
+Obj4=671-1000
+Obj5=670-1000
+Obj6=524-1000
+Obj7=370-1000
 BackUp=1
 
 #############################################
@@ -2246,13 +2246,13 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=7
-Obj1=359-1000 'Cota de Mallas
-Obj2=499-1000 'Cota de Mallas (H/E/EO-M)
-Obj3=667-1000 'Cota de Mallas (E/G)
-Obj4=360-1000 'Armadura de Cazador
-Obj5=648-1000 'Armadura de Cazador (E/G)
-Obj6=484-1000 'Manto de Noble 
-Obj7=1004-1000 'Casco de Tigre
+Obj1=359-1000
+Obj2=499-1000
+Obj3=667-1000
+Obj4=360-1000
+Obj5=648-1000
+Obj6=484-1000
+Obj7=1004-1000
 BackUp=1
 
 
@@ -2278,10 +2278,10 @@ Alineacion=0
 Comercia=1
 TipoItems=13
 NROITEMS=4
-Obj1=1-1000 'Manzana Roja
-Obj2=29-1000 'Sand�a
-Obj3=158-1000 'Banana
-Obj4=754-1000 'R�bano
+Obj1=1-1000
+Obj2=29-1000
+Obj3=158-1000
+Obj4=754-1000
 BackUp=1
 
 #############################################
@@ -2302,16 +2302,16 @@ Alineacion=0
 Comercia=1
 TipoItems=13
 NROITEMS=10
-Obj1=21-1000 'Porci�n de Tarta
-Obj2=23-1000 'Pan de Trigo
-Obj3=24-1000 'Pan de Ma�z
-Obj4=28-1000 'Queso de Cabra
-Obj5=29-1000 'Sand�a
-Obj6=26-1000 'Pollo
-Obj7=25-1000 'Pastel
-Obj8=160-1000 'Cerveza
-Obj9=42-1000 'Vino
-Obj10=161-1000 'Jugo de Frutas
+Obj1=21-1000
+Obj2=23-1000
+Obj3=24-1000
+Obj4=28-1000
+Obj5=29-1000
+Obj6=26-1000
+Obj7=25-1000
+Obj8=160-1000
+Obj9=42-1000
+Obj10=161-1000
 BackUp=1
 
 #############################################
@@ -2332,14 +2332,14 @@ Alineacion=0
 Comercia=1
 TipoItems=2
 NROITEMS=8
-Obj1=15-1000 'Daga
-Obj2=619-1000 'Daga Envenenada
-Obj3=165-1000 'Daga +1
-Obj4=389-1000 'Martillo de Herrero
-Obj5=9-1000 'Horquilla
-Obj6=2-1000 'Espada Larga
-Obj7=125-1000 'Sable
-Obj8=123-1000 'Espada Vikinga
+Obj1=15-1000
+Obj2=619-1000
+Obj3=165-1000
+Obj4=389-1000
+Obj5=9-1000
+Obj6=2-1000
+Obj7=125-1000
+Obj8=123-1000
 BackUp=1
 
 #############################################
@@ -2359,13 +2359,13 @@ Alineacion=0
 Comercia=1
 TipoItems=24
 NROITEMS=7
-Obj1=199-1000 'Dardo M�gico
-Obj2=200-1000 'Ant�doto M�gico
-Obj3=201-1000 'Aura Sanadora
-Obj4=202-1000 'Toxina
-Obj5=204-1000 'Flecha El�ctrica
-Obj6=658-1000 'Vara de Fresno
-Obj7=659-1000 'Bast�n nudoso
+Obj1=199-1000
+Obj2=200-1000
+Obj3=201-1000
+Obj4=202-1000
+Obj5=204-1000
+Obj6=658-1000
+Obj7=659-1000
 BackUp=1
 
 #############################################
@@ -2386,16 +2386,16 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=10
-Obj1=31-1000 'Vestimentas Comunes
-Obj2=32-1000 'Vestimentas Comunes
-Obj3=35-1000 'Vestimentas Comunes
-Obj4=641-1000 'Ropa de Pordiosero
-Obj5=501-1000 'Ropa de Campesino
-Obj6=135-1000 'T�nica Roja Burda
-obj7=238-1000 'T�nica Azul
-obj8=239-1000 'T�nica Roja
-obj9=873-1000 'Guantes de Hurto
-obj10=1036-1000 'Guantes de Lucha
+Obj1=31-1000
+Obj2=32-1000
+Obj3=35-1000
+Obj4=641-1000
+Obj5=501-1000
+Obj6=135-1000
+obj7=238-1000
+obj8=239-1000
+obj9=873-1000
+obj10=1036-1000
 BackUp=1
 
 #############################################
@@ -2416,11 +2416,11 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=5
-Obj1=170-1000 'Vestimenta de Mujer (H/E/EO-M)
-Obj2=504-1000 'Atuendo Combinado (H/E/EO-M)
-Obj3=505-1000 'Atuendo Azul (H/E/EO-M)
-Obj4=506-1000 'Atuendo Rosa (H/E/EO-M)
-Obj5=382-1000 'Vestido Azul (H/E/EO-M)
+Obj1=170-1000
+Obj2=504-1000
+Obj3=505-1000
+Obj4=506-1000
+Obj5=382-1000
 BackUp=1
 
 #############################################
@@ -2441,12 +2441,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=240-1000 'Ropa de Enano (E/G)
-Obj2=527-1000 'Ropa de Enana (E/G-M)
-Obj3=486-1000 'Ropa de Estilo (E/G)
-Obj4=507-1000 'Ropa Violeta (E/G)
-Obj5=502-1000 'Ropa de Campesino (E/G)
-Obj6=707-1000 'Vestimenta de Noble (E/G)
+Obj1=240-1000
+Obj2=527-1000
+Obj3=486-1000
+Obj4=507-1000
+Obj5=502-1000
+Obj6=707-1000
 BackUp=1
 
 [NPC73]
@@ -2464,9 +2464,9 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=3
-Obj1=30-1000 'Armadura de Cuero
-Obj2=529-1000 'Armadura de Cuero (H/E/EO-M)
-Obj3=668-1000 'Armadura de Cuero (E/G)
+Obj1=30-1000
+Obj2=529-1000
+Obj3=668-1000
 BackUp=1
 
 
@@ -2491,16 +2491,16 @@ Alineacion=0
 Comercia=1
 TipoItems=13
 NROITEMS=10
-Obj1=21-1000 'Porci�n de Tarta
-Obj2=23-1000 'Pan de Trigo
-Obj3=24-1000 'Pan de Ma�z
-Obj4=28-1000 'Queso de Cabra
-Obj5=29-1000 'Sand�a
-Obj6=26-1000 'Pollo
-Obj7=25-1000 'Pastel
-Obj8=160-1000 'Cerveza
-Obj9=42-1000 'Vino
-Obj10=161-1000 'Jugo de Frutas
+Obj1=21-1000
+Obj2=23-1000
+Obj3=24-1000
+Obj4=28-1000
+Obj5=29-1000
+Obj6=26-1000
+Obj7=25-1000
+Obj8=160-1000
+Obj9=42-1000
+Obj10=161-1000
 BackUp=1
 
 #############################################
@@ -2521,15 +2521,15 @@ Alineacion=0
 Comercia=1
 TipoItems=2
 NROITEMS=9
-Obj1=164-1000 'Espada Corta
-Obj2=2-1000 'Espada Larga
-Obj3=19-1000 'Espada Dos Manos
-Obj4=123-1000 'Espada Vikinga
-Obj5=389-1000 'Martillo de Herrero
-Obj6=401-1000 'Martillo de Guerra
-Obj7=478-1000 'Arco Simple
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+Obj1=164-1000
+Obj2=2-1000
+Obj3=19-1000
+Obj4=123-1000
+Obj5=389-1000
+Obj6=401-1000
+Obj7=478-1000
+Obj8=990-1000
+Obj9=1009-1000
 BackUp=1
 
 #############################################
@@ -2549,20 +2549,20 @@ Alineacion=0
 Comercia=1
 TipoItems=24
 NROITEMS=14
-Obj1=395-1000 'Llamado Nigromante
-Obj2=203-1000 'Aura Sanadora Avanzada
-obj3=207-1000 'Devolver Movilidad
-obj4=657-1000 'Quitar la turbaci�n
-obj5=206-1000 'Paralizar
-obj6=361-1000 'Tormenta de Fuego
-obj7=673-1000 'Mimetismo
-obj8=202-1000 'Toxina
-Obj9=531-1000 'Descarga El�ctrica
-Obj10=318-1000 'Invisibilidad
-Obj11=537-1000 'Invocar Elemental de Agua
-Obj12=662-1000 'Sombrero de Mago
-Obj13=658-1000 'Vara de Fresno
-Obj14=659-1000 'Bast�n nudoso
+Obj1=395-1000
+Obj2=203-1000
+obj3=207-1000
+obj4=657-1000
+obj5=206-1000
+obj6=361-1000
+obj7=673-1000
+obj8=202-1000
+Obj9=531-1000
+Obj10=318-1000
+Obj11=537-1000
+Obj12=662-1000
+Obj13=658-1000
+Obj14=659-1000
 BackUp=1
 
 #############################################
@@ -2583,20 +2583,20 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=14
-Obj1=45-1000 'Ropa de Clan
-Obj2=80-1000 'Ropa de Clan
-Obj3=641-1000 'Ropa de Pordiosero
-Obj4=501-1000 'Ropa de Campesino
-Obj5=135-1000 'T�nica Roja Burda
-Obj6=238-1000 'T�nica Azul
-Obj7=239-1000 'T�nica Roja
-Obj8=381-1000 'T�nica de Monje
-Obj9=196-1000 'T�nica de Mago
-Obj10=357-1000 'T�nica de Druida
-Obj11=986-1000 'T�nica de Druida
-Obj12=873-1000 'Guantes de Hurto
-Obj13=1036-1000 'Guantes de Lucha
-Obj14=1010-1000 'Sombrero de Pirata
+Obj1=45-1000
+Obj2=80-1000
+Obj3=641-1000
+Obj4=501-1000
+Obj5=135-1000
+Obj6=238-1000
+Obj7=239-1000
+Obj8=381-1000
+Obj9=196-1000
+Obj10=357-1000
+Obj11=986-1000
+Obj12=873-1000
+Obj13=1036-1000
+Obj14=1010-1000
 BackUp=1
 
 #############################################
@@ -2617,10 +2617,10 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=4
-Obj1=504-1000 'Atuendo Combinado (H/E/EO-M)
-Obj2=505-1000 'Atuendo Azul (H/E/EO-M)
-Obj3=506-1000 'Atuendo Rosa (H/E/EO-M)
-Obj4=382-1000 'Vestido Azul (H/E/EO-M)
+Obj1=504-1000
+Obj2=505-1000
+Obj3=506-1000
+Obj4=382-1000
 BackUp=1
 
 #############################################
@@ -2641,12 +2641,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=486-1000 'Ropa de Estilo (E/G)
-Obj2=507-1000 'Ropa Violeta (E/G)
-Obj3=502-1000 'Ropa de Campesino (E/G)
-Obj4=707-1000 'Vestimenta de Noble (E/G)
-Obj5=671-1000 'T�nica de Monje (E/G)
-Obj6=670-1000 'T�nica de Mago (E/G)
+Obj1=486-1000
+Obj2=507-1000
+Obj3=502-1000
+Obj4=707-1000
+Obj5=671-1000
+Obj6=670-1000
 BackUp=1
 
 #############################################
@@ -2666,12 +2666,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=359-1000 'Cota de Mallas
-Obj2=499-1000 'Cota de Mallas (H/E/EO-M)
-Obj3=667-1000 'Cota de Mallas (E/G)
-Obj4=360-1000 'Armadura de Cazador
-Obj5=648-1000 'Armadura de Cazador (E/G)
-Obj6=1003-1000 'Casco de Oso
+Obj1=359-1000
+Obj2=499-1000
+Obj3=667-1000
+Obj4=360-1000
+Obj5=648-1000
+Obj6=1003-1000
 BackUp=1
 
 
@@ -2697,14 +2697,14 @@ Alineacion=0
 Comercia=1
 TipoItems=1
 NROITEMS=8
-Obj1=28-1000 'Queso de Cabra
-Obj2=29-1000 'Sand�a
-Obj3=26-1000 'Pollo
-Obj4=25-1000 'Pastel
-Obj5=27-1000 'Chuleta
-Obj6=42-1000 'Vino
-Obj7=161-1000 'Jugo de Frutas
-Obj8=533-1000 'Odre
+Obj1=28-1000
+Obj2=29-1000
+Obj3=26-1000
+Obj4=25-1000
+Obj5=27-1000
+Obj6=42-1000
+Obj7=161-1000
+Obj8=533-1000
 BackUp=1
 
 
@@ -2730,15 +2730,15 @@ Alineacion=0
 Comercia=1
 TipoItems=2
 NROITEMS=9
-Obj1=164-1000 'Espada Corta
-Obj2=19-1000 'Espada Dos Manos
-Obj3=123-1000 'Espada Vikinga
-Obj4=124-1000 'Katana
-Obj5=401-1000 'Martillo de Guerra
-Obj6=125-1000 'Sable
-Obj7=753-1000 'Mayal Triple
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+Obj1=164-1000
+Obj2=19-1000
+Obj3=123-1000
+Obj4=124-1000
+Obj5=401-1000
+Obj6=125-1000
+Obj7=753-1000
+Obj8=990-1000
+Obj9=1009-1000
 BackUp=1
 
 #############################################
@@ -2759,10 +2759,10 @@ Alineacion=0
 Comercia=1
 TipoItems=24
 NROITEMS=4
-Obj1=542-1000 'Turbaci�n
-Obj2=532-1000 'Apocalipsis
-Obj3=658-1000 'Vara de Fresno
-Obj4=659-1000 'Bast�n nudoso
+Obj1=542-1000
+Obj2=532-1000
+Obj3=658-1000
+Obj4=659-1000
 BackUp=1
 
 #############################################
@@ -2783,16 +2783,16 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=10
-Obj1=515-1000 'Ropa Legendaria
-Obj2=490-1000 'Ropa de Minero
-Obj3=381-1000 'T�nica de Monje
-Obj4=196-1000 'T�nica de Mago
-Obj5=357-1000 'T�nica de Monje
-Obj6=519-1000 'T�nica Legendaria
-Obj7=986-1000 'T�nica de Druida
-Obj8=873-1000 'Guantes de Hurto
-Obj9=1036-1000 'Guantes de Lucha
-Obj10=1010-1000 'Sombrero de pirata
+Obj1=515-1000
+Obj2=490-1000
+Obj3=381-1000
+Obj4=196-1000
+Obj5=357-1000
+Obj6=519-1000
+Obj7=986-1000
+Obj8=873-1000
+Obj9=1036-1000
+Obj10=1010-1000
 BackUp=1
 
 #############################################
@@ -2813,12 +2813,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=511-1000 'Vestido de Novia Sensual (H/E/EO-M)
-Obj2=488-1000 'White Lady (H/E/EO-M)
-Obj3=508-1000 'Ropa Estuaria (H/E/EO-M)
-Obj4=510-1000 'Vestido Indulgente (H/E/EO-M)
-Obj5=513-1000 'Vestido de Bruja (H/E/EO-M)
-Obj6=514-1000 'Vestido de Bruja Especial (H/E/EO-M)
+Obj1=511-1000
+Obj2=488-1000
+Obj3=508-1000
+Obj4=510-1000
+Obj5=513-1000
+Obj6=514-1000
 BackUp=1
 
 #############################################
@@ -2839,12 +2839,12 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=6
-Obj1=671-1000 'T�nica de Monje (E/G)
-Obj2=670-1000 'T�nica de Mago (E/G)
-Obj3=512-1000 'Vestido Calipso (E/G-M)
-Obj4=672-1000 'Armadura de Elite (E/G)
-Obj5=525-1000 'T�nica Combinada (E/G)
-Obj6=526-1000 'T�nica Combinada de Mujer (E/G-M)
+Obj1=671-1000
+Obj2=670-1000
+Obj3=512-1000
+Obj4=672-1000
+Obj5=525-1000
+Obj6=526-1000
 BackUp=1
 
 #############################################
@@ -2864,17 +2864,17 @@ Alineacion=0
 Comercia=1
 TipoItems=3
 NROITEMS=11
-Obj1=672-1000 'Armadura de Elite (E/G)
-Obj2=359-1000 'Cota de Mallas
-Obj3=499-1000 'Cota de Mallas (H/E/EO-M)
-Obj4=667-1000 'Cota de Mallas (E/G)
-Obj5=360-1000 'Armadura de Cazador
-Obj6=648-1000 'Armadura de Cazador (E/G)
-Obj7=356-1000 'Armadura de las Sombras
-Obj8=854-1000 'Armadura de las Sombras (E/G)
-Obj9=195-1000 'Armadura de Placas Completa
-Obj10=243-1000 'Armadura de Placas Completa (E/G)
-Obj11=1004-1000 'Casco de Tigre
+Obj1=672-1000
+Obj2=359-1000
+Obj3=499-1000
+Obj4=667-1000
+Obj5=360-1000
+Obj6=648-1000
+Obj7=356-1000
+Obj8=854-1000
+Obj9=195-1000
+Obj10=243-1000
+Obj11=1004-1000
 BackUp=1
 
 
@@ -3027,7 +3027,7 @@ PoderEvasion=190
 LanzaSpells=1
 Sp1=35
 NROITEMS=1
-Obj1=551-10 'Flecha +1
+Obj1=551-10
 BackUp=0
 
 #############################################
@@ -3510,11 +3510,11 @@ Domable=0
 Comercia=1
 TipoItems=11
 NROITEMS=5
-Obj1=855-1000 'Poci�n Amarilla (newbie)
-Obj2=856-1000 'Poci�n Azul (newbie)
-Obj3=857-1000 'Poci�n Roja (newbie)
-Obj4=858-1000 'Poci�n Verde (newbie)
-Obj5=166-1000 'Poci�n Violeta
+Obj1=855-1000
+Obj2=856-1000
+Obj3=857-1000
+Obj4=858-1000
+Obj5=166-1000
 BackUp=1
 
 #############################################
@@ -3534,13 +3534,13 @@ Domable=0
 Comercia=1
 TipoItems=3
 NROITEMS=7
-Obj1=1044-1000 'T�nica (Newbie) (H/E/EO)
-Obj2=1045-1000 'T�nica (Newbie) (E/G)
-Obj3=1046-1000 'Armadura de Cuero (Newbie) (H/E/EO)
-Obj4=1047-1000 'Armadura de Cuero (Newbie) (E/G)
-Obj5=1048-1000 'Escudo (Newbie)
-Obj6=1051-1000 'Casco Simple (Newbie)
-Obj7=1052-1000 'Capucha de Cazador (Newbie)
+Obj1=1044-1000
+Obj2=1045-1000
+Obj3=1046-1000
+Obj4=1047-1000
+Obj5=1048-1000
+Obj6=1051-1000
+Obj7=1052-1000
 BackUp=1
 
 #############################################
@@ -3560,14 +3560,14 @@ Domable=0
 Comercia=1
 TipoItems=2
 NROITEMS=8
-Obj1=861-1000 'Espada (Newbie)
-Obj2=859-1000 'Arco (Newbie)
-Obj3=860-1000 'Flecha (Newbie)
-Obj4=564-1000 'Serrucho (Newbie)
-Obj5=565-1000 'Martillo de Herrero (Newbie)
-Obj6=562-1000 'Piquete de minero (Newbie)
-Obj7=561-1000 'Hacha de Le�ador (Newbie)
-Obj8=563-1000 'Ca�a de PEscar (Newbie)
+Obj1=861-1000
+Obj2=859-1000
+Obj3=860-1000
+Obj4=564-1000
+Obj5=565-1000
+Obj6=562-1000
+Obj7=561-1000
+Obj8=563-1000
 BackUp=1
 
 #############################################
@@ -3587,19 +3587,19 @@ Domable=0
 Comercia=1
 TipoItems=24
 NROITEMS=12
-Obj1=199-1000 'Dardo Magico
-Obj2=197-1000 'Flecha Magica
-Obj3=204-1000 'Flecha Electrica
-Obj4=205-1000 'Proyectil magico
-Obj5=202-1000 'Toxina
-Obj6=200-1000 'Antidoto magico
-Obj7=201-1000 'Curar heridas leves
-Obj8=363-1000 'Ataque de hambre
-Obj9=364-1000 'Terrible Hambre de Igor
-Obj10=862-1000 'Baston de mago (Newbie)
-Obj11=863-1000 ' Flauta Magica (Newbie)
-Obj12=864-1000 ' Laud magico (Newbie)
-BackUp=1 
+Obj1=199-1000
+Obj2=197-1000
+Obj3=204-1000
+Obj4=205-1000
+Obj5=202-1000
+Obj6=200-1000
+Obj7=201-1000
+Obj8=363-1000
+Obj9=364-1000
+Obj10=862-1000
+Obj11=863-1000
+Obj12=864-1000
+BackUp=1
 
 ##############################################################
 #####################NPCS NO HOSTILES#########################
@@ -4294,10 +4294,10 @@ PoderAtaque=30
 PoderEvasion=10
 BackUp=0
 NROITEMS=5
-Drop1=12-1  ' Oro
-Drop2=12-2  ' Oro
-Drop4=12-15 ' Oro
-Drop5=12-70 ' Oro
+Drop1=12-1
+Drop2=12-2
+Drop4=12-15
+Drop5=12-70
 
 ############################################
 
@@ -4327,10 +4327,10 @@ Snd1=35
 Snd2=9
 BackUp=0
 NROITEMS=5
-Drop1=414-1 'Piel de Lobo
-Drop2=27-3 'Chuleta
-Drop3=1002-1 'Casco de Lobo
-Drop4=394-1 'Llamado a la Naturaleza.
+Drop1=414-1
+Drop2=27-3
+Drop3=1002-1
+Drop4=394-1
 
 ############################################
 
@@ -4360,10 +4360,10 @@ Snd2=33
 Snd3=164
 BackUp=0
 NROITEMS=5
-Drop1=12-21 'Oro
-Drop2=45-1 'Ropa de Clan
-Drop3=12-50 'Oro
-Drop4=38-30 'Pociones Rojas
+Drop1=12-21
+Drop2=45-1
+Drop3=12-50
+Drop4=38-30
 
 ############################################
 
@@ -4391,11 +4391,11 @@ PoderAtaque=30
 PoderEvasion=30
 BackUp=0
 NROITEMS=5
-Drop1=12-8 'Oro
-Drop2=12-8 'Oro
-Drop3=363-1 'Ataque de Hambre
-Drop4=2-2 ' Espada larga
-Drop5=197-1 'Flecha magica
+Drop1=12-8
+Drop2=12-8
+Drop3=363-1
+Drop4=2-2
+Drop5=197-1
 
 ############################################
 
@@ -4424,9 +4424,9 @@ PoderEvasion=0
 SND2=103
 BackUp=0
 NROITEMS=5
-Drop3=38-10 'Pociones Rojas
-Drop4=200-1 'Ant�doto M�gico
-Drop5=202-1 'Toxina
+Drop3=38-10
+Drop4=200-1
+Drop5=202-1
 
 ############################################
 
@@ -4455,11 +4455,11 @@ PoderEvasion=40
 Snd3=142
 BackUp=0
 NROITEMS=5
-Drop1=12-15 'Oro
-Drop2=12-22 'Oro
-Drop3=15-1 'Daga
-Drop4=132-1 'Casco de Hierro
-Drop5=39-10 'Pociones Verdes
+Drop1=12-15
+Drop2=12-22
+Drop3=15-1
+Drop4=132-1
+Drop5=39-10
 
 ############################################
 
@@ -4488,9 +4488,9 @@ PoderEvasion=5
 SND3=67
 BackUp=0
 NROITEMS=5
-Drop1=26-1 'Pollo
-Drop2=12-5 'Oro
-Drop3=12-50 'Oro
+Drop1=26-1
+Drop2=12-5
+Drop3=12-50
 
 ############################################
 
@@ -4520,10 +4520,10 @@ SND2=33
 Snd3=164
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop2=38-7 'Pociones Rojas
-Drop3=37-5 'Pociones Azules
-Drop5=395-1 'Llamado Nigromante
+Drop1=12-50
+Drop2=38-7
+Drop3=37-5
+Drop5=395-1
 
 ############################################
 
@@ -4551,10 +4551,10 @@ PoderAtaque=60
 PoderEvasion=50
 BackUp=0
 NROITEMS=5
-Drop1=12-25 'Oro
-Drop3=132-1 'Casco de Hierro
-Drop4=126-1 'Hacha Larga de Guerra
-Drop5=380-1 'Invocaci�n de Ultratumba
+Drop1=12-25
+Drop3=132-1
+Drop4=126-1
+Drop5=380-1
 
 ############################################
 
@@ -4584,11 +4584,11 @@ PoderEvasion=250
 Snd3=160
 BackUp=0
 NROITEMS=5
-Drop1=12-1000 'Oro
-Drop2=239-1 'T�nica Roja
-Drop3=12-4700 'Oro
-Drop4=981-2 'Piwafwi de Fuego
-Drop5=481-1 'Armadura de Drag�n
+Drop1=12-1000
+Drop2=239-1
+Drop3=12-4700
+Drop4=981-2
+Drop5=481-1
 
 ############################################
 
@@ -4617,11 +4617,11 @@ PoderEvasion=70
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop1=12-175 'Oro
-Drop2=38-30 ' Pociones Rojas
-Drop3=164-1 'Espada Corta
-Drop4=480-110 'Flechas
-Drop5=206-1 'Paralizar
+Drop1=12-175
+Drop2=38-30
+Drop3=164-1
+Drop4=480-110
+Drop5=206-1
 
 ############################################
 
@@ -4651,10 +4651,10 @@ PoderEvasion=210
 snd2=78
 BackUp=0
 NROITEMS=5
-Drop1=12-350 'Oro
-Drop2=37-55 'Pociones Azul
-Drop3=401-1 'Martillo de Guerra
-Drop5=697-1 'Anillo M�gico
+Drop1=12-350
+Drop2=37-55
+Drop3=401-1
+Drop5=697-1
 
 ############################################
 
@@ -4713,11 +4713,11 @@ PoderEvasion=245
 snd2=78
 BackUp=0
 NROITEMS=5
-Drop1=12-900 'Oro
-Drop2=37-145 'Poci�n Azul
-Drop3=990-1 'Mazo de Juicio
-Drop4=698-1 'Anillo de Resitencia M�gica
-Drop5=359-3 'Cotas de Mallas
+Drop1=12-900
+Drop2=37-145
+Drop3=990-1
+Drop4=698-1
+Drop5=359-3
 
 ############################################
 
@@ -4747,11 +4747,11 @@ PoderEvasion=150
 SND2=103
 BackUp=0
 NROITEMS=5
-Drop1=12-3000 'Oro
-Drop2=697-3 'Anillo M�gico
-Drop3=698-2 'Anillo de Resistencia M�gica
-Drop4=699-1 'Anillo de Disoluci�n M�gica
-Drop5=503-2 'Trampa Visual
+Drop1=12-3000
+Drop2=697-3
+Drop3=698-2
+Drop4=699-1
+Drop5=503-2
 
 ############################################
 
@@ -4780,11 +4780,11 @@ PoderAtaque=160
 PoderEvasion=70
 BackUp=0
 NROITEMS=5
-Drop1=12-175 'Oro
-Drop2=38-30 'Poci�n Roja
-Drop3=37-50 'Poci�n Azul
-Drop4=480-310 'Flechas
-Drop5=697-2 'Anillo M�gico
+Drop1=12-175
+Drop2=38-30
+Drop3=37-50
+Drop4=480-310
+Drop5=697-2
 
 ############################################
 
@@ -4841,11 +4841,11 @@ Sp1=9
 Sp2=23
 BackUp=0
 NROITEMS=5
-Drop1=12-1200 'Oro
-Drop2=12-1550 'Oro
-Drop3=37-175 'Pociones Azules
-Drop4=206-1 'Paralizar
-Drop5=531-1 'Descarga El�ctrica
+Drop1=12-1200
+Drop2=12-1550
+Drop3=37-175
+Drop4=206-1
+Drop5=531-1
 
 ############################################
 
@@ -4877,10 +4877,10 @@ Sp2=15
 Snd3=89
 BackUp=0
 NROITEMS=5
-Drop1=12-150 'Oro
-Drop3=37-120 'Pociones Azules
-Drop4=361-1 'Tormenta de Fuego
-Drop5=206-1 'Paralizar
+Drop1=12-150
+Drop3=37-120
+Drop4=361-1
+Drop5=206-1
 
 ############################################
 
@@ -4909,10 +4909,10 @@ PoderEvasion=70
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop1=12-175 'Oro
-Drop2=38-30 'Poci�n Roja
-Drop3=36-10 'Poci�n Amarilla
-Drop4=480-365 'Flechas
+Drop1=12-175
+Drop2=38-30
+Drop3=36-10
+Drop4=480-365
 
 ############################################
 
@@ -4967,10 +4967,10 @@ PoderAtaque=700
 PoderEvasion=45
 BackUp=0
 NROITEMS=5
-Drop1=414-20 'Piel de Tigre (le pongo de lobo mientras, cambiar!!)
-Drop3=27-23 'Chuleta
-Drop4=30-1 'Armadura de Cuero
-Drop5=1004-1 'Casco de Tigre
+Drop1=414-20
+Drop3=27-23
+Drop4=30-1
+Drop5=1004-1
 
 ############################################
 
@@ -4998,11 +4998,11 @@ PoderAtaque=100
 PoderEvasion=75
 BackUp=0
 NROITEMS=5
-Drop1=12-114 'Oro
-Drop2=3-1 'Hacha
-Drop3=39-10 'Poci�n Verde
-Drop4=990-2 'Mazos de Juicio
-Drop5=359-2 'Cotas de Malla
+Drop1=12-114
+Drop2=3-1
+Drop3=39-10
+Drop4=990-2
+Drop5=359-2
 
 ############################################
 
@@ -5030,11 +5030,11 @@ DEF=30
 PoderAtaque=100
 PoderEvasion=75
 NROITEMS=5
-Drop1=12-114 'Oro
-Drop2=3-1 'Hacha
-Drop3=39-10 'Poci�n Verde
-Drop4=990-2 'Mazos de Juicio
-Drop5=359-2 'Cotas de Malla
+Drop1=12-114
+Drop2=3-1
+Drop3=39-10
+Drop4=990-2
+Drop5=359-2
 BackUp=0
 
 ############################################
@@ -5064,11 +5064,11 @@ PoderEvasion=200
 Nroitems=1
 BackUp=0
 NROITEMS=5
-Drop1=183-1 'Llave Fuerte
-Drop2=183-1 'Llave Fuerte
-Drop3=183-1 'Llave Fuerte
-Drop4=183-1 'Llave Fuerte
-Drop5=183-1 'Llave Fuerte
+Drop1=183-1
+Drop2=183-1
+Drop3=183-1
+Drop4=183-1
+Drop5=183-1
 
 ############################################
 
@@ -5097,8 +5097,8 @@ PoderEvasion=160
 SND3=62
 BackUp=0
 NROITEMS=5
-Drop2=139-1 'Pescado
-Drop3=544-5 'Pez Dorado
+Drop2=139-1
+Drop3=544-5
 
 ############################################
 
@@ -5128,11 +5128,11 @@ Nroitems=1
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop1=174-1 'Llave Catacumbas de Ulla
-Drop2=174-1 'Llave Catacumbas de Ulla
-Drop3=174-1 'Llave Catacumbas de Ulla
-Drop4=174-1 'Llave Catacumbas de Ulla
-Drop5=174-1 'Llave Catacumbas de Ulla
+Drop1=174-1
+Drop2=174-1
+Drop3=174-1
+Drop4=174-1
+Drop5=174-1
 
 ############################################
 
@@ -5161,11 +5161,11 @@ PoderEvasion=250
 Nroitems=1
 BackUp=0
 NROITEMS=5
-Drop1=178-1 'Llave Dungeon Malaheing
-Drop2=178-1 'Llave Dungeon Malaheing
-Drop3=178-1 'Llave Dungeon Malaheing
-Drop4=178-1 'Llave Dungeon Malaheing
-Drop5=178-1 'Llave Dungeon Malaheing
+Drop1=178-1
+Drop2=178-1
+Drop3=178-1
+Drop4=178-1
+Drop5=178-1
 
 ############################################
 
@@ -5194,9 +5194,9 @@ PoderEvasion=0
 SND2=103
 BackUp=0
 NROITEMS=5
-Drop1=12-5 'Oro
-Drop2=12-10 'Oro
-Drop3=12-50 'Oro
+Drop1=12-5
+Drop2=12-10
+Drop3=12-50
 
 ############################################
 
@@ -5226,10 +5226,10 @@ PoderEvasion=10
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop1=12-2   ' Oro
-Drop3=12-30  ' Oro
-Drop4=2-1    ' Espada larga
-Drop5=164-1  ' Espada corta
+Drop1=12-2
+Drop3=12-30
+Drop4=2-1
+Drop5=164-1
 
 ############################################
 
@@ -5258,10 +5258,10 @@ PoderEvasion=50
 Snd3=157
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop2=641-1 'Ropa Pordiosero
-Drop3=38-10 'Pociones Rojas
-Drop4=873-1 'Guantes de Hurto
+Drop1=12-50
+Drop2=641-1
+Drop3=38-10
+Drop4=873-1
 
 ############################################
 
@@ -5290,11 +5290,11 @@ PoderEvasion=200
 Snd3=155
 BackUp=0
 NROITEMS=5
-Drop1=12-200 'Oro
-Drop2=38-10 'Pociones Rojas
-Drop3=366-1 'Daga +3
-Drop4=367-1 'Daga +4
-Drop5=356-1 'Armadura de las Sombras
+Drop1=12-200
+Drop2=38-10
+Drop3=366-1
+Drop4=367-1
+Drop5=356-1
 
 ############################################
 
@@ -5322,9 +5322,9 @@ PoderAtaque=230
 PoderEvasion=60
 BackUp=0
 NROITEMS=5
-Drop1=415-1 'Piel de Oso Pardo
-Drop3=38-10 'Pociones Rojas
-Drop4=480-50 'Flechas
+Drop1=415-1
+Drop3=38-10
+Drop4=480-50
 
 ############################################
 
@@ -5355,10 +5355,10 @@ PoderEvasion=25
 SND3=63
 BackUp=0
 NROITEMS=5
-Drop1=12-4    ' Oro
-Drop3=12-53   ' Oro
-Drop4=12-250  ' Oro
-Drop5=12-1000 ' Oro
+Drop1=12-4
+Drop3=12-53
+Drop4=12-250
+Drop5=12-1000
 
 ############################################
 
@@ -5386,11 +5386,11 @@ PoderAtaque=150
 PoderEvasion=100
 BackUp=0
 NROITEMS=5
-Drop1=12-100 'Oro
-Drop2=478-1 'Arco Simple
-Drop3=479-1 'Arco Compuesto
-Drop4=38-15 'Pociones Rojas
-Drop5=480-500 ' Flechas
+Drop1=12-100
+Drop2=478-1
+Drop3=479-1
+Drop4=38-15
+Drop5=480-500
 
 ############################################
 
@@ -5418,9 +5418,9 @@ PoderAtaque=5
 PoderEvasion=3
 BackUp=0
 NROITEMS=5
-Drop1=12-1 'Oro
-Drop3=12-10 'Oro
-Drop5=12-200 'Oro
+Drop1=12-1
+Drop3=12-10
+Drop5=12-200
 
 ############################################
 
@@ -5451,10 +5451,10 @@ EXP1=Crick Crick
 EXP2=Clir chuik
 BackUp=0
 NROITEMS=5
-Drop1=12-2 'Oro
-Drop3=28-10 'Queso de Cabra
-Drop4=534-10 'Odre Vac�a
-Drop5=12-100 'Oro
+Drop1=12-2
+Drop3=28-10
+Drop4=534-10
+Drop5=12-100
 
 ############################################
 
@@ -5482,11 +5482,11 @@ PoderAtaque=350
 PoderEvasion=200
 BackUp=0
 NROITEMS=5
-Drop1=12-360 'Oro
-Drop2=12-500 'Oro
-Drop3=37-100 'Pociones Azules
-Drop4=205-1 'Proyectil Etereo
-Drop5=12-10000 'Oro
+Drop1=12-360
+Drop2=12-500
+Drop3=37-100
+Drop4=205-1
+Drop5=12-10000
 
 ############################################
 
@@ -5514,11 +5514,11 @@ PoderAtaque=250
 PoderEvasion=65
 BackUp=0
 NROITEMS=5
-Drop1=415-1 'Piel Oso Pardo
-Drop2=12-26 'Oro
-Drop3=480-50 'Flechas
-Drop4=479-1 'Arco Compuesto
-Drop5=38-100 'Pociones Rojas
+Drop1=415-1
+Drop2=12-26
+Drop3=480-50
+Drop4=479-1
+Drop5=38-100
 
 ############################################
 
@@ -5546,10 +5546,10 @@ PoderAtaque=100
 PoderEvasion=45
 BackUp=0
 NROITEMS=5
-Drop1=404-1 'Escudo de Tortuga
-Drop2=12-175 'Oro
-Drop3=38-20 'Pociones Rojas
-Drop4=203-1 'Aura Sanadora Avanzada
+Drop1=404-1
+Drop2=12-175
+Drop3=38-20
+Drop4=203-1
 
 ############################################
 
@@ -5578,10 +5578,10 @@ PoderEvasion=60
 Snd3=161
 BackUp=0
 NROITEMS=5
-Drop1=12-23 'Oro
-Drop3=12-150 'Oro
-Drop4=197-1 'Flecha M�gica
-Drop5=204-1 'Flecha El�ctrica
+Drop1=12-23
+Drop3=12-150
+Drop4=197-1
+Drop5=204-1
 
 ############################################
 
@@ -5610,10 +5610,10 @@ PoderEvasion=230
 snd2=78
 BackUp=0
 NROITEMS=5
-Drop1=12-512 'Oro
-Drop2=398-20 'Garrote
-Drop3=38-120 'Pociones Rojas
-Drop4=37-150 'Pociones Azules
+Drop1=12-512
+Drop2=398-20
+Drop3=38-120
+Drop4=37-150
 Drop5=698-1
 
 ############################################
@@ -5649,11 +5649,11 @@ SND3=32
 AfectaParalisis=1
 BackUp=0
 NROITEMS=5
-Drop1=12-65000 'Oro
-Drop2= 194-5000 'Minerales de Oro
-Drop3=402-1 'Espada Mata Dragones
-Drop4=532-1 'Apocalipsis
-Drop5=481-3 'Armaduras de Drag�n
+Drop1=12-65000
+Drop2= 194-5000
+Drop3=402-1
+Drop4=532-1
+Drop5=481-3
 
 ############################################
 
@@ -5682,11 +5682,11 @@ PoderEvasion=220
 Snd3=159
 BackUp=0
 NROITEMS=5
-Drop1=12-6000 'Oro
-Drop2=12-10000 'Oro
-Drop3=126-1 'Hacha Larga de Guerra
-Drop4=129-3 'Hacha Doble Filo
-Drop5=495-1 'Armadura Escarlata.
+Drop1=12-6000
+Drop2=12-10000
+Drop3=126-1
+Drop4=129-3
+Drop5=495-1
 
 ############################################
 
@@ -5714,11 +5714,11 @@ PoderAtaque=10
 PoderEvasion=10
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop2=12-80 'Oro
-Drop3=12-150 'Oro
-Drop4=37-50 'Poci�n Azul
-Drop5=12-5000 'Oro
+Drop1=12-50
+Drop2=12-80
+Drop3=12-150
+Drop4=37-50
+Drop5=12-5000
 
 ############################################
 
@@ -5744,13 +5744,13 @@ MinHIT=65
 DEF=0
 PoderAtaque=250
 PoderEvasion=65
-BackUp=0 
+BackUp=0
 NROITEMS=5
-Drop1=12-100 'Oro
-Drop2=38-10 'Poci�n Roja
-Drop3=414-30 'Piel de Lobo
-Drop4=1002-1 'Casco de Lobo
-Drop5=394-1 'Llamado a la Naturaleza.
+Drop1=12-100
+Drop2=38-10
+Drop3=414-30
+Drop4=1002-1
+Drop5=394-1
 
 ############################################
 
@@ -5807,11 +5807,11 @@ PoderEvasion=70
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop1=12-175 'Oro
-Drop2=38-25 'Pociones Rojas
-Drop3=36-15 'Poci�n Amarilla
-Drop4=39-20 'Poci�n Verde
-Drop5=159-5 'Hachas de B�rbaro
+Drop1=12-175
+Drop2=38-25
+Drop3=36-15
+Drop4=39-20
+Drop5=159-5
 
 ############################################
 
@@ -5841,11 +5841,11 @@ PoderEvasion=180
 Snd2=59
 BackUp=0
 NROITEMS=5
-Drop1=12-2100 'Oro
-Drop2=36-30 'Poci�n Amarilla
-Drop3=39-30 'Poci�n Verde
-Drop4=537-1 'Invocar Elemental de Agua
-Drop5=496-1 'Armadura de las Ci�nagas
+Drop1=12-2100
+Drop2=36-30
+Drop3=39-30
+Drop4=537-1
+Drop5=496-1
 
 ############################################
 
@@ -5876,11 +5876,11 @@ Sp1=8
 Snd3=171
 BackUp=0
 NROITEMS=5
-Drop1=12-500 'Oro
-Drop2=12-650 'Oro
-Drop3=205-1 'Proyectil Et�reo
-Drop4=38-300 'Poci�n Roja
-Drop5=37-500 'Poci�n Azul
+Drop1=12-500
+Drop2=12-650
+Drop3=205-1
+Drop4=38-300
+Drop5=37-500
 
 ############################################
 
@@ -5915,10 +5915,10 @@ Sp3=15
 BackUp=0
 NROITEMS=5
 Drop1=12-1000 �ro
-Drop2=659-1 'Baston Nudoso
-Drop3=514-1 'Vestido de Bruja Especial
-Drop4=12-5000 'Oro
-Drop5=12-15000 'Oro
+Drop2=659-1
+Drop3=514-1
+Drop4=12-5000
+Drop5=12-15000
 
 ############################################
 
@@ -5950,11 +5950,11 @@ Sp2=9
 Sp3=15
 BackUp=0
 NROITEMS=5
-Drop1=12-1500 'Oro
-Drop2=12-2000 'Oro
-Drop3=524-2 'T�nica Roja Especial (E/G)
-Drop4=206-1 'Paralizar
-Drop5=660-5 'B�culos Engarzados
+Drop1=12-1500
+Drop2=12-2000
+Drop3=524-2
+Drop4=206-1
+Drop5=660-5
 
 ############################################
 
@@ -5984,11 +5984,11 @@ Snd2=79
 Snd3=89
 BackUp=0
 NROITEMS=5
-Drop1=12-2000 'Oro
-Drop2=12-2750 'Oro
-Drop3=21-10000 'Oro
-Drop4=403-2 'Espadas de Plata
-Drop5=485-1 'Armadura Legendaria
+Drop1=12-2000
+Drop2=12-2750
+Drop3=21-10000
+Drop4=403-2
+Drop5=485-1
 
 ############################################
 
@@ -6021,11 +6021,11 @@ Sp2=23
 Sp3=9
 BackUp=0
 NROITEMS=5
-Drop1=12-1200 'Oro
-Drop2=38-100 'Pociones Rojas
-Drop3=12-7500 'Oro
-Drop4=206-1 'Paralizar
-Drop5=531-1 'Descarga El�ctrica
+Drop1=12-1200
+Drop2=38-100
+Drop3=12-7500
+Drop4=206-1
+Drop5=531-1
 
 ############################################
 
@@ -6054,11 +6054,11 @@ PoderEvasion=190
 Snd3=168
 BackUp=0
 NROITEMS=5
-Drop1=12-1000 'Oro
-Drop2=12-2000 'Oro
-Drop3=196-5 'T�nica de Mago
-Drop4=380-1 'Invocaci�n de Ultratumba
-Drop5=660-5 'B�culos Engarzados
+Drop1=12-1000
+Drop2=12-2000
+Drop3=196-5
+Drop4=380-1
+Drop5=660-5
 
 ############################################
 
@@ -6086,11 +6086,11 @@ PoderAtaque=170
 PoderEvasion=100
 BackUp=0
 NROITEMS=5
-Drop1=12-800 'Oro
-Drop2=38-100 'Pociones Rojas
-Drop3=132-2 'Casco de Hierro
-Drop4=126-5 'Hacha Larga de Guerra
-Drop5=130-3 'Escudo de Plata
+Drop1=12-800
+Drop2=38-100
+Drop3=132-2
+Drop4=126-5
+Drop5=130-3
 
 ############################################
 
@@ -6118,11 +6118,11 @@ PoderAtaque=45
 PoderEvasion=50
 BackUp=0
 NROITEMS=5
-Drop1=12-15  'Oro
-Drop2=12-20  'Oro
-Drop3=12-100 'Oro
-Drop4=12-250 'Oro
-Drop5=12-750 'Oro
+Drop1=12-15
+Drop2=12-20
+Drop3=12-100
+Drop4=12-250
+Drop5=12-750
 
 ############################################
 
@@ -6151,9 +6151,9 @@ PoderEvasion=70
 Snd2=98
 BackUp=0
 NROITEMS=5
-Drop1=27-10 'Chuleta
-Drop2=12-50 'Oro
-Drop3=38-20 'Pociones Rojas
+Drop1=27-10
+Drop2=12-50
+Drop3=38-20
 
 ############################################
 
@@ -6402,10 +6402,10 @@ LanzaSpells=1
 Sp1=2
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop2=12-75 'Oro
+Drop1=12-50
+Drop2=12-75
 Drop3=12-150' Oro
-Drop4=199-5 'Dardo M�gico
+Drop4=199-5
 
 ############################################
 
@@ -6435,10 +6435,10 @@ PoderEvasion=150
 Snd3=172
 BackUp=0
 NROITEMS=5
-Drop2=12-5000 'Oro (Poner alforja despues)
-Drop3=474-1 'Barca
-Drop4=475-1 'Galera
-Drop5=476-1 'Gale�n
+Drop2=12-5000
+Drop3=474-1
+Drop4=475-1
+Drop5=476-1
 
 ############################################
 
@@ -6469,9 +6469,9 @@ LanzaSpells=1
 Sp1=15
 BackUp=0
 NROITEMS=5
-Drop2=12-3500 'Oro (Poner Mochila de Viajero despues)
-Drop3=474-1 'Barca
-Drop4=475-1 'Galera
+Drop2=12-3500
+Drop3=474-1
+Drop4=475-1
 
 ############################################
 
@@ -6501,7 +6501,7 @@ PoderEvasion=10
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop2=58-15 'Le�a
+Drop2=58-15
 
 ############################################
 
@@ -6532,11 +6532,11 @@ Snd2=13
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop1=58-50 'Le�a
-Drop2=58-100 'Le�a
-Drop3=58-500 'Le�a
-Drop4=58-3000 'Le�a
-Drop5=58-10000 'Le�a
+Drop1=58-50
+Drop2=58-100
+Drop3=58-500
+Drop4=58-3000
+Drop5=58-10000
 
 ############################################
 
@@ -6567,9 +6567,9 @@ Snd2=13
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop1=58-10 'Le�a
-Drop2=208-1 'Flauta M�gica
-Drop3=696-5 'La�d M�gico
+Drop1=58-10
+Drop2=208-1
+Drop3=696-5
 
 ############################################
 
@@ -6598,7 +6598,7 @@ PoderEvasion=10
 Veneno=1
 BackUp=0
 NROITEMS=5
-Drop2=58-15 'Le�a
+Drop2=58-15
 
 ############################################
 
@@ -6630,9 +6630,9 @@ SND2=31
 SND3=32
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop2=12-100 'Oro
-Drop3=645-1 'Poci�n Negra
+Drop1=12-50
+Drop2=12-100
+Drop3=645-1
 
 ############################################
 
@@ -6661,8 +6661,8 @@ PoderAtaque=10
 PoderEvasion=15
 BackUp=0
 NROITEMS=5
-Drop1=27-1 'Chuleta
-Drop2=12-10 'Oro
+Drop1=27-1
+Drop2=12-10
 
 ############################################
 
@@ -6692,8 +6692,8 @@ PoderEvasion=15
 Snd2=8
 BackUp=0
 NROITEMS=5
-Drop1=27-5 'Chuleta
-Drop2=12-50 'Oro
+Drop1=27-5
+Drop2=12-50
 
 ############################################
 
@@ -6722,11 +6722,11 @@ PoderEvasion=140
 AfectaParalisis=1
 BackUp=0
 NROITEMS=5
-Drop1=12-500 'Oro
-Drop2=38-50 'Pociones Rojas
-Drop3=159-1 'Hacha de B�rbaro
-Drop4=243-2 'Armadura de Placas Completas (E/G)
-Drop5=393-3 'Armadura de Placas Completas + 2 (E/G)
+Drop1=12-500
+Drop2=38-50
+Drop3=159-1
+Drop4=243-2
+Drop5=393-3
 
 ############################################
 
@@ -6759,11 +6759,11 @@ Sp3=15
 AfectaParalisis=1
 BackUp=0
 NROITEMS=5
-Drop1=12-10000 'Oro
-Drop2=12-15000 'Oro
-Drop3=361-2 'Tormentas de Fuego
-Drop4=206-3 'Paralizar
-Drop5=400-3 'Varas de Mago
+Drop1=12-10000
+Drop2=12-15000
+Drop3=361-2
+Drop4=206-3
+Drop5=400-3
 
 ############################################
 
@@ -6792,11 +6792,11 @@ PoderEvasion=220
 Snd3=100
 BackUp=0
 NROITEMS=5
-Drop1=12-8000 'Oro
-Drop2=12-16000 'Oro
-Drop3=126-3 'Hacha Larga de Guerra
-Drop4=129-5 'Hachas Doble Filo
-Drop5=495-2 'Armaduras Escarlata
+Drop1=12-8000
+Drop2=12-16000
+Drop3=126-3
+Drop4=129-5
+Drop5=495-2
 
 ############################################
 
@@ -6825,11 +6825,11 @@ PoderAtaque=380
 PoderEvasion=250
 BackUp=0
 NROITEMS=5
-Drop1=12-4000 'Oro
-Drop2=12-6000 'Oro
-Drop3=12-10000 'Oro
-Drop4=12-50000 'Oro
-Drop5=402-1 'Espada Mata Dragones
+Drop1=12-4000
+Drop2=12-6000
+Drop3=12-10000
+Drop4=12-50000
+Drop5=402-1
 
 ############################################
 
@@ -6859,11 +6859,11 @@ Snd2=79
 Snd3=89
 BackUp=0
 NROITEMS=5
-Drop1=12-15000 'Oro
-Drop2=38-1000 'Pociones Rojas
-Drop3=37-2000 'Pociones Azules
-Drop4=12-100000 'Oro
-Drop5=485-2 'Armaduras Legendarias
+Drop1=12-15000
+Drop2=38-1000
+Drop3=37-2000
+Drop4=12-100000
+Drop5=485-2
 
 ############################################
 
@@ -6896,11 +6896,11 @@ Sp3=15
 Snd3=156
 BackUp=0
 NROITEMS=5
-Drop1=12-2500 'Oro
-Drop2=37-200 'Pociones Azules
-Drop3=361-1 'Tormentas de Fuego
-Drop4=530-2 'Inmovilizar
-Drop5=699-3 'Anillo de Disoluci�n M�gica
+Drop1=12-2500
+Drop2=37-200
+Drop3=361-1
+Drop4=530-2
+Drop5=699-3
 
 ############################################
 
@@ -6930,10 +6930,10 @@ LanzaSpells=1
 Sp1=8
 BackUp=0
 NROITEMS=5
-Drop1=12-500 'Oro
-Drop2=38-100 'Pociones Rojas
-Drop3=239-1 'T�nica Roja
-Drop4=205-1 'Proyectil Et�reo
+Drop1=12-500
+Drop2=38-100
+Drop3=239-1
+Drop4=205-1
 
 ############################################
 
@@ -6967,11 +6967,11 @@ Sp1=15
 Sp2=25
 BackUp=0
 NROITEMS=5
-Drop1=12-10000 'Oro
-Drop2=12-15000 'Oro
-Drop3=361-2 'Tormentas de Fuego
-Drop4=536-1 'Invocar Elemental de Fuego
-Drop5=532-1 'Apocalipsis
+Drop1=12-10000
+Drop2=12-15000
+Drop3=361-2
+Drop4=536-1
+Drop5=532-1
 
 ############################################
 
@@ -6999,11 +6999,11 @@ PoderAtaque=150
 PoderEvasion=50
 BackUp=0
 NROITEMS=5
-Drop1=12-100 'Oro
-Drop2=12-150 'Oro
-Drop3=12-300 'Oro
-Drop4=12-600 'Oro
-Drop5=12-1200 'Oro
+Drop1=12-100
+Drop2=12-150
+Drop3=12-300
+Drop4=12-600
+Drop5=12-1200
 
 ############################################
 
@@ -7031,11 +7031,11 @@ PoderAtaque=200
 PoderEvasion=80
 BackUp=0
 NROITEMS=5
-Drop1=12-125 'Oro
-Drop2=12-200 'Oro
-Drop3=12-300 'Oro
-Drop4=12-500 'Oro
-Drop5=12-1500 'Oro
+Drop1=12-125
+Drop2=12-200
+Drop3=12-300
+Drop4=12-500
+Drop5=12-1500
 
 ############################################
 
@@ -7063,9 +7063,9 @@ PoderAtaque=110
 PoderEvasion=70
 BackUp=0
 NROITEMS=5
-Drop1=12-75 'Oro
-Drop2=619-1 'Daga Envenenada
-Drop4=202-1 'Toxina
+Drop1=12-75
+Drop2=619-1
+Drop4=202-1
 
 ############################################
 
@@ -7093,10 +7093,10 @@ PoderAtaque=250
 PoderEvasion=85
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop3=19-1 'Espada Dos manos
-Drop4=125-1 'Sable
-Drop5=873-1 'Guantes de Hurto
+Drop1=12-50
+Drop3=19-1
+Drop4=125-1
+Drop5=873-1
 
 ############################################
 
@@ -7124,9 +7124,9 @@ PoderAtaque=100
 PoderEvasion=45
 BackUp=0
 NROITEMS=5
-Drop1=12-150 'Oro
-Drop2=12-200 'Oro
-Drop3=12-600 'Oro
+Drop1=12-150
+Drop2=12-200
+Drop3=12-600
 
 ############################################
 
@@ -7154,8 +7154,8 @@ PoderAtaque=80
 PoderEvasion=100
 BackUp=0
 NROITEMS=5
-Drop1=12-70 'Oro
-Drop2=12-140 'Oro
+Drop1=12-70
+Drop2=12-140
 Drop3=12-200' Oro
 
 ############################################
@@ -7185,8 +7185,8 @@ PoderEvasion=150
 Snd3=163
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop2=38-10 'Pociones Rojas
+Drop1=12-50
+Drop2=38-10
 
 ############################################
 
@@ -7214,8 +7214,8 @@ PoderAtaque=150
 PoderEvasion=50
 BackUp=0
 NROITEMS=5
-Drop1=12-50 'Oro
-Drop2=12-65 'Oro
+Drop1=12-50
+Drop2=12-65
 Drop5=380-1
 
 ############################################
@@ -7245,10 +7245,10 @@ PoderEvasion=70
 Snd3=166
 BackUp=0
 NROITEMS=5
-Drop1=12-75 'Oro
-Drop2=978-2 'Harapos de la Cueva
-Drop4=697-2 'Anillos M�gicos
-Drop5=513-1 'Vestido de Bruja
+Drop1=12-75
+Drop2=978-2
+Drop4=697-2
+Drop5=513-1
 
 ############################################
 
@@ -7277,10 +7277,10 @@ PoderEvasion=45
 Snd3=162
 BackUp=0
 NROITEMS=5
-Drop1=12-75 'Oro
-Drop2=38-12 'Pociones Rojas
-Drop3=398-4 'Garrotes
-Drop4=30-1 'Armaduras de Cuero
+Drop1=12-75
+Drop2=38-12
+Drop3=398-4
+Drop4=30-1
 
 ############################################
 
@@ -7308,9 +7308,9 @@ PoderAtaque=200
 PoderEvasion=80
 BackUp=0
 NROITEMS=5
-Drop1=12-125 'Oro
-Drop2=551-50 'Flechas +1
-Drop3=552-50 'Flechas +2
+Drop1=12-125
+Drop2=551-50
+Drop3=552-50
 
 ############################################
 
@@ -7339,9 +7339,9 @@ PoderEvasion=65
 Snd3=167
 BackUp=0
 NROITEMS=5
-Drop1=12-100 'Oro
-Drop2=414-20 'Pieles de Lobo
-Drop5=1002-5 'Cascos de Lobo
+Drop1=12-100
+Drop2=414-20
+Drop5=1002-5
 
 ############################################
 
@@ -7370,9 +7370,9 @@ PoderAtaque=200
 PoderEvasion=70
 BackUp=0
 NROITEMS=5
-Drop1=12-150 'Oro
-Drop2=12-275 'Oro
-Drop3=36-10 'Pociones Amarillas
+Drop1=12-150
+Drop2=12-275
+Drop3=36-10
 
 ############################################
 
@@ -7405,9 +7405,9 @@ LanzaSpells=1
 Sp1=9
 BackUp=0
 NROITEMS=5
-Drop1=12-230 'Oro
-Drop3=208-2 'Flauta M�gica
-Drop5=542-1 'Turbaci�n
+Drop1=12-230
+Drop3=208-2
+Drop5=542-1
 
 ############################################
 
@@ -7436,9 +7436,9 @@ PoderAtaque=120
 PoderEvasion=45
 BackUp=0
 NROITEMS=5
-Drop1=12-100 'Oro
-Drop2=38-20 'Pociones Rojas
-Drop3=36-4 'Pociones Amarillas
+Drop1=12-100
+Drop2=38-20
+Drop3=36-4
 
 ############################################
 
@@ -7468,10 +7468,10 @@ PoderAtaque=150
 PoderEvasion=150
 BackUp=0
 NROITEMS=5
-Drop1=12-550 'Oro
-Drop2=36-15 'Pociones Amarillas
-Drop3=39-15 'Pociones Verdes
-Drop4=12-13500 'Oro
+Drop1=12-550
+Drop2=36-15
+Drop3=39-15
+Drop4=12-13500
 
 ############################################
 
@@ -7501,10 +7501,10 @@ PoderAtaque=220
 PoderEvasion=180
 BackUp=0
 NROITEMS=5
-Drop1=12-150 'Oro
-Drop2=38-25 'Pociones Rojas
-Drop3=39-5 'Pociones Verdes
-Drop4=12-2100 'Oro
+Drop1=12-150
+Drop2=38-25
+Drop3=39-5
+Drop4=12-2100
 
 ############################################
 
@@ -7533,10 +7533,10 @@ PoderAtaque=220
 PoderEvasion=190
 BackUp=0
 NROITEMS=5
-Drop1=12-1000 'Oro
-Drop2=12-1640 'Oro
-Drop3=125-2 'Sables
-Drop4=474-1 'Barca
+Drop1=12-1000
+Drop2=12-1640
+Drop3=125-2
+Drop4=474-1
 
 ############################################
 
@@ -7566,10 +7566,10 @@ PoderEvasion=210
 BackUp=0
 snd3=210
 NROITEMS=5
-Drop1=12-400 'Oro
-Drop2=37-50 'Pociones Azules
-Drop3=38-130 'Pociones Rojas
-Drop4=361-1 'Tormenta de Fuego
+Drop1=12-400
+Drop2=37-50
+Drop3=38-130
+Drop4=361-1
 
 ############################################
 
@@ -7603,11 +7603,11 @@ AtacaDoble=1
 AfectaParalisis=1
 BackUp=0
 NROITEMS=5
-Drop1=12-10000 'Oro
-Drop2=12-19050 'Oro
-Drop3=657-1 'Quitar la Turbaci�n
-Drop4=542-1 'Turbaci�n
-Drop5=537-1 'Invocar Elemental de Agua
+Drop1=12-10000
+Drop2=12-19050
+Drop3=657-1
+Drop4=542-1
+Drop5=537-1
 
 ############################################
 
@@ -7641,11 +7641,11 @@ Sp1=9
 AtacaDoble=1
 BackUp=0
 NROITEMS=5
-Drop1=12-1200 'Oro
-Drop2=38-110 'Pociones Rojas
-Drop3=405-1 'Casco de Plata
-Drop4=206-1 'Paralizar
-Drop5=475-1 'Galera
+Drop1=12-1200
+Drop2=38-110
+Drop3=405-1
+Drop4=206-1
+Drop5=475-1
 
 ############################################
 
@@ -7674,11 +7674,11 @@ PoderAtaque=200
 PoderEvasion=70
 BackUp=0
 NROITEMS=5
-Drop1=12-100 'Oro
-Drop2=38-18 'Pociones Rojas
-Drop3=37-30 'Pociones Azules
-Drop4=36-10 'Pociones Amarillas
-Drop5=39-10 'Pociones Verdes
+Drop1=12-100
+Drop2=38-18
+Drop3=37-30
+Drop4=36-10
+Drop5=39-10
 
 ############################################
 
@@ -7708,8 +7708,8 @@ PoderAtaque=220
 PoderEvasion=60
 BackUp=0
 NROITEMS=5
-Drop4=619-1 'Daga Envenenada
-Drop5=365-1 'Daga +2
+Drop4=619-1
+Drop5=365-1
 
 
 ############################################
@@ -7740,11 +7740,11 @@ PoderAtaque=150
 PoderEvasion=70
 BackUp=0
 NROITEMS=5
-Drop1=12-150 'Oro
-Drop2=37-23 'Pociones Azules
-Drop3=658-1 'Vara de Frezno
-Drop4=697-1 'Anillo M�gico
-Drop5=698-1 'Anillo de Resistencia M�gica
+Drop1=12-150
+Drop2=37-23
+Drop3=658-1
+Drop4=697-1
+Drop5=698-1
 
 
 ############################################
@@ -7777,11 +7777,11 @@ LanzaSpells=1
 Sp1=44
 BackUp=0
 NROITEMS=5
-Drop1=12-500 'Oro
-Drop2=480-115 'Flechas
-Drop3=479-3 'Arcos Compuestos
-Drop4=551-200 'Flechas +1
-Drop5=665-6 'Arcos de Cazador
+Drop1=12-500
+Drop2=480-115
+Drop3=479-3
+Drop4=551-200
+Drop5=665-6
 
 ############################################
 
@@ -7816,10 +7816,10 @@ Snd3=173
 AfectaParalisis=1
 BackUp=0
 NROITEMS=5
-Drop1=12-1000 'Oro
-Drop2=1005-2 'Hachas de Madera �lfia
-Drop3=38-300 'Pociones Rojas
-Drop4=203-1 'Aura Sanadora Avanzada
+Drop1=12-1000
+Drop2=1005-2
+Drop3=38-300
+Drop4=203-1
 
 ############################################
 
@@ -7849,9 +7849,9 @@ PoderAtaque=40
 PoderEvasion=35
 BackUp=0
 NROITEMS=5
-Drop3=12-50 'Oro
-Drop4=12-500 'Oro
-Drop5=12-5000 'Oro
+Drop3=12-50
+Drop4=12-500
+Drop5=12-5000
 
 ############################################
 
@@ -7880,10 +7880,10 @@ PoderAtaque=75
 PoderEvasion=25
 BackUp=0
 NROITEMS=5
-Drop1=12-10  ' Oro
-Drop2=855-10 ' Poci�n amarilla (newbie)
-Drop3=858-20 ' Poci�n verde(newbie)
-Drop5=126-1  ' Hacha larga de guerra
+Drop1=12-10
+Drop2=855-10
+Drop3=858-20
+Drop5=126-1
 
 ############################################
 
@@ -7911,10 +7911,10 @@ PoderAtaque=90
 PoderEvasion=100
 BackUp=0
 NROITEMS=5
-Drop1=12-65  ' Oro
-Drop2=856-24 ' Poci�n Azul (newbie)
-Drop4=208-1  ' Flauta Magica
-Drop5=696-1  ' Laud Magico
+Drop1=12-65
+Drop2=856-24
+Drop4=208-1
+Drop5=696-1
 
 ############################################
 
@@ -7942,12 +7942,12 @@ PoderAtaque=150
 PoderEvasion=150
 Snd3=166
 BackUp=0
-NROITEMS=5 
-Drop1=12-40  ' Oro
-Drop2=12-85  ' Oro
-Drop3=857-20 ' Poci�n roja (newbie)
-Drop4=658-1  ' Vara de fresno
-Drop5=205-1  ' Misil Magico
+NROITEMS=5
+Drop1=12-40
+Drop2=12-85
+Drop3=857-20
+Drop4=658-1
+Drop5=205-1
 
 ############################################
 
@@ -7976,10 +7976,10 @@ PoderAtaque=50
 PoderEvasion=20
 BackUp=0
 NROITEMS=5
-Drop1=12-12  ' Oro
-Drop3=12-110 ' Oro
-Drop4=366-1  ' Daga +3
-Drop5=30-1   ' Armadura de cuero
+Drop1=12-12
+Drop3=12-110
+Drop4=366-1
+Drop5=30-1
 
 ############################################
 
@@ -8009,10 +8009,10 @@ PoderAtaque=75
 PoderEvasion=25
 BackUp=0
 NROITEMS=5
-Drop1=12-20   ' Oro
-Drop2=480-15  ' Flechas 
-Drop3=855-30  ' Poci�n amarilla (newbie)
-Drop4=1009-20 ' cuchillas
+Drop1=12-20
+Drop2=480-15
+Drop3=855-30
+Drop4=1009-20
 
 ############################################
 
@@ -8043,11 +8043,11 @@ PoderEvasion=27
 Snd3=89
 BackUp=0
 NROITEMS=5
-Drop1=12-40   ' Oro 
-Drop2=480-25  ' Flechas
-Drop3=480-150 ' Flechas
-Drop4=664-1   ' Arco compuesto reforzado
-Drop5=665-1   ' Arco de Cazador
+Drop1=12-40
+Drop2=480-25
+Drop3=480-150
+Drop4=664-1
+Drop5=665-1
 
 ############################################
 
@@ -8076,10 +8076,10 @@ PoderAtaque=45
 PoderEvasion=30
 BackUp=0
 NROITEMS=5
-Drop1=12-50 ' Oro 
-Drop2=12-75 ' Oro 
-Drop4=205-1 ' Proyectil M�gico
-Drop5=123-3 ' Espada Vikinga
+Drop1=12-50
+Drop2=12-75
+Drop4=205-1
+Drop5=123-3
 
 ############################################
 
@@ -8108,10 +8108,10 @@ PoderEvasion=50
 Snd3=160
 BackUp=0
 NROITEMS=5
-Drop1=12-25 ' Oro
-Drop2=12-25 ' Oro
-Drop4=204-1 ' Flecha El�ctrica
-Drop5=990-3 ' Mazo del juicio
+Drop1=12-25
+Drop2=12-25
+Drop4=204-1
+Drop5=990-3
 
 ############################################
 
@@ -8139,9 +8139,9 @@ PoderEvasion=20
 SND2=103
 BackUp=0
 NROITEMS=5
-Drop3=38-10 ' Pocion roja
-Drop4=200-1 ' Antidoto magico
-Drop5=202-1 ' Toxina
+Drop3=38-10
+Drop4=200-1
+Drop5=202-1
 
 ############################################
 
@@ -8170,9 +8170,9 @@ PoderEvasion=15
 Snd3=142
 BackUp=0
 NROITEMS=5
-Drop1=12-6   ' Oro
-Drop3=480-10 ' Flechas
-Drop4=479-1  ' Arco compuesto
+Drop1=12-6
+Drop3=480-10
+Drop4=479-1
 
 ############################################
 
@@ -8201,11 +8201,11 @@ PoderAtaque=69
 PoderEvasion=55
 BackUp=0
 NROITEMS=5
-Drop1=12-41 ' Oro
-Drop2=12-41 ' Oro
-Drop3=364-1 ' Terrible hambre de Ig�r
-Drop4=19-2  ' Espada dos manos
-Drop5=470-1 ' Fuerza
+Drop1=12-41
+Drop2=12-41
+Drop3=364-1
+Drop4=19-2
+Drop5=470-1
 
 ############################################
 
@@ -8455,7 +8455,7 @@ Hostile=0
 Domable=0
 Alineacion=0
 Comercia=0
-BackUp=0 
+BackUp=0
 
 ############################################
 
@@ -8635,7 +8635,7 @@ Hostile=0
 Domable=0
 Alineacion=0
 Comercia=0
-BackUp=0 
+BackUp=0
 
 ############################################
 
@@ -8761,7 +8761,7 @@ Hostile=0
 Domable=0
 Alineacion=0
 Comercia=0
-BackUp=0 
+BackUp=0
 
 ##############################################################
 ##############################################################
@@ -8872,12 +8872,12 @@ Sp3=39
 Sp4=5
 Sp5=36
 NROITEMS=6
-Obj1=12-5000 ' Oro
-Obj2=519-1   ' Tunica legendaria
-Obj3=37-300  ' Pocion Azul
-Obj4=38-300  ' Pocion Roja
-Obj5=361-1   ' Tormenta de Fuego
-Obj6=697-1   ' Anillo Magico
+Obj1=12-5000
+Obj2=519-1
+Obj3=37-300
+Obj4=38-300
+Obj5=361-1
+Obj6=697-1
 BackUp=0
 
 ############################################
@@ -8911,12 +8911,12 @@ Sp3=39
 Sp4=5
 Sp5=36
 NROITEMS=6
-Obj1=12-5000 ' Oro
-Obj2=525-1   ' Tunica Combinada
-Obj3=37-300  ' Pocion Azul
-Obj4=38-300  ' Pocion Roja
-Obj5=361-1   ' Tormenta de Fuego
-Obj6=697-1   ' Anillo Magico
+Obj1=12-5000
+Obj2=525-1
+Obj3=37-300
+Obj4=38-300
+Obj5=361-1
+Obj6=697-1
 BackUp=0
 
 ############################################
@@ -8950,12 +8950,12 @@ Sp3=39
 Sp4=5
 Sp5=36
 NROITEMS=6
-Obj1=12-5000 ' Oro
-Obj2=519-1   ' Tunica legendaria
-Obj3=37-300  ' Pocion Azul
-Obj4=38-300  ' Pocion Roja
-Obj5=132-1   ' Casco de Hierro
-Obj6=1049-1  ' Laud �lfico
+Obj1=12-5000
+Obj2=519-1
+Obj3=37-300
+Obj4=38-300
+Obj5=132-1
+Obj6=1049-1
 BackUp=0
 
 ############################################
@@ -8989,12 +8989,12 @@ Sp3=39
 Sp4=5
 Sp5=36
 NROITEMS=6
-Obj1=12-5000 ' Oro
-Obj2=525-1   ' Tunica Combinada
-Obj3=37-300  ' Pocion Azul
-Obj4=38-300  ' Pocion Roja
-Obj5=132-1   ' Casco de Hierro
-Obj6=1049-1  ' Laud �lfico
+Obj1=12-5000
+Obj2=525-1
+Obj3=37-300
+Obj4=38-300
+Obj5=132-1
+Obj6=1049-1
 BackUp=0
 
 ############################################
@@ -9025,11 +9025,11 @@ LanzaSpells=2
 Sp1=25
 Sp2=38
 NROITEMS=5
-Obj1=12-10000 ' Oro
-Obj2=238-1    ' Tunica Azul
-Obj3=37-400   ' Pocion Azul
-Obj4=660-1    ' Baculo Engarzado
-Obj5=662-1    ' Sombrero de Mago
+Obj1=12-10000
+Obj2=238-1
+Obj3=37-400
+Obj4=660-1
+Obj5=662-1
 BackUp=0
 
 ############################################
@@ -9060,11 +9060,11 @@ LanzaSpells=2
 Sp1=25
 Sp2=38
 NROITEMS=5
-Obj1=12-10000 ' Oro
-Obj2=670-1    ' T�nica de mago 
-Obj3=37-400   ' Pocion Azul
-Obj4=660-1    ' Baculo Engarzado
-Obj5=662-1    ' Sombrero de Mago
+Obj1=12-10000
+Obj2=670-1
+Obj3=37-400
+Obj4=660-1
+Obj5=662-1
 BackUp=0
 
 ############################################
@@ -9095,11 +9095,11 @@ LanzaSpells=2
 Sp1=25
 Sp2=38
 NROITEMS=5
-Obj1=12-10000 ' Oro
-Obj2=986-1    ' Tunica de Druida
-Obj3=37-400   ' Pocion Azul
-Obj4=1050-1   ' Flauta �lfica
-Obj5=1004-1   ' Casco de Tigre
+Obj1=12-10000
+Obj2=986-1
+Obj3=37-400
+Obj4=1050-1
+Obj5=1004-1
 BackUp=0
 
 ############################################
@@ -9130,11 +9130,11 @@ LanzaSpells=2
 Sp1=25
 Sp2=38
 NROITEMS=5
-Obj1=12-10000 ' Oro
-Obj2=524-1    ' T�nica roja especial
-Obj3=37-400   ' Pocion Azul
-Obj4=1050-1   ' Flauta �lfica
-Obj5=1004-1   ' Casco de Tigre
+Obj1=12-10000
+Obj2=524-1
+Obj3=37-400
+Obj4=1050-1
+Obj5=1004-1
 BackUp=0
 
 ############################################
@@ -9164,18 +9164,18 @@ PoderEvasion=220
 LanzaSpells=1
 Sp1=37
 NROITEMS=8
-Obj1=12-5000  ' Oro
-Obj2=665-1    ' Arco de Cazador
-Obj3=553-125  ' Flecha +3
-Obj4=360-1    ' Armadura de Cazador 
-Obj5=370-1    ' Capucha de Cazador 
-Obj6=128-1    ' Escudo de Hierro
-Obj7=36-20    ' Poci�n Amarilla
-Obj8=39-20    ' Poci�n Verde
+Obj1=12-5000
+Obj2=665-1
+Obj3=553-125
+Obj4=360-1
+Obj5=370-1
+Obj6=128-1
+Obj7=36-20
+Obj8=39-20
 BackUp=0
 
 ############################################
- 
+
 [NPC911]
 Name=Cazador Pretoriano
 NpcType=10
@@ -9201,14 +9201,14 @@ PoderEvasion=220
 LanzaSpells=1
 Sp1=37
 NROITEMS=8
-Obj1=12-5000  ' Oro
-Obj2=665-1    ' Arco de Cazador(E/G)
-Obj3=553-125  ' Flecha +3
-Obj4=648-1    ' Armadura de Cazador (E/G) 
-Obj5=370-1    ' Capucha de Cazador 
-Obj6=128-1    ' Escudo de Hierro
-Obj7=36-20    ' Poci�n Amarilla
-Obj8=39-20    ' Poci�n Verde
+Obj1=12-5000
+Obj2=665-1
+Obj3=553-125
+Obj4=648-1
+Obj5=370-1
+Obj6=128-1
+Obj7=36-20
+Obj8=39-20
 BackUp=0
 
 ############################################
@@ -9238,12 +9238,12 @@ PoderEvasion=220
 LanzaSpells=1
 Sp1=37
 NROITEMS=6
-Obj1=12-8000  ' Oro
-Obj2=1009-125 ' Cuchillas
-Obj3=519-1    ' Tunica Legendaria
-Obj4=1010-1   ' Sombrero Pirata 
-Obj5=36-20    ' Poci�n Amarilla
-Obj6=39-20    ' Poci�n Verde
+Obj1=12-8000
+Obj2=1009-125
+Obj3=519-1
+Obj4=1010-1
+Obj5=36-20
+Obj6=39-20
 BackUp=0
 
 ############################################
@@ -9273,12 +9273,12 @@ PoderEvasion=220
 LanzaSpells=1
 Sp1=37
 NROITEMS=6
-Obj1=12-8000  ' Oro
-Obj2=1009-125 ' Cuchillas
-Obj3=525-1    ' T�nica Combinada (E/G)
-Obj4=1010-1   ' Sombrero Pirata 
-Obj5=36-20    ' Poci�n Amarilla
-Obj6=39-20    ' Poci�n Verde
+Obj1=12-8000
+Obj2=1009-125
+Obj3=525-1
+Obj4=1010-1
+Obj5=36-20
+Obj6=39-20
 BackUp=0
 
 ############################################
@@ -9307,14 +9307,14 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=8
-Obj1=12-5000 ' Oro
-Obj2=129-1   ' Hacha de Guerra Dos Filos
-Obj3=195-1   ' Armadura de Placas Completa
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=128-1   ' Escudo de Hierro
-Obj6=36-30   ' Poci�n Amarilla
-Obj7=39-30   ' Poci�n Verde
-Obj8=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=129-1
+Obj3=195-1
+Obj4=131-1
+Obj5=128-1
+Obj6=36-30
+Obj7=39-30
+Obj8=38-300
 BackUp=0
 
 ############################################
@@ -9343,14 +9343,14 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=8
-Obj1=12-5000 ' Oro
-Obj2=129-1   ' Hacha de Guerra Dos Filos
-Obj3=243-1   ' Armadura de Placas Completa (E/G)
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=128-1   ' Escudo de Hierro
-Obj6=36-30   ' Poci�n Amarilla
-Obj7=39-30   ' Poci�n Verde
-Obj8=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=129-1
+Obj3=243-1
+Obj4=131-1
+Obj5=128-1
+Obj6=36-30
+Obj7=39-30
+Obj8=38-300
 BackUp=0
 
 ############################################
@@ -9379,13 +9379,13 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=7
-Obj1=12-5000 ' Oro
-Obj2=129-1   ' Hacha de Guerra Dos Filos
-Obj3=195-1   ' Armadura de Placas Completa
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=128-1   ' Escudo de Hierro
-Obj6=37-450  ' Poci�n Azul
-Obj7=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=129-1
+Obj3=195-1
+Obj4=131-1
+Obj5=128-1
+Obj6=37-450
+Obj7=38-300
 BackUp=0
 
 ############################################
@@ -9414,13 +9414,13 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=7
-Obj1=12-5000 ' Oro
-Obj2=129-1   ' Hacha de Guerra Dos Filos
-Obj3=243-1   ' Armadura de Placas Completa (E/G)
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=128-1   ' Escudo de Hierro
-Obj6=37-450  ' Poci�n Azul
-Obj7=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=129-1
+Obj3=243-1
+Obj4=131-1
+Obj5=128-1
+Obj6=37-450
+Obj7=38-300
 BackUp=0
 
 ############################################
@@ -9449,14 +9449,14 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=8
-Obj1=12-5000 ' Oro
-Obj2=367-2   ' Daga +4
-Obj3=356-1   ' Armadura de las sombras
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=404-1   ' Escudo de Tortuga
-Obj6=697-1   ' Anillo m�gico
-Obj7=37-450  ' Poci�n Azul
-Obj8=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=367-2
+Obj3=356-1
+Obj4=131-1
+Obj5=404-1
+Obj6=697-1
+Obj7=37-450
+Obj8=38-300
 BackUp=0
 
 ############################################
@@ -9485,14 +9485,14 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=8
-Obj1=12-5000 ' Oro
-Obj2=367-2   ' Daga +4
-Obj3=854-1   ' Armadura de las sombras (E/G)
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=404-1   ' Escudo de Tortuga
-Obj6=697-1   ' Anillo m�gico
-Obj7=37-450  ' Poci�n Azul
-Obj8=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=367-2
+Obj3=854-1
+Obj4=131-1
+Obj5=404-1
+Obj6=697-1
+Obj7=37-450
+Obj8=38-300
 BackUp=0
 
 ############################################
@@ -9521,14 +9521,14 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=8
-Obj1=12-5000 ' Oro
-Obj2=123-2   ' Espada Vikinga
-Obj3=195-1   ' Armadura de Placas Completa
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=128-1   ' Escudo de Hierro
-Obj6=873-1   ' Guantes de hurto
-Obj7=37-450  ' Poci�n Azul
-Obj8=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=123-2
+Obj3=195-1
+Obj4=131-1
+Obj5=128-1
+Obj6=873-1
+Obj7=37-450
+Obj8=38-300
 BackUp=0
 
 ############################################
@@ -9557,14 +9557,14 @@ PoderAtaque=600
 PoderEvasion=250
 LanzaSpells=0
 NROITEMS=8
-Obj1=12-5000 ' Oro
-Obj2=123-2   ' Espada Vikinga
-Obj3=243-1   ' Armadura de Placas Completa (E/G)
-Obj4=131-1   ' Casco de Hierro Completo
-Obj5=128-1   ' Escudo de Hierro
-Obj6=873-1   ' Guantes de hurto
-Obj7=37-450  ' Poci�n Azul
-Obj8=38-300  ' Poci�n Roja
+Obj1=12-5000
+Obj2=123-2
+Obj3=243-1
+Obj4=131-1
+Obj5=128-1
+Obj6=873-1
+Obj7=37-450
+Obj8=38-300
 BackUp=0
 
 ############################################
@@ -9593,12 +9593,12 @@ PoderAtaque=150
 PoderEvasion=300
 AfectaParalisis=1
 LanzaSpells=2
-Sp1=47 ' Flecha
-Sp2=39 ' Paralisis
+Sp1=47
+Sp2=39
 NROITEMS=3
-Obj1=12-10000 ' Oro
-Obj2=873-1    ' Guantes de hurto
-Obj3=132-1    ' Casco de Hierro
+Obj1=12-10000
+Obj2=873-1
+Obj3=132-1
 BackUp=0
 
 ############################################
@@ -9627,10 +9627,10 @@ PoderAtaque=150
 PoderEvasion=300
 AfectaParalisis=1
 LanzaSpells=2
-Sp1=47 ' Flecha
-Sp2=39 ' Paralisis
+Sp1=47
+Sp2=39
 NROITEMS=3
-Obj1=12-10000 ' Oro
-Obj2=873-1    ' Guantes de hurto
-Obj3=132-1    ' Casco de Hierro
+Obj1=12-10000
+Obj2=873-1
+Obj3=132-1
 BackUp=0
