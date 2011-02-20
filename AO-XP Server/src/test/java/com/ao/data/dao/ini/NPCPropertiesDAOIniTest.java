@@ -32,6 +32,7 @@ import com.ao.model.character.npc.properties.CreatureNPCProperties;
 import com.ao.model.character.npc.properties.GovernorNPCProperties;
 import com.ao.model.character.npc.properties.GuardNPCProperties;
 import com.ao.model.character.npc.properties.NPCProperties;
+import com.ao.model.character.npc.properties.NobleNPCProperties;
 import com.ao.model.character.npc.properties.TrainerNPCProperties;
 
 /**
@@ -115,7 +116,7 @@ public class NPCPropertiesDAOIniTest {
 		assertEquals(NPCType.BANKER, banker.getType());
 
 		NPCProperties noble = npcProperties[NOBLE_NPC_INDEX];
-		assertTrue(noble instanceof NPCProperties);
+		assertTrue(noble instanceof NobleNPCProperties);
 		assertEquals(NPCType.NOBLE, noble.getType());
 	}
 
