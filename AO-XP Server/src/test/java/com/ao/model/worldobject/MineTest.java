@@ -24,12 +24,14 @@ import org.junit.Before;
 import com.ao.model.worldobject.properties.ResourceSourceProperties;
 
 public class MineTest extends AbstractResourceSourceTest {
+	
+	private static final ResourceSourceType resourceSourceType = ResourceSourceType.MINE;
 
 	private Mine mine1;
 	
 	@Before
 	public void setUp() throws Exception {
-		ResourceSourceProperties props1 = new ResourceSourceProperties(WorldObjectType.MINE, 1, "Cooper mine", 1, 6);
+		ResourceSourceProperties props1 = new ResourceSourceProperties(WorldObjectType.MINE, 1, "Cooper mine", 1, 6, resourceSourceType);
 		mine1 = new Mine(props1);
 		
 		object = mine1;

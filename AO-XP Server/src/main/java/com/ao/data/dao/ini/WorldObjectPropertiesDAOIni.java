@@ -34,6 +34,8 @@ import com.ao.data.dao.WorldObjectPropertiesDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.character.Race;
 import com.ao.model.character.archetype.UserArchetype;
+import com.ao.model.character.npc.properties.NPCProperties;
+import com.ao.model.worldobject.ResourceSourceType;
 import com.ao.model.worldobject.WoodType;
 import com.ao.model.worldobject.WorldObjectType;
 import com.ao.data.dao.ini.LegacyWorldObjectType;
@@ -476,24 +478,28 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		int resourceId = -1;
 		
 		// Get the resource id
+		ResourceSourceType resourceSourceType = null;
 		switch (legactType) {
 			case TREE:
 				resourceId = WOOD_INDEX;
+				resourceSourceType = ResourceSourceType.TREE;
 				break;
 				
 			case ELVEN_TREE:
 				resourceId = ELVEN_WOOD_INDEX;
+				resourceSourceType = ResourceSourceType.TREE;
 				break;
 				
 			case MINE:
 				resourceId = getMineralIndex(section);
+				resourceSourceType = ResourceSourceType.MINE;
 				break;
 				
 			default:
 				logger.error("Unexpected resource source of type " + type.name());
 		}
 		
-		return new ResourceSourceProperties(type, id, name, graphic, resourceId);
+		return new ResourceSourceProperties(type, id, name, graphic, resourceId, resourceSourceType);
 	}
 
 	/**
