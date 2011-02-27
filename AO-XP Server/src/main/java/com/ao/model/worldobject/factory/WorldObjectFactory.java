@@ -20,6 +20,7 @@ package com.ao.model.worldobject.factory;
 
 import java.util.HashMap;
 
+import com.ao.model.worldobject.AbstractItem;
 import com.ao.model.worldobject.Accessory;
 import com.ao.model.worldobject.AgilityPotion;
 import com.ao.model.worldobject.Ammunition;
@@ -111,19 +112,37 @@ public class WorldObjectFactory {
 	}
 
 	/**
-	 * Creates a new instance of the appropriate WorldObnejct given it's properties.
-	 * @param woProperties The properties fom which to create an object.
+	 * Creates a new instance of the appropriate AbstractItem given it's properties.
+	 * @param woProperties The properties from which to create an object.
 	 * @param amount The amount of the given object to create.
 	 * @return The newly created object.
 	 * @throws WorldObjectFactoryException
 	 */
-	public WorldObject getWorldObject(WorldObjectProperties woProperties, int amount) throws WorldObjectFactoryException {
-		Class<? extends WorldObject> woClass = worldObjectMapper.get(woProperties.getType());
+	public AbstractItem getWorldObject(WorldObjectProperties woProperties, int amount) throws WorldObjectFactoryException {
+		@SuppressWarnings("unchecked")
+		Class<? extends AbstractItem> woClass = (Class<? extends AbstractItem>) worldObjectMapper.get(woProperties.getType());
 
 		try {
 			return woClass.getConstructor(woProperties.getClass(), int.class).newInstance(
 				woProperties, amount
 			);
+		} catch (Exception e) {
+			throw new WorldObjectFactoryException(e);
+		}
+	}
+
+	/**
+	 * Creates a new instance of the appropriate WorldObject given it's properties.
+	 * @param woProperties The properties from which to create an object.
+	 * @return The newly created object.
+	 * @throws WorldObjectFactoryException
+	 */
+	public WorldObject getWorldObject(WorldObjectProperties woProperties) throws WorldObjectFactoryException {
+		Class<? extends WorldObject> woClass = worldObjectMapper.get(woProperties.getType());
+
+		try {
+			return woClass.getConstructor(woProperties.getClass())
+							.newInstance(woProperties);
 		} catch (Exception e) {
 			throw new WorldObjectFactoryException(e);
 		}
