@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -16,23 +16,60 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.ao.model.worldobject;
+package com.ao.model.worldobject.factory;
 
 import java.util.HashMap;
 
-import com.ao.context.ApplicationContext;
+import com.ao.model.worldobject.Accessory;
+import com.ao.model.worldobject.AgilityPotion;
+import com.ao.model.worldobject.Ammunition;
+import com.ao.model.worldobject.Armor;
+import com.ao.model.worldobject.Backpack;
+import com.ao.model.worldobject.Boat;
+import com.ao.model.worldobject.DeathPotion;
+import com.ao.model.worldobject.Door;
+import com.ao.model.worldobject.Drink;
+import com.ao.model.worldobject.EmptyBottle;
+import com.ao.model.worldobject.FilledBottle;
+import com.ao.model.worldobject.Food;
+import com.ao.model.worldobject.Forum;
+import com.ao.model.worldobject.Gold;
+import com.ao.model.worldobject.GrabableProp;
+import com.ao.model.worldobject.HPPotion;
+import com.ao.model.worldobject.Helmet;
+import com.ao.model.worldobject.Ingot;
+import com.ao.model.worldobject.Key;
+import com.ao.model.worldobject.ManaPotion;
+import com.ao.model.worldobject.Mine;
+import com.ao.model.worldobject.Mineral;
+import com.ao.model.worldobject.MusicalInstrument;
+import com.ao.model.worldobject.Parchment;
+import com.ao.model.worldobject.PoisonPotion;
+import com.ao.model.worldobject.Prop;
+import com.ao.model.worldobject.RangedWeapon;
+import com.ao.model.worldobject.Shield;
+import com.ao.model.worldobject.Sign;
+import com.ao.model.worldobject.Staff;
+import com.ao.model.worldobject.StrengthPotion;
+import com.ao.model.worldobject.Teleport;
+import com.ao.model.worldobject.Tree;
+import com.ao.model.worldobject.Weapon;
+import com.ao.model.worldobject.Wood;
+import com.ao.model.worldobject.WorldObject;
+import com.ao.model.worldobject.WorldObjectType;
 import com.ao.model.worldobject.properties.WorldObjectProperties;
-import com.ao.service.WorldObjectService;
 
+/**
+ * Factory to create instances of items based on their properties.
+ * @author itirabasso
+ */
 public class WorldObjectFactory {
 
-	public static final HashMap<WorldObjectType, Class<? extends WorldObject>> worldObjectMapper;
+	protected static final HashMap<WorldObjectType, Class<? extends WorldObject>> worldObjectMapper;
 
-	private final WorldObjectService objectService = ApplicationContext.getInstance(WorldObjectService.class);
-	
 	static {
 		worldObjectMapper = new HashMap<WorldObjectType, Class<? extends WorldObject>>();
-		
+
 		worldObjectMapper.put(WorldObjectType.ACCESSORY, Accessory.class);
 		worldObjectMapper.put(WorldObjectType.AGILITY_POTION, AgilityPotion.class);
 		worldObjectMapper.put(WorldObjectType.AMMUNITION, Ammunition.class);
@@ -70,32 +107,25 @@ public class WorldObjectFactory {
 		worldObjectMapper.put(WorldObjectType.TREE, Tree.class);
 		worldObjectMapper.put(WorldObjectType.WEAPON, Weapon.class);
 		worldObjectMapper.put(WorldObjectType.WOOD, Wood.class);
-		
+
 	}
-	
+
 	/**
-	 * 
-	 * @param id
-	 * @param amount
-	 * @return
+	 * Creates a new instance of the appropriate WorldObnejct given it's properties.
+	 * @param woProperties The properties fom which to create an object.
+	 * @param amount The amount of the given object to create.
+	 * @return The newly created object.
+	 * @throws WorldObjectFactoryException
 	 */
-	public WorldObject getWorldObject(int id, int amount) {
-		WorldObjectProperties woProperties = objectService.getWorldObjectPropertiesById(id);
+	public WorldObject getWorldObject(WorldObjectProperties woProperties, int amount) throws WorldObjectFactoryException {
 		Class<? extends WorldObject> woClass = worldObjectMapper.get(woProperties.getType());
-		
-		if (null != woClass) {
-			try {
-				return woClass.getConstructor(woProperties.getClass(), Integer.class).newInstance(
-					woProperties, amount
-				);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+
+		try {
+			return woClass.getConstructor(woProperties.getClass(), int.class).newInstance(
+				woProperties, amount
+			);
+		} catch (Exception e) {
+			throw new WorldObjectFactoryException(e);
 		}
-		
-		return null;
-		
 	}
-	
 }

@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,10 +19,8 @@
 package com.ao.service;
 
 import com.ao.data.dao.exception.DAOException;
-import com.ao.model.character.npc.properties.NPCProperties;
 import com.ao.model.worldobject.WorldObject;
-import com.ao.model.worldobject.WorldObjectType;
-import com.ao.model.worldobject.properties.WorldObjectProperties;
+import com.ao.model.worldobject.factory.WorldObjectFactoryException;
 
 public interface WorldObjectService {
 
@@ -31,26 +29,13 @@ public interface WorldObjectService {
 	 * @throws DAOException
 	 */
 	void loadObjects() throws DAOException;
-	
+
 	/**
-	 * Retrieves an WorldObjectType Properties with the given id.
-	 * @param id the object's id.
-	 * @return the object's properties.
-	 */
-	WorldObjectProperties getWorldObjectPropertiesById(int id);
-	
-	/**
-	 * Retrieves the object type
-	 * @param id the object's id.
-	 * @return the object's properties.
-	 */
-	WorldObjectType getWorldObjectTypeById(int id);
-	
-	/**
-	 * Retrieves a world object with the givenid.
+	 * Retrieves a world object with the given id.
 	 * @param id the id of the object.
 	 * @param amount the amount of objects.
 	 * @return a world object.
+	 * @throws WorldObjectFactoryException
 	 */
-	WorldObject getWorldObject(int id, int amount);
+	WorldObject createWorldObject(int id, int amount) throws WorldObjectFactoryException;
 }
