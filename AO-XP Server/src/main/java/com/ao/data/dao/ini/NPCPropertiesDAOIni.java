@@ -34,6 +34,7 @@ import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
 
 import com.ao.data.dao.NPCCharacterPropertiesDAO;
+import com.ao.data.dao.WorldObjectPropertiesDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.character.Alignment;
 import com.ao.model.character.NPCType;
@@ -50,10 +51,16 @@ import com.ao.model.character.npc.properties.NPCProperties;
 import com.ao.model.character.npc.properties.NobleNPCProperties;
 import com.ao.model.character.npc.properties.TrainerNPCProperties;
 import com.ao.model.inventory.Inventory;
+import com.ao.model.inventory.InventoryImpl;
 import com.ao.model.map.City;
 import com.ao.model.map.Heading;
 import com.ao.model.spell.Spell;
+import com.ao.model.worldobject.Item;
+import com.ao.model.worldobject.WorldObject;
 import com.ao.model.worldobject.WorldObjectType;
+import com.ao.model.worldobject.factory.WorldObjectFactory;
+import com.ao.model.worldobject.factory.WorldObjectFactoryException;
+import com.ao.model.worldobject.properties.WorldObjectProperties;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -133,13 +140,21 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 
 	private String npcsFilePath;
 
+	private WorldObjectPropertiesDAO worldObjectPropertiesDAO;
+	private WorldObjectFactory worldObjectFactory;
+
 	/**
 	 * Creates a new NPCDAOIni instance.
 	 * @param npcsFilePath The path to the file with all objects definitions.
+	 * @param worldObjectPropertiesDAO The DAO for World Object Properties.
+	 * @param worldObjectFactory The Factory to create world object instances.
 	 */
 	@Inject
-	public NPCPropertiesDAOIni(@Named("npcsFilePath") String npcsFilePath) {
+	public NPCPropertiesDAOIni(@Named("npcsFilePath") String npcsFilePath,
+			WorldObjectPropertiesDAO worldObjectPropertiesDAO, WorldObjectFactory worldObjectFactory) {
 		this.npcsFilePath = npcsFilePath;
+		this.worldObjectPropertiesDAO = worldObjectPropertiesDAO;
+		this. worldObjectFactory = worldObjectFactory;
 	}
 
 	/*
@@ -344,9 +359,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			Class<? extends MovementStrategy> movementStrategy,
 			Section section) {
 
-		// TODO : Transform inventory items to inventory
-		Map<Integer, Integer> inventoryItems = getInventory(section);
-		Inventory inventory = null;
+		Inventory inventory = getInventory(section);
 
 		boolean respawnInventory = hasInventoryRespawn(section);
 		Set<WorldObjectType> acceptedTypes = getItemsType(section);
@@ -830,22 +843,38 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 	 * @param section The section from which to load the NPC's inventory.
 	 * @return The NPC's inventory.
 	 */
-	private Map<Integer, Integer> getInventory(Section section) {
+	private Inventory getInventory(Section section) {
 		String data = section.get(ITEMS_AMOUNT_KEY);
 		if (data == null) {
 			return null;
 		}
 
 		String slot;
-		Map<Integer, Integer> inventory = null;
-		for (byte i = 1; i <= Byte.parseByte(data); i++) {
+		byte inventorySize = Byte.parseByte(data);
+
+		Inventory inventory = new InventoryImpl(inventorySize);
+
+		for (byte i = 1; i <= inventorySize; i++) {
 			slot = section.get(OBJECT_INVENTORY_PREFIX + i);
 			if (slot != null) {
-				if (null == inventory) {
-					inventory = new HashMap<Integer, Integer>();
-				}
 				String[] slotInfo = slot.split("-");
-				inventory.put(Integer.parseInt(slotInfo[0]), Integer.parseInt(slotInfo[1]));
+				int objId = Integer.parseInt(slotInfo[0]);
+				int amount = Integer.parseInt(slotInfo[1]);
+
+				WorldObjectProperties woProperties = worldObjectPropertiesDAO.getWorldObjectProperties(objId);
+				WorldObject worldObject;
+				try {
+					worldObject = worldObjectFactory.getWorldObject(woProperties, amount);
+				} catch (WorldObjectFactoryException e) {
+					logger.error("An NPC has an item in it's inventory that can't be created. Object id: " + objId + ". Ignoring it...", e);
+					continue;
+				}
+
+				if (worldObject instanceof Item) {
+					inventory.addItem((Item) worldObject);
+				} else {
+					logger.error("An NPC has the object with id " + objId + " in it's inventory, but the object is not an item. Ignoring it...");
+				}
 			}
 		}
 

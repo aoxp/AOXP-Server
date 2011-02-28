@@ -22,10 +22,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.easymock.classextension.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ao.data.dao.WorldObjectPropertiesDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.character.NPCType;
 import com.ao.model.character.npc.properties.CreatureNPCProperties;
@@ -34,6 +36,9 @@ import com.ao.model.character.npc.properties.GuardNPCProperties;
 import com.ao.model.character.npc.properties.NPCProperties;
 import com.ao.model.character.npc.properties.NobleNPCProperties;
 import com.ao.model.character.npc.properties.TrainerNPCProperties;
+import com.ao.model.worldobject.AbstractItem;
+import com.ao.model.worldobject.factory.WorldObjectFactory;
+import com.ao.model.worldobject.properties.WorldObjectProperties;
 
 /**
  * Test for NPCPropertiesDAOIni
@@ -59,7 +64,22 @@ public class NPCPropertiesDAOIniTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dao = new NPCPropertiesDAOIni(TEST_NPCS_DAT);
+		WorldObjectProperties woProperties = EasyMock.createMock(WorldObjectProperties.class);
+		AbstractItem item = EasyMock.createMock(AbstractItem.class);
+		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
+		EasyMock.expect(item.getAmount()).andReturn(1).anyTimes();
+		EasyMock.expect(item.addAmount(EasyMock.anyInt())).andReturn(1).anyTimes();
+		EasyMock.replay(woProperties, item);
+
+		WorldObjectPropertiesDAO woDao = EasyMock.createMock(WorldObjectPropertiesDAO.class);
+		EasyMock.expect(woDao.getWorldObjectProperties(EasyMock.anyInt())).andReturn(woProperties).anyTimes();
+
+		WorldObjectFactory woFactory = EasyMock.createMock(WorldObjectFactory.class);
+		EasyMock.expect(woFactory.getWorldObject(EasyMock.eq(woProperties), EasyMock.anyInt())).andReturn(item).anyTimes();
+
+		EasyMock.replay(woDao, woFactory);
+
+		dao = new NPCPropertiesDAOIni(TEST_NPCS_DAT, woDao, woFactory);
 	}
 
 	@After

@@ -23,7 +23,6 @@ import com.ao.data.dao.exception.DAOException;
 import com.ao.model.worldobject.WorldObject;
 import com.ao.model.worldobject.factory.WorldObjectFactory;
 import com.ao.model.worldobject.factory.WorldObjectFactoryException;
-import com.ao.model.worldobject.properties.WorldObjectProperties;
 import com.ao.service.WorldObjectService;
 import com.google.inject.Inject;
 
@@ -35,8 +34,6 @@ public class WorldObjectServiceImpl implements WorldObjectService {
 	protected WorldObjectPropertiesDAO woPropertiesDao;
 
 	protected WorldObjectFactory woFactory;
-
-	protected WorldObjectProperties[] objectProperties;
 
 	/**
 	 * Creates a new WorldObjectServiceImpl instance.
@@ -56,11 +53,15 @@ public class WorldObjectServiceImpl implements WorldObjectService {
 	 */
 	@Override
 	public void loadObjects() throws DAOException {
-		objectProperties = woPropertiesDao.retrieveAll();
+		woPropertiesDao.loadAll();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ao.service.WorldObjectService#createWorldObject(int, int)
+	 */
 	@Override
 	public WorldObject createWorldObject(int id, int amount) throws WorldObjectFactoryException {
-		return woFactory.getWorldObject(objectProperties[id], amount);
+		return woFactory.getWorldObject(woPropertiesDao.getWorldObjectProperties(id), amount);
 	}
 }

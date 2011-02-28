@@ -25,7 +25,7 @@ import com.ao.model.worldobject.factory.WorldObjectFactoryException;
 public interface WorldObjectService {
 
 	/**
-	 * Loads all objects.
+	 * Loads / Reloads all objects.
 	 * @throws DAOException
 	 */
 	void loadObjects() throws DAOException;

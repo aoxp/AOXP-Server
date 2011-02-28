@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -32,15 +32,21 @@ public interface WorldObjectPropertiesDAO {
 
 	/**
 	 * Loads all World Objects Properties.
-	 * @return The complete list of WorldObjectsProperties.
 	 * @throws DAOException
 	 */
-	WorldObjectProperties[] retrieveAll() throws DAOException;
-	
+	void loadAll() throws DAOException;
+
 	/**
 	 * Retrieves all loaded manufacturables.
 	 * @return The complete set of manufacturables.
 	 * @throws DAOException
 	 */
 	Map<Integer, Manufacturable> getAllManufacturables() throws DAOException;
+
+	/**
+	 * Retrieves a World Object Properties by id.
+	 * @param id The id of the world object properties to retrieve.
+	 * @return The requested World Object Properties
+	 */
+	WorldObjectProperties getWorldObjectProperties(int id);
 }
