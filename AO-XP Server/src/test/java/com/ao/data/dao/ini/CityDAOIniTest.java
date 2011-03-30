@@ -5,6 +5,11 @@ package com.ao.data.dao.ini;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Reader;
+
+import org.ini4j.Ini;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,14 +27,8 @@ public class CityDAOIniTest {
 	
 	private static final String CITIES_DAT_PATH = "src/test/resources/ciudades.dat";
 	
-	private static final int FIRST_CITY = 1;
-	private static final int FIRST_CITY_MAP = 34;
-	private static final int FIRST_CITY_X = 44;
-	private static final int FIRST_CITY_Y = 88;
-	private static final int LAST_CITY = 7;
-	private static final int LAST_CITY_MAP = 151;
-	private static final int LAST_CITY_X = 40;
-	private static final int LAST_CITY_Y = 48;
+	private static final String INIT_HEADER = "INIT";
+	private static final String NUM_CITIES_KEY = "NumCities";
 	
 	/**
 	 * @throws java.lang.Exception
@@ -52,14 +51,24 @@ public class CityDAOIniTest {
 	@Test
 	public final void testRetrieveAll() {
 		
+		Ini iniFile = null;
+		
+		try {
+			// Make sure the reader is closed, since Ini4J gives no guarantees.
+			Reader reader = new BufferedReader(new FileReader(CITIES_DAT_PATH));
+			iniFile = new Ini(reader);
+			reader.close();
+		} catch (Exception e) {
+			fail("Loading of cities failed with message " + e.getMessage());
+		}
+		
+		int totalCities = Integer.parseInt(iniFile.get(INIT_HEADER, NUM_CITIES_KEY));
+		
+		
 		City[] cities = dao.retrieveAll();
-	
-		assertEquals(FIRST_CITY_MAP,cities[FIRST_CITY - 1].getMap());
-		assertEquals(FIRST_CITY_X,cities[FIRST_CITY - 1].getX());
-		assertEquals(FIRST_CITY_Y,cities[FIRST_CITY - 1].getY());
-		assertEquals(LAST_CITY_MAP,cities[LAST_CITY - 1].getMap());
-		assertEquals(LAST_CITY_X,cities[LAST_CITY - 1].getX());
-		assertEquals(LAST_CITY_Y,cities[LAST_CITY - 1].getY());
+		
+		assertEquals(totalCities,cities.length);
+		
 	}
 
 }
