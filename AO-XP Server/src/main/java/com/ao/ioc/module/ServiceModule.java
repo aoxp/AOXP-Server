@@ -21,6 +21,8 @@ package com.ao.ioc.module;
 import java.util.List;
 import java.util.Properties;
 
+import com.ao.service.CharacterBodyService;
+import com.ao.service.CharacterBodyServiceImpl;
 import com.ao.service.LoginService;
 import com.ao.service.MapService;
 import com.ao.service.NPCService;
@@ -33,8 +35,6 @@ import com.ao.service.map.MapServiceImpl;
 import com.ao.service.timedevents.TimedEventsServiceImpl;
 import com.ao.service.user.UserServiceImpl;
 import com.ao.service.worldobject.WorldObjectServiceImpl;
-import com.ao.service.CharacterBodyService;
-import com.ao.service.CharacterBodyServiceImpl;
 import com.ao.utils.RangeParser;
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
