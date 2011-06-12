@@ -5650,7 +5650,7 @@ AfectaParalisis=1
 BackUp=0
 NROITEMS=5
 Drop1=12-65000
-Drop2= 194-5000
+Drop2=194-5000
 Drop3=402-1
 Drop4=532-1
 Drop5=481-3
@@ -5914,7 +5914,7 @@ Sp2=9
 Sp3=15
 BackUp=0
 NROITEMS=5
-Drop1=12-1000 �ro
+Drop1=12-1000
 Drop2=659-1
 Drop3=514-1
 Drop4=12-5000
@@ -6404,7 +6404,7 @@ BackUp=0
 NROITEMS=5
 Drop1=12-50
 Drop2=12-75
-Drop3=12-150' Oro
+Drop3=12-150
 Drop4=199-5
 
 ############################################
@@ -7156,7 +7156,7 @@ BackUp=0
 NROITEMS=5
 Drop1=12-70
 Drop2=12-140
-Drop3=12-200' Oro
+Drop3=12-200
 
 ############################################
 

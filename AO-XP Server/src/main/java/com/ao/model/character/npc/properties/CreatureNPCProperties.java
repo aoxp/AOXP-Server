@@ -24,6 +24,7 @@ import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
 import com.ao.model.character.movement.MovementStrategy;
+import com.ao.model.character.npc.Drop;
 import com.ao.model.map.Heading;
 import com.ao.model.spell.Spell;
 
@@ -50,6 +51,7 @@ public class CreatureNPCProperties extends NPCProperties {
 	protected boolean paralyzable;
 	protected boolean hostile;
 	protected boolean tameable;
+	protected Drop drop;
 
 	/**
 	 * Creates a new CreatureNPCProperties instance.
@@ -82,6 +84,7 @@ public class CreatureNPCProperties extends NPCProperties {
 	 * @param paralyzable Whether the npc is paralyzable or not.
 	 * @param hostile Whether the npc is hostile or not.
 	 * @param tameable Whether the npc is tameable or not.
+	 * @param drop The NPCs drop.
 	 */
 	public CreatureNPCProperties(NPCType type, int id, String name, short body, short head,
 			Heading heading, boolean respawn, String description, Class<? extends Behavior> behavior,
@@ -89,7 +92,7 @@ public class CreatureNPCProperties extends NPCProperties {
 			int experience, int gold, int minHP, int maxHP,
 			int minDamage, int maxDamage, short defense, short magicDefense, short accuracy,
 			short dodge, List<Spell> spells, boolean canSwim, boolean canWalk, boolean attackable,
-			boolean poison, boolean paralyzable, boolean hostile, boolean tameable) {
+			boolean poison, boolean paralyzable, boolean hostile, boolean tameable, Drop drop) {
 		super(type, id, name, body, head, heading, respawn, description, behavior, attackStrategy, movementStrategy);
 
 		this.experience = experience;
@@ -110,6 +113,7 @@ public class CreatureNPCProperties extends NPCProperties {
 		this.paralyzable = paralyzable;
 		this.hostile = hostile;
 		this.tameable = tameable;
+		this.drop = drop;
 	}
 
 	/**
@@ -230,7 +234,6 @@ public class CreatureNPCProperties extends NPCProperties {
 		return tameable;
 	}
 
-
 	/**
 	 * @return The amount of spells.
 	 */
@@ -238,4 +241,10 @@ public class CreatureNPCProperties extends NPCProperties {
 		return spells;
 	}
 
+	/**
+	 * @return the drop
+	 */
+	public Drop getDrop() {
+		return drop;
+	}
 }

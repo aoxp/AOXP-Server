@@ -16,24 +16,49 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package com.ao.model.character.npc;
-
-import java.util.List;
-
-import com.ao.model.worldobject.WorldObject;
-import com.ao.model.worldobject.factory.WorldObjectFactoryException;
+package com.ao.model.character.npc.drop;
 
 /**
- * An interface to cope with the task of choosing what items to drop, if any.
- * @author itirabasso
+ * An item that may be dropped.
+ * @author jsotuyod
  */
-public interface Drop {
+public class Dropable {
+
+	protected int objId;
+	protected int amount;
+	protected float chance;
 
 	/**
-	 * Retrieve the list of objects to be dropped.
-	 * @return a list with the drops.
-	 * @throws WorldObjectFactoryException
+	 * Creates a new Dropable instance.
+	 * @param objId The index of the world obejct that may be dropped.
+	 * @param amount The amount of the item to be dropped.
+	 * @param chance The chance this object has of being dropped.
 	 */
-	List<WorldObject> getDrops() throws WorldObjectFactoryException;
+	public Dropable(int objId, int amount, float chance) {
+		super();
+		this.objId = objId;
+		this.amount = amount;
+		this.chance = chance;
+	}
 
+	/**
+	 * @return the objId
+	 */
+	public int getObjId() {
+		return objId;
+	}
+
+	/**
+	 * @return the amount
+	 */
+	public int getAmount() {
+		return amount;
+	}
+
+	/**
+	 * @return the chance
+	 */
+	public float getChance() {
+		return chance;
+	}
 }

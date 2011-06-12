@@ -24,6 +24,7 @@ import com.ao.model.character.NPCType;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.behavior.Behavior;
 import com.ao.model.character.movement.MovementStrategy;
+import com.ao.model.character.npc.Drop;
 import com.ao.model.map.Heading;
 import com.ao.model.spell.Spell;
 
@@ -65,6 +66,7 @@ public class GuardNPCProperties extends CreatureNPCProperties {
 	 * @param paralyzable Whether the npc is paralyzable or not.
 	 * @param hostile Whether the npc is hostile or not.
 	 * @param tameable Whether the npc is tameable or not.
+	 * @param drop The NPCs drop.
 	 * @param originalPosition Whether the npc is original position or not.
 	 */
 	public GuardNPCProperties(NPCType type, int id, String name, short body,
@@ -75,12 +77,12 @@ public class GuardNPCProperties extends CreatureNPCProperties {
 			int maxDamage, short defense, short magicDefense, short accuracy,
 			short dodge, List<Spell> spells, boolean canSwim, boolean canWalk,
 			boolean attackable, boolean poison, boolean paralyzable,
-			boolean hostile, boolean tameable, boolean originalPosition) {
+			boolean hostile, boolean tameable, Drop drop, boolean originalPosition) {
 		super(type, id, name, body, head, heading, respawn, description,
 				behavior, attackStrategy, movementStrategy, experience, gold, minHP, maxHP, minDamage,
 				maxDamage, defense, magicDefense, accuracy, dodge, spells,
 				canSwim, canWalk, attackable, poison, paralyzable, hostile,
-				tameable);
+				tameable, drop);
 
 		this.originalPosition = originalPosition;
 	}

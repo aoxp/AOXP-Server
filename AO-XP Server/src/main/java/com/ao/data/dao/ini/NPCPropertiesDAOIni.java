@@ -43,6 +43,10 @@ import com.ao.model.character.behavior.Behavior;
 import com.ao.model.character.behavior.NullBehavior;
 import com.ao.model.character.movement.MovementStrategy;
 import com.ao.model.character.movement.QuietMovementStrategy;
+import com.ao.model.character.npc.Drop;
+import com.ao.model.character.npc.drop.DropEverything;
+import com.ao.model.character.npc.drop.Dropable;
+import com.ao.model.character.npc.drop.RandomDrop;
 import com.ao.model.character.npc.properties.CreatureNPCProperties;
 import com.ao.model.character.npc.properties.GovernorNPCProperties;
 import com.ao.model.character.npc.properties.GuardNPCProperties;
@@ -439,11 +443,12 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean paralyzable = isParalyzable(section);
 		boolean hostile = isHostile(section);
 		boolean tameable = isTameable(section);
+		Drop drops = getDrops(section);
 
 		return new CreatureNPCProperties(type, id, name, body, head, heading, respawn, desc,
 			behavior, attackStrategy, movementStrategy, experience, gold, minHP, maxHP,
 			minDamage, maxDamage, defense, magicDefense, accuracy, dodge, spells, canSwim, canWalk,
-			attackable, poison, paralyzable, hostile, tameable);
+			attackable, poison, paralyzable, hostile, tameable, drops);
 	}
 
 	/**
@@ -487,12 +492,13 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		boolean paralyzable = isParalyzable(section);
 		boolean hostile = isHostile(section);
 		boolean tameable = isTameable(section);
+		Drop drops = getDrops(section);
 		boolean originalPosition = hasOriginalPosition(section);
 
 		return new GuardNPCProperties(type, id, name, body, head, heading, respawn, desc,
 			behavior, attackStrategy, movementStrategy, experience, gold, minHP, maxHP, minDamage,
 			maxDamage, defense, magicDefense, accuracy, dodge, spells, canSwim, canWalk, attackable,
-			poison, paralyzable, hostile, tameable, originalPosition);
+			poison, paralyzable, hostile, tameable, drops, originalPosition);
 	}
 
 	/**
@@ -794,28 +800,62 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		return data != null && !"0".equals(data);
 	}
 
-	// TODO : Refactor this once drops are refactored!!
-	private Map<Integer, Integer> getDrops(Section section) {
+	/**
+	 * Retrieves a drop from the given section.
+	 * @param section The section from which to load the drop.
+	 * @return The drop to be used.
+	 */
+	private Drop getDrops(Section section) {
 		String data = section.get(ITEMS_AMOUNT_KEY);
 		if (data == null) {
 			return null;
 		}
 
-		Map<Integer, Integer> drops = null;
-		String slot;
-		for (int i = 1; i <= Integer.parseInt(data); i++) {
-			slot = section.get(DROP_PREFIX + i);
-			if (slot != null) {
-				if (drops == null) {
-					drops = new HashMap<Integer, Integer>();
-				}
+		// Is it a Pretorian NPC?
+		String movement = section.get(MOVEMENT_KEY);
 
-				String[] slotInfo = slot.split("-");
-				drops.put(Integer.parseInt(slotInfo[0]), Integer.parseInt(slotInfo[1]));
-			}
+		if (movement == null) {
+			return null;
 		}
 
-		return drops;
+		// Pretorian NPCs drop everything... a little bit hard coded, but we want to be compatible with old AO..
+		LegacyAIType aiType = LegacyAIType.valueOf(Integer.parseInt(movement));
+		if (aiType.isPretorian()) {
+			return new DropEverything(getInventory(section));
+		}
+
+		int count = Integer.parseInt(data);
+
+		List<Dropable> dropables = new LinkedList<Dropable>();
+		String slot;
+
+		/*
+		 * In Argentum, there is a 10% chance of dropping nothing, the other 90%
+		 * is split among the count items in such a way that each has 10% the
+		 * chance of the previous one.
+		 */
+		float chance = 0.9f;
+		for (int i = 1; i <= count; i++) {
+			slot = section.get(DROP_PREFIX + i);
+			if (slot != null) {
+				String[] slotInfo = slot.split("-");
+				// In every step except the last one, leave a 10% chance for the next level
+				float curChance = i == count ? chance : chance * 0.9f;
+
+				dropables.add(
+					new Dropable(Integer.parseInt(slotInfo[0]), Integer.parseInt(slotInfo[1]), curChance)
+				);
+			}
+
+			// Chance for the next step is 10% of the current one
+			chance *= 0.1;
+		}
+
+		if (dropables.size() > 0) {
+			return new RandomDrop(dropables);
+		}
+
+		return null;
 	}
 
 	// TODO : Use this!
@@ -1194,6 +1234,16 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		 */
 		public Class<? extends MovementStrategy> getMovementStrategy() {
 			return movementStrategy;
+		}
+
+		/**
+		 * Checks if the current NPC is pretorian
+		 * @return True if the NPC is pretorian, false otherwise.
+		 */
+		public boolean isPretorian() {
+			return this == PRETORIAN_HUNTER || this == PRETORIAN_KING
+				|| this == PRETORIAN_MAGE || this == PRETORIAN_PRIEST
+				|| this == PRETORIAN_WARRIOR;
 		}
 	}
 }

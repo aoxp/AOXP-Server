@@ -15,25 +15,45 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+package com.ao.model.character.npc.drop;
 
-package com.ao.model.character.npc;
-
+import java.util.LinkedList;
 import java.util.List;
 
+import com.ao.model.character.npc.Drop;
+import com.ao.model.inventory.Inventory;
+import com.ao.model.worldobject.Item;
 import com.ao.model.worldobject.WorldObject;
 import com.ao.model.worldobject.factory.WorldObjectFactoryException;
 
 /**
- * An interface to cope with the task of choosing what items to drop, if any.
+ * A Drop strategy that simply drops everything the NPC holds.
  * @author itirabasso
  */
-public interface Drop {
+public class DropEverything implements Drop {
+
+	protected Inventory inventory;
 
 	/**
-	 * Retrieve the list of objects to be dropped.
-	 * @return a list with the drops.
-	 * @throws WorldObjectFactoryException
+	 * Create a new DropEverything instance.
+	 * @param inventory An inventory of items to be dropped.
 	 */
-	List<WorldObject> getDrops() throws WorldObjectFactoryException;
+	public DropEverything(Inventory inventory) {
+		this.inventory = inventory;
+	}
 
+	@Override
+	public List<WorldObject> getDrops() throws WorldObjectFactoryException {
+		List<WorldObject> items = new LinkedList<WorldObject>();
+
+		for (int i = 0; i < inventory.getCapacity(); i++) {
+			Item item = inventory.getItem(i);
+
+			if (item != null) {
+				items.add(item);
+			}
+		}
+
+		return items;
+	}
 }
