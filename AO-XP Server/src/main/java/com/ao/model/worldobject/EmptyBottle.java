@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 package com.ao.model.worldobject;
 
 import com.ao.model.character.Character;
-import com.ao.model.worldobject.properties.ItemProperties;
+import com.ao.model.worldobject.properties.RefillableStatModifyingItemProperties;
 
 /**
  * An empty bottle.
@@ -31,7 +31,7 @@ public class EmptyBottle extends AbstractItem {
 	 * @param properties The item's properties.
 	 * @param amount The item's amount.
 	 */
-	public EmptyBottle(ItemProperties properties, int amount) {
+	public EmptyBottle(RefillableStatModifyingItemProperties properties, int amount) {
 		super(properties, amount);
 	}
 
@@ -41,7 +41,7 @@ public class EmptyBottle extends AbstractItem {
 	 */
 	@Override
 	public Item clone() {
-		return new EmptyBottle((ItemProperties) properties, amount);
+		return new EmptyBottle((RefillableStatModifyingItemProperties) properties, amount);
 	}
 
 	/*

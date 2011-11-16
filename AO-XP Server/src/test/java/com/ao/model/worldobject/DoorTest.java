@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -31,44 +31,33 @@ public class DoorTest extends AbstractWorldObjectTest {
 	private static final boolean OPEN = true;
 	private static final boolean LOCKED = false;
 	private static final int CODE = 123;
-	private static final int OPEN_GRH = 50;
-	private static final int CLOSED_GRH = 51;
-	
+	private static final DoorProperties OTHER_PROPERTIES = null;
+
 	private Door door1;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		DoorProperties props1 = new DoorProperties(WorldObjectType.DOOR, 1, "Puerta abierta", 1,
-				OPEN, LOCKED, CODE, OPEN_GRH, CLOSED_GRH);
+				OPEN, LOCKED, CODE, OTHER_PROPERTIES);
 		door1 = new Door(props1);
-		
+
 		object = door1;
 		objectProps = props1;
 	}
-	
+
 	@Test
 	public void testGetOpen() {
 		Assert.assertTrue(door1.getOpen());
 	}
-	
+
 	@Test
 	public void testGetLocked() {
 		Assert.assertFalse(door1.getLocked());
 	}
-	
+
 	@Test
 	public void testGetCode() {
 		assertEquals(CODE, door1.getCode());
 	}
-	
-	@Test
-	public void testGetOpenGrh() {
-		assertEquals(OPEN_GRH, door1.getOpenGrh());
-	}
-	
-	@Test
-	public void testGetClosedGrh() {
-		assertEquals(CLOSED_GRH, door1.getClosedGrh());
-	}
-	
+
 }

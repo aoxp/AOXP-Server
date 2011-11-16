@@ -49,6 +49,7 @@ import com.ao.model.worldobject.properties.MineralProperties;
 import com.ao.model.worldobject.properties.MusicalInstrumentProperties;
 import com.ao.model.worldobject.properties.ParchmentProperties;
 import com.ao.model.worldobject.properties.RangedWeaponProperties;
+import com.ao.model.worldobject.properties.RefillableStatModifyingItemProperties;
 import com.ao.model.worldobject.properties.ResourceSourceProperties;
 import com.ao.model.worldobject.properties.SignProperties;
 import com.ao.model.worldobject.properties.StaffProperties;
@@ -118,8 +119,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	private static final String CODE_KEY = "Clave";
 	private static final String OPEN_KEY = "Abierta";
 	private static final String LOCKED_KEY = "Llave";
-	private static final String OPEN_GRH_KEY = "IndexAbierta";
-	private static final String CLOSED_GRH_KEY = "IndexCerrada";
+	private static final String OPEN_OBJECT_ID_KEY = "IndexAbierta";
+	private static final String CLOSED_OBJECT_ID_KEY = "IndexCerrada";
 	private static final String RESPAWNEABLE_KEY = "Crucial";
 	private static final String FALLS_KEY = "NoSeCae";
 	private static final String NO_LOG_KEY = "NoLog";
@@ -241,11 +242,11 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	/**
 	 * Creates an object's properties from the given section.
 	 * @param iniFile The ini file that contains all world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadObject(int id, Ini iniFile) {
 
-		//The section of the ini file containing the world object to be loaded.
+		// The section of the ini file containing the world object to be loaded.
 		Section section = iniFile.get(OBJECT_SECTION_PREFIX + id);
 
 		// Make sure it's valid
@@ -281,6 +282,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 
 			case DRINK:
 			case FILLED_BOTTLE:
+			case EMPTY_BOTTLE:
 				obj = loadDrink(type.getCurrentType(), id, name, graphic, section);
 				break;
 
@@ -288,7 +290,6 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				obj = loadFood(type.getCurrentType(), id, name, graphic, section);
 				break;
 
-			case EMPTY_BOTTLE:
 			case MONEY:
 			case FORGE:
 			case ANVIL:
@@ -340,7 +341,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 
 			case DOOR:
-				obj = loadDoor(type.getCurrentType(), id, name, graphic, section, iniFile);
+				obj = loadDoor(type.getCurrentType(), id, name, graphic, section);
 				break;
 
 			case SIGN:
@@ -454,7 +455,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @param woodType The type of wood this is.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadWood(WorldObjectType worldObjectType,
 			int id, String name, int graphic, Section section, WoodType woodType) {
@@ -478,7 +479,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 * @param legactType The legacy type of the item.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadResourceSource(WorldObjectType type,
 			int id, String name, int graphic, Section section, LegacyWorldObjectType legactType) {
@@ -517,7 +518,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadDefensiveItem(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
@@ -546,7 +547,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadTeleport(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
@@ -562,7 +563,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadProps(int id, String name, int graphic,
 			Section section) {
@@ -605,7 +606,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadPotion(int id, String name, int graphic,
 			Section section) {
@@ -658,7 +659,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadMusicalInstrument(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
@@ -684,7 +685,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadBoat(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
@@ -717,7 +718,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadFood(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
@@ -741,21 +742,45 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadDrink(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 
 		int value = getValue(section);
 		boolean newbie = getNewbie(section);
-		int modifier = getThirst(section);
+		int modifier = 0;
 		List<UserArchetype> forbiddenArchetypes = getForbiddenArchetypes(section);
 		List<Race> forbiddenRaces = getForbiddenRaces(section);
 		boolean noLog = getNoLog(section);
 		boolean falls = getFalls(section);
 		boolean respawneable = getRespawneable(section);
 
-		return new StatModifyingItemProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, modifier, modifier);
+		if (type != WorldObjectType.EMPTY_BOTTLE) {
+			getThirst(section);
+		}
+
+		int emptyObjectId = getOpenObjectId(section);
+		int filledObjectId = getClosedObjectId(section);
+
+		// Is it refillable?
+		if (emptyObjectId != 0 && filledObjectId != 0) {
+
+			boolean filled = id == filledObjectId;
+
+			RefillableStatModifyingItemProperties otherObjectProperties = null;
+
+			// only take the other object when we are loading the latest of both, to make sure the other one is already loaded
+			if (filled && id > emptyObjectId) {
+				otherObjectProperties = (RefillableStatModifyingItemProperties) worldObjectProperties[emptyObjectId - 1];
+			} else if (!filled && id > filledObjectId) {
+				otherObjectProperties = (RefillableStatModifyingItemProperties) worldObjectProperties[filledObjectId - 1];
+			}
+
+			return new RefillableStatModifyingItemProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, modifier, modifier, filled, otherObjectProperties);
+		} else {
+			return new StatModifyingItemProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, modifier, modifier);
+		}
 	}
 
 	/**
@@ -764,7 +789,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadWeapon(int id, String name, int graphic,
 			Section section) {
@@ -807,7 +832,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadAmmunition(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
@@ -833,7 +858,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param name The object's name.
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadParchment(WorldObjectType type, int id, String name, int graphic, Section section) {
 
@@ -851,6 +876,15 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		return new ParchmentProperties(type, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, null);
 	}
 
+	/**
+	 * Creates a key's properties from the given section.
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The created world object properties.
+	 */
 	private WorldObjectProperties loadKey(WorldObjectType type, int id, String name, int graphic,
 			Section section) {
 
@@ -867,17 +901,40 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		return new KeyProperties(type, id, name, graphic, value, manufactureDifficulty, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, code);
 	}
 
+	/**
+	 * Creates a door's properties from the given section.
+	 * @param type The object's type.
+	 * @param id The object's id.
+	 * @param name The object's name.
+	 * @param graphic The object's graphic.
+	 * @param section The section of the ini file containing the world object to be loaded.
+	 * @return The created world object properties.
+	 */
 	private WorldObjectProperties loadDoor(WorldObjectType type, int id, String name, int graphic,
-			Section section, Ini iniFile) {
+			Section section) {
 
 		boolean open = getOpen(section);
 		boolean locked = getLocked(section);
 		int code = getCode(section);
 
-		int openGrh = getOpenGrh(section, iniFile);
-		int closedGrh = getClosedGrh(section, iniFile);
+		int openObjectId = getOpenObjectId(section);
+		int closedObjectId = getClosedObjectId(section);
 
-		return new DoorProperties(type, id, name, graphic, open, locked, code, openGrh, closedGrh);
+		DoorProperties otherObjectProperties = null;
+
+		if (openObjectId == 0 || closedObjectId == 0) {
+			logger.error("Invalid door definition for id " + id + ". Ids for open and closed states are required.");
+			return null;
+		}
+
+		// only take the other object when we are loading the latest of both, to make sure the other one is already loaded
+		if (open && id > closedObjectId) {
+			otherObjectProperties = (DoorProperties) worldObjectProperties[closedObjectId - 1];
+		} else if (!open && id > openObjectId) {
+			otherObjectProperties = (DoorProperties) worldObjectProperties[openObjectId - 1];
+		}
+
+		return new DoorProperties(type, id, name, graphic, open, locked, code, otherObjectProperties);
 	}
 
 	/**
@@ -889,7 +946,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 *
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadSign(WorldObjectType type, int id, String name, int graphic, Section section) {
 
@@ -908,7 +965,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 *
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadForum(WorldObjectType type, int id, String name, int graphic, Section section) {
 
@@ -926,7 +983,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 *
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadBackpack(WorldObjectType type, int id, String name, int graphic, Section section) {
 
@@ -954,7 +1011,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * @param graphic The object's graphic.
 	 * @param section The section of the ini file containing the world object to be loaded.
 	 *
-	 * @return The world object created.
+	 * @return The created world object properties.
 	 */
 	private WorldObjectProperties loadMineral(WorldObjectType type, int id, String name, int graphic, Section section) {
 
@@ -1554,39 +1611,39 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	}
 
 	/**
-	 * Retrieves the closed door's index
+	 * Retrieves the closed door's id
 	 * @param section The section from which to read the object's value.
-	 * @return The closed door's graphic.
+	 * @return The closed door's id.
 	 */
-	private int getClosedGrh(Section section, Ini iniFile) {
-		String data = section.get(CLOSED_GRH_KEY);
+	private int getClosedObjectId(Section section) {
+		String data = section.get(CLOSED_OBJECT_ID_KEY);
 
 		if (data == null) {
 			return 0;
 		}
 
-		return Integer.parseInt(iniFile.get(OBJECT_SECTION_PREFIX + Integer.parseInt(data)).get(GRAPHIC_KEY));
+		return Integer.parseInt(data);
 	}
 
 	/**
-	 * Retrieves the open door's index.
+	 * Retrieves the open door's id.
 	 * @param section The section from which to read the object's value.
-	 * @return The open door's graphic.
+	 * @return The open door's id.
 	 */
-	private int getOpenGrh(Section section, Ini iniFile) {
-		String data = section.get(OPEN_GRH_KEY);
+	private int getOpenObjectId(Section section) {
+		String data = section.get(OPEN_OBJECT_ID_KEY);
 
 		if (data == null) {
 			return 0;
 		}
 
-		return Integer.parseInt(iniFile.get(OBJECT_SECTION_PREFIX + Integer.parseInt(data)).get(GRAPHIC_KEY));
+		return Integer.parseInt(data);
 	}
 
 	/**
-	 * Checks if the object is logeable or not
+	 * Checks if the object should be logged or not
 	 * @param section The section from which to read the object's value.
-	 * @return True if the object is logeable, false otherwise.
+	 * @return True if the object should be logged, false otherwise.
 	 */
 	private boolean getNoLog(Section section) {
 		String data = section.get(NO_LOG_KEY);

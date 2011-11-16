@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@
 package com.ao.model.worldobject;
 
 import com.ao.model.character.Character;
-import com.ao.model.worldobject.properties.ItemProperties;
+import com.ao.model.worldobject.properties.RefillableStatModifyingItemProperties;
 import com.ao.model.worldobject.properties.StatModifyingItemProperties;
 
 /**
@@ -27,18 +27,13 @@ import com.ao.model.worldobject.properties.StatModifyingItemProperties;
  */
 public class FilledBottle extends ConsumableItem {
 
-	protected ItemProperties emptyBottleProperties;
-	
 	/**
 	 * Creates a new filled bottle instance.
 	 * @param properties The item's properties.
 	 * @param amount The item's amount.
-	 * @param emptyBottleProperties The properties for empty bottles.
 	 */
-	public FilledBottle(StatModifyingItemProperties properties, int amount, ItemProperties emptyBottleProperties) {
+	public FilledBottle(RefillableStatModifyingItemProperties properties, int amount) {
 		super(properties, amount);
-
-		this.emptyBottleProperties = emptyBottleProperties;
 	}
 
 	/*
@@ -47,7 +42,7 @@ public class FilledBottle extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new FilledBottle((StatModifyingItemProperties) properties, amount, emptyBottleProperties);
+		return new FilledBottle((RefillableStatModifyingItemProperties) properties, amount);
 	}
 
 	/*
@@ -57,10 +52,13 @@ public class FilledBottle extends ConsumableItem {
 	@Override
 	public void use(Character character) {
 		super.use(character);
-		
-		character.addToThirstiness(((StatModifyingItemProperties) properties).getMaxModifier());
-		
-		character.getInventory().addItem(new EmptyBottle(emptyBottleProperties, 1));
+
+		RefillableStatModifyingItemProperties itemProperties = (RefillableStatModifyingItemProperties) properties;
+
+		character.addToThirstiness(itemProperties.getMaxModifier());
+
+		EmptyBottle emptyBottle = new EmptyBottle(itemProperties.getOtherStateProperties(), 1);
+		character.getInventory().addItem(emptyBottle);
 	}
 
 	/**

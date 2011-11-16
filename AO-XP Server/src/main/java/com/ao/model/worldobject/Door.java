@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -33,33 +33,18 @@ public class Door extends AbstractWorldObject {
 	public boolean getOpen() {
 		return ((DoorProperties) properties).getOpen();
 	}
-	
+
 	/**
 	 * @return the locked.
 	 */
 	public boolean getLocked() {
 		return ((DoorProperties) properties).getLocked();
 	}
-	
+
 	/**
 	 * @return the code.
 	 */
 	public int getCode() {
 		return ((DoorProperties) properties).getCode();
 	}
-	
-	/**
-	 * @return the openGraphic.
-	 */
-	public int getOpenGrh() {
-		return ((DoorProperties) properties).getOpenGrh();
-	}
-	
-	/**
-	 * @return the closedGraphic
-	 */
-	public int getClosedGrh() {
-		return ((DoorProperties) properties).getClosedGrh();
-	}
-	
 }

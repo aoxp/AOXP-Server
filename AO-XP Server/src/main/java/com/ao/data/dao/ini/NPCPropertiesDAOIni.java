@@ -848,7 +848,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 			}
 
 			// Chance for the next step is 10% of the current one
-			chance *= 0.1;
+			chance *= 0.1f;
 		}
 
 		if (dropables.size() > 0) {

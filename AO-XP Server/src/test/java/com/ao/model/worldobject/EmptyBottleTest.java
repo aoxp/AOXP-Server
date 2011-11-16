@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -28,21 +28,21 @@ import org.junit.Test;
 
 import com.ao.model.character.Character;
 import com.ao.model.inventory.Inventory;
-import com.ao.model.worldobject.properties.ItemProperties;
+import com.ao.model.worldobject.properties.RefillableStatModifyingItemProperties;
 
 public class EmptyBottleTest extends AbstractItemTest {
 
 	private EmptyBottle bottle1;
 	private EmptyBottle bottle2;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props1 = new ItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, 1, null, null, false, false, false, false);
+		RefillableStatModifyingItemProperties props1 = new RefillableStatModifyingItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, 1, null, null, false, false, false, false, 0, 0, false, null);
 		bottle1 = new EmptyBottle(props1, 1);
-		
-		ItemProperties props2 = new ItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, 1, null, null, false, false, false, false);
+
+		RefillableStatModifyingItemProperties props2 = new RefillableStatModifyingItemProperties(WorldObjectType.EMPTY_BOTTLE, 1, "Empty Bottle", 1, 1, null, null, false, false, false, false, 0, 0, false, null);
 		bottle2 = new EmptyBottle(props2, 1);
-		
+
 		object = bottle2;
 		ammount = 1;
 		objectProps = props2;
@@ -54,40 +54,40 @@ public class EmptyBottleTest extends AbstractItemTest {
 
 	@Test
 	public void testUse() {
-		
+
 		Inventory inventory = EasyMock.createMock(Inventory.class);
-		
+
 		Character character = EasyMock.createMock(Character.class);
 		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-		
+
 		// Usage of minerals do nothing.
 		EasyMock.replay(inventory, character);
-		
+
 		bottle1.use(character);
 		bottle2.use(character);
-		
+
 		EasyMock.verify(inventory, character);
 	}
-	
+
 	@Test
 	public void testClone() {
-		
+
 		EmptyBottle clone = (EmptyBottle) bottle1.clone();
-		
+
 		// Make sure all fields match
 		assertEquals(bottle1.amount, clone.amount);
 		assertEquals(bottle1.properties, clone.properties);
-		
+
 		// Make sure the object itself is different
 		assertFalse(bottle1 == clone);
-		
-		
+
+
 		clone = (EmptyBottle) bottle2.clone();
-		
+
 		// Make sure all fields match
 		assertEquals(bottle2.amount, clone.amount);
 		assertEquals(bottle2.properties, clone.properties);
-		
+
 		// Make sure the object itself is different
 		assertFalse(bottle2 == clone);
 	}
