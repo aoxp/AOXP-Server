@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,16 +19,17 @@
 package com.ao.network;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
+
+import org.jboss.netty.buffer.ChannelBuffer;
 
 public class DataBuffer {
 
 	private static final String ASCII_FORMAT = "ASCII";
 	private static final String UNICODE_FORMAT = "UTF8";
-	protected ByteBuffer buffer;
+	protected ChannelBuffer buffer;
 
-	public DataBuffer(int capacity) {
-		buffer = ByteBuffer.allocate(capacity);
+	public DataBuffer(ChannelBuffer buffer) {
+		this.buffer = buffer;
 	}
 
 	/**
@@ -38,66 +39,66 @@ public class DataBuffer {
 	 */
 	public byte[] getBlock(int length) {
 		byte[] ret = new byte[length];
-		
-		buffer.get(ret, buffer.position(), length);
-		
+
+		buffer.readBytes(ret);
+
 		return ret;
 	}
-	
+
 	/**
 	 * @see java.nio.ByteBuffer#get()
 	 */
 	public byte get() {
-		return buffer.get();
+		return buffer.readByte();
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#getChar()
 	 */
 	public char getChar() {
-		return buffer.getChar();
+		return buffer.readChar();
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#getDouble()
 	 */
 	public double getDouble() {
-		return buffer.getDouble();
+		return buffer.readDouble();
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#getFloat()
 	 */
 	public float getFloat() {
-		return buffer.getFloat();
+		return buffer.readFloat();
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#getInt()
 	 */
 	public int getInt() {
-		return buffer.getInt();
+		return buffer.readInt();
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#getLong()
 	 */
 	public long getLong() {
-		return buffer.getLong();
+		return buffer.readLong();
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#getShort()
 	 */
 	public short getShort() {
-		return buffer.getShort();
+		return buffer.readShort();
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#put(byte)
 	 */
 	public DataBuffer put(byte b) {
-		buffer.put(b);
+		buffer.writeByte(b);
 		return this;
 	}
 
@@ -105,7 +106,7 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#put(byte[])
 	 */
 	public final DataBuffer put(byte[] src) {
-		buffer.put(src);
+		buffer.writeBytes(src);
 		return this;
 	}
 
@@ -113,7 +114,7 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#putChar(char)
 	 */
 	public DataBuffer putChar(char value) {
-		buffer.putChar(value);
+		buffer.writeChar(value);
 		return this;
 	}
 
@@ -121,7 +122,7 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#putDouble(double)
 	 */
 	public DataBuffer putDouble(double value) {
-		buffer.putDouble(value);
+		buffer.writeDouble(value);
 		return this;
 	}
 
@@ -129,7 +130,7 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#putFloat(float)
 	 */
 	public DataBuffer putFloat(float value) {
-		buffer.putFloat(value);
+		buffer.writeFloat(value);
 		return this;
 	}
 
@@ -137,7 +138,7 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#putInt(int)
 	 */
 	public DataBuffer putInt(int value) {
-		buffer.putInt(value);
+		buffer.writeInt(value);
 		return this;
 	}
 
@@ -145,7 +146,7 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#putLong(long)
 	 */
 	public DataBuffer putLong(long value) {
-		buffer.putLong(value);
+		buffer.writeLong(value);
 		return this;
 	}
 
@@ -153,32 +154,33 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#putShort(short)
 	 */
 	public DataBuffer putShort(short value) {
-		buffer.putShort(value);
+		buffer.writeShort(value);
 		return this;
 	}
 
 	/**
 	 * @see java.nio.ByteBuffer#toString()
 	 */
+	@Override
 	public String toString() {
 		return buffer.toString();
 	}
-	
+
 	/**
 	 * Reads an ASCII string from the buffer.
 	 * @return The String at the buffer's current position.
 	 * @throws UnsupportedEncodingException
 	 */
 	public String getASCIIString() throws UnsupportedEncodingException {
-		
+
 		// The string length is stored as a short just before the string itself.
-		byte[] str = new byte[buffer.getShort()];
-		
-		buffer.get(str);
-		
+		byte[] str = new byte[buffer.readShort()];
+
+		buffer.readBytes(str);
+
 		return new String(str, ASCII_FORMAT);
 	}
-	
+
 	/**
 	 * Reads an ASCII string with fixed length from the buffer.
 	 * @param length The length of the string to be read.
@@ -186,29 +188,29 @@ public class DataBuffer {
 	 * @throws UnsupportedEncodingException
 	 */
 	public String getASCIIStringFixed(int length) throws UnsupportedEncodingException {
-		
+
 		byte[] str = new byte[length];
-		
-		buffer.get(str);
-		
+
+		buffer.readBytes(str);
+
 		return new String(str, ASCII_FORMAT);
 	}
-	
+
 	/**
 	 * Reads a Unicode string from the buffer.
 	 * @return The String at the buffer's current position.
 	 * @throws UnsupportedEncodingException
 	 */
 	public String getUnicodeString() throws UnsupportedEncodingException {
-		
+
 		// The string length is stored as a short just before the string itself.
-		byte[] str = new byte[buffer.getShort() * 2];
-		
-		buffer.get(str);
-		
+		byte[] str = new byte[buffer.readShort() * 2];
+
+		buffer.readBytes(str);
+
 		return new String(str, UNICODE_FORMAT);
 	}
-	
+
 	/**
 	 * Reads a Unicode string with a fixed length from the buffer.
 	 * @param length The length of the string to be read,
@@ -216,61 +218,69 @@ public class DataBuffer {
 	 * @throws UnsupportedEncodingException
 	 */
 	public String getUnicodeString(int length) throws UnsupportedEncodingException {
-		
+
 		byte[] str = new byte[length];
-		
-		buffer.get(str);
-		
+
+		buffer.readBytes(str);
+
 		return new String(str, UNICODE_FORMAT);
 	}
-	
+
 	/**
-	 * Writes the given ASCII string in the buffer's current position. 
+	 * Writes the given ASCII string in the buffer's current position.
 	 * @param value The string to be written.
 	 * @return This buffer.
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	public DataBuffer putASCIIString(String value) throws UnsupportedEncodingException {
-		buffer.putShort((short) value.length());
-		buffer.put(value.getBytes(ASCII_FORMAT));
-		
+		buffer.writeShort((short) value.length());
+		buffer.writeBytes(value.getBytes(ASCII_FORMAT));
+
 		return this;
 	}
-	
+
 	/**
-	 * Writes the given ASCII string with fixed length in the buffer's current position. 
+	 * Writes the given ASCII string with fixed length in the buffer's current position.
 	 * @param value The string to be written.
 	 * @return This buffer.
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	public DataBuffer putASCIIStringFixed(String value) throws UnsupportedEncodingException {
-		buffer.put(value.getBytes(ASCII_FORMAT));
-		
+		buffer.writeBytes(value.getBytes(ASCII_FORMAT));
+
 		return this;
 	}
-	
+
 	/**
-	 * Writes the given Unicode string in the buffer's current position. 
+	 * Writes the given Unicode string in the buffer's current position.
 	 * @param value The string to be written.
 	 * @return This buffer.
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	public DataBuffer putUnicodeString(String value) throws UnsupportedEncodingException {
-		buffer.putShort((short) value.length());
-		buffer.put(value.getBytes(UNICODE_FORMAT));
-		
+		buffer.writeShort((short) value.length());
+		buffer.writeBytes(value.getBytes(UNICODE_FORMAT));
+
 		return this;
 	}
-	
+
 	/**
-	 * Writes the given Unicode string with fixed length in the buffer's current position. 
+	 * Writes the given Unicode string with fixed length in the buffer's current position.
 	 * @param value The string to be written.
 	 * @return This buffer.
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
 	 */
 	public DataBuffer putUnicodeStringFixed(String value) throws UnsupportedEncodingException {
-		buffer.put(value.getBytes(UNICODE_FORMAT));
-		
+		buffer.writeBytes(value.getBytes(UNICODE_FORMAT));
+
 		return this;
+	}
+
+	/**
+	 * Retrieves the number of readable bytes in the buffer.
+	 * @return The number of readable bytes in the buffer.
+	 */
+	public int getReadableBytes() {
+		return buffer.readableBytes();
 	}
 }

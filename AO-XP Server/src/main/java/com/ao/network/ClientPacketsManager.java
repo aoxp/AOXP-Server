@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,6 @@
 package com.ao.network;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.BufferUnderflowException;
 
 import com.ao.network.packet.IncomingPacket;
 import com.ao.network.packet.incoming.LoginExistingCharacterPacket;
@@ -36,9 +35,9 @@ public class ClientPacketsManager {
 	 */
 	private enum ClientPackets {
 		LOGIN_EXISTING_CHARACTER(LoginExistingCharacterPacket.class),
-		LOGIN_NEW_CHARACTER(LoginNewCharacterPacket.class),
-		THROW_DICE(ThrowDicesPacket.class);
-		
+		THROW_DICE(ThrowDicesPacket.class),
+		LOGIN_NEW_CHARACTER(LoginNewCharacterPacket.class);
+
 		protected IncomingPacket handler;
 
 		private ClientPackets(Class<? extends IncomingPacket> handler) {
@@ -48,24 +47,25 @@ public class ClientPacketsManager {
 				throw new RuntimeException(e);
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * Maps packets ids to their classes.
 	 */
 	protected static final ClientPackets[] packets = ClientPackets.values();
-	
+
 	/**
 	 * Handles new data in the connection's incoming buffer.
 	 * @param connection The connection's container.
-	 * @throws BufferUnderflowException
+	 * @param buffer The buffer from which to read data.
+	 * @return True if a packet could be processed, false otherwise.
 	 * @throws UnsupportedEncodingException
 	 * @throws ArrayIndexOutOfBoundsException
 	 */
-	public static void handle(Connection connection) throws BufferUnderflowException, UnsupportedEncodingException,
+	public static boolean handle(DataBuffer buffer, Connection connection) throws UnsupportedEncodingException,
 		ArrayIndexOutOfBoundsException {
-		
-		packets[connection.inputBuffer.get()].handler.handle(connection);
+
+		return packets[buffer.get()].handler.handle(buffer, connection);
 	}
 }

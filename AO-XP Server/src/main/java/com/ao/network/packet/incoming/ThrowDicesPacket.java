@@ -1,18 +1,17 @@
 package com.ao.network.packet.incoming;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.BufferUnderflowException;
 import java.util.Random;
 
 import com.ao.model.character.Attribute;
 import com.ao.model.user.ConnectedUser;
 import com.ao.network.Connection;
-import com.ao.network.ServerPacketsManager;
+import com.ao.network.DataBuffer;
 import com.ao.network.packet.IncomingPacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 
 public class ThrowDicesPacket implements IncomingPacket {
-	
+
 	/**
 	 * Minimum attributes values.
 	 */
@@ -21,31 +20,32 @@ public class ThrowDicesPacket implements IncomingPacket {
 	private final int MIN_INGELLIGENCE = 16;
 	private final int MIN_CHARISMA = 15;
 	private final int MIN_CONSTITUTION = 16;
-	
+
 	private Random rnd = new Random();
-	
+
 	@Override
-	public void handle(Connection connection) throws BufferUnderflowException,
+	public boolean handle(DataBuffer buffer, Connection connection) throws ArrayIndexOutOfBoundsException,
 			UnsupportedEncodingException {
-		
+
 		ConnectedUser user = (ConnectedUser) connection.getUser();
-		
+
 		byte strength = (byte) Math.max(MIN_STRENGTH, 13 + rnd.nextInt(4) + rnd.nextInt(3));
 		byte agility = (byte) Math.max(MIN_AGILITY, 12 + rnd.nextInt(4) + rnd.nextInt(4));
 		byte intelligence = (byte) Math.max(MIN_INGELLIGENCE, 13 + rnd.nextInt(4) + rnd.nextInt(3));
 		byte charisma = (byte) Math.max(MIN_CHARISMA, 12 + rnd.nextInt(4) + rnd.nextInt(4));
 		byte constitution = (byte) Math.max(MIN_CONSTITUTION, 16 + rnd.nextInt(2) + rnd.nextInt(2));
-		
+
 		user.setAttribute(Attribute.STRENGTH, strength);
 		user.setAttribute(Attribute.AGILITY, agility);
 		user.setAttribute(Attribute.INTELLIGENCE, intelligence);
 		user.setAttribute(Attribute.CHARISMA, charisma);
 		user.setAttribute(Attribute.CONSTITUTION, constitution);
-		
-		ServerPacketsManager.write(
-			new DiceRollPacket(strength, agility, intelligence, charisma, constitution),
-			connection.getOutputBuffer()
+
+		connection.send(
+			new DiceRollPacket(strength, agility, intelligence, charisma, constitution)
 		);
+
+		return true;
 	}
 
 }

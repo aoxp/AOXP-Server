@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -31,7 +31,7 @@ import com.ao.model.user.ConnectedUser;
 import com.ao.model.user.User;
 import com.ao.model.worldobject.WorldObject;
 import com.ao.network.Connection;
-import com.ao.network.DataBuffer;
+import com.ao.network.packet.OutgoingPacket;
 import com.ao.service.timedevents.TimedEvent;
 
 /**
@@ -41,68 +41,79 @@ public class MockFactory {
 
 	/**
 	 * Creates a new Connection mock.
-	 * The created mock will also return mocks in the functions getInputBuffer,
-	 * getOutputBuffer and getUser.
-	 * 
+	 *
 	 * @param user The User object to be retrieved by getUser.
+	 * @param outgoing A capture on which to leave any outgoing packets sent. May be null.
 	 * @return The mock.
 	 */
-	public static Connection mockConnection(User user) {
+	public static Connection mockConnection(User user, Capture<? extends OutgoingPacket> outgoing) {
 		Connection conn = EasyMock.createMock(Connection.class);
-		
-		EasyMock.expect(conn.getInputBuffer()).andReturn(EasyMock.createMock(DataBuffer.class)).anyTimes();
-		EasyMock.expect(conn.getOutputBuffer()).andReturn(EasyMock.createMock(DataBuffer.class)).anyTimes();
+
 		EasyMock.expect(conn.getUser()).andReturn(user).anyTimes();
+
+		if (outgoing != null) {
+			conn.send(EasyMock.capture(outgoing));
+		}
+
 		conn.disconnect();
-		
+
 		EasyMock.replay(conn);
-		
+
 		return conn;
 	}
-	
+
 	/**
 	 * Creates a new Connection mock.
-	 * The created mock will return default mocks in getInputBuffer, getOutputBuffer and getUser.
-	 * 
+	 *
 	 * @return The mock.
 	 */
 	public static Connection mockConnection() {
-		return mockConnection(EasyMock.createMock(ConnectedUser.class));
+		return mockConnection(null);
 	}
-	
+
+	/**
+	 * Creates a new Connection mock.
+	 *
+	 * @param outgoing A capture on which to leave any outgoing packets sent. May be null.
+	 * @return The mock.
+	 */
+	public static Connection mockConnection(Capture<? extends OutgoingPacket> outgoing) {
+		return mockConnection(EasyMock.createMock(ConnectedUser.class), outgoing);
+	}
+
 	/**
 	 * Creates a new ConnectedUser mock.
-	 * 
+	 *
 	 * @return The created mock.
 	 */
 	public static ConnectedUser mockConnectedUser() {
 		ConnectedUser user = EasyMock.createMock(ConnectedUser.class);
-		
+
 		EasyMock.expect(user.getAttribute(Attribute.AGILITY)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.CHARISMA)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.CONSTITUTION)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.INTELLIGENCE)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.STRENGTH)).andReturn((byte) 18).anyTimes();
-		
+
 		// Capture the received Account object in setAccount to later return it on getAccount.
 		final Capture<Account> account = new Capture<Account>();
-		
+
 		user.setAccount(EasyMock.capture(account));
-		
+
 		EasyMock.expect(user.getAccount()).andAnswer(new IAnswer<Account>() {
 
 			@Override
 			public Account answer() throws Throwable {
 				return account.getValue();
 			}
-			
+
 		});
-		
+
 		EasyMock.replay(user);
-		
+
 		return user;
 	}
-	
+
 	/**
 	 * Creates a new effect mock.
 	 * @param appliesToChar Whether the effect to be mocked should apply to characters.
@@ -113,33 +124,33 @@ public class MockFactory {
 		Effect effect = EasyMock.createMock(Effect.class);
 		EasyMock.expect(effect.appliesTo((Character) EasyMock.anyObject(), (Character) EasyMock.anyObject())).andReturn(appliesToChar).anyTimes();
 		EasyMock.expect(effect.appliesTo((Character) EasyMock.anyObject(), (WorldObject) EasyMock.anyObject())).andReturn(appliesToWorldObject).anyTimes();
-		
+
 		effect.apply((Character) EasyMock.anyObject(), (Character) EasyMock.anyObject());
 		if (!appliesToChar) {
 			EasyMock.expectLastCall().andThrow(new InvalidTargetException()).anyTimes();
 		}
-		
+
 		effect.apply((Character) EasyMock.anyObject(), (WorldObject) EasyMock.anyObject());
 		if (!appliesToWorldObject) {
 			EasyMock.expectLastCall().andThrow(new InvalidTargetException()).anyTimes();
 		}
-		
+
 		EasyMock.replay(effect);
-		
+
 		return effect;
 	}
-	
+
 	/**
 	 * Creates a new character mock.
 	 * @return The created mock.
 	 */
 	public static Character mockCharacter() {
 		Character character = EasyMock.createMock(Character.class);
-		
+
 		// TODO : Fill this in as needed
-		
+
 		EasyMock.replay(character);
-		
+
 		return character;
 	}
 
@@ -149,14 +160,14 @@ public class MockFactory {
 	 */
 	public static WorldObject mockWorldObject() {
 		WorldObject worldObject = EasyMock.createMock(WorldObject.class);
-		
+
 		// TODO : Fill this in as needed
-		
+
 		EasyMock.replay(worldObject);
-		
+
 		return worldObject;
 	}
-	
+
 	/**
 	 * Creates a new TimedEvent mock.
 	 * @param executions The amount of the executions the event would have.
@@ -165,18 +176,18 @@ public class MockFactory {
 	 */
 	public static TimedEvent mockTimedEvent(int executions, Character chara) {
 		TimedEvent event = EasyMock.createMock(TimedEvent.class);
-		
+
 		EasyMock.expect(event.getCharacter()).andReturn(chara).anyTimes();
-		
+
 		for(int i = 0; i < executions; i++) {
 			event.execute();
 		}
-		
+
 		EasyMock.replay(event);
-		
+
 		return event;
 	}
-	
+
 	/**
 	 * Creates a new TimedEvent mock with a default mocked Characted.
 	 * @param executions The amount of the executions the event would have.
