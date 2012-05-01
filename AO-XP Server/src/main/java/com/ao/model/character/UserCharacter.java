@@ -88,4 +88,29 @@ public interface UserCharacter extends Character {
 	 * @return The user's archetype.
 	 */
 	Archetype getArchetype();
+	
+	/**
+	 * Retrieves the user's stamina.
+	 * @return The user's stamina.
+	 */
+	public int getStamina();
+
+	/**
+	 * Sets the user's stamina.
+	 * @param stamina The stamina
+	 */
+	public void setStamina(int stamina);
+
+	/**
+	 * Retrieves the user's max stamina.
+	 * @return The user's max stamina.
+	 */
+	public int getMaxStamina();
+
+	/**
+	 * Sets the user's max stamina.
+	 * @param maxStamina The max stamina.
+	 */
+	public void setMaxStamina(int maxStamina);
+	
 }
