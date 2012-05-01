@@ -19,96 +19,39 @@
 package com.ao.network.packet.outgoing;
 
 import java.io.UnsupportedEncodingException;
-import com.ao.model.map.Heading;
+import com.ao.model.character.Character;
 import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
 
 public class CharacterCreatePacket implements OutgoingPacket {
 
-	private short body;
-	private short head;
-	private Heading heading;
-	private short charIndex;
-	private byte x;
-	private byte y;
-	private short weapon;
-	private short shield;
-	private short fx;
-	private short fxLoops;
-	private short helmet;
-	private String name;
-	private byte nickColor;
-	private byte privileges;
+	private Character character;
 
 	/**
 	 * Create character packages
 	 * 
-	 * @param body
-	 *            Body index of the new character.
-	 * @param head
-	 *            Head index of the new character.
-	 * @param heading
-	 *            Heading in which the new character is looking.
-	 * @param charIndex
-	 *            The index of the new character.
-	 * @param x
-	 *            X coordinate of the new character's position.
-	 * @param y
-	 *            Y coordinate of the new character's position.
-	 * @param weapon
-	 *            Weapon index of the new character.
-	 * @param shield
-	 *            Shield index of the new character.
-	 * @param fx
-	 *            FX index to be displayed over the new character.
-	 * @param fxLoops
-	 *            Number of times the FX should be rendered.
-	 * @param helmet
-	 *            Helmet index of the new character.
-	 * @param name
-	 *            Name of the new character.
-	 * @param criminal
-	 *            Determines if the character is a criminal or not.
-	 * @param privileges
-	 *            Sets if the character is a normal one or any kind of
-	 *            administrative character.
+	 * @param character The character
 	 */
-	public CharacterCreatePacket(short body, short head, Heading heading, short charIndex, byte x, byte y,
-			short weapon, short shield, short fx, short fxLoops, short helmet, String name, byte nickColor,
-			byte privileges) {
-
-		this.body = body;
-		this.head = head;
-		this.heading = heading;
-		this.charIndex = charIndex;
-		this.x = x;
-		this.y = y;
-		this.weapon = weapon;
-		this.shield = shield;
-		this.fx = fx;
-		this.fxLoops = fxLoops;
-		this.helmet = helmet;
-		this.name = name;
-		this.nickColor = nickColor;
-		this.privileges = privileges;
+	public CharacterCreatePacket(Character character) {
+		this.character = character;
 	}
 
 	@Override
 	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
-		buffer.putShort(charIndex);
-		buffer.putShort(body);
-		buffer.putShort(head);
-		buffer.put((byte) heading.ordinal());
-		buffer.put(x);
-		buffer.put(y);
-		buffer.putShort(weapon);
-		buffer.putShort(shield);
-		buffer.putShort(helmet);
-		buffer.putShort(fx);
-		buffer.putShort(fxLoops);
-		buffer.putASCIIString(name);
-		buffer.put(nickColor);
-		buffer.put(privileges);
+		buffer.putShort((short) character.getCharIndex());
+		buffer.putShort((short) character.getBody());
+		buffer.putShort((short) character.getHead());
+		buffer.put((byte) character.getHeading().ordinal());
+		buffer.put(character.getPosition().getX());
+		buffer.put(character.getPosition().getY());
+		buffer.putShort((short) character.getWeapon().getId());
+		buffer.putShort((short) character.getShield().getId());
+		buffer.putShort((short) character.getHelmet().getId());
+		buffer.putShort((short) character.getFx().getId());
+		buffer.putShort((short) character.getFx().getLoops());
+		buffer.putASCIIString(character.getName());
+		buffer.put((byte) character.getNickColor());
+		buffer.put((byte) character.getPrivileges().getPrivilegesFlags());
 	}
 
 }
