@@ -64,17 +64,20 @@ public class LockingServiceImpl implements LockingService {
 
 			int identityHashCode = System.identityHashCode(o);
 
-			lock = lockedObjects.get(identityHashCode);
-
-			if (lock == null) {
-				lock = new ObjectLock(identityHashCode, new ReentrantLock());
-				((ConcurrentHashMap<Integer, ObjectLock>) lockedObjects).putIfAbsent(identityHashCode, lock);
+			// Make sure only one thread at a time enters the request area for any given object
+			synchronized (o) {
 				lock = lockedObjects.get(identityHashCode);
-			}
 
-			// After obtaining the lock, we add the lock to the map once again, just in case it was just released by another thread and removed..
-			lock.getLock().lock();
-			((ConcurrentHashMap<Integer, ObjectLock>) lockedObjects).putIfAbsent(identityHashCode, lock);
+				if (lock == null) {
+					lock = new ObjectLock(identityHashCode, new ReentrantLock());
+					((ConcurrentHashMap<Integer, ObjectLock>) lockedObjects).putIfAbsent(identityHashCode, lock);
+					lock = lockedObjects.get(identityHashCode);
+				}
+
+				// After obtaining the lock, we add the lock to the map once again, just in case it was just released by another thread and removed..
+				lock.getLock().lock();
+				((ConcurrentHashMap<Integer, ObjectLock>) lockedObjects).putIfAbsent(identityHashCode, lock);
+			}
 
 			locks.add(lock);
 		}
