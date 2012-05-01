@@ -1,6 +1,6 @@
 /*
 
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -35,31 +35,34 @@ public class WorldMap {
 	public static final int VISIBLE_AREA_WIDTH = 8;
 	public static final int VISIBLE_AREA_HEIGHT = 6;
 	public static final int MAX_DISTANCE = 12;
-	
+
 	public static final int MAX_X = 99;
 	public static final int MAX_Y = 99;
 	public static final int MIN_X = 0;
 	public static final int MIN_Y = 0;
-	
+
 	protected String name;
 	protected int id;
-	
+	protected short version;
+
 	// We don't use jagged arrays, they are inefficient in Java!
 	protected Tile[] tiles;
-	
+
 	/**
 	 * Creates a new Map.
 	 * @param name The name of the map.
 	 * @param id The unique id of the map.
+	 * @param version The map's version.
 	 * @param tiles The array of tiles composing the map.
 	 */
-	public WorldMap(String name, int id, Tile[] tiles) {
+	public WorldMap(String name, int id, short version, Tile[] tiles) {
 		super();
 		this.name = name;
 		this.id = id;
+		this.version = version;
 		this.tiles = tiles;
 	}
- 
+
 	/**
 	 * Creates a new Map.
 	 * @param id The unique id of the map.
@@ -68,7 +71,7 @@ public class WorldMap {
 		super();
 		this.id = id;
 	}
-	
+
 	/**
 	 * Sets the tiles of the map
 	 * @param tiles The array of tiles composing the map
@@ -76,7 +79,7 @@ public class WorldMap {
 	public void setTiles(Tile[] tiles) {
 		this.tiles = tiles;
 	}
-	
+
 	/**
 	 * Sets the name of the map
 	 * @param name The name of the map
@@ -84,7 +87,23 @@ public class WorldMap {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	/**
+	 * Sets the map's version.
+	 * @param version The map's version
+	 */
+	public void setVersion(short version) {
+		this.version = version;
+	}
+
+	/**
+	 * Retrieves the map's version.
+	 * @return The map's version.
+	 */
+	public short getVersion() {
+		return version;
+	}
+
 	/**
 	 * Retrieves the tile at the given coordinates.
 	 * @param x The coordinate along the x vertex (zero is at the left).
@@ -104,7 +123,7 @@ public class WorldMap {
 	public static int getTileKey(int x, int y) {
 		return y * MAP_WIDTH + x;
 	}
-	
+
 	/**
 	 * Retrieves the map's name.
 	 * @return The map's name.
@@ -120,7 +139,7 @@ public class WorldMap {
 	public int getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Retrieves a list with the characters in the given position vision range.
 	 * @param x The coordinate along the x vertex (zero is at the left).
@@ -130,26 +149,30 @@ public class WorldMap {
 	public List<Character> getCharactersNearby(int x, int y) {
 		List<Character> charList = new LinkedList<Character>();
 		Character character;
-		
+
 		int yy;
 		int toX = x + WorldMap.VISIBLE_AREA_WIDTH * 2;
 		int toY = y + WorldMap.VISIBLE_AREA_HEIGHT * 2;
 		int fromY = y - WorldMap.VISIBLE_AREA_HEIGHT;
-		
+
 		for (int xx = x - WorldMap.VISIBLE_AREA_WIDTH; xx < toX; xx++) {
-			if (xx > MAX_X || xx < MIN_X) continue;
-			
+			if (xx > MAX_X || xx < MIN_X) {
+				continue;
+			}
+
 			for (yy = fromY; yy < toY; yy++) {
-				if (yy > MAX_Y || yy < MIN_Y) continue;
+				if (yy > MAX_Y || yy < MIN_Y) {
+					continue;
+				}
 				character = getTile(xx, yy).getCharacter();
-				
+
 				if (character != null && (xx != x && yy != y)) {
 					charList.add(character);
 				}
-				
+
 			}
 		}
-		
+
 		return charList;
 	}
 
@@ -162,15 +185,15 @@ public class WorldMap {
 	public void putCharacterAtPos(Character chara, byte x, byte y) {
 		synchronized (tiles) {
 			Tile tile = getTile(x, y);
-			
+
 			if (tile.getCharacter() != null) {
 				tile = getEmptyTileAround(x, y, chara.canWalkInWater(), !chara.canWalkInWater());
 			}
-			
+
 			tile.setCharacter(chara);
 		}
 	}
-	
+
 	/**
 	 * Searchs for an empty tile around the given one and retrieves it.
 	 * If there is no empty tile around the given one this will continue
@@ -189,7 +212,7 @@ public class WorldMap {
 		while (distance < MAX_DISTANCE) {
 			for (int x = Math.max(lookAroundX - distance, 1); x < lookAroundX + distance && x <= MAP_HEIGHT; x++) {
 				for (int y = Math.max(lookAroundY - distance, 1); y < lookAroundY + distance && y <= MAP_WIDTH; y++) {
-					
+
 					// Don't look on the tile we're supposed to look around or on tiles already checked.
 					if (Math.abs(x - lookAroundX) != distance && Math.abs(y - lookAroundY) != distance) {
 						continue;
@@ -209,28 +232,35 @@ public class WorldMap {
 
 		return null;
 	}
-	
+
 	@Override
  	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		WorldMap other = (WorldMap) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
-		} else if (!name.equals(other.name))
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
-		if (!Arrays.equals(tiles, other.tiles))
+		}
+		if (!Arrays.equals(tiles, other.tiles)) {
 			return false;
+		}
 		return true;
 	}
-	
+
 	public Tile[] dame()
 	{
 		return tiles;
