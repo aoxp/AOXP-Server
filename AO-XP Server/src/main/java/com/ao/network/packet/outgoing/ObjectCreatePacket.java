@@ -14,40 +14,39 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
-package com.ao.model.character.movement;
+package com.ao.network.packet.outgoing;
 
-import junit.framework.Assert;
+import java.io.UnsupportedEncodingException;
 
-import org.easymock.EasyMock;
-import org.junit.Test;
-
-import com.ao.model.character.Character;
 import com.ao.model.map.Position;
-import com.ao.model.map.Tile;
-import com.ao.model.map.WorldMap;
+import com.ao.model.worldobject.WorldObject;
+import com.ao.network.DataBuffer;
+import com.ao.network.packet.OutgoingPacket;
 
-public class QuietMovementStrategyTest {
+public class ObjectCreatePacket implements OutgoingPacket {
 
-	private MovementStrategy movement = new QuietMovementStrategy();
+	private WorldObject object;
+	private Position position;
+	
+	/**
+	 * Creates an object.
+	 * 
+     * @param object   The object.
+     * @param position The position.
+     */
+    public ObjectCreatePacket(WorldObject object, Position position) {
+        this.object = object;
+        this.position = position;
+    }
 
-	@Test
-	public void testMove() {
-		WorldMap map = new WorldMap("foo", 0, (short) 1, new Tile[0]);
-
-		Position pos = new Position((byte) 50, (byte) 50, map);
-		Position target = new Position((byte) 60, (byte) 60, map);
-
-		movement.setTarget(target);
-
-		Assert.assertNull(movement.move(pos));
-
-		Character character = EasyMock.createMock(Character.class);
-
-		movement.setTarget(character);
-
-		Assert.assertNull(movement.move(pos));
+    @Override
+	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
+		
+        buffer.putShort((short) object.getGraphic());
+        buffer.put(position.getX());
+        buffer.put(position.getY());
 	}
 
 }

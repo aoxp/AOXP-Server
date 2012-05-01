@@ -25,8 +25,12 @@ import java.util.Map;
 import com.ao.network.packet.OutgoingPacket;
 import com.ao.network.packet.outgoing.ChangeMapPacket;
 import com.ao.network.packet.outgoing.CharacterCreatePacket;
+import com.ao.network.packet.outgoing.ConsoleMessagePacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
+import com.ao.network.packet.outgoing.ObjectCreatePacket;
+import com.ao.network.packet.outgoing.UserCharacterIndexInServerPacket;
+import com.ao.network.packet.outgoing.UserIndexInServer;
 
 /**
  * Manager for server-side packets.
@@ -58,21 +62,21 @@ public class ServerPacketsManager {
 	    UPDATE_GOLD(null),
 	    UPDATE_BANK_GOLD(null),
 	    UPDATE_EXP(null),
-	    CHANGE_MAP(null),
+	    CHANGE_MAP(ChangeMapPacket.class),
 	    POSITION_UPDATE(null),
 	    CHAT_OVER_HEAD(null),
-	    CONSOLE_MESSAGE(null),
+	    CONSOLE_MESSAGE(ConsoleMessagePacket.class),
 	    GUILD_CHAT(null),
 	    SHOW_MESSAGE_BOX(null),
-	    USER_INDEX_IN_SERVER(null),
-	    USER_CHARACTER_INDEX_IN_SERVER(null),
+	    USER_INDEX_IN_SERVER(UserIndexInServer.class),
+	    USER_CHARACTER_INDEX_IN_SERVER(UserCharacterIndexInServerPacket.class),
 	    CHARACTER_CREATE(CharacterCreatePacket.class),
 	    CHARACTER_REMOVE(null),
 	    CHARACTER_CHANGE_NICKNAME(null),
 	    CHARACTER_MOVE(null),
 	    CHARACTER_FORCE_MOVE(null),
 	    CHARACTER_CHANGE(null),
-	    OBJECT_CREATE(null),
+	    OBJECT_CREATE(ObjectCreatePacket.class),
 	    OBJECT_DEETE(null),
 	    BLOCK_POSITION(null),
 	    PLAY_MIDI(null),
