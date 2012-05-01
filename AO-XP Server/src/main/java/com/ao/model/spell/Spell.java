@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,32 +18,41 @@
 
 package com.ao.model.spell;
 
+import com.ao.model.character.Character;
 import com.ao.model.spell.effect.Effect;
 import com.ao.model.worldobject.WorldObject;
-import com.ao.model.character.Character;
 
+/**
+ * Defines a spell's model.
+ * @author Juan Martín Sotuyo Dodero
+ */
 public class Spell {
+
+	/**
+	 * The id of the spell.
+	 */
+	protected int id;
 
 	/**
 	 * The effects stack.
 	 */
 	protected Effect[] effects;
-	
+
 	/**
 	 * The required staff power to use the spell.
 	 */
 	private int requiredStaffPower;
-	
+
 	/**
 	 * The required skill to use the spell.
 	 */
 	private int requiredSkill;
-	
+
 	/**
 	 * The required mana to use the spell.
 	 */
 	private int requiredMana;
-	
+
 	/**
 	 * The spell's name.
 	 */
@@ -53,29 +62,31 @@ public class Spell {
 	 * The spell's description.
 	 */
 	private String description;
-	
+
 	/**
 	 * Determines whether the effects applied to target are harmful, or not.
 	 */
 	private boolean negative;
-	
+
 	/**
 	 * The spell's fx.
 	 */
 	private int fx;
-	
+
 	/**
 	 * The spell's sound.
 	 */
 	private int sound;
-	
+
 	/**
 	 * The pronounced words when the spell is thrown.
 	 */
 	private String magicWords;
-	
+
 	/**
 	 * Instantes the spell.
+	 *
+	 * @param id					The spell's id.
 	 * @param effects 				The spell's effect.
 	 * @param requiredStaffPower	The spell's required staff power.
 	 * @param requiredSkill			The spell's required skill.
@@ -87,9 +98,10 @@ public class Spell {
 	 * @param sound					The sound to play when casting the spell.
 	 * @param magicWords			The magic words to be said by the caster when casting the spell.
 	 */
-	public Spell(Effect[] effects, int requiredStaffPower, int requiredSkill,
+	public Spell(int id, Effect[] effects, int requiredStaffPower, int requiredSkill,
 			int requiredMana, String name, String description, boolean negative,
 			int fx, int sound, String magicWords) {
+		this.id = id;
 		this.effects = effects;
 		this.requiredStaffPower = requiredStaffPower;
 		this.requiredSkill = requiredSkill;
@@ -133,7 +145,7 @@ public class Spell {
 	public int getRequiredSkill() {
 		return requiredSkill;
 	}
-	
+
 	/**
 	 * Checks whether the spell can be applied to the given target when is casted by the given caster.
 	 * @param caster The spell's caster.
@@ -146,10 +158,10 @@ public class Spell {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Checks whether the spell can be applied to the given target when is casted by the given caster.
 	 * @param caster The spell's caster.
@@ -162,10 +174,10 @@ public class Spell {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	/**
 	 * Applies the spell to the given target.
 	 * @param caster The spell's caster.
@@ -175,10 +187,10 @@ public class Spell {
 		for (int i = 0; i < effects.length; i++) {
 			effects[i].apply(caster, target);
 		}
-		
+
 		caster.addToMana(-requiredMana);
 	}
-	
+
 	/**
 	 * Applies the spell to the given target.
 	 * @param caster The spell's caster.
@@ -188,10 +200,10 @@ public class Spell {
 		for (int i = 0; i < effects.length; i++) {
 			effects[i].apply(caster, target);
 		}
-		
+
 		caster.addToMana(-requiredMana);
 	}
-	
+
 	/**
 	 * Retrieves the spell's name.
 	 * @return Spell's name.
@@ -207,7 +219,7 @@ public class Spell {
 	public String getDescription() {
 		return description;
 	}
-	
+
 	/**
 	 * Checks whether the spell is negative to target, or not.
 	 * @return
@@ -215,7 +227,7 @@ public class Spell {
 	public boolean isNegative() {
 		return negative;
 	}
-	
+
 	/**
 	 * Retrieves the spell's fx.
 	 * @return Spell's fx.
@@ -223,7 +235,7 @@ public class Spell {
 	public int getFX() {
 		return fx;
 	}
-	
+
 	/**
 	 * Retrieves the spell's sound.
 	 * @return Spell's sound.
@@ -238,5 +250,13 @@ public class Spell {
 	 */
 	public String getMagicWords() {
 		return magicWords;
+	}
+
+	/**
+	 * Retrieves the spell's id.
+	 * @return The spells id.
+	 */
+	public int getId() {
+		return id;
 	}
 }

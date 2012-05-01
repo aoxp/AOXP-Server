@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,10 @@
 
 package com.ao.model.spell;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.easymock.classextension.EasyMock;
 import org.junit.After;
@@ -42,33 +45,33 @@ public class SpellTest {
 	private static final int SPELL_FX = 1;
 	private static final int SPELL_SOUND = 2;
 	private static final String SPELL_MAGIC_WORDS = "magic words for poison spell";
-	
+
 	private Spell spellNoStaff;
 	private Spell spellWithStaff;
 	private Spell spellNoStaffObject;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		Effect[] effects = new Effect[2];
-		
+
 		effects[0] = MockFactory.mockEffect(true, false);
 		effects[1] = MockFactory.mockEffect(true, false);
-		
-		spellNoStaff = new Spell(effects, 0, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
-		
+
+		spellNoStaff = new Spell(1, effects, 0, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
+
 		Effect[] effects2 = new Effect[2];
-		
+
 		effects2[0] = MockFactory.mockEffect(true, false);
 		effects2[1] = MockFactory.mockEffect(true, false);
-		
-		spellWithStaff = new Spell(effects2, REQUIRED_STAFF_POWER, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
-		
+
+		spellWithStaff = new Spell(1, effects2, REQUIRED_STAFF_POWER, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
+
 		Effect[] effects3 = new Effect[2];
-		
+
 		effects3[0] = MockFactory.mockEffect(false, true);
 		effects3[1] = MockFactory.mockEffect(false, true);
-		
-		spellNoStaffObject = new Spell(effects3, 0, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
+
+		spellNoStaffObject = new Spell(1, effects3, 0, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
 	}
 
 	@After
@@ -107,7 +110,7 @@ public class SpellTest {
 	public void testAppliesToCharacterCharacter() {
 		Character caster = MockFactory.mockCharacter();
 		Character target = MockFactory.mockCharacter();
-		
+
 		assertTrue(spellNoStaff.appliesTo(caster, target));
 		assertTrue(spellWithStaff.appliesTo(caster, target));
 		assertFalse(spellNoStaffObject.appliesTo(caster, target));
@@ -117,7 +120,7 @@ public class SpellTest {
 	public void testAppliesToCharacterWorldObject() {
 		Character caster = MockFactory.mockCharacter();
 		WorldObject target = MockFactory.mockWorldObject();
-		
+
 		assertFalse(spellNoStaff.appliesTo(caster, target));
 		assertFalse(spellWithStaff.appliesTo(caster, target));
 		assertTrue(spellNoStaffObject.appliesTo(caster, target));
@@ -127,23 +130,23 @@ public class SpellTest {
 	public void testApplyCharacterCharacter() {
 		Character caster = MockFactory.mockCharacter();
 		Character target = MockFactory.mockCharacter();
-		
+
 		// Mock the mana loss
 		EasyMock.reset(caster);
 		caster.addToMana(-REQUIRED_MANA);
 		caster.addToMana(-REQUIRED_MANA);
 		EasyMock.replay(caster);
-		
+
 		spellNoStaff.apply(caster, target);
 		spellWithStaff.apply(caster, target);
-		
+
 		try {
 			spellNoStaffObject.apply(caster, target);
 			fail("Effect not targeting character was applied succesfully to one.");
 		} catch (InvalidTargetException e) {
 			// This is ok
 		}
-		
+
 		EasyMock.verify(caster, target);
 		EasyMock.verify(spellNoStaff.effects[0], spellNoStaff.effects[1]);
 		EasyMock.verify(spellWithStaff.effects[0], spellWithStaff.effects[1]);
@@ -153,31 +156,31 @@ public class SpellTest {
 	public void testApplyCharacterWorldObject() {
 		Character caster = MockFactory.mockCharacter();
 		WorldObject target = MockFactory.mockWorldObject();
-		
+
 		try {
 			spellNoStaff.apply(caster, target);
 			fail("Effect not targeting world objects was applied succesfully to one.");
 		} catch (InvalidTargetException e) {
 			// This is ok
 		}
-		
+
 		try {
 			spellWithStaff.apply(caster, target);
 			fail("Effect not targeting world objects was applied succesfully to one.");
 		} catch (InvalidTargetException e) {
 			// This is ok
 		}
-		
+
 		// Nothing else should happen to caster nor target
 		EasyMock.verify(caster, target);
-		
+
 		// Mock the mana loss
 		EasyMock.reset(caster);
 		caster.addToMana(-REQUIRED_MANA);
 		EasyMock.replay(caster);
-		
+
 		spellNoStaffObject.apply(caster, target);
-		
+
 		// Nothing else should happen to caster nor target
 		EasyMock.verify(caster, target);
 		EasyMock.verify(spellNoStaffObject.effects[0], spellNoStaffObject.effects[1]);
