@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ao.network.packet.OutgoingPacket;
+import com.ao.network.packet.outgoing.ChangeMapPacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
 
@@ -56,7 +57,7 @@ public class ServerPacketsManager {
 	    UPDATE_GOLD(null),
 	    UPDATE_BANK_GOLD(null),
 	    UPDATE_EXP(null),
-	    CHANGE_MAP(null),
+	    CHANGE_MAP(ChangeMapPacket.class),
 	    POSITION_UPDATE(null),
 	    CHAT_OVER_HEAD(null),
 	    CONSOLE_MESSAGE(null),
