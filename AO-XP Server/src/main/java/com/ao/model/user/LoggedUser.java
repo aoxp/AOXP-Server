@@ -19,7 +19,9 @@
 package com.ao.model.user;
 
 import com.ao.model.character.Character;
+import com.ao.model.character.Fx;
 import com.ao.model.character.Gender;
+import com.ao.model.character.Privileges;
 import com.ao.model.character.Race;
 import com.ao.model.character.Reputation;
 import com.ao.model.character.Skill;
@@ -536,6 +538,83 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public Heading getHeading() {
+		// TODO Auto-generated method stub
+		return Heading.EAST;
+	}
+	
+	@Override
+	public void setHeading(Heading heading) {
+		
+	}
+
+	@Override
+	public void setWeapon(Weapon weapon) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setShield(Shield shield) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setHelmet(Helmet helmet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Privileges getPrivileges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPrivileges(Privileges privileges) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getNickColor() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setNickColor(int colorIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Fx getFx() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFx(Fx fx) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getCharIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setCharIndex(int index) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public Weapon getWeapon() {
@@ -560,6 +639,18 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public Accessory getAccessory() {
 		return this.accessory;
+	}
+
+	@Override
+	public void setArmor(Armor armor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAccessory(Accessory accessory) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
