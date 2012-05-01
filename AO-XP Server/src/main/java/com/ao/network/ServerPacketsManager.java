@@ -60,7 +60,7 @@ public class ServerPacketsManager {
 	    UPDATE_GOLD(null),
 	    UPDATE_BANK_GOLD(null),
 	    UPDATE_EXP(null),
-	    CHANGE_MAP(null),
+	    CHANGE_MAP(ChangeMapPacket.class),
 	    POSITION_UPDATE(null),
 	    CHAT_OVER_HEAD(null),
 	    CONSOLE_MESSAGE(null),
