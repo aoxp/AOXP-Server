@@ -22,8 +22,13 @@ import com.ao.model.inventory.Inventory;
 import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
 import com.ao.model.spell.Spell;
+import com.ao.model.worldobject.Accessory;
+import com.ao.model.worldobject.Armor;
 import com.ao.model.worldobject.EquipableItem;
+import com.ao.model.worldobject.Helmet;
 import com.ao.model.worldobject.Item;
+import com.ao.model.worldobject.Shield;
+import com.ao.model.worldobject.Weapon;
 import com.ao.model.worldobject.WorldObject;
 
 public interface Character {
@@ -397,5 +402,34 @@ public interface Character {
 	 * @param The amount of gold to add.
 	 */
 	void addMoney(int amount);
-
+	
+	/**
+	 * Retrieves the character's weapon
+	 * @return the character's weapon
+	 */
+	Weapon getWeapon();
+	
+	/**
+	 * Retrieves the character's weapon
+	 * @return the character's weapon
+	 */
+	Helmet getHelmet();
+	
+	/**
+	 * Retrieves the character's helmet
+	 * @return the character's helmet
+	 */
+	Shield getShield();
+	
+	/**
+	 * Retrieves the character's armor
+	 * @return the character's armor
+	 */
+	Armor getArmor();
+	
+	/**
+	 * Retrieves the character's accessory
+	 * @return the character's accessory
+	 */
+	Accessory getAccessory();
 }

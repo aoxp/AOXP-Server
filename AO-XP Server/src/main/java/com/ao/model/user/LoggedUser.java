@@ -29,8 +29,13 @@ import com.ao.model.inventory.Inventory;
 import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
 import com.ao.model.spell.Spell;
+import com.ao.model.worldobject.Accessory;
+import com.ao.model.worldobject.Armor;
 import com.ao.model.worldobject.EquipableItem;
+import com.ao.model.worldobject.Helmet;
 import com.ao.model.worldobject.Item;
+import com.ao.model.worldobject.Shield;
+import com.ao.model.worldobject.Weapon;
 import com.ao.model.worldobject.WorldObject;
 
 /**
@@ -47,6 +52,12 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private Race race;
 	private Gender gender;
 	private Archetype archetype;
+	
+	private Weapon weapon;
+	private Helmet helmet;
+	private Shield shield;
+	private Armor armor;
+	private Accessory accessory;
 	
 	/*
 	 * UserFlags
@@ -524,6 +535,31 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	public int getMoney() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public Weapon getWeapon() {
+		return this.weapon;
+	}
+
+	@Override
+	public Helmet getHelmet() {
+		return this.helmet;
+	}
+
+	@Override
+	public Shield getShield() {
+		return this.shield;
+	}
+
+	@Override
+	public Armor getArmor() {
+		return this.armor;
+	}
+
+	@Override
+	public Accessory getAccessory() {
+		return this.accessory;
 	}
 
 }
