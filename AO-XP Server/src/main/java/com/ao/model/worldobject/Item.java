@@ -77,5 +77,5 @@ public interface Item extends WorldObject, Cloneable {
 	 * Checks if the item can be stolen.
 	 * @return True if the item can be stolen, false otherwise.
 	 */
-	boolean canBeStolen();
+	boolean canBeStolen();	
 }

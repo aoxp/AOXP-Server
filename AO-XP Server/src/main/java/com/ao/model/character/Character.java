@@ -547,5 +547,9 @@ public interface Character {
 	 */
 	void setSailing(boolean sailing);
 
-	
+	/**
+	 * Checks if the item is equipped.
+	 * @return Whether the item is equipped or not.
+	 */
+	boolean isEquipped(Item item);
 }

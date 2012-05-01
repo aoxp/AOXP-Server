@@ -709,6 +709,10 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void moveTo(Heading heading) {
 		// TODO Auto-generated method stub
+
+	public boolean isEquipped(Item item) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

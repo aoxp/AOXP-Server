@@ -109,6 +109,19 @@ public class DataBuffer {
 		buffer.writeBytes(src);
 		return this;
 	}
+	
+	/**
+	 * @see java.nio.ByteBuffer#put(byte)
+	 */
+	public DataBuffer putBoolean(boolean value) {
+		if (value)
+			buffer.writeByte(1);
+		else
+			buffer.writeByte(0);
+		
+		//buffer.writeByte(b);
+		return this;
+	}
 
 	/**
 	 * @see java.nio.ByteBuffer#putChar(char)
