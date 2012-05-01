@@ -90,7 +90,7 @@ public class ServerPacketsManager {
 	    WORK_REQUEST_TARGET(null),
 	    CHANGE_INVENTORY_SLOT(null),
 	    CHANGE_BANK_SLOT(null),
-	    CHANGE_SPELL_SLOT(null),
+	    CHANGE_SPELL_SLOT(ChangeSpellSlotPacket.class),
 	    ATTRIBUTES(null),
 	    BLACKSMITH_WEAPONS(null),
 	    BLACKSMITH_ARMORS(null),
