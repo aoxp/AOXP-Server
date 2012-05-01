@@ -27,9 +27,8 @@ import com.ao.network.packet.OutgoingPacket;
 
 public class ObjectCreatePacket implements OutgoingPacket {
 
-	private short grhIndex;
-	private byte x;
-	private byte y;
+	private WorldObject object;
+	private Position position;
 	
 	/**
 	 * Creates an object.
@@ -38,17 +37,16 @@ public class ObjectCreatePacket implements OutgoingPacket {
      * @param position The position.
      */
     public ObjectCreatePacket(WorldObject object, Position position) {
-        this.grhIndex = (short) object.getGraphic();
-        this.x = position.getX();
-        this.y = position.getY();
+        this.object = object;
+        this.position = position;
     }
 
     @Override
 	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
 		
-        buffer.putShort(grhIndex);
-        buffer.put(x);
-        buffer.put(y);
+        buffer.putShort((short) object.getGraphic());
+        buffer.put(position.getX());
+        buffer.put(position.getY());
 	}
 
 }

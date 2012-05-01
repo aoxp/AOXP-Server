@@ -27,6 +27,7 @@ import com.ao.network.packet.outgoing.ChangeMapPacket;
 import com.ao.network.packet.outgoing.CharacterCreatePacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
+import com.ao.network.packet.outgoing.ObjectCreatePacket;
 import com.ao.network.packet.outgoing.UserCharacterIndexInServerPacket;
 import com.ao.network.packet.outgoing.UserIndexInServer;
 
@@ -74,7 +75,7 @@ public class ServerPacketsManager {
 	    CHARACTER_MOVE(null),
 	    CHARACTER_FORCE_MOVE(null),
 	    CHARACTER_CHANGE(null),
-	    OBJECT_CREATE(null),
+	    OBJECT_CREATE(ObjectCreatePacket.class),
 	    OBJECT_DEETE(null),
 	    BLOCK_POSITION(null),
 	    PLAY_MIDI(null),
