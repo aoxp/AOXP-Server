@@ -21,6 +21,7 @@ import com.ao.data.dao.CityDAO;
 import com.ao.data.dao.WorldMapDAO;
 import com.ao.model.character.Character;
 import com.ao.model.map.City;
+import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
 import com.ao.service.MapService;
@@ -76,6 +77,35 @@ public class MapServiceImpl implements MapService {
 	@Override
 	public void putCharacterAtPos(Character chara, Position pos) {
 		pos.getMap().putCharacterAtPos(chara, pos.getX(), pos.getY());
+		//TODO Seteamos aca la nueva position en el character?
 	}
-	
+
+	@Override
+	public void moveCharacterTo(Character chara, Heading heading) {
+		//FIXME Metodo getPosition() de loggedUser no está implementado.
+		byte x = chara.getPosition().getX();
+		byte y = chara.getPosition().getY();
+
+		switch (heading) {
+
+		case NORTH:
+			y++;
+			break;
+
+		case EAST:
+			x++;
+			break;
+
+		case SOUTH:
+			y--;
+			break;
+
+		case WEST:
+			x--;
+			break;
+		}
+
+		putCharacterAtPos(chara, new Position(x, y, chara.getPosition().getMap()));
+	}
+
 }

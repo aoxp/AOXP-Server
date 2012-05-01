@@ -19,6 +19,7 @@
 package com.ao.service;
 
 import com.ao.model.map.City;
+import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
 import com.ao.model.character.Character;
@@ -59,4 +60,11 @@ public interface MapService {
 	 * @param pos The position where to put the character.
 	 */
 	void putCharacterAtPos(Character chara, Position pos);
+
+	/**
+	 * Moves the character on the given direction.
+	 * @param chara The character to move.
+	 * @param heading The heading in which to move.
+	 */
+	void moveCharacterTo(Character chara, Heading heading);
 }

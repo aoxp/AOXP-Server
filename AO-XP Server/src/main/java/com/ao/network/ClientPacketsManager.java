@@ -24,6 +24,7 @@ import com.ao.network.packet.IncomingPacket;
 import com.ao.network.packet.incoming.LoginExistingCharacterPacket;
 import com.ao.network.packet.incoming.LoginNewCharacterPacket;
 import com.ao.network.packet.incoming.ThrowDicesPacket;
+import com.ao.network.packet.incoming.WalkPacket;
 
 /**
  * Manager for client-side packets.
@@ -36,7 +37,11 @@ public class ClientPacketsManager {
 	private enum ClientPackets {
 		LOGIN_EXISTING_CHARACTER(LoginExistingCharacterPacket.class),
 		THROW_DICE(ThrowDicesPacket.class),
-		LOGIN_NEW_CHARACTER(LoginNewCharacterPacket.class);
+		LOGIN_NEW_CHARACTER(LoginNewCharacterPacket.class),
+		TALK(null),
+		YELL(null),
+		WHISPER(null),
+		WALK(WalkPacket.class);
 
 		protected IncomingPacket handler;
 

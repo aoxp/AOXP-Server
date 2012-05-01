@@ -113,4 +113,15 @@ public interface UserCharacter extends Character {
 	 */
 	public void setMaxStamina(int maxStamina);
 	
+	/**
+	 * Checks if the user is meditating.
+	 * @return True if the user is meditating, false other wise.
+	 */
+	boolean isMeditating();
+
+	/**
+	 * Sets the user to meditate.
+	 * @param meditating The boolean value.
+	 */
+	void setMeditate(boolean meditating);
 }

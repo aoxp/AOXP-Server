@@ -421,11 +421,11 @@ public interface Character {
 	 */
 	Weapon getWeapon();
 
-    /**
-     * Sets the character weapon.
-     * @param weapon The character's weapon.
-     */
-    void setWeapon(Weapon weapon);
+	/**
+	 * Sets the character weapon.
+	 * @param weapon The character's weapon.
+	*/
+	void setWeapon(Weapon weapon);
 
 	/**
 	 * Retrieves the character's weapon
@@ -433,11 +433,11 @@ public interface Character {
 	 */
 	Helmet getHelmet();
 
-    /**
-     * Sets the character helmet.
-     * @param weapon The character's helmet.
-     */
-    void setHelmet(Helmet helmet);
+	/**
+	 * Sets the character helmet.
+	 * @param weapon The character's helmet.
+	*/
+	void setHelmet(Helmet helmet);
 
 	/**
 	 * Retrieves the character's shield.
@@ -445,11 +445,11 @@ public interface Character {
 	 */
 	Shield getShield();
 
-    /**
-     * Sets the character shield.
-     * @param weapon The character's shield.
-     */
-    void setShield(Shield shield);
+	/**
+	 * Sets the character shield.
+	 * @param weapon The character's shield.
+	*/
+	void setShield(Shield shield);
 
 	/**
 	 * Retrieves the character's armor
@@ -458,9 +458,9 @@ public interface Character {
 	Armor getArmor();
 	
 	/**
-     * Sets the character's armor.
-     * @param weapon The character's armor.
-     */
+	 * Sets the character's armor.
+	 * @param weapon The character's armor.
+	*/
 	void setArmor(Armor armor);
 
 	/**
@@ -470,9 +470,9 @@ public interface Character {
 	Accessory getAccessory();
 	
 	/**
-     * Sets the character's accessory.
-     * @param weapon The character's accessory.
-     */
+	 * Sets the character's accessory.
+	 * @param weapon The character's accessory.
+	 */
 	void setAccessory(Accessory accessory);
 
 	/**
@@ -523,4 +523,29 @@ public interface Character {
 	 */
 	void setCharIndex(int index);
 
+	/**
+	 * Sets the character hidden as Admin.
+	 * @param adminHidden The boolean value.
+	 */
+	void setAdminHidden(boolean adminHidden);
+
+	/**
+	 * Checks if the character hidden as Admin.
+	 * @return True if is admin-hidden, false other wise.
+	 */
+	boolean isAdminHidden();
+
+	/**
+	 * Checks if the character is sailing.
+	 * @return True if is sailing, false other wise.
+	 */
+	boolean isSailing();
+
+	/**
+	 * Sets the character sailing.
+	 * @param sailing The boolean value.
+	 */
+	void setSailing(boolean sailing);
+
+	
 }

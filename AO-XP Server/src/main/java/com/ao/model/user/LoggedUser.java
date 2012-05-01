@@ -45,7 +45,6 @@ import com.ao.model.worldobject.WorldObject;
  */
 public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	
-	
 	private static final int MAX_THIRSTINESS = 100;
 	private static final int MAX_HUNGER = 100;
 	
@@ -71,6 +70,13 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private boolean mimetized;
 	private boolean dumbed;
 	private boolean hidden;
+	private boolean meditating;
+	private boolean sailing;
+
+	/*
+	 * AdminFlags
+	 */
+	private boolean adminHidden;
 	
 	/*
 	 * UserStats
@@ -439,12 +445,6 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	}
 
 	@Override
-	public void moveTo(Heading heading) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void setBody(int body) {
 		// TODO Auto-generated method stub
 		
@@ -470,6 +470,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public void setHidden(boolean hidden) {
+		// TODO : If there is a timed event to remove hidden, remove it
 		this.hidden = hidden;
 	}
 
@@ -673,6 +674,41 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setMaxStamina(int maxStamina) {
 		this.maxStamina = maxStamina;
+	}
+
+	@Override
+	public boolean isMeditating() {
+		return this.meditating;
+	}
+
+	@Override
+	public void setMeditate(boolean meditating) {
+		this.meditating = meditating;
+	}
+
+	@Override
+	public void setAdminHidden(boolean adminHidden) {
+		this.adminHidden = adminHidden;
+	}
+
+	@Override
+	public boolean isAdminHidden() {
+		return adminHidden;
+	}
+
+	@Override
+	public boolean isSailing() {
+		return this.sailing;
+	}
+
+	@Override
+	public void setSailing(boolean sailing) {
+		this.sailing = sailing;
+	}
+
+	@Override
+	public void moveTo(Heading heading) {
+		// TODO Auto-generated method stub
 	}
 
 }

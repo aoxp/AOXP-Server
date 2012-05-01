@@ -62,7 +62,7 @@ public class HostileBehavior implements Behavior {
 				if (target != chara) {
 					movement.setTarget(chara);
 				}
-					
+				
 				attack.attack(chara);
 				target = chara;
 				
