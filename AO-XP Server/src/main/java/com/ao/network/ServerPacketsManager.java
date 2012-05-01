@@ -29,6 +29,7 @@ import com.ao.network.packet.outgoing.ConsoleMessagePacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
 import com.ao.network.packet.outgoing.ObjectCreatePacket;
+import com.ao.network.packet.outgoing.PlayMidiPacket;
 import com.ao.network.packet.outgoing.UserCharacterIndexInServerPacket;
 import com.ao.network.packet.outgoing.UserIndexInServer;
 
@@ -79,7 +80,7 @@ public class ServerPacketsManager {
 	    OBJECT_CREATE(ObjectCreatePacket.class),
 	    OBJECT_DEETE(null),
 	    BLOCK_POSITION(null),
-	    PLAY_MIDI(null),
+	    PLAY_MIDI(PlayMidiPacket.class),
 	    PLAY_WAVE(null),
 	    GUILD_LIST(null),
 	    AREA_CHANGED(null),
