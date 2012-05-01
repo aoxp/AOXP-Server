@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,8 @@ import java.util.Properties;
 
 import com.ao.service.CharacterBodyService;
 import com.ao.service.CharacterBodyServiceImpl;
+import com.ao.service.LockingService;
+import com.ao.service.LockingServiceImpl;
 import com.ao.service.LoginService;
 import com.ao.service.MapService;
 import com.ao.service.NPCService;
@@ -44,7 +46,7 @@ import com.google.inject.name.Names;
 public class ServiceModule extends AbstractModule {
 
 	protected Properties properties;
-	
+
 	/**
 	 * Creates a new ServiceModule.
 	 * @param properties The general project properties.
@@ -52,7 +54,7 @@ public class ServiceModule extends AbstractModule {
 	public ServiceModule(Properties properties) {
 		this.properties = properties;
 	}
-	
+
 	@Override
 	protected void configure() {
 		bind(LoginService.class).to(LoginServiceImpl.class).in(Singleton.class);
@@ -62,10 +64,11 @@ public class ServiceModule extends AbstractModule {
 		bind(UserService.class).to(UserServiceImpl.class).in(Singleton.class);
 		bind(CharacterBodyService.class).to(CharacterBodyServiceImpl.class).in(Singleton.class);
 		bind(NPCService.class).to(NPCServiceImpl.class).in(Singleton.class);
-		
+		bind(LockingService.class).to(LockingServiceImpl.class).in(Singleton.class);
+
 		bind(Integer.class).annotatedWith(Names.named("initialAvailableSkills")).toInstance(Integer.parseInt(properties.getProperty("config.loginservice.initialavailableskills")));
-		
-		
+
+
 		// Heads ranges
 		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsDarkelfMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.darkelf.male")));
 		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsDarkelfFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.darkelf.female")));
@@ -76,8 +79,8 @@ public class ServiceModule extends AbstractModule {
 		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsGnomeMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.gnome.male")));
 		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsGnomeFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.gnome.female")));
 		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsHumanMale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.human.male")));
-		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsHumanFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.human.female")));	
-		
+		bind(new TypeLiteral<List<Integer>>(){}).annotatedWith(Names.named("headsHumanFemale")).toInstance(RangeParser.parseIntegers(properties.getProperty("config.heads.human.female")));
+
 		// Default Bodies
 		bind(Integer.class).annotatedWith(Names.named("darkElfMaleBody")).toInstance(Integer.parseInt(properties.getProperty("config.bodies.darkelf.male")));
 		bind(Integer.class).annotatedWith(Names.named("darkElfFemaleBody")).toInstance(Integer.parseInt(properties.getProperty("config.bodies.darkelf.female")));
