@@ -14,7 +14,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.ao.network.packet.incoming;
 
@@ -71,14 +71,14 @@ public class LoginExistingCharacterPacketTest {
 		config.setRestrictedToAdmins(false);
 	}
 
-	private void writeLogin(String charName, String password, short major, short minor, short version, String hash) throws Exception {
+	private void writeLogin(String charName, String password, byte major, byte minor, byte version, String hash) throws Exception {
 		EasyMock.expect(inputBuffer.getReadableBytes()).andReturn(charName.length() + 2 + security.getPasswordHashLength() + 6 + security.getClientHashLength());
 
 		EasyMock.expect(inputBuffer.getASCIIString()).andReturn(charName).once();
 		EasyMock.expect(inputBuffer.getASCIIStringFixed(security.getPasswordHashLength())).andReturn(password).once();
-		EasyMock.expect(inputBuffer.getShort()).andReturn(major).once();
-		EasyMock.expect(inputBuffer.getShort()).andReturn(minor).once();
-		EasyMock.expect(inputBuffer.getShort()).andReturn(version).once();
+		EasyMock.expect(inputBuffer.get()).andReturn(major).once();
+		EasyMock.expect(inputBuffer.get()).andReturn(minor).once();
+		EasyMock.expect(inputBuffer.get()).andReturn(version).once();
 		EasyMock.expect(inputBuffer.getASCIIStringFixed(security.getClientHashLength())).andReturn(hash).once();
 
 		EasyMock.replay(inputBuffer);
@@ -116,7 +116,7 @@ public class LoginExistingCharacterPacketTest {
 		LoginServiceImpl service = (LoginServiceImpl) ApplicationContext.getInstance(LoginService.class);
 		service.setCurrentClientVersion(CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION);
 
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, (short) 0, (short) 0,(short) 0, "");
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, (byte) 0, (byte) 0, (byte) 0, "");
 		packet.handle(inputBuffer, connection);
 
 		assertEquals(String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION), errPacket.getValue().getMessage());
@@ -125,7 +125,7 @@ public class LoginExistingCharacterPacketTest {
 	@Test
 	public void testHandleBannedCharacter() throws Exception {
 		writeLogin(BANNED_CHARACTER_NAME, BANNED_CHARACTER_PASSWORD,
-						CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "");
+				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "");
 		packet.handle(inputBuffer, connection);
 
 		assertEquals(LoginServiceImpl.BANNED_CHARACTER_ERROR, errPacket.getValue().getMessage());
