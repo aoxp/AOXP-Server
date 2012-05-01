@@ -28,6 +28,7 @@ import com.ao.network.packet.outgoing.CharacterCreatePacket;
 import com.ao.network.packet.outgoing.ConsoleMessagePacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
+import com.ao.network.packet.outgoing.GuildChatPacket;
 import com.ao.network.packet.outgoing.ObjectCreatePacket;
 import com.ao.network.packet.outgoing.PlayMidiPacket;
 import com.ao.network.packet.outgoing.PlayWavePacket;
@@ -71,7 +72,7 @@ public class ServerPacketsManager {
 	    POSITION_UPDATE(null),
 	    CHAT_OVER_HEAD(null),
 	    CONSOLE_MESSAGE(ConsoleMessagePacket.class),
-	    GUILD_CHAT(null),
+	    GUILD_CHAT(GuildChatPacket.class),
 	    SHOW_MESSAGE_BOX(null),
 	    USER_INDEX_IN_SERVER(UserIndexInServer.class),
 	    USER_CHARACTER_INDEX_IN_SERVER(UserCharacterIndexInServerPacket.class),
