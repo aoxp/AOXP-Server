@@ -31,6 +31,7 @@ import com.ao.network.packet.outgoing.ErrorMessagePacket;
 import com.ao.network.packet.outgoing.ObjectCreatePacket;
 import com.ao.network.packet.outgoing.PlayMidiPacket;
 import com.ao.network.packet.outgoing.PlayWavePacket;
+import com.ao.network.packet.outgoing.UpdateHungerAndThirstPacket;
 import com.ao.network.packet.outgoing.UserCharacterIndexInServerPacket;
 import com.ao.network.packet.outgoing.UserIndexInServer;
 
@@ -103,7 +104,7 @@ public class ServerPacketsManager {
 	    DUMB(null),
 	    SHOW_SIGNAL(null),
 	    CHANGE_NPC_INVENTORY_SLOT(null),
-	    UPDATE_HUNGER_AND_THRIST(null),
+	    UPDATE_HUNGER_AND_THRIST(UpdateHungerAndThirstPacket.class),
 	    FAME(null),
 	    MINI_STATS(null),
 	    LEVEL_UP(null),
