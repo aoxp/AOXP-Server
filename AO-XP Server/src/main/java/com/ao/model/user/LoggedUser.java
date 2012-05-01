@@ -83,6 +83,8 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private int maxThirstiness;
 	private int maxHunger;
 	private int minHunger;
+	private int maxStamina;
+	private int stamina;
 	private byte level;
 	private String name;
 	private String description;
@@ -651,6 +653,26 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	public void setAccessory(Accessory accessory) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getStamina() {
+		return stamina;
+	}
+
+	@Override
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
+	}
+	
+	@Override
+	public int getMaxStamina() {
+		return maxStamina;
+	}
+
+	@Override
+	public void setMaxStamina(int maxStamina) {
+		this.maxStamina = maxStamina;
 	}
 
 }
