@@ -27,6 +27,7 @@ import com.ao.network.packet.outgoing.ChangeMapPacket;
 import com.ao.network.packet.outgoing.CharacterCreatePacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
+import com.ao.network.packet.outgoing.UserCharacterIndexInServerPacket;
 
 /**
  * Manager for server-side packets.
@@ -65,7 +66,7 @@ public class ServerPacketsManager {
 	    GUILD_CHAT(null),
 	    SHOW_MESSAGE_BOX(null),
 	    USER_INDEX_IN_SERVER(null),
-	    USER_CHARACTER_INDEX_IN_SERVER(null),
+	    USER_CHARACTER_INDEX_IN_SERVER(UserCharacterIndexInServerPacket.class),
 	    CHARACTER_CREATE(CharacterCreatePacket.class),
 	    CHARACTER_REMOVE(null),
 	    CHARACTER_CHANGE_NICKNAME(null),
