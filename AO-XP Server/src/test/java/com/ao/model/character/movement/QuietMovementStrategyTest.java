@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -29,24 +29,24 @@ import com.ao.model.map.Tile;
 import com.ao.model.map.WorldMap;
 
 public class QuietMovementStrategyTest {
-	
+
 	private MovementStrategy movement = new QuietMovementStrategy();
 
 	@Test
 	public void testMove() {
-		WorldMap map = new WorldMap("foo", 0, new Tile[0]);
-		
+		WorldMap map = new WorldMap("foo", 0, (short) 1, new Tile[0]);
+
 		Position pos = new Position((byte) 50, (byte) 50, map);
 		Position target = new Position((byte) 60, (byte) 60, map);
-		
+
 		movement.setTarget(target);
-		
+
 		Assert.assertNull(movement.move(pos));
-		
+
 		Character character = EasyMock.createMock(Character.class);
-		
+
 		movement.setTarget(character);
-		
+
 		Assert.assertNull(movement.move(pos));
 	}
 
