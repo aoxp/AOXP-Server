@@ -24,6 +24,7 @@ import java.util.Map;
 
 import com.ao.network.packet.OutgoingPacket;
 import com.ao.network.packet.outgoing.ChangeMapPacket;
+import com.ao.network.packet.outgoing.CharacterCreatePacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
 
@@ -57,7 +58,7 @@ public class ServerPacketsManager {
 	    UPDATE_GOLD(null),
 	    UPDATE_BANK_GOLD(null),
 	    UPDATE_EXP(null),
-	    CHANGE_MAP(ChangeMapPacket.class),
+	    CHANGE_MAP(null),
 	    POSITION_UPDATE(null),
 	    CHAT_OVER_HEAD(null),
 	    CONSOLE_MESSAGE(null),
@@ -65,7 +66,7 @@ public class ServerPacketsManager {
 	    SHOW_MESSAGE_BOX(null),
 	    USER_INDEX_IN_SERVER(null),
 	    USER_CHARACTER_INDEX_IN_SERVER(null),
-	    CHARACTER_CREATE(null),
+	    CHARACTER_CREATE(CharacterCreatePacket.class),
 	    CHARACTER_REMOVE(null),
 	    CHARACTER_CHANGE_NICKNAME(null),
 	    CHARACTER_MOVE(null),
