@@ -31,8 +31,9 @@ import com.ao.network.packet.outgoing.ErrorMessagePacket;
 import com.ao.network.packet.outgoing.ObjectCreatePacket;
 import com.ao.network.packet.outgoing.PlayMidiPacket;
 import com.ao.network.packet.outgoing.PlayWavePacket;
-import com.ao.network.packet.outgoing.UpdateHungerAndThirstPacket;
-import com.ao.network.packet.outgoing.UpdateUserStatsPacket;
+import com.ao.network.packet.outgoing.UpdateDexterityPacket;
+import com.ao.network.packet.outgoing.UpdateStrengthAndDexterityPacket;
+import com.ao.network.packet.outgoing.UpdateStrengthPacket;
 import com.ao.network.packet.outgoing.UserCharacterIndexInServerPacket;
 import com.ao.network.packet.outgoing.UserIndexInServer;
 
@@ -145,9 +146,9 @@ public class ServerPacketsManager {
 	    RECORD_DETAILS(null),
 	    SHOW_GUILD_ALIGN(null),
 	    SHOW_PARTY_FORM(null),
-	    UPDATE_STRENGHT_AND_DEXTERITY(null),
-	    UPDATE_STRENGHT(null),
-	    UPDATE_DEXTERITY(null),
+	    UPDATE_STRENGHT_AND_DEXTERITY(UpdateStrengthAndDexterityPacket.class),
+	    UPDATE_STRENGHT(UpdateStrengthPacket.class),
+	    UPDATE_DEXTERITY(UpdateDexterityPacket.class),
 	    ADD_SLOTS(null),
 	    MULTI_MESSAGE(null),
 	    STOP_WORKING(null),
