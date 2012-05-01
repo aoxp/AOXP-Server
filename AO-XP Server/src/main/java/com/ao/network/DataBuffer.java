@@ -51,6 +51,17 @@ public class DataBuffer {
 	public byte get() {
 		return buffer.readByte();
 	}
+	
+	
+	public boolean getBoolean() {
+		byte b = buffer.readByte();
+		
+		if (b == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * @see java.nio.ByteBuffer#getChar()
@@ -114,12 +125,12 @@ public class DataBuffer {
 	 * @see java.nio.ByteBuffer#put(byte)
 	 */
 	public DataBuffer putBoolean(boolean value) {
-		if (value)
+		if (value) {
 			buffer.writeByte(1);
-		else
-			buffer.writeByte(0);
-		
-		//buffer.writeByte(b);
+		} else {
+			buffer.writeByte(0);			
+		}
+
 		return this;
 	}
 

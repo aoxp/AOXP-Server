@@ -20,18 +20,11 @@ package com.ao.network.packet.outgoing;
 
 import java.io.UnsupportedEncodingException;
 
-import org.easymock.internal.matchers.InstanceOf;
-
 import com.ao.model.character.UserCharacter;
 import com.ao.model.inventory.Inventory;
 import com.ao.model.worldobject.DefensiveItem;
-import com.ao.model.worldobject.EquipableItem;
-import com.ao.model.worldobject.Helmet;
 import com.ao.model.worldobject.Item;
-import com.ao.model.worldobject.ManaPotion;
-import com.ao.model.worldobject.Shield;
 import com.ao.model.worldobject.Weapon;
-import com.ao.model.worldobject.WorldObject;
 import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
 import com.ao.service.user.UserServiceImpl;
@@ -44,13 +37,10 @@ public class ChangeInventorySlotPacket implements OutgoingPacket {
 	
 	//private EquipableItem item;
 	
-	public ChangeInventorySlotPacket(short charIndex, byte slot) {
-		
-		UserServiceImpl userService = new UserServiceImpl();
-		Inventory inventory = userCharacter.getInventory();
-		
-		//TODO: falta un getCharacterById
-		this.userCharacter = userService.getCharacter("");
+	public ChangeInventorySlotPacket(UserCharacter character, byte slot) {
+		Inventory inventory = character.getInventory();
+
+		this.userCharacter = character;
 		this.slot = slot;
 		this.item = inventory.getItem(slot);		
 	}
