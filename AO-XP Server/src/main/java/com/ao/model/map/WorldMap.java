@@ -260,9 +260,5 @@ public class WorldMap {
 		}
 		return true;
 	}
-
-	public Tile[] dame()
-	{
-		return tiles;
 	}
 }
