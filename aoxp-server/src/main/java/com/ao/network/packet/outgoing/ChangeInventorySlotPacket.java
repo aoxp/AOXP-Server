@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -27,33 +27,32 @@ import com.ao.model.worldobject.Item;
 import com.ao.model.worldobject.Weapon;
 import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
-import com.ao.service.user.UserServiceImpl;
 
 public class ChangeInventorySlotPacket implements OutgoingPacket {
 
 	private byte slot;
 	private UserCharacter userCharacter;
 	private Item item;
-	
+
 	//private EquipableItem item;
-	
+
 	public ChangeInventorySlotPacket(UserCharacter character, byte slot) {
 		Inventory inventory = character.getInventory();
 
-		this.userCharacter = character;
+		userCharacter = character;
 		this.slot = slot;
-		this.item = inventory.getItem(slot);		
+		item = inventory.getItem(slot);
 	}
-	
+
 	@Override
 	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
 		buffer.put(slot);
 		buffer.putShort((short) item.getId());
 		buffer.putASCIIString(item.getName());
 		buffer.putShort((short) item.getAmount());
-		buffer.putBoolean(this.userCharacter.isEquipped(item));
+		buffer.putBoolean(userCharacter.isEquipped(item));
 		buffer.putShort((short) item.getGraphic());
-		
+
 		if (item instanceof Weapon) {
 			buffer.putShort((short) ((Weapon) item).getMaxHit());
 			buffer.putShort((short) ((Weapon) item).getMinHit());
@@ -61,7 +60,7 @@ public class ChangeInventorySlotPacket implements OutgoingPacket {
 			buffer.putShort((short) 0);
 			buffer.putShort((short) 0);
 		}
-		
+
 		if (item instanceof DefensiveItem) {
 			buffer.putShort((short) ((DefensiveItem) item).getMaxDef());
 			buffer.putShort((short) ((DefensiveItem) item).getMinDef());
@@ -69,8 +68,8 @@ public class ChangeInventorySlotPacket implements OutgoingPacket {
 			buffer.putShort((short) 0);
 			buffer.putShort((short) 0);
 		}
-					
-		buffer.putFloat((float) item.getValue());
+
+		buffer.putFloat(item.getValue());
 	}
 
 }

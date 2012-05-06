@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -23,10 +23,9 @@ import junit.framework.Assert;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import com.ao.data.dao.WorldMapDAO;
 import com.ao.data.dao.CityDAO;
+import com.ao.data.dao.WorldMapDAO;
 import com.ao.model.map.WorldMap;
-import com.ao.model.map.City;
 import com.ao.service.MapService;
 
 public class MapServiceImplTest {
@@ -37,31 +36,31 @@ public class MapServiceImplTest {
 		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
 		EasyMock.expect(dao.retrieveAll()).andReturn(null).once();
 		EasyMock.replay(dao);
-		
-		
-		
+
+
+
 		MapService service = new MapServiceImpl(dao, cityDao);
 		service.loadMaps();
-		
+
 		EasyMock.verify(dao);
 	}
 
 	@Test
 	public void testGetMap() {
 		int mapId = 1;
-		
+
 		WorldMap map = new WorldMap(mapId);
 		WorldMapDAO dao = EasyMock.createMock(WorldMapDAO.class);
 		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
-		
+
 		EasyMock.expect(dao.retrieveAll()).andReturn(new WorldMap[] {map}).once();
 		EasyMock.replay(dao);
-		
+
 		MapService service = new MapServiceImpl(dao,cityDao);
 		service.loadMaps();
-		
+
 		Assert.assertEquals(service.getMap(mapId), map);
-		
+
 	}
 
 }

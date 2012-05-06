@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -20,7 +20,6 @@ package com.ao.model.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -29,10 +28,6 @@ import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.ao.context.ApplicationContext;
-import com.ao.data.dao.UserCharacterDAO;
-import com.ao.data.dao.ini.UserDAOIni;
 
 public class AccountImplTest {
 
@@ -44,9 +39,9 @@ public class AccountImplTest {
 	private static final Set<String> ACCOUNT_CHARACTERS = new HashSet<String>();
 	private static final String TEST_CHARACTER_NAME = "TEST";
 	private static final String NON_EXISTING_CHARACTER_NAME = "non existing character";
-	
+
 	private AccountImpl account;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		account = new AccountImpl(ACCOUNT_NAME, ACCOUNT_PASSWORD, ACCOUNT_EMAIL, ACCOUNT_CHARACTERS, ACCOUNT_BANNED);
@@ -77,9 +72,9 @@ public class AccountImplTest {
 	@Test
 	public void testIsBanned() {
 		assertEquals(account.isBanned(), ACCOUNT_BANNED);
-		
+
 		account.setBanned(!ACCOUNT_BANNED);
-		
+
 		assertEquals(account.isBanned(), !ACCOUNT_BANNED);
 	}
 
@@ -99,9 +94,9 @@ public class AccountImplTest {
 	@Test
 	public void testAddCharacter() {
 		String charr = "foo";
-		
+
 		account.addCharacter(charr);
-		
+
 		assertTrue(account.characters.contains(charr));
 	}
 
