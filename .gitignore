@@ -1,16 +1,8 @@
 
-# /AO-XP Server/
-/AO-XP Server/target
-/AO-XP Server/.*
+# Hidden files and target folders
+/*/target
+/*/.*
 
-# /AO-XP Server/resources/Maps/
-/AO-XP Server/resources/Maps/*.txt
-/AO-XP Server/resources/Maps/*.dat
-/AO-XP Server/resources/Maps/*.inf
-/AO-XP Server/resources/Maps/*.map
-/AO-XP Server/resources/Maps/*.DAT
-/AO-XP Server/resources/Maps/*
+# maps
+/*/resources/Maps/*
 
-# /AO-XP Server Security/
-/AO-XP Server Security/target
-/AO-XP Server Security/.*
