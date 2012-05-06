@@ -235,8 +235,25 @@ public class WorldMap {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
- 	public boolean equals(Object obj) {
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + Arrays.hashCode(tiles);
+		result = prime * result + version;
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -260,13 +277,16 @@ public class WorldMap {
 		if (!Arrays.equals(tiles, other.tiles)) {
 			return false;
 		}
+		if (version != other.version) {
+			return false;
+		}
 		return true;
 	}
-	
+
 	/**
 	 * Returns the nearest available tile (using Manhattan norm) searching in a rhomb order, if no tile is available
 	 * within the maxDistance null is returned. This method should be called from a synchronized block.
-	 * 
+	 *
 	 * @param x The X coordinate of the center of the rhomb.
 	 * @param y The Y coordinate of the center of the rhomb.
 	 * @param maxDistance The max acceptable distance for searching.
@@ -278,121 +298,121 @@ public class WorldMap {
 	 */
 	public Tile getNearestAvailableTile(byte x, byte y, byte maxDistance, boolean includeGroundTiles,
 			boolean includeWaterTiles, boolean includeLavaTiles, boolean includeExitTiles) {
-		
+
 		if (isAvailableTile(x, y, includeGroundTiles, includeWaterTiles, includeLavaTiles, includeExitTiles)) {
 			return getTile(x, y);
 		}
-		
+
 		for (int currentDistance = 1; currentDistance <= maxDistance; currentDistance += 1) {
-			
+
 			byte currentX;
 			byte currentY;
-			
+
 			//Upper tiles with dx in [-1, currentDistances - 1] except dx=0 and dy=0
 			for (byte dx = -1; dx <= currentDistance - 1; dx += 1) {
-				
+
 				byte dy = (byte) (currentDistance - Math.abs(dx));
-				
+
 				if ((dx == 0) || (dy == 0)) {
 					continue;
 				}
-				
+
 				currentX = (byte) (x + dx);
 				currentY = (byte) (y + dy);
-				
+
 				if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
 						includeLavaTiles, includeExitTiles)) {
-					
+
 					return getTile(currentX, currentY);
 				}
 			}
-			
+
 			//Lower tiles with dx in [currentDistances - 1, -(currentDistance - 1)] except dx=0 and dy=0
 			for (byte dx = (byte) (currentDistance - 1); dx >= -(currentDistance - 1); dx -= 1) {
-				
+
 				byte dy = (byte) (currentDistance - Math.abs(dx));
-				
+
 				if ((dx == 0) || (dy == 0)) {
 					continue;
 				}
-				
+
 				currentX = (byte) (x + dx);
 				currentY = (byte) (y - dy);
-				
+
 				if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
 						includeLavaTiles, includeExitTiles)) {
-					
+
 					return getTile(currentX, currentY);
 				}
 			}
-			
+
 			//Upper tiles with dx in [-(currentDistance - 1), -1) except dx=0 and dy=0
 			for (byte dx = (byte) -(currentDistance - 1); dx < - 1; dx += 1) {
-				
+
 				byte dy = (byte) (currentDistance - Math.abs(dx));
-				
+
 				if ((dx == 0) || (dy == 0)) {
 					continue;
 				}
-				
+
 				currentX = (byte) (x + dx);
 				currentY = (byte) (y + dy);
-				
+
 				if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
 						includeLavaTiles, includeExitTiles)) {
-					
+
 					return getTile(currentX, currentY);
 				}
 			}
-			
+
 			//North
 			currentX = x;
 			currentY = (byte) (y - currentDistance);
-			
+
 			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
-				
+
 				return getTile(currentX, currentY);
 			}
-			
+
 			//East
 			currentX = (byte) (x + currentDistance);
 			currentY = y;
-			
+
 			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
-				
+
 				return getTile(currentX, currentY);
 			}
-			
+
 			//South
 			currentX = x;
 			currentY = (byte) (y + currentDistance);
-			
+
 			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
-				
+
 				return getTile(currentX, currentY);
 			}
-			
+
 			//West
 			currentX = (byte) (x - currentDistance);
 			currentY = y;
-			
+
 			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
-				
+
 				return getTile(currentX, currentY);
 			}
-			
+
 		}
-		
+
 		return null;
 	}
-	
+
 	/**
 	 * Returns whether the tile is available or not.
-	 * 
+	 *
 	 * @param x The X coordinate of the tile.
 	 * @param y The Y coordinate of the tile.
 	 * @param canBeGround Whether the tile can be ground or not.
@@ -403,38 +423,38 @@ public class WorldMap {
 	 */
 	public boolean isAvailableTile(byte x, byte y, boolean canBeGround, boolean canBeWater, boolean canBeLava,
 			boolean canBeExitTile) {
-		
+
 		if ((x < MIN_X) || (x > MAX_X)) {
 			return false;
 		}
-		
+
 		if ((y < MIN_Y) || (y > MAX_Y)) {
 			return false;
 		}
-		
+
 		Tile tile = getTile(x, y);
-		
+
 		if (tile.isBlocked() || (tile.getCharacter() != null)) {
 			return false;
 		}
-		
+
 		if ((!canBeWater) && tile.isWater()) {
 			return false;
 		}
-		
+
 		if ((!canBeLava) && tile.isLava()) {
 			return false;
 		}
-		
+
 		if ((!canBeGround) && (!tile.isWater()) && (!tile.isLava())) {
 			return false;
 		}
-		
+
 		if ((!canBeExitTile) && (tile.getTileExit() != null)) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 }

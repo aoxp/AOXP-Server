@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -28,7 +28,7 @@ public class PetBehavior implements Behavior {
 	private Character character;
 	private AttackStrategy attack;
 	private Character target;
-	
+
 	public PetBehavior(MovementStrategy movement, AttackStrategy attack, Character character) {
 		this.movement = movement;
 		this.character = character;
@@ -40,19 +40,20 @@ public class PetBehavior implements Behavior {
 		// TODO: Don't attack npcs if the attack is magic
 		if (target != character) {
 			movement.setTarget(character);
+			target = character;
 		}
 	}
 
 	@Override
 	public void takeAction() {
-		
+
 		if (target != null && character.getPosition().inVisionRange(target.getPosition())) {
 			attack.attack(target);
 		} else {
 			// Follow the pet master.
 			movement.setTarget(character);
 		}
-		
+
 		// Move, move!
 		character.moveTo(movement.move(character.getPosition()));
 	}

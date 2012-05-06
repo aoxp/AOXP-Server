@@ -30,7 +30,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * LockingService Implementation
  * Locks objects ordered by their identityHashCode in ascending order
- * 
+ *
  * @author mvanotti
  */
 public class LockingServiceImpl implements LockingService {
@@ -76,7 +76,9 @@ public class LockingServiceImpl implements LockingService {
 
 				// After obtaining the lock, we add the lock to the map once again, just in case it was just released by another thread and removed..
 				lock.getLock().lock();
-				((ConcurrentHashMap<Integer, ObjectLock>) lockedObjects).putIfAbsent(identityHashCode, lock);
+				if (null == lockedObjects.get(identityHashCode)) {
+					lockedObjects.put(identityHashCode, lock);
+				}
 			}
 
 			locks.add(lock);
@@ -153,7 +155,7 @@ public class LockingServiceImpl implements LockingService {
 
 		/***
 		 * Compares two objects by their identityHashCode.
-		 * 
+		 *
 		 * @return negative integer if arg1 has a greater identityHashCode than arg0, zero if they are equal,
 		 * 	positive otherwise
 		 */
