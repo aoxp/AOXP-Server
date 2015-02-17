@@ -46,9 +46,7 @@ public class DropEverything implements Drop {
 	public List<WorldObject> getDrops() throws WorldObjectFactoryException {
 		List<WorldObject> items = new LinkedList<WorldObject>();
 
-		for (int i = 0; i < inventory.getCapacity(); i++) {
-			Item item = inventory.getItem(i);
-
+		for (final Item item : inventory) {
 			if (item != null) {
 				items.add(item);
 			}

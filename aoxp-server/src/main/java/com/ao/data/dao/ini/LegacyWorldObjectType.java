@@ -1,8 +1,9 @@
 package com.ao.data.dao.ini;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 import com.ao.model.worldobject.WorldObjectType;
 
@@ -10,7 +11,6 @@ import com.ao.model.worldobject.WorldObjectType;
  * World Object Type enumeration, as it was known in the old days of Visual Basic.
  */
 public enum LegacyWorldObjectType {
-	// Beware, some objects are not mapped because they have no direct mapping, and we need extra info to do that
 	USE_ONCE(1, WorldObjectType.FOOD),
 	WEAPON(2, new HashSet<WorldObjectType>(Arrays.asList(new WorldObjectType[] { WorldObjectType.RANGED_WEAPON, WorldObjectType.STAFF, WorldObjectType.WEAPON }))),
 	ARMOR(3, WorldObjectType.ARMOR),
@@ -25,6 +25,7 @@ public enum LegacyWorldObjectType {
 	BOOK(12, new HashSet<WorldObjectType>(Arrays.asList(new WorldObjectType[] { WorldObjectType.PROP, WorldObjectType.GRABABLE_PROP }))),
 	DRINK(13, WorldObjectType.DRINK),
 	WOOD(14, WorldObjectType.WOOD),
+	// FIXME : Bonfire do have special behavior for resting, should be mapped to something else than props
 	BONFIRE(15, new HashSet<WorldObjectType>(Arrays.asList(new WorldObjectType[] { WorldObjectType.PROP, WorldObjectType.GRABABLE_PROP }))),
 	SHIELD(16, WorldObjectType.SHIELD),
 	HELMET(17, WorldObjectType.HELMET),
@@ -47,47 +48,64 @@ public enum LegacyWorldObjectType {
 	STAIN(35, new HashSet<WorldObjectType>(Arrays.asList(new WorldObjectType[] { WorldObjectType.PROP, WorldObjectType.GRABABLE_PROP }))),
 	ELVEN_TREE(36, WorldObjectType.TREE),
 	BACKPACK(37, WorldObjectType.BACKPACK);
-	
-	protected int value;
-	protected WorldObjectType currentType;
-	protected Set<WorldObjectType> plausibleCurrentTypes;
-	
+
+	private final int value;
+	private WorldObjectType currentType;
+	private final Set<WorldObjectType> plausibleCurrentTypes;
+
 	/**
 	 * Creates a new LegacyWorldObjectType.
 	 * @param value The value corresponding to the object type. Should be unique.
 	 */
-	LegacyWorldObjectType(int value, WorldObjectType currentType) {
+	LegacyWorldObjectType(final int value, final WorldObjectType currentType) {
 		this.value = value;
 		this.currentType = currentType;
-		this.plausibleCurrentTypes = new HashSet<WorldObjectType>();
-		
+		plausibleCurrentTypes = new HashSet<WorldObjectType>();
+
 		plausibleCurrentTypes.add(currentType);
 	}
-	
+
 	/**
 	 * Creates a new LegacyWorldObjectType.
 	 * @param value The value corresponding to the object type. Should be unique.
 	 */
-	LegacyWorldObjectType(int value, Set<WorldObjectType> plausibleTypes) {
+	LegacyWorldObjectType(final int value, final Set<WorldObjectType> plausibleTypes) {
 		this.value = value;
-		this.plausibleCurrentTypes = plausibleTypes;
+		plausibleCurrentTypes = plausibleTypes;
 	}
-	
+
 	/**
 	 * Retrieves the LegacyWorldObjectType associated with the given value.
 	 * @param value The value for which to search for a LegacyWorldObjectType.
 	 * @return The matched LegacyWorldObjectType, if any.
 	 */
-	public static LegacyWorldObjectType valueOf(int value) {
-		for (LegacyWorldObjectType type : LegacyWorldObjectType.values()) {
+	public static LegacyWorldObjectType valueOf(final int value) {
+		for (final LegacyWorldObjectType type : LegacyWorldObjectType.values()) {
 			if (type.value == value) {
 				return type;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
+	/**
+	 * Maps a new object type to a legacy one.
+	 * For cases where more than one mapping is plausible, the first one is retrieved.
+	 * @param objType The type to map back to a legacy type.
+	 * @return The legacy type matched.
+	 * @throws NoSuchElementException If no mapping is found.
+	 */
+	public static LegacyWorldObjectType valueFor(final WorldObjectType objType) {
+		for (final LegacyWorldObjectType type : LegacyWorldObjectType.values()) {
+			if (type.plausibleCurrentTypes.contains(objType)) {
+				return type;
+			}
+		}
+
+		throw new NoSuchElementException("No LegacyWorldObjectType maps to " + objType);
+	}
+
 	/**
 	 * Retrieves the current world object type.
 	 * @return The current world object type.
@@ -102,5 +120,12 @@ public enum LegacyWorldObjectType {
 	 */
 	public Set<WorldObjectType> getPlausibleCurrentType() {
 		return plausibleCurrentTypes;
+	}
+
+	/**
+	 * @return the value
+	 */
+	public int getValue() {
+		return value;
 	}
 }

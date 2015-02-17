@@ -129,7 +129,7 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
-		Account account = ((ConnectedUser) connection.getUser()).getAccount();
+		final Account account = ((ConnectedUser) connection.getUser()).getAccount();
 
 		assertTrue(account.hasCharacter(CHARACTER_NAME));
 		assertEquals(account.getName(), CHARACTER_NAME);

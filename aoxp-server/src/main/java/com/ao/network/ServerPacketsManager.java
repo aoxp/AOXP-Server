@@ -24,12 +24,14 @@ import java.util.Map;
 
 import com.ao.network.packet.OutgoingPacket;
 import com.ao.network.packet.outgoing.ChangeMapPacket;
+import com.ao.network.packet.outgoing.ChangeSpellSlotPacket;
 import com.ao.network.packet.outgoing.CharacterCreatePacket;
 import com.ao.network.packet.outgoing.ConsoleMessagePacket;
 import com.ao.network.packet.outgoing.DiceRollPacket;
 import com.ao.network.packet.outgoing.ErrorMessagePacket;
 import com.ao.network.packet.outgoing.GuildChatPacket;
 import com.ao.network.packet.outgoing.ObjectCreatePacket;
+import com.ao.network.packet.outgoing.ParalizedPacket;
 import com.ao.network.packet.outgoing.PlayMidiPacket;
 import com.ao.network.packet.outgoing.PlayWavePacket;
 import com.ao.network.packet.outgoing.UpdateDexterityPacket;
@@ -129,7 +131,7 @@ public class ServerPacketsManager {
 	    GUILD_MEMBER_INFO(null),
 	    GUILD_DETAILS(null),
 	    SHOW_GUILD_FUNDATION_FORM(null),
-	    PARALIZE_OK(null),
+	    PARALIZE_OK(ParalizedPacket.class),
 	    SHOW_USER_REQUEST(null),
 	    TRADE_OK(null),
 	    BANK_OK(null),
@@ -173,7 +175,7 @@ public class ServerPacketsManager {
 	protected static final Map<Class<? extends OutgoingPacket>, Integer> packetsMap = new HashMap<Class<? extends OutgoingPacket>, Integer>();
 
 	static {
-		for (ServerPackets packet : packets) {
+		for (final ServerPackets packet : packets) {
 			packetsMap.put(packet.packetClass, packet.ordinal());
 		}
 	}
@@ -184,7 +186,7 @@ public class ServerPacketsManager {
 	 * @param buffer The buffer where to write the packet.
 	 * @throws UnsupportedEncodingException
 	 */
-	public static void write(OutgoingPacket packet, DataBuffer buffer) throws UnsupportedEncodingException {
+	public static void write(final OutgoingPacket packet, final DataBuffer buffer) throws UnsupportedEncodingException {
 
 		// Put the packet id before the packet itself.
 		buffer.put(packetsMap.get(packet.getClass()).byteValue());

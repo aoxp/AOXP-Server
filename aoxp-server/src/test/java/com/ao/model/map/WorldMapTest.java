@@ -53,15 +53,6 @@ public class WorldMapTest {
 	}
 
 	@Test
-	public void testSetTiles() {
-		Tile t = new Tile(true, true, false, Trigger.NONE, null, null, null);
-
-		map.setTiles(new Tile[] {t});
-
-		assertEquals(map.getTile(0, 0), t);
-	}
-
-	@Test
 	public void testEquals() {
 		WorldMap map2 = new WorldMap("foo", 1, (short) 1, new Tile[] {});
 		WorldMap map3 = new WorldMap("foo", 2, (short) 1, new Tile[] {});
@@ -82,19 +73,11 @@ public class WorldMapTest {
 	@Test
 	public void testGetName() {
 		assertEquals("foo", map.getName());
-
-		map.setName("asd");
-
-		assertEquals("asd", map.getName());
 	}
 
 	@Test
 	public void testGetId() {
-		assertEquals(map.getId(), 1);
-
-		map = new WorldMap(1);
-
-		assertEquals(map.getId(), 1);
+		assertEquals(1, map.getId());
 	}
 
 	@Test

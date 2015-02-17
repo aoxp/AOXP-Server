@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -25,14 +25,13 @@ import com.ao.model.worldobject.WorldObject;
  * A map tile.
  */
 public class Tile {
-
-	protected Character character;
-	protected WorldObject worldObject;
-	protected Trigger trigger;
-	protected boolean blocked;
-	protected boolean isWater;
-	protected boolean isLava;
-	protected Position tileExit;
+	private Character character;
+	private WorldObject worldObject;
+	private Trigger trigger;
+	private boolean blocked;
+	private boolean isWater;
+	private boolean isLava;
+	private Position tileExit;
 
 	/**
 	 * Creates a new tile.
@@ -44,7 +43,9 @@ public class Tile {
 	 * @param character The character currently standing on this position, if any.
 	 * @param worldObject The object laying in this position, if any.
 	 */
-	public Tile(boolean blocked, boolean isWater, boolean isLava, Trigger trigger, Position tileExit, Character character, WorldObject worldObject) {
+	public Tile(final boolean blocked, final boolean isWater, final boolean isLava,
+			final Trigger trigger, final Position tileExit, final Character character,
+			final WorldObject worldObject) {
 		this.blocked = blocked;
 		this.isWater = isWater;
 		this.isLava = isLava;
@@ -53,21 +54,13 @@ public class Tile {
 		this.worldObject = worldObject;
 		this.character = character;
 	}
-	
+
 	/**
 	 * Retrieves the position to which this tile leads.
 	 * @return The tile exit.
 	 */
 	public Position getTileExit() {
 		return tileExit;
-	}
-	
-	/**
-	 * Sets the position to which this tile leads.
-	 * @param tileExit The new tile exit.
-	 */
-	public void setTileExit(Position tileExit) {
-		this.tileExit = tileExit;
 	}
 
 	/**
@@ -77,15 +70,7 @@ public class Tile {
 	public boolean isBlocked() {
 		return blocked;
 	}
-	
-	/**
-	 * Sets the block status.
-	 * @param block Whether the tile is blocked, or not.
-	 */
-	public void setBlocked(boolean block) {	
-		this.blocked = block;
-	}
-	
+
 	/**
 	 * Retrieves the character at the tile.
 	 * @return The character at the tile.
@@ -93,15 +78,15 @@ public class Tile {
 	public Character getCharacter() {
 		return character;
 	}
-	
+
 	/**
 	 * Sets the character at the tile.
 	 * @param character The character to be set at the tile.
 	 */
-	public void setCharacter(Character character) {
+	/*package*/ void setCharacter(final Character character) {
 		this.character = character;
 	}
-	
+
 	/**
 	 * Retrieves the world object at the tile.
 	 * @return The world object at the tile.
@@ -109,15 +94,15 @@ public class Tile {
 	public WorldObject getWorldObject() {
 		return worldObject;
 	}
-	
+
 	/**
 	 * Sets the world object at the tile.
 	 * @param worldObject The worldObject to set at the tile.
 	 */
-	public void setWorldObject(WorldObject worldObject) {
+	/*package*/ void setWorldObject(final WorldObject worldObject) {
 		this.worldObject = worldObject;
 	}
-	
+
 	/**
 	 * Retrieves the trigger at the tile.
 	 * @return The trigger at the tile.
@@ -125,15 +110,7 @@ public class Tile {
 	public Trigger getTrigger() {
 		return trigger;
 	}
-	
-	/**
-	 * Sets the trigger at the tile.
-	 * @param trigger The trigger to be set at the tile.
-	 */
-	public void setTrigger(Trigger trigger) {
-		this.trigger = trigger;
-	}
-	
+
 	/**
 	 * Checks if the tile is water.
 	 * @return True if this tile is water, false otherwise.
@@ -141,7 +118,7 @@ public class Tile {
 	public boolean isWater() {
 		return isWater;
 	}
-	
+
 	/**
 	 * Checks if the tile is lava.
 	 * @return True if this tile is lava, false otherwise.
@@ -149,7 +126,7 @@ public class Tile {
 	public boolean isLava() {
 		return isLava;
 	}
-	
+
 	/**
 	 * Checks if the tile is under roof.
 	 * @return True if this tile is under roof, false otherwise.
@@ -157,7 +134,7 @@ public class Tile {
 	public boolean isUnderRoof() {
 		return trigger == Trigger.UNDER_ROOF;
 	}
-	
+
 	/**
 	 * Checks if the tile is a safe zone.
 	 * @return True if this tile is safe zone, false otherwise.
@@ -173,5 +150,5 @@ public class Tile {
 				+ ", isWater=" + isWater + ", isLava=" + isLava + ", tileExit="
 				+ tileExit + "]";
 	}
-	
+
 }

@@ -23,8 +23,6 @@ import java.util.Properties;
 
 import com.ao.service.CharacterBodyService;
 import com.ao.service.CharacterBodyServiceImpl;
-import com.ao.service.LockingService;
-import com.ao.service.LockingServiceImpl;
 import com.ao.service.LoginService;
 import com.ao.service.MapService;
 import com.ao.service.NPCService;
@@ -64,7 +62,6 @@ public class ServiceModule extends AbstractModule {
 		bind(UserService.class).to(UserServiceImpl.class).in(Singleton.class);
 		bind(CharacterBodyService.class).to(CharacterBodyServiceImpl.class).in(Singleton.class);
 		bind(NPCService.class).to(NPCServiceImpl.class).in(Singleton.class);
-		bind(LockingService.class).to(LockingServiceImpl.class).in(Singleton.class);
 
 		bind(Integer.class).annotatedWith(Names.named("initialAvailableSkills")).toInstance(Integer.parseInt(properties.getProperty("config.loginservice.initialavailableskills")));
 

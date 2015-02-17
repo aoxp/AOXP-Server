@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,11 +18,11 @@
 
 package com.ao.service;
 
+import com.ao.model.character.Character;
 import com.ao.model.map.City;
 import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
 import com.ao.model.map.WorldMap;
-import com.ao.model.character.Character;
 
 /**
  * Map Service interface.
@@ -34,26 +34,26 @@ public interface MapService {
 	 * Loads all maps.
 	 */
 	void loadMaps();
-	
+
 	/**
 	 * Retrieves the map with the given id.
 	 * @param id The map's id.
 	 * @return The loaded map.
 	 */
 	WorldMap getMap(int id);
-	
+
 	/**
 	 * Loads all cities.
 	 */
 	void loadCities();
-	
+
 	/**
 	 * Retrieves the city with the given id.
 	 * @param id The City's id.
 	 * @return The city.
 	 */
 	City getCity(byte id);
-	
+
 	/**
 	 * Puts a character at the given position
 	 * @param chara The character to be put.

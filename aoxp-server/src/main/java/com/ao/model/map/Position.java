@@ -18,9 +18,6 @@
 
 package com.ao.model.map;
 
-import java.util.List;
-
-import com.ao.model.character.Character;
 
 public class Position {
 
@@ -37,7 +34,7 @@ public class Position {
 	/**
 	 * The position's map.
 	 */
-	private WorldMap map;
+	private int map;
 
 	/**
 	 * Creates a new position with the given data
@@ -45,7 +42,7 @@ public class Position {
 	 * @param y	The position in the Y axis.
 	 * @param map The position's map.
 	 */
-	public Position(byte x, byte y, WorldMap map) {
+	public Position(byte x, byte y, int map) {
 		this.x = x;
 		this.y = y;
 		this.map = map;
@@ -87,7 +84,7 @@ public class Position {
 	 * Retrieves the position's map.
 	 * @return The position's map.
 	 */
-	public WorldMap getMap() {
+	public int getMap() {
 		return map;
 	}
 
@@ -95,7 +92,7 @@ public class Position {
 	 * Sets the position's map.
 	 * @param map The new position's map.
 	 */
-	public void setMap(WorldMap map) {
+	public void setMap(int map) {
 		this.map = map;
 	}
 
@@ -119,6 +116,7 @@ public class Position {
 
 	/**
 	 * Calculates the Manhattan distance to the given Position.
+	 * Assumes both positions are on the same map.
 	 * @param pos The other position to calculate the distance.
 	 * @return The distance to the other position.
 	 */
@@ -132,7 +130,6 @@ public class Position {
 	 * @return True if the given position is in the vision range, false otherwise.
 	 */
 	public boolean inVisionRange(Position pos) {
-
 		if (map != pos.map ||
 			Math.abs(x - pos.x) > WorldMap.VISIBLE_AREA_WIDTH ||
 			Math.abs(y - pos.y) > WorldMap.VISIBLE_AREA_HEIGHT) {
@@ -142,14 +139,6 @@ public class Position {
 		return true;
 	}
 
-	/**
-	 * Looks for characters in the vision range.
-	 * @return A list of the characters found.
-	 */
-	public List<Character> getCharactersNearby() {
-		return map.getCharactersNearby(x, y);
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -157,7 +146,7 @@ public class Position {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((map == null) ? 0 : map.hashCode());
+		result = prime * result + map;
 		result = prime * result + x;
 		result = prime * result + y;
 		return result;
@@ -178,11 +167,7 @@ public class Position {
 			return false;
 		}
 		Position other = (Position) obj;
-		if (map == null) {
-			if (other.map != null) {
-				return false;
-			}
-		} else if (!map.equals(other.map)) {
+		if (map != other.map) {
 			return false;
 		}
 		if (x != other.x) {

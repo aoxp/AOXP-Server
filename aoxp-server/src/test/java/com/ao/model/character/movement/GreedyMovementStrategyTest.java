@@ -26,7 +26,6 @@ import org.junit.Test;
 import com.ao.model.character.Character;
 import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
-import com.ao.model.map.WorldMap;
 
 public class GreedyMovementStrategyTest {
 
@@ -34,10 +33,8 @@ public class GreedyMovementStrategyTest {
 
 	@Test
 	public void testMove() {
-		WorldMap map = new WorldMap("foo", 0, (short) 1, null);
-
-		Position pos = new Position((byte) 50, (byte) 50, map);
-		Position target = new Position((byte) 60, (byte) 60, map);
+		Position pos = new Position((byte) 50, (byte) 50, 1);
+		Position target = new Position((byte) 60, (byte) 60, 1);
 
 		// Should go to northeast
 		moveTest(pos, target, Heading.WEST, Heading.SOUTH);

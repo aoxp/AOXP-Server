@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -25,22 +25,25 @@ import com.ao.model.character.Race;
 import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.map.City;
+import com.ao.model.user.ConnectedUser;
 
 /**
  * A DAO for user characters.
  */
 public interface UserCharacterDAO {
-	
+
 	/**
 	 * Return the character with the given name
+	 * @param user The connected user loading the character
 	 * @param name Character's name
 	 * @return
-	 * @throws DAOException 
+	 * @throws DAOException
 	 */
-	UserCharacter load(String name) throws DAOException;
+	UserCharacter load(ConnectedUser user, String name) throws DAOException;
 
 	/**
 	 * Creates and persists a new user character.
+	 * @param user						The connected user creating the character.
 	 * @param race 						The character's race.
 	 * @param gender 					The character's gender.
 	 * @param archetype 				The character's archetype.
@@ -55,9 +58,9 @@ public interface UserCharacterDAO {
 	 * @param body					 	The character's body
 	 * @return 							The created user character.
 	 */
-	UserCharacter create(String name, Race race, Gender gender,
+	UserCharacter create(ConnectedUser user, String name, Race race, Gender gender,
 			UserArchetype archetype, int head, City homeland, byte strength,
-			byte agility, byte intelligence, byte charisma, byte constitution, 
+			byte agility, byte intelligence, byte charisma, byte constitution,
 			int initialAvailableSkills, int body)
 			throws DAOException, NameAlreadyTakenException;
 

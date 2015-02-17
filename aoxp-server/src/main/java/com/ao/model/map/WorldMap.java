@@ -29,7 +29,6 @@ import com.ao.model.character.Character;
  * A game's map.
  */
 public class WorldMap {
-
 	public static final int MAP_WIDTH = 100;
 	public static final int MAP_HEIGHT = 100;
 	public static final int VISIBLE_AREA_WIDTH = 8;
@@ -41,12 +40,12 @@ public class WorldMap {
 	public static final int MIN_X = 0;
 	public static final int MIN_Y = 0;
 
-	protected String name;
-	protected int id;
-	protected short version;
+	private final int id;
+	private final String name;
+	private final short version;
 
 	// We don't use jagged arrays, they are inefficient in Java!
-	protected Tile[] tiles;
+	private final Tile[] tiles;
 
 	/**
 	 * Creates a new Map.
@@ -55,45 +54,12 @@ public class WorldMap {
 	 * @param version The map's version.
 	 * @param tiles The array of tiles composing the map.
 	 */
-	public WorldMap(String name, int id, short version, Tile[] tiles) {
+	public WorldMap(final String name, final int id, final short version, final Tile[] tiles) {
 		super();
 		this.name = name;
 		this.id = id;
 		this.version = version;
 		this.tiles = tiles;
-	}
-
-	/**
-	 * Creates a new Map.
-	 * @param id The unique id of the map.
-	 */
-	public WorldMap(int id) {
-		super();
-		this.id = id;
-	}
-
-	/**
-	 * Sets the tiles of the map
-	 * @param tiles The array of tiles composing the map
-	 */
-	public void setTiles(Tile[] tiles) {
-		this.tiles = tiles;
-	}
-
-	/**
-	 * Sets the name of the map
-	 * @param name The name of the map
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Sets the map's version.
-	 * @param version The map's version
-	 */
-	public void setVersion(short version) {
-		this.version = version;
 	}
 
 	/**
@@ -120,7 +86,7 @@ public class WorldMap {
 	 * @param y The coordinate along the y vertex (zero is at the top).
 	 * @return The tile index at the given coordinates.
 	 */
-	public static int getTileKey(int x, int y) {
+	public static int getTileKey(final int x, final int y) {
 		return y * MAP_WIDTH + x;
 	}
 
@@ -151,19 +117,13 @@ public class WorldMap {
 		Character character;
 
 		int yy;
-		int toX = x + WorldMap.VISIBLE_AREA_WIDTH * 2;
-		int toY = y + WorldMap.VISIBLE_AREA_HEIGHT * 2;
-		int fromY = y - WorldMap.VISIBLE_AREA_HEIGHT;
+		int toX = Math.min(x + WorldMap.VISIBLE_AREA_WIDTH * 2, MAX_X);
+		int toY = Math.min(y + WorldMap.VISIBLE_AREA_HEIGHT * 2, MAX_Y);
+		int fromY = Math.max(y - WorldMap.VISIBLE_AREA_HEIGHT, MIN_Y);
+		int fromX = Math.max(x - WorldMap.VISIBLE_AREA_WIDTH, MIN_X);
 
-		for (int xx = x - WorldMap.VISIBLE_AREA_WIDTH; xx < toX; xx++) {
-			if (xx > MAX_X || xx < MIN_X) {
-				continue;
-			}
-
+		for (int xx = fromX; xx < toX; xx++) {
 			for (yy = fromY; yy < toY; yy++) {
-				if (yy > MAX_Y || yy < MIN_Y) {
-					continue;
-				}
 				character = getTile(xx, yy).getCharacter();
 
 				if (character != null && (xx != x && yy != y)) {
@@ -299,7 +259,7 @@ public class WorldMap {
 	public Tile getNearestAvailableTile(byte x, byte y, byte maxDistance, boolean includeGroundTiles,
 			boolean includeWaterTiles, boolean includeLavaTiles, boolean includeExitTiles) {
 
-		if (isAvailableTile(x, y, includeGroundTiles, includeWaterTiles, includeLavaTiles, includeExitTiles)) {
+		if (isTileAvailable(x, y, includeGroundTiles, includeWaterTiles, includeLavaTiles, includeExitTiles)) {
 			return getTile(x, y);
 		}
 
@@ -320,7 +280,7 @@ public class WorldMap {
 				currentX = (byte) (x + dx);
 				currentY = (byte) (y + dy);
 
-				if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
+				if (isTileAvailable(currentX, currentY, includeGroundTiles, includeWaterTiles,
 						includeLavaTiles, includeExitTiles)) {
 
 					return getTile(currentX, currentY);
@@ -339,7 +299,7 @@ public class WorldMap {
 				currentX = (byte) (x + dx);
 				currentY = (byte) (y - dy);
 
-				if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
+				if (isTileAvailable(currentX, currentY, includeGroundTiles, includeWaterTiles,
 						includeLavaTiles, includeExitTiles)) {
 
 					return getTile(currentX, currentY);
@@ -358,7 +318,7 @@ public class WorldMap {
 				currentX = (byte) (x + dx);
 				currentY = (byte) (y + dy);
 
-				if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
+				if (isTileAvailable(currentX, currentY, includeGroundTiles, includeWaterTiles,
 						includeLavaTiles, includeExitTiles)) {
 
 					return getTile(currentX, currentY);
@@ -369,7 +329,7 @@ public class WorldMap {
 			currentX = x;
 			currentY = (byte) (y - currentDistance);
 
-			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
+			if (isTileAvailable(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
 
 				return getTile(currentX, currentY);
@@ -379,7 +339,7 @@ public class WorldMap {
 			currentX = (byte) (x + currentDistance);
 			currentY = y;
 
-			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
+			if (isTileAvailable(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
 
 				return getTile(currentX, currentY);
@@ -389,7 +349,7 @@ public class WorldMap {
 			currentX = x;
 			currentY = (byte) (y + currentDistance);
 
-			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
+			if (isTileAvailable(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
 
 				return getTile(currentX, currentY);
@@ -399,7 +359,7 @@ public class WorldMap {
 			currentX = (byte) (x - currentDistance);
 			currentY = y;
 
-			if (isAvailableTile(currentX, currentY, includeGroundTiles, includeWaterTiles,
+			if (isTileAvailable(currentX, currentY, includeGroundTiles, includeWaterTiles,
 					includeLavaTiles, includeExitTiles)) {
 
 				return getTile(currentX, currentY);
@@ -421,7 +381,7 @@ public class WorldMap {
 	 * @param canBeExitTile Whether the tile can be an exit tile or not.
 	 * @return Whether the tile is available or not.
 	 */
-	public boolean isAvailableTile(byte x, byte y, boolean canBeGround, boolean canBeWater, boolean canBeLava,
+	public boolean isTileAvailable(byte x, byte y, boolean canBeGround, boolean canBeWater, boolean canBeLava,
 			boolean canBeExitTile) {
 
 		if ((x < MIN_X) || (x > MAX_X)) {
@@ -457,4 +417,9 @@ public class WorldMap {
 		return true;
 	}
 
+	public void moveCharacterTo(final Character character, final byte x, final byte y) {
+		final Position position = character.getPosition();
+		getTile(position.getX(), position.getY()).setCharacter(null);
+		getTile(x, y).setCharacter(character);
+	}
 }

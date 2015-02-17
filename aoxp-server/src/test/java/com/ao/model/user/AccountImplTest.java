@@ -20,7 +20,6 @@ package com.ao.model.user;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
@@ -76,13 +75,6 @@ public class AccountImplTest {
 		account.setBanned(!ACCOUNT_BANNED);
 
 		assertEquals(account.isBanned(), !ACCOUNT_BANNED);
-	}
-
-	@Test
-	public void testGetCharacter() {
-		// TODO : Find a nice way to test this...
-		// assertNotNull(account.getCharacter(TEST_CHARACTER_NAME));
-		assertNull(account.getCharacter(NON_EXISTING_CHARACTER_NAME));
 	}
 
 	@Test

@@ -136,12 +136,6 @@ public interface Character {
 	Position getPosition();
 
 	/**
-	 * Sets the character's position.
-	 * @param pos The new character's position.
-	 */
-	void setPosition(Position pos);
-
-	/**
 	 * Uses the given item (must be in the character's inventory).
 	 * @param item The item to use.
 	 */
@@ -456,7 +450,7 @@ public interface Character {
 	 * @return the character's armor
 	 */
 	Armor getArmor();
-	
+
 	/**
 	 * Sets the character's armor.
 	 * @param weapon The character's armor.
@@ -468,7 +462,7 @@ public interface Character {
 	 * @return the character's accessory
 	 */
 	Accessory getAccessory();
-	
+
 	/**
 	 * Sets the character's accessory.
 	 * @param weapon The character's accessory.

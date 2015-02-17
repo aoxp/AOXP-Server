@@ -1,20 +1,21 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
-    Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * AO-XP Server (XP stands for Cross Platform) is a Java implementation of
+ * Argentum Online's server Copyright (C) 2009 Juan Martín Sotuyo Dodero.
+ * <juansotuyo@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package com.ao.model.user;
 
@@ -43,23 +44,24 @@ import com.ao.model.worldobject.WorldObject;
 /**
  * Defines a logged user.
  */
-public class LoggedUser extends ConnectedUser implements UserCharacter  {
-	
+public class LoggedUser extends ConnectedUser implements UserCharacter {
+
 	private static final int MAX_THIRSTINESS = 100;
 	private static final int MAX_HUNGER = 100;
-	
+
 	private Reputation reputation;
-	private Inventory inventory; //TODO: need to be instanced in the constructor.
+	private Inventory inventory; // TODO: need to be instanced in the
+									// constructor.
 	private Race race;
 	private Gender gender;
 	private Archetype archetype;
-	
+
 	private Weapon weapon;
 	private Helmet helmet;
 	private Shield shield;
 	private Armor armor;
 	private Accessory accessory;
-	
+
 	/*
 	 * UserFlags
 	 */
@@ -77,14 +79,14 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	 * AdminFlags
 	 */
 	private boolean adminHidden;
-	
+
 	/*
 	 * UserStats
 	 */
 	private int maxMana;
 	private int maxHp;
 	private int minMana;
-	private int minHp; 
+	private int minHp;
 	private int minThirstiness;
 	private int maxThirstiness;
 	private int maxHunger;
@@ -94,14 +96,17 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	private byte level;
 	private String name;
 	private String description;
-	
-	public LoggedUser(Reputation reputation, Race race, Gender gender,
-			Archetype archetype, boolean poisoned, boolean paralyzed,
-			boolean immobilized, boolean invisible, boolean dumbed, boolean hidden, int maxMana, int minMana, int maxHp,
-			int minHp, int maxThirstiness, int minThirstiness , int maxHunger, int minHunger, byte lvl,
-			String name, String description) {
-		
-		super();
+
+	public LoggedUser(final ConnectedUser user, final Reputation reputation,
+			final Race race, final Gender gender, final Archetype archetype,
+			final boolean poisoned, final boolean paralyzed,
+			final boolean immobilized, final boolean invisible,
+			final boolean dumbed, final boolean hidden, final int maxMana,
+			final int minMana, final int maxHp, final int minHp,
+			final int maxThirstiness, final int minThirstiness,
+			final int maxHunger, final int minHunger, final byte lvl,
+			final String name, final String description) {
+		super(user.getConnection());
 		this.reputation = reputation;
 		this.race = race;
 		this.gender = gender;
@@ -120,7 +125,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 		this.maxHunger = maxHunger;
 		this.minThirstiness = minThirstiness;
 		this.minHunger = minHunger;
-		this.level = lvl;
+		level = lvl;
 		this.name = name;
 		this.description = description;
 	}
@@ -128,7 +133,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void addToSkill(Skill skill, byte points) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -173,31 +178,31 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setGuildName(String name) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setPartyId(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void work() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addToExperience(int experience) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addToHitPoints(int points) {
-		minHp += points;		//TODO: Check for overflows and underflows
-		
+		minHp += points; // TODO: Check for overflows and underflows
+
 		if (minHp > maxHp) {
 			minHp = maxHp;
 		}
@@ -205,8 +210,8 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public void addToHunger(int points) {
-		minHunger += points;			//TODO: Check for overflows and underflows
-		
+		minHunger += points; // TODO: Check for overflows and underflows
+
 		if (minHunger > maxHunger) {
 			minHunger = maxHunger;
 		}
@@ -214,7 +219,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public void addToMana(int points) {
-		minMana += points;				 //TODO: Check for overflows and underflows
+		minMana += points; // TODO: Check for overflows and underflows
 		if (minMana > maxMana) {
 			minMana = maxMana;
 		}
@@ -222,28 +227,28 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public void addToMaxHitPoints(int points) {
-		maxHp += points; 	//TODO: Check for overflows and underflows
+		maxHp += points; // TODO: Check for overflows and underflows
 	}
 
 	@Override
 	public void addToMaxMana(int points) {
-		maxMana += points; 			//TODO: Check for overflows and underflows
+		maxMana += points; // TODO: Check for overflows and underflows
 	}
 
 	@Override
 	public void addToThirstiness(int points) {
-		minThirstiness += points; 		//TODO: Check for overflows and underflows
-		
+		minThirstiness += points; // TODO: Check for overflows and underflows
+
 		if (minThirstiness > maxThirstiness) {
 			minThirstiness = maxThirstiness;
 		}
-			
+
 	}
 
 	@Override
 	public void attack(Character character) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -261,19 +266,19 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void cast(Spell spell, Character target) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void cast(Spell spell, WorldObject object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void equip(EquipableItem item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -447,25 +452,25 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setBody(int body) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setDead(boolean dead) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setDumb(boolean dumb) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setHead(int head) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -487,7 +492,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setMimetized(boolean mimetized) {
 		this.mimetized = mimetized;
-		
+
 	}
 
 	@Override
@@ -501,39 +506,33 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	}
 
 	@Override
-	public void setPosition(Position pos) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void use(Item item) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addToAgility(int points, int duration) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addToStrength(int points, int duration) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addSpell(Spell spell) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addMoney(int amount) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -541,34 +540,34 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
+
 	@Override
 	public Heading getHeading() {
 		// TODO Auto-generated method stub
 		return Heading.EAST;
 	}
-	
+
 	@Override
 	public void setHeading(Heading heading) {
-		
+
 	}
 
 	@Override
 	public void setWeapon(Weapon weapon) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setShield(Shield shield) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setHelmet(Helmet helmet) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -580,7 +579,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setPrivileges(Privileges privileges) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -592,7 +591,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setNickColor(int colorIndex) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -604,7 +603,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setFx(Fx fx) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -616,44 +615,44 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	@Override
 	public void setCharIndex(int index) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public Weapon getWeapon() {
-		return this.weapon;
+		return weapon;
 	}
 
 	@Override
 	public Helmet getHelmet() {
-		return this.helmet;
+		return helmet;
 	}
 
 	@Override
 	public Shield getShield() {
-		return this.shield;
+		return shield;
 	}
 
 	@Override
 	public Armor getArmor() {
-		return this.armor;
+		return armor;
 	}
 
 	@Override
 	public Accessory getAccessory() {
-		return this.accessory;
+		return accessory;
 	}
 
 	@Override
 	public void setArmor(Armor armor) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void setAccessory(Accessory accessory) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -665,7 +664,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
-	
+
 	@Override
 	public int getMaxStamina() {
 		return maxStamina;
@@ -678,7 +677,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public boolean isMeditating() {
-		return this.meditating;
+		return meditating;
 	}
 
 	@Override
@@ -698,7 +697,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 
 	@Override
 	public boolean isSailing() {
-		return this.sailing;
+		return sailing;
 	}
 
 	@Override
@@ -711,6 +710,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter  {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
 	public boolean isEquipped(Item item) {
 		// TODO Auto-generated method stub
 		return false;

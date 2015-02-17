@@ -980,6 +980,7 @@ public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 		LegacyWorldObjectType objectType = LegacyWorldObjectType.valueOf(Integer.parseInt(data));
 
 		if (objectType == null) {
+			// All item types are accepted
 			acceptedTypes = new HashSet<WorldObjectType>();
 			acceptedTypes.addAll(Arrays.asList(WorldObjectType.values()));
 		} else {

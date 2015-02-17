@@ -14,24 +14,20 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package com.ao.service;
+*/
 
-/**
- * Service for getting exclusive locks over objects.
- * @author mvanotti
- */
-public interface LockingService {
-	/**
-	 * Lock several objects
-	 * 
-	 * @param objects The objects to be locked
-	 * @throws ThreadAlreadyLockingException if the calling thread is locking something already
-	 */
-	public void lock(Object... objects) throws ThreadAlreadyLockingException;
+package com.ao.network.packet.outgoing;
 
-	/**
-	 * Release all the objects locked by the calling thread
-	 */
-	public void release();
+import java.io.UnsupportedEncodingException;
+
+import com.ao.network.DataBuffer;
+import com.ao.network.packet.OutgoingPacket;
+
+public class ParalizedPacket implements OutgoingPacket {
+
+	@Override
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
+		// we have no extra data to write
+	}
+
 }

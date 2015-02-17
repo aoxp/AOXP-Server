@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ import com.ao.model.worldobject.properties.WorldObjectProperties;
 public abstract class AbstractWorldObject implements WorldObject {
 
 	protected WorldObjectProperties properties;
-	
+
 	/**
 	 * Creates a new AbstractWorldObject instance.
 	 * @param properties The object's properties.
@@ -34,7 +34,7 @@ public abstract class AbstractWorldObject implements WorldObject {
 	public AbstractWorldObject(WorldObjectProperties properties) {
 		this.properties = properties;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.ao.model.worldobject.WorldObject#getGraphic()
@@ -62,4 +62,8 @@ public abstract class AbstractWorldObject implements WorldObject {
 		return properties.getName();
 	}
 
+	@Override
+	public WorldObjectType getObjectType() {
+		return properties.getType();
+	}
 }

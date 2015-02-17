@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@ package com.ao.context;
 import java.util.Properties;
 
 import com.ao.ioc.InjectorFactory;
-
 import com.google.inject.Injector;
 
 /**
@@ -34,14 +33,14 @@ public class ApplicationContext {
 	static {
 		reload();
 	}
-	
+
 	/**
 	 * Retrieves an instance of the requested class.
 	 * @param <T> Type of the object being requested.
 	 * @param clazz The class of the object being requested.
 	 * @return An instance of the requested class.
 	 */
-	public static <T> T getInstance(Class<T> clazz) {
+	public static <T> T getInstance(final Class<T> clazz) {
 		return injector.getInstance(clazz);
 	}
 
@@ -50,8 +49,8 @@ public class ApplicationContext {
 	 * BEWARE, all previously created objects are not longer attached!
 	 */
 	public static void reload() {
-		Properties properties = ApplicationProperties.getProperties();
-		
+		final Properties properties = ApplicationProperties.getProperties();
+
 		injector = InjectorFactory.get(properties);
 	}
 }

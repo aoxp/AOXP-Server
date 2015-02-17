@@ -50,6 +50,7 @@ import com.ao.model.map.City;
 import com.ao.model.map.Heading;
 import com.ao.model.user.Account;
 import com.ao.model.user.AccountImpl;
+import com.ao.model.user.ConnectedUser;
 import com.ao.model.user.LoggedUser;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -264,12 +265,12 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	}
 
 	@Override
-	public UserCharacter create(String name, Race race, Gender gender,
-			UserArchetype archetype, int head, City homeland, byte strength,
-			byte agility, byte intelligence, byte charisma, byte constitution,
-			int initialAvailableSkills, int body)
+	public UserCharacter create(final ConnectedUser user, final String name, final Race race, final Gender gender,
+			final UserArchetype archetype, final int head, final City homeland, final byte strength,
+			final byte agility, final byte intelligence, final byte charisma, final byte constitution,
+			final int initialAvailableSkills, final int body)
 			throws DAOException, NameAlreadyTakenException {
-		Ini chara = new Ini();
+		final Ini chara = new Ini();
 
 		chara.put(INIT_HEADER, GENDER_KEY, gender.ordinal());
 		chara.put(INIT_HEADER, RACE_KEY, race.ordinal());
@@ -380,7 +381,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		}
 
 		// TODO: Update this when hp, mana and hit points get updated!
-		return new LoggedUser(rep, race, gender, archetype.getArchetype(),
+		return new LoggedUser(user, rep, race, gender, archetype.getArchetype(),
 				false, false, false, false, false, false, 0, 0, 0, 0,
 				100, 0, 100, 0, (byte) 1, name, "");
 	}
@@ -400,7 +401,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	}
 
 	@Override
-	public UserCharacter load(String username) throws DAOException {
+	public UserCharacter load(final ConnectedUser user, final String username) throws DAOException {
 		Ini chara = readCharFile(username);
 
 		if (null == chara) {

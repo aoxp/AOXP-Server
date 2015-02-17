@@ -1,20 +1,21 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
-    Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * AO-XP Server (XP stands for Cross Platform) is a Java implementation of
+ * Argentum Online's server Copyright (C) 2009 Juan Martín Sotuyo Dodero.
+ * <juansotuyo@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package com.ao.service.login;
 
@@ -31,8 +32,14 @@ import com.ao.model.character.Race;
 import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.map.City;
+import com.ao.model.spell.Spell;
 import com.ao.model.user.Account;
 import com.ao.model.user.ConnectedUser;
+import com.ao.model.user.User;
+import com.ao.network.Connection;
+import com.ao.network.packet.outgoing.ChangeInventorySlotPacket;
+import com.ao.network.packet.outgoing.ChangeSpellSlotPacket;
+import com.ao.network.packet.outgoing.ParalizedPacket;
 import com.ao.security.SecurityManager;
 import com.ao.service.CharacterBodyService;
 import com.ao.service.LoginService;
@@ -42,8 +49,8 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
- * Default implementation of the login service.
- * An account is the exact same as a character.
+ * Default implementation of the login service. An account is the exact same as
+ * a character.
  *
  * @author jsotuyod
  */
@@ -94,11 +101,11 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public void connectNewCharacter(ConnectedUser user, String username, String password, byte bRace,
-			byte bGender, byte bArchetype, int head, String mail,
-			byte bHomeland, String clientHash,
-			String version) throws LoginErrorException {
-
+	public void connectNewCharacter(final ConnectedUser user,
+			final String username, final String password, final byte bRace,
+			final byte bGender, final byte bArchetype, final int head,
+			final String mail, final byte bHomeland, final String clientHash,
+			final String version) throws LoginErrorException {
 		checkClient(clientHash, version);
 
 		if (!config.isCharacterCreationEnabled()) {
@@ -109,38 +116,37 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(ONLY_ADMINS_ERROR);
 		}
 
-		//TODO: Check to avoid mass characters creation for this IP
-
+		// TODO: Check to avoid mass characters creation for this IP
 
 		if (user.getAttribute(Attribute.AGILITY) == null) {
 			throw new LoginErrorException(MUST_THROW_DICES_BEFORE_ERROR);
 		}
 
-		UserCharacterBuilder userCharacterBuilder = new UserCharacterBuilder();
+		final UserCharacterBuilder userCharacterBuilder = new UserCharacterBuilder();
 
-		Race race;
+		final Race race;
 		try {
 			race = Race.get(bRace);
-		} catch(ArrayIndexOutOfBoundsException e) {
+		} catch (final ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_RACE_ERROR);
 		}
 
-		Gender gender;
+		final Gender gender;
 		try {
 			gender = Gender.get(bGender);
-		} catch(ArrayIndexOutOfBoundsException e) {
+		} catch (final ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_GENDER_ERROR);
 		}
 
-		City homeland = mapService.getCity(bHomeland);
-		if (homeland == null){
+		final City homeland = mapService.getCity(bHomeland);
+		if (homeland == null) {
 			throw new LoginErrorException(INVALID_HOMELAND_ERROR);
 		}
 
-		UserArchetype archetype;
+		final UserArchetype archetype;
 		try {
 			archetype = UserArchetype.get(bArchetype);
-		} catch(ArrayIndexOutOfBoundsException e) {
+		} catch (final ArrayIndexOutOfBoundsException e) {
 			throw new LoginErrorException(INVALID_ARCHETYPE_ERROR);
 		}
 
@@ -149,55 +155,52 @@ public class LoginServiceImpl implements LoginService {
 		}
 
 		// Get default body
-		int body = characterBodyService.getBody(race, gender);
+		final int body = characterBodyService.getBody(race, gender);
 
 		if (body == 0) {
 			throw new LoginErrorException(INVALID_BODY_ERROR);
 		}
 
 		try {
-			userCharacterBuilder.withName(username)
-				.withEmail(mail)
-				.withGender(gender)
-				.withCity(homeland)
-				.withRace(race)
-				.withArchetype(archetype)
-				.withHead(head)
-				.withBody(body);
-		} catch (Exception e) {
+			userCharacterBuilder.withName(username).withEmail(mail)
+					.withGender(gender).withCity(homeland).withRace(race)
+					.withArchetype(archetype).withHead(head).withBody(body);
+		} catch (final Exception e) {
 			throw new LoginErrorException(e.getMessage());
 		}
 
-
 		// First, we have to create the new account.
-		Account acc;
+		final Account acc;
 
 		try {
 			acc = accDAO.create(username, password, mail);
-		} catch(NameAlreadyTakenException e) {
+		} catch (NameAlreadyTakenException e) {
 			throw new LoginErrorException(ACCOUNT_NAME_TAKEN_ERROR);
 
-		} catch (DAOException e) {
+		} catch (final DAOException e) {
 			accDAO.delete(username);
 
 			throw new LoginErrorException(DAO_ERROR);
 		}
 
-
 		// Once we have the account, lets create the character itself!
 		try {
-			UserCharacter chara = charDAO.create(username, race, gender, archetype,
-					head, homeland, user.getAttribute(Attribute.STRENGTH),
-					user.getAttribute(Attribute.AGILITY), user.getAttribute(Attribute.INTELLIGENCE),
-					user.getAttribute(Attribute.CHARISMA), user.getAttribute(Attribute.CONSTITUTION),
+			final UserCharacter chara = charDAO.create(user, username, race, gender,
+					archetype, head, homeland,
+					user.getAttribute(Attribute.STRENGTH),
+					user.getAttribute(Attribute.AGILITY),
+					user.getAttribute(Attribute.INTELLIGENCE),
+					user.getAttribute(Attribute.CHARISMA),
+					user.getAttribute(Attribute.CONSTITUTION),
 					initialAvailableSkills, body);
-		} catch (DAOException e) {
+		} catch (final DAOException e) {
 			accDAO.delete(username);
 
 			throw new LoginErrorException(e.getMessage());
 		}
 
-		// Everything it's okay, associate the character with the account and the account with the user.
+		// Everything is okay, associate the character with the account and
+		// the account with the user.
 		acc.addCharacter(username);
 		user.setAccount(acc);
 
@@ -206,8 +209,9 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public void connectExistingCharacter(ConnectedUser user, String name, String password, String version,
-			String clientHash) throws LoginErrorException {
+	public void connectExistingCharacter(final ConnectedUser user, final String name,
+			final String password, final String version, final String clientHash)
+			throws LoginErrorException {
 
 		checkClient(clientHash, version);
 
@@ -215,15 +219,15 @@ public class LoginServiceImpl implements LoginService {
 			throw new LoginErrorException(ONLY_ADMINS_ERROR);
 		}
 
-		Account acc;
+		final Account acc;
 
 		try {
 			acc = accDAO.retrieve(name);
-		} catch (DAOException e) {
+		} catch (final DAOException e) {
 			throw new LoginErrorException(DAO_ERROR);
 		}
 
-		//TODO : Is the ip in use?
+		// TODO : Is the ip in use?
 
 		if (acc == null) {
 			throw new LoginErrorException(CHARACTER_NOT_FOUND_ERROR);
@@ -246,46 +250,103 @@ public class LoginServiceImpl implements LoginService {
 		// TODO : If user is a GM, log it to admin's log with it's ip.
 
 		// TODO : Do something with the account!!!
+		if (!acc.hasCharacter(name)) {
+			throw new LoginErrorException(CHARACTER_NOT_FOUND_ERROR);
+		}
 
-		UserCharacter character = acc.getCharacter(name);
+		final UserCharacter character;
+		try {
+			character = charDAO.load(user, name);
+		} catch (final DAOException e) {
+			throw new LoginErrorException(DAO_ERROR);
+		}
 
-		// TODO : send all data!
+		// Send initial state to client!
+		sendInitialState(user, character);
 
+		// Upgrade the user to a logged user
+		user.getConnection().changeUser((User) character);
 		user.setAccount(acc);
 
 		userService.logIn(user);
 	}
 
+	private void sendInitialState(final ConnectedUser user, final UserCharacter character) {
+		final Connection connection = user.getConnection();
+
+		// inventory
+		final int invCapacity = character.getInventory().getCapacity();
+		for (int i = 0; i < invCapacity; i++) {
+			connection.send(new ChangeInventorySlotPacket(character, (byte) i));
+		}
+
+		// spellbook
+		final Spell[] spellbook = character.getSpells();
+		final int spells = spellbook.length;
+		for (int i = 0; i < spells; i++) {
+			connection.send(new ChangeSpellSlotPacket(spellbook[i], (byte) i));
+		}
+
+		if (character.isParalyzed()) {
+			connection.send(new ParalizedPacket());
+		}
+
+		// TODO : Check if map pos is valid, or find valid one
+
+		// TODO : Set sailing and use boat if in water (and has a boat)
+
+		// TODO : Send user index in server? The client doesn't use it at all, and we have no user indexes in this server...
+
+		// TODO : Tell client to load map
+
+		// TODO : Tell client to play audio
+
+		// TODO : Meter el char en el área (avisar a todos, darle items, npcs, usuarios, bloquear posiciones, etc.)
+
+		// TODO : Other
+
+	}
+
 	/**
 	 * Sets the current client's version.
-	 * @param version The new client version.
+	 *
+	 * @param version
+	 *            The new client version.
 	 */
-	public void setCurrentClientVersion(String version) {
+	public void setCurrentClientVersion(final String version) {
 		// TODO: Update the config!
 		currentClientVersion = version;
 	}
 
 	/**
-	 * Checks if the given hash matches any of the valid hashes and if the given version is up to date.
-	 * @param hash 	The hash to check.
-	 * @param version The client's version.
+	 * Checks if the given hash matches any of the valid hashes and if the given
+	 * version is up to date.
+	 *
+	 * @param hash
+	 *            The hash to check.
+	 * @param version
+	 *            The client's version.
 	 * @throws LoginErrorException
 	 */
-	private void checkClient(String hash, String version) throws LoginErrorException {
+	private void checkClient(final String hash, final String version)
+			throws LoginErrorException {
 
 		if (!currentClientVersion.equals(version)) {
-			throw new LoginErrorException(String.format(CLIENT_OUT_OF_DATE_ERROR_FORMAT, currentClientVersion));
+			throw new LoginErrorException(String.format(
+					CLIENT_OUT_OF_DATE_ERROR_FORMAT, currentClientVersion));
 		}
 
 		if (clientHashes == null) {
-			clientHashes = ApplicationContext.getInstance(SecurityManager.class).getValidClientHashes();
+			// FIXME : Why is it loaded here?
+			clientHashes = ApplicationContext
+					.getInstance(SecurityManager.class).getValidClientHashes();
 		}
 
 		if (clientHashes.length < 1) {
 			return;
 		}
 
-		for (String validHash : clientHashes) {
+		for (final String validHash : clientHashes) {
 			if (hash.equals(validHash)) {
 				return;
 			}

@@ -95,6 +95,8 @@ public class MockFactory {
 		EasyMock.expect(user.getAttribute(Attribute.INTELLIGENCE)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.STRENGTH)).andReturn((byte) 18).anyTimes();
 
+		EasyMock.expect(user.getConnection()).andReturn(mockConnection()).anyTimes();
+
 		// Capture the received Account object in setAccount to later return it on getAccount.
 		final Capture<Account> account = new Capture<Account>();
 

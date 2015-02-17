@@ -31,6 +31,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ao.data.dao.exception.DAOException;
+import com.ao.mock.MockFactory;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.Skill;
@@ -122,7 +123,7 @@ public class UserDAOIniTest {
 		EasyMock.replay(city);
 
 		// TODO: Use constants!!
-		UserCharacter chara = dao.create(NEW_CHARACTER_NICK, Race.HUMAN, Gender.FEMALE,
+		UserCharacter chara = dao.create(MockFactory.mockConnectedUser(), NEW_CHARACTER_NICK, Race.HUMAN, Gender.FEMALE,
 				UserArchetype.ASSASIN, 75, city, (byte) 18, (byte) 18,
 				(byte) 18, (byte) 18, (byte) 18, 10, 1);
 

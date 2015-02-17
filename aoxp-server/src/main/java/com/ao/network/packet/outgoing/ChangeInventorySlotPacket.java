@@ -20,6 +20,7 @@ package com.ao.network.packet.outgoing;
 
 import java.io.UnsupportedEncodingException;
 
+import com.ao.data.dao.ini.LegacyWorldObjectType;
 import com.ao.model.character.UserCharacter;
 import com.ao.model.inventory.Inventory;
 import com.ao.model.worldobject.DefensiveItem;
@@ -30,14 +31,12 @@ import com.ao.network.packet.OutgoingPacket;
 
 public class ChangeInventorySlotPacket implements OutgoingPacket {
 
-	private byte slot;
-	private UserCharacter userCharacter;
-	private Item item;
+	private final byte slot;
+	private final UserCharacter userCharacter;
+	private final Item item;
 
-	//private EquipableItem item;
-
-	public ChangeInventorySlotPacket(UserCharacter character, byte slot) {
-		Inventory inventory = character.getInventory();
+	public ChangeInventorySlotPacket(final UserCharacter character, final byte slot) {
+		final Inventory inventory = character.getInventory();
 
 		userCharacter = character;
 		this.slot = slot;
@@ -45,13 +44,15 @@ public class ChangeInventorySlotPacket implements OutgoingPacket {
 	}
 
 	@Override
-	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
 		buffer.put(slot);
 		buffer.putShort((short) item.getId());
 		buffer.putASCIIString(item.getName());
 		buffer.putShort((short) item.getAmount());
 		buffer.putBoolean(userCharacter.isEquipped(item));
 		buffer.putShort((short) item.getGraphic());
+
+		buffer.putShort((short) LegacyWorldObjectType.valueFor(item.getObjectType()).getValue());
 
 		if (item instanceof Weapon) {
 			buffer.putShort((short) ((Weapon) item).getMaxHit());
@@ -69,6 +70,7 @@ public class ChangeInventorySlotPacket implements OutgoingPacket {
 			buffer.putShort((short) 0);
 		}
 
+		// TODO : we want to send the sale price
 		buffer.putFloat(item.getValue());
 	}
 

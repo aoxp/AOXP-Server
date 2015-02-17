@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,35 +18,26 @@
 
 package com.ao.service;
 
-import com.ao.model.character.UserCharacter;
 import com.ao.model.user.ConnectedUser;
 
 public interface UserService {
-	
+
 	/**
 	 * Look if a ConnectedUser is logged in.
 	 * @param user The ConnectedUser
 	 * @return True if it is connected, False in another case.
 	 */
 	boolean isLoggedIn(ConnectedUser user);
-	
+
 	/**
 	 * Log in a ConnectedUser
 	 * @param user The ConnectedUser
 	 */
 	void logIn(ConnectedUser user);
-	
+
 	/**
 	 * Log out a ConnectedUser
 	 * @param user The ConnectedUser
 	 */
 	void logOut(ConnectedUser user);
-
-	/**
-	 * Get character with given name
-	 * @param name A character name
-	 * @return
-	 */
-	UserCharacter getCharacter(String name);
-	
 }

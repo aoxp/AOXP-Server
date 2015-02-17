@@ -25,6 +25,7 @@ import org.junit.Test;
 
 import com.ao.data.dao.CityDAO;
 import com.ao.data.dao.WorldMapDAO;
+import com.ao.model.map.Tile;
 import com.ao.model.map.WorldMap;
 import com.ao.service.MapService;
 
@@ -37,8 +38,6 @@ public class MapServiceImplTest {
 		EasyMock.expect(dao.retrieveAll()).andReturn(null).once();
 		EasyMock.replay(dao);
 
-
-
 		MapService service = new MapServiceImpl(dao, cityDao);
 		service.loadMaps();
 
@@ -49,7 +48,7 @@ public class MapServiceImplTest {
 	public void testGetMap() {
 		int mapId = 1;
 
-		WorldMap map = new WorldMap(mapId);
+		WorldMap map = new WorldMap(null, 1, (short) 1, new Tile[] {});
 		WorldMapDAO dao = EasyMock.createMock(WorldMapDAO.class);
 		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
 
@@ -59,8 +58,7 @@ public class MapServiceImplTest {
 		MapService service = new MapServiceImpl(dao,cityDao);
 		service.loadMaps();
 
-		Assert.assertEquals(service.getMap(mapId), map);
-
+		Assert.assertSame(map, service.getMap(mapId));
 	}
 
 }

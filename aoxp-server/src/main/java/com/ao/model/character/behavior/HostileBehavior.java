@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,8 +19,6 @@
 package com.ao.model.character.behavior;
 
 import com.ao.model.character.Character;
-import com.ao.model.character.NPCCharacter;
-import com.ao.model.character.UserCharacter;
 import com.ao.model.character.attack.AttackStrategy;
 import com.ao.model.character.movement.MovementStrategy;
 
@@ -29,13 +27,13 @@ import com.ao.model.character.movement.MovementStrategy;
  * @author jsotuyod
  */
 public class HostileBehavior implements Behavior {
-	
+
 	private MovementStrategy movement;
 	private AttackStrategy attack;
-	
+
 	private Character character;
 	private Character target;
-	
+
 	/**
 	 * Creates a new HostileBehavior instance.
 	 * @param movement The movement strategy to be used.
@@ -47,7 +45,7 @@ public class HostileBehavior implements Behavior {
 		this.attack = attack;
 		this.character = character;
 	}
-	
+
 	@Override
 	public void attackedBy(Character character) {
 		// Don't care, anyway this behavior will attack everyone in his range.
@@ -55,23 +53,24 @@ public class HostileBehavior implements Behavior {
 
 	@Override
 	public void takeAction() {
-		for (Character chara : character.getPosition().getCharactersNearby()) {
-			if (chara != character && (chara instanceof UserCharacter || ((NPCCharacter) chara).getMaster() != null)) {
-				
-				// Is it the same as last target?
-				if (target != chara) {
-					movement.setTarget(chara);
-				}
-				
-				attack.attack(chara);
-				target = chara;
-				
-				break;
-			}
-		}
-		
-		// Move, move!
-		character.moveTo(movement.move(character.getPosition()));
+		// TODO : This has to be rewritten as a WorldMapAction
+//		for (final Character chara : character.getPosition().getCharactersNearby()) {
+//			if (chara != character && (chara instanceof UserCharacter || ((NPCCharacter) chara).getMaster() != null)) {
+//
+//				// Is it the same as last target?
+//				if (target != chara) {
+//					movement.setTarget(chara);
+//				}
+//
+//				attack.attack(chara);
+//				target = chara;
+//
+//				break;
+//			}
+//		}
+//
+//		// Move, move!
+//		character.moveTo(movement.move(character.getPosition()));
 	}
 
 }

@@ -211,6 +211,7 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 
 	public UserCharacterBuilder withConnectedUser(ConnectedUser user) {
+		Preconditions.checkNotNull(user);
 		this.user = user;
 
 		return this;
@@ -301,7 +302,7 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 
 	@Override
 	public UserCharacter build() {
-		// TODO Auto-generated method stub
+		Preconditions.checkNotNull(user);
 		Preconditions.checkNotNull(maxHp);
 		Preconditions.checkNotNull(minHp);
 		Preconditions.checkNotNull(maxMana);
@@ -324,13 +325,13 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 		Preconditions.checkNotNull(reputation);
 		Preconditions.checkNotNull(position);
 
-		LoggedUser user = new LoggedUser(reputation, race, gender, archetype.getArchetype(), poisoned,
+		LoggedUser loggedUser = new LoggedUser(user, reputation, race, gender, archetype.getArchetype(), poisoned,
 				paralyzed, immobilized, invisible, dumbed, hidden, maxMana, minMana, maxHp, minHp,
 				maxThirstiness, minThirstiness, maxHunger, minHunger, lvl, name, description);
 
 		//TODO: Set everything!
 
-		return user;
+		return loggedUser;
 	}
 
 }

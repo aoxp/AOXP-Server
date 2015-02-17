@@ -28,18 +28,17 @@ import com.ao.network.packet.OutgoingPacket;
  * Connection class. A simple DTO to wrap the user and connection together.
  */
 public class Connection {
-
-	protected Channel socket;
-	protected User user;
+	private Channel socket;
+	private User user;
 
 	/**
 	 * Creates a new Connection.
 	 * @param socket The channel over which to communicate with the client.
 	 */
-	public Connection(Channel socket) {
+	public Connection(final Channel socket) {
 		this.socket = socket;
 
-		user = new ConnectedUser();
+		user = new ConnectedUser(this);
 	}
 
 	/**
@@ -61,7 +60,15 @@ public class Connection {
 	 * Sends the given packet to the client.
 	 * @param packet The packet being sent.
 	 */
-	public void send(OutgoingPacket packet) {
+	public void send(final OutgoingPacket packet) {
 		socket.write(packet);
+	}
+
+	/**
+	 * Changes the current connection's user model.
+	 * @param user The new user model to be used.
+	 */
+	public void changeUser(final User user) {
+		this.user = user;
 	}
 }

@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,13 @@
 
 package com.ao.model.user;
 
+import com.ao.network.Connection;
+
 public interface User {
 
+	/**
+	 * Retrieves the associated connection for this user.
+	 * @return The connection for this user.
+	 */
+	Connection getConnection();
 }

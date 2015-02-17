@@ -40,7 +40,7 @@ import com.google.inject.name.Named;
 
 public class WorldMapDAOImpl implements WorldMapDAO {
 
-	private Logger logger = Logger.getLogger(WorldMapDAOImpl.class);
+	private final static Logger LOGGER = Logger.getLogger(WorldMapDAOImpl.class);
 
 	private static final String MAP_FILE_NAME_FORMAT = "Mapa%d.map";
 	private static final String INF_FILE_NAME_FORMAT = "Mapa%d.inf";
@@ -55,13 +55,15 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 	private static final byte BITFLAG_NPC = 2;
 	private static final byte BITFLAG_OBJECT = 4;
 
-	private int mapsAmount;
-	private String mapsPath;
-	private Set<Short> waterGrhs = new HashSet<Short>();
-	private Set<Short> lavaGrhs = new HashSet<Short>();
+	private final int mapsAmount;
+	private final String mapsPath;
+	private final Set<Short> waterGrhs = new HashSet<Short>();
+	private final Set<Short> lavaGrhs = new HashSet<Short>();
 
 	@Inject
-	public WorldMapDAOImpl(@Named("mapsPath") String mapsPath, @Named("mapsAmount") int mapsAmount, @Named("mapsConfigFile") String mapsConfigFile) {
+	public WorldMapDAOImpl(@Named("mapsPath") final String mapsPath,
+			@Named("mapsAmount") final int mapsAmount,
+			@Named("mapsConfigFile") final String mapsConfigFile) {
 		this.mapsPath = mapsPath;
 		this.mapsAmount = mapsAmount;
 
@@ -70,16 +72,11 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 
 	@Override
 	public WorldMap[] retrieveAll() {
-		WorldMap[] maps = new WorldMap[mapsAmount];
+		final WorldMap[] maps = new WorldMap[mapsAmount];
 
 		// Maps enumeration starts at 1.
 		for (int i = 1; i <= mapsAmount; i++) {
-			// Initialize all maps empty, this way references to not yet loaded maps can be correctly handled.
-			maps[i - 1] = new WorldMap(i);
-		}
-
-		for (int i = 1; i <= mapsAmount; i++) {
-			loadMap(i, maps);
+			maps[i - 1] = loadMap(i);
 		}
 
 		return maps;
@@ -91,43 +88,45 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 	 * @param maps The list of maps where the map will be loaded. Also this list
 	 * 				must contain all maps pre-loaded to handle inter-maps references.
 	 */
-	private void loadMap(int id, WorldMap[] maps) {
-		byte flag;
-		RandomAccessFile dataInf;
-		RandomAccessFile dataMap;
-		byte[] bufInf;
-		byte[] bufMap;
+	private WorldMap loadMap(final int id) {
+		final byte[] bufInf;
+		final byte[] bufMap;
 
-		try {
+		// TODO : Load .dat file too
+		try (
 			// Completely read both files.
-			dataInf = new RandomAccessFile(mapsPath + String.format(INF_FILE_NAME_FORMAT, id), "r");
-			dataMap = new RandomAccessFile(mapsPath + String.format(MAP_FILE_NAME_FORMAT, id), "r");
+			final RandomAccessFile dataInf = new RandomAccessFile(mapsPath + String.format(INF_FILE_NAME_FORMAT, id), "r");
+			final RandomAccessFile dataMap = new RandomAccessFile(mapsPath + String.format(MAP_FILE_NAME_FORMAT, id), "r");
+		) {
 
 			bufInf = new byte[(int) dataInf.length()];
 			bufMap = new byte[(int) dataMap.length()];
 
 			dataInf.readFully(bufInf);
 			dataMap.readFully(bufMap);
-		} catch (IOException e) {
-			logger.error("Map " + id + " loading failed!", e);
+		} catch (final IOException e) {
+			LOGGER.error("Map " + id + " loading failed!", e);
 			throw new RuntimeException(e);
 		}
 
-		ByteBuffer infBuffer = ByteBuffer.wrap(bufInf);
-		ByteBuffer mapBuffer = ByteBuffer.wrap(bufMap);
+		final ByteBuffer infBuffer = ByteBuffer.wrap(bufInf);
+		final ByteBuffer mapBuffer = ByteBuffer.wrap(bufMap);
 
 		// The map files are written with Little Endian and the default byte order in Java is Big Endian.
 		infBuffer.order(ByteOrder.LITTLE_ENDIAN);
 		mapBuffer.order(ByteOrder.LITTLE_ENDIAN);
 
 		// Load the map header.
-		short mapVersion = mapBuffer.getShort();
+		final short mapVersion = mapBuffer.getShort();
 
-		byte[] description = new byte[255];
+		final byte[] description = new byte[255];
 		mapBuffer.get(description);
 
-		int crc = mapBuffer.getInt();
-		int magicWord = mapBuffer.getInt();
+		// Never actually implemented
+		@SuppressWarnings("unused")
+		final int crc = mapBuffer.getInt();
+		@SuppressWarnings("unused")
+		final int magicWord = mapBuffer.getInt();
 
 		// Unused header value.
 		mapBuffer.getLong();
@@ -136,8 +135,9 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 		infBuffer.getLong();
 		infBuffer.getShort();
 
-		Tile[] tiles = new Tile[WorldMap.MAP_HEIGHT * WorldMap.MAP_WIDTH];
+		final Tile[] tiles = new Tile[WorldMap.MAP_HEIGHT * WorldMap.MAP_WIDTH];
 
+		byte flag;
 		boolean blocked;
 		boolean isWater;
 		boolean isLava;
@@ -150,7 +150,6 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 		// Tiles enumeration starts at 1.
 		for (int y = WorldMap.MIN_Y; y <= WorldMap.MAX_Y; y++) {
 			for (int x = WorldMap.MIN_X; x <= WorldMap.MAX_X; x++) {
-
 				blocked = isWater = isLava = false;
 				trigger = Trigger.NONE;
 				tileExit = null;
@@ -201,7 +200,7 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 					try {
 						trigger = Trigger.get(triggerIndex);
 					} catch (ArrayIndexOutOfBoundsException e) {
-						logger.warn(String.format("The position (%d, %d, %d) has an invalid trigger: %d.", id, x, y, triggerIndex));
+						LOGGER.warn(String.format("The position (%d, %d, %d) has an invalid trigger: %d.", id, x, y, triggerIndex));
 						trigger = Trigger.NONE;
 					}
 				}
@@ -216,10 +215,10 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 					byte toY = (byte) infBuffer.getShort();
 
 
-					if (toMap < 1 || toMap > maps.length) {
-						logger.error(String.format("The position (%d, %d, %d) has an invalid tile exit to a non-existant map (%d). Omitting.", id, x, y, toMap));
+					if (toMap < 1 || toMap > mapsAmount) {
+						LOGGER.error(String.format("The position (%d, %d, %d) has an invalid tile exit to a non-existant map (%d). Omitting.", id, x, y, toMap));
 					} else {
-						tileExit = new Position(toX, toY, maps[toMap - 1]);
+						tileExit = new Position(toX, toY, toMap);
 					}
 				}
 
@@ -245,8 +244,7 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 		}
 
 		// Fill the map with the loaded data.
-		maps[id - 1].setTiles(tiles);
-		maps[id - 1].setVersion(mapVersion);
+		return new WorldMap(null, id, mapVersion, tiles);
 	}
 
 	/**
@@ -259,7 +257,7 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 		try {
 			props.load(new FileReader(configFile));
 		} catch (IOException e) {
-			logger .fatal("Error loading maps properties file(" + configFile + ")");
+			LOGGER .fatal("Error loading maps properties file(" + configFile + ")");
 			throw new RuntimeException(e);
 		}
 

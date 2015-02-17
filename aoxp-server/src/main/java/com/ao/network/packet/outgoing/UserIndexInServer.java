@@ -23,26 +23,27 @@ import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
 
 /**
- * Packet to tell the client his user index in the server. 
+ * Packet to tell the client his user index in the server.
  * @author Gonzalo Fernández Verón
  */
+// TODO : Is this packet needed at all? The user doesn't us the user index at all, and our server doesn't use user indexes anymore
 public class UserIndexInServer implements OutgoingPacket {
 
 	private short userIndex;
 
 	/**
 	 * Creates a new UserIndexInServer
-	 * @param userIndex The index to tell to the client.  
+	 * @param userIndex The index to tell to the client.
 	 */
-	public UserIndexInServer(short userIndex) {
+	public UserIndexInServer(final short userIndex) {
 		super();
-		this.userIndex = userIndex; 
+		this.userIndex = userIndex;
 
 	}
 
 	@Override
-	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
-		buffer.putShort(this.userIndex);
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
+		buffer.putShort(userIndex);
 	}
 
 }

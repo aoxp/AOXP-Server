@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -21,43 +21,25 @@ package com.ao.service.user;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ao.context.ApplicationContext;
-import com.ao.data.dao.UserCharacterDAO;
-import com.ao.data.dao.exception.DAOException;
-import com.ao.model.character.UserCharacter;
 import com.ao.model.user.ConnectedUser;
 import com.ao.service.UserService;
 
 public class UserServiceImpl implements UserService {
-	
-	private final UserCharacterDAO charDAO = ApplicationContext.getInstance(UserCharacterDAO.class);
-	
-	private Set<ConnectedUser> connectedUsers = new HashSet<ConnectedUser>();
-	
+
+	private final Set<ConnectedUser> connectedUsers = new HashSet<ConnectedUser>();
+
 	@Override
-	public boolean isLoggedIn(ConnectedUser user) {
+	public boolean isLoggedIn(final ConnectedUser user) {
 		return connectedUsers.contains(user);
 	}
 
 	@Override
-	public void logIn(ConnectedUser user) {
+	public void logIn(final ConnectedUser user) {
 		connectedUsers.add(user);
 	}
 
 	@Override
-	public void logOut(ConnectedUser user) {
+	public void logOut(final ConnectedUser user) {
 		connectedUsers.remove(user);
 	}
-
-	@Override
-	public UserCharacter getCharacter(String name) {
-		UserCharacter userCharacter;
-		try {
-			userCharacter = charDAO.load(name);
-		} catch (DAOException e) {
-			throw new RuntimeException(e);
-		}
-		return userCharacter;
-	}
-
 }

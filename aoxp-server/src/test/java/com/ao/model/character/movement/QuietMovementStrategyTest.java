@@ -25,8 +25,6 @@ import org.junit.Test;
 
 import com.ao.model.character.Character;
 import com.ao.model.map.Position;
-import com.ao.model.map.Tile;
-import com.ao.model.map.WorldMap;
 
 public class QuietMovementStrategyTest {
 
@@ -34,10 +32,8 @@ public class QuietMovementStrategyTest {
 
 	@Test
 	public void testMove() {
-		WorldMap map = new WorldMap("foo", 0, (short) 1, new Tile[0]);
-
-		Position pos = new Position((byte) 50, (byte) 50, map);
-		Position target = new Position((byte) 60, (byte) 60, map);
+		Position pos = new Position((byte) 50, (byte) 50, 1);
+		Position target = new Position((byte) 60, (byte) 60, 1);
 
 		movement.setTarget(target);
 

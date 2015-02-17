@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,8 +19,6 @@
 package com.ao.model.user;
 
 import java.util.Set;
-
-import com.ao.model.character.UserCharacter;
 
 public interface Account {
 
@@ -51,19 +49,12 @@ public interface Account {
 	 * @return True if the account is banned, false otherwise.
 	 */
 	boolean isBanned();
-	
+
 	/**
 	 * Sets the account's ban status.
 	 * @param banned Whether the account is banned, or not.
 	 */
 	void setBanned(boolean banned);
-
-	/**
-	 * Retrieves the character with the given name.
-	 * @param name The name of the character to be retrieved.
-	 * @return The requested character.
-	 */
-	UserCharacter getCharacter(String name);
 
 	/**
 	 * Try to authenticate the account with the given password.

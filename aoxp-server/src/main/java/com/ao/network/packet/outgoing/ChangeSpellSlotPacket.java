@@ -1,8 +1,9 @@
-package com.ao.network;
+package com.ao.network.packet.outgoing;
 
 import java.io.UnsupportedEncodingException;
 
 import com.ao.model.spell.Spell;
+import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
 
 /**
@@ -19,14 +20,14 @@ public class ChangeSpellSlotPacket implements OutgoingPacket {
 	 * @param spell The spell to set at the given position (may be null)
 	 * @param slot The slot at which to set the item.
 	 */
-	private ChangeSpellSlotPacket(Spell spell, byte slot) {
+	public ChangeSpellSlotPacket(final Spell spell, final byte slot) {
 		super();
 		this.spell = spell;
 		this.slot = slot;
 	}
 
 	@Override
-	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
 		buffer.put(slot);
 
 		if (spell == null) {
