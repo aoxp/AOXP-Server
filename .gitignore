@@ -1,8 +1,8 @@
 
 # Hidden files and target folders
-/*/target
-/*/.*
+target
+.*
 
 # maps
-/*/resources/Maps/*
+*/resources/Maps/*
 
