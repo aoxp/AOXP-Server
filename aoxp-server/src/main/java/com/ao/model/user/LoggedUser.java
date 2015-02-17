@@ -31,6 +31,7 @@ import com.ao.model.character.archetype.Archetype;
 import com.ao.model.inventory.Inventory;
 import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
+import com.ao.model.map.area.AreaInfo;
 import com.ao.model.spell.Spell;
 import com.ao.model.worldobject.Accessory;
 import com.ao.model.worldobject.Armor;
@@ -48,6 +49,8 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 
 	private static final int MAX_THIRSTINESS = 100;
 	private static final int MAX_HUNGER = 100;
+
+	private AreaInfo areaInfo;
 
 	private Reputation reputation;
 	private Inventory inventory; // TODO: need to be instanced in the
@@ -607,7 +610,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 	}
 
 	@Override
-	public int getCharIndex() {
+	public short getCharIndex() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -716,4 +719,8 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 		return false;
 	}
 
+	@Override
+	public AreaInfo getCurrentAreaInfo() {
+		return areaInfo;
+	}
 }

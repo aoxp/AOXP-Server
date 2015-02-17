@@ -66,4 +66,9 @@ public abstract class AbstractWorldObject implements WorldObject {
 	public WorldObjectType getObjectType() {
 		return properties.getType();
 	}
+
+	@Override
+	public boolean isFixed() {
+		return false;
+	}
 }

@@ -14,32 +14,34 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
+package com.ao.network.packet.outgoing;
 
-package com.ao.model.worldobject;
+import java.io.UnsupportedEncodingException;
 
-import com.ao.model.worldobject.properties.ForumProperties;
+import com.ao.model.map.Position;
+import com.ao.network.DataBuffer;
+import com.ao.network.packet.OutgoingPacket;
 
-public class Forum extends AbstractWorldObject {
+/**
+ * Tells the user that the visible area in the map changed.
+ * @author Juan Martín Sotuyo Dodero
+ */
+public class AreaChangedPacket implements OutgoingPacket {
+
+	private final Position pos;
 
 	/**
-	 * Creates a new Sign instance.
-	 * @param properties The object's properties.
+	 * Creates a new AreaChangedPacket.
+	 * @param pos The current position of the character.
 	 */
-	public Forum(ForumProperties properties) {
-		super(properties);
-	}
-
-	/**
-	 * Retrieves the forum's name.
-	 * @return The forum's name.
-	 */
-	public String getForumName() {
-		return ((ForumProperties) properties).getForumName();
+	public AreaChangedPacket(final Position pos) {
+		this.pos = pos;
 	}
 
 	@Override
-	public boolean isFixed() {
-		return true;
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
+		buffer.put(pos.getX());
+		buffer.put(pos.getY());
 	}
 }

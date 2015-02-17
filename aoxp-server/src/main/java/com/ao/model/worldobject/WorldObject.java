@@ -46,4 +46,10 @@ public interface WorldObject {
 	 * @return The object's type.
 	 */
 	WorldObjectType getObjectType();
+
+	/**
+	 * Checks whether the object is fixed in the map or not.
+	 * @return Whether the object is ixed in the map.
+	 */
+	boolean isFixed();
 }

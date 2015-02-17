@@ -15,37 +15,35 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.ao.network.packet.outgoing;
 
 import java.io.UnsupportedEncodingException;
 
-import com.ao.model.worldobject.WorldObject;
+import com.ao.model.character.Character;
 import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
 
-public class ObjectCreatePacket implements OutgoingPacket {
-	private final WorldObject object;
-	private final byte posX;
-	private final byte posY;
+/**
+ * Tells the user that a character is / is not visible.
+ * @author Juan Martín Sotuyo Dodero
+ */
+public class SetInvisiblePacket implements OutgoingPacket {
+	private final Character character;
+	private final boolean invisible;
 
 	/**
-	 * Creates an object.
-	 *
-     * @param object   The object.
-     * @param position The position.
-     */
-    public ObjectCreatePacket(final WorldObject object, final byte posX, final byte posY) {
-        this.object = object;
-        this.posX = posX;
-        this.posY = posY;
-    }
-
-    @Override
-	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
-        buffer.put(posX);
-        buffer.put(posY);
-        buffer.putShort((short) object.getGraphic());
+	 * Creates a new SetInvisiblePacket.
+	 * @param character The character being shown / hidden.
+	 * @param invisible True if the char is invisible, false otherwise
+	 */
+	public SetInvisiblePacket(final Character character, final boolean invisible) {
+		this.character = character;
+		this.invisible = invisible;
 	}
 
+	@Override
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
+		buffer.putShort(character.getCharIndex());
+		buffer.putBoolean(invisible);
+	}
 }

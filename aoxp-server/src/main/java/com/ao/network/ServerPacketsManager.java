@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.ao.network.packet.OutgoingPacket;
+import com.ao.network.packet.outgoing.AreaChangedPacket;
+import com.ao.network.packet.outgoing.BlockPositionPacket;
 import com.ao.network.packet.outgoing.ChangeMapPacket;
 import com.ao.network.packet.outgoing.ChangeSpellSlotPacket;
 import com.ao.network.packet.outgoing.CharacterCreatePacket;
@@ -34,6 +36,7 @@ import com.ao.network.packet.outgoing.ObjectCreatePacket;
 import com.ao.network.packet.outgoing.ParalizedPacket;
 import com.ao.network.packet.outgoing.PlayMidiPacket;
 import com.ao.network.packet.outgoing.PlayWavePacket;
+import com.ao.network.packet.outgoing.SetInvisiblePacket;
 import com.ao.network.packet.outgoing.UpdateDexterityPacket;
 import com.ao.network.packet.outgoing.UpdateStrengthAndDexterityPacket;
 import com.ao.network.packet.outgoing.UpdateStrengthPacket;
@@ -86,11 +89,11 @@ public class ServerPacketsManager {
 	    CHARACTER_CHANGE(null),
 	    OBJECT_CREATE(ObjectCreatePacket.class),
 	    OBJECT_DEETE(null),
-	    BLOCK_POSITION(null),
+	    BLOCK_POSITION(BlockPositionPacket.class),
 	    PLAY_MIDI(PlayMidiPacket.class),
 	    PLAY_WAVE(PlayWavePacket.class),
 	    GUILD_LIST(null),
-	    AREA_CHANGED(null),
+	    AREA_CHANGED(AreaChangedPacket.class),
 	    TOGGLE_PAUSE(null),
 	    TOGGLE_RAIN(null),
 	    CREATE_FX(null),
@@ -115,7 +118,7 @@ public class ServerPacketsManager {
 	    LEVEL_UP(null),
 	    ADD_FORUM_MESAGE(null),
 	    SHOW_FORUM_MESSAGE(null),
-	    SET_INVISIBLE(null),
+	    SET_INVISIBLE(SetInvisiblePacket.class),
 	    ROLL_DICE(DiceRollPacket.class),
 	    MEDITATE_TOGGLE(null),
 	    BLIND_NO_MORE(null),

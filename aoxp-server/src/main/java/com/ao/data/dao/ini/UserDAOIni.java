@@ -284,8 +284,8 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		chara.put(INIT_HEADER, HEAD_KEY, head);
 		chara.put(INIT_HEADER, BODY_KEY, body);
 
-		String positionKey = homeland.getMap() + "-" + homeland.getX() + "-" + homeland.getY();
-		chara.put(INIT_HEADER, POSITION_KEY, positionKey );
+		final String positionKey = homeland.getMap() + "-" + homeland.getX() + "-" + homeland.getY();
+		chara.put(INIT_HEADER, POSITION_KEY, positionKey);
 		// TODO: Save last ip?
 
 		chara.put(FLAGS_HEADER, BANNED_KEY, 0);

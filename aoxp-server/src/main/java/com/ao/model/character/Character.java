@@ -21,6 +21,7 @@ package com.ao.model.character;
 import com.ao.model.inventory.Inventory;
 import com.ao.model.map.Heading;
 import com.ao.model.map.Position;
+import com.ao.model.map.area.AreaInfo;
 import com.ao.model.spell.Spell;
 import com.ao.model.worldobject.Accessory;
 import com.ao.model.worldobject.Armor;
@@ -134,6 +135,12 @@ public interface Character {
 	 * @return The character's position.
 	 */
 	Position getPosition();
+
+	/**
+	 * Retrieves the character's current area info.
+	 * @return The character's area info.
+	 */
+	AreaInfo getCurrentAreaInfo();
 
 	/**
 	 * Uses the given item (must be in the character's inventory).
@@ -509,7 +516,7 @@ public interface Character {
 	 * Retrieves the character's index.
 	 * @return The character's index.
 	 */
-	int getCharIndex();
+	short getCharIndex();
 
 	/**
 	 * Sets the character's index.
