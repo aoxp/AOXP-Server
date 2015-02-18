@@ -90,6 +90,10 @@ public class AreaInfo {
 		}
 
 		// Update area data
+		updateAreaData();
+	}
+
+	private void updateAreaData() {
 		id = getAreaIdForPos(minX, minY);
 
 		final int bitX = minX / AREA_SIZE + 1;
@@ -99,6 +103,14 @@ public class AreaInfo {
 		final int bitY = minY / AREA_SIZE + 1;
 		receivesY = AREAS_RECEIVE[bitY];
 		belongsY = 1 << bitY;
+	}
+
+	public void setForPosition(final Position pos) {
+		minX = (pos.getX() / AREA_SIZE - 1) * 9;
+		minY = (pos.getY() / AREA_SIZE - 1) * 9;
+
+		// Update area data
+		updateAreaData();
 	}
 
 	public boolean isInSameArea(final Position position) {
