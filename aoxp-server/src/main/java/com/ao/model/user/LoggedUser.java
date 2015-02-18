@@ -19,6 +19,7 @@
 
 package com.ao.model.user;
 
+import com.ao.model.character.Attribute;
 import com.ao.model.character.Character;
 import com.ao.model.character.Fx;
 import com.ao.model.character.Gender;
@@ -46,10 +47,6 @@ import com.ao.model.worldobject.WorldObject;
  * Defines a logged user.
  */
 public class LoggedUser extends ConnectedUser implements UserCharacter {
-
-	private static final int MAX_THIRSTINESS = 100;
-	private static final int MAX_HUNGER = 100;
-
 	private AreaInfo areaInfo;
 
 	private Reputation reputation;
@@ -515,7 +512,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 	}
 
 	@Override
-	public void addToAgility(int points, int duration) {
+	public void addToDexterity(int points, int duration) {
 		// TODO Auto-generated method stub
 
 	}
@@ -722,5 +719,30 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 	@Override
 	public AreaInfo getCurrentAreaInfo() {
 		return areaInfo;
+	}
+
+	@Override
+	public byte getStrength() {
+		return getAttribute(Attribute.STRENGTH);
+	}
+
+	@Override
+	public byte getDexterity() {
+		return getAttribute(Attribute.DEXTERITY);
+	}
+
+	@Override
+	public byte getIntelligence() {
+		return getAttribute(Attribute.INTELLIGENCE);
+	}
+
+	@Override
+	public byte getCharisma() {
+		return getAttribute(Attribute.CHARISMA);
+	}
+
+	@Override
+	public byte getConstitution() {
+		return getAttribute(Attribute.CONSTITUTION);
 	}
 }

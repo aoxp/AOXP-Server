@@ -28,10 +28,10 @@ import com.ao.network.packet.OutgoingPacket;
  * @author mvanotti
  */
 public class UpdateHungerAndThirstPacket implements OutgoingPacket {
-	protected byte minHunger;
-	protected byte maxHunger;
-	protected byte minThirst;
-	protected byte maxThirst;
+	private final byte minHunger;
+	private final byte maxHunger;
+	private final byte minThirst;
+	private final byte maxThirst;
 
 
 	/**
@@ -42,17 +42,17 @@ public class UpdateHungerAndThirstPacket implements OutgoingPacket {
 	 * @param minThirst user's current thirst level
 	 * @param maxThirst user's total thirst
 	 */
-	public UpdateHungerAndThirstPacket(byte minHunger, byte maxHunger, byte minThirst, byte maxThirst) {
-		super();
-		this.minHunger = minHunger;
-		this.maxHunger = maxHunger;
-		this.minThirst = minThirst;
-		this.maxThirst = maxThirst;
+	public UpdateHungerAndThirstPacket(final int minHunger, final int maxHunger,
+			final int minThirst, final int maxThirst) {
+		this.minHunger = (byte) minHunger;
+		this.maxHunger = (byte) maxHunger;
+		this.minThirst = (byte) minThirst;
+		this.maxThirst = (byte) maxThirst;
 	}
-
 
 	@Override
 	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
+		// TODO : Is it really necessary to send the max values if they are constant?
 		buffer.put(maxThirst);
 		buffer.put(minThirst);
 		buffer.put(maxHunger);

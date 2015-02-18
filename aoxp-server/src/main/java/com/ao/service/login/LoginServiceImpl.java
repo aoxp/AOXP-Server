@@ -27,6 +27,7 @@ import com.ao.data.dao.exception.DAOException;
 import com.ao.data.dao.exception.NameAlreadyTakenException;
 import com.ao.model.builder.UserCharacterBuilder;
 import com.ao.model.character.Attribute;
+import com.ao.model.character.Character;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.UserCharacter;
@@ -40,6 +41,9 @@ import com.ao.network.Connection;
 import com.ao.network.packet.outgoing.ChangeInventorySlotPacket;
 import com.ao.network.packet.outgoing.ChangeSpellSlotPacket;
 import com.ao.network.packet.outgoing.ParalizedPacket;
+import com.ao.network.packet.outgoing.UpdateHungerAndThirstPacket;
+import com.ao.network.packet.outgoing.UpdateStrengthAndDexterityPacket;
+import com.ao.network.packet.outgoing.UpdateUserStatsPacket;
 import com.ao.security.SecurityManager;
 import com.ao.service.CharacterBodyService;
 import com.ao.service.LoginService;
@@ -118,7 +122,7 @@ public class LoginServiceImpl implements LoginService {
 
 		// TODO: Check to avoid mass characters creation for this IP
 
-		if (user.getAttribute(Attribute.AGILITY) == null) {
+		if (user.getAttribute(Attribute.DEXTERITY) == null) {
 			throw new LoginErrorException(MUST_THROW_DICES_BEFORE_ERROR);
 		}
 
@@ -188,7 +192,7 @@ public class LoginServiceImpl implements LoginService {
 			final UserCharacter chara = charDAO.create(user, username, race, gender,
 					archetype, head, homeland,
 					user.getAttribute(Attribute.STRENGTH),
-					user.getAttribute(Attribute.AGILITY),
+					user.getAttribute(Attribute.DEXTERITY),
 					user.getAttribute(Attribute.INTELLIGENCE),
 					user.getAttribute(Attribute.CHARISMA),
 					user.getAttribute(Attribute.CONSTITUTION),
@@ -215,9 +219,7 @@ public class LoginServiceImpl implements LoginService {
 
 		checkClient(clientHash, version);
 
-		if (config.isRestrictedToAdmins()) {
-			throw new LoginErrorException(ONLY_ADMINS_ERROR);
-		}
+		// TODO : Check for max users limit?
 
 		final Account acc;
 
@@ -247,8 +249,6 @@ public class LoginServiceImpl implements LoginService {
 
 		// TODO : Add ip to connected ips
 
-		// TODO : If user is a GM, log it to admin's log with it's ip.
-
 		// TODO : Do something with the account!!!
 		if (!acc.hasCharacter(name)) {
 			throw new LoginErrorException(CHARACTER_NOT_FOUND_ERROR);
@@ -260,6 +260,14 @@ public class LoginServiceImpl implements LoginService {
 		} catch (final DAOException e) {
 			throw new LoginErrorException(DAO_ERROR);
 		}
+
+		// TODO : If user is a GM, log it to admin's log with it's ip.
+
+		if (config.isRestrictedToAdmins() && !character.getPrivileges().isGameMaster()) {
+			throw new LoginErrorException(ONLY_ADMINS_ERROR);
+		}
+
+		// TODO : tell the client it's current resuscitation lock state
 
 		// Send initial state to client!
 		sendInitialState(user, character);
@@ -291,7 +299,9 @@ public class LoginServiceImpl implements LoginService {
 			connection.send(new ParalizedPacket());
 		}
 
-		// TODO : Check if map pos is valid, or find valid one
+		// TODO : Check if map pos is valid, or disconnect user if invalid map
+
+		// TODO : If position taken, find a suitable position
 
 		// TODO : Set sailing and use boat if in water (and has a boat)
 
@@ -299,12 +309,20 @@ public class LoginServiceImpl implements LoginService {
 
 		// TODO : Tell client to load map
 
-		// TODO : Tell client to play audio
+		// TODO : Tell client to play midi
+
+		// TODO : Initialize chat color
 
 		// TODO : Meter el char en el área (avisar a todos, darle items, npcs, usuarios, bloquear posiciones, etc.)
 
-		// TODO : Other
+		// TODO : Other (continue from TCP.bas line 1280-1288)
 
+		connection.send(new UpdateUserStatsPacket(character));
+		connection.send(new UpdateHungerAndThirstPacket(character.getHunger(),
+				Character.MAX_HUNGER, character.getThirstiness(), Character.MAX_THIRSTINESS));
+		connection.send(new UpdateStrengthAndDexterityPacket(character.getStrength(), character.getDexterity()));
+
+		// TODO : Other (continue from TCP.bas line 1296)
 	}
 
 	/**

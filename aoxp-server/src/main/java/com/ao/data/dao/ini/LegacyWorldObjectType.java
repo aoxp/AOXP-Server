@@ -21,7 +21,7 @@ public enum LegacyWorldObjectType {
 	SIGN(8, WorldObjectType.SIGN),
 	KEY(9, WorldObjectType.KEY),
 	FORUM(10, WorldObjectType.FORUM),
-	POTION(11, new HashSet<WorldObjectType>(Arrays.asList(new WorldObjectType[] { WorldObjectType.AGILITY_POTION, WorldObjectType.DEATH_POTION, WorldObjectType.HP_POTION, WorldObjectType.MANA_POTION, WorldObjectType.POISON_POTION, WorldObjectType.STRENGTH_POTION }))),
+	POTION(11, new HashSet<WorldObjectType>(Arrays.asList(new WorldObjectType[] { WorldObjectType.DEXTERITY_POTION, WorldObjectType.DEATH_POTION, WorldObjectType.HP_POTION, WorldObjectType.MANA_POTION, WorldObjectType.POISON_POTION, WorldObjectType.STRENGTH_POTION }))),
 	BOOK(12, new HashSet<WorldObjectType>(Arrays.asList(new WorldObjectType[] { WorldObjectType.PROP, WorldObjectType.GRABABLE_PROP }))),
 	DRINK(13, WorldObjectType.DRINK),
 	WOOD(14, WorldObjectType.WOOD),

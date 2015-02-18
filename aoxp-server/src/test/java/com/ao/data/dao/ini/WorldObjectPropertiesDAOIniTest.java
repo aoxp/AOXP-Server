@@ -77,7 +77,7 @@ public class WorldObjectPropertiesDAOIniTest {
 		// Check some items to make sure they loaded properly...
 		WorldObjectProperties yellowPotion = dao.getWorldObjectProperties(YELLOW_POTION_INDEX);
 		assertTrue(yellowPotion instanceof TemporalStatModifyingItemProperties);
-		assertEquals(WorldObjectType.AGILITY_POTION, yellowPotion.getType());
+		assertEquals(WorldObjectType.DEXTERITY_POTION, yellowPotion.getType());
 
 		WorldObjectProperties bluePotion = dao.getWorldObjectProperties(BLUE_POTION_INDEX);
 		assertTrue(bluePotion instanceof StatModifyingItemProperties);

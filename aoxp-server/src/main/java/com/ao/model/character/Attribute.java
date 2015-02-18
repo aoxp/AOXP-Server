@@ -23,7 +23,7 @@ package com.ao.model.character;
  */
 public enum Attribute {
 	STRENGTH,
-    AGILITY,
+    DEXTERITY,
     INTELLIGENCE,
     CHARISMA,
     CONSTITUTION

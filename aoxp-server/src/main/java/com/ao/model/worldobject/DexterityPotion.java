@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -22,18 +22,18 @@ import com.ao.model.character.Character;
 import com.ao.model.worldobject.properties.TemporalStatModifyingItemProperties;
 
 /**
- * A potion to increase agility.
+ * A potion to increase dexterity.
  */
-public class AgilityPotion extends ConsumableItem {
-	
+public class DexterityPotion extends ConsumableItem {
+
 	// TODO : Add timing for effect!!
-	
+
 	/**
-	 * Creates a new AgilityPotion instance.
+	 * Creates a new DexerityPotion instance.
 	 * @param properties The item's properties.
 	 * @param amount The item's amount.
 	 */
-	public AgilityPotion(TemporalStatModifyingItemProperties properties, int amount) {
+	public DexterityPotion(TemporalStatModifyingItemProperties properties, int amount) {
 		super(properties, amount);
 	}
 
@@ -43,7 +43,7 @@ public class AgilityPotion extends ConsumableItem {
 	 */
 	@Override
 	public Item clone() {
-		return new AgilityPotion((TemporalStatModifyingItemProperties) properties, amount);
+		return new DexterityPotion((TemporalStatModifyingItemProperties) properties, amount);
 	}
 
 	/*
@@ -53,13 +53,13 @@ public class AgilityPotion extends ConsumableItem {
 	@Override
 	public void use(Character character) {
 		super.use(character);
-		
+
 		int minModifier = ((TemporalStatModifyingItemProperties) properties).getMinModifier();
 		int maxModifier = ((TemporalStatModifyingItemProperties) properties).getMaxModifier();
 		int time = ((TemporalStatModifyingItemProperties) properties).getEffectDuration();
-		
-		// increase agility!
-		character.addToAgility((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier, time);
+
+		// increase dexterity!
+		character.addToDexterity((int) (Math.random() * (maxModifier - minModifier + 1)) + minModifier, time);
 	}
 
 	/**

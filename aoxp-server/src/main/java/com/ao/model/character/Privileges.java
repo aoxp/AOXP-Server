@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,23 +18,16 @@
 
 package com.ao.model.character;
 
+// FIXME : This should probably be just an enum with smart methods...
 public class Privileges {
-
-	public final int USER = 0x01;
-
-	public final int COUNSELOR = 0x02;
-
-	public final int DEMIGOD = 0x04;
-
-	public final int GOD = 0x08;
-
-	public final int ADMIN = 0x10;
-
-	public final int ROLE_MASTER = 0x20;
-
-	public final int CHAOS_COUNSELOR = 0x40;
-
-	public final int ROYAL_COUNSELOR = 0x80;
+	private final int USER = 0x01;
+	private final int COUNSELOR = 0x02;
+	private final int DEMIGOD = 0x04;
+	private final int GOD = 0x08;
+	private final int ADMIN = 0x10;
+	private final int ROLE_MASTER = 0x20;
+	private final int CHAOS_COUNSELOR = 0x40;
+	private final int ROYAL_COUNSELOR = 0x80;
 
 	private int privilegesFlags;
 
@@ -45,35 +38,39 @@ public class Privileges {
 	public boolean isUser() {
 		return ((privilegesFlags & USER) != 0);
 	}
-	
+
 	public boolean isCouncelor() {
 		return ((privilegesFlags & COUNSELOR) != 0);
 	}
-	
+
 	public boolean isDemigod() {
 		return ((privilegesFlags & DEMIGOD) != 0);
 	}
-	
+
 	public boolean isGod() {
 		return ((privilegesFlags & GOD) != 0);
 	}
-	
+
 	public boolean isAdmin() {
 		return ((privilegesFlags & ADMIN) != 0);
 	}
-	
+
 	public boolean isRoleMaster() {
 		return ((privilegesFlags & ROLE_MASTER) != 0);
 	}
-	
+
 	public boolean isChaosCounserlor() {
 		return ((privilegesFlags & CHAOS_COUNSELOR) != 0);
 	}
-	
+
 	public boolean isRoyalCounselor() {
 		return ((privilegesFlags & ROYAL_COUNSELOR) != 0);
 	}
-	
+
+	public boolean isGameMaster() {
+		return ((privilegesFlags & (ADMIN | GOD | DEMIGOD | COUNSELOR)) != 0);
+	}
+
 	public int getPrivilegesFlags() {
 		return privilegesFlags;
 	}

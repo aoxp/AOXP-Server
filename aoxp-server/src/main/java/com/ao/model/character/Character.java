@@ -33,6 +33,9 @@ import com.ao.model.worldobject.Weapon;
 import com.ao.model.worldobject.WorldObject;
 
 public interface Character {
+	// FIXME : I fon't like these being here...
+	public static final int MAX_THIRSTINESS = 100;
+	public static final int MAX_HUNGER = 100;
 
 	/**
 	 * Retrieves the character's hit points.
@@ -373,11 +376,11 @@ public interface Character {
 	Spell[] getSpells();
 
 	/**
-	 * Adds (or subtracts if the given number is negative) points to the character's agility.
+	 * Adds (or subtracts if the given number is negative) points to the character's dexterity.
 	 * @param points	The points to add.
 	 * @param duration		The time for which the effect is valid.
 	 */
-	void addToAgility(int points, int duration);
+	void addToDexterity(int points, int duration);
 
 	/**
 	 * Adds (or subtracts if the given number is negative) points to the character's strength.

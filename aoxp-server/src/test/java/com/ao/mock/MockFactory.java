@@ -89,7 +89,7 @@ public class MockFactory {
 	public static ConnectedUser mockConnectedUser() {
 		ConnectedUser user = EasyMock.createMock(ConnectedUser.class);
 
-		EasyMock.expect(user.getAttribute(Attribute.AGILITY)).andReturn((byte) 18).anyTimes();
+		EasyMock.expect(user.getAttribute(Attribute.DEXTERITY)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.CHARISMA)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.CONSTITUTION)).andReturn((byte) 18).anyTimes();
 		EasyMock.expect(user.getAttribute(Attribute.INTELLIGENCE)).andReturn((byte) 18).anyTimes();

@@ -50,7 +50,7 @@ public interface UserCharacterDAO {
 	 * @param head	 					The character's head.
 	 * @param homeland 					The character's homeland.
 	 * @param strength					The character's strength attribute.
-	 * @param agility					The character's agility attribute.
+	 * @param dexterity					The character's dexterity attribute.
 	 * @param intelligence				The character's intelligence attribute.
 	 * @param charisma					The character's charisma attribute.
 	 * @param constitution				The character's constitution attribute.
@@ -60,7 +60,7 @@ public interface UserCharacterDAO {
 	 */
 	UserCharacter create(ConnectedUser user, String name, Race race, Gender gender,
 			UserArchetype archetype, int head, City homeland, byte strength,
-			byte agility, byte intelligence, byte charisma, byte constitution,
+			byte dexterity, byte intelligence, byte charisma, byte constitution,
 			int initialAvailableSkills, int body)
 			throws DAOException, NameAlreadyTakenException;
 

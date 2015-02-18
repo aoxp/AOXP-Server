@@ -38,8 +38,10 @@ import com.ao.network.packet.outgoing.PlayMidiPacket;
 import com.ao.network.packet.outgoing.PlayWavePacket;
 import com.ao.network.packet.outgoing.SetInvisiblePacket;
 import com.ao.network.packet.outgoing.UpdateDexterityPacket;
+import com.ao.network.packet.outgoing.UpdateHungerAndThirstPacket;
 import com.ao.network.packet.outgoing.UpdateStrengthAndDexterityPacket;
 import com.ao.network.packet.outgoing.UpdateStrengthPacket;
+import com.ao.network.packet.outgoing.UpdateUserStatsPacket;
 import com.ao.network.packet.outgoing.UserCharacterIndexInServerPacket;
 import com.ao.network.packet.outgoing.UserIndexInServer;
 
@@ -97,7 +99,7 @@ public class ServerPacketsManager {
 	    TOGGLE_PAUSE(null),
 	    TOGGLE_RAIN(null),
 	    CREATE_FX(null),
-	    UPDATE_USER_STATS(null),
+	    UPDATE_USER_STATS(UpdateUserStatsPacket.class),
 	    WORK_REQUEST_TARGET(null),
 	    CHANGE_INVENTORY_SLOT(null),
 	    CHANGE_BANK_SLOT(null),
@@ -112,7 +114,7 @@ public class ServerPacketsManager {
 	    DUMB(null),
 	    SHOW_SIGNAL(null),
 	    CHANGE_NPC_INVENTORY_SLOT(null),
-	    UPDATE_HUNGER_AND_THRIST(null),
+	    UPDATE_HUNGER_AND_THRIST(UpdateHungerAndThirstPacket.class),
 	    FAME(null),
 	    MINI_STATS(null),
 	    LEVEL_UP(null),

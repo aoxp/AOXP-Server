@@ -267,7 +267,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	@Override
 	public UserCharacter create(final ConnectedUser user, final String name, final Race race, final Gender gender,
 			final UserArchetype archetype, final int head, final City homeland, final byte strength,
-			final byte agility, final byte intelligence, final byte charisma, final byte constitution,
+			final byte dexterity, final byte intelligence, final byte charisma, final byte constitution,
 			final int initialAvailableSkills, final int body)
 			throws DAOException, NameAlreadyTakenException {
 		final Ini chara = new Ini();
@@ -318,7 +318,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		chara.put(FACTIONS_HEADER, NEXT_REWARD_KEY, 0);
 
 		chara.put(ATTRIBUTES_HEADER, String.format(ATTRIBUTE_FORMAT_KEY,Attribute.STRENGTH.ordinal() + 1), strength);
-		chara.put(ATTRIBUTES_HEADER, String.format(ATTRIBUTE_FORMAT_KEY, Attribute.AGILITY.ordinal() + 1), agility);
+		chara.put(ATTRIBUTES_HEADER, String.format(ATTRIBUTE_FORMAT_KEY, Attribute.DEXTERITY.ordinal() + 1), dexterity);
 		chara.put(ATTRIBUTES_HEADER, String.format(ATTRIBUTE_FORMAT_KEY, Attribute.CHARISMA.ordinal() + 1), charisma);
 		chara.put(ATTRIBUTES_HEADER, String.format(ATTRIBUTE_FORMAT_KEY, Attribute.CONSTITUTION.ordinal() + 1), constitution);
 		chara.put(ATTRIBUTES_HEADER, String.format(ATTRIBUTE_FORMAT_KEY, Attribute.INTELLIGENCE.ordinal() + 1), intelligence);

@@ -29,16 +29,14 @@ import com.ao.network.packet.OutgoingPacket;
 // TODO : Is this packet needed at all? The user doesn't us the user index at all, and our server doesn't use user indexes anymore
 public class UserIndexInServer implements OutgoingPacket {
 
-	private short userIndex;
+	private final short userIndex;
 
 	/**
 	 * Creates a new UserIndexInServer
 	 * @param userIndex The index to tell to the client.
 	 */
 	public UserIndexInServer(final short userIndex) {
-		super();
 		this.userIndex = userIndex;
-
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import java.util.HashMap;
 
 import com.ao.model.worldobject.AbstractItem;
 import com.ao.model.worldobject.Accessory;
-import com.ao.model.worldobject.AgilityPotion;
+import com.ao.model.worldobject.DexterityPotion;
 import com.ao.model.worldobject.Ammunition;
 import com.ao.model.worldobject.Armor;
 import com.ao.model.worldobject.Backpack;
@@ -72,7 +72,7 @@ public class WorldObjectFactory {
 		worldObjectMapper = new HashMap<WorldObjectType, Class<? extends WorldObject>>();
 
 		worldObjectMapper.put(WorldObjectType.ACCESSORY, Accessory.class);
-		worldObjectMapper.put(WorldObjectType.AGILITY_POTION, AgilityPotion.class);
+		worldObjectMapper.put(WorldObjectType.DEXTERITY_POTION, DexterityPotion.class);
 		worldObjectMapper.put(WorldObjectType.AMMUNITION, Ammunition.class);
 //		worldObjectMapper.put(WorldObjectType.ANVIL, Anvil.class);
 		worldObjectMapper.put(WorldObjectType.ARMOR, Armor.class);

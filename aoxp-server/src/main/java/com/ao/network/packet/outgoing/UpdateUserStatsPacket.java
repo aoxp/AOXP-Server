@@ -20,20 +20,19 @@ package com.ao.network.packet.outgoing;
 
 import java.io.UnsupportedEncodingException;
 
-import com.ao.model.user.LoggedUser;
+import com.ao.model.character.UserCharacter;
 import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
 
 public class UpdateUserStatsPacket implements OutgoingPacket {
+	private final UserCharacter user;
 
-	private LoggedUser user;
-	
-	UpdateUserStatsPacket(LoggedUser user) {
+	public UpdateUserStatsPacket(final UserCharacter user) {
 		this.user = user;
 	}
-	
+
 	@Override
-	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
         buffer.putShort((short) user.getMaxHitPoints());
         buffer.putShort((short) user.getHitPoints());
         buffer.putShort((short) user.getMaxMana());
@@ -41,7 +40,7 @@ public class UpdateUserStatsPacket implements OutgoingPacket {
         buffer.putShort((short) user.getMaxStamina());
         buffer.putShort((short) user.getStamina());
         buffer.putInt(user.getMoney());
-        buffer.put((byte) user.getLevel());
+        buffer.put(user.getLevel());
         buffer.putInt(user.getExperienceForLeveUp());
         buffer.putInt(user.getExperience());
 	}

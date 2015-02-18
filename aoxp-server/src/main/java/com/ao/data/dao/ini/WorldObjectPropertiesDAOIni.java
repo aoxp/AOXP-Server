@@ -643,8 +643,8 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		// Strength potion?
 		if (potionType == PotionType.STRENGTH) {
 			return new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier, effectTime);
-		} else if (potionType == PotionType.AGILITY) { 	// Agility potion?
-			return new TemporalStatModifyingItemProperties(WorldObjectType.AGILITY_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier, effectTime);
+		} else if (potionType == PotionType.DEXTERITY) { 	// dexterity potion?
+			return new TemporalStatModifyingItemProperties(WorldObjectType.DEXTERITY_POTION, id, name, graphic, value, forbiddenArchetypes, forbiddenRaces, newbie, noLog, falls, respawneable, minModifier, maxModifier, effectTime);
 		}
 
 		// This should never happen...
@@ -1760,7 +1760,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	 * Legacy potion types. They are separate object types nowadays.
 	 */
 	private enum PotionType {
-		AGILITY(1),
+		DEXTERITY(1),
 		STRENGTH(2),
 		HP(3),
 		MANA(4),
