@@ -2,6 +2,7 @@
 # Hidden files and target folders
 target
 .*
+!.travis.yml
 
 # maps
 */resources/Maps/*
