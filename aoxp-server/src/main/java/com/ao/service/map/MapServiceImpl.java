@@ -40,10 +40,10 @@ public class MapServiceImpl extends ActionExecutor<MapService>
 	private final CityDAO citiesDAO;
 	private City[] cities;
 
-	private AreaServiceImpl areaService;
+	private AreaService areaService;
 
 	@Inject
-	public MapServiceImpl(final WorldMapDAO mapsDAO, final CityDAO citiesDAO, final AreaServiceImpl areaService) {
+	public MapServiceImpl(final WorldMapDAO mapsDAO, final CityDAO citiesDAO, final AreaService areaService) {
 		this.mapsDAO = mapsDAO;
 		this.citiesDAO = citiesDAO;
 		this.areaService = areaService;

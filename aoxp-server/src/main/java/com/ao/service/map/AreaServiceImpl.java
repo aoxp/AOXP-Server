@@ -25,7 +25,7 @@ import com.ao.network.packet.outgoing.SetInvisiblePacket;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class AreaServiceImpl {
+public class AreaServiceImpl implements AreaService {
 	/*
 	 * For a better understanding of areas, please refer to
 	 * https://github.com/aoxp/AOXP-Server/wiki/Areas-for-dummies
@@ -44,6 +44,10 @@ public class AreaServiceImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ao.service.map.AreaService#checkIfUserNeedsUpdate(com.ao.model.map.WorldMap, com.ao.model.character.Character, com.ao.model.map.Heading)
+	 */
+	@Override
 	public void checkIfUserNeedsUpdate(final WorldMap map, final Character character, final Heading heading) {
 		final AreaInfo areaInfo = character.getCurrentAreaInfo();
 
@@ -177,6 +181,10 @@ public class AreaServiceImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ao.service.map.AreaService#addCharToMap(com.ao.model.map.WorldMap, com.ao.model.character.Character)
+	 */
+	@Override
 	public void addCharToMap(final WorldMap map, final Character character) {
 		final AreaInfo areaInfo = character.getCurrentAreaInfo();
 		areaInfo.setForPosition(character.getPosition());
@@ -197,6 +205,10 @@ public class AreaServiceImpl {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.ao.service.map.AreaService#removeUserFromMap(com.ao.model.map.WorldMap, com.ao.model.user.LoggedUser)
+	 */
+	@Override
 	public void removeUserFromMap(final WorldMap map, final LoggedUser user) {
 		connectionGroups.get(map.getId() - 1).remove(user);
 	}

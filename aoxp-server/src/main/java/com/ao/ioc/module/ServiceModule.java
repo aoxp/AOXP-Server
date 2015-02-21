@@ -31,6 +31,8 @@ import com.ao.service.TimedEventsService;
 import com.ao.service.UserService;
 import com.ao.service.WorldObjectService;
 import com.ao.service.login.LoginServiceImpl;
+import com.ao.service.map.AreaService;
+import com.ao.service.map.AreaServiceImpl;
 import com.ao.service.map.MapServiceImpl;
 import com.ao.service.timedevents.TimedEventsServiceImpl;
 import com.ao.service.user.UserServiceImpl;
@@ -56,6 +58,7 @@ public class ServiceModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(LoginService.class).to(LoginServiceImpl.class).in(Singleton.class);
+		bind(AreaService.class).to(AreaServiceImpl.class).in(Singleton.class);
 		bind(MapService.class).to(MapServiceImpl.class).in(Singleton.class);
 		bind(TimedEventsService.class).to(TimedEventsServiceImpl.class).in(Singleton.class);
 		bind(WorldObjectService.class).to(WorldObjectServiceImpl.class).in(Singleton.class);
