@@ -18,13 +18,14 @@
 
 package com.ao.service.worldobject;
 
+import javax.inject.Inject;
+
 import com.ao.data.dao.WorldObjectPropertiesDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.model.worldobject.WorldObject;
 import com.ao.model.worldobject.factory.WorldObjectFactory;
 import com.ao.model.worldobject.factory.WorldObjectFactoryException;
 import com.ao.service.WorldObjectService;
-import com.google.inject.Inject;
 
 /**
  * Default implementation of WorldObjectService.

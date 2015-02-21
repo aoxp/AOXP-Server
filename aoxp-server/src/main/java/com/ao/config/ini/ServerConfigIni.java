@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -21,11 +21,12 @@ package com.ao.config.ini;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.ini4j.Ini;
 
 import com.ao.config.ServerConfig;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * General server configuration, backed by a INI file.
@@ -40,14 +41,14 @@ public class ServerConfigIni implements ServerConfig {
 	private static final String VERSION_KEY = "Version";
 	private static final String CHARACTER_CREATION_KEY = "PuedeCrearPersonajes";
 	private static final String RESTRICTED_TO_ADMINS_KEY = "ServerSoloGMs";
-	
+
 	private static final String HASHES_HEADER = "MD5Hush";
 	private static final String HASHES_ACTIVATED_KEY = "Activado";
 	private static final String HASHES_AMOUNT_KEY = "MD5Aceptados";
 	private static final String HASHES_ACCEPTED_KEY_FORMAT = "Md5Aceptado%d";
-	
+
 	private Ini config;
-	
+
 	/**
 	 * Creates a new ServerConfigIni instance.
 	 * @throws IOException
@@ -56,7 +57,7 @@ public class ServerConfigIni implements ServerConfig {
 	public ServerConfigIni(@Named("ServerConfigIni") String serverConfigIni) throws IOException {
 		config = new Ini(new FileInputStream(serverConfigIni));
 	}
-	
+
 	@Override
 	public int getListeningBacklog() {
 		String backlog = config.get(INIT_HEADER, BACKLOG_KEY);
@@ -78,7 +79,7 @@ public class ServerConfigIni implements ServerConfig {
 	public String getVersion() {
 		return config.get(INIT_HEADER, VERSION_KEY);
 	}
-	
+
 	@Override
 	public boolean isCharacterCreationEnabled() {
 		return config.get(INIT_HEADER, CHARACTER_CREATION_KEY).equals("1");
@@ -88,7 +89,7 @@ public class ServerConfigIni implements ServerConfig {
 	public void setCharacterCreationEnabled(boolean enabled) {
 		config.put(INIT_HEADER, CHARACTER_CREATION_KEY, enabled ? "1" : "0");
 	}
-	
+
 	@Override
 	public boolean isRestrictedToAdmins() {
 		return config.get(INIT_HEADER, RESTRICTED_TO_ADMINS_KEY).equals("1");

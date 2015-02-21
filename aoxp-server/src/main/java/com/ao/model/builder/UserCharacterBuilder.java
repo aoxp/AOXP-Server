@@ -18,6 +18,7 @@
 package com.ao.model.builder;
 
 import java.util.Map;
+import java.util.Objects;
 
 import javax.management.InvalidAttributeValueException;
 
@@ -35,7 +36,6 @@ import com.ao.model.user.ConnectedUser;
 import com.ao.model.user.Guild;
 import com.ao.model.user.LoggedUser;
 import com.ao.service.ValidatorService;
-import com.google.inject.internal.Preconditions;
 
 /**
  *
@@ -86,16 +86,13 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 
 
 	public UserCharacterBuilder withCity(City homeland) {
-		Preconditions.checkNotNull(homeland);
-		this.homeland = homeland;
+		this.homeland = Objects.requireNonNull(homeland);
 
 		return this;
 	}
 
 	public UserCharacterBuilder withRace(Race race){
-		Preconditions.checkNotNull(race);
-
-		this.race = race;
+		this.race = Objects.requireNonNull(race);
 
 		return this;
 	}
@@ -164,7 +161,9 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 
 	public UserCharacterBuilder withDescription(String description) {
-		Preconditions.checkArgument(ValidatorService.validCharacterName(name));
+		if (!ValidatorService.validCharacterName(name)) {
+			throw new IllegalArgumentException();
+		}
 
 		this.description = description;
 		return this;
@@ -172,60 +171,64 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 
 	public UserCharacterBuilder withGender(Gender gender)  {
-		Preconditions.checkNotNull(gender);
-		this.gender = gender;
+		this.gender = Objects.requireNonNull(gender);
 
 		return this;
 	}
 
 
 	public UserCharacterBuilder withName(String name) {
-		Preconditions.checkArgument(ValidatorService.validCharacterName(name), INVALID_NAME_ERROR);
+		if (!ValidatorService.validCharacterName(name)) {
+			throw new IllegalArgumentException(INVALID_NAME_ERROR);
+		}
 
 		this.name = name;
 		return this;
 	}
 
 	public UserCharacterBuilder withEmail(String email) {
-		Preconditions.checkArgument(ValidatorService.validEmail(email), INVALID_EMAIL_ERROR);
+		if (!ValidatorService.validEmail(email)) {
+			throw new IllegalArgumentException(INVALID_EMAIL_ERROR);
+		}
 
 		this.email = email;
 		return this;
 	}
 
 	public UserCharacterBuilder withArchetype(UserArchetype archetype) {
-		Preconditions.checkNotNull(archetype);
-
-		this.archetype = archetype;
+		this.archetype = Objects.requireNonNull(archetype);
 
 		return this;
 	}
 
 	public UserCharacterBuilder withHead(int head) {
-		Preconditions.checkArgument(head >= 0);
+		if (head < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.head = head;
-
 
 		return this;
 	}
 
 	public UserCharacterBuilder withBody(int body) {
-		Preconditions.checkArgument(body >= 0);
+		if (body < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.body = body;
 
 		return this;
 	}
 
 	public UserCharacterBuilder withConnectedUser(ConnectedUser user) {
-		Preconditions.checkNotNull(user);
-		this.user = user;
+		this.user = Objects.requireNonNull(user);
 
 		return this;
 	}
 
-
 	public UserCharacterBuilder withHp(int minHp, int maxHp) {
-		Preconditions.checkArgument(maxHp > 0 && minHp >= 0);
+		if (maxHp < 0 || minHp > maxHp) {
+			throw new IllegalArgumentException();
+		}
 
 		this.minHp = minHp;
 		this.maxHp = maxHp;
@@ -234,7 +237,9 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 
 	public UserCharacterBuilder withMana(int minMana, int maxMana) {
-		Preconditions.checkArgument(maxMana > 0 && minMana >= 0 );
+		if (maxMana < 0 || minMana > maxMana) {
+			throw new IllegalArgumentException();
+		}
 
 		this.minMana = minMana;
 		this.maxMana = maxMana;
@@ -243,10 +248,10 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 
 	public UserCharacterBuilder withSkills(Map<Skill, Byte> skills) throws InvalidAttributeValueException {
-		Preconditions.checkContentsNotNull(skills.values());
-
 		for (Skill skill : Skill.VALUES) {
-			if (!skills.containsKey(skill)) {
+			if (skills.containsKey(skill)) {
+				Objects.requireNonNull(skills.get(skill));
+			} else {
 				throw new InvalidAttributeValueException();
 			}
 		}
@@ -269,9 +274,7 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 
 	public UserCharacterBuilder withInventory(Inventory inventory) {
-		Preconditions.checkNotNull(inventory);
-
-		this.inventory = inventory;
+		this.inventory = Objects.requireNonNull(inventory);
 
 		return this;
 	}
@@ -289,17 +292,13 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	}
 
 	public UserCharacterBuilder withReputation(Reputation reputation) {
-		Preconditions.checkNotNull(reputation);
-
-		this.reputation = reputation;
+		this.reputation = Objects.requireNonNull(reputation);
 
 		return this;
 	}
 
 	public UserCharacterBuilder withPosition(Position position) {
-		Preconditions.checkNotNull(position);
-
-		this.position = position;
+		this.position = Objects.requireNonNull(position);
 
 		return this;
 
@@ -308,28 +307,28 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 
 	@Override
 	public UserCharacter build() {
-		Preconditions.checkNotNull(user);
-		Preconditions.checkNotNull(maxHp);
-		Preconditions.checkNotNull(minHp);
-		Preconditions.checkNotNull(maxMana);
-		Preconditions.checkNotNull(minMana);
-		Preconditions.checkNotNull(name);
-		Preconditions.checkNotNull(email);
-		Preconditions.checkNotNull(race);
-		Preconditions.checkNotNull(gender);
-		Preconditions.checkNotNull(user);
-		Preconditions.checkNotNull(homeland);
-		Preconditions.checkNotNull(archetype);
-		Preconditions.checkNotNull(head);
-		Preconditions.checkNotNull(body);
-		Preconditions.checkNotNull(skills);
-		Preconditions.checkNotNull(description);
-		Preconditions.checkNotNull(guild);
-		Preconditions.checkNotNull(exp);
-		Preconditions.checkNotNull(inventory);
-		Preconditions.checkNotNull(spells);
-		Preconditions.checkNotNull(reputation);
-		Preconditions.checkNotNull(position);
+		Objects.requireNonNull(user);
+		Objects.requireNonNull(maxHp);
+		Objects.requireNonNull(minHp);
+		Objects.requireNonNull(maxMana);
+		Objects.requireNonNull(minMana);
+		Objects.requireNonNull(name);
+		Objects.requireNonNull(email);
+		Objects.requireNonNull(race);
+		Objects.requireNonNull(gender);
+		Objects.requireNonNull(user);
+		Objects.requireNonNull(homeland);
+		Objects.requireNonNull(archetype);
+		Objects.requireNonNull(head);
+		Objects.requireNonNull(body);
+		Objects.requireNonNull(skills);
+		Objects.requireNonNull(description);
+		Objects.requireNonNull(guild);
+		Objects.requireNonNull(exp);
+		Objects.requireNonNull(inventory);
+		Objects.requireNonNull(spells);
+		Objects.requireNonNull(reputation);
+		Objects.requireNonNull(position);
 
 		LoggedUser loggedUser = new LoggedUser(user, reputation, race, gender, archetype.getArchetype(), poisoned,
 				paralyzed, immobilized, mimetized, invisible, dumbed, hidden, maxMana, minMana, maxHp, minHp,

@@ -19,6 +19,9 @@
 
 package com.ao.service.login;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.ao.action.worldmap.MakeUserCharAction;
 import com.ao.config.ServerConfig;
 import com.ao.context.ApplicationContext;
@@ -50,8 +53,6 @@ import com.ao.service.CharacterBodyService;
 import com.ao.service.LoginService;
 import com.ao.service.MapService;
 import com.ao.service.UserService;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * Default implementation of the login service. An account is the exact same as

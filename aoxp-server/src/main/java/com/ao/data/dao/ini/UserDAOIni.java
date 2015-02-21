@@ -30,6 +30,9 @@ import java.io.Writer;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 
@@ -53,8 +56,6 @@ import com.ao.model.user.Account;
 import com.ao.model.user.AccountImpl;
 import com.ao.model.user.ConnectedUser;
 import com.ao.model.user.LoggedUser;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 

@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.ao.model.character.Character;
 import com.ao.model.character.NPCCharacter;
 import com.ao.model.character.UserCharacter;
@@ -22,8 +25,6 @@ import com.ao.network.packet.outgoing.BlockPositionPacket;
 import com.ao.network.packet.outgoing.CharacterCreatePacket;
 import com.ao.network.packet.outgoing.ObjectCreatePacket;
 import com.ao.network.packet.outgoing.SetInvisiblePacket;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 public class AreaServiceImpl implements AreaService {
 	/*

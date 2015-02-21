@@ -26,6 +26,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
@@ -61,8 +64,6 @@ import com.ao.model.worldobject.properties.WoodProperties;
 import com.ao.model.worldobject.properties.WorldObjectProperties;
 import com.ao.model.worldobject.properties.manufacture.Manufacturable;
 import com.ao.model.worldobject.properties.manufacture.ManufactureType;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 /**
  * Ini-backed implementation of the World Object DAO.

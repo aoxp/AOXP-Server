@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -20,13 +20,14 @@ package com.ao.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 public class CharacterBodyServiceImpl implements CharacterBodyService {
-	
+
 	private int darkElfMaleBody;
 	private int darkElfFemaleBody;
 	private int dwarfMaleBody;
@@ -38,7 +39,7 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 	private int humanMaleBody;
 	private int humanFemaleBody;
 
-	
+
 	private List<Integer> headsDarkelfMale;
 	private List<Integer> headsDarkelfFemale;
 	private List<Integer> headsDwarfMale;
@@ -49,18 +50,18 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 	private List<Integer> headsGnomeFemale;
 	private List<Integer> headsHumanMale;
 	private List<Integer> headsHumanFemale;
-	
+
 	@Inject
 	public CharacterBodyServiceImpl(@Named("headsDarkelfMale") List<Integer> headsDarkelfMale,
 			@Named("headsDarkelfFemale")  List<Integer> headsDarkelfFemale,
 			@Named("headsDwarfMale") List<Integer> headsDwarfMale,
-			@Named("headsDwarfFemale")  List<Integer> headsDwarfFemale, 
-			@Named("headsElfMale") List<Integer> headsElfMale, 
+			@Named("headsDwarfFemale")  List<Integer> headsDwarfFemale,
+			@Named("headsElfMale") List<Integer> headsElfMale,
 			@Named("headsElfFemale") List<Integer> headsElfFemale,
-			@Named("headsGnomeMale")  List<Integer> headsGnomeMale, 
+			@Named("headsGnomeMale")  List<Integer> headsGnomeMale,
 			@Named("headsGnomeFemale") List<Integer> headsGnomeFemale,
 			@Named("headsHumanMale") List<Integer> headsHumanMale,
-			@Named("headsHumanFemale")  List<Integer> headsHumanFemale, 
+			@Named("headsHumanFemale")  List<Integer> headsHumanFemale,
 			@Named("darkElfMaleBody")  int darkElfMaleBody,
 			@Named("darkElfFemaleBody")  int darkElfFemaleBody,
 			@Named("dwarfMaleBody")  int dwarfMaleBody,
@@ -82,7 +83,7 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 		this.headsGnomeFemale = headsGnomeFemale;
 		this.headsHumanMale = headsHumanMale;
 		this.headsHumanFemale = headsHumanFemale;
-		
+
 		this.darkElfMaleBody = darkElfMaleBody;
 		this.darkElfFemaleBody = darkElfFemaleBody ;
 		this.dwarfMaleBody = dwarfMaleBody;
@@ -93,15 +94,15 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 		this.gnomeFemaleBody = gnomeFemaleBody;
 		this.humanMaleBody = humanMaleBody;
 		this.humanFemaleBody = humanFemaleBody;
-		
+
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.ao.service.CharacterBodyService#isValidHead(int, com.ao.model.character.Race, com.ao.model.character.Gender)
 	 */
 	@Override
 	public boolean isValidHead(int head, Race race, Gender gender){
-		
+
 		switch (race) {
 			case DARK_ELF:
 				if (gender == Gender.MALE) {
@@ -109,45 +110,45 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 				} else {
 					return headsDarkelfFemale.contains(head);
 				}
-			
+
 			case DWARF:
 				if (gender == Gender.MALE) {
 					return headsDwarfMale.contains(head);
 				} else {
 					return headsDwarfFemale.contains(head);
 				}
-			
+
 			case ELF:
 				if (gender == Gender.MALE) {
 					return headsElfMale.contains(head);
 				} else {
 					return headsElfFemale.contains(head);
 				}
-				
+
 			case GNOME:
 				if (gender == Gender.MALE) {
 					return headsGnomeMale.contains(head);
 				} else {
 					return headsGnomeFemale.contains(head);
 				}
-				
+
 			case HUMAN:
 				if (gender == Gender.MALE){
 					return headsHumanMale.contains(head);
 				} else {
 					return headsHumanFemale.contains(head);
 				}
-	
+
 			default:
 				break;
 		}
-		
+
 		return false;
 	}
-	
+
 	@Override
 	public int getBody(Race race, Gender gender) {
-		
+
 		int body = 0;
 
 		switch (race) {
@@ -158,7 +159,7 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 					body = darkElfFemaleBody;
 				}
 				break;
-				
+
 			case DWARF:
 				if (gender == Gender.MALE) {
 					body = dwarfMaleBody;
@@ -166,7 +167,7 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 					body = dwarfFemaleBody;
 				}
 				break;
-				
+
 			case ELF:
 				if (gender == Gender.MALE) {
 					body = elfMaleBody;
@@ -174,7 +175,7 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 					body = elfFemaleBody;
 				}
 				break;
-				
+
 			case GNOME:
 				if (gender == Gender.MALE) {
 					body = gnomeMaleBody;
@@ -182,7 +183,7 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 					body = gnomeFemaleBody;
 				}
 				break;
-				
+
 			case HUMAN:
 				if (gender == Gender.MALE){
 					body = humanMaleBody;
@@ -190,11 +191,11 @@ public class CharacterBodyServiceImpl implements CharacterBodyService {
 					body = humanFemaleBody;
 				}
 				break;
-				
+
 			default:
 				break;
 		}
-	
+
 		return body;
 	}
 }

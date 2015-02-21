@@ -27,6 +27,9 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.apache.log4j.Logger;
 
 import com.ao.data.dao.WorldMapDAO;
@@ -35,8 +38,6 @@ import com.ao.model.map.Tile;
 import com.ao.model.map.Trigger;
 import com.ao.model.map.WorldMap;
 import com.ao.utils.RangeParser;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 public class WorldMapDAOImpl implements WorldMapDAO {
 
