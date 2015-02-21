@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -17,33 +17,33 @@
 */
 
 package com.ao.context;
-
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * General properties for the application.
  */
 public class ApplicationProperties {
 
-	private static final Logger logger = Logger.getLogger(ApplicationProperties.class);
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationProperties.class);
+
 	private static Properties properties = new Properties();
-	
+
 	static {
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		
+		final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+
 		// Load global.properties
 		try {
-			Properties globalProperties = new Properties();
+			final Properties globalProperties = new Properties();
 			globalProperties.load(loader.getResourceAsStream("global.properties"));
 			System.getProperties().putAll(globalProperties);
-		} catch (Exception e) {
-			logger.fatal("Error global loading application properties", e);
-			e.printStackTrace();
+		} catch (final Exception e) {
+			LOGGER.error("Error global loading application properties", e);
 		}
-		
+
 		loadProperties("project.properties");
 	}
 
@@ -59,19 +59,17 @@ public class ApplicationProperties {
 	 * Loads all properties from the given file. It's automatically searched as a resource.
 	 * @param fileName The name of the file from which to load properties.
 	 */
-	public static void loadProperties(String fileName) {
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();
-		
-		Properties props = new Properties();
-		
+	public static void loadProperties(final String fileName) {
+		final ClassLoader loader = Thread.currentThread().getContextClassLoader();
+		final Properties props = new Properties();
+
 		// Load project.properties
 		try {
 			props.load(loader.getResourceAsStream(fileName));
-		} catch (Exception e) {
-			logger.fatal("Error loading " + fileName + " properties file.", e);
-			e.printStackTrace();
+		} catch (final Exception e) {
+			LOGGER.error("Error loading {} properties file.", fileName, e);
 		}
-		
+
 		properties.putAll(props);
 	}
 }

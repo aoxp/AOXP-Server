@@ -24,9 +24,10 @@ import java.io.Reader;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ao.data.dao.CityDAO;
 import com.ao.model.map.City;
@@ -37,7 +38,7 @@ import com.ao.model.map.City;
  */
 public class CityDAOIni implements CityDAO {
 
-	private static final Logger logger = Logger.getLogger(CityDAOIni.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(CityDAOIni.class);
 
 	private static final String INIT_HEADER = "INIT";
 	private static final String NUM_CITIES_KEY = "NumCities";
@@ -72,7 +73,7 @@ public class CityDAOIni implements CityDAO {
 			iniFile = new Ini(reader);
 			reader.close();
 		} catch (Exception e) {
-			logger.error("Cities loading failed!", e);
+			LOGGER.error("Cities loading failed!", e);
 			throw new RuntimeException(e);
 		}
 

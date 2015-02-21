@@ -23,7 +23,8 @@ import java.net.Inet4Address;
 import java.net.InetSocketAddress;
 import java.util.Timer;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ao.config.ServerConfig;
 import com.ao.context.ApplicationContext;
@@ -37,23 +38,24 @@ import com.ao.service.WorldObjectService;
  */
 public class Bootstrap {
 
-	private static final Logger logger = Logger.getLogger(Bootstrap.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(Bootstrap.class);
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		AOXPServer server = null;
+		final AOXPServer server;
 
 		try {
 			server = Bootstrap.bootstrap();
-		} catch (Exception e) {
-			logger.fatal("Server bootstraping failed!", e);
+		} catch (final Exception e) {
+			LOGGER.error("Server bootstraping failed!", e);
 
 			System.exit(-1);
+			return;
 		}
 
-		logger.info("AOXP Server ready. Enjoy it!");
+		LOGGER.info("AOXP Server ready. Enjoy it!");
 		server.run();
 	}
 
@@ -69,12 +71,12 @@ public class Bootstrap {
 
 		long timeMillis = System.currentTimeMillis();
 
-		logger.info("Initializing AOXP Server...");
+		LOGGER.info("Initializing AOXP Server...");
 		loadApplicationContext(server);
 		startTimers(server);
 		configureNetworking(server);
 
-		logger.info("AOXP Server initialized. Took " + (System.currentTimeMillis() - timeMillis) + "ms.");
+		LOGGER.info("AOXP Server initialized. Took " + (System.currentTimeMillis() - timeMillis) + "ms.");
 
 		return server;
 	}
@@ -87,7 +89,7 @@ public class Bootstrap {
 	private static void configureNetworking(AOXPServer server) throws IOException {
 		byte[] addr = {0,0,0,0};
 
-		logger.info("Initializing server socket configuration...");
+		LOGGER.info("Initializing server socket configuration...");
 		ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
 		InetSocketAddress endpoint = new InetSocketAddress(Inet4Address.getByAddress(addr), config.getServerListeningPort());
 		server.setListeningAddr(endpoint);
@@ -100,7 +102,7 @@ public class Bootstrap {
 	 */
 	private static void startTimers(AOXPServer server) {
 
-		logger.info("Starting up game timers...");
+		LOGGER.info("Starting up game timers...");
 
 		Timer timer = new Timer(true);
 
@@ -113,20 +115,20 @@ public class Bootstrap {
 	 */
 	private static void loadApplicationContext(AOXPServer server) throws DAOException {
 
-		logger.info("Loading application context...");
+		LOGGER.info("Loading application context...");
 
-		logger.info("Loading maps...");
+		LOGGER.info("Loading maps...");
 		MapService mapService = ApplicationContext.getInstance(MapService.class);
 		mapService.loadMaps();
 
-		logger.info("Loading cities...");
+		LOGGER.info("Loading cities...");
 		mapService.loadCities();
 
-		logger.info("Loading world objects...");
+		LOGGER.info("Loading world objects...");
 		WorldObjectService objectService = ApplicationContext.getInstance(WorldObjectService.class);
 		objectService.loadObjects();
 
-		logger.info("Loading NPCs...");
+		LOGGER.info("Loading NPCs...");
 		NPCService npcService = ApplicationContext.getInstance(NPCService.class);
 		npcService.loadNPCs();
 

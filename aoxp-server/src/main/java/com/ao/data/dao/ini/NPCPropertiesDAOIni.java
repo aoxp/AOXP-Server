@@ -32,9 +32,10 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ao.data.dao.NPCCharacterPropertiesDAO;
 import com.ao.data.dao.WorldObjectPropertiesDAO;
@@ -74,7 +75,7 @@ import com.ao.model.worldobject.properties.WorldObjectProperties;
  */
 public class NPCPropertiesDAOIni implements NPCCharacterPropertiesDAO {
 
-	private static final Logger logger = Logger.getLogger(NPCPropertiesDAOIni.class);
+	private static final Logger logger = LoggerFactory.getLogger(NPCPropertiesDAOIni.class);
 
 	private static final int MAX_SOUNDS = 3;
 

@@ -30,7 +30,8 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ao.data.dao.WorldMapDAO;
 import com.ao.model.map.Position;
@@ -41,7 +42,7 @@ import com.ao.utils.RangeParser;
 
 public class WorldMapDAOImpl implements WorldMapDAO {
 
-	private final static Logger LOGGER = Logger.getLogger(WorldMapDAOImpl.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(WorldMapDAOImpl.class);
 
 	private static final String MAP_FILE_NAME_FORMAT = "Mapa%d.map";
 	private static final String INF_FILE_NAME_FORMAT = "Mapa%d.inf";
@@ -252,13 +253,13 @@ public class WorldMapDAOImpl implements WorldMapDAO {
 	 * Loads the maps configuration from the given file.
 	 * @param configFile The file path to the config file.
 	 */
-	private void loadMapsConfig(String configFile) {
-		Properties props = new Properties();
+	private void loadMapsConfig(final String configFile) {
+		final Properties props = new Properties();
 
 		try {
 			props.load(new FileReader(configFile));
-		} catch (IOException e) {
-			LOGGER .fatal("Error loading maps properties file(" + configFile + ")");
+		} catch (final IOException e) {
+			LOGGER.error("Error loading maps properties file({})", configFile);
 			throw new RuntimeException(e);
 		}
 

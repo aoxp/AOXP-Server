@@ -64,7 +64,7 @@
   </build>
 
   <properties>
-    <log4j.version>1.2.16</log4j.version>
+    <logback.version>1.1.2</logback.version>
     <junit.version>4.12</junit.version>
     <ini4j.version>0.5.4</ini4j.version>
     <guice.version>3.0</guice.version>
@@ -83,9 +83,14 @@
         <version>${javax.inject.version}</version>
       </dependency>
       <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>${log4j.version}</version>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
       </dependency>
       <dependency>
         <groupId>junit</groupId>

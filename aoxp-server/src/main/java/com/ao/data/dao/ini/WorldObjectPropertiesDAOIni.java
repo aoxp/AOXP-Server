@@ -29,9 +29,10 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 import org.ini4j.Profile.Section;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ao.data.dao.WorldObjectPropertiesDAO;
 import com.ao.data.dao.exception.DAOException;
@@ -70,7 +71,7 @@ import com.ao.model.worldobject.properties.manufacture.ManufactureType;
  */
 public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 
-	private static final Logger logger = Logger.getLogger(WorldObjectPropertiesDAOIni.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WorldObjectPropertiesDAOIni.class);
 
 	private static final int MAX_SOUNDS = 3;
 
@@ -216,7 +217,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 	public void loadAll() throws DAOException {
 		Ini iniFile;
 
-		logger.info("Loading all world object properties from ini file.");
+		LOGGER.info("Loading all world object properties from ini file.");
 
 		// Reset manufacturables
 		manufacturables = new HashMap<Integer, Manufacturable>();
@@ -227,7 +228,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			iniFile = new Ini(reader);
 			reader.close();
 		} catch (Exception e) {
-			logger.error("World Object loading failed!", e);
+			LOGGER.error("World Object loading failed!", e);
 			throw new DAOException(e);
 		}
 
@@ -362,7 +363,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 
 			default:
-				logger.error("Unexpected object type found: " + objectType);
+				LOGGER.error("Unexpected object type found: " + objectType);
 		}
 
 		// Check if the item is manufacturable
@@ -370,7 +371,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 			try {
 				manufacturables.put(obj.getId(), loadManufacturable(section, obj));
 			} catch (DAOException e) {
-				logger.error("Item " + id + " seems like manufacturable, but it's not!");
+				LOGGER.error("Item " + id + " seems like manufacturable, but it's not!");
 			}
 		}
 
@@ -506,7 +507,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 				break;
 
 			default:
-				logger.error("Unexpected resource source of type " + type.name());
+				LOGGER.error("Unexpected resource source of type " + type.name());
 		}
 
 		return new ResourceSourceProperties(type, id, name, graphic, resourceId, resourceSourceType);
@@ -649,7 +650,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		}
 
 		// This should never happen...
-		logger.error("Parsed a potion with an unmatched potion type: " + potionType.name());
+		LOGGER.error("Parsed a potion with an unmatched potion type: " + potionType.name());
 		return null;
 	}
 
@@ -924,7 +925,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 		DoorProperties otherObjectProperties = null;
 
 		if (openObjectId == 0 || closedObjectId == 0) {
-			logger.error("Invalid door definition for id " + id + ". Ids for open and closed states are required.");
+			LOGGER.error("Invalid door definition for id " + id + ". Ids for open and closed states are required.");
 			return null;
 		}
 
@@ -1086,7 +1087,7 @@ public class WorldObjectPropertiesDAOIni implements WorldObjectPropertiesDAO {
 					forbiddenArchetypes.add(archetypesByName.get(data));
 				} else {
 					// This shouldn't happen!!!
-					logger.error("Unexpected forbidden class loading object: " + data);
+					LOGGER.error("Unexpected forbidden class loading object: " + data);
 				}
 			}
 		}

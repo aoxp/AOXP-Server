@@ -33,8 +33,9 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.log4j.Logger;
 import org.ini4j.Ini;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.ao.data.dao.AccountDAO;
 import com.ao.data.dao.UserCharacterDAO;
@@ -193,7 +194,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 	protected static final String NO_ENLISTMENT_KEY_MESSAGE = "No ingresó a ninguna facción";
 	protected static final int INITIAL_NOBLE_POINTS = 1000;
 
-	private static final Logger logger = Logger.getLogger(UserDAOIni.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserDAOIni.class);
 
 	private String charfilesPath;
 
@@ -244,7 +245,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			// Make sure the writer is closed, since Ini4j gives no guarantees.
 			writer.close();
 		} catch (IOException e) {
-			logger.error("Charfile (account data) creation failed!", e);
+			LOGGER.error("Charfile (account data) creation failed!", e);
 			throw new DAOException(e);
 		}
 
@@ -262,7 +263,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		boolean success = charfile.delete();
 
 		if (!success) {
-			logger.error(String.format("Character (%s) deletion failed", name));
+			LOGGER.error(String.format("Character (%s) deletion failed", name));
 		}
 	}
 
@@ -378,7 +379,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			// Make sure the stream is closed, since Ini4J gives no guarantees.
 			writer.close();
 		} catch (IOException e) {
-			logger.error("Charfile (full charfile) creation failed!", e);
+			LOGGER.error("Charfile (full charfile) creation failed!", e);
 			throw new DAOException(e);
 		}
 
@@ -473,7 +474,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 			return null;
 
 		} catch (IOException e) {
-			logger.error("Charfile loading failed!", e);
+			LOGGER.error("Charfile loading failed!", e);
 			throw new DAOException(e);
 		}
 
