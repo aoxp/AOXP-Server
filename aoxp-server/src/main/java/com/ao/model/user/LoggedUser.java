@@ -372,7 +372,28 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 
 	@Override
 	public String getName() {
-		return name;
+		// TODO : If we shouldn't show the name (.showName is False), return an empty string
+
+		final StringBuilder builder = new StringBuilder(name);
+
+		// TODO : Translate this code from VB
+//        If .flags.EnConsulta Then
+//	        UserName = UserName & " " & TAG_CONSULT_MODE
+//	    Else
+//	        If UserList(sndIndex).flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.RoleMaster) Then
+//	            If LenB(ClanTag) <> 0 Then _
+//	                UserName = UserName & " <" & ClanTag & ">"
+//	        Else
+//	            If (.flags.invisible Or .flags.Oculto) And (Not .flags.AdminInvisible = 1) Then
+//	                UserName = UserName & " " & TAG_USER_INVISIBLE
+//	            Else
+//	                If LenB(ClanTag) <> 0 Then _
+//	                    UserName = UserName & " <" & ClanTag & ">"
+//	            End If
+//	        End If
+//	    End If
+
+		return builder.toString();
 	}
 
 	@Override

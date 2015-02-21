@@ -19,6 +19,7 @@ import com.ao.model.worldobject.WorldObject;
 import com.ao.network.Connection;
 import com.ao.network.packet.outgoing.AreaChangedPacket;
 import com.ao.network.packet.outgoing.BlockPositionPacket;
+import com.ao.network.packet.outgoing.CharacterCreatePacket;
 import com.ao.network.packet.outgoing.ObjectCreatePacket;
 import com.ao.network.packet.outgoing.SetInvisiblePacket;
 import com.google.inject.Inject;
@@ -131,15 +132,14 @@ public class AreaServiceImpl {
 				final WorldObject worldObject = tile.getWorldObject();
 
 				if (tileCharacter != null) {
-					if (tileCharacter != user) {	// Same instance, we can use ==
-						// TODO : It would be awesome if MakeUserChar could handle this transparently
+					if (tileCharacter != user) { // Same instance, we can use ==
 						// If it's not an invisible admin, we tell the new user
 						if (!tileCharacter.isAdminHidden()) {
-							// TODO : MakeUserChar
+							userConnection.send(new CharacterCreatePacket(tileCharacter));
 
 							// FIXME : Move this logic away!
 							if (!tileCharacter.isSailing() && (tileCharacter.isInvisible() || tileCharacter.isHidden())) {
-								// If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.RoleMaster) Then
+								// TODO : If .flags.Privilegios And (PlayerType.User Or PlayerType.Consejero Or PlayerType.RoleMaster) Then
 								userConnection.send(new SetInvisiblePacket(tileCharacter, true));
 								// End If
 							}
@@ -148,17 +148,16 @@ public class AreaServiceImpl {
 						// If our moving user is not admin hidden, notify the other user
 						if (tileCharacter instanceof UserCharacter) {
 							if (!user.isAdminHidden()) {
-								// TODO : MakeUserChar
+								final Connection otherUserConnection = ((LoggedUser) tileCharacter).getConnection();
+								otherUserConnection.send(new CharacterCreatePacket(user));
 
 								// FIXME : Move this logic away!
 								if (!user.isSailing() && (user.isInvisible() || user.isHidden())) {
 									// If UserList(TempInt).flags.Privilegios And PlayerType.User Then
-									((LoggedUser) tileCharacter).getConnection().send(new SetInvisiblePacket(user, true));
+									otherUserConnection.send(new SetInvisiblePacket(user, true));
 									// End If
 								}
 							}
-						} else {
-							// TODO : MakeNPCChar
 						}
 					}
 				}
@@ -191,7 +190,7 @@ public class AreaServiceImpl {
 
 			connectionGroups.get(map.getId() - 1).add(user);
 			// Tell the user he is in the map
-			// TODO : MakeUserChar(False, UserIndex, UserIndex, Map, X, Y)
+			user.getConnection().send(new CharacterCreatePacket(character));
 			userEnteredRegion(map, areaInfo.getMinX(), areaInfo.getMinY(), maxX, maxY, user);
 		} else {
 			npcEnteredRegion(map, areaInfo.getMinX(), areaInfo.getMinY(), maxX, maxY, (NPCCharacter) character);

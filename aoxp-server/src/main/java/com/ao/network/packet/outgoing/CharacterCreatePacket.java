@@ -19,26 +19,27 @@
 package com.ao.network.packet.outgoing;
 
 import java.io.UnsupportedEncodingException;
+
 import com.ao.model.character.Character;
 import com.ao.network.DataBuffer;
 import com.ao.network.packet.OutgoingPacket;
 
 public class CharacterCreatePacket implements OutgoingPacket {
 
-	private Character character;
+	private final Character character;
 
 	/**
 	 * Create character packages
-	 * 
+	 *
 	 * @param character The character
 	 */
-	public CharacterCreatePacket(Character character) {
+	public CharacterCreatePacket(final Character character) {
 		this.character = character;
 	}
 
 	@Override
-	public void write(DataBuffer buffer) throws UnsupportedEncodingException {
-		buffer.putShort((short) character.getCharIndex());
+	public void write(final DataBuffer buffer) throws UnsupportedEncodingException {
+		buffer.putShort(character.getCharIndex());
 		buffer.putShort((short) character.getBody());
 		buffer.putShort((short) character.getHead());
 		buffer.put((byte) character.getHeading().ordinal());
@@ -53,5 +54,4 @@ public class CharacterCreatePacket implements OutgoingPacket {
 		buffer.put((byte) character.getNickColor());
 		buffer.put((byte) character.getPrivileges().getPrivilegesFlags());
 	}
-
 }

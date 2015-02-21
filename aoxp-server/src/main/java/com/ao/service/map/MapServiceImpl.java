@@ -40,10 +40,13 @@ public class MapServiceImpl extends ActionExecutor<MapService>
 	private final CityDAO citiesDAO;
 	private City[] cities;
 
+	private AreaServiceImpl areaService;
+
 	@Inject
-	public MapServiceImpl(final WorldMapDAO mapsDAO, final CityDAO citiesDAO) {
+	public MapServiceImpl(final WorldMapDAO mapsDAO, final CityDAO citiesDAO, final AreaServiceImpl areaService) {
 		this.mapsDAO = mapsDAO;
 		this.citiesDAO = citiesDAO;
+		this.areaService = areaService;
 	}
 
 	@Override
@@ -83,8 +86,9 @@ public class MapServiceImpl extends ActionExecutor<MapService>
 
 	@Override
 	public void putCharacterAtPos(final Character chara, final Position pos) {
-		// TODO Auto-generated method stub
-
+		final WorldMap map = getMap(pos.getMap());
+		map.putCharacterAtPos(chara,pos.getX(), pos.getY());
+		areaService.addCharToMap(map, chara);
 	}
 
 	@Override

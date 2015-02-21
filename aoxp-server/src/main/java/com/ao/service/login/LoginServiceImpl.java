@@ -19,6 +19,7 @@
 
 package com.ao.service.login;
 
+import com.ao.action.worldmap.MakeUserCharAction;
 import com.ao.config.ServerConfig;
 import com.ao.context.ApplicationContext;
 import com.ao.data.dao.AccountDAO;
@@ -313,10 +314,13 @@ public class LoginServiceImpl implements LoginService {
 
 		// TODO : Initialize chat color
 
-		// TODO : Meter el char en el área (avisar a todos, darle items, npcs, usuarios, bloquear posiciones, etc.)
+		// TODO : We want to take this as fat down as possible in this method...
+		// Add the user to the map, notify everyone on area, and let the player know it's surroundings
+		new MakeUserCharAction(character, character.getPosition()).dispatch();
 
 		// TODO : Other (continue from TCP.bas line 1280-1288)
 
+		// TODO : these lines can be moved further up, but I want to be sure other TODOs don't mess with that...
 		connection.send(new UpdateUserStatsPacket(character));
 		connection.send(new UpdateHungerAndThirstPacket(character.getHunger(),
 				Character.MAX_HUNGER, character.getThirstiness(), Character.MAX_THIRSTINESS));
