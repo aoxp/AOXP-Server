@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <!-- Monits' open source pom has great defaults, and is ept updated -->
+    <groupId>com.monits</groupId>
+    <artifactId>java-pom</artifactId>
+    <version>2.0-SNAPSHOT</version>
+  </parent>
   <groupId>com.ao</groupId>
   <artifactId>aoxp</artifactId>
   <packaging>pom</packaging>
@@ -16,25 +22,21 @@
     <url>https://github.com/aoxp/AOXP-Server/issues</url>
   </issueManagement>
 
+  <repositories>
+    <repository>
+      <id>monits-snapshots</id>
+      <url>http://nexus.monits.com/content/repositories/oss-snapshots/</url>
+      <name>Monits Snapshots</name>
+    </repository>
+    <repository>
+      <id>monits-releases</id>
+      <url>http://nexus.monits.com/content/repositories/oss-releases/</url>
+      <name>Monits Releases</name>
+    </repository>
+  </repositories>
+
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.3</version>
-        <configuration>
-          <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.0.2</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -56,36 +58,7 @@
     </plugins>
   </build>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.7</version>
-        <configuration>
-          <show>private</show>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>javadoc</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-        <inherited>true</inherited>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.1</version>
-        <inherited>true</inherited>
-      </plugin>
-    </plugins>
-  </reporting>
-
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     <log4j.version>1.2.16</log4j.version>
     <junit.version>4.8.1</junit.version>
     <ini4j.version>0.5.1</ini4j.version>
