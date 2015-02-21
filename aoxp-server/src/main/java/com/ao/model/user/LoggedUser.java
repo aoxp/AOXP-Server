@@ -97,12 +97,13 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 	private String name;
 	private String description;
 
+	// TODO : Prohibit building this class without a builder (Effective Java, item 2)
 	public LoggedUser(final ConnectedUser user, final Reputation reputation,
 			final Race race, final Gender gender, final Archetype archetype,
 			final boolean poisoned, final boolean paralyzed,
 			final boolean immobilized, final boolean invisible,
-			final boolean dumbed, final boolean hidden, final int maxMana,
-			final int minMana, final int maxHp, final int minHp,
+			final boolean mimetized, final boolean dumbed, final boolean hidden,
+			final int maxMana, final int minMana, final int maxHp, final int minHp,
 			final int maxThirstiness, final int minThirstiness,
 			final int maxHunger, final int minHunger, final byte lvl,
 			final String name, final String description) {
@@ -115,6 +116,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 		this.paralyzed = paralyzed;
 		this.immobilized = immobilized;
 		this.invisible = invisible;
+		this.mimetized = mimetized;
 		this.dumbed = dumbed;
 		this.hidden = hidden;
 		this.maxMana = maxMana;
@@ -594,7 +596,7 @@ public class LoggedUser extends ConnectedUser implements UserCharacter {
 	@Override
 	public Privileges getPrivileges() {
 		// TODO Auto-generated method stub
-		return null;
+		return new Privileges(1);
 	}
 
 	@Override

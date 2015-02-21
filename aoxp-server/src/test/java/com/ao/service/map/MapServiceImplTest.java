@@ -38,7 +38,7 @@ public class MapServiceImplTest {
 		EasyMock.expect(dao.retrieveAll()).andReturn(null).once();
 		EasyMock.replay(dao);
 
-		MapService service = new MapServiceImpl(dao, cityDao);
+		MapService service = new MapServiceImpl(dao, cityDao, new AreaServiceImpl(1));
 		service.loadMaps();
 
 		EasyMock.verify(dao);
@@ -55,7 +55,7 @@ public class MapServiceImplTest {
 		EasyMock.expect(dao.retrieveAll()).andReturn(new WorldMap[] {map}).once();
 		EasyMock.replay(dao);
 
-		MapService service = new MapServiceImpl(dao,cityDao);
+		MapService service = new MapServiceImpl(dao,cityDao, new AreaServiceImpl(1));
 		service.loadMaps();
 
 		Assert.assertSame(map, service.getMap(mapId));

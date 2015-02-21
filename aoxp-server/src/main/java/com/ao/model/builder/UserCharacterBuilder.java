@@ -68,6 +68,7 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 	protected boolean dumbed = false;
 	protected String description;
 	protected boolean hidden = false;
+	protected boolean mimetized = false;
 	protected boolean immobilized = false;
 	protected boolean invisible = false;
 	protected byte lvl = 1;
@@ -135,6 +136,11 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 		return this;
 	}
 
+	public UserCharacterBuilder withMimetized(boolean mimetized) {
+		this.mimetized = mimetized;
+
+		return this;
+	}
 
 	public UserCharacterBuilder withLvl(byte lvl) {
 		this.lvl = lvl;
@@ -326,7 +332,7 @@ public class UserCharacterBuilder implements Builder<UserCharacter> {
 		Preconditions.checkNotNull(position);
 
 		LoggedUser loggedUser = new LoggedUser(user, reputation, race, gender, archetype.getArchetype(), poisoned,
-				paralyzed, immobilized, invisible, dumbed, hidden, maxMana, minMana, maxHp, minHp,
+				paralyzed, immobilized, mimetized, invisible, dumbed, hidden, maxMana, minMana, maxHp, minHp,
 				maxThirstiness, minThirstiness, maxHunger, minHunger, lvl, name, description);
 
 		//TODO: Set everything!

@@ -38,6 +38,7 @@ import com.ao.data.dao.UserCharacterDAO;
 import com.ao.data.dao.exception.DAOException;
 import com.ao.data.dao.exception.NameAlreadyTakenException;
 import com.ao.model.character.Attribute;
+import com.ao.model.character.Character;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.Reputation;
@@ -382,8 +383,8 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 
 		// TODO: Update this when hp, mana and hit points get updated!
 		return new LoggedUser(user, rep, race, gender, archetype.getArchetype(),
-				false, false, false, false, false, false, 0, 0, 0, 0,
-				100, 0, 100, 0, (byte) 1, name, "");
+				false, false, false, false, false, false, false, 0, 0, 0, 0,
+				Character.MAX_THIRSTINESS, 0, Character.MAX_HUNGER, 0, (byte) 1, name, "");
 	}
 
 	@Override
@@ -413,7 +414,7 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		int bourgeoisPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, BOURGEOIS_POINTS_KEY));
 		int thiefPoints = Integer.parseInt(chara.get(REPUTATION_HEADER, THIEF_POINTS_KEY));
 		int noblePoints = Integer.parseInt(chara.get(REPUTATION_HEADER, NOBLE_POINTS_KEY));
-		boolean belongsToFaction = chara.get(REPUTATION_HEADER, BELONGS_TO_CHAOS_KEY).equals("1") || chara.get(REPUTATION_HEADER, BELONGS_TO_ARMY_KEY).equals("1");
+		boolean belongsToFaction = "1".equals(chara.get(REPUTATION_HEADER, BELONGS_TO_CHAOS_KEY)) || "1".equals(chara.get(REPUTATION_HEADER, BELONGS_TO_ARMY_KEY));
 
 		Reputation reputation = new ReputationImpl(assassinPoints, banditPoints, bourgeoisPoints, thiefPoints, noblePoints,
 				belongsToFaction);
@@ -443,17 +444,19 @@ public class UserDAOIni implements AccountDAO, UserCharacterDAO {
 		int maxHitPoints = Integer.parseInt(chara.get(STATS_HEADER, MAX_HIT_KEY));
 		int mana = Integer.parseInt(chara.get(STATS_HEADER, MIN_MANA_KEY));
 		int hitpoints = Integer.parseInt(chara.get(STATS_HEADER, MIN_HIT_KEY));
+		int maxThirstiness = Integer.parseInt(chara.get(STATS_HEADER, MAX_THIRSTINESS_KEY));
 		int thirstiness = Integer.parseInt(chara.get(STATS_HEADER, MIN_THIRSTINESS_KEY));
-		int hunger = Integer.parseInt(chara.get(STATS_HEADER, MIN_THIRSTINESS_KEY));
+		int maxHunger = Integer.parseInt(chara.get(STATS_HEADER, MAX_HUNGER_KEY));
+		int hunger = Integer.parseInt(chara.get(STATS_HEADER, MIN_HUNGER_KEY));
 		byte lvl = Byte.parseByte(chara.get(STATS_HEADER, LEVEL_KEY));
 
 		// TODO : Complete description
 		String description = "";
 
 		// TODO : Validate character
-		/* UserCharacter userCharacter = new LoggedUser(reputation, race, gender, archetype, poisoned, paralyzed, immobilized, invisible, mimetized, dumbed, hidden, maxMana, maxHitPoints, mana, hitpoints, thirstiness, hunger, lvl, username, description); */
+		final UserCharacter userCharacter = new LoggedUser(user, reputation, race, gender, archetype, poisoned, paralyzed, immobilized, invisible, mimetized, dumbed, hidden, maxMana, mana, maxHitPoints, hitpoints, maxThirstiness, thirstiness, maxHunger, hunger, lvl, username, description);
 
-		return null;
+		return userCharacter;
 	}
 
 	private Ini readCharFile(String username) throws DAOException {
