@@ -49,13 +49,13 @@ public class InventoryImpl implements Inventory {
 	 * @see com.ao.model.inventory.Inventory#addItem(ao.model.worldobject.Item)
 	 */
 	@Override
-	public int addItem(Item item) {
+	public int addItem(final Item item) {
 		int i;
 
 		if ((i = hasItem(item)) != -1) {
 			int amount = item.getAmount();
 			int newAmount, oldAmount;
-			int id = item.getId();
+			final int id = item.getId();
 
 			// Stack the item to previous slots
 			for (; i < inventory.length; i++) {

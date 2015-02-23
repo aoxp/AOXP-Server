@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -32,19 +32,19 @@ import com.ao.model.worldobject.properties.ItemProperties;
 public abstract class AbstractItem extends AbstractWorldObject implements Item {
 
 	protected static final int MAX_STACKED_ITEMS = 10000;
-	
+
 	protected int amount;
-	
+
 	/**
 	 * Creates a new AbstractItem instance.
 	 * @param properties The item's properties.
 	 * @param amount The item's amount.
 	 */
-	public AbstractItem(ItemProperties properties, int amount) {
+	public AbstractItem(final ItemProperties properties, final int amount) {
 		super(properties);
-		
+
 		this.amount = amount;
-		
+
 		if (this.amount > MAX_STACKED_ITEMS) {
 			this.amount = MAX_STACKED_ITEMS;
 		} else if (this.amount < 0) {
@@ -57,14 +57,14 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 	 * @see com.ao.model.worldobject.Item#addAmount(int)
 	 */
 	@Override
-	public int addAmount(int amount) {
-		
+	public int addAmount(final int amount) {
+
 		if (this.amount + amount <= MAX_STACKED_ITEMS) {
 			this.amount += amount;
 		} else {
 			this.amount = MAX_STACKED_ITEMS;
 		}
-		
+
 		return this.amount;
 	}
 
@@ -73,25 +73,25 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 	 * @see com.ao.model.worldobject.Item#canBeUsedBy(ao.model.character.Race, com.ao.model.character.Gender, com.ao.model.character.archetype.UserArchetype, com.ao.model.character.Reputation)
 	 */
 	@Override
-	public boolean canBeUsedBy(Race race, Gender gender,
-			UserArchetype archetype, Reputation reputation) {
-		
+	public boolean canBeUsedBy(final Race race, final Gender gender,
+			final UserArchetype archetype, final Reputation reputation) {
+
 		// Check if the archetype can use this item
-		List<UserArchetype> forbiddenArchetypes = ((ItemProperties) properties).getForbiddenArchetypes();
-		
+		final List<UserArchetype> forbiddenArchetypes = ((ItemProperties) properties).getForbiddenArchetypes();
+
 		if (forbiddenArchetypes != null && forbiddenArchetypes.contains(archetype)) {
 			return false;
 		}
-		
+
 		// Check if the race can use this item
-		List<Race> forbiddenRaces = ((ItemProperties) properties).getForbiddenRaces();
-		
+		final List<Race> forbiddenRaces = ((ItemProperties) properties).getForbiddenRaces();
+
 		if (forbiddenRaces != null && forbiddenRaces.contains(race)) {
 			return false;
 		}
-		
+
 		// TODO : Check by gender and reputation
-		
+
 		return true;
 	}
 
@@ -121,7 +121,7 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 	public boolean isNewbie() {
 		return ((ItemProperties) properties).isNewbie();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.ao.model.worldobject.Item#canBeStolen()
@@ -145,7 +145,7 @@ public abstract class AbstractItem extends AbstractWorldObject implements Item {
 	public boolean isFalls() {
 		return ((ItemProperties) properties).isFalls();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.ao.model.worldobject.Item#isNoLog()

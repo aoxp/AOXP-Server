@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,13 +18,19 @@
 
 package com.ao.model.worldobject;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.easymock.Capture;
-import org.easymock.EasyMock;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import com.ao.model.character.Character;
 import com.ao.model.inventory.Inventory;
@@ -35,107 +41,87 @@ public class StrengthPotionTest extends AbstractItemTest {
 	private static final int MIN_STR = 1;
 	private static final int MAX_STR = 5;
 	private static final int DURATION = 300;
-	
+
 	private StrengthPotion potion1;
 	private StrengthPotion potion2;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		TemporalStatModifyingItemProperties props1 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Green Potion", 1, 1, null, null, false, false, false, false, MIN_STR, MAX_STR, DURATION);
+		final TemporalStatModifyingItemProperties props1 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Green Potion", 1, 1, null, null, false, false, false, false, MIN_STR, MAX_STR, DURATION);
 		potion1 = new StrengthPotion(props1, 5);
-		
-		TemporalStatModifyingItemProperties props2 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Big Green Potion", 1, 1, null, null, false, false, false, false, MAX_STR, MAX_STR, DURATION);
+
+		final TemporalStatModifyingItemProperties props2 = new TemporalStatModifyingItemProperties(WorldObjectType.STRENGTH_POTION, 1, "Big Green Potion", 1, 1, null, null, false, false, false, false, MAX_STR, MAX_STR, DURATION);
 		potion2 = new StrengthPotion(props2, 1);
-		
+
 		object = potion2;
 		ammount = 1;
 		objectProps = props2;
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	@Test
+	public void testUseWithCleanup() {
+		final Inventory inventory = mock(Inventory.class);
+		final Character character = mock(Character.class);
+		when(character.getInventory()).thenReturn(inventory);
+
+		potion2.use(character);
+
+		// Consumption of potion2 requires these 2 calls.
+		verify(inventory).cleanup();
+		verify(character).addToStrength(MAX_STR, DURATION);
 	}
 
 	@Test
-	public void testUseWithCleanup() {
-		
-		Inventory inventory = EasyMock.createMock(Inventory.class);
-		
-		Character character = EasyMock.createMock(Character.class);
-		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-		
-		// Consumption of potion2 requires these 2 calls.
-		inventory.cleanup();
-		character.addToStrength(MAX_STR, DURATION);
-		
-		EasyMock.replay(inventory, character);
-		
-		potion2.use(character);
-		
-		EasyMock.verify(inventory, character);
-	}
-	
-	@Test
 	public void testUseWithoutCleanup() {
-		
-		Inventory inventory = EasyMock.createMock(Inventory.class);
-		
-		Character character = EasyMock.createMock(Character.class);
-		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-		
-		Capture<Integer> capture = new Capture<Integer>();
-		
-		// Consumption of potion1 requires just a call to addToStrength.
-		character.addToStrength(EasyMock.capture(capture), EasyMock.eq(DURATION));
-		
-		EasyMock.replay(inventory, character);
-		
+		final Inventory inventory = mock(Inventory.class);
+		final Character character = mock(Character.class);
+		when(character.getInventory()).thenReturn(inventory);
+
 		potion1.use(character);
-		
+
+		// Consumption of potion1 requires just a call to addToStrength.
+		final ArgumentCaptor<Integer> capture = ArgumentCaptor.forClass(Integer.class);
+		verify(character).addToStrength(capture.capture(), eq(DURATION));
+
 		/// Make sure the value is in the correct range
-		assertTrue(capture.getValue() >= MIN_STR);
-		assertTrue(capture.getValue() <= MAX_STR);
-		
-		EasyMock.verify(inventory, character);
+		assertThat(capture.getValue(), greaterThanOrEqualTo(MIN_STR));
+		assertThat(capture.getValue(), lessThanOrEqualTo(MAX_STR));
 	}
 
 	@Test
 	public void testGetMinModifier() {
-		
 		assertEquals(MIN_STR, potion1.getMinModifier());
 		assertEquals(MAX_STR, potion2.getMinModifier());
 	}
 
 	@Test
 	public void testGetMaxModifier() {
-		
 		assertEquals(MAX_STR, potion1.getMaxModifier());
 		assertEquals(MAX_STR, potion2.getMaxModifier());
 	}
 
 	@Test
 	public void testClone() {
-		
-		StrengthPotion clone = (StrengthPotion) potion1.clone();
-		
+		final StrengthPotion clone = (StrengthPotion) potion1.clone();
+
 		// Make sure all fields match
 		assertEquals(potion1.amount, clone.amount);
 		assertEquals(potion1.properties, clone.properties);
-		
+
 		// Make sure the object itself is different
-		assertFalse(potion1 == clone);
-		
-		
-		clone = (StrengthPotion) potion2.clone();
-		
+		assertNotSame(potion1, clone);
+
+
+		final StrengthPotion clone2 = (StrengthPotion) potion2.clone();
+
 		// Make sure all fields match
-		assertEquals(potion2.amount, clone.amount);
-		assertEquals(potion2.properties, clone.properties);
-		
+		assertEquals(potion2.amount, clone2.amount);
+		assertEquals(potion2.properties, clone2.properties);
+
 		// Make sure the object itself is different
-		assertFalse(potion2 == clone);
+		assertNotSame(potion2, clone2);
 	}
-	
+
 	@Test
 	public void testGetEffectDuration() {
 		assertEquals(DURATION, potion1.getEffectDuration());

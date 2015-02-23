@@ -19,8 +19,9 @@
 package com.ao.model.worldobject;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class DoorTest extends AbstractWorldObjectTest {
 
 	@Before
 	public void setUp() throws Exception {
-		DoorProperties props1 = new DoorProperties(WorldObjectType.DOOR, 1, "Puerta abierta", 1,
+		final DoorProperties props1 = new DoorProperties(WorldObjectType.DOOR, 1, "Puerta abierta", 1,
 				OPEN, LOCKED, CODE, OTHER_PROPERTIES);
 		door1 = new Door(props1);
 
@@ -47,12 +48,12 @@ public class DoorTest extends AbstractWorldObjectTest {
 
 	@Test
 	public void testGetOpen() {
-		Assert.assertTrue(door1.getOpen());
+		assertTrue(door1.getOpen());
 	}
 
 	@Test
 	public void testGetLocked() {
-		Assert.assertFalse(door1.getLocked());
+		assertFalse(door1.getLocked());
 	}
 
 	@Test

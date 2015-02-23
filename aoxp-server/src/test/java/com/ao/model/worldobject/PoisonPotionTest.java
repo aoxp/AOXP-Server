@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -19,10 +19,11 @@
 package com.ao.model.worldobject;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.easymock.EasyMock;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,82 +35,65 @@ public class PoisonPotionTest extends AbstractItemTest {
 
 	private PoisonPotion potion1;
 	private PoisonPotion potion2;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		ItemProperties props1 = new ItemProperties(WorldObjectType.POISON_POTION, 1, "Violet Potion", 1, 1, null, null, false, false, false, false);
+		final ItemProperties props1 = new ItemProperties(WorldObjectType.POISON_POTION, 1, "Violet Potion", 1, 1, null, null, false, false, false, false);
 		potion1 = new PoisonPotion(props1, 5);
-		
-		ItemProperties props2 = new ItemProperties(WorldObjectType.POISON_POTION, 1, "Violet Potion", 1, 1, null, null, false, false, false, false);
+
+		final ItemProperties props2 = new ItemProperties(WorldObjectType.POISON_POTION, 1, "Violet Potion", 1, 1, null, null, false, false, false, false);
 		potion2 = new PoisonPotion(props2, 1);
-		
+
 		object = potion2;
 		objectProps = props2;
 		ammount = 1;
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	@Test
+	public void testUseWithCleanup() {
+		final Inventory inventory = mock(Inventory.class);
+		final Character character = mock(Character.class);
+		when(character.getInventory()).thenReturn(inventory);
+
+		potion2.use(character);
+
+		// Consumption of potion2 requires these 2 calls.
+		verify(inventory).cleanup();
+		verify(character).setPoisoned(false);
 	}
 
 	@Test
-	public void testUseWithCleanup() {
-		
-		Inventory inventory = EasyMock.createMock(Inventory.class);
-		
-		Character character = EasyMock.createMock(Character.class);
-		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-		
-		// Consumption of potion2 requires these 2 calls.
-		inventory.cleanup();
-		character.setPoisoned(false);
-		
-		EasyMock.replay(inventory, character);
-		
-		potion2.use(character);
-		
-		EasyMock.verify(inventory, character);
-	}
-	
-	@Test
 	public void testUseWithoutCleanup() {
-		
-		Inventory inventory = EasyMock.createMock(Inventory.class);
-		
-		Character character = EasyMock.createMock(Character.class);
-		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-		
-		// Consumption of potion1 requires just a call to setPoisoned.
-		character.setPoisoned(false);
-		
-		EasyMock.replay(inventory, character);
-		
+		final Inventory inventory = mock(Inventory.class);
+		final Character character = mock(Character.class);
+		when(character.getInventory()).thenReturn(inventory);
+
 		potion1.use(character);
-		
-		EasyMock.verify(inventory, character);
+
+		// Consumption of potion1 requires just a call to setPoisoned.
+		verify(character).setPoisoned(false);
 	}
 
 	@Test
 	public void testClone() {
-		
-		PoisonPotion clone = (PoisonPotion) potion1.clone();
-		
+		final PoisonPotion clone = (PoisonPotion) potion1.clone();
+
 		// Make sure all fields match
 		assertEquals(potion1.amount, clone.amount);
 		assertEquals(potion1.properties, clone.properties);
-		
+
 		// Make sure the object itself is different
-		assertFalse(potion1 == clone);
-		
-		
-		clone = (PoisonPotion) potion2.clone();
-		
+		assertNotSame(potion1, clone);
+
+
+		final PoisonPotion clone2 = (PoisonPotion) potion2.clone();
+
 		// Make sure all fields match
-		assertEquals(potion2.amount, clone.amount);
-		assertEquals(potion2.properties, clone.properties);
-		
+		assertEquals(potion2.amount, clone2.amount);
+		assertEquals(potion2.properties, clone2.properties);
+
 		// Make sure the object itself is different
-		assertFalse(potion2 == clone);
+		assertNotSame(potion2, clone2);
 	}
-	
+
 }

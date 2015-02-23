@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,9 @@
 
 package com.ao.model.character.archetype;
 
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
@@ -28,25 +30,25 @@ public class UserArchetypeTest {
 
 	@Test
 	public void testGetArchetype() {
-		assertTrue(UserArchetype.ASSASIN.getArchetype() instanceof AssasinArchetype);
-		assertTrue(UserArchetype.BANDIT.getArchetype() instanceof BanditArchetype);
-		assertTrue(UserArchetype.BARD.getArchetype() instanceof BardArchetype);
-		assertTrue(UserArchetype.CLERIC.getArchetype() instanceof ClericArchetype);
-		assertTrue(UserArchetype.DRUID.getArchetype() instanceof DruidArchetype);
-		assertTrue(UserArchetype.HUNTER.getArchetype() instanceof HunterArchetype);
-		assertTrue(UserArchetype.MAGE.getArchetype() instanceof MageArchetype);
-		assertTrue(UserArchetype.PALADIN.getArchetype() instanceof PaladinArchetype);
-		assertTrue(UserArchetype.PIRATE.getArchetype() instanceof PirateArchetype);
-		assertTrue(UserArchetype.THIEF.getArchetype() instanceof ThiefArchetype);
-		assertTrue(UserArchetype.WARRIOR.getArchetype() instanceof WarriorArchetype);
-		assertTrue(UserArchetype.WORKER.getArchetype() instanceof WorkerArchetype);
+		assertThat(UserArchetype.ASSASIN.getArchetype(), instanceOf(AssasinArchetype.class));
+		assertThat(UserArchetype.BANDIT.getArchetype(), instanceOf(BanditArchetype.class));
+		assertThat(UserArchetype.BARD.getArchetype(), instanceOf(BardArchetype.class));
+		assertThat(UserArchetype.CLERIC.getArchetype(), instanceOf(ClericArchetype.class));
+		assertThat(UserArchetype.DRUID.getArchetype(), instanceOf(DruidArchetype.class));
+		assertThat(UserArchetype.HUNTER.getArchetype(), instanceOf(HunterArchetype.class));
+		assertThat(UserArchetype.MAGE.getArchetype(), instanceOf(MageArchetype.class));
+		assertThat(UserArchetype.PALADIN.getArchetype(), instanceOf(PaladinArchetype.class));
+		assertThat(UserArchetype.PIRATE.getArchetype(), instanceOf(PirateArchetype.class));
+		assertThat(UserArchetype.THIEF.getArchetype(), instanceOf(ThiefArchetype.class));
+		assertThat(UserArchetype.WARRIOR.getArchetype(), instanceOf(WarriorArchetype.class));
+		assertThat(UserArchetype.WORKER.getArchetype(), instanceOf(WorkerArchetype.class));
 	}
 
 	@Test
 	public void testValueOf() {
-		Archetype arch = ArchetypeLocator.getArchetype(AssasinArchetype.class);
-		
-		assertTrue(UserArchetype.valueOf(arch) == UserArchetype.ASSASIN);
+		final Archetype arch = ArchetypeLocator.getArchetype(AssasinArchetype.class);
+
+		assertSame(UserArchetype.valueOf(arch), UserArchetype.ASSASIN);
 	}
 
 }

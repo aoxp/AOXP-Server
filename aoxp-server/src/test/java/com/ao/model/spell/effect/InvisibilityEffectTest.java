@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,9 +18,13 @@
 
 package com.ao.model.spell.effect;
 
-import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,77 +37,60 @@ import com.ao.model.worldobject.WorldObject;
 public class InvisibilityEffectTest {
 
 	private Effect invisibilityEffect;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		this.invisibilityEffect = new InvisibilityEffect();
-	}
-
-	@After
-	public void tearDown() throws Exception {
+		invisibilityEffect = new InvisibilityEffect();
 	}
 
 	@Test
 	public void testApplyCharacterCharacter() {
-		Character caster = EasyMock.createMock(Character.class);
-		Character target = EasyMock.createMock(Character.class);
-		target.setInvisible(true);
-		
-		EasyMock.replay(caster, target);
-		
+		final Character caster = mock(Character.class);
+		final Character target = mock(Character.class);
+
 		invisibilityEffect.apply(caster, target);
-		
-		EasyMock.verify(caster, target);
+
+		verify(target).setInvisible(true);
 	}
 
 	@Test
 	public void testAppliesToCharacterCharacter() {
-		Character caster = EasyMock.createMock(Character.class);
-		UserCharacter userTarget = EasyMock.createMock(UserCharacter.class);
-		NPCCharacter target = EasyMock.createMock(NPCCharacter.class);
-		
-		// First fake it's dead, then pretend it's alive.
-		EasyMock.expect(userTarget.isDead()).andReturn(true).once();
-		EasyMock.expect(userTarget.isDead()).andReturn(false).once();
-		
-		EasyMock.replay(caster, target, userTarget);
-		
+		final Character caster = mock(Character.class);
+		final UserCharacter deadUserTarget = mock(UserCharacter.class);
+		when(deadUserTarget.isDead()).thenReturn(Boolean.TRUE);
+		final UserCharacter aliveUserTarget = mock(UserCharacter.class);
+		final NPCCharacter target = mock(NPCCharacter.class);
+
 		// Test invalid target
-		Assert.assertFalse(invisibilityEffect.appliesTo(caster, target));
-		
+		assertFalse(invisibilityEffect.appliesTo(caster, target));
+
 		// Test dead target
-		Assert.assertFalse(invisibilityEffect.appliesTo(caster, userTarget));
-		
+		assertFalse(invisibilityEffect.appliesTo(caster, deadUserTarget));
+
 		// Test alive target
-		Assert.assertTrue(invisibilityEffect.appliesTo(caster, userTarget));
+		assertTrue(invisibilityEffect.appliesTo(caster, aliveUserTarget));
 	}
 
 	@Test
 	public void testAppliesToCharacterWorldObject() {
-		WorldObject obj = EasyMock.createMock(WorldObject.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		EasyMock.replay(obj, caster);
-		
-		Assert.assertFalse(invisibilityEffect.appliesTo(caster, obj));
+		final WorldObject obj = mock(WorldObject.class);
+		final Character caster = mock(Character.class);
+
+		assertFalse(invisibilityEffect.appliesTo(caster, obj));
 	}
 
 	@Test
 	public void testApplyCharacterWorldObject() {
-		WorldObject obj = EasyMock.createMock(WorldObject.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		EasyMock.replay(obj, caster);
-		
+		final WorldObject obj = mock(WorldObject.class);
+		final Character caster = mock(Character.class);
+
 		// This should do fail
 		try {
 			invisibilityEffect.apply(caster, obj);
-			Assert.fail("Applying an effect for characters to a world object didn't fail.");
-		} catch (InvalidTargetException e) {
+			fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (final InvalidTargetException e) {
 			// this is ok
 		}
-		
-		EasyMock.verify(caster, obj);
 	}
 
 }

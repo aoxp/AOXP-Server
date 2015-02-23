@@ -18,9 +18,10 @@
 
 package com.ao.service.map;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.easymock.EasyMock;
 import org.junit.Test;
 
 import com.ao.data.dao.CityDAO;
@@ -33,34 +34,27 @@ public class MapServiceImplTest {
 
 	@Test
 	public void testLoadMaps() {
-		WorldMapDAO dao = EasyMock.createMock(WorldMapDAO.class);
-		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
-		AreaService areaService = EasyMock.createMock(AreaService.class);
-		EasyMock.expect(dao.retrieveAll()).andReturn(null).once();
-		EasyMock.replay(dao);
-
-		MapService service = new MapServiceImpl(dao, cityDao, areaService);
+		final WorldMapDAO dao = mock(WorldMapDAO.class);
+		final CityDAO cityDao = mock(CityDAO.class);
+		final AreaService areaService = mock(AreaService.class);
+		final MapService service = new MapServiceImpl(dao, cityDao, areaService);
 		service.loadMaps();
-
-		EasyMock.verify(dao);
 	}
 
 	@Test
 	public void testGetMap() {
-		int mapId = 1;
+		final int mapId = 1;
+		final WorldMap map = new WorldMap(null, mapId, (short) 1, new Tile[] {});
+		final WorldMapDAO dao = mock(WorldMapDAO.class);
+		final CityDAO cityDao = mock(CityDAO.class);
+		final AreaService areaService = mock(AreaService.class);
 
-		WorldMap map = new WorldMap(null, 1, (short) 1, new Tile[] {});
-		WorldMapDAO dao = EasyMock.createMock(WorldMapDAO.class);
-		CityDAO cityDao = EasyMock.createMock(CityDAO.class);
-		AreaService areaService = EasyMock.createMock(AreaService.class);
+		when(dao.retrieveAll()).thenReturn(new WorldMap[] {map});
 
-		EasyMock.expect(dao.retrieveAll()).andReturn(new WorldMap[] {map}).once();
-		EasyMock.replay(dao);
-
-		MapService service = new MapServiceImpl(dao,cityDao, areaService);
+		final MapService service = new MapServiceImpl(dao, cityDao, areaService);
 		service.loadMaps();
 
-		Assert.assertSame(map, service.getMap(mapId));
+		assertSame(map, service.getMap(mapId));
 	}
 
 }

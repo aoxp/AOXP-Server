@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.Reader;
 
 import org.ini4j.Ini;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,13 +38,6 @@ public class CityDAOIniTest {
 	}
 
 	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
 	 * Test method for {@link com.ao.data.dao.ini.CityDAOIni#retrieveAll()}.
 	 */
 	@Test
@@ -55,17 +47,16 @@ public class CityDAOIniTest {
 
 		try {
 			// Make sure the reader is closed, since Ini4J gives no guarantees.
-			Reader reader = new BufferedReader(new FileReader(CITIES_DAT_PATH));
+			final Reader reader = new BufferedReader(new FileReader(CITIES_DAT_PATH));
 			iniFile = new Ini(reader);
 			reader.close();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			fail("Loading of cities failed with message " + e.getMessage());
 		}
 
-		int totalCities = Integer.parseInt(iniFile.get(INIT_HEADER, NUM_CITIES_KEY));
+		final int totalCities = Integer.parseInt(iniFile.get(INIT_HEADER, NUM_CITIES_KEY));
 
-
-		City[] cities = dao.retrieveAll();
+		final City[] cities = dao.retrieveAll();
 
 		assertEquals(totalCities,cities.length);
 

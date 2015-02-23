@@ -18,15 +18,19 @@
 
 package com.ao.model.worldobject;
 
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.easymock.Capture;
-import org.easymock.EasyMock;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import com.ao.model.character.Character;
 import com.ao.model.inventory.Inventory;
@@ -43,10 +47,10 @@ public class DexterityPotionTest extends AbstractItemTest {
 
 	@Before
 	public void setUp() throws Exception {
-		TemporalStatModifyingItemProperties props1 = new TemporalStatModifyingItemProperties(WorldObjectType.POISON_POTION, 1, "Yellow Potion", 1, 1, null, null, false, false, false, false, MIN_AGI, MAX_AGI, DURATION);
+		final TemporalStatModifyingItemProperties props1 = new TemporalStatModifyingItemProperties(WorldObjectType.POISON_POTION, 1, "Yellow Potion", 1, 1, null, null, false, false, false, false, MIN_AGI, MAX_AGI, DURATION);
 		potion1 = new DexterityPotion(props1, 5);
 
-		TemporalStatModifyingItemProperties props2 = new TemporalStatModifyingItemProperties(WorldObjectType.POISON_POTION, 1, "Big Yellow Potion", 1, 1, null, null, false, false, false, false, MAX_AGI, MAX_AGI, DURATION);
+		final TemporalStatModifyingItemProperties props2 = new TemporalStatModifyingItemProperties(WorldObjectType.POISON_POTION, 1, "Big Yellow Potion", 1, 1, null, null, false, false, false, false, MAX_AGI, MAX_AGI, DURATION);
 		potion2 = new DexterityPotion(props2, 1);
 
 		object = potion2;
@@ -54,88 +58,66 @@ public class DexterityPotionTest extends AbstractItemTest {
 		objectProps = props2;
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void testUseWithCleanup() {
-
-		Inventory inventory = EasyMock.createMock(Inventory.class);
-
-		Character character = EasyMock.createMock(Character.class);
-		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-
-		// Consumption of potion2 requires these 2 calls.
-		inventory.cleanup();
-		character.addToDexterity(MAX_AGI, DURATION);
-
-		EasyMock.replay(inventory, character);
+		final Inventory inventory = mock(Inventory.class);
+		final Character character = mock(Character.class);
+		when(character.getInventory()).thenReturn(inventory);
 
 		potion2.use(character);
 
-		EasyMock.verify(inventory, character);
+		// Consumption of potion2 requires these 2 calls.
+		verify(inventory).cleanup();
+		verify(character).addToDexterity(MAX_AGI, DURATION);
 	}
 
 	@Test
 	public void testUseWithoutCleanup() {
-
-		Inventory inventory = EasyMock.createMock(Inventory.class);
-
-		Character character = EasyMock.createMock(Character.class);
-		EasyMock.expect(character.getInventory()).andReturn(inventory).anyTimes();
-
-		Capture<Integer> capture = new Capture<Integer>();
-
-		// Consumption of potion1 requires just a call to addToDexterity.
-		character.addToDexterity(EasyMock.capture(capture), EasyMock.eq(DURATION));
-
-		EasyMock.replay(inventory, character);
+		final Inventory inventory = mock(Inventory.class);
+		final Character character = mock(Character.class);
+		when(character.getInventory()).thenReturn(inventory);
 
 		potion1.use(character);
 
 		/// Make sure the value is in the correct range
-		assertTrue(capture.getValue() >= MIN_AGI);
-		assertTrue(capture.getValue() <= MAX_AGI);
-
-		EasyMock.verify(inventory, character);
+		final ArgumentCaptor<Integer> capture = ArgumentCaptor.forClass(Integer.class);
+		verify(character).addToDexterity(capture.capture(), eq(DURATION));
+		assertThat(capture.getValue(), greaterThanOrEqualTo(MIN_AGI));
+		assertThat(capture.getValue(), lessThanOrEqualTo(MAX_AGI));
 	}
 
 	@Test
 	public void testGetMinModifier() {
-
 		assertEquals(MIN_AGI, potion1.getMinModifier());
 		assertEquals(MAX_AGI, potion2.getMinModifier());
 	}
 
 	@Test
 	public void testGetMaxModifier() {
-
 		assertEquals(MAX_AGI, potion1.getMaxModifier());
 		assertEquals(MAX_AGI, potion2.getMaxModifier());
 	}
 
 	@Test
 	public void testClone() {
-
-		DexterityPotion clone = (DexterityPotion) potion1.clone();
+		final DexterityPotion clone = (DexterityPotion) potion1.clone();
 
 		// Make sure all fields match
 		assertEquals(potion1.amount, clone.amount);
 		assertEquals(potion1.properties, clone.properties);
 
 		// Make sure the object itself is different
-		assertFalse(potion1 == clone);
+		assertNotSame(potion1, clone);
 
 
-		clone = (DexterityPotion) potion2.clone();
+		final DexterityPotion clone2 = (DexterityPotion) potion2.clone();
 
 		// Make sure all fields match
-		assertEquals(potion2.amount, clone.amount);
-		assertEquals(potion2.properties, clone.properties);
+		assertEquals(potion2.amount, clone2.amount);
+		assertEquals(potion2.properties, clone2.properties);
 
 		// Make sure the object itself is different
-		assertFalse(potion2 == clone);
+		assertNotSame(potion2, clone2);
 	}
 
 	@Test

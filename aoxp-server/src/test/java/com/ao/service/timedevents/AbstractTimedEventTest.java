@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,11 @@
 
 package com.ao.service.timedevents;
 
-import org.easymock.EasyMock;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 
 import com.ao.model.character.Character;
@@ -27,31 +31,24 @@ import com.ao.service.TimedEventsService;
 public abstract class AbstractTimedEventTest {
 
 	protected TimedEvent event;
-	
+
 	@Test
 	public void testRegisterLong() {
-		TimedEventsService service = EasyMock.createMock(TimedEventsService.class);
-		service.addEvent((Character) EasyMock.anyObject(), event, EasyMock.anyLong());
-		
-		EasyMock.replay(service);
-		
+		final TimedEventsService service = mock(TimedEventsService.class);
+
 		TimedEvent.service = service;
 		event.register(1L);
-		
-		EasyMock.verify(service);
+
+		verify(service).addEvent(any(Character.class), event, anyLong());
 	}
 
 	@Test
 	public void testRegisterLongLongLong() {
-		TimedEventsService service = EasyMock.createMock(TimedEventsService.class);
-		service.addEvent((Character) EasyMock.anyObject(), event, EasyMock.anyLong(), EasyMock.anyLong(), EasyMock.anyLong());
-		
-		EasyMock.replay(service);
-		
+		final TimedEventsService service = mock(TimedEventsService.class);
+
 		TimedEvent.service = service;
 		event.register(1L, 1L, 1L);
-		
-		EasyMock.verify(service);
-	}
 
+		verify(service).addEvent(any(Character.class), event, anyLong(), anyLong(), anyLong());
+	}
 }

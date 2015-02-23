@@ -19,7 +19,7 @@
 package com.ao.model.worldobject;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class KeyTest extends AbstractWorldObjectTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		KeyProperties props1 = new KeyProperties(WorldObjectType.KEY, 1, "Llave maestra", 1, 1, 0, null, null, false, false, false, false, CODE);
+		final KeyProperties props1 = new KeyProperties(WorldObjectType.KEY, 1, "Llave maestra", 1, 1, 0, null, null, false, false, false, false, CODE);
 		key1 = new Key(props1, 1);
 		
 		object = key1;
@@ -43,14 +43,14 @@ public class KeyTest extends AbstractWorldObjectTest {
 	
 	@Test
 	public void testClone() {
-		Key clone = (Key) key1.clone();
+		final Key clone = (Key) key1.clone();
 		
 		// Make sure all fields match
 		assertEquals(key1.amount, clone.amount);
 		assertEquals(key1.properties, clone.properties);
 		
 		// Make sure the object itself is different
-		assertFalse(key1 == clone);
+		assertNotSame(key1, clone);
 
 	}
 	

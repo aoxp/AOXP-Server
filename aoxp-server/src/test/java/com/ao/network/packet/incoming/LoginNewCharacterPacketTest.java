@@ -20,12 +20,15 @@ package com.ao.network.packet.incoming;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.easymock.Capture;
-import org.easymock.classextension.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import com.ao.config.ServerConfig;
 import com.ao.context.ApplicationContext;
@@ -33,6 +36,7 @@ import com.ao.context.ApplicationProperties;
 import com.ao.data.dao.AccountDAO;
 import com.ao.mock.MockFactory;
 import com.ao.model.builder.UserCharacterBuilder;
+import com.ao.model.character.Attribute;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.archetype.UserArchetype;
@@ -67,7 +71,7 @@ public class LoginNewCharacterPacketTest {
 	private Connection connection;
 	private IncomingPacket packet;
 	private DataBuffer inputBuffer;
-	private Capture<ErrorMessagePacket> errPacket;
+	private ArgumentCaptor<ErrorMessagePacket> errPacket;
 	private ServerConfig config;
 	private SecurityManager security;
 	private MapService mapService;
@@ -80,10 +84,10 @@ public class LoginNewCharacterPacketTest {
 	@Before
 	public void setUp() throws Exception {
 		packet = new LoginNewCharacterPacket();
-		errPacket = new Capture<ErrorMessagePacket>();
-		connection = MockFactory.mockConnection(MockFactory.mockConnectedUser(), errPacket);
+		errPacket = ArgumentCaptor.forClass(ErrorMessagePacket.class);
+		connection = MockFactory.mockConnection();
 
-		inputBuffer = EasyMock.createMock(DataBuffer.class);
+		inputBuffer = mock(DataBuffer.class);
 
 		config = ApplicationContext.getInstance(ServerConfig.class);
 		security = ApplicationContext.getInstance(SecurityManager.class);
@@ -108,6 +112,7 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, "foo", CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(UserCharacterBuilder.INVALID_EMAIL_ERROR, errPacket.getValue().getMessage());
 	}
 
@@ -119,6 +124,7 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(UserCharacterBuilder.INVALID_NAME_ERROR, errPacket.getValue().getMessage());
 	}
 
@@ -129,7 +135,10 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
-		final Account account = ((ConnectedUser) connection.getUser()).getAccount();
+
+		final ArgumentCaptor<Account> capture = ArgumentCaptor.forClass(Account.class);
+		verify((ConnectedUser) connection.getUser()).setAccount(capture.capture());
+		final Account account = capture.getValue();
 
 		assertTrue(account.hasCharacter(CHARACTER_NAME));
 		assertEquals(account.getName(), CHARACTER_NAME);
@@ -148,6 +157,7 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION), errPacket.getValue().getMessage());
 	}
 
@@ -160,20 +170,21 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.ACCOUNT_NAME_TAKEN_ERROR, errPacket.getValue().getMessage());
 	}
 
 	@Test
 	public void dicesThrewTest() throws Exception {
-
-		// Oops, I forgot to throw the dices!
-		EasyMock.reset(connection.getUser());
+		final ConnectedUser user = (ConnectedUser) connection.getUser();
+		when(user.getAttribute(any(Attribute.class))).thenReturn(null);
 
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
 				CLIENT_VERSION, "", CHARACTER_RACE, CHARACTER_GENDER, CHARACTER_ARCHETYPE,
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.MUST_THROW_DICES_BEFORE_ERROR, errPacket.getValue().getMessage());
 	}
 
@@ -184,8 +195,8 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.INVALID_RACE_ERROR, errPacket.getValue().getMessage());
-
 	}
 
 	@Test
@@ -195,6 +206,7 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.INVALID_GENDER_ERROR, errPacket.getValue().getMessage());
 	}
 
@@ -205,6 +217,7 @@ public class LoginNewCharacterPacketTest {
 				(byte) -1, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.INVALID_HEAD_ERROR, errPacket.getValue().getMessage());
 	}
 
@@ -215,12 +228,12 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.INVALID_ARCHETYPE_ERROR, errPacket.getValue().getMessage());
 	}
 
 	@Test
 	public void characterCreationDisabledTest() throws Exception {
-
 		config.setCharacterCreationEnabled(false);
 
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, CLIENT_MAJOR, CLIENT_MINOR,
@@ -228,6 +241,7 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.CHARACTER_CREATION_DISABLED_ERROR, errPacket.getValue().getMessage());
 	}
 
@@ -240,27 +254,19 @@ public class LoginNewCharacterPacketTest {
 				CHARACTER_HEAD, CHARACTER_MAIL, CHARACTER_HOMELAND);
 
 		packet.handle(inputBuffer, connection);
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.ONLY_ADMINS_ERROR, errPacket.getValue().getMessage());
 	}
 
-	private void writeLogin(String charName, String password, byte major,
-			byte minor, byte version, String hash, byte race, byte gender,
-			byte archetype, byte head, String mail, byte homeland) throws Exception {
-		EasyMock.expect(inputBuffer.getReadableBytes()).andReturn(charName.length() + 2 + security.getPasswordHashLength() + 8 + security.getClientHashLength() + mail.length() + 2);
-
-		EasyMock.expect(inputBuffer.getASCIIString()).andReturn(charName).once();
-		EasyMock.expect(inputBuffer.getASCIIStringFixed(security.getPasswordHashLength())).andReturn(password).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(major).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(minor).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(version).once();
-		EasyMock.expect(inputBuffer.getASCIIStringFixed(security.getClientHashLength())).andReturn(hash).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(race).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(gender).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(archetype).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(head).once();
-		EasyMock.expect(inputBuffer.getASCIIString()).andReturn(mail).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(homeland).once();
-
-		EasyMock.replay(inputBuffer);
+	private void writeLogin(final String charName, final String password, final byte major,
+			final byte minor, final byte version, final String hash, final byte race, final byte gender,
+			final byte archetype, final byte head, final String mail, final byte homeland) throws Exception {
+		when(inputBuffer.getReadableBytes()).thenReturn(charName.length() + 2 + security.getPasswordHashLength() + 8 + security.getClientHashLength() + mail.length() + 2);
+		when(inputBuffer.getASCIIString()).thenReturn(charName).thenReturn(mail);
+		when(inputBuffer.getASCIIStringFixed(security.getPasswordHashLength())).thenReturn(password);
+		when(inputBuffer.get()).thenReturn(major).thenReturn(minor)
+			.thenReturn(version).thenReturn(race).thenReturn(gender)
+			.thenReturn(archetype).thenReturn(head).thenReturn(homeland);
+		when(inputBuffer.getASCIIStringFixed(security.getClientHashLength())).thenReturn(hash);
 	}
 }

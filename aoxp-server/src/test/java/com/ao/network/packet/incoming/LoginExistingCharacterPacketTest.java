@@ -19,11 +19,13 @@
 package com.ao.network.packet.incoming;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import org.easymock.Capture;
-import org.easymock.classextension.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import com.ao.config.ServerConfig;
 import com.ao.context.ApplicationContext;
@@ -45,12 +47,12 @@ public class LoginExistingCharacterPacketTest {
 	private static final String CHARACTER_PASSWORD = "a";
 	private static final byte CLIENT_MAJOR = 0;
 	private static final byte CLIENT_MINOR = 12;
-	private static final byte CLIENT_VERSION = 2;
+	private static final byte CLIENT_REVISION = 2;
 
 	private Connection connection;
 	private IncomingPacket packet;
 	private DataBuffer inputBuffer;
-	private Capture<ErrorMessagePacket> errPacket;
+	private ArgumentCaptor<ErrorMessagePacket> errPacket;
 
 	private ServerConfig config = ApplicationContext.getInstance(ServerConfig.class);
 	private SecurityManager security = ApplicationContext.getInstance(SecurityManager.class);
@@ -63,25 +65,22 @@ public class LoginExistingCharacterPacketTest {
 	@Before
 	public void setUp() throws Exception {
 		packet = new LoginExistingCharacterPacket();
-		errPacket = new Capture<ErrorMessagePacket>();
-		connection = MockFactory.mockConnection(errPacket);
-
-		inputBuffer = EasyMock.createMock(DataBuffer.class);
+		errPacket = ArgumentCaptor.forClass(ErrorMessagePacket.class);
+		connection = MockFactory.mockConnection();
+		inputBuffer = mock(DataBuffer.class);
 
 		config.setRestrictedToAdmins(false);
 	}
 
-	private void writeLogin(String charName, String password, byte major, byte minor, byte version, String hash) throws Exception {
-		EasyMock.expect(inputBuffer.getReadableBytes()).andReturn(charName.length() + 2 + security.getPasswordHashLength() + 6 + security.getClientHashLength());
+	private void writeLogin(final String charName, final String password,
+			final byte major, final byte minor, final byte version,
+			final String hash) throws Exception {
+		when(inputBuffer.getReadableBytes()).thenReturn(charName.length() + 2 + security.getPasswordHashLength() + 6 + security.getClientHashLength());
 
-		EasyMock.expect(inputBuffer.getASCIIString()).andReturn(charName).once();
-		EasyMock.expect(inputBuffer.getASCIIStringFixed(security.getPasswordHashLength())).andReturn(password).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(major).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(minor).once();
-		EasyMock.expect(inputBuffer.get()).andReturn(version).once();
-		EasyMock.expect(inputBuffer.getASCIIStringFixed(security.getClientHashLength())).andReturn(hash).once();
-
-		EasyMock.replay(inputBuffer);
+		when(inputBuffer.getASCIIString()).thenReturn(charName);
+		when(inputBuffer.getASCIIStringFixed(security.getPasswordHashLength())).thenReturn(password);
+		when(inputBuffer.get()).thenReturn(major).thenReturn(minor).thenReturn(version);
+		when(inputBuffer.getASCIIStringFixed(security.getClientHashLength())).thenReturn(hash);
 	}
 
 	@Test
@@ -89,45 +88,50 @@ public class LoginExistingCharacterPacketTest {
 		config.setRestrictedToAdmins(true);
 
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD,
-				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "");
+				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_REVISION, "");
 		packet.handle(inputBuffer, connection);
 
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.ONLY_ADMINS_ERROR, errPacket.getValue().getMessage());
 	}
 
 	@Test
 	public void testHandleCharacterNotFound() throws Exception {
-		writeLogin("foo", "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "");
+		writeLogin("foo", "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_REVISION, "");
 		packet.handle(inputBuffer, connection);
 
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.CHARACTER_NOT_FOUND_ERROR, errPacket.getValue().getMessage());
 	}
 
 	@Test
 	public void testHandleIncorrectPassword() throws Exception {
-		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD + "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "");
+		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD + "foo", CLIENT_MAJOR, CLIENT_MINOR, CLIENT_REVISION, "");
 		packet.handle(inputBuffer, connection);
 
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.INCORRECT_PASSWORD_ERROR, errPacket.getValue().getMessage());
 	}
 
 	@Test
 	public void testHandleOutOfDateClient() throws Exception {
 		LoginServiceImpl service = (LoginServiceImpl) ApplicationContext.getInstance(LoginService.class);
-		service.setCurrentClientVersion(CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION);
+		service.setCurrentClientVersion(CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_REVISION);
 
 		writeLogin(CHARACTER_NAME, CHARACTER_PASSWORD, (byte) 0, (byte) 0, (byte) 0, "");
 		packet.handle(inputBuffer, connection);
 
-		assertEquals(String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_VERSION), errPacket.getValue().getMessage());
+		verify(connection).send(errPacket.capture());
+		assertEquals(String.format(LoginServiceImpl.CLIENT_OUT_OF_DATE_ERROR_FORMAT, CLIENT_MAJOR + "." + CLIENT_MINOR + "." + CLIENT_REVISION), errPacket.getValue().getMessage());
 	}
 
 	@Test
 	public void testHandleBannedCharacter() throws Exception {
 		writeLogin(BANNED_CHARACTER_NAME, BANNED_CHARACTER_PASSWORD,
-				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_VERSION, "");
+				CLIENT_MAJOR, CLIENT_MINOR, CLIENT_REVISION, "");
 		packet.handle(inputBuffer, connection);
 
+		verify(connection).send(errPacket.capture());
 		assertEquals(LoginServiceImpl.BANNED_CHARACTER_ERROR, errPacket.getValue().getMessage());
 	}
 

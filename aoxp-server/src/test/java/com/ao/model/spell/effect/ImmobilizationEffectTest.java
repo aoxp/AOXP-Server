@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,90 +18,74 @@
 
 package com.ao.model.spell.effect;
 
-import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.ao.exception.InvalidTargetException;
 import com.ao.model.character.Character;
-import com.ao.model.spell.effect.Effect;
-import com.ao.model.spell.effect.ImmobilizationEffect;
 import com.ao.model.worldobject.WorldObject;
 
 public class ImmobilizationEffectTest {
 
 	private Effect immobilizationEffect;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		this.immobilizationEffect = new ImmobilizationEffect();
-	}
-
-	@After
-	public void tearDown() throws Exception {
+		immobilizationEffect = new ImmobilizationEffect();
 	}
 
 	@Test
 	public void testApplyCharacterCharacter() {
-		Character caster = EasyMock.createMock(Character.class);
-		Character target = EasyMock.createMock(Character.class);
-		
-		target.setImmobilized(true);
-		
-		EasyMock.replay(caster, target);
-		
+		final Character caster = mock(Character.class);
+		final Character target = mock(Character.class);
+
 		immobilizationEffect.apply(caster, target);
-		
-		EasyMock.verify(caster, target);
+
+		verify(target).setImmobilized(true);
 	}
 
 	@Test
 	public void testAppliesToCharacterCharacter() {
-		Character caster = EasyMock.createMock(Character.class);
-		Character target = EasyMock.createMock(Character.class);
-		
-		// Pretend the target is dead first, then alive.
-		EasyMock.expect(target.isDead()).andReturn(true).once();
-		EasyMock.expect(target.isDead()).andReturn(false).once();
-		
-		EasyMock.replay(caster, target);
-		
+		final Character caster = mock(Character.class);
+		final Character deadTarget = mock(Character.class);
+		when(deadTarget.isDead()).thenReturn(Boolean.TRUE);
+		final Character aliveTarget = mock(Character.class);
+
 		// Paralyzing a dead char is invalid.
-		Assert.assertFalse(immobilizationEffect.appliesTo(caster, target));
-		
+		assertFalse(immobilizationEffect.appliesTo(caster, deadTarget));
+
 		/// Paralyzing an alive char is valid.
-		Assert.assertTrue(immobilizationEffect.appliesTo(caster, target));
+		assertTrue(immobilizationEffect.appliesTo(caster, aliveTarget));
 	}
 
 	@Test
 	public void testAppliesToCharacterWorldObject() {
-		WorldObject obj = EasyMock.createMock(WorldObject.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		EasyMock.replay(obj, caster);
-		
+		final WorldObject obj = mock(WorldObject.class);
+		final Character caster = mock(Character.class);
+
 		// Should always false, no matter what
-		Assert.assertFalse(immobilizationEffect.appliesTo(caster, obj));
+		assertFalse(immobilizationEffect.appliesTo(caster, obj));
 	}
 
 	@Test
 	public void testApplyCharacterWorldObject() {
-		WorldObject obj = EasyMock.createMock(WorldObject.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		EasyMock.replay(obj, caster);
-		
+		final WorldObject obj = mock(WorldObject.class);
+		final Character caster = mock(Character.class);
+
 		// Should do nothing....
 		try {
 			immobilizationEffect.apply(caster, obj);
-			Assert.fail("Applying an effect for characters to a world object didn't fail.");
-		} catch (InvalidTargetException e) {
+			fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (final InvalidTargetException e) {
 			// this is ok
 		}
-		
-		EasyMock.verify(caster, obj);
 	}
 
 }

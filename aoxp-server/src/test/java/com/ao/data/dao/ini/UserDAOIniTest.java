@@ -22,16 +22,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import java.io.File;
 
-import org.easymock.classextension.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.ao.data.dao.exception.DAOException;
-import com.ao.mock.MockFactory;
 import com.ao.model.character.Gender;
 import com.ao.model.character.Race;
 import com.ao.model.character.Skill;
@@ -39,6 +38,7 @@ import com.ao.model.character.UserCharacter;
 import com.ao.model.character.archetype.UserArchetype;
 import com.ao.model.map.City;
 import com.ao.model.user.Account;
+import com.ao.model.user.ConnectedUser;
 
 public class UserDAOIniTest {
 
@@ -61,30 +61,30 @@ public class UserDAOIniTest {
 	@After
 	public void tearDown() throws Exception {
 		// Be really sure the file is not there before the next test
-		File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
+		final File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
 		file.delete();
 	}
 
 	@Test
 	public void testRetrieve() throws DAOException {
-		Account acc = dao.retrieve(CHARACTER_NICK);
+		final Account acc = dao.retrieve(CHARACTER_NICK);
 
 		assertNotNull(acc);
 
 		// Ensure we get the requested character and not another one.
-		assertEquals(acc.getName(), CHARACTER_NICK);
+		assertEquals(CHARACTER_NICK, acc.getName());
 	}
 
 	@Test
 	public void testCreateAccount() throws DAOException {
-		Account acc = dao.create(NEW_CHARACTER_NICK, CHARACTER_PASSWORD, CHARACTER_MAIL);
+		final Account acc = dao.create(NEW_CHARACTER_NICK, CHARACTER_PASSWORD, CHARACTER_MAIL);
 
-		assertEquals(acc.getName(), NEW_CHARACTER_NICK);
-		assertEquals(acc.getMail(), CHARACTER_MAIL);
+		assertEquals(NEW_CHARACTER_NICK, acc.getName());
+		assertEquals(CHARACTER_MAIL, acc.getMail());
 
 		assertTrue(acc.authenticate(CHARACTER_PASSWORD));
 
-		File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
+		final File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
 
 		assertTrue(file.exists());
 
@@ -95,7 +95,7 @@ public class UserDAOIniTest {
 	@Test
 	public void testDelete() throws DAOException {
 		dao.create(NEW_CHARACTER_NICK, CHARACTER_PASSWORD, CHARACTER_MAIL);
-		File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
+		final File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
 
 		assertTrue(file.exists());
 
@@ -106,7 +106,7 @@ public class UserDAOIniTest {
 
 	@Test
 	public void testCreateCharacter() throws DAOException {
-		byte[] skills = new byte[Skill.AMOUNT];
+		final byte[] skills = new byte[Skill.AMOUNT];
 
 		for (int i = 0; i < Skill.AMOUNT; i++) {
 			if (i == 1) {
@@ -116,26 +116,22 @@ public class UserDAOIniTest {
 			}
 		}
 
-		City city = EasyMock.createMock(City.class);
-		EasyMock.expect(city.getMap()).andReturn(1).anyTimes();
-		EasyMock.expect(city.getX()).andReturn((byte) 10).anyTimes();
-		EasyMock.expect(city.getY()).andReturn((byte) 20).anyTimes();
-		EasyMock.replay(city);
+		final City city = mock(City.class);
 
 		// TODO: Use constants!!
-		UserCharacter chara = dao.create(MockFactory.mockConnectedUser(), NEW_CHARACTER_NICK, Race.HUMAN, Gender.FEMALE,
+		final UserCharacter chara = dao.create(mock(ConnectedUser.class), NEW_CHARACTER_NICK, Race.HUMAN, Gender.FEMALE,
 				UserArchetype.ASSASIN, 75, city, (byte) 18, (byte) 18,
 				(byte) 18, (byte) 18, (byte) 18, 10, 1);
 
-		File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
+		final File file = new File(dao.getCharFilePath(NEW_CHARACTER_NICK));
 
 		assertTrue(file.exists());
 
-		assertEquals(chara.getName(), NEW_CHARACTER_NICK);
-		assertEquals(chara.getArchetype(), UserArchetype.ASSASIN.getArchetype());
-		assertEquals(chara.getGender(), Gender.FEMALE);
-		assertEquals(chara.getRace(), Race.HUMAN);
-		assertEquals(chara.getLevel(), (byte) 1);
+		assertEquals(NEW_CHARACTER_NICK, chara.getName());
+		assertEquals(UserArchetype.ASSASIN.getArchetype(), chara.getArchetype());
+		assertEquals(Gender.FEMALE, chara.getGender());
+		assertEquals(Race.HUMAN, chara.getRace());
+		assertEquals((byte) 1, chara.getLevel());
 
 		// TODO: To be continued... :P
 

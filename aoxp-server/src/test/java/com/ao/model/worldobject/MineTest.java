@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,27 +18,22 @@
 
 package com.ao.model.worldobject;
 
-import org.junit.After;
 import org.junit.Before;
 
 import com.ao.model.worldobject.properties.ResourceSourceProperties;
 
 public class MineTest extends AbstractResourceSourceTest {
-	
+
 	private static final ResourceSourceType resourceSourceType = ResourceSourceType.MINE;
 
 	private Mine mine1;
-	
+
 	@Before
 	public void setUp() throws Exception {
-		ResourceSourceProperties props1 = new ResourceSourceProperties(WorldObjectType.MINE, 1, "Cooper mine", 1, 6, resourceSourceType);
+		final ResourceSourceProperties props1 = new ResourceSourceProperties(WorldObjectType.MINE, 1, "Cooper mine", 1, 6, resourceSourceType);
 		mine1 = new Mine(props1);
-		
+
 		object = mine1;
 		objectProps = props1;
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 }

@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,11 +18,12 @@
 
 package com.ao.model.spell.effect;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.easymock.EasyMock;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,10 +35,10 @@ public class HitPointsEffectTest {
 
 	private static final int MIN_POINTS = 5;
 	private static final int MAX_POINTS = 10;
-	
+
 	private HitPointsEffect hpEffect1;
 	private HitPointsEffect hpEffect2;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		hpEffect1 = new HitPointsEffect(MIN_POINTS, MAX_POINTS);
@@ -46,46 +47,38 @@ public class HitPointsEffectTest {
 
 	@Test
 	public void testAppliesToCharacterCharacter() {
-		Character target = EasyMock.createMock(Character.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		EasyMock.expect(target.isDead()).andReturn(false).times(2);
-		EasyMock.expect(target.isDead()).andReturn(true).times(2);
-		EasyMock.replay(target, caster);
-		
-		assertTrue(hpEffect1.appliesTo(caster, target));
-		assertTrue(hpEffect2.appliesTo(caster, target));
-		assertFalse(hpEffect1.appliesTo(caster, target));
-		assertFalse(hpEffect2.appliesTo(caster, target));
+		final Character deadTarget = mock(Character.class);
+		when(deadTarget.isDead()).thenReturn(Boolean.TRUE);
+		final Character aliveTarget = mock(Character.class);
+		final Character caster = mock(Character.class);
+
+		assertTrue(hpEffect1.appliesTo(caster, aliveTarget));
+		assertTrue(hpEffect2.appliesTo(caster, aliveTarget));
+		assertFalse(hpEffect1.appliesTo(caster, deadTarget));
+		assertFalse(hpEffect2.appliesTo(caster, deadTarget));
 	}
 
 	@Test
 	public void testAppliesToCharacterWorldObject() {
-		Character caster = EasyMock.createMock(Character.class);
-		WorldObject target = EasyMock.createMock(WorldObject.class);
-		
-		EasyMock.replay(caster, target);
-		
+		final Character caster = mock(Character.class);
+		final WorldObject target = mock(WorldObject.class);
+
 		assertFalse(hpEffect1.appliesTo(caster, target));
 		assertFalse(hpEffect2.appliesTo(caster, target));
 	}
 
 	@Test
 	public void testApplyCharacterWorldObject() {
-		WorldObject obj = EasyMock.createMock(WorldObject.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		EasyMock.replay(obj, caster);
-		
+		final WorldObject obj = mock(WorldObject.class);
+		final Character caster = mock(Character.class);
+
 		// Should do nothing....
 		try {
 			hpEffect1.apply(caster, obj);
-			Assert.fail("Applying an effect for characters to a world object didn't fail.");
-		} catch (InvalidTargetException e) {
+			fail("Applying an effect for characters to a world object didn't fail.");
+		} catch (final InvalidTargetException e) {
 			// this is ok
 		}
-		
-		EasyMock.verify(caster, obj);
 	}
-	
+
 }

@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,22 +18,24 @@
 
 package com.ao.model.spell.effect;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.ao.exception.InvalidTargetException;
 import com.ao.model.character.Character;
 import com.ao.model.character.UserCharacter;
-import com.ao.model.spell.effect.DumbEffect;
 import com.ao.model.worldobject.WorldObject;
 
 public class DumbEffectTest {
 
 	private DumbEffect dumbEffect;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		dumbEffect = new DumbEffect();
@@ -41,61 +43,47 @@ public class DumbEffectTest {
 
 	@Test
 	public void testApplyCharacterCharacter() {
-		Character target = EasyMock.createMock(Character.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		target.setDumb(true);
-		
-		EasyMock.replay(target, caster);
-		
+		final Character target = mock(Character.class);
+		final Character caster = mock(Character.class);
+
 		dumbEffect.apply(caster, target);
-		
-		EasyMock.verify(target);
 	}
 
 	@Test
 	public void testAppliesToCharacterCharacter() {
-		Character target = EasyMock.createMock(Character.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		Assert.assertFalse(dumbEffect.appliesTo(caster, target));
-		
-		target = EasyMock.createMock(UserCharacter.class);
-		
-		EasyMock.expect(target.isDead()).andReturn(false).once();
-		EasyMock.expect(target.isDead()).andReturn(true).once();
-		EasyMock.replay(target, caster);
-		
-		Assert.assertTrue(dumbEffect.appliesTo(caster, target));
-		Assert.assertFalse(dumbEffect.appliesTo(caster, target));
+		final Character target = mock(Character.class);
+		final Character caster = mock(Character.class);
+
+		assertFalse(dumbEffect.appliesTo(caster, target));
+
+		final Character deadUserTarget = mock(UserCharacter.class);
+		when(deadUserTarget.isDead()).thenReturn(Boolean.TRUE);
+		final Character aliveUserTarget = mock(UserCharacter.class);
+
+		assertTrue(dumbEffect.appliesTo(caster, aliveUserTarget));
+		assertFalse(dumbEffect.appliesTo(caster, deadUserTarget));
 	}
 
 	@Test
 	public void testAppliesToCharacterWorldObject() {
-		Character caster = EasyMock.createMock(Character.class);
-		WorldObject target = EasyMock.createMock(WorldObject.class);
-		
-		EasyMock.replay(caster, target);
-		
-		Assert.assertFalse(dumbEffect.appliesTo(caster, target));
+		final Character caster = mock(Character.class);
+		final WorldObject target = mock(WorldObject.class);
+
+		assertFalse(dumbEffect.appliesTo(caster, target));
 	}
 
 	@Test
 	public void testApplyCharacterWorldObject() {
-		WorldObject obj = EasyMock.createMock(WorldObject.class);
-		Character caster = EasyMock.createMock(Character.class);
-		
-		EasyMock.replay(obj, caster);
-		
+		final WorldObject obj = mock(WorldObject.class);
+		final Character caster = mock(Character.class);
+
 		// Should do nothing....
 		try {
 			dumbEffect.apply(caster, obj);
-			Assert.fail("Applying an effect for characters to a world object didn't fail.");
+			fail("Applying an effect for characters to a world object didn't fail.");
 		} catch (InvalidTargetException e) {
 			// this is ok
 		}
-		
-		EasyMock.verify(caster, obj);
 	}
 
 }

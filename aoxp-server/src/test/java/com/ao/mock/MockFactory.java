@@ -18,26 +18,48 @@
 
 package com.ao.mock;
 
-import org.easymock.Capture;
-import org.easymock.IAnswer;
-import org.easymock.classextension.EasyMock;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import com.ao.exception.InvalidTargetException;
-import com.ao.model.character.Attribute;
 import com.ao.model.character.Character;
 import com.ao.model.spell.effect.Effect;
-import com.ao.model.user.Account;
 import com.ao.model.user.ConnectedUser;
 import com.ao.model.user.User;
+import com.ao.model.worldobject.AbstractItem;
+import com.ao.model.worldobject.Item;
 import com.ao.model.worldobject.WorldObject;
 import com.ao.network.Connection;
-import com.ao.network.packet.OutgoingPacket;
 import com.ao.service.timedevents.TimedEvent;
 
 /**
  * Centralizes the common mocks creation.
  */
 public class MockFactory {
+
+	public static Item mockItem(final int id, final int initialAmount) {
+		final Item item = mock(AbstractItem.class);
+		when(item.getId()).thenReturn(id);
+		when(item.getAmount()).thenCallRealMethod();
+		when(item.addAmount(anyInt())).thenCallRealMethod();
+		when(item.clone()).thenAnswer(new Answer<Item>() {
+			@Override
+			public Item answer(final InvocationOnMock invocation) throws Throwable {
+				return mockItem(item.getId(), item.getAmount());
+			}
+		});
+
+		// initialize amount
+		item.addAmount(initialAmount);
+
+		return item;
+	}
 
 	/**
 	 * Creates a new Connection mock.
@@ -46,18 +68,9 @@ public class MockFactory {
 	 * @param outgoing A capture on which to leave any outgoing packets sent. May be null.
 	 * @return The mock.
 	 */
-	public static Connection mockConnection(User user, Capture<? extends OutgoingPacket> outgoing) {
-		Connection conn = EasyMock.createMock(Connection.class);
-
-		EasyMock.expect(conn.getUser()).andReturn(user).anyTimes();
-
-		if (outgoing != null) {
-			conn.send(EasyMock.capture(outgoing));
-		}
-
-		conn.disconnect();
-
-		EasyMock.replay(conn);
+	public static Connection mockConnection(final User user) {
+		final Connection conn = mock(Connection.class);
+		when(conn.getUser()).thenReturn(user);
 
 		return conn;
 	}
@@ -68,52 +81,11 @@ public class MockFactory {
 	 * @return The mock.
 	 */
 	public static Connection mockConnection() {
-		return mockConnection(null);
-	}
+		final ConnectedUser user = mock(ConnectedUser.class);
+		final Connection connection = mockConnection(user);
+		when(user.getConnection()).thenReturn(connection);
 
-	/**
-	 * Creates a new Connection mock.
-	 *
-	 * @param outgoing A capture on which to leave any outgoing packets sent. May be null.
-	 * @return The mock.
-	 */
-	public static Connection mockConnection(Capture<? extends OutgoingPacket> outgoing) {
-		return mockConnection(EasyMock.createMock(ConnectedUser.class), outgoing);
-	}
-
-	/**
-	 * Creates a new ConnectedUser mock.
-	 *
-	 * @return The created mock.
-	 */
-	public static ConnectedUser mockConnectedUser() {
-		ConnectedUser user = EasyMock.createMock(ConnectedUser.class);
-
-		EasyMock.expect(user.getAttribute(Attribute.DEXTERITY)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.CHARISMA)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.CONSTITUTION)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.INTELLIGENCE)).andReturn((byte) 18).anyTimes();
-		EasyMock.expect(user.getAttribute(Attribute.STRENGTH)).andReturn((byte) 18).anyTimes();
-
-		EasyMock.expect(user.getConnection()).andReturn(mockConnection()).anyTimes();
-
-		// Capture the received Account object in setAccount to later return it on getAccount.
-		final Capture<Account> account = new Capture<Account>();
-
-		user.setAccount(EasyMock.capture(account));
-
-		EasyMock.expect(user.getAccount()).andAnswer(new IAnswer<Account>() {
-
-			@Override
-			public Account answer() throws Throwable {
-				return account.getValue();
-			}
-
-		});
-
-		EasyMock.replay(user);
-
-		return user;
+		return connection;
 	}
 
 	/**
@@ -122,22 +94,18 @@ public class MockFactory {
 	 * @param appliesToWorldObject Whether the effect to be mocked should apply to world objects.
 	 * @return The created mock.
 	 */
-	public static Effect mockEffect(boolean appliesToChar, boolean appliesToWorldObject) {
-		Effect effect = EasyMock.createMock(Effect.class);
-		EasyMock.expect(effect.appliesTo((Character) EasyMock.anyObject(), (Character) EasyMock.anyObject())).andReturn(appliesToChar).anyTimes();
-		EasyMock.expect(effect.appliesTo((Character) EasyMock.anyObject(), (WorldObject) EasyMock.anyObject())).andReturn(appliesToWorldObject).anyTimes();
+	public static Effect mockEffect(final boolean appliesToChar, final boolean appliesToWorldObject) {
+		final Effect effect = mock(Effect.class);
+		when(effect.appliesTo(any(Character.class), any(Character.class))).thenReturn(appliesToChar);
+		when(effect.appliesTo(any(Character.class), any(WorldObject.class))).thenReturn(appliesToWorldObject);
 
-		effect.apply((Character) EasyMock.anyObject(), (Character) EasyMock.anyObject());
 		if (!appliesToChar) {
-			EasyMock.expectLastCall().andThrow(new InvalidTargetException()).anyTimes();
+			doThrow(InvalidTargetException.class).when(effect).apply(any(Character.class), any(Character.class));
 		}
 
-		effect.apply((Character) EasyMock.anyObject(), (WorldObject) EasyMock.anyObject());
 		if (!appliesToWorldObject) {
-			EasyMock.expectLastCall().andThrow(new InvalidTargetException()).anyTimes();
+			doThrow(InvalidTargetException.class).when(effect).apply(any(Character.class), any(WorldObject.class));
 		}
-
-		EasyMock.replay(effect);
 
 		return effect;
 	}
@@ -147,11 +115,9 @@ public class MockFactory {
 	 * @return The created mock.
 	 */
 	public static Character mockCharacter() {
-		Character character = EasyMock.createMock(Character.class);
+		final Character character = mock(Character.class);
 
 		// TODO : Fill this in as needed
-
-		EasyMock.replay(character);
 
 		return character;
 	}
@@ -161,41 +127,31 @@ public class MockFactory {
 	 * @return The created mock.
 	 */
 	public static WorldObject mockWorldObject() {
-		WorldObject worldObject = EasyMock.createMock(WorldObject.class);
+		final WorldObject worldObject = mock(WorldObject.class);
 
 		// TODO : Fill this in as needed
-
-		EasyMock.replay(worldObject);
 
 		return worldObject;
 	}
 
 	/**
 	 * Creates a new TimedEvent mock.
-	 * @param executions The amount of the executions the event would have.
 	 * @param chara The event's Character.
 	 * @return The created mock.
 	 */
-	public static TimedEvent mockTimedEvent(int executions, Character chara) {
-		TimedEvent event = EasyMock.createMock(TimedEvent.class);
-
-		EasyMock.expect(event.getCharacter()).andReturn(chara).anyTimes();
-
-		for(int i = 0; i < executions; i++) {
-			event.execute();
-		}
-
-		EasyMock.replay(event);
+	public static TimedEvent mockTimedEvent(final Character chara) {
+		final TimedEvent event = mock(TimedEvent.class);
+		when(event.getCharacter()).thenReturn(chara);
 
 		return event;
 	}
 
 	/**
-	 * Creates a new TimedEvent mock with a default mocked Characted.
+	 * Creates a new TimedEvent mock with a default mocked Character.
 	 * @param executions The amount of the executions the event would have.
 	 * @return The created mock.
 	 */
-	public static TimedEvent mockTimedEvent(int executions) {
-		return mockTimedEvent(executions, mockCharacter());
+	public static TimedEvent mockTimedEvent() {
+		return mockTimedEvent(mockCharacter());
 	}
 }

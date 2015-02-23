@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,24 +18,24 @@
 
 package com.ao.model.worldobject;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import com.ao.model.worldobject.properties.DefensiveItemProperties;
 
 public abstract class AbstractDefensiveItemTest extends AbstractEquipableItemTest {
-	
+
 	@Test
 	public void testGetMaxDef() {
 		assertEquals(((DefensiveItemProperties) objectProps).getMaxDef(), ((AbstractDefensiveItem) object).getMaxDef());
 	}
-	
+
 	@Test
 	public void testGetMinDef() {
 		assertEquals(((DefensiveItemProperties) objectProps).getMinDef(), ((AbstractDefensiveItem) object).getMinDef());
 	}
-	
+
 	@Test
 	public void testGetMaxMagicDef() {
 		assertEquals(((DefensiveItemProperties) objectProps).getMaxMagicDef(), ((AbstractDefensiveItem) object).getMaxMagicDef());

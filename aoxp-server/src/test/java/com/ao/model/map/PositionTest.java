@@ -30,7 +30,7 @@ public class PositionTest {
 	private static final byte X_POSITION = 50;
 	private static final byte Y_POSITION = 50;
 
-	Position pos;
+	private Position pos;
 
 	@Before
 	public void setUp() {
@@ -41,29 +41,29 @@ public class PositionTest {
 	public void testAddToX() {
 		pos.addToX(7);
 
-		assertEquals(pos.getX(), X_POSITION + 7);
+		assertEquals(X_POSITION + 7, pos.getX());
 
 		pos.addToX(-6);
 
-		assertEquals(pos.getX(), X_POSITION + 1);
+		assertEquals(X_POSITION + 1, pos.getX());
 	}
 
 	@Test
 	public void testAddToY() {
 		pos.addToY(7);
 
-		assertEquals(pos.getY(), Y_POSITION + 7);
+		assertEquals(Y_POSITION + 7, pos.getY());
 
 		pos.addToY(-6);
 
-		assertEquals(pos.getY(), Y_POSITION + 1);
+		assertEquals(Y_POSITION + 1, pos.getY());
 	}
 
 	@Test
 	public void testGetDistance() {
 		Position anotherPos = new Position((byte) (X_POSITION +  20), (byte) (Y_POSITION +  20), 1);
 
-		assertEquals(pos.getDistance(anotherPos), 40);
+		assertEquals(40, pos.getDistance(anotherPos));
 	}
 
 	@Test

@@ -18,12 +18,15 @@
 package com.ao.data.dao.ini;
 
 
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.easymock.classextension.EasyMock;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,83 +63,74 @@ public class NPCPropertiesDAOIniTest {
 
 	private static final String TEST_NPCS_DAT = "src/test/resources/NPCs.dat";
 
-	protected NPCPropertiesDAOIni dao;
+	private NPCPropertiesDAOIni dao;
 
 	@Before
 	public void setUp() throws Exception {
-		WorldObjectProperties woProperties = EasyMock.createMock(WorldObjectProperties.class);
-		AbstractItem item = EasyMock.createMock(AbstractItem.class);
-		EasyMock.expect(item.getId()).andReturn(1).anyTimes();
-		EasyMock.expect(item.getAmount()).andReturn(1).anyTimes();
-		EasyMock.expect(item.addAmount(EasyMock.anyInt())).andReturn(1).anyTimes();
-		EasyMock.replay(woProperties, item);
+		final WorldObjectProperties woProperties = mock(WorldObjectProperties.class);
+		final AbstractItem item = mock(AbstractItem.class);
 
-		WorldObjectPropertiesDAO woDao = EasyMock.createMock(WorldObjectPropertiesDAO.class);
-		EasyMock.expect(woDao.getWorldObjectProperties(EasyMock.anyInt())).andReturn(woProperties).anyTimes();
+		final WorldObjectPropertiesDAO woDao = mock(WorldObjectPropertiesDAO.class);
+		when(woDao.getWorldObjectProperties(anyInt())).thenReturn(woProperties);
 
-		WorldObjectFactory woFactory = EasyMock.createMock(WorldObjectFactory.class);
-		EasyMock.expect(woFactory.getWorldObject(EasyMock.eq(woProperties), EasyMock.anyInt())).andReturn(item).anyTimes();
-
-		EasyMock.replay(woDao, woFactory);
+		final WorldObjectFactory woFactory = mock(WorldObjectFactory.class);
+		when(woFactory.getWorldObject(eq(woProperties), anyInt())).thenReturn(item);
 
 		dao = new NPCPropertiesDAOIni(TEST_NPCS_DAT, woDao, woFactory);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
 	public void testRetrieveAll() {
-		NPCProperties[] npcProperties = null;
+		final NPCProperties[] npcProperties;
 		try {
 			npcProperties = dao.retrieveAll();
-		} catch (DAOException e) {
+		} catch (final DAOException e) {
 			fail("Loading of npcs failed with message " + e.getMessage());
+			return;
 		}
 
-		NPCProperties snake = npcProperties[COMMON_NPC_INDEX];
-		assertTrue(snake instanceof CreatureNPCProperties);
+		final NPCProperties snake = npcProperties[COMMON_NPC_INDEX];
+		assertThat(snake, instanceOf(CreatureNPCProperties.class));
 		assertEquals(NPCType.COMMON, snake.getType());
 
-		NPCProperties dragon = npcProperties[DRAGON_NPC_INDEX];
-		assertTrue(dragon instanceof CreatureNPCProperties);
+		final NPCProperties dragon = npcProperties[DRAGON_NPC_INDEX];
+		assertThat(dragon, instanceOf(CreatureNPCProperties.class));
 		assertEquals(NPCType.DRAGON, dragon.getType());
 
-		NPCProperties trainer = npcProperties[TRAINER_NPC_INDEX];
-		assertTrue(trainer instanceof TrainerNPCProperties);
+		final NPCProperties trainer = npcProperties[TRAINER_NPC_INDEX];
+		assertThat(trainer, instanceOf(TrainerNPCProperties.class));
 		assertEquals(NPCType.TRAINER, trainer.getType());
 
-		NPCProperties governor = npcProperties[GOVERNOR_NPC_INDEX];
-		assertTrue(governor instanceof GovernorNPCProperties);
+		final NPCProperties governor = npcProperties[GOVERNOR_NPC_INDEX];
+		assertThat(governor, instanceOf(GovernorNPCProperties.class));
 		assertEquals(NPCType.GOVERNOR, governor.getType());
 
-		NPCProperties royalGuard = npcProperties[ROYAL_GUARD_NPC_INDEX];
-		assertTrue(royalGuard instanceof GuardNPCProperties);
+		final NPCProperties royalGuard = npcProperties[ROYAL_GUARD_NPC_INDEX];
+		assertThat(royalGuard, instanceOf(GuardNPCProperties.class));
 		assertEquals(NPCType.ROYAL_GUARD, royalGuard.getType());
 
-		NPCProperties chaosGuard = npcProperties[CHAOS_GUARD_NPC_INDEX];
-		assertTrue(chaosGuard instanceof GuardNPCProperties);
+		final NPCProperties chaosGuard = npcProperties[CHAOS_GUARD_NPC_INDEX];
+		assertThat(chaosGuard, instanceOf(GuardNPCProperties.class));
 		assertEquals(NPCType.CHAOS_GUARD, chaosGuard.getType());
 
-		NPCProperties newbieResucitator = npcProperties[NEWBIE_RESUCITATOR_NPC_INDEX];
-		assertTrue(newbieResucitator instanceof NPCProperties);
+		final NPCProperties newbieResucitator = npcProperties[NEWBIE_RESUCITATOR_NPC_INDEX];
+		assertThat(newbieResucitator, instanceOf(NPCProperties.class));
 		assertEquals(NPCType.NEWBIE_RESUCITATOR, newbieResucitator.getType());
 
-		NPCProperties resucitator = npcProperties[RESUCITATOR_NPC_INDEX];
-		assertTrue(resucitator instanceof NPCProperties);
+		final NPCProperties resucitator = npcProperties[RESUCITATOR_NPC_INDEX];
+		assertThat(resucitator, instanceOf(NPCProperties.class));
 		assertEquals(NPCType.RESUCITATOR, resucitator.getType());
 
-		NPCProperties gambler = npcProperties[GAMBLER_NPC_INDEX];
-		assertTrue(gambler instanceof NPCProperties);
+		final NPCProperties gambler = npcProperties[GAMBLER_NPC_INDEX];
+		assertThat(gambler, instanceOf(NPCProperties.class));
 		assertEquals(NPCType.GAMBLER, gambler.getType());
 
-		NPCProperties banker = npcProperties[BANKER_NPC_INDEX];
-		assertTrue(banker instanceof NPCProperties);
+		final NPCProperties banker = npcProperties[BANKER_NPC_INDEX];
+		assertThat(banker, instanceOf(NPCProperties.class));
 		assertEquals(NPCType.BANKER, banker.getType());
 
-		NPCProperties noble = npcProperties[NOBLE_NPC_INDEX];
-		assertTrue(noble instanceof NobleNPCProperties);
+		final NPCProperties noble = npcProperties[NOBLE_NPC_INDEX];
+		assertThat(noble, instanceOf(NobleNPCProperties.class));
 		assertEquals(NPCType.NOBLE, noble.getType());
 	}
 

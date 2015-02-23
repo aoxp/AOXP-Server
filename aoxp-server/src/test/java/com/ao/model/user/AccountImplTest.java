@@ -85,7 +85,7 @@ public class AccountImplTest {
 
 	@Test
 	public void testAddCharacter() {
-		String charr = "foo";
+		final String charr = "foo";
 
 		account.addCharacter(charr);
 

@@ -22,11 +22,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-import org.easymock.classextension.EasyMock;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import com.ao.exception.InvalidTargetException;
 import com.ao.mock.MockFactory;
@@ -52,30 +53,23 @@ public class SpellTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Effect[] effects = new Effect[2];
-
+		final Effect[] effects = new Effect[2];
 		effects[0] = MockFactory.mockEffect(true, false);
 		effects[1] = MockFactory.mockEffect(true, false);
 
 		spellNoStaff = new Spell(1, effects, 0, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
 
-		Effect[] effects2 = new Effect[2];
-
+		final Effect[] effects2 = new Effect[2];
 		effects2[0] = MockFactory.mockEffect(true, false);
 		effects2[1] = MockFactory.mockEffect(true, false);
 
 		spellWithStaff = new Spell(1, effects2, REQUIRED_STAFF_POWER, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
 
-		Effect[] effects3 = new Effect[2];
-
+		final Effect[] effects3 = new Effect[2];
 		effects3[0] = MockFactory.mockEffect(false, true);
 		effects3[1] = MockFactory.mockEffect(false, true);
 
 		spellNoStaffObject = new Spell(1, effects3, 0, REQUIRED_SKILL, REQUIRED_MANA, SPELL_NAME, SPELL_DESCRIPTION, IS_NEGATIVE, SPELL_FX, SPELL_SOUND, SPELL_MAGIC_WORDS);
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 	@Test
@@ -108,8 +102,8 @@ public class SpellTest {
 
 	@Test
 	public void testAppliesToCharacterCharacter() {
-		Character caster = MockFactory.mockCharacter();
-		Character target = MockFactory.mockCharacter();
+		final Character caster = MockFactory.mockCharacter();
+		final Character target = MockFactory.mockCharacter();
 
 		assertTrue(spellNoStaff.appliesTo(caster, target));
 		assertTrue(spellWithStaff.appliesTo(caster, target));
@@ -118,8 +112,8 @@ public class SpellTest {
 
 	@Test
 	public void testAppliesToCharacterWorldObject() {
-		Character caster = MockFactory.mockCharacter();
-		WorldObject target = MockFactory.mockWorldObject();
+		final Character caster = MockFactory.mockCharacter();
+		final WorldObject target = MockFactory.mockWorldObject();
 
 		assertFalse(spellNoStaff.appliesTo(caster, target));
 		assertFalse(spellWithStaff.appliesTo(caster, target));
@@ -128,14 +122,8 @@ public class SpellTest {
 
 	@Test
 	public void testApplyCharacterCharacter() {
-		Character caster = MockFactory.mockCharacter();
-		Character target = MockFactory.mockCharacter();
-
-		// Mock the mana loss
-		EasyMock.reset(caster);
-		caster.addToMana(-REQUIRED_MANA);
-		caster.addToMana(-REQUIRED_MANA);
-		EasyMock.replay(caster);
+		final Character caster = MockFactory.mockCharacter();
+		final Character target = MockFactory.mockCharacter();
 
 		spellNoStaff.apply(caster, target);
 		spellWithStaff.apply(caster, target);
@@ -143,24 +131,23 @@ public class SpellTest {
 		try {
 			spellNoStaffObject.apply(caster, target);
 			fail("Effect not targeting character was applied succesfully to one.");
-		} catch (InvalidTargetException e) {
+		} catch (final InvalidTargetException e) {
 			// This is ok
 		}
 
-		EasyMock.verify(caster, target);
-		EasyMock.verify(spellNoStaff.effects[0], spellNoStaff.effects[1]);
-		EasyMock.verify(spellWithStaff.effects[0], spellWithStaff.effects[1]);
+		// Check mana cost
+		verify(caster, times(2)).addToMana(-REQUIRED_MANA);
 	}
 
 	@Test
 	public void testApplyCharacterWorldObject() {
-		Character caster = MockFactory.mockCharacter();
-		WorldObject target = MockFactory.mockWorldObject();
+		final Character caster = MockFactory.mockCharacter();
+		final WorldObject target = MockFactory.mockWorldObject();
 
 		try {
 			spellNoStaff.apply(caster, target);
 			fail("Effect not targeting world objects was applied succesfully to one.");
-		} catch (InvalidTargetException e) {
+		} catch (final InvalidTargetException e) {
 			// This is ok
 		}
 
@@ -172,18 +159,12 @@ public class SpellTest {
 		}
 
 		// Nothing else should happen to caster nor target
-		EasyMock.verify(caster, target);
-
-		// Mock the mana loss
-		EasyMock.reset(caster);
-		caster.addToMana(-REQUIRED_MANA);
-		EasyMock.replay(caster);
+		Mockito.verifyZeroInteractions(caster, target);
 
 		spellNoStaffObject.apply(caster, target);
 
-		// Nothing else should happen to caster nor target
-		EasyMock.verify(caster, target);
-		EasyMock.verify(spellNoStaffObject.effects[0], spellNoStaffObject.effects[1]);
+		// Check mana cost
+		verify(caster).addToMana(-REQUIRED_MANA);
 	}
 
 	@Test

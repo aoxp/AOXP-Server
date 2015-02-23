@@ -1,5 +1,5 @@
 /*
-    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server 
+    AO-XP Server (XP stands for Cross Platform) is a Java implementation of Argentum Online's server
     Copyright (C) 2009 Juan Martín Sotuyo Dodero. <juansotuyo@gmail.com>
 
     This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,9 @@
 
 package com.ao.model.character;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,81 +33,81 @@ public class ReputationImplTest {
 	private static final int THIEFF_POINTS = 500;
 	private static final int NOBLE_POINTS = 500;
 	private static final boolean BELONGS_TO_FACTION = false;
-	
+
 	private Reputation rep;
-	
+
 	@Before
 	public void setUp() {
 		rep = new ReputationImpl(ASSASIN_POINTS, BANDIT_POINTS, BURGEOIS_POINTS, THIEFF_POINTS, NOBLE_POINTS, BELONGS_TO_FACTION);
 	}
-	
+
 	@Test
 	public void testAddToAssassin() {
 		rep.addToAssassin(10);
-		
-		assertEquals(rep.getAssassin(), ASSASIN_POINTS + 10);
+
+		assertEquals(ASSASIN_POINTS + 10, rep.getAssassin());
 	}
 
 	@Test
 	public void testAddToBandit() {
 		rep.addToBandit(10);
-		
-		assertEquals(rep.getBandit(), BANDIT_POINTS + 10);
+
+		assertEquals(BANDIT_POINTS + 10, rep.getBandit());
 	}
 
 	@Test
 	public void testAddToBourgeois() {
 		rep.addToBourgeois(10);
-		
-		assertEquals(rep.getBourgeois(), BURGEOIS_POINTS + 10);
+
+		assertEquals(BURGEOIS_POINTS + 10, rep.getBourgeois());
 	}
 
 	@Test
 	public void testAddToNoblePoints() {
 		rep.addToNoble(10);
-		
-		assertEquals(rep.getNoble(), NOBLE_POINTS + 10);
+
+		assertEquals(NOBLE_POINTS + 10, rep.getNoble());
 	}
 
 	@Test
 	public void testAddToThief() {
 		rep.addToThief(10);
-		
-		assertEquals(rep.getThief(), THIEFF_POINTS + 10);
+
+		assertEquals(THIEFF_POINTS + 10, rep.getThief());
 	}
 
 	@Test
 	public void testGetAlignment() {
-		assertEquals(rep.getAlignment(), Alignment.CRIMINAL);
-		
+		assertSame(Alignment.CRIMINAL, rep.getAlignment());
+
 		rep.addToNoble(600);
-		
-		assertEquals(rep.getAlignment(), Alignment.CITIZEN);
+
+		assertSame(Alignment.CITIZEN, rep.getAlignment());
 	}
 
 	@Test
 	public void testGetAssassin() {
-		assertEquals(rep.getAssassin(), ASSASIN_POINTS);
+		assertEquals(ASSASIN_POINTS, rep.getAssassin());
 	}
 
 	@Test
 	public void testGetBandit() {
-		assertEquals(rep.getBandit(), BANDIT_POINTS);
+		assertEquals(BANDIT_POINTS, rep.getBandit());
 	}
 
 	@Test
 	public void testGetBourgeois() {
-		assertEquals(rep.getBourgeois(), BURGEOIS_POINTS);
+		assertEquals(BURGEOIS_POINTS, rep.getBourgeois());
 	}
 
 	@Test
 	public void testGetThief() {
-		assertEquals(rep.getThief(), THIEFF_POINTS);
+		assertEquals(THIEFF_POINTS, rep.getThief());
 	}
 
 	@Test
 	public void testGetNoble() {
-		assertEquals(rep.getNoble(), NOBLE_POINTS);
+		assertEquals(NOBLE_POINTS, rep.getNoble());
 	}
 
 	@Test
@@ -116,8 +118,8 @@ public class ReputationImplTest {
 	@Test
 	public void testSetBelongsToFaction() {
 		rep.setBelongsToFaction(!BELONGS_TO_FACTION);
-		
-		assertEquals(rep.belongsToFaction(), !BELONGS_TO_FACTION);
+
+		assertEquals(!BELONGS_TO_FACTION, rep.belongsToFaction());
 	}
 
 }

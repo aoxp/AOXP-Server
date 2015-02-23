@@ -26,8 +26,8 @@ public class WorldMapDAOImplTest {
 
 	@Test
 	public void testLoadMaps() {
-		WorldMap[] maps = dao.retrieveAll();
-		WorldMap map = maps[0];
+		final WorldMap[] maps = dao.retrieveAll();
+		final WorldMap map = maps[0];
 
 		// Check for blocked / non-blocked
 		assertTrue(map.getTile(0, 0).isBlocked());
@@ -36,7 +36,7 @@ public class WorldMapDAOImplTest {
 		// Check if tile exits are where expected
 		assertNull(map.getTile(49, 49).getTileExit());
 
-		Position tileExit = map.getTile(19, 84).getTileExit();
+		final Position tileExit = map.getTile(19, 84).getTileExit();
 		assertTrue(tileExit != null);
 		assertTrue(tileExit.getX() >= WorldMap.MIN_X);
 		assertTrue(tileExit.getX() <= WorldMap.MAX_X);
